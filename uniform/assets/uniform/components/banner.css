@@ -4,6 +4,7 @@
   flex-direction: column;
   gap: var(--u-space-1);
   padding: var(--u-space-4) var(--u-space-6);
+  border-radius: var(--u-radius-default);
   background: var(--u-banner-bg, transparent);
   color: var(--u-banner-text, inherit);
   font-size: var(--u-font-size-small);

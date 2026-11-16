@@ -1,5 +1,5 @@
 @layer uniform.components {
-.u-banner:has(+ .u-site-header) { padding: var(--u-space-2) 0; }
+.u-banner:has(+ .u-site-header) { padding: var(--u-space-2) 0; border-radius: 0; }
 
 .u-banner:has(+ .u-site-header) p { margin: 0; }
 

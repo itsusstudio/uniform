@@ -8,7 +8,7 @@ it's us studio's design system, and the site that documents it.
 ## Install in an app
 
 ```ruby
-gem "studio-uniform", github: "itsusstudio/uniform", glob: "uniform/*.gemspec"
+gem "studio-uniform", github: "itsusstudio/uniform", branch: "main", glob: "uniform/*.gemspec"
 ```
 
 ## Working on it

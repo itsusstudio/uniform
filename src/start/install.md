@@ -28,7 +28,7 @@ Uniform sits in cascade layers, so any CSS you write outside them wins.
 
 ```ruby
 # Gemfile
-gem "studio-uniform", github: "itsusstudio/uniform", glob: "uniform/*.gemspec"
+gem "studio-uniform", github: "itsusstudio/uniform", branch: "main", glob: "uniform/*.gemspec"
 ```
 
 The gem's engine adds its files to the asset paths, so Propshaft serves them

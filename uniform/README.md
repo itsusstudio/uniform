@@ -5,7 +5,7 @@ The it's us studio design system as plain CSS, plus one small JavaScript module 
 ## Install
 
 ```ruby
-gem "studio-uniform", github: "itsusstudio/uniform", glob: "uniform/*.gemspec"
+gem "studio-uniform", github: "itsusstudio/uniform", branch: "main", glob: "uniform/*.gemspec"
 ```
 
 The engine adds `assets/` to the asset paths, so Propshaft serves every file under `uniform/`. In the layout, set the audience and link the stylesheets:

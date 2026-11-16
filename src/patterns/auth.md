@@ -73,7 +73,7 @@ Code field
 : A [code input](/components/input-code/): one box per digit over a single input, so pasting and filling the code from a text message work. A wrong code gets `aria-invalid="true"` and a `u-error` under it.
 
 Links
-: Going to another screen, like “Change” or “Create an account”, is a plain [link](/components/link/). Sending a new code does something, so it's a `<button>` in its own form with [`u-link-btn`](/components/link/#link-button), which makes it look like a link.
+: Going to another screen, like “Change” or “Sign up”, is a plain [link](/components/link/). Sending a new code does something, so it's a `<button>` in its own form with [`u-link-btn`](/components/link/#link-button), which makes it look like a link.
 
 ## Code
 
@@ -99,7 +99,7 @@ and the error until a code doesn't match, and show the hint instead.
 <p class="u-text-heading">Welcome back to Workbench</p>
 <p class="u-text-small u-text-muted">Enter your email address and we’ll send you a code</p>
 <input class="u-input" aria-label="Email address" placeholder="Email address">
-<button type="button" class="u-btn u-btn-primary">Email me a code</button>
+<button type="button" class="u-btn u-btn-primary">Send code</button>
 </div>
 </section>
 </div>
@@ -116,7 +116,7 @@ and the error until a code doesn't match, and show the hint instead.
 <label for="auth-do-email">Email address</label>
 <input class="u-input" id="auth-do-email" type="email" autocomplete="username" autocapitalize="off" spellcheck="false" placeholder=" ">
 </div>
-<button type="button" class="u-btn u-btn-primary">Email me a code</button>
+<button type="button" class="u-btn u-btn-primary">Send code</button>
 </form>
 </div>
 </div>
@@ -134,7 +134,7 @@ Keep the form flush left
 : The app name, heading, labels, boxes and button share one left edge on the page margin.
 
 One question per screen
-: Ask for the email address, then the code, then nothing else. Sign up adds only the name and shop name we need to set up the account.
+: Ask for the email address, then the code, then nothing else. Sign up adds only the name and business name we need to set up the account.
 
 Always offer a way back
 : Show where the code went with a “Change” link, and let people send a new code from the same screen. Nobody should need the back button to fix a typo.

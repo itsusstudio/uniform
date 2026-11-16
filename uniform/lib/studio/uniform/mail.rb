@@ -34,8 +34,10 @@ module Studio
         class << self
           def layout(content, title:, preheader:, sender:, address:, labels: {}, terms_url: nil, privacy_url: nil, unsubscribe_url: nil, sent_with: nil, sent_with_url: nil)
             name, street, *city = Array(address)
+            made_in = labels[:made_in] && "#{h(sender)}&nbsp;&nbsp;&middot;&nbsp;&nbsp;#{h(labels[:made_in])}"
             footer = [
-              %(<p style="margin: 0; padding-top: 32px; border-top: 1px solid #{LINE}; color: #{INK};">#{h(name)}</p>),
+              made_in && %(<p style="margin: 0 0 24px; padding-top: 32px; border-top: 1px solid #{LINE}; color: #{INK};">#{made_in}</p>),
+              %(<p style="margin: 0;#{" padding-top: 32px; border-top: 1px solid #{LINE};" if !made_in} color: #{INK};">#{h(name)}</p>),
               street && %(<p style="margin: 0;">#{h(street)}</p>),
               city.any? && %(<p style="margin: 0;">#{h(city.join(", "))}</p>),
               terms_url && %(<p style="margin: 24px 0 0; color: #{INK};"><a href="#{h(terms_url)}" style="color: #{INK}; text-decoration: underline;">#{h(labels.fetch(:terms))}</a>&nbsp;&nbsp;&middot;&nbsp;&nbsp;<a href="#{h(privacy_url)}" style="color: #{INK}; text-decoration: underline;">#{h(labels.fetch(:privacy))}</a></p>),
@@ -210,7 +212,9 @@ module Studio
         class << self
           def layout(content, title:, preheader:, sender:, address:, labels: {}, terms_url: nil, privacy_url: nil, unsubscribe_url: nil, sent_with: nil, sent_with_url: nil)
             name, street, *city = Array(address)
-            lines = [sender, "", content.to_s.strip, "", "--", name, street, (city.join(", ") if city.any?)]
+            lines = [sender, "", content.to_s.strip, "", "--"]
+            lines += ["#{sender} · #{labels[:made_in]}", ""] if labels[:made_in]
+            lines += [name, street, (city.join(", ") if city.any?)]
             lines += ["", "#{labels.fetch(:terms)}: #{terms_url}", "#{labels.fetch(:privacy)}: #{privacy_url}"] if terms_url
             lines += ["", "#{labels.fetch(:unsubscribe)}: #{unsubscribe_url}"] if unsubscribe_url
             lines += ["", "#{labels.fetch(:powered_by).sub("%{name}", sent_with)}: #{sent_with_url}"] if sent_with

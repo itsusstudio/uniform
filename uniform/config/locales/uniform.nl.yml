@@ -16,6 +16,7 @@ nl:
     input_phone:
       invalid: Vul het volledige telefoonnummer in, of begin met + en de landcode.
     mail:
+      made_in: gemaakt in montréal
       powered_by: "Mogelijk gemaakt door %{name}"
       privacy: Privacy
       terms: Voorwaarden

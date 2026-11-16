@@ -24,6 +24,15 @@ module Studio
         assert_equal "Works for 7 days.\n", Mail::Text.notes(Mail::Text.fallback("Paste:", "https://example.com"), "Works for 7 days.")
       end
 
+      def test_footer_names_the_product_and_where_it_is_made
+        labels = {made_in: "Made in Montréal"}
+        html = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], labels: labels)
+        text = Mail::Text.layout("Hi", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], labels: labels)
+
+        assert_includes html, "Workbench&nbsp;&nbsp;&middot;&nbsp;&nbsp;Made in Montréal"
+        assert_includes text, "Workbench · Made in Montréal\n\nStudio"
+      end
+
       def test_layout_shows_footer_links_only_when_given
         labels = {terms: "Terms", privacy: "Privacy", unsubscribe: "Unsubscribe", powered_by: "Powered by %{name}"}
         bare = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Shop", address: ["Shop", "1 Main St", "Toronto"], labels: labels)

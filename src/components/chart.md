@@ -120,7 +120,7 @@ From a URL
 ```
 
 ```erb
-<u-chart type="bar" src="<%%= weekly_jobs_report_path %>" data-error="<%%= t(".chart_error") %>"></u-chart>
+<u-chart type="bar" src="<%%= weekly_jobs_report_path %>" data-error="<%%= t("uniform.chart.error") %>"></u-chart>
 ```
 
 ## Parts

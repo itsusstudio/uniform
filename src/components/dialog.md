@@ -101,7 +101,7 @@ one on a phone to see it.
   <%%= form_with model: job, method: :delete do |form| %>
     <header>
       <h2 id="<%%= dom_id(job, :delete_title) %>"><%%= t(".title", number: job.number) %></h2>
-      <button type="submit" formmethod="dialog" value="cancel" class="u-btn-close" aria-label="<%%= t(".close") %>"></button>
+      <button type="submit" formmethod="dialog" value="cancel" class="u-btn-close" aria-label="<%%= t("uniform.close") %>"></button>
     </header>
     <div class="u-card-content">
       <p><%%= t(".body", customer: job.customer.name, work: job.work, count: job.notes.size) %></p>

@@ -24,6 +24,11 @@ module Studio
         assert Rails.application.assets.load_path.find("uniform/uniform.css")
       end
 
+      def test_loads_the_translations
+        assert_equal "Fermer", I18n.t("uniform.close", locale: :fr)
+        assert_equal "Quitar filtro: Estado", I18n.t("uniform.remove_filter", name: "Estado", locale: :es)
+      end
+
       def test_helper_links_every_stylesheet_in_manifest_order
         view = ActionView::Base.empty
         tags = view.uniform_stylesheet_tags

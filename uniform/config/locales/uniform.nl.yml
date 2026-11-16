@@ -1,0 +1,34 @@
+nl:
+  uniform:
+    chart:
+      error: Deze grafiek kon niet laden. Laad de pagina opnieuw om het nog eens te proberen.
+    clear_all: Alles wissen
+    close: Sluiten
+    copy:
+      copied: Gekopieerd
+      failed: Kopiëren mislukt
+    custom_view: Aangepaste weergave
+    dismiss: Verbergen
+    input_colour:
+      custom: Aangepast…
+      invalid: Typ een hexcode, zoals #E0A526.
+      presets: Vooraf ingestelde kleuren
+    input_phone:
+      invalid: Vul het volledige telefoonnummer in, of begin met + en de landcode.
+    mail:
+      powered_by: "Mogelijk gemaakt door %{name}"
+      privacy: Privacy
+      terms: Voorwaarden
+      unsubscribe: Afmelden voor deze e-mails
+    menu: Menu
+    pagination:
+      next: Volgende pagina
+      previous: Vorige pagina
+      range: "%{from}–%{to} van %{count}"
+    password:
+      hide: Wachtwoord verbergen
+      show: Wachtwoord tonen
+    remove: Verwijderen
+    remove_filter: "Filter verwijderen: %{name}"
+    sidebar: Zijbalk
+    undo: Ongedaan maken

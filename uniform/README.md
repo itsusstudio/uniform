@@ -24,6 +24,8 @@ Pin the script in `config/importmap.rb` and import it once from the application 
 pin "uniform", to: "uniform/uniform.js"
 ```
 
+The gem also ships the words its components use, as `uniform.*` keys in `config/locales/` for English, French, Dutch and Spanish. Rails loads them with the engine, so `t("uniform.close")` works straight away, and an app's own locale file can override any key.
+
 Outside Rails, link `assets/uniform/uniform.css` and load `assets/uniform/uniform.js` as a module.
 
 Everything works without the script. Each component starts as plain markup that does its job on its own, and the script only adds to it.

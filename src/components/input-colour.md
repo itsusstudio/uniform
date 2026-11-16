@@ -74,7 +74,7 @@ Disabled
 ```erb
 <div class="u-field">
   <%%= form.label :colour, t(".colour") %>
-  <u-input-colour data-presets-label="<%%= t(".presets") %>" data-custom-label="<%%= t(".custom") %>">
+  <u-input-colour data-presets-label="<%%= t("uniform.input_colour.presets") %>" data-custom-label="<%%= t("uniform.input_colour.custom") %>">
     <%%= form.color_field :colour, list: "label-colour-presets",
       aria: { describedby: "label-colour-hint", errormessage: "label-colour-error" } %>
     <datalist id="label-colour-presets">
@@ -94,7 +94,7 @@ the form always gets a valid code.
 
 The element adds two words of its own, so give it both: `data-presets-label`
 names the preset button, and `data-custom-label` is the text on the custom
-colour button. Both come from the app's locale file.
+colour button. Both come from the gem's `uniform.input_colour` keys.
 
 ## Parts
 

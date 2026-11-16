@@ -52,7 +52,7 @@ an `aria-label`.
 ```
 
 ```erb
-<%%= tag.button type: "button", class: "u-btn-close", aria: { label: t(".close") } %>
+<%%= tag.button type: "button", class: "u-btn-close", aria: { label: t("uniform.close") } %>
 ```
 
 ## Copy button
@@ -62,7 +62,7 @@ code. Start the button `hidden`, since copying needs a script. Keep the value on
 the page too, so people can select it.
 
 The words change to `data-copied` for a moment, or to `data-copy-failed` when
-the browser blocks it. Set both, from the app's locale file. A status message beside the button tells screen readers.
+the browser blocks it. Set both from the gem's `uniform.copy.copied` and `uniform.copy.failed` keys. A status message beside the button tells screen readers.
 
 <div class="u-row">
 <span class="u-text-data">kensingtonrepair.ca/jobs/1042</span>
@@ -79,7 +79,7 @@ the browser blocks it. Set both, from the app's locale file. A status message be
 
 ```erb
 <u-copy>
-  <%%= tag.button type: "button", class: "u-btn u-btn-outline", data: { copy: job_url(job), copied: t(".copied"), copy_failed: t(".copy_failed") }, hidden: true do %>
+  <%%= tag.button type: "button", class: "u-btn u-btn-outline", data: { copy: job_url(job), copied: t("uniform.copy.copied"), copy_failed: t("uniform.copy.failed") }, hidden: true do %>
     <span data-copy-label><%%= t(".copy_link") %></span>
   <%% end %>
 </u-copy>

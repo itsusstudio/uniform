@@ -1,0 +1,34 @@
+en:
+  uniform:
+    chart:
+      error: This chart didn’t load. Reload the page to try again.
+    clear_all: Clear all
+    close: Close
+    copy:
+      copied: Copied
+      failed: Couldn’t copy
+    custom_view: Custom view
+    dismiss: Dismiss
+    input_colour:
+      custom: Custom…
+      invalid: Type a hex code like #E0A526.
+      presets: Preset colours
+    input_phone:
+      invalid: Enter the whole phone number, or start with + and the country code.
+    mail:
+      powered_by: "Powered by %{name}"
+      privacy: Privacy
+      terms: Terms
+      unsubscribe: Unsubscribe from these emails
+    menu: Menu
+    pagination:
+      next: Next page
+      previous: Previous page
+      range: "%{from}–%{to} of %{count}"
+    password:
+      hide: Hide password
+      show: Show password
+    remove: Remove
+    remove_filter: "Remove filter: %{name}"
+    sidebar: Sidebar
+    undo: Undo

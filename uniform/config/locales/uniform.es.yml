@@ -1,0 +1,34 @@
+es:
+  uniform:
+    chart:
+      error: Este gráfico no se pudo cargar. Vuelve a cargar la página para intentarlo de nuevo.
+    clear_all: Borrar todo
+    close: Cerrar
+    copy:
+      copied: Copiado
+      failed: No se pudo copiar
+    custom_view: Vista personalizada
+    dismiss: Ocultar
+    input_colour:
+      custom: Personalizado…
+      invalid: Escribe un código hexadecimal como #E0A526.
+      presets: Colores predefinidos
+    input_phone:
+      invalid: Escribe el número de teléfono completo, o empieza con + y el código del país.
+    mail:
+      powered_by: "Con la tecnología de %{name}"
+      privacy: Privacidad
+      terms: Términos
+      unsubscribe: Darse de baja de estos correos
+    menu: Menú
+    pagination:
+      next: Página siguiente
+      previous: Página anterior
+      range: "%{from}–%{to} de %{count}"
+    password:
+      hide: Ocultar contraseña
+      show: Mostrar contraseña
+    remove: Quitar
+    remove_filter: "Quitar filtro: %{name}"
+    sidebar: Barra lateral
+    undo: Deshacer

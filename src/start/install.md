@@ -181,6 +181,20 @@ server: a [chart](/components/chart/)'s `src` page and a
 [data grid](/components/data-grid/) cell's saved value. Those endpoints must
 return HTML your app wrote and escaped, never text a user typed.
 
+## Words
+
+The gem ships the words its components use, in English, French, Dutch and
+Spanish: close, dismiss, menu, page and copy labels, and the messages for
+phone, colour and chart errors. Rails loads them with the gem, so
+`t("uniform.close")` works in every app. Add a key with the same name to the
+app's own locale file to change the wording.
+
+```erb
+<%%= tag.button type: "button", class: "u-btn-close", aria: { label: t("uniform.close") } %>
+```
+
+The full list is in `uniform/config/locales/uniform.en.yml`.
+
 ## Fonts
 
 Switzer, Apfel Grotezk, IBM Plex Mono, Instrument Serif and Bricolage Grotesque

@@ -177,7 +177,7 @@ wrap under it.
     <dialog class="u-popover" id="jobs-filter" popover aria-labelledby="jobs-filter-title">
       <header>
         <h2 id="jobs-filter-title"><%%= t(".filter") %></h2>
-        <button type="button" class="u-btn-close" popovertarget="jobs-filter" popovertargetaction="hide" aria-label="<%%= t(".close") %>"></button>
+        <button type="button" class="u-btn-close" popovertarget="jobs-filter" popovertargetaction="hide" aria-label="<%%= t("uniform.close") %>"></button>
       </header>
       <div class="u-field">
         <%%= form.label :status, t(".status") %>

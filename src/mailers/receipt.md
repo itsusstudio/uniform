@@ -36,18 +36,11 @@ Footer
 
 ## Code
 
-The body, from `uniform/mailers/receipt.html`, goes where the layout has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "receipt.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/receipt.txt`. Pad each label with spaces
-so every amount ends in the same column, 48 characters in:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "receipt.txt")).strip %>
-```
+<%= render "mailer_code", slug: "receipt" %>
 
 The line items use `<th scope="col">` and the payment details use
 `<th scope="row">`, so a screen reader reads each amount with its label. Both

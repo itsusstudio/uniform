@@ -1,0 +1,6 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Join Kensington Jewellery Repair on Workbench" %>
+<%= u.paragraph "Dana Whitfield invited you to join the shop as a jeweller." %>
+<%= u.button "Accept invite", "https://useworkbench.co/invites/9d21aa" %>
+<%= u.notes u.fallback("Or paste this link into your browser:", "https://useworkbench.co/invites/9d21aa"), "This invite works for 7 days." %>

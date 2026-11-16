@@ -1,0 +1,6 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Texts to customers can now be in French" %>
+<%= u.paragraph "Each customer now has a language, and their pickup texts and emails go out in it." %>
+<%= u.paragraph "Set it on the customer’s page, or Workbench picks it from their first message." %>
+<%= u.button "See what’s new", "https://useworkbench.example/changelog" %>

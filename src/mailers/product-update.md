@@ -15,18 +15,11 @@ A product update tells people what's new. It's marketing, so it carries an unsub
 
 ## Code
 
-The body, from `uniform/mailers/product-update.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "product-update.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/product-update.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "product-update.txt")).strip %>
-```
+<%= render "mailer_code", slug: "product-update" %>
 
 This one is marketing, so keep the layout's unsubscribe block.
 

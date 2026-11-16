@@ -1,0 +1,13 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Thanks, we’ve got your ring" %>
+<%= u.paragraph "Hi Ana, thanks for bringing your ring in. Here’s what we wrote down." %>
+<%= u.rows [
+  ["Job", "#1042", :mono],
+  ["Work", "Ring resize, size 6 to 7"],
+  ["Quote", "$85.00", :mono],
+  ["Ready by", "Nov 14", :mono],
+  ["Where", "214 Augusta Avenue, Toronto"]
+] %>
+<%= u.button "View your repair", "https://kensingtonrepair.example/jobs/1042" %>
+<%= u.notes "We’ll email you when it’s ready. Bring your ticket when you pick it up.", "Dana" %>

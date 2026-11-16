@@ -15,18 +15,11 @@ Export ready sends the link to a data export once it's built. Send it when someo
 
 ## Code
 
-The body, from `uniform/mailers/export-ready.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "export-ready.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/export-ready.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "export-ready.txt")).strip %>
-```
+<%= render "mailer_code", slug: "export-ready" %>
 
 This one is transactional, so leave the layout's unsubscribe block out.
 

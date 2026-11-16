@@ -15,18 +15,11 @@ A security alert tells someone about a new sign-in or a change to their account.
 
 ## Code
 
-The body, from `uniform/mailers/security-alert.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "security-alert.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/security-alert.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "security-alert.txt")).strip %>
-```
+<%= render "mailer_code", slug: "security-alert" %>
 
 This one is transactional, so leave the layout's unsubscribe block out.
 

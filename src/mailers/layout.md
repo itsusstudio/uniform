@@ -26,7 +26,7 @@ link colours, and the email still reads fine when a client throws it away.
 
 ## Example
 
-<% email = render("examples/mailer_preview", slug: "layout", title: "We’ve changed our hours", preheader: "From Nov 17 we’re open 10am to 7pm, Tuesday to Saturday.", sender: "Kensington Jewellery Repair", reason: "You’re getting this because you’re a customer of the shop.", address: "Kensington Jewellery Repair, 214 Augusta Ave, Toronto, ON M5T 2L4", unsubscribe_url: "https://kensingtonrepair.example/unsubscribe", body: render("examples/mailer_layout_sample")) %>
+<% email = render("examples/mailer_preview", slug: "layout", title: "We’ve changed our hours", preheader: "From Nov 17 we’re open 10am to 7pm, Tuesday to Saturday.", sender: "Kensington Jewellery Repair", reason: "You’re getting this because you’re a customer of the shop.", address: "Kensington Jewellery Repair, 214 Augusta Ave, Toronto, ON M5T 2L4", unsubscribe_url: "https://kensingtonrepair.example/unsubscribe") %>
 <%= render "examples/mailer_frames", email: email, name: "Hours change email", height: 640, phone_height: 760 %>
 
 This one is a note to every customer, so it isn't transactional and the footer
@@ -85,58 +85,80 @@ light text on dark, never dark on dark.
 
 ## Code
 
-The layout, from `uniform/mailers/layout.html`:
+The gem ships the layout as `layouts/uniform/mailer`, in HTML and plain text.
+A mailer uses it and passes the parts that change per email:
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "layout.html")).strip %>
+```ruby
+class ShopMailer < ApplicationMailer
+  layout "uniform/mailer"
+
+  def hours_changed(customer)
+    @uniform_mail = {
+      sender: customer.shop.name,
+      address: [customer.shop.name, customer.shop.street, customer.shop.city],
+      preheader: t(".preheader"),
+      unsubscribe_url: unsubscribe_url(customer),
+      sent_with: "Workbench",
+      sent_with_url: "https://useworkbench.co"
+    }
+    mail to: customer.email_address, subject: t(".subject")
+  end
+end
 ```
 
-And its plain-text twin, `uniform/mailers/layout.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "layout.txt")).strip %>
-```
-
-Placeholders sit in double braces:
-
-`{{ title }}`
-: The subject line, used for the page title.
-
-`{{ preheader }}`
-: The hidden line inboxes show after the subject.
-
-`{{ sender }}`
+`sender`
 : The name at the top.
 
-`{{ content }}`
-: The email's body. Each mailer is a fragment that goes here.
-
-`{{ address_name }}`, `{{ address_street }}`, `{{ address_city }}`
+`address`
 : The sender's name, street and city, each on its own line.
 
-`{{ if terms_url }}` to `{{ end }}`
-: The product's terms and privacy pages, in `{{ terms_url }}` and `{{ privacy_url }}`. Only on the product's own emails.
+`preheader`
+: The hidden line inboxes show after the subject. The subject itself becomes the page title.
 
-`{{ if sent_with }}` to `{{ end }}`
-: Only when a product sends on a user's behalf. `{{ sent_with }}` is the product's name and `{{ sent_with_url }}` its site. Leave the block out of the product's own emails.
+`terms_url`, `privacy_url`
+: The product's terms and privacy pages. Only on the product's own emails.
 
-`{{ if unsubscribe_url }}` to `{{ end }}`
-: Only for emails that aren't transactional. Leave the whole block out for the rest.
+`sent_with`, `sent_with_url`
+: Only when a product sends on a user's behalf: the product's name and its site.
 
-In Rails, `layout.html` becomes `app/views/layouts/mailer.html.erb` and
-`layout.txt` becomes `app/views/layouts/mailer.text.erb`. Swap `{{ content }}`
-for `<%%= yield %>`, each other placeholder for an instance variable or
-`content_for`, and the unsubscribe block for `<%% if @unsubscribe_url %>` and
-`<%% end %>`.
+`unsubscribe_url`
+: Only for emails that aren't transactional.
 
-The body from the example shows the building blocks: a heading, paragraphs and
-the primary button. The button is a table cell with an ink fill and a link
-inside it, so it works with images off. Outlook ignores the rounded corners and
-draws it square, which is fine.
+The footer's words come from the gem's `uniform.mail` keys, in the reader's
+language.
 
-```html
-<%= raw render("examples/mailer_layout_sample").strip %>
-```
+The view builds the body from blocks: a heading, paragraphs and the primary
+button. The button is a table cell with an ink fill and a link inside it, so it
+works with images off. Outlook ignores the rounded corners and draws it square,
+which is fine.
+
+<%= render "mailer_code", slug: "layout" %>
+
+Every block, for the format being rendered:
+
+`u.heading(text)`
+: The one heading, 24px.
+
+`u.paragraph(text)`
+: A paragraph. Links written out in the text become blue and underlined.
+
+`u.rows(rows)`
+: Label and value pairs between lines. A third value sets the value's look: `:mono`, or a status square with `:success`, `:warning`, `:info`, `:danger` or `:neutral`.
+
+`u.button(label, url)`
+: The primary button. In plain text, the label and the link.
+
+`u.code(digits)`
+: A sign-in or confirmation code, 32px mono.
+
+`u.table(columns, rows, total:)`
+: Line items with an amount column and an optional total row.
+
+`u.facts(rows)`
+: Label and value pairs with the values on the right, like payment details.
+
+`u.notes(*texts)`
+: The closing lines, 48px below the rest. Pass `u.fallback(text, url)` for a "paste this link" line that only shows in HTML.
 
 ## Do and don't
 

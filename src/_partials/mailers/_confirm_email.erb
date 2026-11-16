@@ -1,0 +1,6 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Confirm your email address" %>
+<%= u.paragraph "Confirm dana@kensingtonrepair.ca to finish signing up for Workbench." %>
+<%= u.button "Confirm email address", "https://useworkbench.example/confirm/7f3a9c" %>
+<%= u.notes u.fallback("Or paste this link into your browser:", "https://useworkbench.example/confirm/7f3a9c"), "This link works for 24 hours. If you didn’t sign up, ignore this email." %>

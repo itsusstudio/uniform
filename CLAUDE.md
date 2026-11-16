@@ -2,8 +2,8 @@
 
 Uniform: it's us studio's design system. One repo:
 
-- `uniform/`: the `studio-uniform` gem. A Rails engine that serves `assets/uniform/` (CSS, `uniform.js`, fonts, icons) through Propshaft, plus `mailers/` and tests. Only this folder ships.
-- Everything else: the Bridgetown docs site. It loads the gem with `gem "studio-uniform", path: "uniform"` and reads files through `Studio::Uniform.assets_path` and `Studio::Uniform.mailers_path`. NEVER hard-code a path into the gem.
+- `uniform/`: the `studio-uniform` gem. A Rails engine that serves `assets/uniform/` (CSS, `uniform.js`, fonts, icons) through Propshaft, plus the mail layout and blocks (`Studio::Uniform::Mail`, `app/views/layouts/uniform/mailer`), translations and tests. Only this folder ships.
+- Everything else: the Bridgetown docs site. It loads the gem with `gem "studio-uniform", path: "uniform"` and reads files through `Studio::Uniform.assets_path`. NEVER hard-code a path into the gem.
 
 Design rules: [Rules](/start/rules/) (`src/_data/rules.yml`).
 
@@ -26,7 +26,7 @@ Design rules: [Rules](/start/rules/) (`src/_data/rules.yml`).
 - Live examples: one partial in `src/_partials/examples/` renders the example and its code block. Indent 2 spaces per level: the code block shows the file as written.
 - An HTML code block followed by an ERB one becomes HTML/Rails tabs, from `plugins/builders/code_tabs.rb`. NEVER build the tabs by hand.
 - Screen frames only set width. App shell, Auth shell, Site header, Grid, Description list use container queries. NEVER fake a breakpoint.
-- Mailers can't use Uniform CSS: `role="presentation"` tables, inline styles, Helvetica/Arial and Menlo, hex from tokens, plain-text version.
+- Mailers can't use Uniform CSS. Every email is built from `Studio::Uniform::Mail` blocks (`uniform/lib/studio/uniform/mail.rb`), one view for HTML and plain text. Docs examples live in `src/_partials/mailers/`. NEVER write email HTML by hand.
 - Uniform reads as if every decision was made on purpose from the start. NEVER document what was tried, old class names or how it used to work.
 - The human runs the dev server (`bin/bridgetown start`, port 4000).
 

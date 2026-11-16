@@ -1,0 +1,6 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "We’ve changed our hours" %>
+<%= u.paragraph "Hi Ana, from Monday, Nov 17 we open at 10am and close at 7pm, Tuesday to Saturday. Jobs already in for repair keep the dates we gave you, so your ring resize (#1042) is still ready on Nov 14." %>
+<%= u.paragraph "If the new hours don’t suit you for a pickup, reply to this email and we’ll set something up. Thanks for trusting us with your pieces. Dana" %>
+<%= u.button "See our hours", "https://kensingtonrepair.example/hours" %>

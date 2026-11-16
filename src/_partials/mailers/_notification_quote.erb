@@ -1,0 +1,13 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Your quote is ready" %>
+<%= u.paragraph "Hi Ana, we’ve had a look at your watch. It needs a new crown and a full service. We won’t start until you say yes." %>
+<%= u.rows [
+  ["Job", "#1051", :mono],
+  ["Work", "New crown and full service"],
+  ["Status", "Waiting on you", :warning],
+  ["Quote", "$140.00", :mono],
+  ["Ready", "About 2 weeks after you approve"]
+] %>
+<%= u.button "Review your quote", "https://kensingtonrepair.example/jobs/1051" %>
+<%= u.notes "Questions about the work? Reply to this email or call us.", "Dana" %>

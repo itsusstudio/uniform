@@ -1,0 +1,11 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Welcome to Workbench" %>
+<%= u.paragraph "Kensington Jewellery Repair is set up. Three steps and you’re ready for your first job." %>
+<%= u.rows [
+  ["1", "Add your hours"],
+  ["2", "Invite your team"],
+  ["3", "Log your first job"]
+] %>
+<%= u.button "Finish setting up", "https://useworkbench.example/setup" %>
+<%= u.notes "If you get stuck, reply to this email and it comes to us." %>

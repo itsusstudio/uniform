@@ -1,0 +1,10 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Your November report is ready" %>
+<%= u.paragraph "Kensington Jewellery Repair, Nov 1 to Nov 30." %>
+<%= u.rows [
+  ["Jobs", "64", :mono],
+  ["Taken in", "$5,820.00", :mono],
+  ["On time", "94%", :mono]
+] %>
+<%= u.button "View report", "https://useworkbench.example/reports/2026-11" %>

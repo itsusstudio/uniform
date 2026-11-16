@@ -15,18 +15,11 @@ Welcome is the first email after sign-up. It lists the few steps to get going.
 
 ## Code
 
-The body, from `uniform/mailers/welcome.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "welcome.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/welcome.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "welcome.txt")).strip %>
-```
+<%= render "mailer_code", slug: "welcome" %>
 
 This one is transactional, so leave the layout's unsubscribe block out.
 

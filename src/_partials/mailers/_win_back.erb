@@ -1,0 +1,6 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Your jobs are still here" %>
+<%= u.paragraph "Your jobs, customers and photos are where you left them." %>
+<%= u.button "Open Workbench", "https://useworkbench.example/jobs" %>
+<%= u.notes "If Workbench isn’t working for the shop, reply and tell us why." %>

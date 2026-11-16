@@ -47,7 +47,21 @@ Your own styles always win. Uniform sits in cascade layers (`uniform.tokens`, `u
 | `fonts/` | Switzer, Apfel Grotezk, IBM Plex Mono, Instrument Serif and Bricolage Grotesque |
 | `icons/` | The SVG icons, drawn with `mask` so they take the text colour |
 
-The files above live in `assets/uniform/`. Email templates live in `mailers/`, outside the asset paths, as HTML and plain text with `{{ placeholders }}`.
+The files above live in `assets/uniform/`.
+
+## Email
+
+Emails can't use the CSS, so the gem builds them in Ruby. A mailer uses the `uniform/mailer` layout and sets `@uniform_mail` (sender, address, preheader, and the terms, unsubscribe or "sent with" links it needs). Its view builds the body from blocks, and the same view makes both the HTML and the plain-text part:
+
+```erb
+<% u = uniform_mail -%>
+<%= u.heading t(".title") %>
+<%= u.paragraph t(".body") %>
+<%= u.code @code %>
+<%= u.notes t(".ignore") %>
+```
+
+The blocks are `heading`, `paragraph`, `rows`, `facts`, `table`, `button`, `code`, `notes` and `fallback`. They live in `lib/studio/uniform/mail.rb`.
 
 ## Behaviour
 

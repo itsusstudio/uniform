@@ -1,5 +1,6 @@
 require "json"
 require "studio/uniform/version"
+require "studio/uniform/mail"
 
 module Studio
   module Uniform
@@ -10,10 +11,6 @@ module Studio
 
       def assets_path
         root.join("assets")
-      end
-
-      def mailers_path
-        root.join("mailers")
       end
 
       def manifest

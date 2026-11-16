@@ -15,18 +15,11 @@ A drop-off confirmation tells a customer the shop has their piece. It's sent by 
 
 ## Code
 
-The body, from `uniform/mailers/intake.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "intake.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/intake.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "intake.txt")).strip %>
-```
+<%= render "mailer_code", slug: "intake" %>
 
 This one is transactional, so leave the layout's unsubscribe block out.
 

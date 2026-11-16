@@ -1,0 +1,13 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Your week at the shop" %>
+<%= u.paragraph "Kensington Jewellery Repair, Nov 6 to Nov 12." %>
+<%= u.rows [
+  ["Jobs in", "12", :mono],
+  ["Ready", "5 ready for pickup", :success],
+  ["Overdue", "1 overdue", :danger],
+  ["Quotes", "2 waiting on customers", :warning],
+  ["Taken in", "$1,240.00", :mono]
+] %>
+<%= u.button "Open Workbench", "https://useworkbench.example/jobs" %>
+<%= u.notes "Change how often you get this in your notification settings." %>

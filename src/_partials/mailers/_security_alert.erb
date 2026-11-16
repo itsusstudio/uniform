@@ -1,0 +1,11 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "New sign-in to Workbench" %>
+<%= u.paragraph "Someone signed in to your account from a new device." %>
+<%= u.rows [
+  ["Device", "Firefox on Windows"],
+  ["Near", "Toronto, ON"],
+  ["When", "Nov 12, 2:14pm EST", :mono]
+] %>
+<%= u.button "Review your devices", "https://useworkbench.example/settings/devices" %>
+<%= u.notes "If this was you, there’s nothing to do. If not, sign that device out and reset your password." %>

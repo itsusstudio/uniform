@@ -1,0 +1,11 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Your export is ready" %>
+<%= u.paragraph "The export you asked for is ready." %>
+<%= u.rows [
+  ["File", "kensington-2026-11-12.zip", :mono],
+  ["Holds", "Jobs, customers and payments"],
+  ["Size", "2.4 MB", :mono]
+] %>
+<%= u.button "Download export", "https://useworkbench.example/exports/41c0" %>
+<%= u.notes "This link works for 7 days." %>

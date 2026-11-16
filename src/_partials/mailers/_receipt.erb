@@ -1,0 +1,18 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Receipt for job #1042" %>
+<%= u.paragraph "Hi Ana, you paid $96.05 on Nov 14, 2026 for your ring resize. Thanks for trusting us with it. Keep this email as your receipt." %>
+<%= u.table ["Item", "Amount"], [
+  ["Ring resize, size 6 to 7", "$70.00"],
+  ["Rhodium plating", "$15.00"],
+  ["Subtotal", "$85.00"],
+  ["HST (13%)", "$11.05"]
+], total: ["Total paid", "$96.05"] %>
+<%= u.facts [
+  ["Paid with", "Visa ending 4242"],
+  ["Paid on", "Nov 14, 2026", :mono],
+  ["Receipt number", "R-0187", :mono],
+  ["Job number", "#1042", :mono],
+  ["HST number", "81234 5678 RT0001", :mono]
+] %>
+<%= u.notes "If anything on this receipt looks wrong, reply to this email or call us at 416-555-0142.", "Dana, Kensington Jewellery Repair" %>

@@ -15,18 +15,11 @@ A win-back invites someone back after a quiet stretch. It's marketing, so it car
 
 ## Code
 
-The body, from `uniform/mailers/win-back.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "win-back.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/win-back.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "win-back.txt")).strip %>
-```
+<%= render "mailer_code", slug: "win-back" %>
 
 This one is marketing, so keep the layout's unsubscribe block.
 

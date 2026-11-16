@@ -1,20 +1,16 @@
-<%# locals: (slug:, title:, preheader:, sender:, reason:, address:, unsubscribe_url: nil, body: nil, plain_text: false) -%>
+<%# locals: (slug:, title:, preheader:, sender:, reason:, address:, unsubscribe_url: nil, plain_text: false) -%>
 <%
   given = local_variables
-  unsubscribe = given.include?(:unsubscribe_url) ? unsubscribe_url : nil
-  override = given.include?(:body) ? body : nil
-  ext = given.include?(:plain_text) && plain_text ? "txt" : "html"
-  dir = Studio::Uniform.mailers_path.to_s
-  fill = ->(value) { ext == "html" ? Erubi.h(value.to_s) : value.to_s }
-  content = (override || File.read(File.join(dir, "#{slug}.#{ext}"))).to_s.strip
-  email = File.read(File.join(dir, "layout.#{ext}"))
+  format = given.include?(:plain_text) && plain_text ? "text" : "html"
+  u = Studio::Uniform::Mail.for(format)
+  labels = YAML.load_file(Studio::Uniform.root.join("config/locales/uniform.en.yml")).dig("en", "uniform", "mail").transform_keys(&:to_sym)
   on_behalf = sender != "Workbench"
-  email = email.gsub(/^[ \t]*\{\{ if sent_with \}\}\n(.*?)^[ \t]*\{\{ end \}\}\n/m) { on_behalf ? $1 : "" }
-  email = email.gsub(/^[ \t]*\{\{ if unsubscribe_url \}\}\n(.*?)^[ \t]*\{\{ end \}\}\n/m) { unsubscribe ? $1 : "" }
-  email = email.gsub(/^[ \t]*\{\{ if terms_url \}\}\n(.*?)^[ \t]*\{\{ end \}\}\n/m) { on_behalf ? "" : $1 }
-  lines = address.split(", ")
-  site = sender == "Workbench" ? "https://useworkbench.example" : "https://kensingtonrepair.example"
-  values = { "title" => title, "preheader" => preheader, "sender" => sender, "address_name" => lines[0], "address_street" => lines[1], "address_city" => lines[2..].to_a.join(", "), "terms_url" => "#{site}/terms", "privacy_url" => "#{site}/privacy", "unsubscribe_url" => unsubscribe, "sent_with" => "Workbench", "sent_with_url" => "https://useworkbench.co" }
-  email = email.gsub(/\{\{ (\w+) \}\}/) { $1 == "content" ? content : fill.(values.fetch($1)) }
+  site = on_behalf ? "https://kensingtonrepair.example" : "https://useworkbench.example"
+  content = render("mailers/#{slug.tr("-", "_")}", format: format)
+  email = u.layout(content,
+    title: title, preheader: preheader, sender: sender, address: address.split(", ", 3), labels: labels,
+    terms_url: (on_behalf ? nil : "#{site}/terms"), privacy_url: "#{site}/privacy",
+    unsubscribe_url: (given.include?(:unsubscribe_url) ? unsubscribe_url : nil),
+    sent_with: (on_behalf ? "Workbench" : nil), sent_with_url: "https://useworkbench.co")
 -%>
 <%= raw email %>

@@ -60,24 +60,15 @@ The square takes the colour of the job's status, from the table on
 
 ## Code
 
-The body, from `uniform/mailers/notification.html`. It goes where the layout
-has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "notification.html")).strip %>
-```
+<%= render "mailer_code", slug: "notification" %>
 
-The plain text, from `uniform/mailers/notification.txt`. Labels are padded so
-the values line up in a monospace reader:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "notification.txt")).strip %>
-```
-
-The quote is in `uniform/mailers/notification-quote.html` and
-`notification-quote.txt`. The status square uses the hex values from the
-[Layout](/mailers/layout/) colour table: `#277a4d` pine, `#f3c22c` yellow,
-`#2f5bd3` cobalt, `#c03a26` vermilion.
+The quote email is built the same way, with `:warning` on its status row. A
+row's third value sets its square: `:success`, `:warning`, `:info`, `:danger`
+or `:neutral`, or `:mono` for codes, dates and amounts.
 
 These are transactional, so leave the layout's unsubscribe block out.
 

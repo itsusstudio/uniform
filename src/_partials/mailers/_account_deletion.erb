@@ -1,0 +1,6 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Your account will be deleted on Dec 12" %>
+<%= u.paragraph "Kensington Jewellery Repair’s jobs, customers, photos and payments will be deleted on Dec 12. Until then, you can keep your account." %>
+<%= u.button "Keep my account", "https://useworkbench.example/settings/account" %>
+<%= u.notes "After Dec 12 this can’t be undone. Download your data first if you want a copy." %>

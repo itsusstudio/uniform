@@ -1,0 +1,10 @@
+<%# locals: (slug:) -%>
+<%
+  close = "%" + ">"
+  source = File.read(File.join(site.root_dir, "src/_partials/mailers/_#{slug.tr("-", "_")}.erb")).lines
+  source = source.drop(1)
+  source[0] = "<% u = uniform_mail -#{close}\n"
+-%>
+```erb
+<%= raw source.join.strip %>
+```

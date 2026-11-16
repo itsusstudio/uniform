@@ -15,18 +15,11 @@ A team invite asks someone to join a shop's account. Send it when an owner adds 
 
 ## Code
 
-The body, from `uniform/mailers/invite.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "invite.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/invite.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "invite.txt")).strip %>
-```
+<%= render "mailer_code", slug: "invite" %>
 
 This one is transactional, so leave the layout's unsubscribe block out.
 

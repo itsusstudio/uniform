@@ -1,0 +1,14 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Your ring is ready for pickup" %>
+<%= u.paragraph "Hi Ana, your ring is resized and ready to collect. Come by any time we’re open." %>
+<%= u.rows [
+  ["Job", "#1042", :mono],
+  ["Work", "Ring resize, size 6 to 7"],
+  ["Status", "Ready for pickup", :success],
+  ["To pay", "$85.00", :mono],
+  ["Hours", "Tuesday to Saturday, 10am to 7pm"],
+  ["Where", "214 Augusta Avenue, Toronto"]
+] %>
+<%= u.button "View your repair", "https://kensingtonrepair.example/jobs/1042" %>
+<%= u.notes "If someone else is picking it up for you, reply with their name and we’ll have it ready for them.", "See you soon, Dana" %>

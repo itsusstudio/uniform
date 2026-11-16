@@ -1,0 +1,7 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Your sign-in code" %>
+<%= u.paragraph "Enter this code in Workbench to finish signing in." %>
+<%= u.code "482915" %>
+<%= u.paragraph "This code works for 10 minutes." %>
+<%= u.paragraph "If you didn’t try to sign in, ignore this email." %>

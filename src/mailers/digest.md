@@ -15,18 +15,11 @@ A digest sums up activity in one email instead of many. Send it daily or weekly,
 
 ## Code
 
-The body, from `uniform/mailers/digest.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "digest.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/digest.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "digest.txt")).strip %>
-```
+<%= render "mailer_code", slug: "digest" %>
 
 This one is transactional, so leave the layout's unsubscribe block out.
 

@@ -15,18 +15,11 @@ Confirm email address asks someone to prove a new email address is theirs. Send 
 
 ## Code
 
-The body, from `uniform/mailers/confirm-email.html`. It goes where the
-[layout](/mailers/layout/) has `{{ content }}`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "confirm-email.html")).strip %>
-```
-
-The plain text, from `uniform/mailers/confirm-email.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "confirm-email.txt")).strip %>
-```
+<%= render "mailer_code", slug: "confirm-email" %>
 
 This one is transactional, so leave the layout's unsubscribe block out.
 

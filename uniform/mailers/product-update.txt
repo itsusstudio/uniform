@@ -1,8 +1,0 @@
-Texts to customers can now be in French
-
-Each customer now has a language, and their pickup texts and emails go out in it.
-
-Set it on the customer’s page, or Workbench picks it from their first message.
-
-See what’s new:
-https://useworkbench.example/changelog

@@ -44,17 +44,11 @@ If it wasn't you
 
 ## Code
 
-The body, from `uniform/mailers/sign-in-code.html`:
+The view. One file makes both the HTML and the plain-text part: in Rails,
+`uniform_mail` gives the blocks for the format being rendered, and the
+[layout](/mailers/layout/) goes around them.
 
-```html
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "sign-in-code.html")).strip %>
-```
-
-And the plain text, `uniform/mailers/sign-in-code.txt`:
-
-```text
-<%= raw File.read(File.join(Studio::Uniform.mailers_path, "sign-in-code.txt")).strip %>
-```
+<%= render "mailer_code", slug: "sign-in-code" %>
 
 The filled plain-text email, with the layout around it:
 

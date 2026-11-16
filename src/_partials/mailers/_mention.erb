@@ -1,0 +1,6 @@
+<%# locals: (format:) -%>
+<% u = Studio::Uniform::Mail.for(format) -%>
+<%= u.heading "Sam Okafor mentioned you on #1042" %>
+<%= u.paragraph "On Ana Reyes’s ring resize:" %>
+<%= u.paragraph "“@Dana can you check the size before I cut the band?”" %>
+<%= u.button "Reply", "https://useworkbench.example/jobs/1042" %>

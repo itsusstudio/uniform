@@ -1,4 +1,5 @@
 require "studio/uniform/helper"
+require "studio/uniform/form_builder"
 
 module Studio
   module Uniform
@@ -13,6 +14,12 @@ module Studio
 
       initializer "studio_uniform.helper" do
         ActiveSupport.on_load(:action_view) { include Studio::Uniform::Helper }
+      end
+
+      # Rails wraps a field with errors in <div class="field_with_errors">,
+      # which breaks u-field. Uniform marks errors with aria-invalid instead.
+      initializer "studio_uniform.field_errors" do
+        ActiveSupport.on_load(:action_view) { ActionView::Base.field_error_proc = proc { |html, _| html } }
       end
     end
   end

@@ -33,6 +33,40 @@ permalink: /components/form/
 </div>
 </div>
 
+## With errors
+
+A problem with one field shows under that field. A problem with the whole
+form, like a failed save, shows in a danger [banner](/components/banner/) at
+the top, saying what happened.
+
+<div class="example-frame">
+<div class="u-max-width-form">
+<form class="u-form" action="#example">
+<hgroup>
+<h3>New customer</h3>
+<p>We text them when their job is ready.</p>
+</hgroup>
+<div class="u-banner u-banner-danger" role="alert">
+<p>We couldn’t save this customer.</p>
+</div>
+<div class="u-field">
+<label for="form-error-name">Customer name</label>
+<input class="u-input" id="form-error-name" autocomplete="off" placeholder=" " aria-invalid="true" aria-describedby="form-error-name-error">
+<p class="u-error" id="form-error-name-error">Enter the customer’s name.</p>
+</div>
+<div class="u-field">
+<label for="form-error-phone">Phone number</label>
+<input class="u-input" id="form-error-phone" type="tel" value="416 555 01" autocomplete="off" placeholder=" " aria-invalid="true" aria-describedby="form-error-phone-error">
+<p class="u-error" id="form-error-phone-error">Enter all 10 digits of the phone number.</p>
+</div>
+<div class="u-actions">
+<button type="button" class="u-btn u-btn-primary">Save customer</button>
+<button type="button" class="u-btn u-btn-ghost">Cancel</button>
+</div>
+</form>
+</div>
+</div>
+
 ## Code
 
 ```html
@@ -49,20 +83,23 @@ permalink: /components/form/
 </form>
 ```
 
+In Rails, `uniform_form_with` is `form_with` with Uniform's form builder.
+Give a field `label:` and it writes the whole `u-field`: the label, the
+input, an optional `hint:`, and the error with `aria-invalid` set. The error
+is the model's own message; `messages:` words it per error type for one form.
+
 ```erb
-<%%= form_with model: customer, class: "u-form" do |form| %>
+<%%= uniform_form_with model: customer do |form| %>
   <hgroup>
     <h2><%%= t(".title") %></h2>
     <p><%%= t(".subtitle") %></p>
   </hgroup>
-  <div class="u-field">
-    <%%= form.label :name, t(".name") %>
-    <%%= form.text_field :name, class: "u-input", autocomplete: "name", placeholder: " " %>
-  </div>
-  <div class="u-field">
-    <%%= form.label :phone_number, t(".phone_number") %>
-    <%%= form.telephone_field :phone_number, class: "u-input", autocomplete: "tel", placeholder: " " %>
-  </div>
+  <%% if flash.now[:alert] %>
+    <div class="u-banner u-banner-danger" role="alert"><p><%%= flash.now[:alert] %></p></div>
+  <%% end %>
+  <%%= form.text_field :name, label: t(".name"), autocomplete: "name" %>
+  <%%= form.telephone_field :phone_number, label: t(".phone_number"), autocomplete: "tel",
+        messages: {invalid: t(".phone_number_invalid")} %>
   <div class="u-actions">
     <%%= form.button t(".save"), class: "u-btn u-btn-primary" %>
   </div>

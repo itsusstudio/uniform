@@ -438,8 +438,8 @@
 
 - id: thin-lines
   name: Thin lines
-  summary: 1px for lines and borders, 2px for the focus ring.
-  body: 1px for lines and borders, 2px for the focus ring. Lines only separate things.
+  summary: 1px for lines and borders, 2px for the focus ring and a field with an error.
+  body: 1px for lines and borders, 2px for the focus ring and a field with an error. Lines only separate things.
   home: /foundations/shape-and-depth/
 
 - id: shadows-only-float

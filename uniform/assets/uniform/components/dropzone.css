@@ -54,7 +54,7 @@
   background: var(--u-color-bg-paper);
 }
 
-.u-dropzone:has(> input:is([aria-invalid="true"], :user-invalid)) { border-color: var(--u-color-danger); }
+.u-dropzone:has(> input[aria-invalid="true"]) { border-color: var(--u-color-danger); }
 
 .u-dropzone:has(> input:disabled) {
   background: var(--u-color-divider);

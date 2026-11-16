@@ -41,7 +41,7 @@
 
 .u-checkbox > input:checked::before { visibility: visible; }
 
-.u-checkbox > input:is([aria-invalid="true"], :user-invalid) { border-color: var(--u-color-danger); }
+.u-checkbox > input[aria-invalid="true"] { border-color: var(--u-color-danger); }
 
 .u-checkbox > input:indeterminate::before {
   width: 8px;

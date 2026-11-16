@@ -52,7 +52,10 @@ textarea.u-input {
   field-sizing: content;
 }
 
-.u-input:is([aria-invalid="true"], :user-invalid) { border-color: var(--u-color-danger); }
+.u-input[aria-invalid="true"] {
+  border-width: 2px;
+  border-color: var(--u-color-danger);
+}
 
 .u-input:disabled {
   background: var(--u-color-divider);

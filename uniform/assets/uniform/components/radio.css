@@ -38,7 +38,7 @@
 
 .u-radio > input:checked::before { visibility: visible; }
 
-.u-radio > input:is([aria-invalid="true"], :user-invalid) { border-color: var(--u-color-danger); }
+.u-radio > input[aria-invalid="true"] { border-color: var(--u-color-danger); }
 
 .u-radio-hint {
   color: var(--u-color-text-muted);

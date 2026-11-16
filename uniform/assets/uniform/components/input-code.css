@@ -63,7 +63,10 @@ u-input-code > .u-input-code-slot-active:empty::after {
   50% { opacity: 0; }
 }
 
-u-input-code > .u-input:is([aria-invalid="true"], :user-invalid) ~ span { border-color: var(--u-color-danger); }
+u-input-code > .u-input[aria-invalid="true"] ~ span {
+  border-width: 2px;
+  border-color: var(--u-color-danger);
+}
 
 u-input-code > .u-input:disabled ~ span {
   background: var(--u-color-divider);

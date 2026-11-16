@@ -1,0 +1,1736 @@
+let anchors = 0
+
+class UniformElement extends HTMLElement {
+  connectedCallback() {
+    if (this.controller) return
+    this.controller = new AbortController()
+    this.setup(this.controller.signal)
+  }
+
+  disconnectedCallback() {
+    this.controller?.abort()
+    this.controller = null
+  }
+
+  // Keeps state through moveBefore() instead of a disconnect and a fresh setup.
+  connectedMoveCallback() {}
+
+  anchorName(prefix) {
+    this.anchor ??= `--${prefix}-${++anchors}`
+    return this.anchor
+  }
+}
+
+const define = (name, element) => {
+  if (!customElements.get(name)) customElements.define(name, element)
+}
+
+const fold = (text) => text.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase()
+
+const langOf = (element) => element.closest("[lang]")?.lang || navigator.language
+
+// The HTML these sinks take comes from the app's own server, so the policy passes it through.
+let policy = null
+try { policy = window.trustedTypes?.createPolicy("uniform", { createHTML: (html) => html }) ?? null } catch {}
+const trustedHTML = (html) => policy ? policy.createHTML(html) : html
+
+// The form resets its fields after the reset event, so redraw a moment later.
+const afterReset = (form, signal, redraw) => form?.addEventListener("reset", () => setTimeout(redraw), { signal })
+
+const spokenText = (node) => {
+  const copy = node.cloneNode(true)
+  copy.querySelectorAll('[aria-hidden="true"]').forEach((each) => each.remove())
+  return copy.textContent.replace(/\s+/g, " ").trim()
+}
+
+// One polite region for the page. An error that is only shown, not changed, isn't announced reliably.
+let announcer = null
+let announceTimer = null
+let announcedField = null
+const announce = (field, message) => {
+  if (!announcer) {
+    announcer = document.createElement("div")
+    announcer.className = "u-visually-hidden"
+    announcer.setAttribute("aria-live", "polite")
+    document.body.append(announcer)
+  }
+  const label = field.labels?.[0] ? `${spokenText(field.labels[0])}: ` : ""
+  clearTimeout(announceTimer)
+  announcer.textContent = ""
+  announcedField = field
+  // Wait until the screen reader has read the field that takes focus next.
+  announceTimer = setTimeout(() => { announcer.textContent = label + message }, 500)
+}
+const unannounce = (field) => {
+  if (announcedField !== field) return
+  clearTimeout(announceTimer)
+  announcer.textContent = ""
+  announcedField = null
+}
+
+define("u-combobox", class extends UniformElement {
+  setup(signal) {
+    const input = this.querySelector(':scope > input[role="combobox"]')
+    const list = this.querySelector(':scope > [role="listbox"]')
+    if (!input || !list?.popover) return
+    const on = (target, type, listener) => target.addEventListener(type, listener, { signal })
+    const value = this.querySelector(':scope > input[type="hidden"]')
+    const empty = list.querySelector('[role="option"][aria-disabled="true"]')
+    const options = [...list.querySelectorAll('[role="option"]:not([aria-disabled="true"], [data-action])')]
+    const anchor = this.anchorName("u-combobox")
+    input.style.setProperty("anchor-name", anchor)
+    list.style.setProperty("position-anchor", anchor)
+    list.querySelectorAll('[role="option"]').forEach((option, i) => { option.id ||= `${list.id}-${i}` })
+    const parts = (option) => {
+      const found = [...option.querySelectorAll(":scope > span")]
+      return found.length ? found : [option]
+    }
+    const digits = (text) => text.replace(/\D/g, "")
+    options.forEach((option) => {
+      option.dataset.label ??= (option.querySelector(":scope > span") ?? option).textContent.trim()
+      parts(option).forEach((part) => { part.dataset.text ??= part.textContent.trim() })
+    })
+    let active = null
+    const isOpen = () => list.matches(":popover-open")
+    const choices = () => [...list.querySelectorAll('[role="option"]:not([hidden], [aria-disabled="true"])')]
+    const picked = () => options.find((option) => option.getAttribute("aria-selected") === "true")
+    const setActive = (option, scroll = true) => {
+      active?.classList.remove("u-combobox-option-active")
+      active = option
+      if (!option) return input.removeAttribute("aria-activedescendant")
+      option.classList.add("u-combobox-option-active")
+      input.setAttribute("aria-activedescendant", option.id)
+      if (scroll) option.scrollIntoView({ block: "nearest" })
+    }
+    const filter = (text) => {
+      const query = fold(text.trim())
+      const number = /^[\d\s().+-]+$/.test(text.trim()) ? digits(text) : ""
+      let matches = 0
+      options.forEach((option) => {
+        let hit = query === ""
+        parts(option).forEach((part) => {
+          const source = part.dataset.text
+          const at = query ? fold(source).indexOf(query) : -1
+          if (at === -1) return part.replaceChildren(source)
+          hit = true
+          const match = document.createElement("mark")
+          match.textContent = source.slice(at, at + query.length)
+          part.replaceChildren(source.slice(0, at), match, source.slice(at + query.length))
+        })
+        if (!hit && number.length >= 3) hit = parts(option).some((part) => digits(part.dataset.text).includes(number))
+        option.hidden = !hit
+        if (hit) matches++
+      })
+      if (empty) empty.hidden = matches > 0
+    }
+    const open = () => {
+      if (isOpen()) return
+      list.showPopover()
+      input.setAttribute("aria-expanded", "true")
+    }
+    const close = () => {
+      if (isOpen()) list.hidePopover()
+      input.setAttribute("aria-expanded", "false")
+      setActive(null)
+    }
+    const showAll = () => {
+      filter("")
+      open()
+    }
+    const choose = (option, text) => {
+      options.forEach((each) => each.setAttribute("aria-selected", String(each === option)))
+      if (value) value.value = option ? option.dataset.value ?? option.dataset.label : ""
+      if (text !== undefined) input.value = text
+    }
+    const pick = (option) => {
+      if (option.hasAttribute("data-action")) {
+        this.dispatchEvent(new CustomEvent("combobox:action", { bubbles: true, detail: { query: input.value.trim() } }))
+      } else {
+        choose(option, option.dataset.label)
+        input.dispatchEvent(new Event("change", { bubbles: true }))
+      }
+      close()
+    }
+    on(input, "input", () => {
+      const current = picked()
+      if (current && current.dataset.label !== input.value) choose(null)
+      filter(input.value)
+      open()
+      setActive(input.value.trim() ? choices()[0] : null)
+    })
+    on(input, "click", () => { if (!isOpen()) showAll() })
+    on(input, "blur", close)
+    on(input, "keydown", (event) => {
+      if (event.isComposing || event.keyCode === 229) return
+      const arrow = event.key === "ArrowDown" || event.key === "ArrowUp"
+      if (arrow) event.preventDefault()
+      if (arrow && !isOpen()) {
+        showAll()
+        if (event.altKey) return
+        return setActive(event.key === "ArrowUp" ? choices().at(-1) : picked() ?? choices()[0])
+      }
+      const items = choices()
+      const at = items.indexOf(active)
+      const move = (option) => {
+        event.preventDefault()
+        setActive(option ?? null)
+      }
+      if (event.key === "ArrowDown") return move(items[Math.min(at + 1, items.length - 1)])
+      if (event.key === "ArrowUp") return move(at === -1 ? items.at(-1) : items[Math.max(at - 1, 0)])
+      if ((event.key === "Home" || event.key === "End") && isOpen() && active) return move(event.key === "Home" ? items[0] : items.at(-1))
+      if (event.key === "Enter" && isOpen() && active) {
+        event.preventDefault()
+        return pick(active)
+      }
+      if (event.key === "Escape" && (isOpen() || input.value)) {
+        event.preventDefault()
+        if (isOpen()) return close()
+        choose(null, "")
+        filter("")
+      }
+    })
+    on(list, "mousedown", (event) => event.preventDefault())
+    on(list, "click", (event) => {
+      const option = event.target.closest('[role="option"]')
+      if (option && choices().includes(option)) pick(option)
+    })
+    on(list, "pointermove", (event) => {
+      const option = event.target.closest('[role="option"]')
+      if (option && option !== active && choices().includes(option)) setActive(option, false)
+    })
+  }
+})
+
+define("u-input-password", class extends UniformElement {
+  setup(signal) {
+    const input = this.querySelector(":scope > .u-input")
+    const toggle = this.querySelector(":scope > button")
+    if (!input || !toggle) return
+    const show = (visible) => {
+      input.type = visible ? "text" : "password"
+      toggle.setAttribute("aria-pressed", String(visible))
+    }
+    toggle.addEventListener("click", () => show(input.type === "password"), { signal })
+    input.form?.addEventListener("submit", () => show(false), { signal })
+    toggle.hidden = false
+  }
+})
+
+define("u-character-count", class extends UniformElement {
+  setup(signal) {
+    const input = this.querySelector("textarea[maxlength], input[maxlength]")
+    const count = [...this.querySelectorAll(".u-field > small")].at(-1)
+    if (!input || !count) return
+    const words = this.dataset.count || "{count} of {max}"
+    const update = () => { count.textContent = words.replace("{count}", input.value.length).replace("{max}", input.maxLength) }
+    input.addEventListener("input", update, { signal })
+    afterReset(input.form, signal, update)
+    update()
+  }
+})
+
+define("u-input-code", class extends UniformElement {
+  setup(signal) {
+    const input = this.querySelector(":scope > .u-input")
+    const size = input?.maxLength ?? 0
+    if (size < 1) return
+    const slots = [...this.querySelectorAll(":scope > span")]
+    while (slots.length < size) {
+      const slot = document.createElement("span")
+      slot.setAttribute("aria-hidden", "true")
+      slots.push(this.appendChild(slot))
+    }
+    const on = (type, listener) => input.addEventListener(type, listener, { signal })
+    const toEnd = () => input.setSelectionRange(input.value.length, input.value.length)
+    const render = () => {
+      const digits = input.value.replace(/\D/g, "").slice(0, size)
+      if (digits !== input.value) input.value = digits
+      const focused = document.activeElement === input
+      slots.forEach((slot, i) => {
+        slot.textContent = digits[i] ?? ""
+        slot.classList.toggle("u-input-code-slot-active", focused && i === Math.min(digits.length, size - 1))
+      })
+    }
+    on("input", () => {
+      render()
+      if (input.value.length === size && this.hasAttribute("submit")) input.form?.requestSubmit()
+    })
+    on("paste", (event) => {
+      const pasted = event.clipboardData?.getData("text").replace(/\D/g, "")
+      if (!pasted) return
+      event.preventDefault()
+      input.value = pasted.slice(0, size)
+      input.dispatchEvent(new Event("input", { bubbles: true }))
+    })
+    on("focus", () => { render(); toEnd() })
+    on("click", toEnd)
+    on("blur", render)
+    afterReset(input.form, signal, render)
+    render()
+  }
+})
+
+const nanpRegions = new Set(["CA", "US", "AG", "AI", "AS", "BB", "BM", "BS", "DM", "DO", "GD", "GU", "JM", "KN", "KY", "LC", "MP", "MS", "PR", "SX", "TC", "TT", "VC", "VG", "VI"])
+const twoDigitCodes = new Set("20 27 30 31 32 33 34 36 39 40 41 43 44 45 46 47 48 49 51 52 53 54 55 56 57 58 60 61 62 63 64 65 66 81 82 84 86 90 91 92 93 94 95 98".split(" "))
+
+const phoneBlocks = (digits) => {
+  const blocks = []
+  let rest = digits
+  while (rest.length > 4) {
+    blocks.push(rest.slice(0, 3))
+    rest = rest.slice(3)
+  }
+  if (rest) blocks.push(rest)
+  return blocks.join(" ")
+}
+
+const nanpNumber = (digits) => {
+  if (digits.length <= 3 || digits.length > 10) return digits
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`
+}
+
+const readPhone = (text, region) => {
+  const plus = text.trimStart().startsWith("+")
+  const digits = text.replace(/\D/g, "")
+  const nanp = nanpRegions.has(region)
+  if (!plus && nanp && digits.startsWith("1")) return readPhone(`+${digits}`, region)
+  if (!plus) {
+    const valid = nanp ? digits.length === 10 : digits.length >= 6 && digits.length <= 15
+    return { digits, valid, value: digits, text: nanp ? nanpNumber(digits) : phoneBlocks(digits) }
+  }
+  const size = /^[17]/.test(digits) ? 1 : twoDigitCodes.has(digits.slice(0, 2)) ? 2 : 3
+  const code = digits.slice(0, size)
+  const rest = digits.slice(size)
+  const local = code === "1" ? nanpNumber(rest) : phoneBlocks(rest)
+  const valid = code === "1" ? rest.length === 10 : digits.length >= 8 && digits.length <= 15
+  return { digits, valid, value: `+${digits}`, text: `+${code}${local ? ` ${local}` : ""}` }
+}
+
+define("u-input-phone", class extends UniformElement {
+  setup(signal) {
+    const input = this.querySelector('input[type="tel"]')
+    if (!input) return
+    const on = (target, type, listener) => target.addEventListener(type, listener, { signal })
+    const region = (this.getAttribute("region") || "CA").toUpperCase()
+    const hidden = this.querySelector('input[type="hidden"]')
+    const error = this.querySelector(".u-error")
+    const message = error?.textContent.trim() ?? ""
+    const flag = (invalid) => {
+      input.setAttribute("aria-invalid", String(invalid))
+      if (!invalid) unannounce(input)
+      if (!error) return
+      error.hidden = !invalid
+      const ids = (input.getAttribute("aria-describedby") ?? "").split(" ").filter((id) => id && id !== error.id)
+      if (invalid) ids.push(error.id)
+      if (ids.length) input.setAttribute("aria-describedby", ids.join(" "))
+      else input.removeAttribute("aria-describedby")
+    }
+    // The browser's own validation then blocks the submit and focuses the field.
+    const validate = () => {
+      const phone = readPhone(input.value, region)
+      const invalid = phone.digits !== "" && !phone.valid
+      input.setCustomValidity(invalid ? message : "")
+      return invalid
+    }
+    const render = (text, caret) => {
+      const phone = readPhone(text, region)
+      const before = text.slice(0, caret)
+      const marks = before.replace(/\D/g, "").length
+      let at = marks === 0 && before.includes("+") ? 1 : 0
+      for (let seen = 0; at < phone.text.length && seen < marks; at++) {
+        if (/\d/.test(phone.text[at])) seen++
+      }
+      input.value = phone.text
+      if (hidden) hidden.value = phone.digits ? phone.value : ""
+      if (document.activeElement === input) input.setSelectionRange(at, at)
+      return validate()
+    }
+    on(input, "beforeinput", (event) => {
+      const { selectionStart: start, selectionEnd: end, value } = input
+      const back = event.inputType === "deleteContentBackward"
+      const forward = event.inputType === "deleteContentForward"
+      if (start !== end || (!back && !forward)) return
+      const skipped = back ? value[start - 1] : value[start]
+      if (skipped === undefined || /[\d+]/.test(skipped)) return
+      const at = back ? value.slice(0, start).search(/\d\D*$/) : value.slice(start).search(/\d/)
+      if (at < 0) return
+      const digit = back ? at : start + at
+      event.preventDefault()
+      render(value.slice(0, digit) + value.slice(digit + 1), back ? digit : start)
+      input.dispatchEvent(new Event("input", { bubbles: true }))
+    })
+    on(input, "input", () => {
+      const invalid = render(input.value, input.selectionStart ?? input.value.length)
+      if (!invalid && input.getAttribute("aria-invalid") === "true") flag(false)
+    })
+    on(input, "blur", () => {
+      const invalid = validate()
+      if (invalid && input.getAttribute("aria-invalid") !== "true") announce(input, message)
+      flag(invalid)
+    })
+    on(input, "invalid", () => flag(true))
+    afterReset(input.form, signal, () => {
+      render(input.value, input.value.length)
+      flag(false)
+    })
+    if (!input.hasAttribute("aria-invalid")) input.setAttribute("aria-invalid", "false")
+    if (input.value) render(input.value, input.value.length)
+  }
+})
+
+define("u-toggle", class extends UniformElement {
+  setup(signal) {
+    const toggle = this.querySelector("button.u-toggle[aria-pressed]")
+    if (!toggle) return
+    toggle.addEventListener("click", () => {
+      const pressed = toggle.getAttribute("aria-pressed") !== "true"
+      toggle.setAttribute("aria-pressed", String(pressed))
+      toggle.dispatchEvent(new CustomEvent("toggle:change", { bubbles: true, detail: { pressed } }))
+    }, { signal })
+  }
+})
+
+const sizeText = (bytes, lang) => {
+  const mega = bytes >= 1048576
+  const value = mega ? bytes / 1048576 : Math.max(1, Math.round(bytes / 1024))
+  return new Intl.NumberFormat(lang, { style: "unit", unit: mega ? "megabyte" : "kilobyte", maximumFractionDigits: mega ? 1 : 0 }).format(value)
+}
+
+define("u-dropzone", class extends UniformElement {
+  setup(signal) {
+    const root = this.querySelector(".u-dropzone")
+    const input = root?.querySelector(':scope > input[type="file"]')
+    const list = this.querySelector(".u-dropzone ~ ul")
+    const template = this.querySelector("template")
+    if (!root || !input || !list || !template) return
+    const on = (target, type, listener) => target.addEventListener(type, listener, { signal })
+    const maxSize = Number(input.dataset.maxSize) || Infinity
+    const accepts = input.accept.split(",").map((rule) => rule.trim().toLowerCase()).filter(Boolean)
+    const chosen = this.chosen ??= new Map()
+    const key = (file) => `${file.name}:${file.size}:${file.lastModified}`
+    const problem = (file) => {
+      const name = file.name.toLowerCase()
+      const type = file.type.toLowerCase()
+      const fits = accepts.length === 0 || accepts.some((rule) => {
+        if (rule.startsWith(".")) return name.endsWith(rule)
+        if (rule.endsWith("/*")) return type.startsWith(rule.slice(0, -1))
+        return type === rule
+      })
+      if (!fits) return "type"
+      if (file.size > maxSize) return "size"
+      return null
+    }
+    const sync = () => {
+      const transfer = new DataTransfer()
+      chosen.forEach((row, file) => { if (!problem(file)) transfer.items.add(file) })
+      input.files = transfer.files
+      list.hidden = chosen.size === 0
+    }
+    const remove = (file) => {
+      const row = chosen.get(file)
+      row.querySelectorAll("img").forEach((image) => URL.revokeObjectURL(image.src))
+      row.remove()
+      chosen.delete(file)
+    }
+    const render = (file) => {
+      const row = template.content.firstElementChild.cloneNode(true)
+      row.querySelector(":scope > div > p:first-child").textContent = file.name
+      row.querySelector(".u-meta").textContent = sizeText(file.size, langOf(this))
+      row.querySelectorAll("[data-dropzone-error]").forEach((error) => { error.hidden = error.dataset.dropzoneError !== problem(file) })
+      row.querySelectorAll("[aria-label]").forEach((each) => each.setAttribute("aria-label", `${each.getAttribute("aria-label")} ${file.name}`))
+      const thumb = row.firstElementChild
+      if (thumb && file.type.startsWith("image/") && !problem(file)) {
+        const image = document.createElement("img")
+        image.alt = ""
+        image.addEventListener("error", () => image.replaceWith(thumb), { once: true, signal })
+        image.src = URL.createObjectURL(file)
+        thumb.replaceWith(image)
+      }
+      return row
+    }
+    const add = (files) => {
+      const known = new Set([...chosen.keys()].map(key))
+      let fresh = [...files].filter((file) => !known.has(key(file)))
+      if (!input.multiple) {
+        fresh = fresh.slice(0, 1)
+        if (fresh.length) [...chosen.keys()].forEach(remove)
+      }
+      const added = fresh.map((file) => {
+        const row = render(file)
+        chosen.set(file, row)
+        return { file, row, error: problem(file) }
+      })
+      sync()
+      if (!added.length) return
+      // The list is the live region: it has to be in the page before the first row goes in, or that row isn't announced.
+      requestAnimationFrame(() => {
+        if (signal.aborted) return
+        const kept = added.filter(({ file, row }) => chosen.get(file) === row)
+        if (!kept.length) return
+        list.append(...kept.map(({ row }) => row))
+        root.dispatchEvent(new CustomEvent("dropzone:change", { bubbles: true, detail: { added: kept } }))
+      })
+    }
+    const hasFiles = (event) => [...event.dataTransfer.types].includes("Files")
+    on(input, "change", () => add(input.files))
+    afterReset(input.form, signal, () => {
+      [...chosen.keys()].forEach(remove)
+      list.hidden = true
+    })
+    on(list, "click", (event) => {
+      const button = event.target.closest("[data-dropzone-remove]")
+      const file = button && [...chosen].find(([, row]) => row.contains(button))?.[0]
+      if (!file) return
+      remove(file)
+      sync()
+      input.focus()
+    })
+    on(root, "dragover", (event) => {
+      if (!hasFiles(event)) return
+      event.preventDefault()
+      event.dataTransfer.dropEffect = input.disabled ? "none" : "copy"
+      root.classList.toggle("u-dropzone-over", !input.disabled)
+    })
+    on(root, "dragleave", (event) => {
+      if (!root.contains(event.relatedTarget)) root.classList.remove("u-dropzone-over")
+    })
+    on(root, "drop", (event) => {
+      if (!hasFiles(event)) return
+      event.preventDefault()
+      root.classList.remove("u-dropzone-over")
+      if (!input.disabled) add(event.dataTransfer.files)
+    })
+  }
+})
+
+const luminance = (hex) => hex.slice(1).match(/../g)
+  .map((pair) => parseInt(pair, 16) / 255)
+  .map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4))
+  .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0)
+
+const readHex = (text) => {
+  const digits = text.trim().replace(/^#/, "")
+  if (!/^([0-9a-f]{3}){1,2}$/i.test(digits)) return null
+  return `#${digits.length === 3 ? digits.replace(/./g, "$&$&") : digits}`.toLowerCase()
+}
+
+define("u-input-colour", class extends UniformElement {
+  setup(signal) {
+    const swatch = this.querySelector(':scope > input[type="color"]')
+    if (!swatch) return
+    const on = (target, type, listener) => target.addEventListener(type, listener, { signal })
+    const part = (name, className) => {
+      const node = document.createElement(name)
+      if (className) node.className = className
+      node.dataset.colourPart = ""
+      return node
+    }
+    // A Turbo snapshot clones the live DOM: the swatch has lost its id to the generated input, so take it back.
+    const stale = this.querySelectorAll(":scope > [data-colour-part]")
+    this.fieldId ??= swatch.id || this.querySelector(":scope > input.u-input[data-colour-part]")?.id
+    stale.forEach((node) => node.remove())
+    const shared = ["aria-describedby", "aria-errormessage", "aria-invalid"]
+    const input = part("input", "u-input")
+    Object.assign(input, { type: "text", maxLength: 7, autocomplete: "off", spellcheck: false, placeholder: " ", pattern: "#?([0-9A-Fa-f]{3}){1,2}", disabled: swatch.disabled, defaultValue: (swatch.defaultValue || swatch.value).toUpperCase(), value: swatch.value.toUpperCase() })
+    if (this.fieldId) {
+      swatch.removeAttribute("id")
+      input.id = this.fieldId
+    }
+    shared.forEach((name) => { if (swatch.hasAttribute(name)) input.setAttribute(name, swatch.getAttribute(name)) })
+    swatch.tabIndex = -1
+    swatch.setAttribute("aria-hidden", "true")
+    swatch.after(input)
+    signal.addEventListener("abort", () => {
+      this.querySelectorAll(":scope > [data-colour-part]").forEach((node) => node.remove())
+      if (this.fieldId) swatch.id = this.fieldId
+      swatch.removeAttribute("tabindex")
+      swatch.removeAttribute("aria-hidden")
+    })
+
+    const errorId = input.getAttribute("aria-errormessage")
+    const error = errorId && document.getElementById(errorId)
+    const tokens = getComputedStyle(this)
+    const contrast = (hex, token) => {
+      const [a, b] = [luminance(hex), luminance(tokens.getPropertyValue(token).trim())]
+      return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)
+    }
+    const ink = (hex) => ["--u-color-bg-ink", "--u-color-text-on-ink"].sort((a, b) => contrast(hex, b) - contrast(hex, a))[0]
+    const message = error?.textContent.trim() ?? ""
+    const validate = (hex) => input.setCustomValidity(hex ? "" : message)
+    const flag = (invalid) => {
+      input.setAttribute("aria-invalid", String(invalid))
+      if (invalid) input.setCustomValidity(message)
+      else {
+        input.setCustomValidity("")
+        unannounce(input)
+      }
+      if (!error) return
+      error.hidden = !invalid
+      const ids = (input.getAttribute("aria-describedby") ?? "").split(" ").filter((id) => id && id !== error.id)
+      if (invalid) ids.push(error.id)
+      input.setAttribute("aria-describedby", ids.join(" "))
+    }
+    const fire = (type) => swatch.dispatchEvent(new Event(type, { bubbles: true }))
+
+    const options = [...(swatch.list?.options || [])].filter((option) => readHex(option.value))
+    const choices = options.map((option) => {
+      const hex = readHex(option.value)
+      const choice = document.createElement("button")
+      Object.assign(choice, { type: "button", value: hex })
+      choice.style.backgroundColor = hex
+      choice.style.color = `var(${ink(hex)})`
+      choice.setAttribute("aria-label", option.label || hex)
+      return choice
+    })
+    const mark = (hex) => {
+      choices.forEach((choice) => choice.setAttribute("aria-pressed", String(choice.value === hex)))
+      const current = choices.find((choice) => choice.getAttribute("aria-pressed") === "true") ?? choices[0]
+      choices.forEach((choice) => { choice.tabIndex = choice === current ? 0 : -1 })
+    }
+    const set = (hex) => {
+      swatch.value = hex
+      input.value = hex.toUpperCase()
+      flag(false)
+      mark(hex)
+      fire("input")
+      fire("change")
+    }
+    mark(swatch.value)
+    if (!input.hasAttribute("aria-invalid")) input.setAttribute("aria-invalid", "false")
+    on(input, "input", () => {
+      const hex = readHex(input.value)
+      validate(hex)
+      if (!hex) return
+      swatch.value = hex
+      flag(false)
+      mark(hex)
+      fire("input")
+    })
+    on(input, "change", (event) => {
+      const hex = readHex(input.value)
+      if (!hex) {
+        if (event.isTrusted && input.getAttribute("aria-invalid") !== "true") announce(input, message)
+        return flag(true)
+      }
+      input.value = hex.toUpperCase()
+      fire("change")
+    })
+    on(input, "invalid", () => flag(true))
+    afterReset(swatch.form, signal, () => {
+      input.value = swatch.value.toUpperCase()
+      flag(false)
+      mark(swatch.value)
+    })
+    on(swatch, "input", (event) => {
+      if (!event.isTrusted) return
+      input.value = swatch.value.toUpperCase()
+      flag(false)
+      mark(swatch.value)
+    })
+    if (!choices.length) return
+
+    const label = this.dataset.presetsLabel
+    const toggle = part("button")
+    Object.assign(toggle, { type: "button", disabled: swatch.disabled })
+    toggle.setAttribute("aria-label", label)
+    const picker = part("div", "u-menu")
+    const grid = document.createElement("div")
+    grid.setAttribute("role", "group")
+    grid.setAttribute("aria-label", label)
+    grid.append(...choices)
+    const custom = document.createElement("button")
+    Object.assign(custom, { type: "button", textContent: this.dataset.customLabel })
+    picker.append(grid, document.createElement("hr"), custom)
+    input.after(toggle, picker)
+
+    const choose = (event) => {
+      const choice = choices.find((each) => each.contains(event.target))
+      if (!choice && !custom.contains(event.target)) return false
+      if (choice) set(choice.value)
+      else { try { swatch.showPicker() } catch { swatch.click() } }
+      return true
+    }
+    on(picker, "keydown", (event) => {
+      const at = choices.indexOf(event.target)
+      if (at === -1) return
+      const columns = getComputedStyle(grid).gridTemplateColumns.split(" ").length
+      const step = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -columns, ArrowDown: columns }[event.key]
+      const next = { Home: choices[0], End: choices.at(-1) }[event.key] ?? (step && choices[at + step])
+      if (step || next) event.preventDefault()
+      if (!next) return
+      choices.forEach((choice) => { choice.tabIndex = choice === next ? 0 : -1 })
+      next.focus()
+    })
+    if (this.hasAttribute("data-open")) {
+      toggle.setAttribute("aria-expanded", "true")
+      on(picker, "click", choose)
+      return
+    }
+    picker.id = `${this.fieldId || this.anchorName("u-input-colour").slice(2)}-picker`
+    picker.popover = "auto"
+    toggle.setAttribute("popovertarget", picker.id)
+    const anchor = this.anchorName("u-input-colour")
+    this.style.setProperty("anchor-name", anchor)
+    picker.style.setProperty("position-anchor", anchor)
+    on(picker, "toggle", (event) => {
+      if (event.newState !== "open") return
+      mark(swatch.value)
+      choices.find((choice) => choice.tabIndex === 0)?.focus()
+    })
+    on(picker, "click", (event) => { if (choose(event)) picker.hidePopover() })
+    on(input, "keydown", (event) => {
+      if (event.key !== "ArrowDown" || toggle.disabled || picker.matches(":popover-open")) return
+      event.preventDefault()
+      picker.showPopover()
+    })
+  }
+})
+
+define("u-sidebar", class extends UniformElement {
+  setup(signal) {
+    const button = this.querySelector(":scope > div:first-child > button[aria-expanded]")
+    if (!button) return
+    button.addEventListener("click", () => {
+      if (this.matches(":popover-open")) return this.hidePopover()
+      button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") === "false"))
+    }, { signal })
+    let edge = this.querySelector(":scope > div:first-child + button")
+    if (!edge) {
+      edge = document.createElement("button")
+      edge.type = "button"
+      edge.tabIndex = -1
+      edge.setAttribute("aria-hidden", "true")
+      button.parentElement.after(edge)
+    }
+    edge.title = button.getAttribute("aria-label") ?? ""
+    edge.addEventListener("click", () => button.click(), { signal })
+  }
+})
+
+const chartTip = (tooltip, x, min, max) => {
+  const left = Math.max(min, Math.min(x - tooltip.offsetWidth / 2, max - tooltip.offsetWidth))
+  tooltip.style.left = `${left}px`
+}
+
+const chartNumber = (cell) => {
+  if (!cell) return null
+  const raw = cell.dataset.value ?? cell.textContent
+  if (!raw.trim()) return null
+  const value = parseFloat(raw.replace(/[^\d.-]/g, ""))
+  return Number.isFinite(value) ? value : null
+}
+
+const chartNice = (max) => {
+  if (max <= 0) return 1
+  const power = 10 ** Math.floor(Math.log10(max))
+  return [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find((step) => step * power >= max) * power
+}
+
+const chartCurve = (points) => {
+  if (points.length < 2) return ""
+  const count = points.length
+  const slope = points.slice(0, -1).map(([x, y], i) => (points[i + 1][1] - y) / (points[i + 1][0] - x))
+  const tangent = points.map((_, i) => {
+    if (i === 0) return slope[0]
+    if (i === count - 1) return slope[count - 2]
+    return slope[i - 1] * slope[i] <= 0 ? 0 : (slope[i - 1] + slope[i]) / 2
+  })
+  slope.forEach((m, i) => {
+    if (m === 0) { tangent[i] = tangent[i + 1] = 0; return }
+    const a = tangent[i] / m
+    const b = tangent[i + 1] / m
+    const length = a * a + b * b
+    if (length <= 9) return
+    const k = 3 / Math.sqrt(length)
+    tangent[i] = k * a * m
+    tangent[i + 1] = k * b * m
+  })
+  const round = (n) => Math.round(n * 100) / 100
+  return points.reduce((path, [x, y], i) => {
+    if (i === 0) return `M${round(x)} ${round(y)}`
+    const [px, py] = points[i - 1]
+    const third = (x - px) / 3
+    return `${path} C${round(px + third)} ${round(py + tangent[i - 1] * third)} ${round(x - third)} ${round(y - tangent[i] * third)} ${round(x)} ${round(y)}`
+  }, "")
+}
+
+const chartSvg = (name, attributes = {}) => {
+  const element = document.createElementNS("http://www.w3.org/2000/svg", name)
+  Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value))
+  return element
+}
+
+const chartHtml = (name, className, text) => {
+  const element = document.createElement(name)
+  if (className) element.className = className
+  if (text != null) element.textContent = text
+  return element
+}
+
+let chartFades = 0
+
+define("u-chart", class extends UniformElement {
+  setup(signal) {
+    signal.addEventListener("abort", () => this.clear())
+    const src = this.getAttribute("src")
+    const table = this.querySelector(":scope > table")
+    if (src && !table) this.load(src, signal)
+    else if (!table && this.getAttribute("aria-busy") === "true") this.shimmer()
+    else this.render(signal)
+  }
+
+  shimmer() {
+    const type = this.getAttribute("type") || "bar"
+    const bar = (width) => {
+      const line = chartHtml("span", "u-shimmer")
+      line.style.width = width
+      return line
+    }
+    let shimmer
+    if (type === "stacked") {
+      shimmer = chartHtml("div", "u-chart-stacked")
+      const stack = chartHtml("div", "u-chart-stack")
+      stack.append(bar("100%"))
+      const legend = chartHtml("ul", "u-chart-legend")
+      ;["96px", "120px", "80px", "136px"].forEach((width) => {
+        const item = chartHtml("li")
+        item.append(bar(width))
+        legend.append(item)
+      })
+      shimmer.append(stack, legend)
+    } else if (type === "meter") {
+      shimmer = chartHtml("div", "u-chart-meter-loading")
+      shimmer.append(bar("100%"))
+    } else if (type === "spark") {
+      shimmer = chartHtml("div", "u-chart-spark")
+      shimmer.append(bar("100%"))
+    } else {
+      shimmer = chartHtml("div", `u-chart-loading${type === "line" ? " u-chart-loading-line" : ""}`)
+      if (this.hasAttribute("height")) shimmer.style.setProperty("--u-chart-height", `${this.getAttribute("height")}px`)
+      if (type === "line") {
+        const svg = chartSvg("svg", { viewBox: "0 0 100 100", preserveAspectRatio: "none" })
+        svg.append(chartSvg("path", { d: "M0 92 C15 86 25 80 40 66 C55 52 65 50 80 34 C88 26 94 22 100 18 L100 100 L0 100 Z" }))
+        shimmer.append(svg)
+      } else {
+        ;[45, 60, 40, 70, 55, 80, 65, 50, 75, 60, 85, 70].forEach((at) => {
+          const column = document.createElement("span")
+          column.style.setProperty("--u-chart-at", `${at}%`)
+          shimmer.append(column)
+        })
+      }
+    }
+    shimmer.setAttribute("aria-hidden", "true")
+    this.mark(shimmer)
+  }
+
+  clear() {
+    this.querySelectorAll(":scope > [data-chart]").forEach((node) => node.remove())
+    delete this.dataset.drawn
+  }
+
+  mark(node) {
+    node.dataset.chart = ""
+    this.append(node)
+    return node
+  }
+
+  async load(src, signal) {
+    this.setAttribute("aria-busy", "true")
+    this.shimmer()
+    try {
+      const response = await fetch(src, { headers: { Accept: "text/html" }, signal })
+      if (!response.ok) throw new Error(response.statusText)
+      const page = new DOMParser().parseFromString(trustedHTML(await response.text()), "text/html")
+      const table = page.querySelector("table")
+      if (!table) throw new Error("No table")
+      this.clear()
+      this.append(document.importNode(table, true))
+      this.removeAttribute("aria-busy")
+      this.render(signal)
+    } catch (error) {
+      if (signal.aborted) return
+      this.clear()
+      this.removeAttribute("aria-busy")
+      if (this.dataset.error) this.mark(chartHtml("p", "u-chart-empty", this.dataset.error))
+    }
+  }
+
+  render(signal) {
+    this.clear()
+    const table = this.querySelector(":scope > table")
+    if (!table) return
+    const rows = [...(table.tBodies[0]?.rows || [])].map((row) => ({
+      label: row.cells[0]?.textContent.trim() || "",
+      cells: [...row.cells].slice(1),
+      tone: row.dataset.tone || "neutral"
+    }))
+    const names = [...(table.tHead?.rows[0]?.cells || [])].slice(1).map((cell) => cell.textContent.trim())
+    const type = this.getAttribute("type") || "bar"
+    const hasData = rows.some((row) => row.cells.some((cell) => chartNumber(cell)))
+    if (!hasData) {
+      this.mark(chartHtml("p", "u-chart-empty", this.dataset.empty || ""))
+      this.dataset.drawn = ""
+      return
+    }
+    if (type === "stacked") this.stacked(rows)
+    else if (type === "meter") this.meter(rows)
+    else if (type === "spark") this.spark(rows)
+    else this.plot(type, rows, names, signal)
+    this.dataset.drawn = ""
+  }
+
+  format(value, top) {
+    const lang = this.closest("[lang]")?.lang || navigator.language
+    const compact = top >= 10000
+    const number = new Intl.NumberFormat(lang, { notation: compact ? "compact" : "standard", maximumFractionDigits: compact ? 1 : 2 }).format(value)
+    return `${this.getAttribute("prefix") || ""}${number}`
+  }
+
+  plot(type, rows, names, signal) {
+    const line = type === "line"
+    const seriesCount = line ? Math.min(2, names.length || 1) : 1
+    const series = Array.from({ length: seriesCount }, (_, s) => rows.map((row) => chartNumber(row.cells[s])))
+    const top = Number(this.getAttribute("max")) || chartNice(Math.max(...series.flat().filter((value) => value != null)))
+    const ticks = [0, top / 2, top]
+    const slot = 10
+    const width = rows.length * slot
+    const y = (value) => 100 - (100 * value) / top
+
+    const plot = chartHtml("div", "u-chart-plot")
+    if (this.hasAttribute("height")) plot.style.setProperty("--u-chart-height", `${this.getAttribute("height")}px`)
+
+    const axisY = chartHtml("div", "u-chart-axis u-chart-axis-y")
+    axisY.setAttribute("aria-hidden", "true")
+    ticks.forEach((tick) => {
+      const label = chartHtml("span", "u-chart-tick", this.format(tick, top))
+      label.style.setProperty("--u-chart-at", `${(100 * tick) / top}%`)
+      axisY.append(label)
+    })
+
+    const svg = chartSvg("svg", { class: "u-chart-svg", viewBox: `0 0 ${width} 100`, preserveAspectRatio: "none", "aria-hidden": "true" })
+    const grid = chartSvg("g", { class: "u-chart-grid" })
+    ticks.forEach((tick) => grid.append(chartSvg("line", { x1: 0, x2: width, y1: y(tick), y2: y(tick) })))
+    svg.append(grid)
+
+    if (line) {
+      const id = `u-chart-fade-${++chartFades}`
+      const defs = chartSvg("defs")
+      const fade = chartSvg("linearGradient", { id, x1: 0, x2: 0, y1: 0, y2: 1 })
+      fade.append(chartSvg("stop", { class: "u-chart-fade-top", offset: "0" }), chartSvg("stop", { class: "u-chart-fade-bottom", offset: "1" }))
+      defs.append(fade)
+      svg.append(defs)
+      const points = series.map((values) => values.flatMap((value, i) => value == null ? [] : [[i * slot + slot / 2, y(value)]]))
+      if (points[1]?.length) svg.append(chartSvg("path", { class: "u-chart-line u-chart-previous", d: chartCurve(points[1]) }))
+      const main = points[0]
+      if (main.length > 1) {
+        const curve = chartCurve(main)
+        svg.append(chartSvg("path", { class: "u-chart-area", fill: `url(#${id})`, d: `${curve} L${main.at(-1)[0]} 100 L${main[0][0]} 100 Z` }))
+        svg.append(chartSvg("path", { class: "u-chart-line u-chart-current", d: curve }))
+      }
+    }
+
+    const current = this.getAttribute("current") === "none" ? -1 : rows.length - 1
+    rows.forEach((row, i) => {
+      const column = chartSvg("g", { class: "u-chart-col" })
+      column.dataset.index = i
+      column.append(chartSvg("rect", { class: "u-chart-hit", x: i * slot, y: 0, width: slot, height: 100 }))
+      column.append(chartSvg("line", { class: "u-chart-guide", x1: i * slot + slot / 2, x2: i * slot + slot / 2, y1: 0, y2: 100 }))
+      const value = series[0][i]
+      if (!line && value != null) {
+        column.append(chartSvg("rect", {
+          class: `u-chart-bar ${i === current ? "u-chart-current" : "u-chart-previous"}`,
+          x: i * slot + 2, y: y(value), width: slot - 4, height: 100 - y(value)
+        }))
+      }
+      svg.append(column)
+    })
+
+    const axisX = chartHtml("div", "u-chart-axis u-chart-axis-x")
+    axisX.setAttribute("aria-hidden", "true")
+    axisX.append(chartHtml("span", "u-chart-tick", rows[0].label), chartHtml("span", "u-chart-tick", rows.at(-1).label))
+
+    const tooltip = chartHtml("div", "u-chart-tooltip")
+    tooltip.hidden = true
+    tooltip.setAttribute("aria-hidden", "true")
+    const lines = series.map((_, s) => {
+      const row = chartHtml("p", seriesCount > 1 ? `u-chart-key u-chart-key-line ${s === 0 ? "u-chart-current" : "u-chart-previous"}` : "u-row")
+      row.append(chartHtml("span", "u-chart-tooltip-value"), chartHtml("span", "u-chart-tooltip-label"))
+      tooltip.append(row)
+      return row
+    })
+
+    if (seriesCount > 1) {
+      const legend = chartHtml("ul", "u-chart-legend")
+      legend.setAttribute("aria-hidden", "true")
+      names.slice(0, seriesCount).forEach((name, s) => legend.append(chartHtml("li", `u-chart-key u-chart-key-line ${s === 0 ? "u-chart-current" : "u-chart-previous"}`, name)))
+      this.mark(legend)
+    }
+
+    plot.append(axisY, svg, axisX, tooltip)
+    this.mark(plot)
+
+    const columns = [...svg.querySelectorAll(".u-chart-col")]
+    let active = null
+    const hide = () => {
+      tooltip.hidden = true
+      columns[active]?.classList.remove("u-chart-col-active")
+      active = null
+    }
+    const show = (index) => {
+      columns[active]?.classList.remove("u-chart-col-active")
+      active = index
+      const column = columns[index]
+      column.classList.add("u-chart-col-active")
+      const row = rows[index]
+      let shown = false
+      lines.forEach((tip, s) => {
+        const cell = row.cells[s]
+        const empty = chartNumber(cell) == null
+        tip.hidden = empty
+        if (empty) return
+        shown = true
+        tip.children[0].textContent = cell.textContent.trim()
+        tip.children[1].textContent = cell.dataset.label || row.label
+      })
+      tooltip.hidden = !shown
+      if (!shown) return
+      const box = plot.getBoundingClientRect()
+      const area = svg.getBoundingClientRect()
+      const hit = column.querySelector(".u-chart-hit").getBoundingClientRect()
+      chartTip(tooltip, hit.left + hit.width / 2 - box.left, area.left - box.left, area.right - box.left)
+    }
+    svg.addEventListener("pointerover", (event) => {
+      const column = event.target.closest(".u-chart-col")
+      if (column) show(Number(column.dataset.index))
+    }, { signal })
+    svg.addEventListener("pointerleave", (event) => {
+      if (event.pointerType !== "touch") hide()
+    }, { signal })
+
+    // The table stays what screen readers read. This lets keyboard users step through the same tooltips.
+    const table = this.querySelector(":scope > table")
+    plot.tabIndex = 0
+    plot.setAttribute("role", "img")
+    const name = table?.caption?.textContent.trim() || table?.getAttribute("aria-label") || this.dataset.label
+    if (name) plot.setAttribute("aria-label", name)
+    plot.addEventListener("focus", () => show(active ?? (current === -1 ? rows.length - 1 : current)), { signal })
+    plot.addEventListener("blur", hide, { signal })
+    plot.addEventListener("keydown", (event) => {
+      const at = active ?? rows.length - 1
+      const next = { ArrowLeft: at - 1, ArrowRight: at + 1, Home: 0, End: rows.length - 1 }[event.key]
+      if (event.key === "Escape" && active !== null) {
+        event.preventDefault()
+        return hide()
+      }
+      if (next === undefined) return
+      event.preventDefault()
+      show(Math.max(0, Math.min(next, rows.length - 1)))
+    }, { signal })
+  }
+
+  stacked(rows) {
+    const wrap = chartHtml("div", "u-chart-stacked")
+    wrap.setAttribute("aria-hidden", "true")
+    const bar = chartHtml("div", "u-chart-stack")
+    const legend = chartHtml("ul", "u-chart-legend")
+    rows.forEach((row) => {
+      const value = chartNumber(row.cells[0]) || 0
+      const segment = chartHtml("span", `u-chart-segment u-chart-${row.tone}`)
+      segment.style.setProperty("--u-chart-share", value)
+      bar.append(segment)
+      const item = chartHtml("li")
+      item.append(chartHtml("span", `u-badge u-badge-${row.tone}`, row.label), chartHtml("span", "u-meta", row.cells[0]?.textContent.trim()))
+      legend.append(item)
+    })
+    wrap.append(bar, legend)
+    this.mark(wrap)
+  }
+
+  meter(rows) {
+    const meter = chartHtml("meter", "u-chart-meter")
+    meter.setAttribute("aria-hidden", "true")
+    meter.min = 0
+    meter.max = chartNumber(rows[1]?.cells[0]) || Number(this.getAttribute("max")) || 100
+    meter.value = chartNumber(rows[0].cells[0]) || 0
+    this.mark(meter)
+  }
+
+  spark(rows) {
+    const values = rows.map((row) => chartNumber(row.cells[0])).filter((value) => value != null)
+    const low = Math.min(...values)
+    const range = Math.max(...values) - low || 1
+    const step = 96 / Math.max(1, values.length - 1)
+    const points = values.map((value, i) => [i * step, 22 - (20 * (value - low)) / range])
+    const id = `u-chart-fade-${++chartFades}`
+    const svg = chartSvg("svg", { class: "u-chart-spark", viewBox: "0 0 96 24", "aria-hidden": "true" })
+    const defs = chartSvg("defs")
+    const fade = chartSvg("linearGradient", { id, x1: 0, x2: 0, y1: 0, y2: 1 })
+    fade.append(chartSvg("stop", { class: "u-chart-fade-top", offset: "0" }), chartSvg("stop", { class: "u-chart-fade-bottom", offset: "1" }))
+    defs.append(fade)
+    const curve = chartCurve(points)
+    svg.append(defs, chartSvg("path", { class: "u-chart-area", fill: `url(#${id})`, d: `${curve} L96 24 L0 24 Z` }), chartSvg("path", { class: "u-chart-line u-chart-current", d: curve }))
+    this.mark(svg)
+  }
+})
+
+const timeFormats = {
+  time: { hour: "numeric", minute: "2-digit" },
+  date: { month: "short", day: "numeric" },
+  datetime: { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }
+}
+const formatters = new Map()
+const cached = (Format, lang, options) => {
+  const key = `${Format.name}|${lang}|${JSON.stringify(options)}`
+  if (!formatters.has(key)) formatters.set(key, new Format(lang, options))
+  return formatters.get(key)
+}
+const timeNow = (element) => {
+  const pinned = element.closest("[data-time-now]")?.dataset.timeNow
+  return pinned ? new Date(pinned) : new Date()
+}
+const localZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+const timeZone = (element) => element.closest("[data-time-zone]")?.dataset.timeZone || localZone
+const zoneName = (date, lang, zone) => cached(Intl.DateTimeFormat, lang, { timeZone: zone, timeZoneName: "short" }).formatToParts(date).find((part) => part.type === "timeZoneName")?.value
+const clockTime = (date, lang, zone) => {
+  if (!lang.toLowerCase().startsWith("en")) return cached(Intl.DateTimeFormat, lang, { ...timeFormats.time, timeZone: zone }).format(date)
+  const parts = Object.fromEntries(cached(Intl.DateTimeFormat, lang, { hour: "numeric", minute: "2-digit", hour12: true, timeZone: zone }).formatToParts(date).map((part) => [part.type, part.value]))
+  return `${parts.hour}${parts.minute === "00" ? "" : `:${parts.minute}`}${parts.dayPeriod.replace(/\W/g, "").toLowerCase()}`
+}
+// The day a moment falls on in a zone, as UTC midnight. The ISO calendar keeps the arithmetic Gregorian whatever the language.
+const calendarDay = (date, zone) => {
+  const parts = Object.fromEntries(cached(Intl.DateTimeFormat, "en-u-ca-iso8601-nu-latn", { timeZone: zone, year: "numeric", month: "numeric", day: "numeric" }).formatToParts(date).map((part) => [part.type, Number(part.value)]))
+  return Date.UTC(parts.year, parts.month - 1, parts.day)
+}
+const timeElements = new Set()
+let timeTicker = null
+
+define("u-relative-time", class extends UniformElement {
+  setup(signal) {
+    this.time = this.querySelector("time[datetime]")
+    if (!this.time) return
+    const value = this.time.getAttribute("datetime")
+    // A date with no time is a calendar day, the same in every zone, not UTC midnight.
+    const dateOnly = value.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+    this.day = dateOnly ? Date.UTC(dateOnly[1], dateOnly[2] - 1, dateOnly[3]) : undefined
+    this.date = dateOnly ? new Date(dateOnly[1], dateOnly[2] - 1, dateOnly[3]) : new Date(value)
+    if (Number.isNaN(this.date.getTime())) return
+    this.time.title ||= dateOnly
+      ? cached(Intl.DateTimeFormat, langOf(this), { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" }).format(this.day)
+      : cached(Intl.DateTimeFormat, langOf(this), { year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "2-digit", timeZone: timeZone(this), timeZoneName: "short" }).format(this.date)
+    this.render()
+    timeElements.add(this)
+    timeTicker ??= setInterval(() => timeElements.forEach((element) => element.render()), 60000)
+    signal.addEventListener("abort", () => {
+      timeElements.delete(this)
+      if (!timeElements.size) { clearInterval(timeTicker); timeTicker = null }
+    })
+  }
+
+  render() {
+    const lang = langOf(this)
+    const format = this.getAttribute("format") || "datetime"
+    const now = timeNow(this)
+    const zone = timeZone(this)
+    const relative = cached(Intl.RelativeTimeFormat, lang, { numeric: "auto" })
+    if (format === "relative") {
+      const seconds = Math.round((this.date - now) / 1000)
+      const units = [["day", 86400], ["hour", 3600], ["minute", 60]]
+      const [unit, size] = units.find(([, size]) => Math.abs(seconds) >= size) || ["minute", 60]
+      this.time.textContent = relative.format(Math.abs(seconds) < 60 ? 0 : Math.round(seconds / size), Math.abs(seconds) < 60 ? "minute" : unit)
+      return
+    }
+    const day = this.day ?? calendarDay(this.date, zone)
+    const today = calendarDay(now, zone)
+    const sameYear = new Date(day).getUTCFullYear() === new Date(today).getUTCFullYear()
+    const date = this.day === undefined
+      ? cached(Intl.DateTimeFormat, lang, { ...timeFormats.date, timeZone: zone, year: sameYear ? undefined : "numeric" }).format(this.date)
+      : cached(Intl.DateTimeFormat, lang, { ...timeFormats.date, timeZone: "UTC", year: sameYear ? undefined : "numeric" }).format(this.day)
+    if (format === "day") {
+      const diff = Math.round((day - today) / 86400000)
+      const text = Math.abs(diff) <= 1 ? relative.format(diff, "day") : date
+      this.time.textContent = text.charAt(0).toLocaleUpperCase(lang) + text.slice(1)
+      return
+    }
+    if (format === "date" || this.day !== undefined) { this.time.textContent = date; return }
+    const home = this.getAttribute("zone")
+    const away = home && home !== zone ? ` ${zoneName(this.date, lang, zone)}` : ""
+    if (format === "time") { this.time.textContent = clockTime(this.date, lang, zone) + away; return }
+    this.time.textContent = `${date}, ${clockTime(this.date, lang, zone)}${away}`
+  }
+})
+
+define("u-toast", class extends UniformElement {
+  setup(signal) {
+    const region = this
+    let before = null
+    region.addEventListener("focusin", (event) => {
+      if (!region.contains(event.relatedTarget)) before = event.relatedTarget
+    }, { signal })
+    const close = (toast) => {
+      const hadFocus = toast.contains(document.activeElement)
+      toast.remove()
+      if (hadFocus && before?.isConnected) before.focus()
+    }
+    const watch = (toast) => {
+      const wait = Number(toast.dataset.timeout ?? (toast.classList.contains("u-toast-danger") ? 0 : toast.querySelector(":scope > button:not(.u-btn-close)") ? 10000 : 5000))
+      let timer = null
+      let left = wait
+      let started = 0
+      let hovered = false
+      let focused = false
+      let dragging = false
+      if (wait) toast.style.setProperty("--u-toast-time", `${wait}ms`)
+      // One idempotent sync: mouseenter + focusin both pause, so pausing per event would subtract the elapsed time twice.
+      const sync = () => {
+        if (!wait) return
+        const hold = hovered || focused || dragging
+        if (hold && timer) {
+          clearTimeout(timer)
+          timer = null
+          left -= Date.now() - started
+        }
+        if (!hold && !timer) {
+          started = Date.now()
+          timer = setTimeout(() => close(toast), left)
+        }
+        toast.toggleAttribute("data-paused", hold)
+      }
+      signal.addEventListener("abort", () => clearTimeout(timer))
+      toast.addEventListener("mouseenter", () => { hovered = true; sync() }, { signal })
+      toast.addEventListener("mouseleave", () => { hovered = false; sync() }, { signal })
+      toast.addEventListener("focusin", () => { focused = true; sync() }, { signal })
+      toast.addEventListener("focusout", (event) => { if (!toast.contains(event.relatedTarget)) { focused = false; sync() } }, { signal })
+      toast.querySelectorAll(":scope > button").forEach((button) => button.addEventListener("click", () => close(toast), { signal }))
+      let from = null
+      toast.addEventListener("pointerdown", (event) => {
+        if (event.target.closest("button, a")) return
+        from = event.clientY
+        toast.setPointerCapture(event.pointerId)
+        toast.dataset.dragging = ""
+        dragging = true
+        sync()
+      }, { signal })
+      toast.addEventListener("pointermove", (event) => {
+        if (from === null) return
+        const down = Math.max(0, event.clientY - from)
+        toast.style.translate = `0 ${down}px`
+        toast.style.opacity = String(Math.max(0, 1 - down / 96))
+      }, { signal })
+      const release = (event) => {
+        if (from === null) return
+        const down = event.clientY - from
+        from = null
+        delete toast.dataset.dragging
+        dragging = false
+        if (down > 48) {
+          clearTimeout(timer)
+          toast.style.translate = "0 100%"
+          toast.style.opacity = "0"
+          setTimeout(() => close(toast), 160)
+          return
+        }
+        toast.style.translate = ""
+        toast.style.opacity = ""
+        sync()
+      }
+      toast.addEventListener("pointerup", release, { signal })
+      toast.addEventListener("pointercancel", release, { signal })
+      sync()
+    }
+    region.querySelectorAll(":scope > div").forEach(watch)
+    const observer = new MutationObserver((records) => records.forEach((record) => record.addedNodes.forEach((node) => {
+      if (node.parentElement !== region || node.localName !== "div") return
+      region.querySelectorAll(":scope > div").forEach((old) => { if (old !== node) old.remove() })
+      watch(node)
+    })))
+    observer.observe(region, { childList: true })
+    signal.addEventListener("abort", () => observer.disconnect())
+  }
+})
+
+define("u-data-grid", class extends UniformElement {
+  setup(signal) {
+    const table = this.querySelector("table")
+    if (!table?.tBodies[0]) return
+    const on = (target, type, listener) => target.addEventListener(type, listener, { signal })
+    const tbody = table.tBodies[0]
+    const headers = table.tHead ? [...table.tHead.rows[0].cells] : []
+    const key = this.id && `u-data-grid:${this.id}`
+    const stored = () => { try { return JSON.parse(localStorage.getItem(key)) || {} } catch { return {} } }
+    const store = (patch) => { if (!key) return; try { localStorage.setItem(key, JSON.stringify({ ...stored(), ...patch })) } catch {} }
+    const words = (name, fallback) => this.dataset[name] || fallback
+    this.keepNarrow(tbody, headers)
+    this.selection(on, tbody)
+    this.columns(on, table, headers, stored, store)
+    this.editing(on, signal, tbody, headers, words)
+  }
+
+  keepNarrow(tbody, headers) {
+    const kept = headers.map((th) => th.hasAttribute("data-keep-narrow"))
+    if (!kept.includes(true)) return
+    // The header row is gone on a phone, so each kept cell carries its column's name.
+    const labels = headers.map((th) => th.textContent.trim() || th.getAttribute("aria-label") || "")
+    ;[...tbody.rows].forEach((row) => [...row.cells].forEach((cell, i) => {
+      cell.toggleAttribute("data-keep-narrow", kept[i])
+      if (kept[i] && i > 0 && labels[i]) cell.dataset.label = labels[i]
+    }))
+  }
+
+  narrow() {
+    return this.clientWidth < 600 && !!this.querySelector("thead [data-keep-narrow]")
+  }
+
+  selection(on, tbody) {
+    const all = this.querySelector("thead input[type=checkbox]")
+    const rows = () => [...tbody.querySelectorAll("input[type=checkbox]")].filter((box) => !box.closest("tr").hidden)
+    const counts = this.querySelectorAll("form output")
+    const update = () => {
+      const boxes = rows()
+      const n = boxes.filter((box) => box.checked).length
+      if (all) {
+        all.checked = n > 0 && n === boxes.length
+        all.indeterminate = n > 0 && n < boxes.length
+      }
+      counts.forEach((count) => { count.value = n })
+      this.dispatchEvent(new CustomEvent("data-grid:select", { bubbles: true, detail: { count: n } }))
+    }
+    if (all) on(all, "change", () => { rows().forEach((box) => { box.checked = all.checked }); update() })
+    on(tbody, "change", (event) => { if (event.target.matches("input[type=checkbox]")) update() })
+    this.querySelectorAll("form:has(output)").forEach((form) => on(form, "reset", () => {
+      requestAnimationFrame(() => { rows().forEach((box) => { box.checked = false }); update(); all?.focus() })
+    }))
+    update()
+  }
+
+  columns(on, table, headers, stored, store) {
+    this.querySelectorAll(".u-menu > [data-column-toggle]").forEach((node) => node.remove())
+    const menu = [...this.querySelectorAll(".u-menu")].find((item) => !item.querySelector("input, a, button"))
+    if (!menu || headers.length < 2) return
+    const hidden = new Set(stored().hidden ?? headers.flatMap((th, i) => th.hidden ? [i] : []))
+    const show = (index, visible) => [...table.rows].forEach((row) => { if (row.cells[index]) row.cells[index].hidden = !visible })
+    headers.slice(1).forEach((th, offset) => {
+      const index = offset + 1
+      if (!th.textContent.trim()) return
+      const label = document.createElement("label")
+      const box = document.createElement("input")
+      const text = document.createElement("span")
+      label.className = "u-checkbox"
+      label.dataset.columnToggle = ""
+      box.type = "checkbox"
+      box.checked = !hidden.has(index)
+      text.textContent = th.textContent.trim()
+      label.append(box, text)
+      menu.append(label)
+      show(index, box.checked)
+      on(box, "change", () => {
+        show(index, box.checked)
+        if (box.checked) hidden.delete(index)
+        else hidden.add(index)
+        store({ hidden: [...hidden] })
+      })
+    })
+  }
+
+  editing(on, signal, tbody, headers, words) {
+    const cells = () => [...tbody.querySelectorAll("td")].filter((cell) => cell.querySelector(":scope > template"))
+    const valueOf = (cell) => cell.querySelector(":scope > .u-data-grid-value")
+    // A real button gives the cell a role, a name, and Enter and Space.
+    cells().forEach((cell) => {
+      if (valueOf(cell)) return
+      const button = document.createElement("button")
+      button.type = "button"
+      button.className = "u-data-grid-value"
+      button.setAttribute("aria-description", cell.getAttribute("aria-description") || words("editHint", "Press Enter to change"))
+      cell.removeAttribute("aria-description")
+      button.append(...[...cell.childNodes].filter((node) => node.nodeName !== "TEMPLATE"))
+      cell.prepend(button)
+    })
+    // On a phone the row is one link and cells don't edit.
+    const fit = () => {
+      const narrow = this.narrow()
+      cells().forEach((cell) => { if (valueOf(cell)) valueOf(cell).disabled = narrow })
+    }
+    const resize = new ResizeObserver(fit)
+    resize.observe(this)
+    signal.addEventListener("abort", () => resize.disconnect())
+    const toast = (message, action) => {
+      const region = document.querySelector("u-toast")
+      if (!region) return
+      const item = document.createElement("div")
+      const text = document.createElement("p")
+      const close = document.createElement("button")
+      text.textContent = message
+      close.type = "button"
+      close.className = "u-btn-close"
+      close.setAttribute("aria-label", words("dismiss", "Dismiss"))
+      item.append(text)
+      if (action) {
+        const button = document.createElement("button")
+        button.type = "button"
+        button.textContent = action.label
+        button.addEventListener("click", action.run, { once: true, signal })
+        item.append(button)
+      } else {
+        item.className = "u-toast-danger"
+      }
+      item.append(close)
+      region.append(item)
+    }
+    const show = (cell, html) => { valueOf(cell).innerHTML = trustedHTML(html) }
+    const escape = (text) => text.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c])
+    const save = async (cell, form, field, previous) => {
+      const before = valueOf(cell).innerHTML
+      const label = field.selectedOptions?.[0]?.textContent.trim() ?? field.value
+      const detail = { cell, form, field, value: field.value, previous, label, html: null }
+      const change = new CustomEvent("data-grid:change", { bubbles: true, cancelable: true, detail })
+      let ok = true
+      if (this.dispatchEvent(change)) {
+        try {
+          const token = document.querySelector('meta[name="csrf-token"]')?.content
+          const response = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "text/html", ...(token && { "X-CSRF-Token": token }) } })
+          ok = response.ok
+          if (ok) detail.html = (await response.text()).trim() || null
+        } catch {
+          ok = false
+        }
+      }
+      if (!ok) {
+        field.value = previous
+        toast(words("failed", "Couldn't save that change. Try again."))
+        return
+      }
+      show(cell, detail.html ?? escape(label))
+      cell.classList.add("u-data-grid-changed")
+      return before
+    }
+    const edit = (cell) => {
+      if (this.narrow() || cell.querySelector(".u-data-grid-editor")) return
+      const template = cell.querySelector(":scope > template")
+      const editor = document.createElement("div")
+      editor.className = "u-data-grid-editor"
+      editor.append(template.content.cloneNode(true))
+      cell.append(editor)
+      const form = editor.querySelector("form")
+      const field = form?.querySelector("select, textarea, input:not([type=hidden])")
+      if (!field) { editor.remove(); return }
+      const header = headers[cell.cellIndex]?.textContent.trim()
+      if (header && !field.labels?.length && !field.hasAttribute("aria-label")) field.setAttribute("aria-label", header)
+      const previous = field.value
+      field.focus()
+      const session = new AbortController()
+      signal.addEventListener("abort", () => session.abort(), { signal: session.signal })
+      const listen = (target, type, listener) => target.addEventListener(type, listener, { signal: session.signal })
+      const finish = async (keep) => {
+        if (session.signal.aborted) return
+        session.abort()
+        const changed = keep && field.value !== previous
+        const value = field.value
+        editor.remove()
+        valueOf(cell).focus()
+        if (!changed) return
+        const fieldName = field.name
+        const before = await save(cell, form, field, previous)
+        if (before === undefined) return
+        const kept = template.content.querySelector(`[name="${CSS.escape(fieldName)}"]`)
+        if (kept) setValue(kept, value)
+        toast(words("saved", "Saved"), { label: words("undo", "Undo"), run: async () => {
+          const again = template.content.cloneNode(true).querySelector("form")
+          const field2 = again.querySelector(`[name="${CSS.escape(fieldName)}"]`)
+          setValue(field2, previous)
+          const undone = await save(cell, again, field2, value)
+          if (undone === undefined) return
+          if (kept) setValue(kept, previous)
+          cell.classList.remove("u-data-grid-changed")
+        } })
+      }
+      listen(field, "keydown", (event) => {
+        if (event.isComposing || event.keyCode === 229) return
+        event.stopPropagation()
+        if (event.key === "Enter") { event.preventDefault(); finish(true) }
+        if (event.key === "Escape") { event.preventDefault(); finish(false) }
+      })
+      listen(field, "blur", () => finish(true))
+      listen(form, "submit", (event) => { event.preventDefault(); finish(true) })
+    }
+    const setValue = (field, value) => {
+      if (field.tagName === "SELECT") [...field.options].forEach((option) => { option.toggleAttribute("selected", option.value === value) })
+      else field.setAttribute("value", value)
+      field.value = value
+    }
+    on(tbody, "click", (event) => {
+      const cell = event.target.closest("td")
+      if (cell && cells().includes(cell) && !event.target.closest(".u-data-grid-editor, a, input, button:not(.u-data-grid-value)")) edit(cell)
+    })
+    on(tbody, "keydown", (event) => {
+      if (event.key !== "F2" || !event.target.matches?.(".u-data-grid-value")) return
+      event.preventDefault()
+      edit(event.target.parentElement)
+    })
+  }
+})
+
+let lastCopyMessage = ""
+
+define("u-copy", class extends UniformElement {
+  setup(signal) {
+    const button = this.querySelector("[data-copy]")
+    if (!button || !navigator.clipboard) return
+    const label = button.querySelector("[data-copy-label]") || button
+    const original = label.textContent
+    // A button's children aren't announced reliably, so the message goes in a status beside it.
+    let status = this.querySelector('[role="status"]')
+    if (!status) {
+      status = document.createElement("span")
+      status.className = "u-visually-hidden"
+      status.setAttribute("role", "status")
+      button.after(status)
+    }
+    let timer = null
+    signal.addEventListener("abort", () => clearTimeout(timer))
+    button.hidden = false
+    button.addEventListener("click", async () => {
+      let message = button.dataset.copied
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy)
+      } catch {
+        message = button.dataset.copyFailed
+      }
+      if (signal.aborted) return
+      clearTimeout(timer)
+      label.textContent = message
+      status.textContent = ""
+      // VoiceOver skips a message that repeats the last one, and the no-break space isn't read.
+      requestAnimationFrame(() => { status.textContent = message === lastCopyMessage ? `${message}\u00A0` : message; lastCopyMessage = status.textContent })
+      timer = setTimeout(() => {
+        label.textContent = original
+        status.textContent = ""
+      }, 1500)
+    }, { signal })
+  }
+})
+
+const storedChoice = (group) => {
+  try { return localStorage.getItem(`u-toggle-panels:${group}`) } catch { return null }
+}
+
+define("u-toggle-panels", class extends UniformElement {
+  setup(signal) {
+    const fieldset = this.querySelector(":scope > .u-fieldset")
+    const radios = [...(fieldset?.querySelectorAll(".u-toggle-group input[type=radio]") || [])]
+    const panels = [...this.querySelectorAll(":scope > [data-value]")]
+    if (!radios.length || !panels.length) return
+    const group = this.dataset.group
+
+    const show = (value) => {
+      const radio = radios.find((each) => each.value === value)
+      if (!radio) return
+      radio.checked = true
+      panels.forEach((panel) => { panel.hidden = panel.dataset.value !== value })
+    }
+
+    panels.forEach((panel) => panel.querySelector(":scope > :is(h2, h3, h4):first-child")?.setAttribute("hidden", ""))
+    const remembered = group && storedChoice(group)
+    show(radios.some((radio) => radio.value === remembered) ? remembered : (radios.find((radio) => radio.checked) || radios[0]).value)
+    fieldset.hidden = false
+
+    fieldset.addEventListener("change", (event) => {
+      if (!radios.includes(event.target)) return
+      show(event.target.value)
+      if (!group) return
+      try { localStorage.setItem(`u-toggle-panels:${group}`, event.target.value) } catch {}
+      document.dispatchEvent(new CustomEvent("toggle-panels:change", { detail: { group, value: event.target.value, source: this } }))
+    }, { signal })
+
+    document.addEventListener("toggle-panels:change", ({ detail }) => {
+      if (detail.group === group && detail.source !== this) show(detail.value)
+    }, { signal })
+  }
+})
+
+// Page-wide behaviour and platform fallbacks: document listeners, set up once however often this file loads.
+const pageReady = Symbol.for("uniform.page")
+
+const menuItems = (menu) => [...menu.querySelectorAll(":scope > :is(a[href], button), :scope > form > button")]
+  .filter((item) => !item.disabled && item.getAttribute("aria-disabled") !== "true")
+
+// Arrow keys only where every item is a command or a link. Checkboxes, radios and pickers keep Tab.
+const asMenu = (menu, invoker) => {
+  if (menu.getAttribute("role") === "menu") return true
+  const plain = 'a[href], button:not([role], [aria-pressed], [aria-checked])'
+  const fits = [...menu.children].every((child) => child.matches(`${plain}, hr, hgroup`)
+    || (child.matches("form") && [...child.children].every((each) => each.matches(`${plain}, input[type="hidden"]`))))
+  if (!fits || !menuItems(menu).length) return false
+  menu.setAttribute("role", "menu")
+  menuItems(menu).forEach((item) => {
+    item.setAttribute("role", "menuitem")
+    item.tabIndex = -1
+  })
+  const heading = menu.querySelector(":scope > hgroup")
+  if (!menu.hasAttribute("aria-label") && !menu.hasAttribute("aria-labelledby")) {
+    if (heading) {
+      heading.id ||= `${menu.id || `u-menu-${++anchors}`}-heading`
+      menu.setAttribute("aria-labelledby", heading.id)
+    } else if (invoker) {
+      menu.setAttribute("aria-label", invoker.getAttribute("aria-label") || invoker.textContent.trim())
+    }
+  }
+  // A menu holds only items and separators, so the heading names it instead of sitting in it.
+  heading?.setAttribute("aria-hidden", "true")
+  invoker?.setAttribute("aria-haspopup", "menu")
+  return true
+}
+
+const anchoredPopovers = '.u-menu[popover], .u-popover[popover], u-combobox > [role="listbox"][popover]'
+let lastInvoker = null
+
+const invokerOf = (popover, event) => {
+  if (event.source) return event.source
+  if (!popover.id) return null
+  const id = CSS.escape(popover.id)
+  const invokers = [...document.querySelectorAll(`[popovertarget="${id}"], [commandfor="${id}"]`)]
+  return invokers.find((each) => each === lastInvoker) ?? invokers[0] ?? null
+}
+
+const anchorOf = (popover, event) => {
+  if (popover.matches('u-combobox > [role="listbox"]')) return popover.parentElement.querySelector(':scope > input[role="combobox"]')
+  return popover.closest("u-input-colour") ?? invokerOf(popover, event)
+}
+
+// Below the anchor, above when there's more room there, kept inside the viewport.
+const placePopover = (popover, anchor) => {
+  const gap = 8
+  const box = anchor.getBoundingClientRect()
+  const { style } = popover
+  style.setProperty("position", "fixed")
+  style.setProperty("inset", "auto")
+  style.setProperty("margin", "0")
+  if (popover.matches('[role="listbox"]')) style.setProperty("width", `${box.width}px`)
+  const { width, height } = popover.getBoundingClientRect()
+  const viewWidth = document.documentElement.clientWidth
+  const viewHeight = document.documentElement.clientHeight
+  const below = viewHeight - box.bottom - gap
+  const above = box.top - gap
+  const top = below >= height || below >= above ? box.bottom + gap : box.top - gap - height
+  style.setProperty("left", `${Math.max(gap, Math.min(box.left, viewWidth - width - gap))}px`)
+  style.setProperty("top", `${Math.max(gap, Math.min(top, viewHeight - height - gap))}px`)
+}
+
+const unplacePopover = (popover) => ["position", "inset", "margin", "width", "left", "top"].forEach((name) => popover.style.removeProperty(name))
+
+if (!document[pageReady]) {
+  document[pageReady] = true
+  const anchorFallback = !CSS.supports("position-area: bottom")
+  const commandFallback = !("commandForElement" in HTMLButtonElement.prototype)
+  const following = new WeakMap()
+
+  document.addEventListener("click", (event) => {
+    lastInvoker = event.target.closest?.("[popovertarget], [commandfor]") ?? lastInvoker
+  }, true)
+
+  // beforetoggle places it before the first paint, so it never shows in the middle of the screen. toggle corrects it once it has a size.
+  if (anchorFallback) {
+    document.addEventListener("beforetoggle", (event) => {
+      const popover = event.target
+      if (event.newState !== "open" || !popover.matches?.(anchoredPopovers)) return
+      const anchor = anchorOf(popover, event)
+      if (anchor) placePopover(popover, anchor)
+    }, true)
+  }
+
+  document.addEventListener("toggle", (event) => {
+    const popover = event.target
+    if (!popover.matches?.(anchoredPopovers)) return
+    const open = event.newState === "open"
+    if (commandFallback && popover.id) {
+      document.querySelectorAll(`button[commandfor="${CSS.escape(popover.id)}"][command="toggle-popover"]`).forEach((button) => button.setAttribute("aria-expanded", String(open)))
+    }
+    if (anchorFallback) {
+      following.get(popover)?.abort()
+      following.delete(popover)
+      if (!open) unplacePopover(popover)
+      const anchor = open && anchorOf(popover, event)
+      if (anchor) {
+        const follow = new AbortController()
+        following.set(popover, follow)
+        const place = () => placePopover(popover, anchor)
+        place()
+        addEventListener("resize", place, { signal: follow.signal })
+        addEventListener("scroll", place, { signal: follow.signal, capture: true, passive: true })
+      }
+    }
+    if (open && popover.matches(".u-menu") && asMenu(popover, invokerOf(popover, event))) menuItems(popover)[0]?.focus({ preventScroll: true })
+  }, true)
+
+  document.addEventListener("keydown", (event) => {
+    const menu = event.target.closest?.('.u-menu[role="menu"]')
+    if (!menu || !["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return
+    const items = menuItems(menu)
+    const at = items.indexOf(event.target)
+    if (at === -1) return
+    event.preventDefault()
+    const next = { Home: 0, End: items.length - 1, ArrowDown: (at + 1) % items.length, ArrowUp: (at - 1 + items.length) % items.length }[event.key]
+    items[next].focus()
+  })
+
+  // Escape hides a tooltip without moving the pointer or focus (WCAG 1.4.13). It stays hidden until both leave it.
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || event.defaultPrevented) return
+    const showing = ".u-tooltip:is(:hover, :has(:focus-visible))"
+    const tips = [...document.querySelectorAll(`${showing}:not([data-dismissed])`)]
+    if (!tips.length) return
+    // The first Escape closes the tooltip, not the dialog it sits in.
+    event.preventDefault()
+    tips.forEach((tip) => {
+      tip.toggleAttribute("data-dismissed", true)
+      const left = new AbortController()
+      const check = () => setTimeout(() => {
+        if (tip.matches(showing)) return
+        tip.removeAttribute("data-dismissed")
+        left.abort()
+      })
+      tip.addEventListener("pointerleave", check, { signal: left.signal })
+      tip.addEventListener("focusout", check, { signal: left.signal })
+    })
+  })
+
+  // Tab leaves a menu, so it closes rather than staying open behind the next field.
+  document.addEventListener("focusout", (event) => {
+    const menu = event.target.closest?.('.u-menu[role="menu"]')
+    if (menu?.matches(":popover-open") && event.relatedTarget && !menu.contains(event.relatedTarget)) menu.hidePopover()
+  })
+
+  // Invoker commands for browsers without them. The press records whether the popover was open, because light dismiss closes it before the click.
+  if (commandFallback) {
+    let pressed = null
+    document.addEventListener("pointerdown", (event) => {
+      const button = event.target.closest?.("button[commandfor]")
+      const target = button && document.getElementById(button.getAttribute("commandfor"))
+      pressed = target ? { button, open: target.matches(":popover-open") } : null
+    }, true)
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest?.("button[commandfor][command]")
+      const target = button && !button.disabled && document.getElementById(button.getAttribute("commandfor"))
+      if (!target) return
+      const command = button.getAttribute("command").toLowerCase()
+      const wasOpen = pressed?.button === button ? pressed.open : target.matches(":popover-open")
+      pressed = null
+      if (target instanceof HTMLDialogElement) {
+        if (command === "show-modal" && !target.open) target.showModal()
+        if (command === "close" && target.open) target.close(button.value)
+        if (command === "request-close" && target.open) {
+          if (target.requestClose) target.requestClose(button.value)
+          else target.close(button.value)
+        }
+      }
+      if (!target.hasAttribute("popover")) return
+      const isOpen = target.matches(":popover-open")
+      const show = command === "show-popover" || (command === "toggle-popover" && !wasOpen)
+      const hide = command === "hide-popover" || (command === "toggle-popover" && wasOpen)
+      if (show && !isOpen) target.showPopover({ source: button })
+      if (hide && isOpen) target.hidePopover()
+    })
+  }
+}
+
+if (!document.querySelector("[data-u-audience]")) console.error("Uniform: set data-u-audience=\"business\" or data-u-audience=\"consumer\" on <html>.")

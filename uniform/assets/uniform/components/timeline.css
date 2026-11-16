@@ -1,0 +1,96 @@
+@layer uniform.components {
+.u-timeline {
+  --u-timeline-rail: 24px;
+  --u-timeline-line: calc(var(--u-font-size-small) * var(--u-line-height-small));
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  color: var(--u-color-text-default);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+  list-style: none;
+}
+
+.u-timeline > li {
+  display: grid;
+  position: relative;
+  grid-template-columns: var(--u-timeline-rail) minmax(0, 1fr) auto;
+  align-items: start;
+  column-gap: var(--u-space-4);
+  margin: 0;
+  padding-bottom: var(--u-space-4);
+}
+
+.u-timeline > li:last-child { padding-bottom: 0; }
+
+.u-timeline > li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--u-timeline-line) / 2);
+  bottom: calc(var(--u-timeline-line) / -2);
+  inset-inline-start: calc(var(--u-timeline-rail) / 2 - 0.5px);
+  width: 1px;
+  background: var(--u-color-border);
+}
+
+.u-timeline > li:not(:has(> .u-avatar))::after {
+  content: "";
+  position: absolute;
+  top: calc((var(--u-timeline-line) - 8px) / 2);
+  inset-inline-start: calc(var(--u-timeline-rail) / 2 - 4px);
+  width: 8px;
+  height: 8px;
+  background: var(--u-color-border-input);
+}
+
+.u-timeline > li > .u-avatar {
+  position: relative;
+  grid-column: 1;
+  justify-self: center;
+}
+
+.u-timeline > li > div {
+  display: flex;
+  grid-column: 2;
+  flex-direction: column;
+  gap: var(--u-space-1);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.u-timeline > li > div > * { margin: 0; }
+
+.u-timeline > li > div > strong { font-weight: 500; }
+
+.u-timeline > li > div > small {
+  color: var(--u-color-text-muted);
+  font-size: inherit;
+}
+
+.u-timeline > li > :is(u-relative-time, time) {
+  grid-column: 3;
+  color: var(--u-color-text-muted);
+  font-family: var(--u-font-mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+details:not(.u-accordion > details):has(.u-timeline) > summary {
+  display: flex;
+  align-items: center;
+  min-height: var(--u-size-target);
+  padding-inline-start: calc(var(--u-timeline-rail, 24px) + var(--u-space-4));
+  color: var(--u-color-link);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  list-style: none;
+  cursor: pointer;
+}
+
+details:not(.u-accordion > details):has(.u-timeline) > summary::-webkit-details-marker { display: none; }
+
+details[open]:not(.u-accordion > details):has(.u-timeline) > summary { display: none; }
+}

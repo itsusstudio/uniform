@@ -1,0 +1,23 @@
+{
+  const swatch = document.querySelector("#cf-live-field input[type=color]")
+  const name = document.getElementById("cf-live-name")
+  const tag = document.getElementById("cf-live-tag")
+  const tokens = getComputedStyle(document.documentElement)
+  const luminance = (hex) => hex.slice(1).match(/../g)
+    .map((pair) => parseInt(pair, 16) / 255)
+    .map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4))
+    .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0)
+  const contrast = (hex, token) => {
+    const [a, b] = [luminance(hex), luminance(tokens.getPropertyValue(token).trim())]
+    return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)
+  }
+  const paint = () => {
+    const ink = ["--u-color-bg-ink", "--u-color-text-on-ink"].sort((a, b) => contrast(swatch.value, b) - contrast(swatch.value, a))[0]
+    tag.style.backgroundColor = swatch.value
+    tag.style.color = `var(${ink})`
+    tag.textContent = name.value.trim() || "Label"
+  }
+  swatch.addEventListener("input", paint)
+  name.addEventListener("input", paint)
+  paint()
+}

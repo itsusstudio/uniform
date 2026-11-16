@@ -1,0 +1,52 @@
+<%# locals: (id:, popover:, collapsed: false, current: "jobs") -%>
+<% rail = defined?(collapsed) && collapsed -%>
+<% here = (defined?(current) && current) || "jobs" -%>
+<u-sidebar<% if popover %> id="<%= id %>" popover<% end %>>
+  <div>
+    <a class="u-wordmark u-wordmark-serif" href="/" data-monogram="W">Workbench</a>
+    <button type="button" aria-label="Sidebar" aria-expanded="<%= !rail %>"></button>
+  </div>
+  <nav class="u-nav" aria-label="Workbench">
+    <div>
+      <p>Shop</p>
+      <ul>
+        <li><a href="/"<% if here == "home" %> aria-current="page"<% end %>><%= raw render("icon", name: "house", small: true).strip %><span>Home</span></a></li>
+        <li><a href="/jobs"<% if here == "jobs" %> aria-current="page"<% end %>><%= raw render("icon", name: "wrench", small: true).strip %><span>Jobs</span></a></li>
+        <li><a href="/customers"<% if here == "customers" %> aria-current="page"<% end %>><%= raw render("icon", name: "users", small: true).strip %><span>Customers</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <p>Money</p>
+      <ul>
+        <li><a href="/payments"<% if here == "payments" %> aria-current="page"<% end %>><%= raw render("icon", name: "credit-card", small: true).strip %><span>Payments</span></a></li>
+        <li><a href="/reports"<% if here == "reports" %> aria-current="page"<% end %>><%= raw render("icon", name: "chart-column", small: true).strip %><span>Reports</span></a></li>
+      </ul>
+    </div>
+  </nav>
+  <div>
+    <ul>
+      <li>
+        <button type="button" popovertarget="<%= id %>-help"><%= raw render("icon", name: "circle-help", small: true).strip %><span>Help</span></button>
+        <div class="u-menu" id="<%= id %>-help" popover>
+          <a href="/help/contact">Speak with us</a>
+          <a href="/changelog">What’s new</a>
+        </div>
+      </li>
+    </ul>
+    <button type="button" popovertarget="<%= id %>-account">
+      <span aria-hidden="true">DW</span>
+      <span>Dana Whitfield</span>
+    </button>
+    <div class="u-menu" id="<%= id %>-account" popover>
+      <hgroup>
+        <h2>Kensington Jewellery Repair</h2>
+        <p>Dana Whitfield</p>
+      </hgroup>
+      <a href="/settings">Settings</a>
+      <form action="/session" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit">Sign out</button>
+      </form>
+    </div>
+  </div>
+</u-sidebar>

@@ -1,0 +1,152 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "optparse"
+require "open3"
+
+USAGE = <<~TEXT
+  Usage: bin/halftone INPUT OUTPUT [options]
+
+  Turns a photo into a one-ink halftone: round dots on a 45 degree screen,
+  bigger where the photo is darker. Light backgrounds drop out completely.
+  Same input and options always give a byte-identical file.
+
+  OUTPUT can be .webp or .png. Needs ImageMagick (magick).
+
+  Examples:
+    bin/halftone stool.jpg src/images/stool.webp --ink "#f5f4ef"
+    bin/halftone stool.jpg stool.png --crop 840x1050+60+260 --cell 8
+TEXT
+
+options = {
+  ink: "#1a1a18",
+  background: "transparent",
+  width: 960,
+  ratio: "4:5",
+  cell: 9,
+  angle: 45,
+  black: 0.05,
+  white: 0.77,
+  gamma: 0.75,
+  crop: nil
+}
+
+parser = OptionParser.new do |opts|
+  opts.banner = USAGE
+  opts.on("--ink HEX", "Dot colour (default #1a1a18, Uniform ink)") { |v| options[:ink] = v }
+  opts.on("--background HEX", "Background colour, or transparent (default)") { |v| options[:background] = v }
+  opts.on("--width PX", Integer, "Output width in px (default 960)") { |v| options[:width] = v }
+  opts.on("--ratio W:H", "Aspect ratio, cropped from the centre (default 4:5)") { |v| options[:ratio] = v }
+  opts.on("--crop GEOMETRY", "Crop the source first, ImageMagick style, e.g. 840x1050+60+260") { |v| options[:crop] = v }
+  opts.on("--cell PX", Float, "Distance between dot centres (default 9)") { |v| options[:cell] = v }
+  opts.on("--angle DEG", Float, "Screen angle (default 45)") { |v| options[:angle] = v }
+  opts.on("--black N", Float, "Tones darker than this print as full dots, 0 to 1 (default 0.05)") { |v| options[:black] = v }
+  opts.on("--white N", Float, "Tones lighter than this print nothing, 0 to 1 (default 0.77)") { |v| options[:white] = v }
+  opts.on("--gamma N", Float, "Below 1 makes mid tones heavier (default 0.75)") { |v| options[:gamma] = v }
+  opts.on("-h", "--help", "Show this help") do
+    puts opts
+    exit
+  end
+end
+
+begin
+  parser.parse!
+rescue OptionParser::ParseError => e
+  warn e.message
+  warn parser
+  exit 1
+end
+
+input, output = ARGV
+unless input && output
+  warn parser
+  exit 1
+end
+
+abort "Input not found: #{input}" unless File.file?(input)
+abort "OUTPUT must end in .webp or .png" unless output.match?(/\.(webp|png)\z/i)
+
+ratio_w, ratio_h = options[:ratio].split(":").map(&:to_f)
+abort "--ratio must look like 4:5" unless ratio_w&.positive? && ratio_h&.positive?
+
+width = options[:width]
+height = (width * ratio_h / ratio_w).round
+scale = 3
+
+source_args = ["magick", input, "-auto-orient"]
+source_args += ["-crop", options[:crop], "+repage"] if options[:crop]
+source_args += [
+  "-resize", "#{width}x#{height}^", "-gravity", "center", "-extent", "#{width}x#{height}",
+  "-colorspace", "Gray", "-depth", "8", "gray:-"
+]
+gray, error, status = Open3.capture3(*source_args, binmode: true)
+abort "ImageMagick could not read #{input}:\n#{error}" unless status.success?
+
+range = options[:white] - options[:black]
+abort "--white must be greater than --black" unless range.positive?
+
+darkness = Array.new(256) do |value|
+  tone = ((value / 255.0) - options[:black]) / range
+  (1.0 - tone.clamp(0.0, 1.0))**options[:gamma]
+end
+
+big_width = width * scale
+big_height = height * scale
+mask = "\0".b * (big_width * big_height)
+
+cell = options[:cell]
+radians = options[:angle] * Math::PI / 180
+cos = Math.cos(radians)
+sin = Math.sin(radians)
+reach = Math.hypot(width, height)
+steps = (reach / cell).ceil
+
+(-steps..steps).each do |row|
+  (-steps..steps).each do |col|
+    u = col * cell
+    v = row * cell
+    x = (u * cos) - (v * sin) + (width / 2.0)
+    y = (u * sin) + (v * cos) + (height / 2.0)
+    next if x.negative? || y.negative? || x >= width || y >= height
+
+    radius = darkness[gray.getbyte((y.floor * width) + x.floor)] * cell * 0.68
+    next if radius < 0.5
+
+    cx = x * scale
+    cy = y * scale
+    r = radius * scale
+    r2 = r * r
+    x0 = [(cx - r).floor, 0].max
+    x1 = [(cx + r).ceil, big_width - 1].min
+    y0 = [(cy - r).floor, 0].max
+    y1 = [(cy + r).ceil, big_height - 1].min
+
+    (y0..y1).each do |py|
+      dy = py + 0.5 - cy
+      offset = py * big_width
+      (x0..x1).each do |px|
+        dx = px + 0.5 - cx
+        mask.setbyte(offset + px, 255) if (dx * dx) + (dy * dy) <= r2
+      end
+    end
+  end
+end
+
+render_args = [
+  "magick",
+  "-size", "#{big_width}x#{big_height}", "xc:#{options[:ink]}",
+  "(", "-size", "#{big_width}x#{big_height}", "-depth", "8", "gray:-", ")",
+  "-alpha", "off", "-compose", "CopyOpacity", "-composite"
+]
+unless options[:background] == "transparent"
+  render_args += ["-background", options[:background], "-compose", "Over", "-flatten"]
+end
+render_args += ["-filter", "Box", "-resize", "#{width}x#{height}!", "-strip"]
+render_args += ["-define", "png:exclude-chunks=date,time"] if output.match?(/\.png\z/i)
+render_args += ["-quality", "88", "-define", "webp:method=6"] if output.match?(/\.webp\z/i)
+render_args << output
+
+_, error, status = Open3.capture3(*render_args, stdin_data: mask, binmode: true)
+abort "ImageMagick could not write #{output}:\n#{error}" unless status.success?
+
+puts "#{output} (#{width}x#{height}, #{File.size(output)} bytes)"

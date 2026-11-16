@@ -1,0 +1,44 @@
+@layer uniform.components {
+.u-progress {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-2);
+}
+
+.u-progress > p {
+  margin: 0;
+  color: var(--u-color-text-muted);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+.u-progress > p:first-child {
+  color: var(--u-color-text-default);
+  font-weight: 500;
+}
+
+:is(.u-progress, .u-dropzone ~ .u-list > li > div) > progress {
+  display: block;
+  width: 100%;
+  height: var(--u-space-1);
+  border: 0;
+  background: var(--u-color-divider);
+  color: var(--u-color-text-default);
+  appearance: none;
+}
+
+:is(.u-progress, .u-dropzone ~ .u-list > li > div) > progress::-webkit-progress-bar { background: var(--u-color-divider); }
+
+:is(.u-progress, .u-dropzone ~ .u-list > li > div) > progress::-webkit-progress-value {
+  background: var(--u-color-text-default);
+  transition: width var(--u-motion-enter) var(--u-motion-ease);
+}
+
+:is(.u-progress, .u-dropzone ~ .u-list > li > div) > progress::-moz-progress-bar { background: var(--u-color-text-default); }
+
+:is(.u-progress, .u-dropzone ~ .u-list > li > div) > progress:indeterminate::-moz-progress-bar { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.u-progress, .u-dropzone ~ .u-list > li > div) > progress::-webkit-progress-value { transition: none; }
+}
+}

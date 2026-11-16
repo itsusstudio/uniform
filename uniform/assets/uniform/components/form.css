@@ -1,0 +1,14 @@
+@layer uniform.components {
+.u-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-6);
+  margin: 0;
+}
+
+.u-form > * { margin: 0; }
+
+.u-form > :is(.u-field, .u-fieldset, :has(> .u-field)) + :is(.u-field, .u-fieldset, :has(> .u-field)) {
+  margin-top: calc(var(--u-space-4) - var(--u-space-6));
+}
+}

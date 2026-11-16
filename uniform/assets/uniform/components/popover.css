@@ -1,0 +1,58 @@
+@layer uniform.components {
+.u-popover {
+  width: 320px;
+  max-width: calc(100vw - 2 * var(--u-space-4));
+  padding: var(--u-space-4);
+  border: 1px solid var(--u-color-border);
+  border-radius: var(--u-radius-default);
+  background: var(--u-color-bg-surface);
+  color: var(--u-color-text-default);
+  box-shadow: var(--u-shadow-float);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+/* The browser centres an open <dialog> with position: absolute. Without popover, it sits in the flow. */
+dialog.u-popover:not([popover]) {
+  position: static;
+  margin: 0;
+}
+
+@supports (position-area: block-end) {
+  .u-popover[popover] {
+    inset: auto;
+    margin: var(--u-space-2) 0 0;
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  }
+}
+
+.u-popover > * { margin: 0; }
+
+.u-popover > * + * { margin-top: var(--u-space-4); }
+
+.u-popover > form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-4);
+}
+
+.u-popover > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--u-space-4);
+}
+
+.u-popover > header > * { margin: 0; }
+
+.u-popover > header > :first-child:not(hgroup) {
+  font-size: var(--u-font-size-title);
+  font-weight: 500;
+  line-height: var(--u-line-height-title);
+}
+
+.u-popover > header > .u-btn-close { margin: calc(-1 * var(--u-space-1)) calc(-1 * var(--u-space-2)) calc(-1 * var(--u-space-1)) 0; }
+
+:is(.u-popover, .u-popover > form) > .u-actions { justify-content: flex-end; }
+}

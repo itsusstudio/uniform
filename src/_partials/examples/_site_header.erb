@@ -1,0 +1,27 @@
+<%# locals: (id:, live:, banner:) -%>
+<% if banner -%>
+<div class="u-banner u-banner-info">
+  <div class="u-container">
+    <p>Workbench can now text your customer when their repair is ready. <a href="/changelog/">Read the changelog</a></p>
+  </div>
+</div>
+<% end -%>
+<header class="u-site-header">
+  <div class="u-container">
+    <a class="u-wordmark u-wordmark-serif" href="/">Workbench</a>
+    <nav id="<%= id %>-menu" popover aria-label="Main">
+      <ul>
+        <li><a href="/pricing/" aria-current="page">Pricing</a></li>
+        <li><a href="/changelog/">Changelog</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/help/">Help</a></li>
+      </ul>
+      <ul>
+        <li><a href="/fr/pricing/" lang="fr" hreflang="fr">Français</a></li>
+        <li><a href="/sign-in">Sign in</a></li>
+      </ul>
+    </nav>
+    <a class="u-btn u-btn-primary" href="/sign-up">Start free trial</a>
+    <button type="button" class="u-btn u-btn-ghost"<% if live %> popovertarget="<%= id %>-menu"<% end %>>Menu</button>
+  </div>
+</header>

@@ -1,0 +1,143 @@
+<%# locals: (prefix:, code:) -%>
+<%
+  icon = ->(name, small = true) { code ? %(<svg class="u-icon#{" u-icon-sm" if small}" aria-hidden="true">…</svg>) : render("icon", name: name, small: small) }
+  href = ->(path) { code ? path : "#example" }
+  uid = ->(name) { [prefix, name].reject(&:empty?).join("-") }
+  jobs = [
+    ["1050", "Mateo Silva", "Chain solder", "Overdue", "2026-11-10", "2026-11-03", "Tomás Ruiz", "(416) 555-0150", "30.00", "0.00"],
+    ["1036", "Priya Shah", "Watch battery", "Overdue", "2026-11-11", "2026-11-04", "Tomás Ruiz", "(416) 555-0136", "25.00", "0.00"],
+    ["1041", "Grace Kim", "Prong retip", "On the bench", "2026-11-12", "2026-11-05", "Dana Whitfield", "(647) 555-0141", "55.00", "0.00"],
+    ["1043", "Owen Gallagher", "Watch strap", "Ready for pickup", "2026-11-13", "2026-11-07", "Tomás Ruiz", "(416) 555-0143", "35.00", "35.00"],
+    ["1052", "Ruth Abara", "Ring polish", "On the bench", "2026-11-13", "2026-11-12", "Dana Whitfield", "(437) 555-0152", "40.00", "0.00"],
+    ["1042", "Ana Reyes", "Ring resize, size 6 to 7", "On the bench", "2026-11-14", "2026-11-06", "Dana Whitfield", "(416) 555-0142", "85.00", "40.00"],
+    ["1039", "Marcus Lee", "Chain repair", "Waiting on parts", "2026-11-15", "2026-11-02", "Dana Whitfield", "(647) 555-0139", "40.00", "20.00"],
+    ["1046", "Fatima Noor", "Bracelet clasp", "On the bench", "2026-11-16", "2026-11-09", "Dana Whitfield", "(416) 555-0146", "45.00", "0.00"],
+    ["1049", "Claire Dubois", "Engraving", "Not started", "2026-11-17", "2026-11-11", "Dana Whitfield", "(514) 555-0149", "60.00", "0.00"],
+    ["1044", "Joanne Tremblay", "Prong retipping", "Ready for pickup", "2026-11-18", "2026-11-08", "Tomás Ruiz", "(416) 555-0144", "120.00", "60.00"],
+    ["1045", "Hiro Tanaka", "Watch crystal", "Waiting on parts", "2026-11-19", "2026-11-09", "Tomás Ruiz", "(647) 555-0145", "65.00", "30.00"],
+    ["1053", "Ben Kowalski", "Watch battery", "Not started", "2026-11-19", "2026-11-12", "Tomás Ruiz", "(416) 555-0153", "25.00", "0.00"],
+    ["1051", "Ana Reyes", "New crown and full service", "Quote to approve", "2026-11-20", "2026-11-11", "Tomás Ruiz", "(416) 555-0142", "140.00", "0.00"],
+    ["1047", "Sam Okafor", "Watch service", "Not started", "2026-11-22", "2026-11-10", "Tomás Ruiz", "(437) 555-0147", "310.00", "100.00"],
+    ["1048", "Lina Haddad", "Pearl restring", "On the bench", "2026-11-25", "2026-11-10", "Dana Whitfield", "(416) 555-0148", "95.00", "50.00"]
+  ]
+  variants = { "Not started" => "neutral", "On the bench" => "info", "Waiting on parts" => "warning", "Quote to approve" => "warning", "Overdue" => "danger", "Ready for pickup" => "success" }
+  shown = ["On the bench", "Waiting on parts", "Overdue"]
+  dues = [["", "Any time"], ["overdue", "Past due"], ["week", "This week"], ["next", "Next week"], ["later", "Later"]]
+  short_date = ->(iso) { Date.parse(iso).strftime("%b %-d") }
+  sort_button = ->(label, by, sorted) { %(<button type="button" class="u-table-sort" data-sort="#{by}">#{label}</button>) }
+  filters = uid.("jobs-filters")
+-%>
+<div class="u-stack u-gap-12">
+  <header class="u-page-header">
+    <hgroup>
+      <h1>Jobs</h1>
+      <p><span class="u-text-data">38</span> open, <span class="u-text-data">6</span> due this week</p>
+    </hgroup>
+    <div class="u-actions">
+      <a class="u-btn u-btn-primary" href="<%= href.("/jobs/new") %>"><%= raw icon.("plus") %>New job</a>
+    </div>
+  </header>
+  <u-data-grid class="u-stack u-gap-4" id="<%= uid.("jobs-grid") %>">
+    <search class="u-table-controls">
+      <form id="<%= filters %>" action="/jobs" method="get">
+        <label class="u-visually-hidden" for="<%= uid.("jobs-q") %>">Search jobs</label>
+        <div class="u-input-prefixed">
+          <input class="u-input" id="<%= uid.("jobs-q") %>" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" placeholder="Name, job number or phone">
+        </div>
+        <%= raw render("examples/table_presets", id: uid.("jobs-presets"), current: "Custom view", code: code).strip.gsub("\n", "\n        ") %>
+        <button type="button" class="u-btn u-btn-outline" popovertarget="<%= uid.("jobs-columns") %>"><%= raw icon.("sliders-horizontal") %>View</button>
+      </form>
+      <form id="<%= uid.("jobs-bulk") %>" action="/jobs/bulk" method="post" aria-label="Selected jobs">
+        <span><output>0</output> selected</span>
+        <button type="submit" class="u-btn u-btn-outline" name="bulk_action" value="print">Print tickets</button>
+        <button type="submit" class="u-btn u-btn-primary" name="bulk_action" value="ready">Mark ready for pickup</button>
+        <button type="reset" class="u-btn u-btn-ghost">Clear selection</button>
+      </form>
+      <ul aria-label="Filters" data-grid-part="chips">
+<% shown.each do |status| -%>
+        <li class="u-chip">Status: <%= status %><button type="button" data-remove="status" value="<%= status %>" aria-label="Remove filter: Status: <%= status %>"></button></li>
+<% end -%>
+        <li><button type="button" class="u-btn u-btn-ghost" data-clear-filters>Clear all</button></li>
+      </ul>
+    </search>
+    <section class="u-card" aria-label="Jobs">
+      <div class="u-table" tabindex="0" role="region" aria-label="Jobs">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">
+                <div class="u-row u-gap-4">
+                  <label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden">Select all jobs on this page</span></label>
+                  <span>Job</span>
+                </div>
+              </th>
+              <th scope="col"><%= raw sort_button.("Customer", "customer", false) %></th>
+              <th scope="col">Work</th>
+              <th scope="col">
+                <div class="u-row u-gap-1">
+                  Status
+                  <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="<%= uid.("jobs-filter-status") %>" aria-label="Filter by status"><%= raw icon.("filter", false) %></button>
+                </div>
+              </th>
+              <th scope="col" aria-sort="ascending">
+                <div class="u-row u-gap-1">
+                  <%= raw sort_button.("Due", "due", true) %>
+                  <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="<%= uid.("jobs-filter-due") %>" aria-label="Filter by due date"><%= raw icon.("filter", false) %></button>
+                </div>
+              </th>
+              <th scope="col"><%= raw sort_button.("Taken in", "taken", false) %></th>
+              <th scope="col">Jeweller</th>
+              <th scope="col" hidden>Phone number</th>
+              <th scope="col" class="u-table-num"><%= raw sort_button.("Quote", "quote", false) %></th>
+              <th scope="col" class="u-table-num">Deposit</th>
+            </tr>
+          </thead>
+          <tbody>
+<% jobs.each do |number, customer, work, status, due, taken, jeweller, phone, quote, deposit| -%>
+            <tr data-status="<%= status %>" data-due="<%= due %>"<% unless shown.include?(status) %> hidden<% end %>>
+              <th scope="row" data-value="<%= number %>">
+                <div class="u-row u-gap-4">
+                  <label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="<%= number %>" form="<%= uid.("jobs-bulk") %>"><span class="u-visually-hidden">Select job #<%= number %></span></label>
+                  <a class="u-text-data" href="<%= href.("/jobs/#{number}") %>">#<%= number %></a>
+                </div>
+              </th>
+              <td data-value="<%= customer %>"><%= customer %></td>
+              <td><%= work %></td>
+              <td><span class="u-badge u-badge-<%= variants[status] %>"><%= status %></span><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><select class="u-input" name="job[status]"><% variants.each_key do |option| %><option<% if option == status %> selected<% end %>><%= option %></option><% end %></select></form></template></td>
+              <td class="u-text-data" data-value="<%= due %>"><%= short_date.(due) %><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><input class="u-input u-text-data" type="date" name="job[due_on]" value="<%= due %>"></form></template></td>
+              <td class="u-text-data" data-value="<%= taken %>"><%= short_date.(taken) %></td>
+              <td><%= jeweller %></td>
+              <td class="u-text-data" hidden><%= phone %></td>
+              <td class="u-table-num" data-value="<%= quote %>">$<%= quote %></td>
+              <td class="u-table-num">$<%= deposit %></td>
+            </tr>
+<% end -%>
+          </tbody>
+        </table>
+      </div>
+      <div class="u-menu" id="<%= uid.("jobs-filter-status") %>" popover>
+        <hgroup><h2>Status</h2></hgroup>
+<% variants.each_key do |status| -%>
+        <label class="u-checkbox"><input type="checkbox" name="status[]" value="<%= status %>" form="<%= filters %>"<% if shown.include?(status) %> checked<% end %>><span><%= status %></span></label>
+<% end -%>
+      </div>
+      <div class="u-menu" id="<%= uid.("jobs-filter-due") %>" popover>
+        <hgroup><h2>Due</h2></hgroup>
+<% dues.each do |value, label| -%>
+        <label class="u-radio"><input type="radio" name="due" value="<%= value %>" form="<%= filters %>"<% if value.empty? %> checked<% end %>><span><%= label %></span></label>
+<% end -%>
+      </div>
+      <div class="u-menu" id="<%= uid.("jobs-columns") %>" popover>
+        <hgroup>
+          <h2>Columns</h2>
+          <p>The job number always shows.</p>
+        </hgroup>
+      </div>
+    </section>
+    <nav class="u-pagination" aria-label="Pages">
+      <a aria-disabled="true" aria-label="Previous page"></a>
+      <span data-grid-range>1–9 of 9</span>
+      <a href="<%= href.("/jobs?page=2") %>" rel="next" aria-label="Next page" aria-disabled="true" data-grid-next></a>
+    </nav>
+  </u-data-grid>
+</div>

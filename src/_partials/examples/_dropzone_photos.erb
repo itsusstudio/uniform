@@ -1,0 +1,10 @@
+<%# locals: (id:) -%>
+<u-dropzone>
+<div class="u-field" id="<%= id %>-field">
+<%= render "examples/dropzone_area", id: id, label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true %>
+<ul class="u-list" aria-live="polite" hidden></ul>
+<template>
+<%= render "examples/dropzone_file", name: "", size: "", state: "new", kind: "photos" %>
+</template>
+</div>
+</u-dropzone>

@@ -1,0 +1,10 @@
+<%# locals: (classes_page:, classes_variants: false) -%>
+<% classes_variants_value = defined?(classes_variants) && classes_variants -%>
+<% inline = ->(s) { markdownify(s.to_s).strip.delete_prefix("<p>").delete_suffix("</p>") } -%>
+<% names = ->(s) { s.split(/(, | to )/).map { |part| part.match?(/\A(, | to )\z/) ? part : "<code>#{ERB::Util.h(part)}</code>" }.join } -%>
+<dl>
+<% site.data.classes.select { |entry| entry.page == classes_page && !!entry.variant == !!classes_variants_value }.each do |entry| -%>
+<dt><%= raw names.(entry.name) %></dt>
+<dd><%= raw inline.(entry.description) %><% if entry["scope"] == "sites" %> <span class="u-badge u-badge-info u-badge-strong">Sites only</span><% end %></dd>
+<% end -%>
+</dl>

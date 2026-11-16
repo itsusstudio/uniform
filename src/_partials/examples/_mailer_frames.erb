@@ -1,0 +1,24 @@
+<%
+  srcdoc = h(email.to_s).gsub("\n", "&#10;")
+  subject = email.to_s[/<title>(.*?)<\/title>/m, 1].to_s
+  sender = email.to_s[/class="u-mail-pad"[^>]*>([^<]+)<\/td>/, 1].to_s.strip
+  from = sender == "Workbench" ? "Workbench <hello@useworkbench.co>" : "#{sender} <hello@kensingtonrepair.ca>"
+  recipient = (defined?(to) && to) || (sender == "Workbench" ? "Dana Whitfield <dana@kensingtonrepair.ca>" : "Ana Reyes <ana.reyes@example.com>")
+-%>
+<div class="u-stack">
+<dl class="u-dl">
+<dt>Subject</dt><dd><%= raw subject %></dd>
+<dt>From</dt><dd><%= from %></dd>
+<dt>To</dt><dd><%= recipient %></dd>
+</dl>
+<div class="u-row u-row-top u-gap-6">
+<figure class="u-stack u-gap-2 mailer-preview-desktop">
+<div class="mailer-frame"><iframe class="mailer-iframe" title="<%= h name %>, desktop preview" height="<%= height %>" loading="lazy" onload="this.style.height = '0'; this.style.height = this.contentDocument.documentElement.scrollHeight + 'px'" srcdoc="<%= raw srcdoc %>"></iframe></div>
+<figcaption>Desktop, 640px wide</figcaption>
+</figure>
+<figure class="u-stack u-gap-2 mailer-preview-phone">
+<div class="mailer-frame"><iframe class="mailer-iframe" title="<%= h name %>, phone preview" height="<%= phone_height %>" loading="lazy" onload="this.style.height = '0'; this.style.height = this.contentDocument.documentElement.scrollHeight + 'px'" srcdoc="<%= raw srcdoc %>"></iframe></div>
+<figcaption>Phone, 375px wide</figcaption>
+</figure>
+</div>
+</div>

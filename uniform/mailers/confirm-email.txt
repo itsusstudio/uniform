@@ -1,0 +1,8 @@
+Confirm your email address
+
+Confirm dana@kensingtonrepair.ca to finish signing up for Workbench.
+
+Confirm email address:
+https://useworkbench.example/confirm/7f3a9c
+
+This link works for 24 hours. If you didn’t sign up, ignore this email.

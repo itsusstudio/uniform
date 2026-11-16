@@ -1,0 +1,128 @@
+@layer uniform.components {
+.u-dropzone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: var(--u-space-6);
+  border: 1px solid var(--u-color-border-input);
+  border-radius: var(--u-radius-default);
+  background: var(--u-color-bg-surface);
+  color: var(--u-color-text-default);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+  cursor: pointer;
+}
+
+.u-dropzone::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  margin-bottom: var(--u-space-2);
+  background: currentcolor;
+  mask: url("./../icons/upload.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-dropzone > small { margin-top: var(--u-space-1); }
+
+.u-dropzone > input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.u-dropzone:has(> input:focus-visible) {
+  outline: 2px solid var(--u-color-info);
+  outline-offset: 2px;
+}
+
+.u-dropzone-link {
+  color: var(--u-color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.u-dropzone-over {
+  border-color: var(--u-color-text-default);
+  box-shadow: 0 0 0 1px var(--u-color-text-default);
+  background: var(--u-color-bg-paper);
+}
+
+.u-dropzone:has(> input:is([aria-invalid="true"], :user-invalid)) { border-color: var(--u-color-danger); }
+
+.u-dropzone:has(> input:disabled) {
+  background: var(--u-color-divider);
+  color: var(--u-color-border-input);
+  cursor: not-allowed;
+}
+
+.u-dropzone:has(> input:disabled) :is(.u-dropzone-link, small) { color: var(--u-color-border-input); }
+
+.u-dropzone > input:disabled { cursor: not-allowed; }
+
+.u-dropzone ~ .u-list > li {
+  padding-inline: 0;
+  font-size: var(--u-font-size-small);
+}
+
+.u-dropzone ~ .u-list > li [hidden]:not([hidden="until-found" i]) { display: none; }
+
+.u-dropzone ~ .u-list > li > :first-child {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--u-color-border);
+  border-radius: var(--u-radius-default);
+  background: var(--u-color-bg-surface);
+  object-fit: cover;
+}
+
+.u-dropzone ~ .u-list > li > span:first-child::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: currentcolor;
+  mask: url("./../icons/file.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-dropzone ~ .u-list > li > div {
+  display: grid;
+  flex: 1 1 0;
+  gap: var(--u-space-1);
+  min-width: 0;
+}
+
+.u-dropzone ~ .u-list > li > div > p:first-child { overflow-wrap: anywhere; }
+
+.u-dropzone ~ .u-list > li > div > p:nth-child(2) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--u-space-2);
+}
+
+[data-dropzone-done] {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--u-space-1);
+  color: var(--u-color-success);
+}
+
+[data-dropzone-done]::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url("./../icons/check.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+}

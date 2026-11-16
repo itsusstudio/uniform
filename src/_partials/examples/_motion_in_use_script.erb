@@ -1,0 +1,52 @@
+<script>
+{
+const motionNames = [["#1051", "Mia Chen"], ["#1052", "Noah Patel"], ["#1053", "Iris Novak"], ["#1054", "Theo Brandt"]]
+
+document.addEventListener("click", (event) => {
+  const list = document.getElementById("motion-list")
+  if (!list) return
+
+  if (event.target.closest("#motion-add")) {
+    const [id, name] = motionNames[list.children.length % motionNames.length]
+    const template = list.querySelector(".motion-item")
+    const item = template.cloneNode(true)
+    item.querySelector(".u-text-data").textContent = id
+    item.querySelector(".u-text-data + span").textContent = name
+    item.querySelector("[data-motion-remove]").setAttribute("aria-label", `Remove job ${id}`)
+    item.classList.remove("u-exit")
+    item.classList.add("u-enter")
+    list.prepend(item)
+  }
+
+  const remove = event.target.closest("[data-motion-remove]")
+  if (remove && list.children.length > 1) {
+    const item = remove.closest(".motion-item")
+    const next = item.nextElementSibling || item.previousElementSibling
+    item.classList.remove("u-enter")
+    item.classList.add("u-exit")
+    item.addEventListener("animationend", () => {
+      item.remove()
+      next?.querySelector("[data-motion-remove]")?.focus()
+    }, { once: true })
+  }
+
+  const toggle = event.target.closest("#motion-menu-toggle")
+  if (toggle) {
+    const menu = document.getElementById("motion-menu")
+    menu.hidden = !menu.hidden
+    toggle.setAttribute("aria-expanded", String(!menu.hidden))
+  }
+
+  if (event.target.closest("#motion-progress-start")) {
+    const bar = document.getElementById("motion-progress")
+    const text = document.getElementById("motion-progress-text")
+    bar.value = 0
+    const timer = setInterval(() => {
+      bar.value = Math.min(24, bar.value + 3)
+      text.textContent = `${bar.value} of 24 sent`
+      if (bar.value >= 24) clearInterval(timer)
+    }, 250)
+  }
+})
+}
+</script>

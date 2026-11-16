@@ -1,0 +1,15 @@
+<%# locals: (id:, popover:) -%>
+<dialog class="u-popover" id="<%= id %>" <% if popover %>popover<% else %>open<% end %> aria-labelledby="<%= id %>-title">
+<header>
+<h2 id="<%= id %>-title">Ana Reyes</h2>
+<button type="button" class="u-btn-close"<% if popover %> popovertarget="<%= id %>" popovertargetaction="hide"<% end %> aria-label="Close"></button>
+</header>
+<dl class="u-dl">
+<dt>Phone number</dt>
+<dd>416-555-0148</dd>
+<dt>Email address</dt>
+<dd>ana.reyes@example.com</dd>
+<dt>Open jobs</dt>
+<dd><a class="u-text-data" href="#example">#1042</a>, <a class="u-text-data" href="#example">#1051</a></dd>
+</dl>
+</dialog>

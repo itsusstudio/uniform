@@ -1,0 +1,89 @@
+- title: Build a form
+  pages:
+    - /writing/
+    - /components/text-field/
+    - /components/select/
+    - /components/checkbox/
+    - /components/radio/
+    - /components/button/
+
+- title: Build a list or index page
+  pages:
+    - /patterns/data-table/
+    - /components/page-header/
+    - /components/table/
+    - /components/pagination/
+    - /patterns/data-grid/
+    - /components/data-grid/
+
+- title: Build a record (show) page
+  pages:
+    - /components/page-header/
+    - /components/description-list/
+    - /components/card/
+    - /components/page-tabs/
+    - /components/badge/
+    - /patterns/timeline/
+    - /components/timeline/
+    - /writing/
+
+- title: Show an empty or error state
+  pages:
+    - /writing/
+    - /components/banner/
+
+- title: Add a dialog or confirmation
+  pages:
+    - /components/dialog/
+    - /writing/
+    - /components/toast/
+
+- title: Build the app frame and navigation
+  pages:
+    - /components/app-shell/
+    - /patterns/dashboard-shell/
+    - /components/sidebar/
+    - /components/navigation/
+    - /components/breadcrumb/
+
+- title: Build a marketing site page
+  pages:
+    - /patterns/marketing-page/
+    - /components/site-header/
+    - /foundations/typography/
+    - /foundations/imagery/
+    - /components/prose/
+    - /writing/
+
+- title: Build sign in and sign up
+  pages:
+    - /patterns/auth/
+    - /components/auth-shell/
+    - /components/text-field/
+    - /writing/
+    - /mailers/sign-in-code/
+
+- title: Write an email
+  pages:
+    - /mailers/layout/
+    - /mailers/notification/
+    - /mailers/receipt/
+    - /mailers/sign-in-code/
+    - /writing/
+
+- title: Build a chart or report
+  pages:
+    - /foundations/charts/
+    - /components/chart/
+    - /patterns/charts/
+    - /components/card/
+    - /writing/
+
+- title: Write any copy
+  pages:
+    - /writing/
+
+- title: Add something Uniform doesn't have
+  pages:
+    - /start/rules/#no-one-offs
+    - /start/reference/

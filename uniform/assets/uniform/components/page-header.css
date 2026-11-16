@@ -1,0 +1,63 @@
+@layer uniform.components {
+.u-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--u-space-4) var(--u-space-6);
+}
+
+.u-page-header > * { margin: 0; }
+
+.u-page-header:has(> a)::before {
+  content: "";
+  flex-basis: 100%;
+  order: -1;
+}
+
+.u-page-header > a {
+  display: inline-flex;
+  order: -2;
+  align-items: center;
+  margin-bottom: calc(-1 * var(--u-space-4));
+  gap: var(--u-space-1);
+  min-height: var(--u-size-target);
+  font-size: var(--u-font-size-small);
+  color: var(--u-color-text-muted);
+  text-decoration: none;
+}
+
+.u-page-header > a:hover {
+  color: var(--u-color-text-default);
+  text-decoration: underline;
+}
+
+.u-page-header > a::before {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url("./../icons/arrow-left.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-page-header > hgroup {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.u-page-header > hgroup > :is(h1, h2, h3, h4) {
+  font-family: var(--u-font-sans);
+  font-size: var(--u-font-size-32);
+  font-weight: 500;
+  line-height: var(--u-line-height-32);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.u-page-header > hgroup > p {
+  font-size: var(--u-font-size-body);
+  line-height: var(--u-line-height-body);
+}
+}

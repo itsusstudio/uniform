@@ -1,0 +1,133 @@
+.frame {
+  container-type: inline-size;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--u-color-border);
+  background: var(--u-color-bg-surface);
+}
+
+.frame-paper { background: var(--u-color-bg-paper); }
+
+.frame-pad { padding: var(--u-space-12) var(--u-space-6); }
+
+.frame-pad-block { padding-block: var(--u-space-12); }
+
+.frame-phones > * {
+  flex: 1 1 300px;
+  max-width: 390px;
+}
+
+.frame-column {
+  width: var(--u-width-sidebar);
+  max-width: 100%;
+  height: 560px;
+  border: 1px solid var(--u-color-border);
+}
+
+.frame-column u-sidebar {
+  position: relative;
+  height: 100%;
+  border-right: 0;
+}
+
+.frame-column:has(> u-sidebar > div:first-child > button[aria-expanded="false"]) { width: fit-content; }
+
+.frame .u-auth-shell { min-height: inherit; }
+
+.frame .u-app-shell {
+  position: relative;
+  min-height: 0;
+  height: 100%;
+  anchor-name: --frame-shell;
+  anchor-scope: --frame-shell;
+}
+
+@supports (anchor-scope: --a) {
+  .frame .u-app-shell > u-sidebar:popover-open {
+    position-anchor: --frame-shell;
+    inset: anchor(top) auto anchor(bottom) anchor(left);
+    width: calc(anchor-size(width) * 0.75);
+  }
+
+  .frame .u-app-shell > u-sidebar::backdrop { background: transparent; }
+
+  .frame .u-app-shell:has(> u-sidebar:popover-open)::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    background: var(--u-color-backdrop);
+  }
+}
+
+.frame .u-app-shell > main { overflow-y: auto; }
+
+.frame .u-app-shell > u-sidebar:not(:popover-open) {
+  position: relative;
+  height: auto;
+}
+
+.frame-desktop {
+  --u-page-margin: var(--u-space-12);
+  overflow-x: auto;
+}
+
+.frame-desktop > * { min-width: 880px; }
+
+.frame-phone {
+  --u-page-margin: var(--u-space-4);
+  --u-grid-gutter: var(--u-space-4);
+  --u-section-space: var(--u-space-6);
+  max-width: 390px;
+}
+
+.frame-phone.frame-pad { padding: var(--u-space-6) var(--u-space-4); }
+
+.frame-phone.frame-pad-block { padding-block: var(--u-space-6); }
+
+.frame-phone-open .u-app-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: var(--u-color-backdrop);
+}
+
+.frame-phone-open .u-app-shell > u-sidebar:not(:popover-open) {
+  display: flex;
+  position: absolute;
+  z-index: 3;
+  translate: 0 0;
+}
+
+.frame-phone-open .u-site-header { position: relative; }
+
+.frame-phone-open .u-site-header > .u-container > nav:not(:popover-open) {
+  display: flex;
+  position: absolute;
+  inset: 100% 0 auto;
+  z-index: 1;
+  height: 540px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--u-space-6);
+  padding: var(--u-space-6) var(--u-page-margin) var(--u-space-12);
+  overflow-y: auto;
+  border-top: 1px solid var(--u-color-divider);
+  background: var(--u-color-bg-paper);
+  color: var(--u-color-text-default);
+}
+
+.frame-phone-open .u-site-header > .u-container > nav > ul {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--u-space-2);
+}
+
+.frame-phone-open .u-site-header > .u-container > nav > ul + ul {
+  margin-left: 0;
+  padding-top: var(--u-space-6);
+  border-top: 1px solid var(--u-color-divider);
+}
+
+.frame-phone-open .u-site-header > .u-container > nav > ul > li > a { font-size: var(--u-font-size-20); }

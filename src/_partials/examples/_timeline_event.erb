@@ -1,0 +1,19 @@
+<%# locals: (event:) -%>
+<li>
+<% if event[:initials] -%>
+  <span class="u-avatar u-avatar-sm" aria-hidden="true"><%= event[:initials] %></span>
+<% else -%>
+<% end -%>
+  <div>
+<% if event[:author] -%>
+    <strong><%= event[:author] %></strong>
+<% end -%>
+<% Array(event[:text]).each do |line| -%>
+    <p><%= raw line %></p>
+<% end -%>
+<% if event[:detail] -%>
+    <small><%= raw event[:detail] %></small>
+<% end -%>
+  </div>
+  <u-relative-time format="time"><time datetime="<%= event[:at] %>"><%= event[:time] %></time></u-relative-time>
+</li>

@@ -1,0 +1,32 @@
+@layer uniform.components {
+.u-dl {
+  container: u-dl / inline-size;
+  display: grid;
+  grid-template-columns: fit-content(16rem) minmax(0, 1fr);
+  gap: var(--u-space-2) var(--u-space-6);
+  margin: 0;
+  color: var(--u-color-text-default);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+.u-dl > dt {
+  grid-column: 1;
+  color: var(--u-color-text-muted);
+}
+
+.u-dl > dd {
+  grid-column: 2;
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@container u-dl (max-width: 479px) {
+  .u-dl > :where(dt, dd) { grid-column: 1 / -1; }
+
+  .u-dl > dt { margin-bottom: calc(-1 * var(--u-space-2)); }
+
+  .u-dl > dd + dt { margin-top: var(--u-space-2); }
+}
+}

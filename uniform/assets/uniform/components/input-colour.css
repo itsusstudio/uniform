@@ -1,0 +1,123 @@
+@layer uniform.components {
+u-input-colour > [type="color"] {
+  display: block;
+  width: var(--u-size-control);
+  height: var(--u-size-control);
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--u-color-border-input);
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  appearance: none;
+}
+
+u-input-colour > [type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+
+u-input-colour > [type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: 0;
+}
+
+u-input-colour > [type="color"]::-moz-color-swatch {
+  border: 0;
+  border-radius: 0;
+}
+
+u-input-colour > [type="color"]:disabled { cursor: not-allowed; }
+
+u-input-colour:has(> .u-input) > [type="color"] {
+  position: absolute;
+  top: calc((var(--u-size-control) - 20px) / 2);
+  inset-inline-start: var(--u-space-2);
+  width: 20px;
+  height: 20px;
+  border-color: var(--u-color-border);
+}
+
+u-input-colour > .u-input {
+  padding-inline-start: calc(var(--u-space-2) + 20px + var(--u-space-2));
+  font-family: var(--u-font-mono);
+}
+
+u-input-colour:has(> button) > .u-input { padding-inline-end: calc(var(--u-size-target) + var(--u-space-2)); }
+
+u-input-colour > button {
+  position: absolute;
+  top: 2px;
+  inset-inline-end: 2px;
+  display: grid;
+  place-content: center;
+  width: var(--u-size-target);
+  height: calc(var(--u-size-control) - 4px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--u-radius-pill);
+  background: transparent;
+  color: var(--u-color-text-default);
+  cursor: pointer;
+  outline-offset: 0;
+}
+
+u-input-colour > button:hover { background: var(--u-color-divider); }
+
+u-input-colour > button:disabled {
+  background: transparent;
+  color: var(--u-color-border-input);
+  cursor: not-allowed;
+}
+
+u-input-colour > button::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url("./../icons/chevron-down.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child) u-input-colour:has(> .u-input) > [type="color"] {
+  top: calc(var(--u-space-6) + (var(--u-size-field) - var(--u-space-6) - 20px) / 2);
+  inset-inline-start: var(--u-space-4);
+}
+
+[data-u-audience="consumer"] u-input-colour > .u-input { padding-inline-start: calc(var(--u-space-4) + 20px + var(--u-space-2)); }
+
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child) u-input-colour > button { top: calc((var(--u-size-field) - var(--u-size-control) + 4px) / 2); }
+
+u-input-colour > .u-menu > div {
+  display: grid;
+  grid-template-columns: repeat(6, var(--u-size-target));
+  gap: var(--u-space-2);
+  padding: var(--u-space-2) var(--u-space-4);
+}
+
+u-input-colour > .u-menu > div > button {
+  display: grid;
+  place-content: center;
+  width: var(--u-size-target);
+  height: var(--u-size-target);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+u-input-colour > .u-menu > div > button[aria-pressed="true"] {
+  outline: 2px solid var(--u-color-text-default);
+  outline-offset: 2px;
+}
+
+u-input-colour > .u-menu > div > button[aria-pressed="true"]::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url("./../icons/check.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+u-input-colour > .u-menu > div > button:focus-visible { outline: 2px solid var(--u-color-info); }
+}

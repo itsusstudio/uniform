@@ -1,0 +1,25 @@
+.figure {
+  margin: 0;
+  display: grid;
+  gap: var(--u-space-2);
+}
+
+.figure-field { aspect-ratio: 4 / 5; }
+
+.figure-field-info { background: var(--u-color-info); }
+.figure-field-danger { background: var(--u-color-danger); }
+.figure-field-warning { background: var(--u-color-warning); }
+.figure-field-success { background: var(--u-color-success); }
+
+.figure-plain img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.figure-field img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

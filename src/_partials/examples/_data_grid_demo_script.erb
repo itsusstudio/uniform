@@ -1,0 +1,18 @@
+<u-toast role="status" aria-live="polite"></u-toast>
+<script>
+(() => {
+  const tones = { "Not started": "neutral", "On the bench": "info", "Waiting on parts": "warning", "Quote to approve": "warning", "Overdue": "danger", "Ready for pickup": "success" }
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+  document.addEventListener("data-grid:change", (event) => {
+    event.preventDefault()
+    const { field, value } = event.detail
+    if (field.type === "date") {
+      const [, m, d] = value.split("-")
+      event.detail.html = `${months[m - 1]} ${Number(d)}`
+    } else {
+      event.detail.html = `<span class="u-badge u-badge-${tones[value]}">${value}</span>`
+    }
+  })
+  document.querySelectorAll("u-data-grid form").forEach((form) => form.addEventListener("submit", (event) => event.preventDefault()))
+})()
+</script>

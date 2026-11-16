@@ -1,0 +1,74 @@
+.mailer-preview-desktop { width: 642px; }
+
+.mailer-preview-phone { width: 377px; }
+
+:is(.mailer-preview-desktop, .mailer-preview-phone) {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.mailer-frame {
+  overflow-x: auto;
+  border: 1px solid var(--u-color-border);
+  background: var(--u-color-bg-paper);
+}
+
+.mailer-iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: var(--u-color-bg-paper);
+}
+
+.mailer-preview-desktop .mailer-iframe { min-width: 640px; }
+
+.mailer-preview-phone .mailer-iframe { min-width: 375px; }
+
+.mailer-mock {
+  display: grid;
+  gap: var(--u-space-4);
+  padding: var(--u-space-6);
+  background: var(--u-color-bg-surface);
+}
+
+.mailer-mock > * { margin: 0; }
+
+.mailer-mock-centred { text-align: center; }
+
+.mailer-layout-blocked {
+  display: grid;
+  place-items: center;
+  height: 96px;
+  border: 1px dashed var(--u-color-border-input);
+  color: var(--u-color-text-muted);
+  font-size: var(--u-font-size-14);
+}
+
+.mailer-sign-in-code-inbox {
+  display: grid;
+  gap: var(--u-space-1);
+  padding: var(--u-space-4);
+  background: var(--u-color-bg-surface);
+  font-size: var(--u-font-size-14);
+}
+
+.mailer-sign-in-code-inbox p {
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mailer-receipt-file {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--u-space-4);
+  padding: var(--u-space-2) var(--u-space-4);
+  border: 1px solid var(--u-color-border);
+}
+
+.mailer-receipt-table :where(th, td):first-child { padding-left: 0; }
+
+.mailer-receipt-table :where(th, td):last-child { padding-right: 0; }
+
+.mailer-receipt-total > td { font-weight: 500; }

@@ -1,0 +1,93 @@
+<%
+  css = File.read(File.join(Studio::Uniform.assets_path, "uniform/tokens.css"))
+  declarations = ->(block) { block.to_s.scan(/(--u-[a-z0-9-]+)\s*:\s*([^;]+);/).to_h { |name, value| [name, value.strip.gsub(/\s+/, " ")] } }
+  light = declarations.(css[/^:root \{(.*?)^\}/m, 1])
+  dark = declarations.(css[/^:root\[data-u-theme="dark"\] \{(.*?)^\}/m, 1])
+  # Each light-dark(a, b) in a value resolves to a for the Light column and b for the Dark one.
+  pick = ->(value, side) do
+    out = +""
+    rest = value
+    while (start = rest.index("light-dark("))
+      out << rest[0...start]
+      depth = 0
+      args = [+""]
+      i = start + "light-dark(".length
+      while i < rest.length
+        char = rest[i]
+        if char == "(" then depth += 1
+        elsif char == ")"
+          break if depth.zero?
+          depth -= 1
+        elsif char == "," && depth.zero?
+          args << +""
+          i += 1
+          next
+        end
+        args.last << char
+        i += 1
+      end
+      out << args[side].strip
+      rest = rest[(i + 1)..]
+    end
+    out << rest
+  end
+  dark = light.select { |_, value| value.include?("light-dark(") }.transform_values { |value| pick.(value, 1) }.merge(dark)
+  light = light.transform_values { |value| pick.(value, 0) }
+  business = declarations.(css[/^\[data-u-audience="business"\] \{(.*?)^\}/m, 1])
+  consumer = declarations.(css[/^\[data-u-audience="consumer"\] \{(.*?)^\}/m, 1])
+  token_groups = [
+    ["Colour", "/foundations/colour/", ->(n) { n.start_with?("--u-color-") && !n.start_with?("--u-color-chart-") }],
+    ["Font", "/foundations/typography/", ->(n) { n.start_with?("--u-font-") }],
+    ["Line height", "/foundations/typography/", ->(n) { n.start_with?("--u-line-height-") }],
+    ["Space", "/foundations/space-and-layout/", ->(n) { n.start_with?("--u-space-", "--u-grid-", "--u-page-") }],
+    ["Width", "/foundations/space-and-layout/", ->(n) { n.start_with?("--u-width-", "--u-max-width-") }],
+    ["Size", "/foundations/space-and-layout/", ->(n) { n.start_with?("--u-size-") }],
+    ["Radius", "/foundations/shape-and-depth/", ->(n) { n.start_with?("--u-radius-") }],
+    ["Shadow", "/foundations/shape-and-depth/", ->(n) { n.start_with?("--u-shadow-") }],
+    ["Motion", "/foundations/motion/", ->(n) { n.start_with?("--u-motion-") }],
+    ["Chart", "/foundations/charts/", ->(n) { n.start_with?("--u-color-chart-", "--u-chart-") }]
+  ]
+  grouped = token_groups.map(&:last)
+  token_groups << ["Other", "/start/reference/", ->(n) { grouped.none? { |test| test.(n) } }]
+-%>
+<% token_groups.each do |label, foundation, matches| -%>
+<% names = light.keys.select(&matches) -%>
+<% next if names.empty? -%>
+<h3 id="tokens-<%= label.downcase.tr(" ", "-") %>"><%= label %></h3>
+
+<p>When to use them: <a href="<%= foundation %>"><%= site.data.navigation.flat_map { |group| group.items.to_a }.find { |item| item.url == foundation }&.title %></a>.</p>
+
+<div class="u-table" tabindex="0" role="region" aria-labelledby="tokens-<%= label.downcase.tr(" ", "-") %>">
+<table class="reference-tokens">
+<thead><tr><th scope="col">Token</th><th scope="col">Light</th><th scope="col">Dark</th></tr></thead>
+<tbody>
+<% names.each do |name| -%>
+<tr>
+<%= render "token_name", token: name %>
+<td><span class="u-row u-gap-2"><% if label == "Colour" || (label == "Chart" && name.start_with?("--u-color-")) %><span class="reference-swatch" style="background: <%= light[name] %>"></span><% elsif label == "Space" %><span class="reference-bar" style="width: <%= light[name] %>"></span><% end %><code class="u-text-data"><%= light[name] %></code></span></td>
+<td><% if dark[name] %><span class="u-row u-gap-2"><% if label == "Colour" || (label == "Chart" && name.start_with?("--u-color-")) %><span class="reference-swatch" style="background: <%= dark[name] %>"></span><% end %><code class="u-text-data"><%= dark[name] %></code></span><% end %></td>
+</tr>
+<% end -%>
+</tbody>
+</table>
+</div>
+<% end -%>
+<h3 id="tokens-audience">Audience</h3>
+
+<p>Set by <code>data-u-audience</code> on the html element. When to use them: <a href="/start/audience/">Audience</a>.</p>
+
+<div class="u-table" tabindex="0" role="region" aria-labelledby="tokens-audience">
+<table class="reference-tokens">
+<thead><tr><th scope="col">Token</th><th scope="col">Business</th><th scope="col">Consumer</th></tr></thead>
+<tbody>
+<% business.each_key do |name| -%>
+<tr>
+<%= render "token_name", token: name %>
+<td><code class="u-text-data"><%= business[name] %></code></td>
+<td><code class="u-text-data"><%= consumer[name] %></code></td>
+</tr>
+<% end -%>
+</tbody>
+</table>
+</div>
+

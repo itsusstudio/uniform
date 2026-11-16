@@ -1,0 +1,38 @@
+@layer uniform.components {
+.u-shimmer {
+  display: block;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 1em;
+  margin-block: calc((1lh - 1em) / 2);
+  overflow: hidden;
+  background: var(--u-color-chart-track);
+  color: transparent;
+  user-select: none;
+}
+
+.u-shimmer:not(:empty) { width: fit-content; }
+
+.u-shimmer.u-avatar {
+  height: var(--u-avatar-size);
+  margin-block: 0;
+}
+
+.u-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--u-color-shimmer), transparent);
+  translate: -100% 0;
+  animation: u-shimmer var(--u-motion-shimmer) var(--u-motion-ease) infinite;
+}
+
+@keyframes u-shimmer {
+  to { translate: 100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-shimmer::after { display: none; }
+}
+}

@@ -1,0 +1,17 @@
+<%# locals: (id:) -%>
+<% customers = [["Ana Reyes", "514-555-0142", "ana.reyes@example.com", 18], ["Andre Morin", "438-555-0187", "andre.morin@example.com", 41], ["Beatriz Costa", "514-555-0113", "bea.costa@example.com", 27], ["Chloe Tremblay", "450-555-0168", "chloe.tremblay@example.com", 33], ["Daniel Okafor", "514-555-0129", "d.okafor@example.com", 52], ["Elena Petrov", "438-555-0175", "elena.petrov@example.com", 9], ["Farah Haddad", "514-555-0191", "farah.haddad@example.com", 64], ["Grace Kim", "450-555-0104", "grace.kim@example.com", 12], ["Hiroshi Tanaka", "514-555-0156", "h.tanaka@example.com", 70], ["Isabelle Roy", "438-555-0133", "isabelle.roy@example.com", 45], ["Jamal Wright", "514-555-0148", "jamal.wright@example.com", 38], ["Mei Chen", "450-555-0182", "mei.chen@example.com", 66]] -%>
+<div class="u-field">
+<label for="<%= id %>">Customer</label>
+<u-combobox>
+<input class="u-input" id="<%= id %>" type="text" role="combobox" aria-expanded="false" aria-controls="<%= id %>-list" aria-autocomplete="list" aria-describedby="<%= id %>-hint" autocomplete="off" placeholder=" ">
+<input type="hidden" name="customer_id">
+<ul id="<%= id %>-list" role="listbox" aria-label="Customers" popover="manual">
+<% customers.each do |name, phone, email, value| -%>
+<li role="option" aria-selected="false" data-value="<%= value %>"><span><%= name %></span><span><%= phone %></span><span><%= email %></span></li>
+<% end -%>
+<li role="option" aria-disabled="true" hidden>No customers match</li>
+<li role="option" data-action>New customer</li>
+</ul>
+</u-combobox>
+<small id="<%= id %>-hint">Search by name, phone number or email address.</small>
+</div>

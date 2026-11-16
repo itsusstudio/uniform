@@ -1,0 +1,90 @@
+@layer uniform.components {
+.u-menu {
+  min-width: 192px;
+  max-width: 320px;
+  padding: var(--u-space-1) 0;
+  border: 1px solid var(--u-color-border);
+  border-radius: var(--u-radius-default);
+  overflow: clip;
+  background: var(--u-color-bg-surface);
+  color: var(--u-color-text-default);
+  box-shadow: var(--u-shadow-float);
+  font-size: var(--u-font-size-small);
+}
+
+@supports (position-area: block-end) {
+  .u-menu[popover] {
+    inset: auto;
+    margin: var(--u-space-2) 0 0;
+    position-area: block-end span-inline-end;
+    position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
+  }
+}
+
+.u-menu > hgroup {
+  gap: 0;
+  margin-bottom: var(--u-space-1);
+  padding: var(--u-space-2) var(--u-space-4);
+  border-bottom: 1px solid var(--u-color-divider);
+}
+
+.u-menu > hgroup > * {
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+.u-menu > hgroup > :is(h1, h2, h3, h4, h5, h6) {
+  font-family: inherit;
+  font-weight: 500;
+  color: inherit;
+}
+
+.u-menu > form { margin: 0; }
+
+.u-menu > :is(a, button, label),
+.u-menu > form > button {
+  display: flex;
+  align-items: center;
+  gap: var(--u-space-2);
+  width: 100%;
+  min-height: var(--u-size-target);
+  padding: 0 var(--u-space-4);
+  border: 0;
+  background: transparent;
+  color: var(--u-color-text-default);
+  font: inherit;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.u-menu > :is(a, button, label):hover,
+.u-menu > form > button:hover { background: var(--u-color-divider); }
+
+.u-menu > :is(a, button, label):focus-visible,
+.u-menu > form > button:focus-visible {
+  outline-offset: -2px;
+  background: var(--u-color-divider);
+}
+
+.u-menu .u-menu-item-danger { color: var(--u-color-danger); }
+
+.u-menu > a[aria-current]::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  background: currentcolor;
+  mask: url("./../icons/check.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-menu > hr {
+  height: 1px;
+  margin: var(--u-space-1) 0;
+  border: 0;
+  background: var(--u-color-divider);
+}
+}

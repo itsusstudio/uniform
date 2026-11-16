@@ -1,0 +1,80 @@
+@layer uniform.components {
+.u-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-6);
+}
+
+.u-nav > :is(div, details) { display: grid; }
+
+.u-nav > :is(div, details) > :first-child {
+  margin: 0 0 var(--u-space-1);
+  padding-inline: var(--u-space-2);
+  font-size: var(--u-font-size-small);
+  font-weight: 500;
+  color: var(--u-color-text-default);
+}
+
+:is(.u-nav, u-sidebar) ul { list-style: none; margin: 0; padding: 0; }
+
+:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)) {
+  display: flex;
+  align-items: center;
+  gap: var(--u-space-2);
+  min-height: var(--u-size-target);
+  padding-inline: var(--u-space-2);
+  font-size: var(--u-font-size-small);
+  color: var(--u-color-text-muted);
+  text-decoration: none;
+}
+
+:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)) > .u-icon { flex: none; }
+
+:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)):hover {
+  color: var(--u-color-text-default);
+  text-decoration: underline;
+}
+
+.u-nav .u-nav-link-section {
+  font-weight: 500;
+  color: var(--u-color-text-default);
+}
+
+:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button))[aria-current="page"] {
+  border-radius: var(--u-radius-pill);
+  background: var(--u-color-divider);
+  color: var(--u-color-text-default);
+}
+
+.u-nav > details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--u-size-target);
+  margin: 0;
+  list-style: none;
+  cursor: pointer;
+}
+
+.u-nav > details > summary::-webkit-details-marker { display: none; }
+
+.u-nav > details > summary::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url("./../icons/chevron-down.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+  rotate: -90deg;
+}
+
+.u-nav > details[open] > summary::after { rotate: 0deg; }
+
+@media (forced-colors: active) {
+  :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button))[aria-current="page"]:not(:focus-visible) {
+    outline: 1px solid CanvasText;
+    outline-offset: -1px;
+  }
+}
+}

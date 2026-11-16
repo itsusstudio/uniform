@@ -1,0 +1,76 @@
+@layer uniform.components {
+u-input-code > .u-input {
+  font-family: var(--u-font-mono);
+  font-size: var(--u-font-size-body);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5em;
+}
+
+u-input-code:has(> span) {
+  display: flex;
+  gap: var(--u-space-2);
+  width: fit-content;
+}
+
+u-input-code:has(> span) > .u-input {
+  position: absolute;
+  inset: 0 calc(-1 * var(--u-space-12)) 0 0;
+  z-index: 1;
+  width: auto;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: transparent;
+  caret-color: transparent;
+  outline: none;
+  letter-spacing: 0;
+}
+
+u-input-code:has(> span) > .u-input::selection { background: transparent; }
+
+u-input-code > span {
+  display: grid;
+  place-items: center;
+  width: var(--u-size-control);
+  height: calc(var(--u-size-control) + var(--u-space-2));
+  border: 1px solid var(--u-color-border-input);
+  border-radius: var(--u-radius-default);
+  background: var(--u-color-bg-surface);
+  color: var(--u-color-text-default);
+  font-family: var(--u-font-mono);
+  font-size: var(--u-font-size-body);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--u-line-height-body);
+}
+
+u-input-code > span:nth-of-type(3):not(:last-child) { margin-inline-end: var(--u-space-2); }
+
+u-input-code > .u-input-code-slot-active {
+  outline: 2px solid var(--u-color-info);
+  outline-offset: 2px;
+}
+
+u-input-code > .u-input-code-slot-active:empty::after {
+  content: "";
+  width: 1px;
+  height: calc(var(--u-line-height-body) * 1em);
+  background: var(--u-color-text-default);
+  animation: u-input-code-caret 1s steps(1) infinite;
+}
+
+@keyframes u-input-code-caret {
+  50% { opacity: 0; }
+}
+
+u-input-code > .u-input:is([aria-invalid="true"], :user-invalid) ~ span { border-color: var(--u-color-danger); }
+
+u-input-code > .u-input:disabled ~ span {
+  background: var(--u-color-divider);
+  color: var(--u-color-border-input);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  u-input-code > .u-input-code-slot-active:empty::after { animation: none; }
+}
+}

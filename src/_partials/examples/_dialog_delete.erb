@@ -1,0 +1,14 @@
+<%# locals: (prefix:, live:) -%>
+<form method="dialog">
+<header>
+<<%= live ? "h2" : "p" %> id="<%= prefix %>-title">Delete job <span class="u-text-data">#1042</span>?</<%= live ? "h2" : "p" %>>
+<button type="submit" value="cancel" class="u-btn-close" aria-label="Close"></button>
+</header>
+<div class="u-card-content">
+<p>Ana Reyes’s ring resize, its quote and its 3 notes will be deleted. You can’t undo this.</p>
+</div>
+<div class="u-actions">
+<button type="submit" value="cancel" class="u-btn u-btn-outline"<%= " autofocus" if live %>>Cancel</button>
+<button type="submit" value="delete" class="u-btn u-btn-danger">Delete job</button>
+</div>
+</form>

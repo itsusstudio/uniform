@@ -1,0 +1,42 @@
+<%
+  jobs = [
+    ["1036", "Priya Shah", "danger", "Overdue", "Nov 11", "$25.00"],
+    ["1041", "Grace Kim", "info", "On the bench", "Nov 12", "$55.00"],
+    ["1053", "Owen Park", "info", "On the bench", "Nov 13", "$35.00"],
+    ["1042", "Ana Reyes", "info", "On the bench", "Nov 14", "$85.00"],
+    ["1039", "Marcus Lee", "warning", "Waiting on parts", "Nov 15", "$40.00"],
+    ["1055", "Hannah Wójcik", "warning", "Quote to approve", "Nov 17", "$65.00"],
+    ["1044", "Joanne Tremblay", "success", "Ready for pickup", "Nov 18", "$120.00"],
+    ["1051", "Ana Reyes", "warning", "Quote to approve", "Nov 20", "$140.00"],
+    ["1047", "Sam Okafor", "neutral", "Not started", "Nov 22", "$310.00"],
+    ["1048", "Lina Haddad", "info", "On the bench", "Nov 25", "$95.00"],
+    ["1056", "Diego Morales", "neutral", "Not started", "Nov 26", "$45.00"],
+    ["1058", "Fatima Nouri", "info", "On the bench", "Nov 27", "$180.00"]
+  ]
+-%>
+<section class="u-card" aria-label="Jobs">
+  <div class="u-table u-table-sticky" tabindex="0" role="region" aria-label="Jobs">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Job</th>
+          <th scope="col">Customer</th>
+          <th scope="col">Status</th>
+          <th scope="col" aria-sort="ascending"><a class="u-table-sort" href="#long-lists">Due</a></th>
+          <th scope="col" class="u-table-num">Quote</th>
+        </tr>
+      </thead>
+      <tbody>
+<% jobs.each do |number, customer, variant, status, due, quote| -%>
+        <tr>
+          <td><a class="u-text-data" href="#long-lists">#<%= number %></a></td>
+          <td><%= customer %></td>
+          <td><span class="u-badge u-badge-<%= variant %>"><%= status %></span></td>
+          <td class="u-text-data"><%= due %></td>
+          <td class="u-table-num"><%= quote %></td>
+        </tr>
+<% end -%>
+      </tbody>
+    </table>
+  </div>
+</section>

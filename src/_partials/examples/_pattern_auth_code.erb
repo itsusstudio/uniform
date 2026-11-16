@@ -1,0 +1,25 @@
+<%# locals: (id:, tag:, error:) -%>
+<div class="u-auth-shell">
+  <header>
+    <a class="u-wordmark u-wordmark-serif" href="/">Workbench</a>
+    <p class="u-text-article-title">Every repair, from the counter to pickup.</p>
+  </header>
+  <<%= tag %>>
+    <div class="u-stack u-gap-2">
+      <h1 class="u-text-page-title">Check your email</h1>
+      <p class="u-text-small">We sent a six-digit code to ana@mapleandpine.ca. <a href="/sign-in">Change</a></p>
+    </div>
+    <form class="u-stack u-gap-6" action="/sign-in/code" method="post">
+<% if error -%>
+      <%= raw render("examples/text_field_code", id: "#{id}-code", value: "482915", error: "That code doesn’t match. Check your latest email.").strip.gsub("\n", "\n        ") %>
+<% else -%>
+      <%= raw render("examples/text_field_code", id: "#{id}-code").strip.gsub("\n", "\n        ") %>
+<% end -%>
+      <button type="submit" class="u-btn u-btn-primary">Sign in</button>
+    </form>
+    <form class="u-text-small" action="/sign-in/resend" method="post">Didn’t get it? <button type="submit" class="u-link-btn">Send a new code</button></form>
+  </<%= tag %>>
+  <footer>
+    <p><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a></p>
+  </footer>
+</div>

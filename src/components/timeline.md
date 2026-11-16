@@ -1,0 +1,114 @@
+---
+layout: page
+title: Timeline
+summary: "A list of events on one thing, newest first."
+section: Components
+permalink: /components/timeline/
+---
+
+A timeline lists what happened to one record, newest first. Use it for a
+record's history and notes.
+
+## Example
+
+<div class="example-frame">
+<%= render "examples/timeline_basic" %>
+</div>
+
+Each event is an `<li>` holding a `<div>` of what happened and a `<u-relative-time>`.
+A `<small>` in the div is a muted detail line. A note starts with an avatar, and
+its `<strong>` is the author.
+
+## Older events
+
+<div class="example-frame">
+<%= render "examples/timeline_older" %>
+</div>
+
+Put older events in a `<details>` after the list, holding another `u-timeline`.
+Its `<summary>` looks like a link and goes away once open, so the older events
+continue the same list.
+
+## Code
+
+```html
+<%= raw render("examples/timeline_basic").strip %>
+```
+
+Grouped by day, each day is a heading and its own list:
+
+```html
+<section class="u-stack u-gap-2">
+  <h3 class="u-text-small u-text-strong"><u-relative-time format="day"><time datetime="2026-11-12T13:32:00-05:00">Today</time></u-relative-time></h3>
+  <ol class="u-timeline">…</ol>
+</section>
+```
+
+Older events, collapsed:
+
+```html
+<%= raw render("examples/timeline_older").strip %>
+```
+
+## Parts
+
+<%= render "classes", classes_page: "/components/timeline/" %>
+
+## Do and don't
+
+<div class="examples u-grid u-gap-6">
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-dont">Don’t</p>
+<div class="example-frame">
+<ol class="u-timeline">
+  <li>
+    <div><p>Paid <span class="u-text-data">$85.00</span></p></div>
+    <u-relative-time format="time"><time datetime="2026-11-12T16:08:00-05:00">3 hours ago</time></u-relative-time>
+  </li>
+  <li>
+    <div><p>Text sent</p></div>
+    <u-relative-time format="time"><time datetime="2026-11-12T13:32:00-05:00">6 hours ago</time></u-relative-time>
+  </li>
+</ol>
+</div>
+<figcaption class="example-caption example-caption-dont"><span>Relative times and bare events. “6 hours ago” changes while you read it, and “Text sent” doesn't say which text or to whom.</span></figcaption>
+</figure>
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-do">Do</p>
+<div class="example-frame">
+<ol class="u-timeline">
+  <li>
+    <div><p>Paid <span class="u-text-data">$85.00</span>, Visa ending <span class="u-text-data">4242</span></p></div>
+    <u-relative-time format="time"><time datetime="2026-11-12T16:08:00-05:00">4:08pm</time></u-relative-time>
+  </li>
+  <li>
+    <div><p>Text sent: your ring is ready</p></div>
+    <u-relative-time format="time"><time datetime="2026-11-12T13:32:00-05:00">1:32pm</time></u-relative-time>
+  </li>
+</ol>
+</div>
+<figcaption class="example-caption example-caption-do"><span>The clock time, and each event says what it was. You can read the history without opening anything.</span></figcaption>
+</figure>
+</div>
+
+## Accessibility
+
+An ordered list
+: The timeline is an `<ol>`, so a screen reader says how many events there are.
+
+Real times
+: Put each time in a `<time>` with a full `datetime`, inside a [`<u-relative-time>`](/components/time/). The date and hour are there even when only the hour shows, in the reader's own time zone. Day headings use `format="day"`.
+
+Name it once
+: Give the avatar beside a note `aria-hidden="true"`, since the author's name follows it.
+
+## Rules
+
+One line per event
+: Say what happened in one line, like “Quote sent to Ana Reyes”. Put who it went to or how in a muted detail line, and show a note in full.
+
+No dots or coloured edges
+: Avatars are the only round thing on a timeline, and no event gets a coloured edge.
+
+Colour only from a status
+: An event gets colour only when it changes a status. Payments, texts and notes stay ink.

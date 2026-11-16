@@ -1,0 +1,22 @@
+<%# locals: (prefix:, live:) -%>
+<form method="dialog">
+<header>
+<<%= live ? "h2" : "p" %> id="<%= prefix %>-title">Change due date</<%= live ? "h2" : "p" %>>
+<button type="submit" value="cancel" class="u-btn-close" aria-label="Close" formnovalidate></button>
+</header>
+<div class="u-card-content">
+<div class="u-field">
+<label for="<%= prefix %>-date">Due date</label>
+<input class="u-input u-text-data" id="<%= prefix %>-date" type="date" value="2026-11-18" required<%= " autofocus" if live %>>
+</div>
+<div class="u-field">
+<label for="<%= prefix %>-reason">Reason <span class="u-text-muted">(optional)</span></label>
+<textarea class="u-input" id="<%= prefix %>-reason" rows="3" aria-describedby="<%= prefix %>-reason-hint">Waiting on a part from the supplier.</textarea>
+<small id="<%= prefix %>-reason-hint">Ana sees this in her update text.</small>
+</div>
+</div>
+<div class="u-actions">
+<button type="submit" value="cancel" class="u-btn u-btn-outline" formnovalidate>Cancel</button>
+<button type="submit" value="save" class="u-btn u-btn-primary">Save date</button>
+</div>
+</form>

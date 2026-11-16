@@ -1,0 +1,89 @@
+- name: <u-combobox>
+  wraps: The `role="combobox"` `u-input` and its `<ul role="listbox">`, inside a `u-field`.
+  adds: Filtering as you type, the keyboard and the floating list. Fires `combobox:action`.
+  without: The field still takes text, and the server matches it on submit.
+  page: /components/combobox/
+
+- name: <u-input-colour>
+  wraps: An `<input type="color">` with a `list` pointing at a `<datalist>` of presets, inside a `u-field`.
+  adds: Builds the hex code field, the caret and the preset menu, and keeps them in step with the colour.
+  without: The browser's own colour input picks a colour, and Chrome and Edge show the presets as suggestions.
+  page: /components/input-colour/
+
+- name: <u-input-password>
+  wraps: A password `u-input` and its show `<button>`.
+  adds: The show password button.
+  without: The field still takes the password, hidden.
+  page: /components/input-password/
+
+- name: <u-character-count>
+  wraps: A `u-field` with `maxlength`, ending in a `<small>` hint.
+  adds: The live "47 of 500" count, in the field's last hint. `data-count` words it, with `{count}` and `{max}` for the numbers.
+  without: The hint says "Up to 500 characters" and the browser stops typing at the limit.
+  page: /components/text-field/#text-area
+
+- name: <u-input-code>
+  wraps: A one-time code `u-input` with a `maxlength`.
+  adds: One box per digit, built from the `maxlength`. Keeps only digits, and sends the form after the last digit when the element has `submit`.
+  without: The code goes in a plain field in mono.
+  page: /components/input-code/
+
+- name: <u-input-phone>
+  wraps: The `u-field` holding a `type="tel"` `u-input`, with an optional `u-error` and hidden input.
+  adds: Groups the number as you type, like (416) 555-0142, and checks its length on blur and submit, with the `u-error` as the browser's validation message. `region` sets the home country.
+  without: The field still takes the number as typed.
+  page: /components/input-phone/
+
+- name: <u-toggle>
+  wraps: One `button.u-toggle` with `aria-pressed`.
+  adds: Flips `aria-pressed`. Fires `toggle:change`.
+  without: Use the `<label>` and checkbox version, which needs no script.
+  page: /components/toggle/
+
+- name: <u-dropzone>
+  wraps: The `u-field` holding a `u-dropzone`, the `u-list` for the files and the row `<template>`.
+  adds: The drag highlight and a row for each file, cleared when the form resets. Fires `dropzone:change`.
+  without: The file input still takes files.
+  page: /components/dropzone/
+
+- name: <u-sidebar>
+  wraps: Nothing. It is the sidebar column.
+  adds: Makes the collapse button fold the column to an icon rail and back.
+  without: The column stays the way the server rendered it, open or collapsed.
+  page: /components/sidebar/
+
+- name: <u-chart>
+  wraps: A `<table>` of data, with `type` for the kind of chart.
+  adds: Draws the chart, with hover, a shimmer while it loads, and the empty and error lines. A bar or line chart is one Tab stop whose arrow keys step through the tooltips. A line chart with two value columns gets a legend.
+  without: The table shows as a plain table of the same numbers.
+  page: /components/chart/
+
+- name: <u-relative-time>
+  wraps: A `<time datetime="…">` whose text is the server's formatting of the moment.
+  adds: Rewrites the text in the reader's own time zone and language, in the `format` you pick. Puts the full date and zone in the `title`. With `zone`, adds the reader's zone when it differs from the shop's. A `datetime` with only a date stays that day in every zone.
+  without: The server's text stays, in the server's time zone.
+  page: /components/time/
+
+- name: <u-toast>
+  wraps: "Nothing at first. It's the page's one fixed spot for toasts, with `role=\"status\"` and `aria-live=\"polite\"`. Each toast is a `<div>` inside it: a `<p>` saying what happened, an optional action `<button>`, then a `u-btn-close`."
+  adds: Shows one toast at a time, replacing the old one. Dismisses it after 5 seconds, or 10 with an action, and pauses while it's hovered or focused. `data-timeout` changes the time in milliseconds, and `0` keeps it until dismissed. The action or the `u-btn-close` removes it and sends focus back to where it was.
+  without: Toasts stay until the next page load.
+  page: /components/toast/
+
+- name: <u-data-grid>
+  wraps: "A `u-table` and its bars. Optional: checkboxes in the first column with a bulk `<form>` holding an `<output>`, cells holding a `<template>` with a one-field `<form>` an empty `u-menu` for columns, and `data-keep-narrow` on the headers to keep on a phone."
+  adds: "Select all and its half-checked state, the count in the `<output>`, editing in place from a button around each editable value, saving at once with Undo in a toast, a column menu built from the headers, and `data-keep-narrow` and the column's name copied onto each kept column's cells. Remembers columns per grid `id`. Fires `data-grid:select` and a cancelable `data-grid:change`."
+  without: The table, links and forms still work. The bulk bar swaps in by CSS, the bulk form still sends the ticked rows, and a narrow grid shows only the first column.
+  page: /components/data-grid/
+
+- name: <u-copy>
+  wraps: A button with `data-copy` (the text to copy) and `hidden`, optionally with a `data-copy-label` span for the words.
+  adds: Shows the button, copies the text on click, and reads `data-copied` for a moment, or `data-copy-failed`. A status message beside the button tells screen readers.
+  without: The button stays hidden. Show the text itself so people can select it.
+  page: /components/button/
+
+- name: <u-toggle-panels>
+  wraps: A hidden `u-fieldset` with a toggle group, followed by one `<section data-value="…">` per choice.
+  adds: Shows the toggle group and only the chosen panel, hides the panel headings, and remembers the choice for every set with the same `data-group`.
+  without: Every panel shows one after another, each under its own heading.
+  page: /components/toggle-group/

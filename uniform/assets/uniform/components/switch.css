@@ -1,0 +1,67 @@
+@layer uniform.components {
+.u-switch {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  column-gap: var(--u-space-2);
+  align-items: center;
+  min-height: var(--u-size-target);
+  font-size: var(--u-font-size-small);
+  color: var(--u-color-text-default);
+  cursor: pointer;
+}
+
+.u-switch > :not(input) { grid-column: 2; }
+
+.u-switch > input {
+  display: block;
+  width: 36px;
+  height: 20px;
+  margin: 0;
+  border: 0;
+  border-radius: var(--u-radius-pill);
+  background: var(--u-color-border-input);
+  appearance: none;
+  cursor: pointer;
+}
+
+.u-switch > input::before {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--u-radius-pill);
+  background: var(--u-color-bg-surface);
+  transform: translate(2px, 2px);
+}
+
+.u-switch > input:checked { background: var(--u-color-text-default); }
+
+.u-switch > input:checked::before { transform: translate(18px, 2px); }
+
+.u-switch-hint {
+  color: var(--u-color-text-muted);
+  line-height: var(--u-line-height-small);
+}
+
+.u-switch:has(> input:disabled) {
+  color: var(--u-color-border-input);
+  cursor: not-allowed;
+}
+
+.u-switch > input:disabled {
+  background: var(--u-color-divider);
+  cursor: not-allowed;
+}
+
+.u-switch > input:disabled::before { background: var(--u-color-border-input); }
+
+@media (forced-colors: active) {
+  .u-switch > input {
+    width: 16px;
+    height: 16px;
+    appearance: auto;
+  }
+
+  .u-switch > input::before { display: none; }
+}
+}

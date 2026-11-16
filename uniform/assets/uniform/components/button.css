@@ -1,0 +1,89 @@
+@layer uniform.components {
+.u-btn,
+.u-btn-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--u-space-2);
+  min-height: var(--u-size-control);
+  padding: 0 var(--u-space-4);
+  border: 1px solid transparent;
+  border-radius: var(--u-radius-pill);
+  background: transparent;
+  color: var(--u-color-text-default);
+  font: inherit;
+  font-size: var(--u-font-size-small);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.u-btn-lg {
+  min-height: 48px;
+  padding: 0 var(--u-space-6);
+  font-size: var(--u-font-size-body);
+}
+
+.u-btn-primary {
+  border-color: var(--u-color-text-default);
+  background: var(--u-color-text-default);
+  color: var(--u-color-bg-surface);
+}
+
+.u-btn-outline {
+  border-color: var(--u-color-text-default);
+  background: transparent;
+  color: var(--u-color-text-default);
+}
+
+.u-btn-outline:hover { background: var(--u-color-divider); }
+
+.u-btn-danger {
+  background: var(--u-color-danger);
+  border-color: var(--u-color-danger);
+  color: var(--u-color-text-on-danger);
+}
+
+.u-btn-ghost,
+.u-btn-close {
+  border-color: transparent;
+  background: transparent;
+  color: var(--u-color-text-default);
+}
+
+.u-btn-ghost:hover,
+.u-btn-close:hover { background: var(--u-color-divider); }
+
+.u-btn-icon,
+.u-btn-close {
+  width: var(--u-size-control);
+  padding: 0;
+}
+
+.u-btn:not(.u-btn-icon) > .u-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.u-btn-icon > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.u-btn-close::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: currentcolor;
+  mask: url("./../icons/x.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-btn:disabled,
+.u-btn[aria-disabled="true"] {
+  background: transparent;
+  border-color: var(--u-color-border-input);
+  color: var(--u-color-border-input);
+  cursor: not-allowed;
+}
+}

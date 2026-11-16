@@ -1,0 +1,37 @@
+@layer uniform.components {
+.u-list {
+  margin: 0;
+  padding: 0;
+  color: var(--u-color-text-default);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+  list-style: none;
+}
+
+.u-list > * + * { border-top: 1px solid var(--u-color-divider); }
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) {
+  display: flex;
+  align-items: center;
+  gap: var(--u-space-4);
+  min-height: var(--u-size-row);
+  padding: var(--u-space-2) var(--u-space-4);
+}
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > * {
+  flex: 0 1 auto;
+  margin: 0;
+}
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(.u-meta, .u-btn, .u-btn-close, .u-actions, .u-badge, button):not(:is(.u-meta, .u-btn, .u-btn-close, .u-actions, .u-badge, button) ~ *) { margin-inline-start: auto; }
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(div, span, p) > * { margin: 0; }
+
+.u-list-item-detail {
+  color: var(--u-color-text-muted);
+  font-size: var(--u-font-size-caption);
+  line-height: var(--u-line-height-caption);
+}
+
+.u-card > .u-list :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: var(--u-space-6); }
+}

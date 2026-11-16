@@ -1,0 +1,52 @@
+<div class="examples u-grid u-gap-6">
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-dont">Don’t</p>
+<div class="frame frame-phone" style="height: 260px">
+<div class="u-app-shell">
+<header>
+<span class="u-wordmark u-wordmark-serif">Workbench</span>
+<div class="u-actions">
+<button type="button" class="u-btn u-btn-primary"><%= raw render("icon", name: "plus", small: true).strip %>New job</button>
+<button type="button" class="u-btn u-btn-ghost"><%= raw render("icon", name: "menu", small: true).strip %>Menu</button>
+</div>
+</header>
+<main>
+<div class="u-container">
+<header class="u-page-header">
+<hgroup>
+<h3>Jobs</h3>
+<p><span class="u-text-data">38</span> open, <span class="u-text-data">6</span> due this week</p>
+</hgroup>
+</header>
+</div>
+</main>
+</div>
+</div>
+<figcaption class="example-caption example-caption-dont"><span>New job moved up into the bar. Now the bar changes from page to page, and the page header has lost the one action it was for.</span></figcaption>
+</figure>
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-do">Do</p>
+<div class="frame frame-phone" style="height: 260px">
+<div class="u-app-shell">
+<header>
+<span class="u-wordmark u-wordmark-serif">Workbench</span>
+<button type="button" class="u-btn u-btn-ghost">Menu</button>
+</header>
+<main>
+<div class="u-container">
+<header class="u-page-header">
+<hgroup>
+<h3>Jobs</h3>
+<p><span class="u-text-data">38</span> open, <span class="u-text-data">6</span> due this week</p>
+</hgroup>
+<div class="u-actions">
+<button type="button" class="u-btn u-btn-primary"><%= raw render("icon", name: "plus", small: true).strip %>New job</button>
+</div>
+</header>
+</div>
+</main>
+</div>
+</div>
+<figcaption class="example-caption example-caption-do"><span>The bar holds the app name and Menu, the same on every page. New job stays in the page header, where it sits on a computer too.</span></figcaption>
+</figure>
+</div>

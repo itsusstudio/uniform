@@ -1,0 +1,12 @@
+@layer uniform.components {
+.u-meta {
+  color: var(--u-color-text-muted);
+  font-family: var(--u-font-mono);
+  font-size: var(--u-font-size-small);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--u-line-height-small);
+  white-space: nowrap;
+}
+
+:where(p).u-meta { margin: 0; }
+}

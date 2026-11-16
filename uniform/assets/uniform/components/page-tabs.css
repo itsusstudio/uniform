@@ -1,0 +1,38 @@
+@layer uniform.components {
+.u-page-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u-space-1);
+}
+
+.u-page-tabs > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--u-size-target);
+  padding-inline: var(--u-space-4);
+  border-radius: var(--u-radius-pill);
+  font-size: var(--u-font-size-small);
+  font-weight: 400;
+  color: var(--u-color-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.u-page-tabs > a:hover {
+  color: var(--u-color-text-default);
+  text-decoration: underline;
+}
+
+.u-page-tabs > a[aria-current="page"] {
+  background: var(--u-color-divider);
+  color: var(--u-color-text-default);
+  text-decoration: none;
+}
+
+@media (forced-colors: active) {
+  .u-page-tabs > a[aria-current="page"]:not(:focus-visible) {
+    outline: 1px solid CanvasText;
+    outline-offset: -1px;
+  }
+}
+}

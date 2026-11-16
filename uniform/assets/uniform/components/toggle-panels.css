@@ -1,0 +1,16 @@
+@layer uniform.components {
+u-toggle-panels > .u-fieldset {
+  justify-items: start;
+  margin-block-end: var(--u-space-4);
+}
+
+u-toggle-panels > [hidden]:not([hidden="until-found" i]) { display: none; }
+
+u-toggle-panels > [data-value]:not([hidden]) ~ [data-value]:not([hidden]) { margin-block-start: var(--u-space-6); }
+
+u-toggle-panels > [data-value] > :is(h2, h3, h4):first-child {
+  margin-block: 0 var(--u-space-2);
+  font-size: var(--u-font-size-body);
+  font-weight: 500;
+}
+}

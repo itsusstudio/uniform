@@ -1,0 +1,19 @@
+{{ sender }}
+
+{{ content }}
+
+--
+{{ address_name }}
+{{ address_street }}
+{{ address_city }}
+
+{{ if terms_url }}
+Terms: {{ terms_url }}
+Privacy: {{ privacy_url }}
+{{ end }}
+{{ if unsubscribe_url }}
+Unsubscribe: {{ unsubscribe_url }}
+{{ end }}
+{{ if sent_with }}
+Powered by {{ sent_with }}: {{ sent_with_url }}
+{{ end }}

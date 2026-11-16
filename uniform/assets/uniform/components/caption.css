@@ -1,0 +1,15 @@
+@layer uniform.components {
+:where(figcaption) {
+  max-width: var(--u-max-width-prose);
+  color: var(--u-color-text-muted);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+:where(figcaption) > :where(strong:first-child) {
+  display: block;
+  margin-bottom: var(--u-space-2);
+  color: var(--u-color-text-default);
+  font-weight: 500;
+}
+}

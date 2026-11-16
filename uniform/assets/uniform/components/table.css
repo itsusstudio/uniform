@@ -1,0 +1,189 @@
+@layer uniform.components {
+.u-table {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Inset so a card's overflow: clip doesn't cut the ring off. */
+.u-table:focus-visible { outline-offset: -2px; }
+
+:is(.u-table, u-chart) > table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  color: var(--u-color-text-default);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+:is(.u-table, u-chart) > table :where(th, td) {
+  padding: var(--u-space-2) var(--u-space-4);
+  text-align: start;
+  vertical-align: middle;
+}
+
+:is(.u-table, u-chart) > table tbody :where(th, td) { height: var(--u-size-row); }
+
+:is(.u-table, u-chart) > table thead th {
+  border-bottom: 1px solid var(--u-color-text-default);
+  color: var(--u-color-text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+:is(.u-table, u-chart) > table tbody tr + tr > :where(th, td) { border-top: 1px solid var(--u-color-divider); }
+
+:is(.u-table, u-chart) > table tbody th { font-weight: 500; }
+
+:is(.u-table, u-chart) > table :where(a:not(.u-btn)) { text-decoration: none; }
+
+:is(.u-table, u-chart) > table tbody tr:hover :where(a:not(.u-btn)),
+:is(.u-table, u-chart) > table :where(a:not(.u-btn)):focus-visible { text-decoration: underline; }
+
+.u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) {
+  position: relative;
+  cursor: pointer;
+}
+
+.u-table > table tbody tr > :first-child > a:not(.u-btn)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.u-table > table tbody tr:where(:has(> :first-child > a:not(.u-btn)):hover) > * { background: var(--u-color-divider); }
+
+.u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) :is(a, button, input, label, select, summary):not(tr > :first-child > a) {
+  position: relative;
+  z-index: 1;
+}
+
+:is(.u-table, u-chart) > table .u-table-num {
+  font-family: var(--u-font-mono);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+:is(.u-table, u-chart) > table thead .u-table-num { font-family: var(--u-font-sans); }
+
+.u-table-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--u-space-1);
+  min-height: var(--u-size-target);
+  margin-block: calc(-1 * var(--u-space-1));
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.u-table-sort:hover,
+[aria-sort] > .u-table-sort { color: var(--u-color-text-default); }
+
+.u-table-sort::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url("./../icons/arrow-down-up.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+[aria-sort="ascending"] .u-table-sort::after { mask-image: url("./../icons/chevron-up.svg"); }
+
+[aria-sort="descending"] .u-table-sort::after { mask-image: url("./../icons/chevron-down.svg"); }
+
+.u-table-num > .u-table-sort { flex-direction: row-reverse; }
+
+.u-card > .u-table > table :is(th, td):first-child { padding-inline-start: var(--u-space-6); }
+
+:is(.u-table, u-chart) > table :is(th, td):has(> .u-checkbox:only-child) {
+  width: 16px;
+  padding-inline-end: 0;
+}
+
+:is(.u-table, u-chart) > table :is(th, td) > .u-checkbox:only-child {
+  grid-template-columns: 16px;
+  column-gap: 0;
+}
+
+.u-card > .u-table > table :is(th, td):last-child { padding-inline-end: var(--u-space-6); }
+
+.u-table-sticky {
+  max-height: 80dvh;
+  overflow: auto;
+  /* The sticky header row: sort button, cell padding and the rule under it, so a focused row is never under it. */
+  scroll-padding-block-start: calc(var(--u-size-target) + var(--u-space-2) + 1px);
+}
+
+.u-table-sticky > table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.u-table-sticky > table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--u-color-bg-surface);
+}
+
+.u-table-controls {
+  container: u-table-controls / inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--u-space-4);
+}
+
+.u-table-controls[hidden],
+.u-table-controls > [hidden] { display: none; }
+
+.u-table-controls > form {
+  display: flex;
+  grid-area: 1 / 1;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--u-space-2);
+  margin: 0;
+}
+
+.u-table-controls > form > .u-field { flex: none; }
+
+.u-table-controls > form > :is(input[type="search"], :has(input[type="search"])) {
+  flex: 1 1 10rem;
+  max-width: 32rem;
+}
+
+.u-table-controls > form > select.u-input { width: auto; }
+
+@container u-table-controls (max-width: 479px) {
+  .u-table-controls > form > :is(input[type="search"], :has(input[type="search"])) {
+    flex: 1 0 100%;
+    max-width: none;
+  }
+}
+
+.u-table-controls > form > button[popovertarget]:last-child { margin-inline-start: auto; }
+
+.u-table-controls > form + form {
+  align-items: center;
+  align-self: start;
+  justify-self: end;
+}
+
+.u-table-controls > ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--u-space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+}

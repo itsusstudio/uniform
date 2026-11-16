@@ -1,0 +1,29 @@
+<%# locals: (id:, tag:) -%>
+<div class="u-auth-shell">
+  <header>
+    <a class="u-wordmark u-wordmark-serif" href="/">Workbench</a>
+    <p class="u-text-article-title">Every repair, from the counter to pickup.</p>
+  </header>
+  <<%= tag %>>
+    <h1 class="u-text-page-title">Create your account</h1>
+    <form class="u-form" action="/sign-up" method="post">
+      <div class="u-field">
+        <label for="<%= id %>-name">Your name</label>
+        <input class="u-input" id="<%= id %>-name" name="name" autocomplete="name" required placeholder=" ">
+      </div>
+      <div class="u-field">
+        <label for="<%= id %>-shop">Shop name</label>
+        <input class="u-input" id="<%= id %>-shop" name="shop_name" autocomplete="organization" required placeholder=" ">
+      </div>
+      <div class="u-field">
+        <label for="<%= id %>-email">Email address</label>
+        <input class="u-input" id="<%= id %>-email" name="email_address" type="email" autocomplete="username" autocapitalize="off" spellcheck="false" required placeholder=" ">
+      </div>
+      <button type="submit" class="u-btn u-btn-primary">Email me a code</button>
+    </form>
+    <p class="u-text-small">Already have an account? <a href="/sign-in">Sign in</a></p>
+  </<%= tag %>>
+  <footer>
+    <p><a href="/terms">Terms</a> · <a href="/privacy">Privacy</a></p>
+  </footer>
+</div>

@@ -1,0 +1,102 @@
+<%# locals: (state:, prefix:) -%>
+<%
+  m = ->(value) { %(<span class="u-text-data">#{value}</span>) }
+  st = ->(tone, word) { %(Status changed to <span class="u-badge u-badge-#{tone}">#{word}</span>) }
+  field_id = prefix.to_s.empty? ? "note" : "#{prefix}-note"
+  days = {
+    full: [
+      { label: "Today", events: [
+        { time: "4:10pm", at: "2026-11-12T16:10:00-05:00", text: "Picked up by Ana Reyes" },
+        { time: "4:08pm", at: "2026-11-12T16:08:00-05:00", text: "Paid #{m["$85.00"]}, Visa ending #{m["4242"]}", detail: "Taken by Dana Whitfield" },
+        { time: "1:32pm", at: "2026-11-12T13:32:00-05:00", text: "Text sent: your ring is ready", detail: "To #{m["(416) 555-0148"]}" },
+        { time: "1:30pm", at: "2026-11-12T13:30:00-05:00", text: st["success", "Ready for pickup"] },
+        { time: "1:25pm", at: "2026-11-12T13:25:00-05:00", initials: "DW", author: "Dana Whitfield", text: [
+          "Sized up to a 7 and the engraving inside the band is untouched. I added the new metal at the back of the shank, well away from the lettering.",
+          "Checked all four prongs while it was on the bench and they're tight. Ana wants it for Saturday, so it can go out today."
+        ] }
+      ] },
+      { label: "Yesterday", events: [
+        { time: "2:15pm", at: "2026-11-11T14:15:00-05:00", text: st["info", "On the bench"] },
+        { time: "2:12pm", at: "2026-11-11T14:12:00-05:00", text: "Ana approved the quote, #{m["$85.00"]}", detail: "From the link in her text" },
+        { time: "10:05am", at: "2026-11-11T10:05:00-05:00", text: "Quote sent to Ana Reyes", detail: "By text to #{m["(416) 555-0148"]}" }
+      ] },
+      { label: "Nov 10", mono: true, events: [
+        { time: "3:40pm", at: "2026-11-10T15:40:00-05:00", initials: "TO", author: "Tomás Ortega", text: "Engraving inside the band reads “A &amp; M 2019”. Keep it." },
+        { time: "3:38pm", at: "2026-11-10T15:38:00-05:00", text: st["warning", "Quote to approve"] },
+        { time: "3:35pm", at: "2026-11-10T15:35:00-05:00", text: "Taken in by Tomás Ortega", detail: "Ring resize, size 6 to 7, due #{m["Nov 14"]}" }
+      ] }
+    ],
+    long: [
+      { label: "Today", events: [
+        { time: "10:20am", at: "2026-11-12T10:20:00-05:00", initials: "DW", author: "Dana Whitfield", text: "Called the supplier. The clasp ships Friday, so we'll still make #{m["Nov 15"]}." }
+      ] },
+      { label: "Yesterday", events: [
+        { time: "4:45pm", at: "2026-11-11T16:45:00-05:00", text: "Text sent: new due date", detail: "To #{m["(647) 555-0193"]}" },
+        { time: "4:40pm", at: "2026-11-11T16:40:00-05:00", text: "Due date changed to #{m["Nov 15"]}", detail: "Was #{m["Nov 13"]}" }
+      ] }
+    ],
+    older: [
+      { label: "Nov 10", mono: true, events: [
+        { time: "10:40am", at: "2026-11-10T10:40:00-05:00", text: "Text sent: we're waiting on a part", detail: "To #{m["(647) 555-0193"]}" },
+        { time: "10:30am", at: "2026-11-10T10:30:00-05:00", text: st["warning", "Waiting on parts"] },
+        { time: "10:25am", at: "2026-11-10T10:25:00-05:00", initials: "DW", author: "Dana Whitfield", text: "Ordered a new clasp. The supplier says 3 to 5 days." }
+      ] },
+      { label: "Nov 7", mono: true, events: [
+        { time: "5:12pm", at: "2026-11-07T17:12:00-05:00", text: "Marcus approved the quote, #{m["$40.00"]}" },
+        { time: "2:44pm", at: "2026-11-07T14:44:00-05:00", text: "Text sent: we found a worn clasp", detail: "To #{m["(647) 555-0193"]}" },
+        { time: "2:41pm", at: "2026-11-07T14:41:00-05:00", text: "Quote sent to Marcus Lee", detail: "New clasp added, #{m["$40.00"]} in all" },
+        { time: "2:30pm", at: "2026-11-07T14:30:00-05:00", initials: "TO", author: "Tomás Ortega", text: "Link soldered. The clasp spring is worn and won't hold, so it needs a new clasp." }
+      ] },
+      { label: "Nov 6", mono: true, events: [
+        { time: "10:15am", at: "2026-11-06T10:15:00-05:00", text: st["info", "On the bench"] },
+        { time: "9:48am", at: "2026-11-06T09:48:00-05:00", text: "Marcus approved the quote, #{m["$30.00"]}" }
+      ] },
+      { label: "Nov 5", mono: true, events: [
+        { time: "11:20am", at: "2026-11-05T11:20:00-05:00", text: "Quote sent to Marcus Lee", detail: "By text to #{m["(647) 555-0193"]}" },
+        { time: "11:05am", at: "2026-11-05T11:05:00-05:00", text: st["warning", "Quote to approve"] },
+        { time: "11:02am", at: "2026-11-05T11:02:00-05:00", text: "Taken in by Dana Whitfield", detail: "Chain repair, broken link, due #{m["Nov 13"]}" }
+      ] }
+    ]
+  }
+  shown = days[state] || []
+  older_count = state == :long ? days[:older].sum { |day| day[:events].size } : 0
+-%>
+<section class="u-stack u-gap-6">
+  <h2 class="u-text-heading">History</h2>
+  <div>
+    <form class="u-form" method="post" action="/jobs/<%= state == :long ? "1039" : "1042" %>/notes">
+      <div class="u-field">
+        <label for="<%= field_id %>">Add a note</label>
+        <textarea class="u-input" id="<%= field_id %>" name="body" rows="3" aria-describedby="<%= field_id %>-hint"></textarea>
+        <small id="<%= field_id %>-hint">Only people in your shop see notes. Customers never do.</small>
+      </div>
+      <div class="u-actions">
+        <button type="submit" class="u-btn u-btn-primary">Post note</button>
+      </div>
+    </form>
+  </div>
+<% if state == :empty -%>
+  <hgroup>
+    <h3>No history yet</h3>
+    <p>Quotes, texts, payments and status changes show up here as they happen, newest first.</p>
+  </hgroup>
+<% else -%>
+  <div>
+    <div class="u-stack u-gap-12">
+<% shown.each do |day| -%>
+      <%= raw render("examples/timeline_day", day: day).strip.gsub("\n", "\n      ") %>
+<% end -%>
+<% if state == :long -%>
+      <details>
+        <summary>Show <%= older_count %> older events</summary>
+        <div class="u-stack u-gap-12">
+<% days[:older].each do |day| -%>
+          <%= raw render("examples/timeline_day", day: day).strip.gsub("\n", "\n          ") %>
+<% end -%>
+        </div>
+      </details>
+<% end -%>
+    </div>
+  </div>
+<% end -%>
+</section>

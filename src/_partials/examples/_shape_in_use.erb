@@ -1,0 +1,51 @@
+<div class="annotated">
+<div class="examples u-stack u-gap-12">
+
+<figure class="example">
+<div class="example-frame example-tagged">
+<span class="example-tag">App</span>
+<div class="shape-scene">
+<div class="u-card" data-label="card · 8px corners, border, no shadow" data-label-corner="below">
+<ul class="u-list">
+<li><span class="u-text-data">#1042</span><span>Ana Reyes</span><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="More actions"><%= render "icon", name: "ellipsis", small: false %></button></li>
+<li><span class="u-text-data">#1039</span><span>Sam Okafor</span><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="More actions"><%= render "icon", name: "ellipsis", small: false %></button></li>
+<li><span class="u-text-data">#1036</span><span>Lee Martin</span><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="More actions"><%= render "icon", name: "ellipsis", small: false %></button></li>
+</ul>
+</div>
+<div class="u-menu shape-menu" data-label="floats · border + --u-shadow-float" data-label-corner="below">
+<button type="button">Mark ready</button>
+<button type="button">Print ticket</button>
+<button type="button" class="u-menu-item-danger">Delete job</button>
+</div>
+</div>
+</div>
+<figcaption class="example-caption"><span>A menu open over a list. The list rests on the page in a card, with 8px corners, a border and no shadow. The menu floats, so it keeps its square corners and gains the one soft shadow. The “…” buttons are ghost pills: no edge until you hover, because you press them.</span></figcaption>
+</figure>
+
+<figure class="example">
+<div class="example-frame example-tagged shape-dialog-frame">
+<div class="shape-backdrop u-stack u-gap-6" aria-hidden="true">
+<div class="u-stack u-gap-2">
+<p class="u-text-page-title">Job #1042</p>
+<p class="u-text-small u-text-muted">Ana Reyes · ring resize, size 6 to 7</p>
+</div>
+<div class="u-card">
+<ul class="u-list">
+<li><span>Status</span><span>On the bench</span><span class="u-meta">Nov 12</span></li>
+<li><span>Quote</span><span class="u-text-data">$85.00</span><span class="u-badge u-badge-success">Approved</span></li>
+<li><span>Due</span><span class="u-text-data">2026-11-14</span><span class="u-meta">2 days</span></li>
+</ul>
+</div>
+</div>
+<div class="shape-dim" data-label="--u-color-backdrop" data-label-corner="top-left">
+<div class="u-dialog shape-dialog" data-label="floats · border + --u-shadow-float" data-label-corner="below">
+<%= render "examples/dialog_delete", prefix: "shape-dialog", live: false %>
+</div>
+</div>
+<span class="example-tag">App</span>
+</div>
+<figcaption class="example-caption"><span>A dialog. The page behind dims under the ink backdrop, and the dialog floats above it with the same border and shadow as a menu.</span></figcaption>
+</figure>
+
+</div>
+</div>

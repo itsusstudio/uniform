@@ -1,0 +1,74 @@
+@layer uniform.components {
+.u-checkbox {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: var(--u-space-2);
+  align-items: center;
+  min-height: var(--u-size-target);
+  font-size: var(--u-font-size-small);
+  color: var(--u-color-text-default);
+  cursor: pointer;
+}
+
+.u-checkbox > :not(input) { grid-column: 2; }
+
+.u-checkbox > input {
+  display: grid;
+  place-content: center;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid var(--u-color-border-input);
+  background: var(--u-color-bg-surface);
+  appearance: none;
+  cursor: pointer;
+}
+
+.u-checkbox > input::before {
+  content: "";
+  width: 4px;
+  height: 8px;
+  border: solid var(--u-color-bg-surface);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-1px) rotate(45deg);
+  visibility: hidden;
+}
+
+.u-checkbox > input:is(:checked, :indeterminate) {
+  border-color: var(--u-color-text-default);
+  background: var(--u-color-text-default);
+}
+
+.u-checkbox > input:checked::before { visibility: visible; }
+
+.u-checkbox > input:is([aria-invalid="true"], :user-invalid) { border-color: var(--u-color-danger); }
+
+.u-checkbox > input:indeterminate::before {
+  width: 8px;
+  height: 2px;
+  border: 0;
+  background: var(--u-color-bg-surface);
+  transform: none;
+  visibility: visible;
+}
+
+.u-checkbox-hint {
+  color: var(--u-color-text-muted);
+  line-height: var(--u-line-height-small);
+}
+
+.u-checkbox:has(> input:disabled) {
+  color: var(--u-color-border-input);
+  cursor: not-allowed;
+}
+
+.u-checkbox > input:disabled {
+  border-color: var(--u-color-border-input);
+  background: var(--u-color-divider);
+  cursor: not-allowed;
+}
+
+@media (forced-colors: active) {
+  .u-checkbox > input:indeterminate::before { background: CanvasText; }
+}
+}

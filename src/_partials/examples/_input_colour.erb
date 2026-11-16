@@ -1,0 +1,23 @@
+<%# locals: (id:, value:) -%>
+<% disabled_value = defined?(disabled) && disabled -%>
+<% open_value = defined?(open_picker) && open_picker -%>
+<% plain_value = defined?(plain) && plain -%>
+<% hint_value = (defined?(hint_text) && hint_text) || "Shows on job tickets and the jobs list." -%>
+<% presets = [["Red", "#b83a2e"], ["Orange", "#d9782d"], ["Amber", "#e0a526"], ["Green", "#46a35c"], ["Teal", "#2f9a95"], ["Sky", "#3d8fd1"], ["Blue", "#3e5fc4"], ["Violet", "#7356c2"], ["Plum", "#9c4a8f"], ["Pink", "#d9628a"], ["Brown", "#8b5e3c"], ["Slate", "#5c6772"]] -%>
+<div class="u-field" id="<%= id %>-field">
+  <label for="<%= id %>">Label colour</label>
+<% unless plain_value -%>
+  <u-input-colour data-presets-label="Preset colours" data-custom-label="Custom…"<% if open_value %> data-open<% end %>>
+<% end -%>
+    <input type="color" id="<%= id %>" name="label[colour]" value="<%= value %>" list="<%= id %>-presets" aria-describedby="<%= id %>-hint" aria-errormessage="<%= id %>-error"<% if disabled_value %> disabled<% end %>>
+    <datalist id="<%= id %>-presets">
+<% presets.each do |name, hex| -%>
+      <option value="<%= hex %>" label="<%= name %>"></option>
+<% end -%>
+    </datalist>
+<% unless plain_value -%>
+  </u-input-colour>
+<% end -%>
+  <small id="<%= id %>-hint"><%= hint_value %></small>
+  <p class="u-error" id="<%= id %>-error" hidden>Type a hex code like #E0A526, or pick a preset.</p>
+</div>

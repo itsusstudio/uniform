@@ -1,0 +1,87 @@
+---
+permalink: /llms.txt
+template_engine: erb
+layout: none
+---
+<%
+  nav_groups = site.data.navigation.select(&:items)
+  titles = nav_groups.flat_map(&:items).to_h { |item| [item.url, item.title] }
+  titles["/writing/"] = "Writing"
+  repeated_titles = titles.values.tally.select { |_, count| count > 1 }.keys + nav_groups.map(&:label)
+  full_titles = nav_groups.flat_map { |group| group.items.map { |item| [item.url, repeated_titles.include?(item.title) ? "#{item.title} (#{group.label})" : titles[item.url]] } }.to_h
+  resources = site.resources.to_h { |resource| [resource.relative_url, resource] }
+  rules_by_id = site.data.rules.to_h { |rule| [rule.id, rule] }
+  one_line = ->(s) { s.to_s.strip.gsub(/\s*\n\s*/, " ") }
+  first_paragraph = ->(resource) {
+    body = resource.respond_to?(:untransformed_content) ? resource.untransformed_content.to_s : resource.content.to_s
+    body.split(/\n\s*\n/).map(&:strip).find { |block| !block.empty? && !block.start_with?("<", "#", "{", "|", "`", "-") }
+  }
+  summary_for = ->(url) {
+    resource = resources[url]
+    next "" unless resource
+    one_line.(resource.data.summary || first_paragraph.(resource))
+  }
+  link_for = ->(url) {
+    page_url, anchor = url.split("#", 2)
+    title = (anchor && rules_by_id[anchor]&.name) || full_titles[page_url]
+    "[#{title}](#{url})"
+  }
+-%>
+# Uniform
+
+> it's us studio's design system: plain CSS and one small script, with docs that explain every rule. The docs are written for people. This file routes agents to the pages that answer each task.
+
+Copy the `uniform/` folder into a project, link `uniform/uniform.css` and load `uniform/uniform.js`, as [Install](/start/install/) shows. The script adds behaviour to a few components, and every component still works without it. Classes start with `u-`, and every colour, size and space is a `--u-*` token.
+
+## Read first
+
+<% ["/", "/start/rules/", "/writing/"].each do |url| -%>
+- <%= raw link_for.(url) %>: <%= raw summary_for.(url) %>
+<% end -%>
+
+## Designing something new
+
+When nothing in Uniform shows how to build it, read the rules for its section first and name the ones that apply. Design inside them. Never add a size, colour or weight that a rule doesn't name. Check [Reference](/start/reference/) for an existing piece first, and follow [No one-offs](/start/rules/#no-one-offs).
+
+## Task routes
+
+Read the pages for a task in the order listed.
+
+<% site.data.task_routes.each do |route| -%>
+- <%= raw route.title %>: <%= raw route.pages.map { |url| link_for.(url) }.join(", ") %>
+<% end -%>
+
+## Review checklist
+
+Run this before calling a screen done. Take a screenshot at desktop width and at 390px, in light and dark, then check every rule below that has a Check line. Copy is checked against the studio's AI patterns checklist.
+
+## All rules
+
+Every rule, grouped by the page it lives on. Rules for copy live in the writing skill, summarized on [Writing style](/writing/).
+<% site.data.rules.group_by(&:home).each do |rules_home, rules| -%>
+
+### [<%= raw full_titles[rules_home] || titles[rules_home] %>](<%= rules_home %>)
+
+<% rules.each do |rule| -%>
+- [<%= raw rule.name %>](<%= rules_home %>#<%= rule.id %>): <%= raw one_line.(rule.summary) %><% if rule.check %> Check: <%= raw one_line.(rule.check) %><% end %>
+<% end -%>
+<% end -%>
+<% nav_groups.each do |group| -%>
+
+## <%= raw group.label %>
+
+<% group.items.reject { |item| item.url == "/llms.txt" }.each do |item| -%>
+- [<%= raw item.title %>](<%= item.url %>): <%= raw summary_for.(item.url) %>
+<% end -%>
+<% end -%>
+
+## Class and element index
+
+Every class and custom element, with the page it lives on.
+
+<% site.data.classes.each do |entry| -%>
+- `<%= raw entry.name %>`: [<%= raw full_titles[entry.page] || entry.page %>](<%= entry.page %>)
+<% end -%>
+<% site.data.elements.each do |element| -%>
+- `<%= raw element.name %>`: [<%= raw full_titles[element.page.split("#").first] || element.page %>](<%= element.page %>)
+<% end -%>

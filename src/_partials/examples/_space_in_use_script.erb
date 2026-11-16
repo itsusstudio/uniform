@@ -1,0 +1,13 @@
+<script>
+document.addEventListener("click", (event) => {
+  const chip = event.target.closest("[data-step-filter]")
+  if (!chip) return
+  const filter = chip.closest(".step-filter")
+  const pressed = chip.getAttribute("aria-pressed") === "true"
+  const show = pressed ? "all" : chip.dataset.stepFilter
+  filter.dataset.show = show
+  filter.querySelectorAll("[data-step-filter]").forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.stepFilter === show))
+  })
+})
+</script>

@@ -1,0 +1,64 @@
+@layer uniform.components {
+.u-radio {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr);
+  column-gap: var(--u-space-2);
+  align-items: center;
+  min-height: var(--u-size-target);
+  font-size: var(--u-font-size-small);
+  color: var(--u-color-text-default);
+  cursor: pointer;
+}
+
+.u-radio > :not(input) { grid-column: 2; }
+
+.u-radio > input {
+  display: grid;
+  place-content: center;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid var(--u-color-border-input);
+  border-radius: var(--u-radius-pill);
+  background: var(--u-color-bg-surface);
+  appearance: none;
+  cursor: pointer;
+}
+
+.u-radio > input::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: var(--u-radius-pill);
+  background: var(--u-color-text-default);
+  visibility: hidden;
+}
+
+.u-radio > input:checked { border-color: var(--u-color-text-default); }
+
+.u-radio > input:checked::before { visibility: visible; }
+
+.u-radio > input:is([aria-invalid="true"], :user-invalid) { border-color: var(--u-color-danger); }
+
+.u-radio-hint {
+  color: var(--u-color-text-muted);
+  line-height: var(--u-line-height-small);
+}
+
+.u-radio:has(> input:disabled) {
+  color: var(--u-color-border-input);
+  cursor: not-allowed;
+}
+
+.u-radio > input:disabled {
+  border-color: var(--u-color-border-input);
+  background: var(--u-color-divider);
+  cursor: not-allowed;
+}
+
+.u-radio > input:disabled::before { background: var(--u-color-border-input); }
+
+@media (forced-colors: active) {
+  .u-radio > input::before { background: CanvasText; }
+}
+}

@@ -1,0 +1,15 @@
+<%# locals: (rules_home:, rules_section: nil) -%>
+<% rules_section_value = defined?(rules_section) && rules_section -%>
+<% inline = ->(s) { markdownify(s.to_s).strip.delete_prefix("<p>").delete_suffix("</p>") } -%>
+<dl>
+<% site.data.rules.select { |rule| rule.home == rules_home && (!rules_section_value || rule.section == rules_section_value) }.each do |rule| -%>
+<dt id="<%= rule.id %>"><%= rule.name %></dt>
+<dd><%= raw inline.(rule.body) %></dd>
+<% if rule["default"] -%>
+<dd class="u-text-muted">Default: <%= raw inline.(rule["default"]) %></dd>
+<% end -%>
+<% if rule.check -%>
+<dd>Check: <%= raw inline.(rule.check.sub(/\A[A-Z](?=[a-z ])/) { |letter| letter.downcase }) %></dd>
+<% end -%>
+<% end -%>
+</dl>

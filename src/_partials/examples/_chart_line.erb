@@ -1,0 +1,51 @@
+<%
+  span_value = defined?(span) && span
+  compare_value = defined?(compare) && compare
+  loading_value = defined?(loading) && loading
+  prefix_value = (defined?(prefix) && prefix) || ""
+  uid = ->(name) { [prefix_value, name].reject(&:empty?).join("-") }
+  november = [485.00, 1097.50, 1487.50, 2192.50, 3020.50, 3020.50, 3020.50, 3020.50, 3330.50, 3855.00, 4280.00, 4280.00]
+  october = [402.00, 917.50, 1605.50, 1970.50, 2420.90, 2420.90, 2420.90, 2940.90, 3336.40, 3821.40, 4251.40, 4251.40, 4251.40, 4251.40, 4763.90, 5131.90, 5735.90, 6445.90, 6445.90, 6445.90, 6840.90, 7289.40, 7809.40, 8424.40, 8424.40, 8424.40, 9226.40, 9566.40, 10031.40, 10561.40]
+  money = ->(value) { whole, cents = ("%.2f" % value).split("."); "$#{whole.reverse.scan(/\d{1,3}/).join(",").reverse}.#{cents}" }
+-%>
+<section class="u-card<%= " u-span-#{span_value}" if span_value %>">
+  <header>
+    <h2>Revenue</h2>
+    <form id="<%= uid.("revenue-period") %>" action="/reports" method="get">
+      <fieldset class="u-fieldset">
+        <legend class="u-visually-hidden">Period</legend>
+        <div class="u-toggle-group">
+          <label><input type="radio" name="period" value="month" checked> This month</label>
+          <label><input type="radio" name="period" value="90-days"> Last 90 days</label>
+        </div>
+      </fieldset>
+    </form>
+  </header>
+  <div class="u-card-content">
+<% if loading_value -%>
+    <div class="u-stat" aria-hidden="true">
+      <p><span class="u-shimmer"><%= money.(november.last) %></span></p>
+      <p><span class="u-shimmer">So far this month, up 12%</span></p>
+    </div>
+    <u-chart type="line" aria-busy="true" aria-label="Loading revenue"></u-chart>
+<% else -%>
+    <div class="u-stat">
+      <p><%= money.(november.last) %></p>
+      <p data-trend="up">So far this month, up 12% on <span class="u-text-data">Oct 12</span></p>
+    </div>
+    <u-chart type="line" prefix="$">
+      <table>
+        <caption>Revenue so far, by day</caption>
+        <thead><tr><th scope="col">Day</th><th scope="col">November</th><% if compare_value %><th scope="col">October</th><% end %></tr></thead>
+        <tbody>
+<% (1..30).each do |day| -%>
+          <tr><th scope="row">Nov <%= day %></th><td><%= money.(november[day - 1]) if november[day - 1] %></td><% if compare_value %><td data-label="Oct <%= day %>"><%= money.(october[day - 1]) %></td><% end %></tr>
+<% end -%>
+        </tbody>
+      </table>
+    </u-chart>
+<% end -%>
+    <label class="u-checkbox"><input type="checkbox" name="compare" value="previous" form="<%= uid.("revenue-period") %>"<%= " checked" if compare_value %>> Compare to previous period</label>
+    <p class="u-chart-footer"><span>Updated just now</span><a href="/reports/revenue">Full report</a></p>
+  </div>
+</section>

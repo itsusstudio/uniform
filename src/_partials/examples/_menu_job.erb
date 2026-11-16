@@ -1,0 +1,12 @@
+<%# locals: (id:, popover:) -%>
+<div class="u-menu"<% if popover %> id="<%= id %>" popover<% end %>>
+<% close = popover ? %( popovertarget="#{id}" popovertargetaction="hide") : "" -%>
+<a href="#example">Edit job</a>
+<button type="button"<%= raw close %>>Change due date</button>
+<button type="button"<%= raw close %>>Print ticket</button>
+<hr>
+<button type="button"<%= raw close %>>Text Ana Reyes</button>
+<button type="button"<%= raw close %>>Copy status link</button>
+<hr>
+<button type="button" class="u-menu-item-danger"<%= raw close %>>Delete job</button>
+</div>

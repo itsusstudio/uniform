@@ -1,0 +1,31 @@
+<% span_value = defined?(span) && span -%>
+<% loading_value = defined?(loading) && loading -%>
+<section class="u-card<%= " u-span-#{span_value}" if span_value %>">
+  <header>
+    <h2>Finished on time</h2>
+    <p class="u-text-small u-text-muted">This month</p>
+  </header>
+  <div class="u-card-content">
+<% if loading_value -%>
+    <div class="u-stat" aria-hidden="true">
+      <p><span class="u-shimmer">31 of 40</span></p>
+      <p><span class="u-shimmer">Jobs by their due date</span></p>
+    </div>
+    <u-chart type="meter" aria-busy="true" aria-label="Loading jobs finished on time"></u-chart>
+<% else -%>
+    <div class="u-stat">
+      <p>31 of 40</p>
+      <p data-trend="up">Jobs by their due date, up from 26 of 38 in October</p>
+    </div>
+    <u-chart type="meter">
+      <table>
+        <caption>Jobs finished on time this month</caption>
+        <tbody>
+          <tr><th scope="row">On time</th><td>31</td></tr>
+          <tr><th scope="row">Due</th><td>40</td></tr>
+        </tbody>
+      </table>
+    </u-chart>
+<% end -%>
+  </div>
+</section>

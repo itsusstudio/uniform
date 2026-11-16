@@ -1,0 +1,41 @@
+<%
+  loading_value = defined?(loading) && loading
+  weeks = ["Aug 17", "Aug 24", "Aug 31", "Sep 7", "Sep 14", "Sep 21", "Sep 28", "Oct 5", "Oct 12", "Oct 19", "Oct 26", "Nov 2"]
+  figures = [
+    ["18", "Taken in this week", "/jobs?taken=this-week", "Jobs taken in, by week", [11, 14, 12, 15, 17, 13, 16, 19, 15, 17, 16, 18]],
+    ["23", "Finished last week", "/jobs?finished=last-week", "Jobs finished, by week", [14, 17, 12, 19, 21, 18, 16, 22, 20, 24, 19, 23]],
+    ["$310.00", "Unpaid quotes", "/payments?status=unpaid", "Unpaid quotes, by week", [520, 480, 610, 450, 390, 420, 505, 360, 410, 340, 365, 310]]
+  ]
+-%>
+<section class="u-card" aria-label="This week">
+  <div class="u-card-content">
+    <div class="u-stats">
+<% figures.each do |figure, label, path, caption, values| -%>
+      <div class="u-stack u-gap-2">
+<% if loading_value -%>
+        <div class="u-stat" aria-hidden="true">
+          <p><span class="u-shimmer"><%= figure %></span></p>
+          <p><span class="u-shimmer"><%= label %></span></p>
+        </div>
+        <u-chart type="spark" aria-busy="true" aria-label="Loading <%= caption.downcase %>"></u-chart>
+<% else -%>
+        <div class="u-stat">
+          <p><%= figure %></p>
+          <a href="<%= path %>"><%= label %></a>
+        </div>
+        <u-chart type="spark">
+          <table class="u-visually-hidden">
+            <caption><%= caption %></caption>
+            <tbody>
+<% weeks.zip(values).each do |week, value| -%>
+              <tr><th scope="row"><%= week %></th><td><%= value %></td></tr>
+<% end -%>
+            </tbody>
+          </table>
+        </u-chart>
+<% end -%>
+      </div>
+<% end -%>
+    </div>
+  </div>
+</section>

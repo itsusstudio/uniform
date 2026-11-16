@@ -1,0 +1,750 @@
+- name: u-stack
+  group: Layout
+  page: /components/stack/
+  description: Stacks children one under another with a gap, 24px by default.
+
+- name: u-row
+  group: Layout
+  page: /components/row/
+  description: Lays children side by side and centres them vertically.
+
+- name: u-scroll-row
+  group: Layout
+  page: /components/scroll-row/
+  description: A row of cards that scrolls sideways and snaps to each card.
+
+- name: u-row-top
+  group: Layout
+  page: /components/row/
+  variant: true
+  description: Lines the children up along their top edge, for items of different heights.
+
+- name: u-grid
+  group: Layout
+  page: /components/grid/
+  description: On a block whose children sit on twelve columns.
+
+- name: u-span-1 to u-span-12
+  group: Layout
+  page: /components/grid/
+  description: How many of the twelve columns a child takes. Two children that add up to 12 fill a row, like `u-span-4` and `u-span-8`.
+
+- name: u-sidebar-layout
+  group: Layout
+  page: /components/sidebar-layout/
+  description: A 264px sidebar beside the content.
+
+- name: u-container
+  group: Layout
+  page: /components/container/
+  description: Centres content at the 1280px page width with the page margin on each side.
+
+- name: u-section
+  group: Layout
+  page: /components/section/
+  scope: sites
+  description: One band of a site page, with `--u-section-space` above and below.
+
+- name: u-gap-1, u-gap-2, u-gap-4, u-gap-6, u-gap-12, u-gap-24
+  group: Spacing
+  page: /start/reference/
+  description: Changes the gap of a stack, row or grid to 4, 8, 16, 24, 48 or 96px. The only way to change spacing by hand.
+
+- name: u-text-hero
+  group: Type
+  page: /start/reference/
+  description: 96, Apfel. Once, at the top of a site page.
+  scope: sites
+
+- name: u-text-section-title
+  group: Type
+  page: /start/reference/
+  description: 56, Apfel. Section headlines.
+  scope: sites
+
+- name: u-text-article-title
+  group: Type
+  page: /start/reference/
+  description: 32, Apfel. Article and blog titles.
+  scope: sites
+
+- name: u-text-page-title
+  group: Type
+  page: /start/reference/
+  description: 32, Switzer. The title of an app page.
+
+- name: u-text-heading
+  group: Type
+  page: /start/reference/
+  description: 20, Switzer medium. Headings inside a page.
+
+- name: u-text-lead
+  group: Type
+  page: /start/reference/
+  description: 24, Switzer. The opening line under a title.
+  scope: sites
+
+- name: u-text-feature-title
+  group: Type
+  page: /start/reference/
+  description: 24, Switzer medium. The heading of a feature, a tile or a step on a site.
+  scope: sites
+
+- name: u-text-reading
+  group: Type
+  page: /start/reference/
+  description: 20, Switzer at the prose line height. Paragraphs on a site.
+  scope: sites
+
+- name: u-text-body
+  group: Type
+  page: /start/reference/
+  description: 16, Switzer. Reading text.
+
+- name: u-text-small
+  group: Type
+  page: /start/reference/
+  description: 14, Switzer. Labels, table cells, buttons and hints.
+
+- name: u-text-caption
+  group: Type
+  page: /start/reference/
+  description: 12, Switzer. Figure captions and timestamps.
+
+- name: u-text-data
+  group: Type
+  page: /start/reference/
+  description: Plex Mono with even-width digits. Prices, dates, order numbers and codes.
+
+- name: u-wordmark
+  group: Components
+  page: /components/wordmark/
+  description: "The product's name, 20px and linked home, in place of a logo. Always add `u-wordmark-serif` or `u-wordmark-sans`. Add `u-wordmark-lg` for 24px. `data-monogram`, like \"W\", is the letter on its tile when the sidebar folds."
+
+- name: u-wordmark-lg
+  group: Components
+  page: /components/wordmark/
+  description: The 24px wordmark, for the marketing site header only.
+
+- name: u-wordmark-serif
+  group: Components
+  page: /components/wordmark/
+  variant: true
+  description: Instrument Serif italic, set a little larger so it matches the sans in weight.
+
+- name: u-wordmark-sans
+  group: Components
+  page: /components/wordmark/
+  variant: true
+  description: Bricolage Grotesque medium, letters drawn close. It keeps the casing you write.
+
+- name: u-text-muted
+  group: Type
+  page: /start/reference/
+  description: Muted grey, for secondary text.
+
+- name: u-text-strong
+  group: Type
+  page: /start/reference/
+  description: Medium weight. Never bold.
+
+- name: u-bg-surface
+  group: Backgrounds
+  page: /start/reference/
+  description: White, the default for apps. Add it only to a white block on paper.
+
+- name: u-bg-paper
+  group: Backgrounds
+  page: /start/reference/
+  description: Off-white paper. Put it on the `<body>` of a marketing site or blog.
+
+- name: u-accordion
+  group: Components
+  page: /components/accordion/
+  description: "On a `<div>` of `<details>` rows. Each `<summary>` is a 16px medium heading with a plus that turns into a minus."
+
+- name: u-avatar
+  group: Components
+  page: /components/avatar/
+  description: A circle on a `<span>`, 36px for business and 44px for consumer. It holds an `<img>` or up to two initials.
+
+- name: u-avatar-sm
+  group: Components
+  page: /components/avatar/
+  description: The small size, 24px for business and 32px for consumer.
+
+- name: u-avatar-online
+  group: Components
+  page: /components/avatar/
+  description: Added to `u-avatar` to show the person is online, with a pine dot at the bottom right.
+
+- name: u-avatar-group
+  group: Components
+  page: /components/avatar/
+  description: Up to three avatars and a "+N" avatar, each a plain `<span>`, overlapping.
+
+- name: u-avatar-group-sm
+  group: Components
+  page: /components/avatar/
+  description: Added to `u-avatar-group` to make every avatar small.
+
+- name: u-banner
+  group: Components
+  page: /components/banner/
+  description: The banner's shape, with no colour of its own. Always add one colour class.
+
+- name: u-banner-title
+  group: Components
+  page: /components/banner/
+  description: The title, saying what's going on.
+
+- name: u-banner-info
+  group: Components
+  page: /components/banner/
+  variant: true
+  description: Information and announcements, on cobalt with white text.
+
+- name: u-banner-warning
+  group: Components
+  page: /components/banner/
+  variant: true
+  description: Something needs attention soon. Warm yellow with ink text.
+
+- name: u-banner-danger
+  group: Components
+  page: /components/banner/
+  variant: true
+  description: Something is broken or blocked right now. Vermilion with white text.
+
+- name: u-banner-success
+  group: Components
+  page: /components/banner/
+  variant: true
+  description: Something important finished. Pine with white text. Most successes are a [toast](/components/toast/) instead.
+
+- name: u-breadcrumb
+  group: Components
+  page: /components/breadcrumb/
+  description: On a `<nav aria-label="Breadcrumb">` around an `<ol>` of links, with a slash drawn between them.
+
+- name: u-btn
+  group: Components
+  page: /components/button/
+  description: The button shape, with no fill or border of its own. Always add one variant.
+
+- name: u-btn-lg
+  group: Components
+  page: /components/button/
+  scope: sites
+  description: The large button, 48px tall, for a site's main call to action. Add it alongside a variant.
+
+- name: u-btn-primary
+  group: Components
+  page: /components/button/
+  variant: true
+  description: Ink fill. The one main action in a form, card or dialog.
+
+- name: u-btn-outline
+  group: Components
+  page: /components/button/
+  variant: true
+  description: An ink edge and no fill, grey on hover.
+
+- name: u-btn-ghost
+  group: Components
+  page: /components/button/
+  variant: true
+  description: No edge and no fill until you hover, then a grey fill.
+
+- name: u-btn-danger
+  group: Components
+  page: /components/button/
+  variant: true
+  description: Vermilion with white text, for an action that deletes something.
+
+- name: u-btn-close
+  group: Components
+  page: /components/button/
+  description: "A round button that closes or removes something, with its × drawn for you. Leave it empty, give it an `aria-label` like \"Close\" or \"Remove photo\", and add no other button classes."
+
+- name: u-btn-icon
+  group: Components
+  page: /components/button/
+  description: Add to a variant for a square button holding only an icon. Give it an `aria-label`.
+
+- name: u-card
+  group: Components
+  page: /components/card/
+  description: The frame for one object, with no padding of its own. It holds an optional `<header>`, the content and an optional `u-actions`, each straight inside it.
+
+- name: u-card-content
+  group: Components
+  page: /components/card/
+  description: The padded body, with 24px between what's inside it.
+
+- name: u-checkbox
+  group: Components
+  page: /components/checkbox/
+  description: On a `<label>` holding a native checkbox and its words.
+
+- name: u-checkbox-hint
+  group: Components
+  page: /components/checkbox/
+  description: A muted line under the words.
+
+- name: u-fieldset
+  group: Components
+  page: /components/checkbox/
+  description: Resets a `<fieldset>` for a group of checkboxes or radios. Its `<legend>` is styled like a field's label.
+
+- name: u-badge
+  group: Components
+  page: /components/badge/
+  description: A word with a square before it, inline in text, a table cell or a list. The square shows only with a colour class. Never clickable.
+
+- name: u-badge-info
+  group: Components
+  page: /components/badge/
+  variant: true
+  description: Cobalt. In progress, or information like "Beta".
+
+- name: u-badge-warning
+  group: Components
+  page: /components/badge/
+  variant: true
+  description: Yellow. Waiting on something, or close to a deadline.
+
+- name: u-badge-danger
+  group: Components
+  page: /components/badge/
+  variant: true
+  description: Vermilion. Late, failed or declined. Someone needs to act.
+
+- name: u-badge-success
+  group: Components
+  page: /components/badge/
+  variant: true
+  description: Pine. Done, paid or approved.
+
+- name: u-badge-neutral
+  group: Components
+  page: /components/badge/
+  variant: true
+  description: Grey. Finished and out of the way, or not started yet.
+
+- name: u-badge-strong
+  group: Components
+  page: /components/badge/
+  description: Fills the badge with its colour, for one fact that needs attention, like "Card declined". Never in a list of records.
+
+- name: u-chip
+  group: Components
+  page: /components/chip/
+  description: A grey pill for an applied filter or a tag. It goes on a `<span>`, or an `<a>` for a link.
+
+- name: <u-input-colour>
+  group: Components
+  page: /components/input-colour/
+  description: "Wraps an `<input type=\"color\">` and its `<datalist>` of presets, inside a `u-field`. Builds the hex field, the caret and the preset menu from them."
+
+- name: <u-combobox>
+  group: Components
+  page: /components/combobox/
+  description: "A text field that filters a long list as you type, inside a `u-field`. It holds a `u-input` with `role=\"combobox\"`, `aria-expanded` and `aria-controls`, an optional hidden input for the value, and a `<ul role=\"listbox\" popover=\"manual\">` of `<li role=\"option\">` rows, each with its value in `data-value`. An option can hold a `<span>` for the name and a `<span>` for each detail."
+
+- name: u-combobox-option-active
+  group: Components
+  page: /components/combobox/
+  description: The option the arrow keys or pointer are on. `<u-combobox>` sets it.
+
+- name: u-list
+  group: Components
+  page: /components/list/
+  description: A `<ul>` or `<ol>` with a divider between rows.
+
+- name: u-list-item
+  group: Components
+  page: /components/list/
+  description: On a `<div>` inside an `<li>` with `u-enter` or `u-exit`. Every other row is the `<li>` itself.
+
+- name: u-list-item-detail
+  group: Components
+  page: /components/list/
+  description: A muted second line under the item's name, like an email address.
+
+- name: u-dl
+  group: Components
+  page: /components/description-list/
+  description: Muted labels beside their values, for one record's details.
+
+- name: u-dialog
+  group: Components
+  page: /components/dialog/
+  description: "The frame on a native `<dialog>`, opened with `showModal()`. Inside it, or inside its `<form>`, use the card parts: a `<header>`, a `u-card-content` and a `u-actions`."
+
+- name: u-dialog-sheet
+  group: Components
+  page: /components/dialog/
+  description: On a `u-dialog`, docks it to the bottom of the screen below 640px.
+
+- name: <u-dropzone>
+  group: Components
+  page: /components/dropzone/
+  description: Wraps the `u-field` that holds the area, the file list and the row `<template>`.
+
+- name: u-dropzone
+  group: Components
+  page: /components/dropzone/
+  description: "The `<label>` that is the drop area, with an upload arrow drawn for you. It holds the `<input type=\"file\">`, the words and a `<small>` with the types and size limit."
+
+- name: u-dropzone-link
+  group: Components
+  page: /components/dropzone/
+  description: The "choose files" words inside the label, drawn like a link.
+
+- name: Dropzone file row
+  group: Components
+  page: /components/dropzone/
+  description: "An `<li>` in the `u-list`: a `<span>` for the file icon or an `<img>` preview; a `<div>` with the name, a line holding the size in `u-meta` and `<span data-dropzone-done>`, a `<progress>` and the `u-error`s; and a `u-btn-close`."
+
+- name: u-dropzone-over
+  group: Components
+  page: /components/dropzone/
+  description: The ink edge and paper fill while files are dragged over. `<u-dropzone>` sets it.
+
+- name: <hgroup>
+  group: Components
+  page: /components/heading-group/
+  description: A heading and the `<p>` under it. The heading is 16px medium, the line 14px muted.
+
+- name: u-stats
+  group: Components
+  page: /components/stat/
+  description: A row of stats that wraps when it runs out of room.
+
+- name: u-stat
+  group: Components
+  page: /components/stat/
+  description: One figure and the line under it. The first child is the figure, in 32px mono.
+
+- name: u-meta
+  group: Components
+  page: /components/meta/
+  description: A date, time, count or code in 14px muted mono. It never wraps.
+
+- name: u-actions
+  group: Layout
+  page: /components/actions/
+  description: A row of buttons, 8px apart, that wraps when it runs out of room.
+
+- name: u-actions-icons
+  group: Layout
+  page: /components/actions/
+  description: Added to `u-actions` for a toolbar of icon buttons, 4px apart.
+
+- name: u-form
+  group: Layout
+  page: /components/form/
+  description: On a `<form>` holding a heading group, the fields and a `u-actions` row, in that order.
+
+- name: <figcaption>
+  group: Components
+  page: /components/caption/
+  description: Small muted text, no wider than prose, with no class. A `<strong>` at the start is the title.
+
+- name: u-icon
+  group: Components
+  page: /components/icon/
+  description: On an inline SVG icon, for 20px. Use it on its own or beside 16px text.
+
+- name: u-icon-sm
+  group: Components
+  page: /components/icon/
+  description: Add to `u-icon` for 16px, beside 12 and 14px text. A button with a word sizes its icon for you.
+
+- name: u-menu
+  group: Components
+  page: /components/menu/
+  description: "A floating list of actions. Add the `popover` attribute and point a button's `popovertarget` at its id. Each `<a>` or `<button>` inside, or a `<button>` in a `<form>`, is one action. Put an `<hr>` between groups, and an optional `<hgroup>` at the top to say whose menu it is."
+
+- name: u-menu-item-danger
+  group: Components
+  page: /components/menu/
+  description: An item that deletes or cancels something, in red text.
+
+- name: u-nav
+  group: Page frame
+  page: /components/navigation/
+  description: "On a `<nav>` with an `aria-label`. Each group is a `<div>` with a heading `<p>`, or a `<details>` with a `<summary>` to let it fold, then a `<ul>` of links. Next to an icon, put the link's name in a `<span>`, so a nav that folds to an icon rail can show it on hover."
+
+- name: u-nav-link-section
+  group: Page frame
+  page: /components/navigation/
+  description: A top-level link with nothing under it, right inside the `u-nav`, styled like a group heading.
+
+- name: u-page-header
+  group: Page frame
+  page: /components/page-header/
+  description: The top of an app page, on a `<header>`, with an optional back link, an `<hgroup>` title and a `u-actions` row on the right.
+
+- name: u-pagination
+  group: Components
+  page: /components/pagination/
+  description: On a `<nav>` holding a previous link, a `<span>` with the range, like "26–50 of 112", and a next link. Sits at the end of its row.
+
+- name: u-popover
+  group: Components
+  page: /components/popover/
+  description: On a `<dialog popover>`, a floating panel opened by a button whose `popovertarget` is its id. Optional `<header>` for the title and close, `u-actions` for buttons.
+
+- name: u-progress
+  group: Components
+  page: /components/progress/
+  description: On a `<div>` holding a label `<p>`, a native `<progress>` and a count `<p>`. The bar eases forward as `value` changes.
+
+- name: u-prose
+  group: Components
+  page: /components/prose/
+  description: Wraps long-form writing and styles the elements directly inside it.
+
+- name: u-radio
+  group: Components
+  page: /components/radio/
+  description: The `<label>` that holds a native radio and its words. All of it is clickable.
+
+- name: u-radio-hint
+  group: Components
+  page: /components/radio/
+  description: Muted help under the words, for a choice that needs a line of detail.
+
+- name: u-shimmer
+  group: Components
+  page: /components/shimmer/
+  description: A `<span>` that stands in for loading text, as a grey bar with a light band sweeping across. A typical value inside, like `Nov 14`, sets its width and stays hidden. Empty, it fills the line.
+
+- name: u-spinner
+  group: Components
+  page: /components/spinner/
+  description: An empty `<span aria-hidden="true">`, a 16px ring with an arc that turns in the text colour.
+
+- name: u-spinner-lg
+  group: Components
+  page: /components/spinner/
+  description: The 24px size, for a panel.
+
+- name: u-timeline
+  group: Components
+  page: /components/timeline/
+  description: An `<ol>` of events, newest first, with a grey square and a line drawn for each.
+
+- name: u-switch
+  group: Components
+  page: /components/switch/
+  description: On the `<label>` around an `<input type="checkbox" switch role="switch">` and its words. It draws a track that turns ink when on.
+
+- name: u-switch-hint
+  group: Components
+  page: /components/switch/
+  description: A muted line under the words.
+
+- name: u-table
+  group: Components
+  page: /components/table/
+  description: On a `<div>` around a plain `<table>`. The table fills the width and scrolls sideways when it doesn't fit. Give the `<div>` `tabindex="0"`, `role="region"` and an `aria-label` or `aria-labelledby`, so a keyboard can reach it and scroll it.
+
+- name: u-table-num
+  group: Components
+  page: /components/table/
+  description: A right-aligned cell for amounts and counts, in mono. Put it on the header cell too.
+
+- name: u-table-sort
+  group: Components
+  page: /components/table/
+  description: A link or button in a header cell that sorts by that column. Its arrow follows the cell's `aria-sort`.
+
+- name: u-table-sticky
+  group: Components
+  page: /components/table/
+  description: Added to `u-table` on a long table. The table scrolls inside its card and the heading row stays in view. See [Data table](/patterns/data-table/).
+
+- name: u-page-tabs
+  group: Page frame
+  page: /components/page-tabs/
+  description: The row of tabs, on a `<nav>` with an `aria-label` naming what's being switched. Each `<a>` inside is a tab.
+
+- name: u-field
+  group: Components
+  page: /components/text-field/
+  description: "Holds one form control. Its first `<label>` (or a `<p>` or `<span>` when the control takes no `<label for>`) is the name, with an optional `<span>` for \"(optional)\". Each `<small>` is a hint, and `u-error` is the error."
+
+- name: u-input
+  group: Components
+  page: /components/text-field/
+  description: The box itself, on an `<input>`, `<textarea>` or `<select>`. `aria-invalid="true"` turns its border vermilion.
+
+- name: <u-input-code>
+  group: Components
+  page: /components/input-code/
+  description: Wraps the code `u-input`, inside the `u-field`. Builds one box per digit from the input's `maxlength`.
+
+- name: u-input-code-slot-active
+  group: Components
+  page: /components/input-code/
+  description: The box where the next digit goes, with the focus ring and a blinking caret. `<u-input-code>` sets it while the input has focus.
+
+- name: u-input-prefixed
+  group: Components
+  page: /components/text-field/
+  description: Wraps an input with something in the box before the value. A `<span>` before the input holds a short unit like `$`. Around a `type="search"` input, it draws the search icon instead.
+
+- name: <u-input-password>
+  group: Components
+  page: /components/input-password/
+  description: "Wraps a password `u-input` and an empty `<button>` with `aria-label=\"Show password\"`, `aria-pressed=\"false\"` and `hidden`, inside the `u-field`. Shows the button and flips the input's type."
+
+- name: <u-character-count>
+  group: Components
+  page: /components/text-field/
+  description: The custom element from `uniform.js`, around a `u-field` with `maxlength`. It turns the field's last `<small>` into a live count, like "47 of 500". `data-count` on the element words it for translation, with `{count}` and `{max}` for the numbers, like `data-count="{count} of {max}"`.
+
+- name: <u-input-phone>
+  group: Components
+  page: /components/input-phone/
+  description: Wraps a phone `u-field`. `region` sets the home country, `CA` by default.
+
+- name: u-error
+  group: Components
+  page: /components/text-field/
+  description: What went wrong and how to fix it, in vermilion after a small square.
+
+- name: u-toast-danger
+  group: Components
+  page: /components/toast/
+  variant: true
+  description: Vermilion fill, for an action that failed. Stays until dismissed.
+
+- name: <u-toggle>
+  group: Components
+  page: /components/toggle/
+  description: The custom element from `uniform.js`, around one toggle button. It takes no space of its own.
+
+- name: u-toggle
+  group: Components
+  page: /components/toggle/
+  description: A pill that stays pressed, for a view or formatting option. Put it on a `<button>` with `aria-pressed`, or on a `<label>` around a checkbox.
+
+- name: u-toggle-icon
+  group: Components
+  page: /components/toggle/
+  description: Makes a toggle a circle holding only an icon. Give it an `aria-label`.
+
+- name: u-toggle-group
+  group: Components
+  page: /components/toggle-group/
+  description: Joined pills for one choice out of two to four, each a `<label>` around a native radio. Wrap the group in a `u-fieldset` with a `<legend>`.
+
+- name: u-tooltip
+  group: Components
+  page: /components/tooltip/
+  description: The wrapper around a control, with the label in a `<span aria-hidden="true">` after it. The label shows above the control on hover or focus, below it when there's no room above, and Escape hides it. The control still needs its own `aria-label`.
+
+- name: u-enter, u-exit
+  group: Components
+  page: /foundations/motion/
+  description: On an item arriving in or leaving a list. It fades and the space opens or closes. Put the item's content in one child element, and remove the item when `u-exit` finishes.
+
+- name: <u-chart>
+  group: Charts
+  page: /components/chart/
+  description: "Wraps a `<table>` and draws it as a chart, picked with `type`: `bar`, `line`, `stacked`, `meter` or `spark`."
+
+- name: u-chart-legend
+  group: Charts
+  page: /components/chart/
+  description: The series names above a line chart with two lines, drawn by `<u-chart>` from the header cells.
+
+- name: u-chart-footer
+  group: Charts
+  page: /components/chart/
+  description: The last line of a chart card, saying when the numbers were worked out, with a link to the full report.
+
+- name: Drawn parts
+  group: Charts
+  page: /components/chart/
+  description: "`<u-chart>` draws these, so never write them: `u-chart-plot`, `u-chart-svg`, `u-chart-axis`, `u-chart-tick`, `u-chart-grid`, `u-chart-bar`, `u-chart-line`, `u-chart-area`, `u-chart-col`, `u-chart-hit`, `u-chart-guide`, `u-chart-tooltip`, `u-chart-stack`, `u-chart-segment`, `u-chart-meter`, `u-chart-spark`, `u-chart-loading` and `u-chart-empty`."
+
+- name: u-link-btn
+  group: Components
+  page: /components/link/
+  description: A `<button>` that looks like a link, for an action inside text such as "Send a new code".
+
+- name: u-app-shell
+  group: Page frame
+  page: /components/app-shell/
+  description: "The app's outer frame, with the sidebar beside the page. Inside it, in order: the phone bar `<header>` with the app name in `u-wordmark` and a ghost Menu button; the `<u-sidebar>`; the `<main>` with a `u-container` inside; and an optional `<nav>` tab bar."
+
+- name: u-auth-shell
+  group: Page frame
+  page: /components/auth-shell/
+  description: "The frame around sign-in and sign-up screens, split into an ink half with the name and a two-line blurb, and the form, from 640px wide. Inside it, in order: a `<header>` with the app name in `u-wordmark` and a `<p class=\"u-text-article-title\">` blurb, the `<main>` with the form, and an optional `<footer>` for terms and privacy links."
+
+- name: u-app-shell-paper
+  group: Page frame
+  page: /components/app-shell/
+  variant: true
+  description: Puts the sidebar and the tab bar on paper instead of ink.
+
+- name: <u-sidebar>
+  group: Page frame
+  page: /components/sidebar/
+  description: "The sidebar column. Its first `<div>` holds the app name in `u-wordmark` and an empty collapse `<button aria-label=\"Sidebar\" aria-expanded=\"true\">`. Then comes the `u-nav`, each link with an icon and its name in a `<span>`. Its last `<div>` stays at the bottom: a `<ul>` of links, then the account `<button>` with the initials in one `<span>` and the name in the next, opening a `u-menu`. `aria-expanded=\"false\"` folds the column to an icon rail."
+
+- name: Tab bar
+  group: Page frame
+  page: /components/app-shell/
+  description: The `<nav>` after the `<main>`, shown below 1024px. Three to five links, each an icon above a one-word `<span>`.
+
+- name: u-table-controls
+  group: Components
+  page: /components/table-controls/
+  description: "On a `<search>` above a table. Its `<form>` holds the search, which grows, the preset menu and a Filter button whose popover holds the filter fields and Apply, with View pushed to the end. A `<ul>` holds the filter chips and \"Clear all\". It honours `hidden`."
+
+- name: u-data-grid-editor, u-data-grid-changed
+  group: Components
+  page: /components/data-grid/
+  description: "`<u-data-grid>` sets both. `u-data-grid-editor` holds a cell's form while it's being changed. `u-data-grid-changed` marks a saved cell in yellow."
+
+- name: u-site-header
+  group: Page frame
+  page: /components/site-header/
+  description: The top row of a marketing site, on a `<header>`. Its `u-container` holds a `u-wordmark`, a `<nav>` with `popover`, the primary trial button and a ghost Menu `<button>` whose `popovertarget` is the nav's `id`. The nav's first `<ul>` holds the page links, and a second `<ul>` on the right holds Sign in and the language link.
+
+- name: Announcement
+  group: Page frame
+  page: /components/site-header/
+  description: A coloured `u-banner` right before the site header becomes a one-line announcement. Put a `u-container` inside, with no close button.
+
+- name: u-visually-hidden
+  group: Helpers
+  page: /start/reference/
+  description: Hides text on screen but keeps it for screen readers, like "(opens in a new tab)".
+
+- name: u-max-width-form
+  group: Helpers
+  page: /start/reference/
+  description: Keeps a block to the width of a form column, 384px, like a settings form or a field shown on its own.
+
+- name: u-max-width-prose
+  group: Helpers
+  page: /start/reference/
+  description: Keeps a block to a comfortable reading width, about 65 characters.
+
+- name: u-truncate
+  group: Helpers
+  page: /start/reference/
+  description: Cuts text to one line with an ellipsis. Pair it with a tooltip that shows the full text.
+
+- name: <u-toggle-panels>
+  group: Components
+  page: /components/toggle-group/
+  description: Wraps a `u-fieldset` holding a toggle group and one `<section>` per choice, and shows the section whose `data-value` matches the checked radio.

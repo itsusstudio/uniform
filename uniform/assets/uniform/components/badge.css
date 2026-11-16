@@ -1,0 +1,61 @@
+@layer uniform.components {
+.u-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--u-space-2);
+  color: var(--u-color-text-default);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+p > .u-badge { margin-inline-start: var(--u-space-1); }
+
+.u-badge::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  background: var(--u-badge-color, transparent);
+}
+
+.u-badge-info {
+  --u-badge-color: var(--u-color-info);
+  --u-badge-text: var(--u-color-text-on-info);
+}
+
+.u-badge-warning {
+  --u-badge-color: var(--u-color-warning);
+  --u-badge-text: var(--u-color-text-on-warning);
+}
+
+.u-badge-danger {
+  --u-badge-color: var(--u-color-danger);
+  --u-badge-text: var(--u-color-text-on-danger);
+}
+
+.u-badge-success {
+  --u-badge-color: var(--u-color-success);
+  --u-badge-text: var(--u-color-text-on-success);
+}
+
+.u-badge-neutral {
+  --u-badge-color: var(--u-color-border-input);
+  --u-badge-text: var(--u-color-text-default);
+}
+
+.u-badge-strong {
+  min-height: 20px;
+  padding: 0 var(--u-space-2);
+  background: var(--u-badge-color);
+  color: var(--u-badge-text);
+  font-size: var(--u-font-size-caption);
+  font-weight: 500;
+  line-height: var(--u-line-height-caption);
+}
+
+.u-badge-strong::before { display: none; }
+
+.u-badge-neutral.u-badge-strong { background: var(--u-color-divider); }
+}

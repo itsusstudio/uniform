@@ -1,0 +1,540 @@
+@layer uniform.components {
+:where(.u-app-shell, :not(.u-app-shell) > u-sidebar) {
+  --u-nav-bg: var(--u-color-bg-ink);
+  --u-nav-text: var(--u-color-text-on-ink);
+  --u-nav-link: var(--u-color-text-on-ink);
+  --u-nav-label: var(--u-color-text-muted-on-ink);
+  --u-nav-name: var(--u-color-info-on-ink);
+  --u-nav-line: var(--u-color-divider-on-ink);
+  --u-nav-edge: var(--u-color-text-muted-on-ink);
+  --u-nav-current-bg: var(--u-color-text-on-ink);
+  --u-nav-current-text: var(--u-color-bg-ink);
+  --u-nav-focus: var(--u-color-info-on-ink);
+}
+
+.u-app-shell-paper {
+  --u-nav-bg: var(--u-color-bg-paper);
+  --u-nav-text: var(--u-color-text-default);
+  --u-nav-link: var(--u-color-text-muted);
+  --u-nav-label: var(--u-color-text-default);
+  --u-nav-name: var(--u-color-link);
+  --u-nav-line: var(--u-color-divider);
+  --u-nav-edge: var(--u-color-text-default);
+  --u-nav-current-bg: var(--u-color-text-default);
+  --u-nav-current-text: var(--u-color-bg-surface);
+  --u-nav-focus: var(--u-color-info);
+}
+
+.u-app-shell {
+  container: u-app-shell / inline-size;
+  display: grid;
+  grid-template-columns: var(--u-width-sidebar) minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 100dvh;
+  background: var(--u-color-bg-surface);
+}
+
+.u-app-shell > * { min-width: 0; }
+
+.u-app-shell > main { anchor-name: --u-app-main; }
+
+.u-app-shell > nav { anchor-name: --u-app-tabs; }
+
+.u-app-shell:has(> u-sidebar > div:first-child > button[aria-expanded="false"]) { grid-template-columns: auto minmax(0, 1fr); }
+
+.u-app-shell > header { display: none; }
+
+.u-app-shell > header > button::before {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url("./../icons/menu.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-app-shell > nav { display: none; }
+
+u-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-6);
+  position: sticky;
+  inset: 0 auto auto;
+  width: auto;
+  height: 100dvh;
+  margin: 0;
+  padding: var(--u-space-6) var(--u-space-4);
+  overflow: visible;
+  border: 0;
+  background: var(--u-nav-bg);
+  color: var(--u-nav-text);
+}
+
+.u-app-shell-paper > u-sidebar { border-inline-end: 1px solid var(--u-nav-line); }
+
+:is(.u-app-shell:not(.u-app-shell-paper) > :is(u-sidebar, nav), :not(.u-app-shell) > u-sidebar:not(.u-app-shell-paper)) { color-scheme: dark; }
+
+/* Popovers opened from the ink panel, like the account menu, keep the page's theme. */
+u-sidebar [popover] { color-scheme: light dark; }
+
+:root[data-u-theme="light"] u-sidebar [popover] { color-scheme: light; }
+
+:root[data-u-theme="dark"] u-sidebar [popover] { color-scheme: dark; }
+
+u-sidebar > .u-nav {
+  flex: 1 1 auto;
+  min-height: 0;
+  margin-inline: calc(-1 * var(--u-space-2));
+  padding-inline: var(--u-space-2);
+  overflow-y: auto;
+}
+
+u-sidebar > div:first-child + button { display: none; }
+
+u-sidebar:has(> div:last-child:not(:first-child)) { padding-bottom: 0; }
+
+u-sidebar > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--u-space-2);
+  color: var(--u-nav-name);
+}
+
+u-sidebar > div:first-child > .u-wordmark { padding-inline: var(--u-space-2); }
+
+u-sidebar > div:first-child > button[aria-expanded] {
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: var(--u-size-control);
+  height: var(--u-size-control);
+  padding: 0;
+  border: 0;
+  border-radius: var(--u-radius-pill);
+  background: transparent;
+  color: var(--u-nav-text);
+  cursor: pointer;
+}
+
+u-sidebar > div:first-child > button[aria-expanded]::before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background: currentcolor;
+  mask: url("./../icons/panel-left.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+:is(u-sidebar, .u-app-shell > nav) :focus-visible { outline-color: var(--u-nav-focus); }
+
+u-sidebar > div:first-child > button[aria-expanded]:hover { background: var(--u-nav-line); }
+
+u-sidebar > div:last-child:not(:first-child) {
+  position: sticky;
+  bottom: 0;
+  margin-inline: calc(-1 * var(--u-space-4));
+  padding: var(--u-space-4) var(--u-space-4) var(--u-space-6);
+  border-top: 1px solid var(--u-nav-line);
+  background: var(--u-nav-bg);
+}
+
+u-sidebar > div:last-child:not(:first-child) > :not(ul, button, [popover]) { padding-inline: var(--u-space-2); }
+
+u-sidebar :is(.u-nav > :is(div, details) > :first-child, legend) {
+  color: var(--u-nav-label);
+  font-weight: 400;
+}
+
+u-sidebar .u-nav .u-nav-link-section { color: var(--u-nav-text); }
+
+u-sidebar :is(.u-nav > a, li > :is(a, button)) { color: var(--u-nav-link); }
+
+u-sidebar :is(.u-nav > a, li > :is(a, button)):hover {
+  border-radius: var(--u-radius-pill);
+  background: var(--u-nav-line);
+  color: var(--u-nav-text);
+  text-decoration: none;
+}
+
+u-sidebar :is(.u-nav > a, li > :is(a, button))[aria-current="page"] {
+  background: var(--u-nav-line);
+  color: var(--u-nav-text);
+  font-weight: 500;
+}
+
+u-sidebar .u-toggle-group { border-color: var(--u-nav-edge); }
+
+u-sidebar .u-toggle-group > label { color: var(--u-nav-text); }
+
+u-sidebar .u-toggle-group > label + label { border-inline-start-color: var(--u-nav-edge); }
+
+u-sidebar .u-toggle-group > label:hover { background: var(--u-nav-line); }
+
+u-sidebar .u-toggle-group > label:has(> input:checked) {
+  background: var(--u-nav-current-bg);
+  color: var(--u-nav-current-text);
+}
+
+u-sidebar > div:last-child > button {
+  display: flex;
+  align-items: center;
+  gap: var(--u-space-2);
+  width: 100%;
+  min-height: var(--u-size-target);
+  padding: 0 var(--u-space-2);
+  border: 0;
+  border-radius: var(--u-radius-pill);
+  background: transparent;
+  color: var(--u-nav-text);
+  font: inherit;
+  font-size: var(--u-font-size-small);
+  text-align: start;
+  cursor: pointer;
+}
+
+u-sidebar > div:last-child > button:hover,
+u-sidebar > div:last-child > button:has(+ .u-menu:popover-open) { background: var(--u-nav-line); }
+
+u-sidebar > div:last-child > button > span:first-child {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-inline: calc(-1 * var(--u-space-1));
+  background: var(--u-nav-current-bg);
+  color: var(--u-nav-current-text);
+  font-family: var(--u-font-mono);
+  font-size: var(--u-font-size-caption);
+  font-weight: 500;
+}
+
+u-sidebar > div:last-child > button > span:first-child + span {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+u-sidebar > div:last-child > button::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--u-nav-label);
+  mask: url("./../icons/chevrons-up-down.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+u-sidebar > div:last-child form { margin: 0; }
+
+u-sidebar li > button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: var(--u-font-size-small);
+  text-align: left;
+  cursor: pointer;
+}
+
+u-sidebar li > button:has(+ .u-menu:popover-open) {
+  border-radius: var(--u-radius-pill);
+  background: var(--u-nav-line);
+  color: var(--u-nav-text);
+}
+
+@supports (position-area: top) {
+  u-sidebar > div:last-child > button + .u-menu[popover],
+  u-sidebar > div:last-child li > button + .u-menu[popover] {
+    margin: 0 0 var(--u-space-2);
+    position-area: top span-right;
+    position-try-fallbacks: flip-block;
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button + .u-menu[popover],
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child li > button + .u-menu[popover] {
+    margin: 0 0 0 var(--u-space-2);
+    position-area: right span-top;
+  }
+}
+
+.u-app-shell > main {
+  padding-block: var(--u-space-12) var(--u-space-24);
+  background: var(--u-color-bg-surface);
+}
+
+@container u-app-shell (min-width: 1024px) {
+  .u-app-shell > u-sidebar {
+    grid-column: 1;
+    grid-row: 1 / -1;
+  }
+
+  .u-app-shell > main {
+    grid-column: 2;
+    grid-row: 1 / -1;
+  }
+
+  u-sidebar > div:first-child + button {
+    display: block;
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: calc(-1 * var(--u-space-2));
+    z-index: 1;
+    width: var(--u-space-4);
+    padding: 0 calc(var(--u-space-2) - 1px);
+    border: 0;
+    background: transparent;
+    background-clip: content-box;
+    cursor: w-resize;
+  }
+
+  u-sidebar > div:first-child + button:hover { background-color: var(--u-nav-edge); }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child + button { cursor: e-resize; }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) {
+    align-items: center;
+    padding-inline: var(--u-space-2);
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > .u-nav { overflow: visible; }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child {
+    position: relative;
+    justify-content: center;
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child > .u-wordmark {
+    justify-content: flex-start;
+    width: var(--u-size-control);
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child > .u-wordmark::before {
+    content: attr(data-monogram);
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    margin-inline: calc((var(--u-size-control) - 24px) / 2);
+    border-radius: var(--u-radius-default);
+    background: var(--u-nav-name);
+    color: var(--u-nav-bg);
+    font-size: var(--u-font-size-body);
+    line-height: 1;
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child > .u-wordmark-serif::before { font-size: calc(var(--u-font-size-body) * 1.25); }
+
+  u-sidebar > div:first-child > button[aria-expanded="false"] {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    opacity: 0;
+  }
+
+  u-sidebar > div:first-child:is(:hover, :has(> button:focus-visible)) > button[aria-expanded="false"] { opacity: 1; }
+
+  u-sidebar > div:first-child:is(:hover, :has(> button:focus-visible)):has(> button[aria-expanded="false"]) > .u-wordmark { visibility: hidden; }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child:not(:first-child) {
+    align-self: stretch;
+    margin-inline: calc(-1 * var(--u-space-2));
+    padding-inline: var(--u-space-2);
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav { gap: var(--u-space-2); }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav > :is(div, details) > :first-child { display: none; }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav > details::details-content { content-visibility: visible; }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)) {
+    position: relative;
+    justify-content: center;
+    width: var(--u-size-control);
+    min-height: var(--u-size-control);
+    padding-inline: 0;
+    border-radius: var(--u-radius-pill);
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)) > span {
+    position: absolute;
+    top: 50%;
+    inset-inline-start: calc(100% + var(--u-space-2));
+    z-index: 100;
+    padding: var(--u-space-1) var(--u-space-2);
+    background: var(--u-nav-current-bg);
+    color: var(--u-nav-current-text);
+    box-shadow: var(--u-shadow-float);
+    font-size: var(--u-font-size-caption);
+    white-space: nowrap;
+    clip-path: inset(50%);
+    translate: 0 -50%;
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)):is(:hover, :focus-visible) { text-decoration: none; }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)):is(:hover, :focus-visible) > span { clip-path: none; }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button {
+    justify-content: center;
+    padding: 0;
+  }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button > :not(:first-child) { display: none; }
+
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button::after { display: none; }
+}
+
+@container u-app-shell (max-width: 1023px) {
+  .u-app-shell > * { grid-column: 1 / -1; }
+
+  .u-app-shell > header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--u-space-4);
+    padding:
+      calc(var(--u-space-2) + env(safe-area-inset-top))
+      calc(var(--u-page-margin) - var(--u-space-2) + env(safe-area-inset-right))
+      var(--u-space-2)
+      calc(var(--u-page-margin) - var(--u-space-2) + env(safe-area-inset-left));
+    border-bottom: 1px solid var(--u-color-divider);
+    background: var(--u-color-bg-paper);
+  }
+
+  .u-app-shell > u-sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 75%;
+    height: auto;
+    padding-top: calc(var(--u-space-6) + env(safe-area-inset-top));
+    padding-inline:
+      calc(var(--u-page-margin) - var(--u-space-2) + env(safe-area-inset-left))
+      calc(var(--u-page-margin) - var(--u-space-2));
+    translate: -100% 0;
+    transition:
+      translate var(--u-motion-exit) var(--u-motion-ease),
+      display var(--u-motion-exit) allow-discrete,
+      overlay var(--u-motion-exit) allow-discrete;
+  }
+
+  .u-app-shell > u-sidebar:not(:popover-open) { display: none; }
+
+  .u-app-shell > u-sidebar:popover-open {
+    translate: 0 0;
+    transition-duration: var(--u-motion-enter);
+  }
+
+  @starting-style {
+    .u-app-shell > u-sidebar:popover-open { translate: -100% 0; }
+  }
+
+  .u-app-shell > u-sidebar::backdrop {
+    background: var(--u-color-backdrop);
+    opacity: 0;
+    transition:
+      opacity var(--u-motion-exit) var(--u-motion-ease),
+      display var(--u-motion-exit) allow-discrete,
+      overlay var(--u-motion-exit) allow-discrete;
+  }
+
+  .u-app-shell > u-sidebar:popover-open::backdrop {
+    opacity: 1;
+    transition-duration: var(--u-motion-enter);
+  }
+
+  @starting-style {
+    .u-app-shell > u-sidebar:popover-open::backdrop { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .u-app-shell > u-sidebar:is(*, :popover-open) { translate: 0 0; }
+  }
+
+  .u-app-shell > u-sidebar:not(:has(> div:last-child:not(:first-child))) { padding-bottom: calc(var(--u-space-6) + env(safe-area-inset-bottom)); }
+
+  .u-app-shell > u-sidebar > div:last-child:not(:first-child) {
+    margin-inline:
+      calc(var(--u-space-2) - var(--u-page-margin) - env(safe-area-inset-left))
+      calc(var(--u-space-2) - var(--u-page-margin));
+    padding-inline:
+      calc(var(--u-page-margin) - var(--u-space-2) + env(safe-area-inset-left))
+      calc(var(--u-page-margin) - var(--u-space-2));
+    padding-bottom: calc(var(--u-space-6) + env(safe-area-inset-bottom));
+  }
+
+
+  .u-app-shell > main { padding-block: var(--u-space-6) calc(var(--u-space-12) + env(safe-area-inset-bottom)); }
+
+  /* The page scrolls on the root, which a container query can't reach, so each target keeps clear of the sticky bars instead. */
+  .u-app-shell > main * { scroll-margin-block-start: calc(var(--u-size-control) + var(--u-space-2) * 2 + 1px + env(safe-area-inset-top)); }
+
+  .u-app-shell:has(> nav) > main * { scroll-margin-block-end: calc(var(--u-space-1) * 7 + 20px + var(--u-font-size-caption) * var(--u-line-height-caption) + 1px + env(safe-area-inset-bottom)); }
+
+  .u-app-shell:has(> nav) > main { padding-bottom: var(--u-space-12); }
+
+  .u-app-shell > nav {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    padding:
+      var(--u-space-1)
+      env(safe-area-inset-right)
+      calc(var(--u-space-1) + env(safe-area-inset-bottom))
+      env(safe-area-inset-left);
+    border: 0;
+    border-top: 1px solid var(--u-nav-line);
+    background: var(--u-nav-bg);
+  }
+
+  .u-app-shell > nav > a {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--u-space-1);
+    min-width: 0;
+    padding-block: var(--u-space-1);
+    color: var(--u-nav-link);
+    font-size: var(--u-font-size-caption);
+    line-height: var(--u-line-height-caption);
+    text-decoration: none;
+  }
+
+  .u-app-shell > nav > a > .u-icon {
+    box-sizing: content-box;
+    padding: var(--u-space-1) var(--u-space-4);
+    border-radius: var(--u-radius-pill);
+  }
+
+  .u-app-shell > nav > a:hover > .u-icon { background: var(--u-nav-line); }
+
+  .u-app-shell > nav > a[aria-current="page"] {
+    color: var(--u-nav-text);
+    font-weight: 500;
+  }
+
+  .u-app-shell > nav > a[aria-current="page"] > .u-icon {
+    background: var(--u-nav-current-bg);
+    color: var(--u-nav-current-text);
+  }
+}
+
+@media (forced-colors: active) {
+  u-sidebar > div:last-child > button::after { background: CanvasText; }
+}
+}

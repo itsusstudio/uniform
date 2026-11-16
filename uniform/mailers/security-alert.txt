@@ -1,0 +1,12 @@
+New sign-in to Workbench
+
+Someone signed in to your account from a new device.
+
+Device:  Firefox on Windows
+Near:    Toronto, ON
+When:    Nov 12, 2:14pm EST
+
+Review your devices:
+https://useworkbench.example/settings/devices
+
+If this was you, there’s nothing to do. If not, sign that device out and reset your password.

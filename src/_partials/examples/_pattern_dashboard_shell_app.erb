@@ -1,0 +1,44 @@
+<%# locals: (id:, live:) -%>
+<div class="u-app-shell">
+  <header>
+    <a class="u-wordmark u-wordmark-serif" href="/" data-monogram="W">Workbench</a>
+    <button type="button" class="u-btn u-btn-ghost"<% if live %> popovertarget="<%= id %>-nav"<% end %>>Menu</button>
+  </header>
+  <%= raw render("examples/app_shell_nav", id: "#{id}-nav", popover: true).strip.gsub("\n", "\n  ") %>
+  <main>
+    <div class="u-container u-stack u-gap-12">
+      <header class="u-page-header">
+        <hgroup>
+          <h1>Jobs</h1>
+          <p><span class="u-text-data">38</span> open, <span class="u-text-data">6</span> due this week</p>
+        </hgroup>
+        <div class="u-actions">
+          <a class="u-btn u-btn-primary" href="/jobs/new"><%= raw render("icon", name: "plus", small: true).strip %>New job</a>
+        </div>
+      </header>
+      <section class="u-card">
+        <header>
+          <h2>Due this week</h2>
+        </header>
+        <div class="u-table" tabindex="0" role="region" aria-label="Due this week">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Job</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Status</th>
+                <th scope="col">Due</th>
+                <th scope="col" class="u-table-num">Quote</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><a class="u-text-data" href="/jobs/1036">#1036</a></td><td>Priya Shah</td><td><span class="u-badge u-badge-danger">Overdue</span></td><td class="u-text-data">Nov 11</td><td class="u-table-num">$25.00</td></tr>
+              <tr><td><a class="u-text-data" href="/jobs/1042">#1042</a></td><td>Ana Reyes</td><td><span class="u-badge u-badge-info">On the bench</span></td><td class="u-text-data">Nov 14</td><td class="u-table-num">$85.00</td></tr>
+              <tr><td><a class="u-text-data" href="/jobs/1039">#1039</a></td><td>Marcus Lee</td><td><span class="u-badge u-badge-warning">Waiting on parts</span></td><td class="u-text-data">Nov 15</td><td class="u-table-num">$40.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

@@ -1,0 +1,7 @@
+<% tone_value = defined?(tone) && tone -%>
+<% still_value = defined?(still) && still -%>
+<div<%= raw %( class="u-toast-#{tone_value}") if tone_value %><%= raw %( data-timeout="0") if still_value %>>
+<p><%= raw message %></p>
+<% if action %><button type="button"><%= action %></button><% end %>
+<button type="button" class="u-btn-close" aria-label="Dismiss"></button>
+</div>

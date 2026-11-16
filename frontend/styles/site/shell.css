@@ -1,0 +1,6 @@
+.content .u-prose > p:first-child {
+  max-width: 48ch;
+  font-size: var(--u-font-size-20);
+  line-height: var(--u-line-height-prose);
+  letter-spacing: -0.01em;
+}

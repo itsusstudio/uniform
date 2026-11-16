@@ -1,0 +1,15 @@
+<% inline = ->(s) { markdownify(s.to_s).strip.delete_prefix("<p>").delete_suffix("</p>") } -%>
+<% names = ->(s) { s.split(/(, | to )/).map { |part| part.match?(/\A(, | to )\z/) ? part : "<code>#{ERB::Util.h(part)}</code>" }.join } -%>
+<% page_titles = site.data.navigation.flat_map { |group| group.items.to_a }.to_h { |item| [item.url, item.title] } -%>
+<% site.data.classes.reject { |entry| entry.page == "/start/reference/" }.group_by(&:group).each do |group, group_entries| -%>
+<h3 id="<%= group.downcase %>"><%= group %></h3>
+<% group_entries.group_by(&:page).each do |page_url, entries| -%>
+<h4><a href="<%= page_url %>"><%= page_titles[page_url] || page_url %></a></h4>
+<dl>
+<% entries.each do |entry| -%>
+<dt id="<%= entry.name.split(/, | to /).first.delete("<>") %>"><%= raw names.(entry.name) %></dt>
+<dd><%= raw inline.(entry.description) %><% if entry["scope"] == "sites" %> <span class="u-badge u-badge-info u-badge-strong">Sites only</span><% end %></dd>
+<% end -%>
+</dl>
+<% end -%>
+<% end -%>

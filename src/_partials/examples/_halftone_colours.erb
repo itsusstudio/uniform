@@ -1,0 +1,8 @@
+<div class="u-grid image-types">
+<% [["ink", "Ink"], ["vermilion", "Vermilion"], ["cobalt", "Cobalt"], ["pine", "Pine"]].each do |file, name| %>
+<figure class="u-span-3 image-type">
+<img class="image-paper" src="<%= relative_url "/images/imagery/tape-halftone-#{file}.webp" %>" width="960" height="960" alt="The tape dispenser printed as <%= name.downcase %> halftone dots on off-white paper">
+<figcaption><%= name %></figcaption>
+</figure>
+<% end %>
+</div>

@@ -1,0 +1,45 @@
+@layer uniform.components {
+.u-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--u-space-6) var(--u-space-12);
+}
+
+.u-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-2);
+  min-width: 0;
+}
+
+.u-stat > * { margin: 0; }
+
+.u-stat > :first-child {
+  font-family: var(--u-font-mono);
+  font-size: var(--u-font-size-32);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: var(--u-line-height-32);
+}
+
+.u-stat > :not(:first-child) {
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+.u-stat > :not(:first-child, a) { color: var(--u-color-text-muted); }
+
+.u-stat > [data-trend]::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-inline-end: var(--u-space-1);
+  background: currentcolor;
+  vertical-align: -3px;
+  mask: url("./../icons/arrow-up.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-stat > [data-trend="down"]::before { mask-image: url("./../icons/arrow-down.svg"); }
+}

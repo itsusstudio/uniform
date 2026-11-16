@@ -1,0 +1,36 @@
+<%# locals: (navigation:, metadata:, current_url:) -%>
+<u-sidebar id="site-nav" popover data-u-audience="business">
+  <div>
+    <a class="u-wordmark u-wordmark-lg u-wordmark-sans" href="<%= relative_url "/" %>">uniform</a>
+    <span class="u-meta">v<%= metadata.version %></span>
+  </div>
+  <nav class="u-nav" aria-label="Uniform">
+  <% navigation.each do |group| %>
+    <% if group.url %>
+      <a class="u-nav-link-section" href="<%= relative_url group.url %>"<% if group.url == current_url %> aria-current="page"<% end %>><%= group.label %></a>
+    <% else %>
+      <div>
+        <p><%= group.label %></p>
+        <ul>
+          <% group.items.each do |item| %>
+            <li>
+              <a href="<%= relative_url item.url %>"<% if item.url == current_url %> aria-current="page"<% end %>><%= item.title %></a>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  <% end %>
+  </nav>
+  <div class="u-stack u-gap-4">
+    <%= render "audience_switch", legend_class: "u-text-small" %>
+    <fieldset class="u-fieldset">
+      <legend class="u-text-small">Theme</legend>
+      <div class="u-toggle-group">
+        <label><input type="radio" name="site-theme" value="system" checked> System</label>
+        <label><input type="radio" name="site-theme" value="light"> Light</label>
+        <label><input type="radio" name="site-theme" value="dark"> Dark</label>
+      </div>
+    </fieldset>
+  </div>
+</u-sidebar>

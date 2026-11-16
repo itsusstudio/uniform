@@ -1,0 +1,54 @@
+@layer uniform.components {
+.u-accordion {
+  display: flex;
+  flex-direction: column;
+}
+
+.u-accordion > details { margin: 0; }
+
+.u-accordion > details + details { border-top: 1px solid var(--u-color-divider); }
+
+.u-accordion > details[open] { padding-bottom: var(--u-space-4); }
+
+.u-accordion > details > * { margin: 0; }
+
+.u-accordion > details > :not(summary) + * { margin-top: var(--u-space-4); }
+
+.u-accordion > details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--u-space-4);
+  min-height: var(--u-size-target);
+  padding: var(--u-space-4) 0;
+  color: var(--u-color-text-default);
+  font-size: var(--u-font-size-body);
+  font-weight: 500;
+  line-height: var(--u-line-height-body);
+  list-style: none;
+  cursor: pointer;
+}
+
+.u-accordion > details > summary::-webkit-details-marker { display: none; }
+
+.u-accordion > details > summary::after {
+  content: "";
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-image: linear-gradient(currentcolor, currentcolor), linear-gradient(currentcolor, currentcolor);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 12px var(--u-icon-stroke), var(--u-icon-stroke) 12px;
+  forced-color-adjust: none;
+}
+
+.u-accordion > details[open] > summary::after { background-size: 12px var(--u-icon-stroke), 0 0; }
+
+.u-accordion > details > summary:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.u-accordion > details[open] > summary { padding-bottom: var(--u-space-2); }
+}

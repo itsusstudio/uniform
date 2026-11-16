@@ -1,0 +1,64 @@
+.examples { margin-block: var(--u-space-6); }
+
+.example {
+  margin: 0;
+  display: grid;
+  gap: var(--u-space-2);
+  align-content: start;
+}
+
+.example-frame {
+  min-width: 0;
+  border: 1px solid var(--u-color-border);
+  background: var(--u-color-bg-surface);
+  padding: var(--u-space-6);
+}
+
+.example-caption {
+  display: grid;
+  grid-template-columns: 8px minmax(0, 1fr);
+  gap: var(--u-space-2);
+  align-items: baseline;
+  max-width: none;
+  color: var(--u-color-text-default);
+  font-size: var(--u-font-size-14);
+}
+
+.example-caption::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+}
+
+.example-caption-dont, .example-caption-do { display: block; }
+
+.nav-dont .u-nav > div > :first-child {
+  color: var(--u-color-text-muted);
+  font-weight: 400;
+}
+
+.nav-dont :is(.u-nav > a, .u-nav li > a) {
+  min-height: 44px;
+  color: var(--u-color-text-default);
+}
+
+.nav-do :is(.u-nav > a, .u-nav li > a) { min-height: var(--u-size-target); }
+
+.example-verdict {
+  display: flex;
+  align-items: center;
+  gap: var(--u-space-2);
+  margin: 0;
+  font-size: var(--u-font-size-16);
+  font-weight: 500;
+}
+
+.example-verdict::before {
+  content: "";
+  width: 12px;
+  height: 12px;
+}
+
+.example-verdict-dont::before { background: var(--u-color-danger); }
+
+.example-verdict-do::before { background: var(--u-color-success); }

@@ -1,0 +1,17 @@
+<%# locals: (id:) -%>
+<% customers = [["Ana Reyes", 18], ["Andre Morin", 41], ["Beatriz Costa", 27], ["Chloe Tremblay", 33], ["Daniel Okafor", 52], ["Elena Petrov", 9], ["Farah Haddad", 64], ["Grace Kim", 12], ["Hiroshi Tanaka", 70], ["Isabelle Roy", 45], ["Jamal Wright", 38], ["Karen O’Brien", 21], ["Liam Murphy", 59], ["Marcus Lee", 7], ["Mei Chen", 66], ["Nadia Rahman", 48], ["Omar Siddiqui", 73], ["Priya Shah", 3], ["Rosa Delgado", 30], ["Sofia Marchetti", 55], ["Tomás Herrera", 62], ["Wei Zhang", 24], ["Yusuf Demir", 69], ["Zoë Campbell", 15]] -%>
+<div class="u-field">
+<label for="<%= id %>">Customer</label>
+<u-combobox>
+<input class="u-input" id="<%= id %>" type="text" role="combobox" aria-expanded="false" aria-controls="<%= id %>-list" aria-autocomplete="list" aria-describedby="<%= id %>-hint" autocomplete="off" placeholder=" ">
+<input type="hidden" name="customer_id">
+<ul id="<%= id %>-list" role="listbox" aria-label="Customers" popover="manual">
+<% customers.each do |name, value| -%>
+<li role="option" aria-selected="false" data-value="<%= value %>"><%= name %></li>
+<% end -%>
+<li role="option" aria-disabled="true" hidden>No customers match</li>
+<li role="option" data-action>New customer</li>
+</ul>
+</u-combobox>
+<small id="<%= id %>-hint">Type a name or pick from your <%= customers.size %> customers.</small>
+</div>

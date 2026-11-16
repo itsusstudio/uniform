@@ -1,0 +1,21 @@
+<%# locals: (name:, size:, state:, kind:) -%>
+<% value_value = (defined?(value) && value) || 0 -%>
+<% photo_value = defined?(photo) && photo -%>
+<% thing = kind == "receipt" ? "Receipts" : "Photos" -%>
+<% types = kind == "receipt" ? "Use a PDF, JPG or PNG." : "Use JPG, PNG or HEIC." -%>
+<% named = name.empty? ? "" : " #{name}" -%>
+<li>
+<% if photo_value -%>
+<img src="<%= relative_url photo_value %>" width="48" height="48" alt="">
+<% else -%>
+<span></span>
+<% end -%>
+<div>
+<p><%= name %></p>
+<p><span class="u-meta"><%= size %></span><span data-dropzone-done<%= " hidden" unless state == "done" %>>Uploaded</span></p>
+<progress max="100" value="<%= value_value %>" aria-label="Uploading<%= named %>"<%= " hidden" unless state == "uploading" %>></progress>
+<p class="u-error" data-dropzone-error="size"<%= " hidden" unless state == "size" %>>Too big. <%= thing %> can be up to 10 MB.</p>
+<p class="u-error" data-dropzone-error="type"<%= " hidden" unless state == "type" %>>That type won’t open here. <%= types %></p>
+</div>
+<button type="button" class="u-btn-close" data-dropzone-remove aria-label="Remove<%= named %>"></button>
+</li>

@@ -1,0 +1,92 @@
+{
+  "plugins": [
+    "stylelint-declaration-strict-value"
+  ],
+  "rules": {
+    "color-no-hex": true,
+    "color-named": "never",
+    "function-disallowed-list": [
+      "rgb",
+      "rgba",
+      "hsl",
+      "hsla",
+      "oklch",
+      "lab",
+      "lch"
+    ],
+    "declaration-no-important": true,
+    "selector-max-id": 0,
+    "scale-unlimited/declaration-strict-value": [
+      [
+        "/color$/",
+        "fill",
+        "stroke",
+        "background",
+        "font-family",
+        "font-size",
+        "gap",
+        "row-gap",
+        "column-gap",
+        "line-height",
+        "/^margin/",
+        "/^padding/",
+        "border-radius"
+      ],
+      {
+        "ignoreValues": [
+          "0",
+          "1",
+          "auto",
+          "inherit",
+          "initial",
+          "unset",
+          "none",
+          "transparent",
+          "currentColor",
+          "currentcolor",
+          "50%",
+          "Canvas",
+          "CanvasText",
+          "GrayText",
+          "Highlight",
+          "HighlightText"
+        ],
+        "expandShorthand": true,
+        "message": "Use a Uniform token (var(--u-*)) for \"${property}\", not \"${value}\"."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "uniform/assets/uniform/tokens.css",
+        "uniform/assets/uniform/fonts.css"
+      ],
+      "rules": {
+        "color-no-hex": null,
+        "scale-unlimited/declaration-strict-value": null
+      }
+    },
+    {
+      "files": [
+        "uniform/assets/uniform/components/**/*.css",
+        "uniform/assets/uniform/base.css"
+      ],
+      "rules": {
+        "declaration-property-value-disallowed-list": [
+          {
+            "font-size": [
+              "/--u-font-size-1[246]\\b/"
+            ],
+            "line-height": [
+              "/--u-line-height-1[246]\\b/"
+            ]
+          },
+          {
+            "message": "Use the role token (--u-font-size-body, -small, -caption) and its line height."
+          }
+        ]
+      }
+    }
+  ]
+}

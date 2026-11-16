@@ -1,0 +1,44 @@
+<div class="annotated">
+<div class="examples u-stack u-gap-12">
+
+<figure class="example">
+<div class="example-frame example-tagged">
+<span class="example-tag">App</span>
+<div class="u-stack u-gap-4 u-max-width-prose">
+<div class="u-actions">
+<button type="button" class="u-btn u-btn-primary" id="motion-add"><%= render "icon", name: "plus", small: false %>Add a job</button>
+<button type="button" class="u-btn u-btn-outline" id="motion-menu-toggle" aria-expanded="false">Menu</button>
+</div>
+<div class="u-menu" id="motion-menu" hidden data-label="instant" data-label-corner>
+<button type="button">Mark ready</button>
+<button type="button">Print ticket</button>
+</div>
+<div class="u-card" data-label="rows fade, space opens and closes" data-label-corner="below">
+<ul class="u-list" id="motion-list">
+<% [["#1042", "Ana Reyes"], ["#1039", "Sam Okafor"], ["#1036", "Lee Martin"]].each do |id, name| %>
+<li class="motion-item"><div class="u-list-item"><span class="u-text-data"><%= id %></span><span><%= name %></span><button type="button" class="u-btn-close" data-motion-remove aria-label="Remove job <%= id %>"></button></div></li>
+<% end %>
+</ul>
+</div>
+</div>
+</div>
+<figcaption class="example-caption"><span>Try it. Adding a job fades it in over 200ms while the space opens. Removing one fades it out over 130ms while the space closes, so you see what changed. The menu appears instantly.</span></figcaption>
+</figure>
+
+<figure class="example">
+<div class="example-frame example-tagged">
+<span class="example-tag">App</span>
+<div class="u-stack u-gap-4 u-max-width-prose">
+<div class="u-progress">
+<p data-label="progress, the bar moves">Sending 24 texts</p>
+<progress id="motion-progress" max="24" value="0">0 of 24</progress>
+<p id="motion-progress-text">0 of 24 sent</p>
+</div>
+<div class="u-actions"><button type="button" class="u-btn u-btn-outline" id="motion-progress-start">Start</button></div>
+</div>
+</div>
+<figcaption class="example-caption"><span>A progress bar when the wait is known. When it isn't, shimmer placeholders stand in. No spinners filling the page.</span></figcaption>
+</figure>
+
+</div>
+</div>

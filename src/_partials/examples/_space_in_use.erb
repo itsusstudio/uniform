@@ -1,0 +1,133 @@
+<div class="examples u-stack u-gap-12 step-filter" data-show="all">
+
+<div class="u-row u-gap-2 step-legend" role="group" aria-label="Show spacing steps">
+<button type="button" class="u-toggle step-chip" data-step-filter="all" aria-pressed="true">All</button>
+<button type="button" class="u-toggle step-chip" data-step-filter="inside" data-step="inside" aria-pressed="false"><i></i>space-1 · 4</button>
+<button type="button" class="u-toggle step-chip" data-step-filter="together" data-step="together" aria-pressed="false"><i></i>space-2 · 8</button>
+<button type="button" class="u-toggle step-chip" data-step-filter="group" data-step="group" aria-pressed="false"><i></i>space-4 · 16</button>
+<button type="button" class="u-toggle step-chip" data-step-filter="block" data-step="block" aria-pressed="false"><i></i>space-6 · 24</button>
+<button type="button" class="u-toggle step-chip" data-step-filter="section" data-step="section" aria-pressed="false"><i></i>space-12 · 48</button>
+<button type="button" class="u-toggle step-chip" data-step-filter="chapter" data-step="chapter" aria-pressed="false"><i></i>space-24 · 96</button>
+</div>
+
+<figure class="example">
+<div class="example-frame example-tagged anatomy">
+<span class="example-tag">App</span>
+<div class="step-view anatomy-card step-pad" data-step="block">
+<div class="u-stack u-gap-6 step" data-step="block">
+<hgroup class="step" data-step="together">
+<h3 class="u-text-heading">Job #1042</h3>
+<p>Ana Reyes · dropped off Nov 10</p>
+</hgroup>
+<div class="u-row u-gap-2 step u-text-small" data-step="together">
+<span class="u-badge u-badge-info step" data-step="inside">On the bench</span>
+<span class="u-text-muted">Due Nov 14</span>
+</div>
+<div class="u-stack u-gap-4 step" data-step="group">
+<div class="u-field step" data-step="together">
+<label for="anatomy-notes">Notes</label>
+<input id="anatomy-notes" class="u-input" value="Resize from 6 to 7" placeholder=" ">
+</div>
+<div class="u-field step" data-step="together">
+<label for="anatomy-quote">Quote</label>
+<input id="anatomy-quote" class="u-input u-text-data" value="$85.00" placeholder=" ">
+</div>
+</div>
+<div class="u-row u-gap-2 step" data-step="together">
+<span class="u-btn u-btn-primary">Save</span>
+<span class="u-btn u-btn-outline">Cancel</span>
+</div>
+</div>
+</div>
+<div class="u-stack u-gap-4 anatomy-notes u-text-small">
+<p><span class="u-text-data u-text-strong">space-6</span> (24px) pads the card and separates its four blocks: heading, status, fields and actions.</p>
+<p><span class="u-text-data u-text-strong">space-2</span> (8px) joins the parts of one thing: title and meta, label and input, the two buttons, the status and its due date.</p>
+<p><span class="u-text-data u-text-strong">space-4</span> (16px) separates the two fields. Further apart than a label from its input, closer than one block from the next.</p>
+<p><span class="u-text-data u-text-strong">space-1</span> (4px) sits between the status square and its word.</p>
+</div>
+</div>
+<figcaption class="example-caption"><span>One app card with every gap tinted by its step. Each level out is at least twice the one inside it.</span></figcaption>
+</figure>
+
+<figure class="example">
+<div class="example-frame example-tagged anatomy">
+<span class="example-tag">App</span>
+<div class="step-view anatomy-card step-pad" data-step="block">
+<div class="u-stack u-gap-6 step" data-step="block">
+<hgroup class="step" data-step="together">
+<h3 class="u-text-heading">Sign in to Workbench</h3>
+<p>We’ll email you a code. No password to remember.</p>
+</hgroup>
+<div class="u-stack u-gap-4 step" data-step="group">
+<div class="u-field step" data-step="together">
+<label for="auth-email">Email address</label>
+<input id="auth-email" class="u-input" type="email" value="ana@benchandco.ca" placeholder=" ">
+</div>
+<label class="u-checkbox step" data-step="inside"><input type="checkbox" checked><span>Keep me signed in</span></label>
+</div>
+<span class="u-btn u-btn-primary">Email me a code</span>
+<p class="u-text-small u-text-muted">New here? <a href="#in-use">Create an account</a></p>
+</div>
+</div>
+<div class="u-stack u-gap-4 anatomy-notes u-text-small">
+<p><span class="u-text-data u-text-strong">space-6</span> (24px) pads the card and separates the heading, the fields, the button and the note under it.</p>
+<p><span class="u-text-data u-text-strong">space-2</span> (8px) joins the title to its hint, and the label to its input.</p>
+<p><span class="u-text-data u-text-strong">space-4</span> (16px) separates the email field from the checkbox below it.</p>
+<p><span class="u-text-data u-text-strong">space-1</span> (4px) sits between the checkbox and its words.</p>
+</div>
+</div>
+<figcaption class="example-caption"><span>Sign-in card. The same four steps as the job card, so every form in every app is spaced the same way.</span></figcaption>
+</figure>
+
+<figure class="example">
+<div class="example-frame example-tagged anatomy">
+<span class="example-tag">App</span>
+<div class="step-view">
+<div class="u-stack u-gap-12 step" data-step="section">
+<hgroup class="step" data-step="together">
+<h3 class="u-text-page-title">Jobs</h3>
+<p>12 open, 3 ready for pickup</p>
+</hgroup>
+<div class="u-stack u-gap-4 step" data-step="group">
+<h4 class="u-text-heading">Ready for pickup</h4>
+<p class="u-text-small"><span class="u-text-data">#1031</span> Mia Chen, chain repair</p>
+<p class="u-text-small"><span class="u-text-data">#1027</span> Sam Okafor, ring resize</p>
+</div>
+<div class="u-stack u-gap-4 step" data-step="group">
+<h4 class="u-text-heading">On the bench</h4>
+<p class="u-text-small"><span class="u-text-data">#1042</span> Ana Reyes, ring resize</p>
+<p class="u-text-small"><span class="u-text-data">#1039</span> Lee Martin, watch battery</p>
+</div>
+</div>
+</div>
+<div class="u-stack u-gap-4 anatomy-notes u-text-small">
+<p><span class="u-text-data u-text-strong">space-12</span> (48px) is the big break between the parts of the page: under the “Jobs” title, and between “Ready for pickup” and “On the bench”.</p>
+<p><span class="u-text-data u-text-strong">space-4</span> (16px) sits between “Ready for pickup” and each job listed under it.</p>
+<p><span class="u-text-data u-text-strong">space-2</span> (8px) joins “Jobs” to the line under it, “12 open, 3 ready for pickup”.</p>
+</div>
+</div>
+<figcaption class="example-caption"><span>App page. Space-12 is the biggest gap in an app, used between the main parts of a page.</span></figcaption>
+</figure>
+
+<figure class="example">
+<div class="example-frame example-tagged">
+<span class="example-tag">Site</span>
+<div class="step-view">
+<div class="u-stack u-gap-24 step" data-step="chapter">
+<div class="u-stack u-gap-6 step" data-step="block">
+<h3 class="u-text-section-title">Every repair, tracked</h3>
+<p class="u-text-body">From the counter to pickup, in one list.</p>
+</div>
+<div class="u-stack u-gap-6 step" data-step="block">
+<h3 class="u-text-section-title">Customers stop calling</h3>
+<p class="u-text-body">They get a text when the job is ready.</p>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="example-caption"><span>Marketing site. Sections sit space-24 (96px) apart, so each one reads as its own idea. Inside a section, space-6 (24px) between the title and what follows. Space-24 is only for sites.</span></figcaption>
+</figure>
+
+
+
+</div>

@@ -1,0 +1,107 @@
+@layer uniform.components {
+u-toast {
+  position: fixed;
+  inset: auto var(--u-space-6) var(--u-space-6) var(--u-space-6);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--u-space-2);
+  pointer-events: none;
+}
+
+@supports (anchor-name: --u-app-main) {
+  u-toast {
+    right: calc(anchor(--u-app-main right, 0px) + var(--u-space-6));
+    bottom: calc(anchor(--u-app-tabs top, 0px) + var(--u-space-6));
+    left: calc(anchor(--u-app-main left, 0px) + var(--u-space-6));
+  }
+}
+
+u-toast > div {
+  display: flex;
+  align-items: center;
+  gap: var(--u-space-2);
+  width: max-content;
+  max-width: min(400px, 100%);
+  min-height: var(--u-space-12);
+  padding: var(--u-space-2) var(--u-space-2) var(--u-space-2) var(--u-space-4);
+  border-radius: var(--u-radius-default);
+  background: var(--u-color-text-default);
+  color: var(--u-color-bg-surface);
+  box-shadow: var(--u-shadow-float);
+  font-size: var(--u-font-size-small);
+  pointer-events: auto;
+  position: relative;
+  overflow: clip;
+  touch-action: pan-x;
+  transition: translate var(--u-motion-exit) var(--u-motion-ease), opacity var(--u-motion-exit) var(--u-motion-ease);
+}
+
+u-toast > div[data-dragging] { transition: none; }
+
+.u-toast-danger {
+  background: var(--u-color-danger);
+  color: var(--u-color-text-on-danger);
+}
+
+@property --u-toast-left {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 100%;
+}
+
+u-toast > div[style*="--u-toast-time"] { animation: u-toast-time var(--u-toast-time) linear forwards; }
+
+u-toast > div[data-paused] { animation-play-state: paused; }
+
+u-toast > div[style*="--u-toast-time"] > .u-btn-close { position: relative; }
+
+u-toast > div[style*="--u-toast-time"] > .u-btn-close::after {
+  content: "";
+  position: absolute;
+  inset: var(--u-space-1);
+  border: 2px solid currentcolor;
+  border-radius: 50%;
+  mask: conic-gradient(currentcolor var(--u-toast-left), transparent 0);
+  pointer-events: none;
+}
+
+@keyframes u-toast-time {
+  from { --u-toast-left: 100%; }
+  to { --u-toast-left: 0%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  u-toast > div > .u-btn-close::after { display: none; }
+}
+
+u-toast > div > p {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+u-toast > div > button:not(.u-btn-close) {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--u-size-target);
+  padding: 0 var(--u-space-2);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 500;
+  text-decoration: underline;
+  border-radius: var(--u-radius-pill);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+u-toast > div > .u-btn-close { color: inherit; }
+
+u-toast > div > .u-btn-close:hover,
+u-toast > div > button:not(.u-btn-close):hover { background: color-mix(in srgb, currentColor 15%, transparent); }
+
+u-toast > div :focus-visible { outline-color: currentColor; }
+}

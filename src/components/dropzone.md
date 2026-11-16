@@ -1,0 +1,242 @@
+---
+layout: page
+title: Dropzone
+summary: "A file input with a drop area and file rows."
+section: Components
+permalink: /components/dropzone/
+---
+
+A dropzone adds files to a form, picked or dropped. Each file gets a row, to watch it upload or take it out.
+
+## Example
+
+<div class="example-frame">
+<div class="u-max-width-form">
+<%= render "examples/dropzone_photos", id: "dz-live" %>
+</div>
+</div>
+
+Drop photos on the area, or click it to choose them. Each file gets a row with a
+thumbnail, its size and an upload bar, then a check. A file over 10 MB, or one
+that isn't a JPG, PNG or HEIC, gets a row with the reason and stays out of the
+form. Nothing really uploads here.
+
+<script>
+document.getElementById("dz-live-field").addEventListener("dropzone:change", (event) => {
+  event.detail.added.filter((item) => !item.error).forEach(({ row }) => {
+    const bar = row.querySelector("progress")
+    const done = row.querySelector("[data-dropzone-done]")
+    bar.value = 0
+    bar.hidden = false
+    const timer = setInterval(() => {
+      bar.value = Math.min(bar.max, bar.value + 10)
+      if (bar.value < bar.max) return
+      clearInterval(timer)
+      bar.hidden = true
+      done.hidden = false
+    }, 120)
+  })
+})
+</script>
+
+## States
+
+<div class="u-grid">
+<div class="u-span-6 u-stack u-gap-2">
+<p class="u-text-small u-text-strong">Files over the area</p>
+<div class="example-frame">
+<div class="u-field">
+<%= render "examples/dropzone_area", id: "dz-over", label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true, over: true %>
+</div>
+</div>
+</div>
+<div class="u-span-6 u-stack u-gap-2">
+<p class="u-text-small u-text-strong">Uploading, done and too big</p>
+<div class="example-frame">
+<div class="u-field">
+<%= render "examples/dropzone_area", id: "dz-rows", label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true %>
+<ul class="u-list">
+<%= render "examples/dropzone_file", name: "IMG_4821.HEIC", size: "2.4 MB", state: "done", kind: "photos", photo: "/images/dropzone/ring-4821.webp" %>
+<%= render "examples/dropzone_file", name: "IMG_4822.HEIC", size: "3.1 MB", state: "uploading", kind: "photos", value: 60, photo: "/images/dropzone/ring-4822.webp" %>
+<%= render "examples/dropzone_file", name: "IMG_4823.HEIC", size: "14.2 MB", state: "size", kind: "photos" %>
+</ul>
+</div>
+</div>
+</div>
+<div class="u-span-6 u-stack u-gap-2">
+<p class="u-text-small u-text-strong">One file</p>
+<div class="example-frame">
+<div class="u-field">
+<%= render "examples/dropzone_area", id: "dz-receipt", label: "Receipt for the part", drop: "Drop the receipt here", choose: "choose a file", hint: "PDF, JPG or PNG, up to 10 MB.", accept: "application/pdf,image/jpeg,image/png" %>
+<ul class="u-list">
+<%= render "examples/dropzone_file", name: "receipt-crown-and-stem.pdf", size: "182 KB", state: "done", kind: "receipt" %>
+</ul>
+</div>
+</div>
+</div>
+<div class="u-span-6 u-stack u-gap-2">
+<p class="u-text-small u-text-strong">Error and disabled</p>
+<div class="example-frame u-stack u-gap-6">
+<div class="u-field">
+<%= render "examples/dropzone_area", id: "dz-error", label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true, invalid: true, describedby: "dz-error-message" %>
+<p class="u-error" id="dz-error-message">Add at least one photo of the piece.</p>
+</div>
+<div class="u-field">
+<%= render "examples/dropzone_area", id: "dz-disabled", label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true, disabled: true, describedby: "dz-disabled-why" %>
+<small id="dz-disabled-why">Photos are locked once the job is picked up.</small>
+</div>
+</div>
+</div>
+</div>
+
+Files over the area
+: The edge turns ink and the area fills with paper.
+
+Uploading
+: The row shows the file's name, its size and a [progress](/components/progress/) bar that your upload code fills.
+
+Done
+: A check and "Uploaded" replace the bar. Photos show a thumbnail. Files the browser can't preview, like a PDF or a HEIC photo in Chrome, show a file icon.
+
+Too big or the wrong type
+: The row stays, with a `u-error` that says what fits: "Too big. Photos can be up to 10 MB." The file stays out of the form.
+
+Error
+: For a problem with the whole field, set `aria-invalid="true"` on the input and add a `u-error` under the area, as on a [text field](/components/text-field/). The edge turns vermilion.
+
+Disabled
+: Disable the input to grey out the area and stop it taking files. Say why in a hint.
+
+## Code
+
+```html
+<u-dropzone>
+  <div class="u-field">
+    <label id="intake-label" for="intake-photos">Photos of the piece</label>
+    <label class="u-dropzone">
+      <input id="intake-photos" type="file" name="photos[]"
+        accept="image/jpeg,image/png,image/heic,.heic" multiple data-max-size="10485760"
+        aria-labelledby="intake-label" aria-describedby="intake-hint">
+      <span>Drop photos here or <span class="u-dropzone-link">choose files</span></span>
+      <small id="intake-hint">JPG, PNG or HEIC, up to 10 MB each.</small>
+    </label>
+    <ul class="u-list" aria-live="polite" hidden></ul>
+    <template>
+      <li>
+        <span></span>
+        <div>
+          <p></p>
+          <p><span class="u-meta"></span><span data-dropzone-done hidden>Uploaded</span></p>
+          <progress max="100" value="0" aria-label="Uploading" hidden></progress>
+          <p class="u-error" data-dropzone-error="size" hidden>Too big. Photos can be up to 10 MB.</p>
+          <p class="u-error" data-dropzone-error="type" hidden>That type won’t open here. Use JPG, PNG or HEIC.</p>
+        </div>
+        <button type="button" class="u-btn-close" data-dropzone-remove aria-label="Remove"></button>
+      </li>
+    </template>
+  </div>
+</u-dropzone>
+```
+
+```erb
+<u-dropzone>
+  <div class="u-field">
+    <%%= form.label :photos, t(".photos"), id: form.field_id(:photos, :label) %>
+    <label class="u-dropzone">
+      <%%= form.file_field :photos, multiple: true,
+        accept: "image/jpeg,image/png,image/heic,.heic", data: { max_size: 10.megabytes },
+        aria: { labelledby: form.field_id(:photos, :label), describedby: form.field_id(:photos, :hint) } %>
+      <span><%%= t(".drop_html", choose: tag.span(t(".choose_files"), class: "u-dropzone-link")) %></span>
+      <small id="<%%= form.field_id(:photos, :hint) %>"><%%= t(".photos_hint", size: number_to_human_size(10.megabytes)) %></small>
+    </label>
+    <ul class="u-list" aria-live="polite" hidden></ul>
+    <template>
+      <li>
+        <span></span>
+        <div>
+          <p></p>
+          <p><span class="u-meta"></span><span data-dropzone-done hidden><%%= t(".uploaded") %></span></p>
+          <progress max="100" value="0" aria-label="<%%= t(".uploading") %>" hidden></progress>
+          <p class="u-error" data-dropzone-error="size" hidden><%%= t(".too_big", size: number_to_human_size(10.megabytes)) %></p>
+          <p class="u-error" data-dropzone-error="type" hidden><%%= t(".wrong_type") %></p>
+        </div>
+        <button type="button" class="u-btn-close" data-dropzone-remove aria-label="<%%= t(".remove") %>"></button>
+      </li>
+    </template>
+  </div>
+</u-dropzone>
+```
+
+Attributes
+: `accept` sets the file types, `multiple` allows several files, and `data-max-size` sets the limit in bytes. The `<template>` is the row copied for each file, so its words stay in your markup for translation.
+
+The script
+: Load [`uniform.js`](/start/install/) and wrap the `u-field` in `<u-dropzone>`. Without it, picking and dropping still work, but no rows show.
+
+Uploading
+: The files go up with the form. For progress bars with Active Storage `direct_upload: true`, set each row's `<progress>` on `direct-upload:progress`, then show its `data-dropzone-done` span.
+
+On phones
+: A tap opens the phone's picker, with the camera and the photo library. Add `capture="environment"` only when every file is a new photo, because some phones then skip the library.
+
+## Parts
+
+<%= render "classes", classes_page: "/components/dropzone/" %>
+
+## Do and don't
+
+<div class="examples u-grid u-gap-6">
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-dont">Don’t</p>
+<div class="example-frame">
+<div class="u-field">
+<label for="dz-dont">Photos of the piece</label>
+<label class="u-dropzone">
+<input id="dz-dont" type="file" accept="image/jpeg,image/png,image/heic,.heic" multiple>
+<span>Drop photos here or <span class="u-dropzone-link">choose files</span></span>
+</label>
+<ul class="u-list">
+<%= render "examples/dropzone_file", name: "IMG_4823.HEIC", size: "14.2 MB", state: "size", kind: "photos" %>
+</ul>
+</div>
+</div>
+<figcaption class="example-caption example-caption-dont"><span>Keeping the limits quiet until someone breaks one. They find out after choosing the file.</span></figcaption>
+</figure>
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-do">Do</p>
+<div class="example-frame">
+<div class="u-field">
+<%= render "examples/dropzone_area", id: "dz-do", label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true %>
+</div>
+</div>
+<figcaption class="example-caption example-caption-do"><span>Say the types and the size limit in the hint, so the right file gets picked the first time.</span></figcaption>
+</figure>
+</div>
+
+## Accessibility
+
+A real file input
+: Screen readers announce a file button with its label. It works with a keyboard, a switch or voice control.
+
+Keyboard
+: Tab reaches the area and rings all of it in focus. Enter or Space opens the picker. Each remove button comes right after its row in the tab order.
+
+Name and hint
+: Point `aria-labelledby` at the field's `<label>`, and `aria-describedby` at the hint, plus the error when there is one. This keeps "Drop photos here or choose files" out of the name, so it reads "Photos of the piece, JPG, PNG or HEIC, up to 10 MB each".
+
+Changes are announced
+: The file list is `aria-live="polite"`, so a new row or a "Too big" reason is read out. Removing a file puts focus back on the area.
+
+Dragging is optional
+: Choosing files always works. Never make dropping the only way in.
+
+## Rules
+
+Say what fits
+: Put the accepted types and the size limit in the hint, before anyone picks a file.
+
+A row for every file
+: Each file shows its name, its size and a remove button. Files that don't fit stay in the list with the reason.
+
+Check again on the server
+: The script only turns away files it can tell won't fit. Your server checks size and type again and does the upload.

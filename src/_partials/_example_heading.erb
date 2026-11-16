@@ -1,0 +1,6 @@
+<% example_heading_text = defined?(heading_text) && heading_text || "Example" -%>
+<% example_heading_id = defined?(heading_id) && heading_id || "example" -%>
+<div class="u-row u-gap-4">
+<h2 id="<%= example_heading_id %>"><%= example_heading_text %></h2>
+<%= render "audience_switch", legend_hidden: true %>
+</div>

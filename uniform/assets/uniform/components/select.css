@@ -1,0 +1,101 @@
+@layer uniform.components {
+select.u-input {
+  --u-select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1a18' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --u-select-chevron-disabled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238c8981' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  padding-right: calc(var(--u-space-2) + 16px + var(--u-space-2));
+  background-image: var(--u-select-chevron);
+  background-position: right var(--u-space-2) center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  cursor: pointer;
+}
+
+.u-row > select.u-input { width: auto; }
+
+select.u-input:disabled {
+  background-image: var(--u-select-chevron-disabled);
+  background-position: right var(--u-space-2) center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  cursor: not-allowed;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-u-theme="light"]) select.u-input {
+    --u-select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ecebe6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    --u-select-chevron-disabled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2375726b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+}
+
+:root[data-u-theme="dark"] select.u-input {
+  --u-select-chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ecebe6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  --u-select-chevron-disabled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2375726b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}
+
+[data-u-audience="consumer"] select.u-input {
+  padding-right: calc(var(--u-space-4) + 16px + var(--u-space-2));
+  background-position: right var(--u-space-4) center;
+}
+
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + select) > select.u-input { background-position: right var(--u-space-4) top calc(var(--u-size-field) / 2 + var(--u-space-2) - 8px); }
+
+@media (pointer: fine) {
+  @supports (appearance: base-select) {
+    select.u-input,
+    select.u-input::picker(select) { appearance: base-select; }
+
+    select.u-input {
+      display: flex;
+      align-items: center;
+    }
+
+    select.u-input::picker-icon { display: none; }
+
+    select.u-input::picker(select) {
+      margin-block: var(--u-space-1);
+      padding: var(--u-space-1) 0;
+      border: 1px solid var(--u-color-border);
+      border-radius: var(--u-radius-default);
+      background: var(--u-color-bg-surface);
+      color: var(--u-color-text-default);
+      box-shadow: var(--u-shadow-float);
+      font-size: var(--u-font-size-small);
+    }
+
+    select.u-input option {
+      display: flex;
+      align-items: center;
+      gap: var(--u-space-2);
+      min-height: var(--u-size-target);
+      padding: 0 var(--u-space-4);
+      background: transparent;
+      color: var(--u-color-text-default);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    select.u-input option:is(:hover, :focus-visible) {
+      outline-offset: -2px;
+      background: var(--u-color-divider);
+    }
+
+    select.u-input option:checked { font-weight: 500; }
+
+    select.u-input option::checkmark {
+      content: "";
+      order: 1;
+      width: 16px;
+      height: 16px;
+      margin-inline-start: auto;
+      background: currentcolor;
+      mask: url("./../icons/check.svg") center / contain no-repeat;
+      forced-color-adjust: none;
+    }
+
+    select.u-input option:disabled {
+      color: var(--u-color-border-input);
+      cursor: not-allowed;
+    }
+  }
+}
+}

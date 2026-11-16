@@ -1,0 +1,53 @@
+@layer uniform.components {
+.u-dialog {
+  width: calc(100% - 2 * var(--u-space-4));
+  max-width: 480px;
+  max-height: calc(100% - 2 * var(--u-space-6));
+  margin: auto;
+  padding: 0;
+  overflow-y: auto;
+  border: 1px solid var(--u-color-border);
+  border-radius: var(--u-radius-default);
+  background: var(--u-color-bg-surface);
+  color: var(--u-color-text-default);
+  box-shadow: var(--u-shadow-float);
+}
+
+.u-dialog::backdrop { background: var(--u-color-backdrop); }
+
+.u-dialog:modal { overscroll-behavior: contain; }
+
+/* overflow: hidden makes the backdrop a scroll container, or overscroll-behavior is ignored on it. */
+.u-dialog:modal::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+
+.u-dialog > form { margin: 0; }
+
+.u-dialog .u-card-content { font-size: var(--u-font-size-small); }
+
+@media (max-width: 639px) {
+  .u-dialog-sheet {
+    width: 100%;
+    max-width: none;
+    max-height: calc(100% - var(--u-space-12) - env(safe-area-inset-top));
+    margin: auto 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    border-width: 1px 0 0;
+    border-radius: var(--u-radius-default) var(--u-radius-default) 0 0;
+  }
+
+  :is(.u-dialog-sheet, .u-dialog-sheet > form) > .u-actions > .u-btn {
+    flex: 1 1 calc(50% - var(--u-space-1));
+    min-width: max-content;
+  }
+
+  :is(.u-dialog-sheet, .u-dialog-sheet > form) > .u-actions:has(> :nth-child(3)) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  :is(.u-dialog-sheet, .u-dialog-sheet > form) > .u-actions:has(> :nth-child(3)) > .u-btn { flex: none; }
+}
+}

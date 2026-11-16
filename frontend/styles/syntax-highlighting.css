@@ -1,0 +1,1 @@
+.highlight :is(.c, .c1, .cm, .cd, .cs, .cp) { color: var(--u-color-text-muted); }

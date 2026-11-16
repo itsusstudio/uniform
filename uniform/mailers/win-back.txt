@@ -1,0 +1,8 @@
+Your jobs are still here
+
+Your jobs, customers and photos are where you left them.
+
+Open Workbench:
+https://useworkbench.example/jobs
+
+If Workbench isn’t working for the shop, reply and tell us why.

@@ -1,0 +1,108 @@
+<%
+  grid_id = (defined?(id) && id) || "jobs-grid"
+  ticked = (defined?(selected) && selected) || []
+  query = (defined?(search) && search) || nil
+  statuses = { "Not started" => "neutral", "On the bench" => "info", "Waiting on parts" => "warning", "Quote to approve" => "warning", "Overdue" => "danger", "Ready for pickup" => "success" }
+  jobs = [
+    ["1036", "Priya Shah", "Watch battery", "Overdue", "2026-11-11", "Dana Whitfield", "$25.00"],
+    ["1039", "Marcus Lee", "Chain repair", "Waiting on parts", "2026-11-15", "Sam Okafor", "$40.00"],
+    ["1041", "Grace Kim", "Prong retip", "On the bench", "2026-11-12", "Dana Whitfield", "$55.00"],
+    ["1042", "Ana Reyes", "Ring resize, size 6 to 7", "On the bench", "2026-11-14", "Sam Okafor", "$85.00"],
+    ["1051", "Ana Reyes", "New crown and full service", "Quote to approve", "2026-11-20", "Dana Whitfield", "$140.00"]
+  ]
+  short_date = ->(iso) { Date.parse(iso).strftime("%b %-d") }
+  jobs = jobs.select { |job| job[1].downcase.include?(query) } if query
+  marked = ->(text) { query ? text.sub(/(#{Regexp.escape(query)})/i, "<mark>\\1</mark>") : text }
+-%>
+<u-data-grid id="<%= grid_id %>">
+  <div class="u-stack u-gap-4">
+    <search class="u-table-controls">
+      <form action="/jobs" method="get">
+        <div class="u-input-prefixed">
+          <input class="u-input" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" aria-label="Search jobs" placeholder="Name, job number or phone"<% if query %> value="<%= query %>"<% end %>>
+        </div>
+        <%= raw render("examples/table_presets", id: "#{grid_id}-presets").strip.gsub("\n", "\n        ") %>
+        <%= raw render("examples/table_filter", id: "#{grid_id}-filter", selected: { "due" => "month" }, clear: "?sort=due&amp;dir=asc").strip.gsub("\n", "\n        ") %>
+        <button type="button" class="u-btn u-btn-outline" popovertarget="<%= grid_id %>-columns"><%= raw render("icon", name: "sliders-horizontal", small: true).strip %>View</button>
+      </form>
+      <form id="<%= grid_id %>-bulk" action="/jobs/bulk" method="post" aria-label="Selected jobs">
+        <span><output><%= ticked.size %></output> selected</span>
+        <button type="submit" class="u-btn u-btn-primary" name="bulk_action" value="ready">Mark ready</button>
+        <button type="reset" class="u-btn u-btn-ghost">Clear selection</button>
+      </form>
+      <ul aria-label="Filters">
+<% if query -%>
+        <li class="u-chip">Search: “<%= query %>”<a href="?due=month&amp;sort=due&amp;dir=asc" aria-label="Remove filter: Search: <%= query %>"></a></li>
+<% end -%>
+        <li class="u-chip">Due this month<a href="?sort=due&amp;dir=asc" aria-label="Remove filter: Due this month"></a></li>
+        <li><a class="u-btn u-btn-ghost" href="?sort=due&amp;dir=asc">Clear all</a></li>
+      </ul>
+    </search>
+    <section class="u-card" aria-label="Jobs">
+      <div class="u-table" tabindex="0" role="region" aria-label="Jobs">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">
+                <div class="u-row u-gap-4">
+                  <label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden">Select all jobs</span></label>
+                  Job
+                </div>
+              </th>
+              <th scope="col" data-keep-narrow>Customer</th>
+              <th scope="col">Work</th>
+              <th scope="col" data-keep-narrow>Status</th>
+              <th scope="col" aria-sort="ascending" data-keep-narrow><a class="u-table-sort" href="?due=month&amp;sort=due&amp;dir=desc">Due</a></th>
+              <th scope="col">Jeweller</th>
+              <th scope="col" class="u-table-num" data-keep-narrow><a class="u-table-sort" href="?due=month&amp;sort=quote&amp;dir=asc">Quote</a></th>
+              <th scope="col" aria-label="Actions"></th>
+            </tr>
+          </thead>
+          <tbody>
+<% jobs.each do |number, customer, work, status, due, jeweller, quote| -%>
+            <tr>
+              <th scope="row">
+                <div class="u-row u-gap-4">
+                  <label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="<%= number %>" form="<%= grid_id %>-bulk"<% if ticked.include?(number) %> checked<% end %>><span class="u-visually-hidden">Select job #<%= number %></span></label>
+                  <a class="u-text-data" href="/jobs/<%= number %>">#<%= number %></a>
+                </div>
+              </th>
+              <td><%= raw marked.(customer) %></td>
+              <td><%= work %></td>
+              <td<% if number == "1042" %> class="u-data-grid-changed"<% end %>><span class="u-badge u-badge-<%= statuses[status] %>"><%= status %></span><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><select class="u-input" name="job[status]"><% statuses.each_key do |option| %><option<% if option == status %> selected<% end %>><%= option %></option><% end %></select></form></template></td>
+              <td class="u-text-data"><%= short_date.(due) %><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><input class="u-input u-text-data" type="date" name="job[due_on]" value="<%= due %>"></form></template></td>
+              <td><%= jeweller %></td>
+              <td class="u-table-num"><%= quote %></td>
+              <td>
+                <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="<%= grid_id %>-job-<%= number %>" aria-label="Actions for job #<%= number %>"><%= raw render("icon", name: "ellipsis", small: true).strip %></button>
+                <div class="u-menu" id="<%= grid_id %>-job-<%= number %>" popover>
+                  <hgroup><h2>Job #<%= number %></h2></hgroup>
+                  <a href="/jobs/<%= number %>/edit">Edit job</a>
+                  <a href="/jobs/<%= number %>/ticket.pdf">Print ticket</a>
+                  <hr>
+                  <a href="/jobs/<%= number %>/texts/new">Text <%= customer %></a>
+                </div>
+              </td>
+            </tr>
+<% end -%>
+          </tbody>
+        </table>
+      </div>
+      <div class="u-menu" id="<%= grid_id %>-columns" popover>
+        <hgroup>
+          <h2>Columns</h2>
+          <p>The job number always shows.</p>
+        </hgroup>
+      </div>
+    </section>
+<% if query -%>
+    <p class="u-meta"><%= jobs.size %> jobs</p>
+<% else -%>
+    <nav class="u-pagination" aria-label="Pages">
+      <a aria-disabled="true" aria-label="Previous page"></a>
+      <span>1–5 of 12</span>
+      <a href="?due=month&amp;sort=due&amp;dir=asc&amp;page=2" rel="next" aria-label="Next page"></a>
+    </nav>
+<% end -%>
+  </div>
+</u-data-grid>

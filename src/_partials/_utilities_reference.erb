@@ -1,0 +1,39 @@
+<% inline = ->(s) { markdownify(s.to_s).strip.delete_prefix("<p>").delete_suffix("</p>") } -%>
+<% names = ->(s) { s.split(/(, | to )/).map { |part| part.match?(/\A(, | to )\z/) ? part : "<code>#{ERB::Util.h(part)}</code>" }.join } -%>
+<%
+  sample = lambda do |entry|
+    first = entry.name.split(/, | to /).first
+    case entry.group
+    when "Spacing"
+      entry.name.split(", ").map { |gap| %(<div class="u-row #{gap}"><span class="reference-example-box u-text-caption">#{gap}</span><span class="reference-example-box u-text-caption">Job</span><span class="reference-example-box u-text-caption">Due</span></div>) }.join
+    when "Backgrounds"
+      %(<div class="#{first} reference-example-swatch u-text-small">Kensington Jewellery Repair</div>)
+    when "Helpers"
+      if first == "u-truncate"
+        %(<p class="u-truncate reference-example-narrow u-text-small">New crown and full service for Ana Reyes, due Nov 20</p>)
+      else
+        %(<p class="u-text-small">Opens the receipt<span class="u-visually-hidden"> (opens in a new tab)</span>, with the hidden part read only by screen readers.</p>)
+      end
+    else
+      case first
+      when "u-wordmark" then %(<a class="u-wordmark u-wordmark-serif" href="#utilities">Workbench</a>)
+      when "u-text-data" then %(<p class="u-text-data">#1042 · Nov 14 · $85.00</p>)
+      when "u-text-hero", "u-text-section-title" then %(<p class="#{first}">One price</p>)
+      else %(<p class="#{first}">Ring resize, size 6 to 7</p>)
+      end
+    end
+  end
+-%>
+<% site.data.classes.select { |entry| entry.page == "/start/reference/" }.group_by(&:group).each do |group, entries| -%>
+<h3 id="utilities-<%= group.downcase %>"><%= group %></h3>
+
+<dl>
+<% entries.each do |entry| -%>
+<dt id="<%= entry.name.split(/, | to /).first.delete("<>") %>"><%= raw names.(entry.name) %></dt>
+<dd>
+<p><%= raw inline.(entry.description) %><% if entry["scope"] == "sites" %> <span class="u-badge u-badge-info u-badge-strong">Sites only</span><% end %></p>
+<div class="reference-example u-stack u-gap-2"><%= raw sample.(entry) %></div>
+</dd>
+<% end -%>
+</dl>
+<% end -%>

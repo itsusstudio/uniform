@@ -1,0 +1,34 @@
+<%
+  panel_id = (defined?(id) && id) || "jobs-filter"
+  picked = (defined?(selected) && selected) || {}
+  clear_href = (defined?(clear) && clear) || "?sort=due&amp;dir=asc"
+  as_code = defined?(code) && code
+  funnel = as_code ? %(<svg class="u-icon u-icon-sm" aria-hidden="true">…</svg>) : render("icon", name: "filter", small: true).strip
+  fields = [
+    ["status", "Status", "Any status", [["not_started", "Not started"], ["on_bench", "On the bench"], ["waiting", "Waiting on parts"], ["overdue", "Overdue"], ["ready", "Ready for pickup"]]],
+    ["due", "Due", "Any time", [["today", "Due today"], ["week", "Due this week"], ["month", "Due this month"], ["later", "Due later"]]],
+    ["jeweller", "Jeweller", "Anyone", [["dana", "Dana Whitfield"], ["sam", "Sam Okafor"], ["tomas", "Tomás Ruiz"]]]
+  ]
+-%>
+<button type="button" class="u-btn u-btn-outline" popovertarget="<%= panel_id %>"><%= raw funnel %>Filter</button>
+<dialog class="u-popover" id="<%= panel_id %>" popover aria-labelledby="<%= panel_id %>-title">
+  <header>
+    <h2 id="<%= panel_id %>-title">Filter</h2>
+    <button type="button" class="u-btn-close" popovertarget="<%= panel_id %>" popovertargetaction="hide" aria-label="Close"></button>
+  </header>
+<% fields.each do |name, label, blank, options| -%>
+  <div class="u-field">
+    <label for="<%= panel_id %>-<%= name %>"><%= label %></label>
+    <select class="u-input" id="<%= panel_id %>-<%= name %>" name="<%= name %>">
+      <option value=""><%= blank %></option>
+<% options.each do |value, words| -%>
+      <option value="<%= value %>"<% if picked[name] == value %> selected<% end %>><%= words %></option>
+<% end -%>
+    </select>
+  </div>
+<% end -%>
+  <div class="u-actions">
+    <a class="u-btn u-btn-ghost" href="<%= clear_href %>">Clear</a>
+    <button type="submit" class="u-btn u-btn-primary">Apply</button>
+  </div>
+</dialog>

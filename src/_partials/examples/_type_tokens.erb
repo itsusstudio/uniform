@@ -1,0 +1,63 @@
+<%
+  css = File.read(File.join(Studio::Uniform.assets_path, "uniform/tokens.css"))
+  declarations = ->(block) { block.to_s.scan(/(--u-[a-z0-9-]+)\s*:\s*([^;]+);/).to_h { |name, value| [name, value.strip.gsub(/\s+/, " ")] } }
+  root = declarations.(css[/^:root \{(.*?)^\}/m, 1])
+  business = declarations.(css[/^\[data-u-audience="business"\] \{(.*?)^\}/m, 1])
+  consumer = declarations.(css[/^\[data-u-audience="consumer"\] \{(.*?)^\}/m, 1])
+  px = ->(value) { value.to_s.gsub(/([\d.]+)rem/) { "#{($1.to_f * 16).round}px" } }
+  resolve = ->(value) { (name = value.to_s[/\Avar\((--u-[a-z0-9-]+)\)\z/, 1]) ? px.(root[name]) : px.(value) }
+  fonts = root.keys.select { |n| n.start_with?("--u-font-") && !n.start_with?("--u-font-size-") }
+  sizes = root.keys.select { |n| n.start_with?("--u-font-size-") }
+  roles = business.keys.select { |n| n.start_with?("--u-font-size-", "--u-line-height-") }
+-%>
+<div class="u-stack u-gap-12">
+<div class="u-table" tabindex="0" role="region" aria-label="Font tokens">
+<table class="reference-tokens">
+<thead><tr><th scope="col">Token</th><th scope="col">Face</th></tr></thead>
+<tbody>
+<% fonts.each do |name| -%>
+<tr>
+<%= render "token_name", token: name %>
+<td><code class="u-text-data"><%= root[name].split(",").first.delete('"') %></code></td>
+</tr>
+<% end -%>
+</tbody>
+</table>
+</div>
+
+<div class="u-table" tabindex="0" role="region" aria-label="Type sizes">
+<table class="reference-tokens">
+<thead><tr><th scope="col">Size</th><th scope="col">Value</th><th scope="col">Line height</th></tr></thead>
+<tbody>
+<% sizes.each do |name| -%>
+<% line = name.sub("font-size", "line-height") -%>
+<tr>
+<%= render "token_name", token: name %>
+<td><code class="u-text-data"><%= px.(root[name]) %></code></td>
+<td><code class="u-text-data"><%= root[line] %></code> <span class="u-meta"><%= line %></span></td>
+</tr>
+<% end -%>
+<tr>
+<%= render "token_name", token: "--u-line-height-prose" %>
+<td></td>
+<td><code class="u-text-data"><%= root["--u-line-height-prose"] %></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="u-table" tabindex="0" role="region" aria-label="Type roles by audience">
+<table class="reference-tokens">
+<thead><tr><th scope="col">Role</th><th scope="col">Business</th><th scope="col">Consumer</th></tr></thead>
+<tbody>
+<% roles.each do |name| -%>
+<tr>
+<%= render "token_name", token: name %>
+<td><code class="u-text-data"><%= resolve.(business[name]) %></code></td>
+<td><code class="u-text-data"><%= resolve.(consumer[name]) %></code></td>
+</tr>
+<% end -%>
+</tbody>
+</table>
+</div>
+</div>

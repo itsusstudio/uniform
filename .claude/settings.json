@@ -1,0 +1,16 @@
+{
+  "enabledPlugins": {
+    "modern-web-guidance@itsusstudio": true,
+    "studio-writer@itsusstudio": true,
+    "studio-designer@itsusstudio": true,
+    "studio-developer@itsusstudio": true
+  },
+  "extraKnownMarketplaces": {
+    "itsusstudio": {
+      "source": {
+        "source": "github",
+        "repo": "itsusstudio/jean-claude"
+      }
+    }
+  }
+}

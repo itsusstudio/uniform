@@ -1,0 +1,60 @@
+@layer uniform.base {
+:where(*, *::before, *::after) {
+  box-sizing: border-box;
+}
+
+:where(html) { -webkit-text-size-adjust: 100%; }
+
+:where(body) {
+  margin: 0;
+  background: var(--u-color-bg-surface);
+  color: var(--u-color-text-default);
+  font-family: var(--u-font-sans);
+  font-size: var(--u-font-size-body);
+  line-height: var(--u-line-height-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(pre) { max-width: 100%; overflow-x: auto; }
+
+/* border-input keeps the thumb at 3:1 or more on surface and paper, in both themes and on ink. */
+:where(body *) {
+  scrollbar-color: var(--u-color-border-input) transparent;
+  scrollbar-width: thin;
+}
+
+@supports not (scrollbar-color: auto) {
+  :where(body *)::-webkit-scrollbar {
+    width: var(--u-space-2);
+    height: var(--u-space-2);
+  }
+
+  :where(body *)::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    border-radius: var(--u-radius-pill);
+    background-color: var(--u-color-border-input);
+    background-clip: padding-box;
+  }
+
+  :where(body *)::-webkit-scrollbar-track,
+  :where(body *)::-webkit-scrollbar-corner { background: transparent; }
+}
+
+:where(figure) { margin: 0; }
+
+:where(a) { color: var(--u-color-link); text-underline-offset: 3px; }
+
+:where(a:has(> .u-icon)) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--u-space-1);
+}
+
+:where(mark) { background: var(--u-color-highlight); color: inherit; }
+
+:where(:focus-visible) { outline: 2px solid var(--u-color-info); outline-offset: 2px; }
+
+:where(u-combobox, u-input-code, u-input-password, u-character-count, u-input-phone, u-dropzone, u-input-colour, u-sidebar, u-chart, u-toast, u-data-grid, u-toggle-panels) { display: block; }
+
+:where(u-toggle) { display: contents; }
+}

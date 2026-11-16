@@ -1,0 +1,12 @@
+<%# locals: (id:, label:, drop:, choose:, hint:, accept:) -%>
+<% many = defined?(multiple) && multiple -%>
+<% over_value = defined?(over) && over -%>
+<% off = defined?(disabled) && disabled -%>
+<% invalid_value = defined?(invalid) && invalid -%>
+<% extra = (defined?(describedby) && describedby) || nil -%>
+<label id="<%= id %>-label" for="<%= id %>"><%= label %></label>
+<label class="u-dropzone<%= " u-dropzone-over" if over_value %>">
+<input id="<%= id %>" type="file" name="<%= id %><%= "[]" if many %>" accept="<%= accept %>" data-max-size="10485760" aria-labelledby="<%= id %>-label" aria-describedby="<%= [ "#{id}-hint", extra ].compact.join(" ") %>"<% if invalid_value %> aria-invalid="true"<% end %><%= " multiple" if many %><%= " disabled" if off %>>
+<span><%= drop %> or <span class="u-dropzone-link"><%= choose %></span></span>
+<small id="<%= id %>-hint"><%= hint %></small>
+</label>

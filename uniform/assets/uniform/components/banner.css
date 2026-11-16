@@ -1,0 +1,45 @@
+@layer uniform.components {
+.u-banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-1);
+  padding: var(--u-space-4) var(--u-space-6);
+  background: var(--u-banner-bg, transparent);
+  color: var(--u-banner-text, inherit);
+  font-size: var(--u-font-size-small);
+}
+
+.u-banner > * { margin: 0; }
+
+.u-banner > .u-actions { margin-top: var(--u-space-2); }
+
+.u-banner-title {
+  font-size: var(--u-font-size-title);
+  line-height: var(--u-line-height-title);
+  font-weight: 500;
+}
+
+.u-banner :where(a:not(.u-btn)) { color: inherit; }
+
+.u-banner :focus-visible { outline-color: currentColor; }
+
+.u-banner-info {
+  --u-banner-bg: var(--u-color-info);
+  --u-banner-text: var(--u-color-text-on-info);
+}
+
+.u-banner-warning {
+  --u-banner-bg: var(--u-color-warning);
+  --u-banner-text: var(--u-color-text-on-warning);
+}
+
+.u-banner-danger {
+  --u-banner-bg: var(--u-color-danger);
+  --u-banner-text: var(--u-color-text-on-danger);
+}
+
+.u-banner-success {
+  --u-banner-bg: var(--u-color-success);
+  --u-banner-text: var(--u-color-text-on-success);
+}
+}

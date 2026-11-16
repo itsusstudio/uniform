@@ -1,0 +1,2 @@
+<%# locals: (icon:, label:, open:) -%>
+<span class="u-tooltip<%= " tooltip-demo-open" if open %>"><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="<%= label %>"><%= render "icon", name: icon, small: false %></button><span aria-hidden="true"><%= label %></span></span>

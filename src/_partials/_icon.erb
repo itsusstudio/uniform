@@ -1,0 +1,2 @@
+<%# locals: (name:, small:) -%>
+<%= raw File.read(File.join(Studio::Uniform.assets_path, "uniform/icons", "#{name}.svg")).sub("<svg ", %(<svg class="u-icon#{" u-icon-sm" if small}" aria-hidden="true" focusable="false" )) %>

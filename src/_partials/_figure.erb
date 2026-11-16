@@ -1,0 +1,11 @@
+<%# locals: (src:, alt:, caption:, width:, height:, field:, span:) -%>
+<div class="u-grid">
+<figure class="figure u-span-<%= span %>">
+<div class="<%= field ? "figure-field figure-field-#{field}" : "figure-plain" %>">
+<img src="<%= relative_url src %>" width="<%= width %>" height="<%= height %>" alt="<%= alt %>">
+</div>
+<% if caption %>
+<figcaption><%= caption %></figcaption>
+<% end %>
+</figure>
+</div>

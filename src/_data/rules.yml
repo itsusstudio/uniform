@@ -1,0 +1,634 @@
+- id: decisions-come-built-in
+  name: Decisions come built in
+  summary: Components carry their own spacing, type and states.
+  body: Components carry their own spacing, type and states. Using them is the decision.
+  home: /start/rules/
+  section: Building
+
+- id: when-unsure-choose-the-plainer-option
+  name: When unsure, choose the plainer option
+  summary: The obvious, familiar solution wins.
+  body: The obvious, familiar solution wins. A rule that departs from it says so, with the default it replaces.
+  home: /start/rules/
+  section: Building
+
+- id: tokens-only
+  name: Tokens only
+  summary: Every colour, size and space comes from a `--u-*` token.
+  body: Every colour, size and space comes from a `--u-*` token. No raw values, and no new greys made with transparency. Colours a person picks, like label presets in example markup, are content and the one exception.
+  home: /start/rules/
+  section: Building
+  check: The CSS lint passes, so every colour, size and space comes from a Uniform token.
+
+- id: explicit-variants
+  name: Explicit variants
+  summary: The base class carries shape only, and a variant carries colour.
+  body: The base class carries shape only, and a variant class carries colour, like `u-btn u-btn-primary` or `u-badge u-badge-danger`. A base class on its own shows no colour, so a missing variant is easy to spot.
+  home: /start/rules/
+  section: Building
+  check: Every `u-btn`, `u-banner` and `u-badge` has a variant class, like `u-btn-primary` or `u-banner-info`.
+
+- id: use-what-the-browser-already-does
+  name: Use what the browser already does
+  summary: Native elements and validation before JavaScript.
+  body: Reach for `<dialog>`, `popover` with anchor positioning, `<details>`, `<select>`, native checkboxes and radios, real links and buttons, and built-in form validation before writing JavaScript. Write JavaScript only for what HTML and CSS can't do.
+  home: /start/rules/
+  section: Building
+
+- id: behaviour-lives-in-custom-elements
+  name: Behaviour lives in custom elements
+  summary: Any JavaScript a component needs is a custom element in `uniform.js` around markup that already works.
+  body: A component that needs JavaScript gets a custom element in `uniform.js`, like `<u-combobox>`, around markup that already works without it. The element stays in the light DOM, finds its parts by their structure, ARIA roles or `data-` hooks, and draws only from markup already on the page. See [Building a web component](/agents/building-a-web-component/).
+  home: /start/rules/
+  section: Building
+  check: Components that need a script are wrapped in their `uniform.js` element (`<u-combobox>`, `<u-dropzone>` and the rest), and still work with the script blocked. No page script copies what an element already does.
+
+- id: no-structure-for-one-thing
+  name: No structure for one thing
+  summary: A heading, group or wrapper needs at least two things inside it.
+  body: A heading, group or wrapper needs at least two things inside it. A group with one item becomes a direct link or a single row, named after what it opens. A heading over one item adds a step and tells the person using it nothing.
+  home: /start/rules/
+  section: Building
+  check: No heading in a menu, list or form section has only one item under it.
+
+- id: no-one-offs
+  name: No one-offs
+  summary: A gap in Uniform is fixed in Uniform, not on one screen.
+  body: A screen that needs a class, value or arrangement Uniform doesn't have points to a missing component, variant or token, so add it to Uniform. A one-off on a single screen needs the team's agreement first.
+  home: /start/rules/
+  section: Building
+  check: No class, value or arrangement outside Uniform unless the team agreed to it as a one-off.
+
+- id: patterns-add-no-classes
+  name: Patterns add no classes
+  summary: A pattern only arranges components and layout classes. If it needs new CSS, the missing component or layout piece goes in Uniform.
+  body: A pattern only arranges components and layout classes, and has no classes or CSS of its own. When an arrangement can't be built from what exists, build the missing piece in Uniform, with its own page.
+  home: /start/rules/
+  section: Building
+  check: No pattern page or pattern markup uses a class that belongs to the pattern. Every class in it comes from a component, a layout or a utility.
+
+- id: position-before-class
+  name: Position before class
+  summary: When an element's place in the markup says what it is, Uniform styles it by that place, and it gets no class.
+  body: A field's label is its first child, its hint is its `<small>`, and a toast is a `<div>` inside `<u-toast>`. Add a class only when the same element in the same place can mean two different things.
+  home: /start/rules/
+  section: Building
+  check: No component asks for a class on an element whose place already names it, like a field's label or hint.
+
+- id: no-product-in-the-system
+  name: No product in the system
+  summary: Components are named and built for what they are, never for one product's work.
+  body: Jobs, repairs and quotes are Workbench words. A component that only makes sense in one product belongs in that product, built from Uniform's parts. Product words only appear in the examples.
+  home: /start/rules/
+  section: Building
+  check: No class, token, element or page name in Uniform uses a word from one product's work.
+
+- id: name-it-what-everyone-calls-it
+  name: Name it what everyone calls it
+  summary: A component takes the name other design systems and the HTML spec already use for it.
+  body: Before naming something, check what Polaris, shadcn, GOV.UK and the HTML spec call it, and use the common name, like toggle group, page tabs, sidebar or relative time. People and agents already know a familiar name.
+  home: /start/rules/
+  section: Building
+  check: Every new component's name matches what a well-known design system or the HTML spec calls the same thing.
+
+- id: every-word-comes-from-the-markup
+  name: Every word comes from the markup
+  summary: Uniform's CSS and script never write words. Every label, title and name comes from the page, so it can be translated.
+  body: The apps ship in several languages, so text the reader sees lives in the markup the app renders from its locale files. A script that adds an element takes its label from markup already there, and casing comes from the text itself, never from `text-transform`.
+  home: /start/rules/
+  section: Building
+  check: No `content:` string, `text-transform` or English text in `uniform.js` puts words on the screen.
+
+- id: state-lives-in-the-url-or-on-the-server
+  name: State lives in the URL or on the server
+  summary: A choice that should survive a reload lives in the URL or is saved on the server, never only in the browser.
+  body: Search, filters, sort, page and presets are query parameters, so a link opens the same view. A choice about the person, like a folded sidebar, is saved on the server and rendered into the page, so nothing flashes while a script catches up.
+  home: /start/rules/
+  section: Building
+  check: Reloading the page keeps every search, filter, sort and saved choice, with no flash.
+
+- id: replace-dont-deprecate
+  name: Replace, don't deprecate
+  summary: When Uniform changes a name or drops a piece, every use is converted and the old one is deleted.
+  body: Uniform has no aliases, legacy variants or deprecated classes. A rename changes every page, example and app that uses it in the same change, so there's only ever one way to do each thing.
+  home: /start/rules/
+  section: Building
+  check: No old class, element or token name remains anywhere after a rename or removal.
+
+- id: size-by-the-container
+  name: Size by the container
+  summary: Components respond to the width of the space they sit in, with container queries, not to the screen.
+  body: A table, form or shell works the same in a sidebar slot, a dialog or a full page. Media queries are only for things that belong to the whole screen, like the page margin, and dialogs and pickers that open over everything.
+  home: /start/rules/
+  section: Building
+  check: Every component's layout change is an `@container` query. `@media` widths only set page-wide tokens or size something that covers the screen.
+
+- id: every-app-shares-the-frame
+  name: Every app shares the frame
+  summary: Every studio app uses the same app shell, auth shell and mailer layout. Only the name, monogram and menu entries change.
+  body: Products differ in their pages and their words, not in how they're framed. An app supplies its name in its wordmark voice, its monogram and its own help and account entries, and changes nothing else in the frame.
+  home: /start/rules/
+  section: Building
+  check: The app's shell, sign-in screens and emails match Uniform's, apart from the name, monogram and menu entries.
+
+- id: open-to-everyone
+  name: Open to everyone
+  summary: 4.5:1 text contrast, keyboard and screen reader access, fast pages.
+  body: Text reaches 4.5:1 contrast in light and dark, every control works with a keyboard and a screen reader, and pages stay fast.
+  home: /start/rules/
+  section: Accessibility
+  check: Body and muted text reach 4.5:1 against their background, in light and dark.
+
+- id: dark-mode-follows-the-tokens
+  name: Dark mode follows the tokens
+  summary: Dark mode only changes token values.
+  body: Dark mode only changes token values, and screenshots switch to their dark versions.
+  home: /start/rules/
+  section: Accessibility
+
+- id: section-numbers
+  name: Section numbers
+  summary: No numbers or symbols before headings.
+  body: No "01", "02 /" or "§" before headings. Labels above headlines are out too, see [No eyebrows](/foundations/typography/#no-eyebrows).
+  home: /start/rules/
+  section: Don't look generated
+  check: No "01", "02 /" or "§" before a heading, and no small label above a headline.
+
+- id: the-generated-brutalist-look
+  name: The generated brutalist look
+  summary: No thick black borders, offset shadows, cream and terracotta, or mono everywhere.
+  body: No thick black borders, hard offset shadows, cream page with a single orange or terracotta accent, visible grid lines and crosshair marks, or everything set in mono or uppercase with wide letter spacing.
+  home: /start/rules/
+  section: Don't look generated
+  check: No thick black borders, hard offset shadows, visible grid lines or text set all in mono or uppercase.
+
+- id: terminal-dressing
+  name: Terminal dressing
+  summary: No brackets, fake prompts, blinking cursors or ASCII rules.
+  body: No "[ Section ]" brackets, fake command prompts, blinking cursors, ASCII rules, or an arrow after every link.
+  home: /start/rules/
+  section: Don't look generated
+  check: No brackets around headings, fake prompts, cursors, ASCII rules or arrows after links.
+
+- id: template-sections
+  name: Template sections
+  summary: No icon feature cards, bento grids, claim strips, logo marquees or star testimonials.
+  body: No three icon feature cards, bento grid, strip of round claims like "10x faster", logo marquee or star testimonials. No social proof filler either, like "Trusted by 10,000+ teams", avatar stacks or "Why choose us". No starter layout kept as it came.
+  home: /start/rules/
+  section: Don't look generated
+  check: No icon feature cards, bento grid, strip of round claims, logo marquee, star testimonials, "Trusted by" lines, avatar stacks or starter layouts kept as they came.
+
+- id: the-template-hero
+  name: The template hero
+  summary: No centred hero with a pill badge, a fancy headline word and two buttons.
+  body: No centred hero with a "New" pill badge, a gradient or italic serif word in the headline, and two buttons side by side.
+  home: /start/rules/
+  section: Don't look generated
+  check: No centred hero with a "New" badge, a gradient or italic word and two buttons.
+
+- id: decoration
+  name: Decoration
+  summary: No gradients, glows, blobs, glass, textured backgrounds, sparkles or hover lifts.
+  body: No gradients outside the [fill under a chart line](/foundations/charts/#fading-fill-under-chart-lines), and no glows, blurred blobs, glass, dot or noise backgrounds, sparkles, emoji icons, coloured left borders or hover lifts. No generic illustration, as [Imagery](/foundations/imagery/#images-earn-their-place) says, and no [icon on everything](/foundations/iconography/#icons-beat-a-word-or-stay-out).
+  home: /start/rules/
+  section: Don't look generated
+  check: No gradients outside charts, glows, blobs, glass, dot or noise backgrounds, sparkles, hover lifts or generic illustration.
+
+- id: framework-default-colours
+  name: Framework default colours
+  summary: No indigo or violet brand colour and no purple-to-blue gradient.
+  body: No indigo or violet brand colour, and no purple-to-blue gradient. The palette is ink, paper and the four signals on [Colour](/foundations/colour/). Pale grey text everywhere is a default too, and it fails [Open to everyone](#open-to-everyone).
+  home: /start/rules/
+  section: Don't look generated
+  check: No indigo, violet or purple-to-blue colour anywhere. Every colour comes from Uniform's palette.
+
+- id: framework-default-type
+  name: Framework default type
+  summary: No Inter or Geist for everything, and no tight tracking on every heading.
+  body: No Inter or Geist set for every word on the page, and no tight negative letter spacing on every heading whatever its size. Uniform sets apps in Switzer and site headlines in Apfel Grotezk, with spacing tuned per size in the type classes. See [Typography](/foundations/typography/).
+  home: /start/rules/
+  section: Don't look generated
+  check: No Inter or Geist, and no letter spacing set by hand on headings. Type comes from the `u-text-*` classes.
+
+- id: card-soup
+  name: Card soup
+  summary: Not every section and list goes in a card, and no card sits inside a card.
+  body: A card holds one object, and a card never sits inside another card. Not every section, list and form goes in a card, because space and headings group things first. See [Card](/components/card/).
+  home: /start/rules/
+  section: Don't look generated
+  check: No card inside a card, and no card around a whole section that holds more than one object.
+
+- id: badges-everywhere
+  name: Badges everywhere
+  summary: No scattered "New", "Beta", "Pro" or "Popular" pills.
+  body: No "New", "Beta", "Pro" or "Popular" pills dotted over a page or a nav. A badge appears only where it changes what someone decides, like a [badge](/components/badge/) for a job's state. A "New" pill on a menu item that shipped a month ago changes nothing.
+  home: /start/rules/
+  section: Don't look generated
+  check: No "New", "Beta", "Pro" or "Popular" pill that doesn't change a decision.
+
+- id: zigzag-features
+  name: Zigzag features
+  summary: No image-left, image-right blocks at the same rhythm for every feature.
+  body: No run of feature blocks that swap the image from left to right at the same height and rhythm. Give each section the shape its content needs, and cut the features nobody asked about.
+  home: /start/rules/
+  section: Don't look generated
+  check: No three or more feature blocks in a row that alternate image left and image right.
+
+- id: pricing-theatre
+  name: Pricing theatre
+  summary: No "Most popular" tier on a gradient border and no fake-urgency discount toggle.
+  body: No "Most popular" tier on a gradient border, no "Save 20%" yearly toggle to rush people, and no struck-out prices. Compare plans plainly, and name what differs in words.
+  home: /start/rules/
+  section: Don't look generated
+  check: No "Most popular" tier, gradient border, struck-out price or urgency discount toggle on a pricing page.
+
+- id: fake-screenshots
+  name: Fake screenshots
+  summary: No tilted browser frames, floating UI panels or laptop mockups.
+  body: No screenshots tilted in 3D, browser frames with a shadow, UI panels floating over each other, or the product inside a laptop or phone mockup. Show the real screen, flat, at a size you can read. See [Show the real product](/foundations/imagery/#show-the-real-product).
+  home: /start/rules/
+  section: Don't look generated
+  check: Screenshots are flat and real, with no tilt, floating panels, shadows or device mockups.
+
+- id: scroll-choreography
+  name: Scroll choreography
+  summary: No blocks that fade or slide in on scroll, no typewriter text and no animated gradients.
+  body: No sections that fade or slide in as they scroll into view, no headline typed out letter by letter, and no animated gradient on text or borders. The page is there when it loads. See [Mostly still](/foundations/motion/#mostly-still).
+  home: /start/rules/
+  section: Don't look generated
+  check: Nothing fades or slides in on scroll, no typewriter text and no animated gradient.
+
+- id: placeholder-data
+  name: Placeholder data
+  summary: No "John Doe", "Acme", lorem ipsum or perfectly round numbers.
+  body: No "John Doe", "Acme", lorem ipsum, $1,234.56 or all-round numbers like $10,000. Use data that could be real, so real lengths test the layout.
+  home: /start/rules/
+  section: Don't look generated
+  check: No "John Doe", "Acme", lorem ipsum, $1,234.56 or round placeholder numbers.
+
+- id: copy-tells
+  name: Copy tells
+  summary: Copy has its own list of tells.
+  body: "Copy has its own list of AI patterns, in the studio writing style."
+  home: /start/rules/
+  section: Don't look generated
+
+- id: type-does-the-work
+  name: Type does the work
+  summary: Size and space make the hierarchy.
+  body: Size and space make the hierarchy, instead of colour, boxes or bold weights.
+  home: /foundations/typography/
+
+- id: three-weights
+  name: Three weights
+  summary: Regular and medium for text, Apfel Grotezk Mittel for headlines. No bold.
+  body: Regular and medium for text, Apfel Grotezk Mittel for headlines. No bold.
+  home: /foundations/typography/
+
+- id: eight-sizes
+  name: Eight sizes
+  summary: 12, 14, 16, 20, 24, 32, 56 and 96px.
+  body: 12, 14, 16, 20, 24, 32, 56 and 96px. Apps use 12 to 32. Sites set paragraphs at 20px (`u-text-reading`), the intro line and feature headings at 24px, section headlines at 56px and one 96px hero per page.
+  default: "one scale for apps and sites, with 16px reading text everywhere."
+  home: /foundations/typography/
+
+- id: one-line-height-per-size
+  name: One line height per size
+  summary: Each font size has its own line height token, and lines land on the 4px grid.
+  body: Each font size pairs with one line height, like `--u-line-height-14` with `--u-font-size-14`, so lines land on the 4px grid. Site reading text uses `--u-line-height-prose`. Components use the role tokens (`--u-font-size-body`, `-small` and `-caption`), never 16, 14 or 12.
+  home: /foundations/typography/
+  check: Every line-height in the CSS is a `--u-line-height-*` token, and components use the body, small and caption roles. The lint enforces both.
+
+- id: headings-stand-out
+  name: Headings stand out from what they introduce
+  summary: A heading is never fainter or smaller than the items under it.
+  body: A heading above a group is ink and medium weight, never fainter or smaller than the items under it. Muted text is for secondary information beside or below something, never above it, like a label next to a value or a caption under an image.
+  home: /foundations/typography/
+  check: Every group heading is ink and medium weight. Squint at the screenshot, and the headings are the first thing you see.
+
+- id: no-eyebrows
+  name: No eyebrows
+  summary: A headline stands on its own.
+  body: A headline stands on its own. No small label or tagline above it, like "FEATURES" or "How it works".
+  home: /foundations/typography/
+
+- id: no-logos
+  name: No logos
+  summary: A product's name is set in type.
+  body: A product's name is set in type, in the studio's serif or sans wordmark. No symbol, mark or icon stands in for it.
+  home: /foundations/typography/
+
+- id: mono-only-for-data
+  name: Mono only for data
+  summary: Prices, dates, order numbers and codes are in IBM Plex Mono, so digits line up.
+  body: Prices, dates, order numbers and codes are in IBM Plex Mono, so digits line up. Never labels, headings or buttons.
+  home: /foundations/typography/
+  default: the same face as the rest of the text.
+
+- id: sentence-case-flush-left
+  name: Sentence case, flush left
+  summary: No uppercase labels, no centred text, lines of about 65 characters.
+  body: No uppercase labels and no centred text. Lines of text stop at about 65 characters.
+  home: /foundations/typography/
+
+- id: apfel-grotezk-for-headlines
+  name: Apfel Grotezk for headlines
+  summary: Apfel Grotezk sets marketing and blog headlines at 32px and up, and the product name everywhere.
+  body: Headlines on marketing sites and blogs at 32px and larger. The product name (`u-wordmark`) is set in it everywhere, on the site and in the app, so it reads as the same name wherever it appears. Nothing else in an app uses it.
+  home: /foundations/typography/
+  default: one plain grotesk for everything.
+
+- id: colour-is-a-signal
+  name: Colour is a signal
+  summary: Red is danger, blue is information and links, yellow is a warning, green is success.
+  body: Red is danger, blue is information and links, yellow is a warning, green is success. Nothing else gets colour.
+  home: /foundations/colour/
+
+- id: words-carry-the-meaning
+  name: Words carry the meaning
+  summary: Never colour alone, and never coloured text except links, errors and a short “done” confirmation.
+  body: A state is a [badge](/components/badge/), ink text with a coloured square beside it. Never colour alone, and no coloured text except links, vermilion errors, a delete or cancel item in a menu, and a short pine confirmation like “Uploaded”. Each comes with a word or icon that says the same thing.
+  home: /foundations/colour/
+
+- id: order-before-size
+  name: Order before size
+  summary: Show what matters by order and space first.
+  body: Put the most important thing first and give it room. Change size, colour or weight only where a role defines it, like a heading, a label or muted secondary text. Never shrink or grey a line just to make it look less important.
+  home: /foundations/typography/
+  check: Every size, colour and weight on the screen belongs to a named role. No line is smaller or greyer than its role.
+
+- id: email-two-sizes
+  name: Two sizes, ink by default
+  summary: An email uses the heading size and the body size, nothing else.
+  body: An email uses the heading size and the body size. The one exception is a code people have to type, set larger in mono. Everything is ink except detail-row labels and the footer's address and Powered by line. Secondary lines, like how long something works, a link to paste or what to do if it wasn't you, are ordinary body sentences at the end, never smaller and never grey.
+  home: /mailers/layout/
+  check: Each email has one heading size and one body size, plus a typed code if there is one. The only grey text is detail-row labels and the footer's address and Powered by line.
+
+- id: every-grey-has-one-job
+  name: Every grey has one job
+  summary: Divider, border, input border and muted text, each for its own job.
+  body: Divider between rows, border around objects, input border for form controls, muted for secondary text. Use the grey named for the job. If no job fits, the answer is ink or no line at all.
+  home: /foundations/colour/
+  check: Every grey in the CSS is a `--u-color-*` token, never a hex value or transparency.
+
+- id: nothing-coloured-on-colour
+  name: Nothing coloured on colour
+  summary: On a colour block, text and shapes turn ink.
+  body: On a colour block, text and shapes turn ink, unless they sit inside a white card.
+  home: /foundations/colour/
+
+- id: highlight-sparingly
+  name: Highlight sparingly
+  summary: The yellow wash marks what someone just searched for or changed.
+  body: The yellow wash marks what someone just searched for or changed. Never decoration.
+  home: /foundations/colour/
+
+- id: colour-blocks-on-marketing-sites
+  name: Colour blocks on marketing sites
+  summary: A marketing site section can sit on one of the four colours as a solid block.
+  body: A marketing site section can sit on one of the four colours as a solid block. Which colour, and where, is the designer's call within the colour rules. No gradients or texture.
+  home: /foundations/colour/
+  default: colour only as a signal.
+
+- id: paper-for-sites-white-for-apps
+  name: Paper for sites, white for apps
+  summary: Marketing pages and blogs sit on off-white paper, and apps stay white.
+  body: Marketing pages and blogs sit on off-white paper, because we like the look of old vintage paper. Apps stay white. Halftones use paper everywhere. Sites set it with `u-bg-paper` on `<body>`.
+  home: /foundations/colour/
+  default: white everywhere.
+
+- id: six-spacing-steps
+  name: Six spacing steps
+  summary: 4, 8, 16, 24, 48 and 96px.
+  body: 4, 8, 16, 24, 48 and 96px.
+  home: /foundations/space-and-layout/
+
+- id: groups-sit-twice-as-far-apart
+  name: Groups sit twice as far apart
+  summary: The space between groups is at least twice the space inside them.
+  body: The space between groups is at least twice the space between the items inside a group. That gap is what tells the eye where one group ends.
+  home: /foundations/space-and-layout/
+  check: On a screenshot, the gap between two groups is at least twice the gap between two items in the same group.
+
+- id: hit-area-is-not-spacing
+  name: Hit area is not spacing
+  summary: Every control is at least as tall as `--u-size-target`, grown with padding inside it.
+  body: Every control is at least `--u-size-target` tall, and controls with a visible box, like buttons and fields, are `--u-size-control` tall. That's 32px and 36px for business, 40px and 44px for consumer. Padding inside the control makes up the height, never the space between controls.
+  home: /foundations/space-and-layout/
+  check: Every button, link row and input is at least `--u-size-target` tall.
+
+- id: space-before-boxes
+  name: Space before boxes
+  summary: A card only for a real object, never a card inside a card.
+  body: A card only for a real object, like a table or a panel. Never a card inside a card.
+  home: /foundations/space-and-layout/
+
+- id: hang-from-the-grid
+  name: Hang from the grid
+  summary: Twelve columns, and everything starts on a column line.
+  body: Twelve columns. Everything starts on a column line.
+  home: /foundations/space-and-layout/
+
+- id: three-shapes
+  name: Three shapes
+  summary: Cards, dialogs, fields and floating panels have 8px corners, things you press are pills, and everything else is square.
+  body: Cards, dialogs, fields, popovers, menus and the option lists that drop from fields have 8px corners (`--u-radius-default`). Things you press, like buttons, chips and toggles, are pills (`--u-radius-pill`). Everything else is square, including tables, images and badges.
+  home: /foundations/shape-and-depth/
+  default: zero border radius everywhere.
+
+- id: thin-lines
+  name: Thin lines
+  summary: 1px for lines and borders, 2px for the focus ring.
+  body: 1px for lines and borders, 2px for the focus ring. Lines only separate things.
+  home: /foundations/shape-and-depth/
+
+- id: shadows-only-float
+  name: Shadows only float
+  summary: Only menus, dialogs and messages get the one soft shadow.
+  body: Menus, dialogs and messages get the one soft shadow. Nothing resting on the page has one.
+  home: /foundations/shape-and-depth/
+
+- id: no-accent-bars
+  name: No accent bars
+  summary: Signals use a small square or a chip, never a coloured strip.
+  body: Signals use a small square or a chip, never a coloured strip along the edge of a card.
+  home: /foundations/shape-and-depth/
+
+- id: current-item-pill
+  name: Current item pill
+  summary: The open item in a navigation list sits in a divider-grey pill.
+  body: The open item in a navigation list sits in a divider-grey pill with ink text, at regular weight so it never reads as a group label.
+  home: /foundations/shape-and-depth/
+
+- id: round-avatars
+  name: Round avatars
+  summary: Avatars and their online dot are circles, and nothing else that holds content is round.
+  body: Avatars and their online dot are circles, because people expect to see a face in a circle, and a square photo reads as a product shot. Only avatars are round. Everything else that holds content stays square.
+  home: /foundations/shape-and-depth/
+  default: zero border radius for anything that holds content.
+
+- id: images-earn-their-place
+  name: Images earn their place
+  summary: Only when words can't do the job.
+  body: Only when words can't do the job. No stock photos, illustrations or fake mockups.
+  home: /foundations/imagery/
+
+- id: show-the-real-product
+  name: Show the real product
+  summary: Pieces built from Uniform or demo screenshots, cropped to one idea.
+  body: Pieces built from Uniform or screenshots from a demo account, cropped to one idea, with a 1px border and no shadow.
+  home: /foundations/imagery/
+
+- id: match-the-image-to-the-job
+  name: Match the image to the job
+  summary: Colour photos for anything people buy, halftones for people and tools.
+  body: Colour photos for anything people buy, halftones for people and tools.
+  home: /foundations/imagery/
+
+- id: fixed-shapes
+  name: Fixed shapes
+  summary: 3:2, 4:5 or 1:1, spanning whole grid columns, with a "Fig." caption when needed.
+  body: Images are 3:2, 4:5 or 1:1, and span whole grid columns, like `u-span-5`. Caption an image only when it needs context, numbered "Fig. 1", in small muted text under it.
+  home: /foundations/imagery/
+
+- id: printed-matter-sits-on-paper
+  name: Printed matter sits on paper
+  summary: Halftones on off-white paper, photos and screenshots on white.
+  body: Halftones always sit on off-white paper, in one of four inks. Photos and screenshots sit on white.
+  home: /foundations/imagery/
+
+- id: generic-phones
+  name: Generic phones
+  summary: Phone screens sit in a plain grey frame.
+  body: Phone screens sit in a plain grey frame with no notch, island, buttons or brand.
+  home: /foundations/imagery/
+
+- id: light-and-described
+  name: Light and described
+  summary: Under 200KB per image, and every image has alt text.
+  body: Under 200KB per image, in WebP. Every image has alt text that says what it shows, or an empty `alt=""` when it's only decoration beside text that says the same thing.
+  home: /foundations/imagery/
+
+- id: no-dithering
+  name: No dithering
+  summary: Halftones use round dots on a screen, never one-bit dithering.
+  body: Halftones use round dots on a screen. One-bit dithered images stay out of Uniform. A product may adopt them as its own departure.
+  home: /foundations/imagery/
+
+- id: icons-beat-a-word-or-stay-out
+  name: Icons beat a word or stay out
+  summary: Lucide only, and an icon alone always has a hidden label.
+  body: Lucide only. An icon on its own is for close, search, menu, more, back, add and similar, always with a hidden label.
+  home: /foundations/iconography/
+
+- id: two-icon-sizes
+  name: Two icon sizes
+  summary: 16px beside small text, 20px alone or beside 16px text and up.
+  body: 16px beside 12 and 14px text, 20px on its own or beside 16px text and up, in the colour of the text.
+  home: /foundations/iconography/
+
+- id: no-decoration
+  name: No decoration
+  summary: No icons on headings, as illustrations or in running text, and no emoji.
+  body: No icons on headings, as feature illustrations or in running text, and no emoji.
+  home: /foundations/iconography/
+
+- id: status-is-not-an-icon
+  name: Status is not an icon
+  summary: A state is a coloured square and a word.
+  body: A state is a [badge](/components/badge/), a coloured square and a word, never a warning or tick icon.
+  home: /foundations/iconography/
+
+- id: mostly-still
+  name: Mostly still
+  summary: Only progress bars, spinners, shimmer and list changes move.
+  body: Menus, dialogs and messages appear instantly. Only progress bars, spinners, the shimmer on content still loading, and lists gaining or losing an item move, and they hold still when someone has asked for reduced motion.
+  home: /foundations/motion/
+
+- id: motion-when-a-list-changes
+  name: Motion when a list changes
+  summary: An item added to or removed from a list fades while its space opens or closes.
+  body: An item added to or removed from a list fades and its space opens or closes, so you see what changed.
+  home: /foundations/motion/
+  default: nothing moves.
+
+- id: answer-first
+  name: Answer first
+  summary: A chart card leads with its figure and a sentence saying how it changed.
+  body: Every chart card leads with its figure and a sentence saying how it changed. The chart backs up the sentence. No delta pill and sparkline on every tile.
+  home: /foundations/charts/
+
+- id: ink-for-now-grey-for-then
+  name: Ink for now, grey for then
+  summary: One main series in ink, comparisons in grey, colour only for job statuses.
+  body: One main series in ink. A comparison is grey. Colour only when it's a job status.
+  home: /foundations/charts/
+
+- id: lines-across-nothing-else
+  name: Lines across, nothing else
+  summary: Three faint horizontal gridlines and nothing else on the plot.
+  body: Three faint horizontal gridlines. No axis lines, tick marks, borders or shadows on the plot, and no gradient but the fade under the main line.
+  home: /foundations/charts/
+
+- id: no-chart-when-a-number-or-a-table-will-do
+  name: No chart when a number or a table will do
+  summary: One number is a figure, a few values are a table.
+  body: One number is a figure, never a chart. A few values are a table. Reach for a chart when the shape over time is the point.
+  home: /foundations/charts/
+
+- id: fading-fill-under-chart-lines
+  name: Fading fill under chart lines
+  summary: The main series of a line chart, and a sparkline, has a fill that fades to nothing at the baseline.
+  body: The main series of a line chart, and a sparkline, gets a fill that fades from 14% ink under the line to nothing at the baseline. Nothing else gets a gradient, as [Decoration](/start/rules/#decoration) says.
+  home: /foundations/charts/
+  default: no gradients anywhere.
+
+- id: one-audience
+  name: One audience per product
+  summary: Every product sets `data-u-audience` to business or consumer on its html element. Nothing else changes text, control or field sizes.
+  body: "Every product sets `data-u-audience=\"business\"` or `data-u-audience=\"consumer\"` on its `<html>` element, once, in its layout. The audience sets text sizes, control heights and the field style for the whole product. Screens never mix audiences, and builders never resize text or controls to get the other look."
+  home: /start/audience/
+  check: The layout's `<html>` has `data-u-audience`, and no CSS resizes text, controls or fields.
+
+- id: audience-only-changes-presentation
+  name: Audiences share the same markup
+  summary: Both audiences use the same components, classes and markup. Only sizes and the field style differ.
+  body: An audience changes how components look, never what they are. If a consumer product seems to need a different component or layout, that need goes into Uniform for every product, or it doesn't go in at all.
+  home: /start/audience/
+  check: The screen's markup would work unchanged under the other audience.
+
+- id: one-job-per-screen
+  name: One job per screen
+  summary: A consumer screen shows one thing or asks one question. Long forms become steps.
+  body: A consumer screen shows one thing or asks one question, with one primary button. A long form becomes a few short steps, each with a heading that says what it's for, so a phone shows the whole step without scrolling past the button.
+  home: /start/audience/
+  check: No consumer screen has more than one primary button or more than one form section.
+
+- id: actions-within-thumb-reach
+  name: Actions within thumb reach
+  summary: On a consumer phone screen, the primary action sits in the bottom half.
+  body: On a phone, people hold the screen in one hand. The primary action sits in the bottom half, where a thumb reaches it. Actions people use rarely, like settings and filters, go at the top right or in a [menu](/components/menu/).
+  home: /start/audience/
+  check: At 390px, every consumer screen's primary button is in the bottom half of the screen.
+
+- id: content-is-the-colour
+  name: Content is the colour
+  summary: In a consumer product, photos and people's own content carry the colour. The interface stays ink, grey and white.
+  body: Photos, food, faces and whatever people make carry the colour. The interface around them stays ink, grey and white, with colour only on the primary button and on [badges](/components/badge/), so the content is the first thing anyone sees.
+  home: /start/audience/
+  check: At 390px, the only colour outside content is the primary button and status signals.
+
+- id: never-zoom-the-field
+  name: Never zoom the field
+  summary: Every consumer input is at least 16px, so phones don't zoom in when it's tapped.
+  body: Safari on iPhone zooms the page into any field with text under 16px, and leaves it zoomed after typing. The consumer audience sets fields to 16px. Don't set a field's text smaller, including search boxes and fields inside tables.
+  home: /start/audience/
+  check: Every input, select and text area in a consumer product computes to at least 16px text.
+
+- id: motion-follows-your-hand
+  name: Motion follows your hand
+  summary: Something moves only while you drag, swipe or pull it, and then settles. Nothing moves on its own.
+  body: What you drag, swipe or pull moves with your finger and settles with `--u-motion-ease` when you let go. A tap gets its answer instantly, and nothing moves on load or on scroll. See [Mostly still](#mostly-still).
+  home: /foundations/motion/
+  check: Nothing moves on load or on scroll, and nothing moves on a tap. Only what a finger drags, and what Mostly still allows.
+

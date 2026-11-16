@@ -1,0 +1,30 @@
+<%
+  shares = [["--u-color-danger", 9.52], ["--u-color-info", 42.86], ["--u-color-warning", 28.57], ["--u-color-success", 19.05]]
+  offset = 0
+-%>
+<div class="examples u-grid u-gap-6">
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-dont">Don’t</p>
+<div class="example-frame">
+<section class="u-card">
+<header><h3>Open jobs by status</h3></header>
+<div class="u-card-content">
+<svg class="chart-donut" viewBox="0 0 42 42" role="img" aria-label="Open jobs by status">
+<% shares.each do |token, share| -%>
+<circle cx="21" cy="21" r="15.9" fill="none" stroke-width="6" pathLength="100" style="stroke: var(<%= token %>)" stroke-dasharray="<%= share %> <%= (100 - share).round(2) %>" stroke-dashoffset="<%= (25 - offset).round(2) %>"/>
+<% offset += share -%>
+<% end -%>
+</svg>
+</div>
+</section>
+</div>
+<figcaption class="example-caption example-caption-dont"><span>A donut in four colours with no words. You have to know the colours by heart, and nobody can tell 9 jobs from 6 by the size of an arc.</span></figcaption>
+</figure>
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-do">Do</p>
+<div class="example-frame">
+<%= render "examples/chart_stacked" %>
+</div>
+<figcaption class="example-caption example-caption-do"><span>One bar split by status, with each status named and counted underneath. The lengths compare at a glance and the words carry the meaning.</span></figcaption>
+</figure>
+</div>

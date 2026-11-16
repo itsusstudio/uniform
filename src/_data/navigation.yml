@@ -1,0 +1,232 @@
+- label: Start
+  items:
+    - title: Philosophy
+      url: /
+    - title: Install
+      url: /start/install/
+    - title: Audience
+      url: /start/audience/
+    - title: Rules
+      url: /start/rules/
+    - title: Reference
+      url: /start/reference/
+- label: Foundations
+  items:
+    - title: Typography
+      url: /foundations/typography/
+    - title: Colour
+      url: /foundations/colour/
+    - title: Space and layout
+      url: /foundations/space-and-layout/
+    - title: Shape and depth
+      url: /foundations/shape-and-depth/
+    - title: Imagery
+      url: /foundations/imagery/
+    - title: Iconography
+      url: /foundations/iconography/
+    - title: Motion
+      url: /foundations/motion/
+    - title: Charts
+      url: /foundations/charts/
+- label: Writing
+  items:
+    - title: Writing style
+      url: /writing/
+- label: Layout
+  items:
+    - title: Stack
+      url: /components/stack/
+    - title: Row
+      url: /components/row/
+    - title: Actions
+      url: /components/actions/
+    - title: Form
+      url: /components/form/
+    - title: Scroll row
+      url: /components/scroll-row/
+    - title: Grid
+      url: /components/grid/
+    - title: Sidebar layout
+      url: /components/sidebar-layout/
+    - title: Container
+      url: /components/container/
+    - title: Section
+      url: /components/section/
+- label: Page frame
+  items:
+    - title: App shell
+      url: /components/app-shell/
+    - title: Auth shell
+      url: /components/auth-shell/
+    - title: Sidebar
+      url: /components/sidebar/
+    - title: Site header
+      url: /components/site-header/
+    - title: Page header
+      url: /components/page-header/
+    - title: Page tabs
+      url: /components/page-tabs/
+    - title: Navigation
+      url: /components/navigation/
+- label: Components
+  items:
+    - title: Accordion
+      url: /components/accordion/
+    - title: Avatar
+      url: /components/avatar/
+    - title: Badge
+      url: /components/badge/
+    - title: Banner
+      url: /components/banner/
+    - title: Breadcrumb
+      url: /components/breadcrumb/
+    - title: Button
+      url: /components/button/
+    - title: Card
+      url: /components/card/
+    - title: Chart
+      url: /components/chart/
+    - title: "Chart: Bar"
+      url: /components/chart-bar/
+    - title: "Chart: Line"
+      url: /components/chart-line/
+    - title: "Chart: Meter"
+      url: /components/chart-meter/
+    - title: "Chart: Sparkline"
+      url: /components/chart-spark/
+    - title: "Chart: Stacked bar"
+      url: /components/chart-stacked/
+    - title: Checkbox
+      url: /components/checkbox/
+    - title: Chip
+      url: /components/chip/
+    - title: Combobox
+      url: /components/combobox/
+    - title: Description list
+      url: /components/description-list/
+    - title: Dialog
+      url: /components/dialog/
+    - title: Dropzone
+      url: /components/dropzone/
+    - title: Icon
+      url: /components/icon/
+    - title: Link
+      url: /components/link/
+    - title: List
+      url: /components/list/
+    - title: Menu
+      url: /components/menu/
+    - title: Pagination
+      url: /components/pagination/
+    - title: Popover
+      url: /components/popover/
+    - title: Progress
+      url: /components/progress/
+    - title: Prose
+      url: /components/prose/
+    - title: Radio
+      url: /components/radio/
+    - title: Select
+      url: /components/select/
+    - title: Shimmer
+      url: /components/shimmer/
+    - title: Spinner
+      url: /components/spinner/
+    - title: Switch
+      url: /components/switch/
+    - title: Table
+      url: /components/table/
+    - title: "Table: Data grid"
+      url: /components/data-grid/
+    - title: "Table: Controls"
+      url: /components/table-controls/
+    - title: "Text: Caption"
+      url: /components/caption/
+    - title: "Text: Heading group"
+      url: /components/heading-group/
+    - title: "Text: Meta"
+      url: /components/meta/
+    - title: "Text: Stat"
+      url: /components/stat/
+    - title: Text field
+      url: /components/text-field/
+    - title: "Input: code"
+      url: /components/input-code/
+    - title: "Input: colour"
+      url: /components/input-colour/
+    - title: "Input: password"
+      url: /components/input-password/
+    - title: "Input: phone number"
+      url: /components/input-phone/
+    - title: Time
+      url: /components/time/
+    - title: Timeline
+      url: /components/timeline/
+    - title: Toast
+      url: /components/toast/
+    - title: Toggle
+      url: /components/toggle/
+    - title: Toggle group
+      url: /components/toggle-group/
+    - title: Tooltip
+      url: /components/tooltip/
+    - title: Wordmark
+      url: /components/wordmark/
+- label: Mailers
+  items:
+    - title: Layout
+      url: /mailers/layout/
+    - title: Sign-in code
+      url: /mailers/sign-in-code/
+    - title: Notification
+      url: /mailers/notification/
+    - title: Receipt
+      url: /mailers/receipt/
+    - title: "Confirm email address"
+      url: /mailers/confirm-email/
+    - title: "Password reset"
+      url: /mailers/password-reset/
+    - title: "Security alert"
+      url: /mailers/security-alert/
+    - title: "Team invite"
+      url: /mailers/invite/
+    - title: "Export ready"
+      url: /mailers/export-ready/
+    - title: "Account deletion"
+      url: /mailers/account-deletion/
+    - title: "Digest"
+      url: /mailers/digest/
+    - title: "Mention"
+      url: /mailers/mention/
+    - title: "Report ready"
+      url: /mailers/report-ready/
+    - title: "Drop-off confirmation"
+      url: /mailers/intake/
+    - title: "Welcome"
+      url: /mailers/welcome/
+    - title: "Win-back"
+      url: /mailers/win-back/
+    - title: "Product update"
+      url: /mailers/product-update/
+- label: Patterns
+  items:
+    - title: Marketing page
+      url: /patterns/marketing-page/
+    - title: Dashboard shell
+      url: /patterns/dashboard-shell/
+    - title: Auth
+      url: /patterns/auth/
+    - title: Data table
+      url: /patterns/data-table/
+    - title: Data grid
+      url: /patterns/data-grid/
+    - title: Timeline
+      url: /patterns/timeline/
+    - title: Charts
+      url: /patterns/charts/
+- label: For agents
+  items:
+    - title: Building a web component
+      url: /agents/building-a-web-component/
+    - title: llms.txt
+      url: /llms.txt

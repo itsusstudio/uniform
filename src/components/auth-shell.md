@@ -38,7 +38,7 @@ Header
 : The app name in [`u-wordmark`](/components/wordmark/), linked to the app's home page, then a `<p class="u-text-article-title">` with the app's blurb. From 640px the header is the ink half, with the name at the top and the blurb at the bottom, and it stays ink in dark mode. On a phone only the name shows.
 
 Main
-: The screen itself, with its parts 24px apart and each up to 384px wide. Put one heading, one form and the links under it straight inside.
+: The screen itself, with its parts 24px apart and each up to 384px wide. Put one heading, one form and the links under it straight inside. Paragraphs in a row sit 8px apart, as one group of notes.
 
 Footer
 : Optional. The terms and privacy links in small grey type, at the bottom of the form's side.

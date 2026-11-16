@@ -64,7 +64,7 @@ Frame
 : The [auth shell](/components/auth-shell/): the app name in its `<header>`, the screen in its `<main>`, and the terms and privacy links in its `<footer>`. Every studio app uses the same one.
 
 Heading
-: `u-text-page-title`, the screen's one `h1`. A line under it, like where the code went, sits 8px below in a `u-stack u-gap-2`. See [Typography](/foundations/typography/).
+: `u-text-page-title`, the screen's one `h1`. A line under it, like where the code went, goes with it in an `<hgroup>`. See [Typography](/foundations/typography/).
 
 Form
 : A [`u-form`](/components/form/) holding the [text fields](/components/text-field/), then the [primary button](/components/button/). The form stretches the button to the column's width.

@@ -36,6 +36,8 @@
   margin: 0;
 }
 
+.u-auth-shell > header + * > p + p { margin-top: calc(var(--u-space-2) - var(--u-space-6)); }
+
 .u-auth-shell > footer {
   padding-bottom: var(--u-space-12);
   color: var(--u-color-text-muted);

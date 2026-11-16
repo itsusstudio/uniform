@@ -15,7 +15,7 @@ gem "studio-uniform", github: "itsusstudio/uniform", branch: "main", glob: "unif
 
 ```sh
 bundle install && npm install
-bin/bridgetown start
+bin/dev
 ```
 
 - Lint: `npm run lint:css`.

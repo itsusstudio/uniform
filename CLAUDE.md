@@ -28,7 +28,7 @@ Design rules: [Rules](/start/rules/) (`src/_data/rules.yml`).
 - Screen frames only set width. App shell, Auth shell, Site header, Grid, Description list use container queries. NEVER fake a breakpoint.
 - Mailers can't use Uniform CSS. Every email is built from `Studio::Uniform::Mail` blocks (`uniform/lib/studio/uniform/mail.rb`), one view for HTML and plain text. Docs examples live in `src/_partials/mailers/`. NEVER write email HTML by hand.
 - Uniform reads as if every decision was made on purpose from the start. NEVER document what was tried, old class names or how it used to work.
-- The human runs the dev server (`bin/bridgetown start`, port 4000).
+- The human runs the dev server (`bin/dev`, port 4000).
 
 ## Page shapes
 

@@ -15,11 +15,21 @@ class UniformElement extends HTMLElement {
   // Keeps state through moveBefore() instead of a disconnect and a fresh setup.
   connectedMoveCallback() {}
 
+  refresh() {
+    this.disconnectedCallback()
+    this.connectedCallback()
+  }
+
   anchorName(prefix) {
     this.anchor ??= `--${prefix}-${++anchors}`
     return this.anchor
   }
 }
+
+// Turbo's morph rewrites an element's children to match the server's HTML and drops what setup() added, without a disconnect.
+addEventListener("turbo:morph-element", ({ target }) => {
+  if (target instanceof UniformElement) target.refresh()
+})
 
 const define = (name, element) => {
   if (!customElements.get(name)) customElements.define(name, element)

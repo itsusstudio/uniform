@@ -110,7 +110,7 @@ module Studio
 
           def notes(*texts)
             Mail.safe(texts.flatten.each_with_index.map { |text, index|
-              text = Mail.safe("#{h(text.text)} #{inline(text.url)}") if text.is_a?(Fallback)
+              text = Mail.safe(%(#{h(text.text)} <a href="#{h(text.url)}" style="color: #{INK}; word-break: break-all;">#{h(text.url)}</a>)) if text.is_a?(Fallback)
               %(<p style="margin: #{index.zero? ? "48px" : "24px"} 0 0; #{TEXT} color: #{INK};">#{inline(text)}</p>\n)
             }.join)
           end

@@ -15,6 +15,10 @@ module Studio
         assert_equal "Open:\nhttps://example.com\n", Mail::Text.button("Open", "https://example.com")
       end
 
+      def test_a_long_fallback_link_wraps_instead_of_widening_the_mail
+        assert_includes Mail::Html.notes(Mail::Html.fallback("Paste:", "https://example.com/#{"x" * 200}")), "word-break: break-all"
+      end
+
       def test_fallback_link_only_shows_in_html
         assert_includes Mail::Html.notes(Mail::Html.fallback("Paste:", "https://example.com")), "https://example.com"
         assert_equal "Works for 7 days.\n", Mail::Text.notes(Mail::Text.fallback("Paste:", "https://example.com"), "Works for 7 days.")

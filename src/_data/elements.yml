@@ -88,8 +88,8 @@
   without: Every panel shows one after another, each under its own heading.
   page: /components/toggle-group/
 
-- name: <u-theme>
+- name: <u-theme-preference>
   wraps: Three `<button>`s with `value="system"`, `"light"` and `"dark"`, in a `<details>` in the account menu.
-  adds: Marks the chosen button with `aria-pressed`, sets `data-u-theme` on the page, remembers the choice in this browser and fires `theme:change`.
+  adds: Marks the chosen button with `aria-pressed`, sets `data-u-theme` on the page, remembers the choice in this browser and fires `theme-preference:change`.
   without: Hidden, and the page follows the device's light or dark setting.
   page: /components/sidebar/

@@ -1575,9 +1575,9 @@ const applyTheme = (value) => {
   else delete document.documentElement.dataset.uTheme
 }
 
-try { applyTheme(localStorage.getItem("u-theme")) } catch {}
+try { applyTheme(localStorage.getItem("u-theme-preference")) } catch {}
 
-define("u-theme", class extends UniformElement {
+define("u-theme-preference", class extends UniformElement {
   setup(signal) {
     const buttons = [...this.querySelectorAll(":scope > button[value]")]
     if (!buttons.length) return
@@ -1590,10 +1590,10 @@ define("u-theme", class extends UniformElement {
       const button = event.target.closest("button[value]")
       if (!buttons.includes(button)) return
       applyTheme(button.value)
-      try { localStorage.setItem("u-theme", button.value) } catch {}
-      document.dispatchEvent(new CustomEvent("theme:change", { detail: { value: button.value, source: this } }))
+      try { localStorage.setItem("u-theme-preference", button.value) } catch {}
+      document.dispatchEvent(new CustomEvent("theme-preference:change", { detail: { value: button.value, source: this } }))
     }, { signal })
-    document.addEventListener("theme:change", mark, { signal })
+    document.addEventListener("theme-preference:change", mark, { signal })
   }
 })
 

@@ -5,7 +5,7 @@
 <title><% if resource_title.empty? || resource_title == metadata.title %><%= metadata.title %><% else %><%= resource_title %> · <%= metadata.title %><% end %></title>
 <meta name="description" content="<%= metadata.description %>" />
 <meta name="color-scheme" content="light dark" />
-<script>try { const theme = localStorage.getItem("u-theme"); if (theme === "light" || theme === "dark") document.documentElement.dataset.uTheme = theme } catch (error) {}</script>
+<script>try { const theme = localStorage.getItem("u-theme-preference"); if (theme === "light" || theme === "dark") document.documentElement.dataset.uTheme = theme } catch (error) {}</script>
 <script>try { if (localStorage.getItem("uniform-audience") === "consumer") document.documentElement.dataset.uAudience = "consumer" } catch (error) {}</script>
 <link rel="stylesheet" href="<%= asset_path :css %>" />
 <script src="<%= asset_path :js %>" defer></script>

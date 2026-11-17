@@ -43,10 +43,10 @@ Footer
 : The last `<div>`. It stays at the bottom while the places scroll. A list comes first, with a line under it: guides, and Help as a `<button>` in a list item, with its icon and name like a link, opening a [menu](/components/menu/) of the app's own help entries, like Help centre, What's new and Speak with us. Then the account: a `<button>` with the initials in one `<span>`, and the name and email address in the next, the address in a `<small>`. It opens a [menu](/components/menu/) with Appearance and Log out.
 
 Appearance
-: A `<details>` in the account menu, holding a `<u-theme>` of three buttons: `value="system"`, `"light"` and `"dark"`. `uniform.js` marks the chosen one, sets `data-u-theme` on the page, remembers it in this browser and fires `theme:change`, so an app can save it to the account too. To paint the right theme before `uniform.js` loads, read the same choice in the `<head>`:
+: A `<details>` in the account menu, holding a `<u-theme-preference>` of three buttons: `value="system"`, `"light"` and `"dark"`. `uniform.js` marks the chosen one, sets `data-u-theme` on the page, remembers it in this browser and fires `theme-preference:change`, so an app can save it to the account too. To paint the right theme before `uniform.js` loads, read the same choice in the `<head>`:
 
 ```html
-<script>try { const theme = localStorage.getItem("u-theme"); if (theme === "light" || theme === "dark") document.documentElement.dataset.uTheme = theme } catch {}</script>
+<script>try { const theme = localStorage.getItem("u-theme-preference"); if (theme === "light" || theme === "dark") document.documentElement.dataset.uTheme = theme } catch {}</script>
 ```
 
 Inside the app shell, give the sidebar an `id` and `popover`, so the Menu button

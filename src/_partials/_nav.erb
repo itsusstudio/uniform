@@ -27,11 +27,11 @@
       <li>
         <button type="button" popovertarget="site-appearance"><%= raw render("icon", name: "monitor", small: true).strip %><span>Appearance</span></button>
         <div class="u-menu" id="site-appearance" popover>
-          <u-theme>
+          <u-theme-preference>
             <button type="button" value="system"><%= raw render("icon", name: "monitor", small: true).strip %>Use system setting</button>
             <button type="button" value="light"><%= raw render("icon", name: "sun", small: true).strip %>Light</button>
             <button type="button" value="dark"><%= raw render("icon", name: "moon", small: true).strip %>Dark</button>
-          </u-theme>
+          </u-theme-preference>
         </div>
       </li>
     </ul>

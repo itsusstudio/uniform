@@ -44,7 +44,7 @@
 .u-menu > :is(a, button, label),
 .u-menu > form > button,
 .u-menu > details > summary,
-.u-menu u-theme > button {
+.u-menu u-theme-preference > button {
   display: flex;
   align-items: center;
   gap: var(--u-space-2);
@@ -64,12 +64,12 @@
 .u-menu > :is(a, button, label):hover,
 .u-menu > form > button:hover,
 .u-menu > details > summary:hover,
-.u-menu u-theme > button:hover { background: var(--u-color-divider); }
+.u-menu u-theme-preference > button:hover { background: var(--u-color-divider); }
 
 .u-menu > :is(a, button, label):focus-visible,
 .u-menu > form > button:focus-visible,
 .u-menu > details > summary:focus-visible,
-.u-menu u-theme > button:focus-visible {
+.u-menu u-theme-preference > button:focus-visible {
   outline-offset: -2px;
   background: var(--u-color-divider);
 }
@@ -95,12 +95,12 @@
 
 .u-menu > details[open] > summary::after { background-size: 10px var(--u-icon-stroke), 0 0; }
 
-.u-menu u-theme { display: grid; }
+.u-menu u-theme-preference { display: grid; }
 
-.u-menu u-theme > button > .u-icon { flex: none; }
+.u-menu u-theme-preference > button > .u-icon { flex: none; }
 
 .u-menu > a[aria-current]::after,
-.u-menu u-theme > button[aria-pressed="true"]::after {
+.u-menu u-theme-preference > button[aria-pressed="true"]::after {
   content: "";
   flex: none;
   width: 16px;

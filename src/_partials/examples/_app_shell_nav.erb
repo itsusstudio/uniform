@@ -46,11 +46,11 @@
     <div class="u-menu" id="<%= id %>-account" popover>
       <details>
         <summary>Appearance</summary>
-        <u-theme>
+        <u-theme-preference>
           <button type="button" value="system"><%= raw render("icon", name: "monitor", small: true).strip %>Use system setting</button>
           <button type="button" value="light"><%= raw render("icon", name: "sun", small: true).strip %>Light</button>
           <button type="button" value="dark"><%= raw render("icon", name: "moon", small: true).strip %>Dark</button>
-        </u-theme>
+        </u-theme-preference>
       </details>
       <hr>
       <form action="/session" method="post">

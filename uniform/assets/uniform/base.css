@@ -74,5 +74,5 @@
 
 :where(u-toggle) { display: contents; }
 
-:where(u-theme:not(:defined)) { display: none; }
+:where(u-theme-preference:not(:defined)) { display: none; }
 }

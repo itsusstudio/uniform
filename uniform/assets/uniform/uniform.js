@@ -1260,10 +1260,18 @@ define("u-toast", class extends UniformElement {
       toast.addEventListener("pointercancel", release, { signal })
       sync()
     }
+    // A dialog opened after the region would cover it, so each new toast puts the region back on top.
+    const raise = () => {
+      if (!region.hasAttribute("popover")) return
+      if (region.matches(":popover-open")) region.hidePopover()
+      region.showPopover()
+    }
     region.querySelectorAll(":scope > div").forEach(watch)
+    raise()
     const observer = new MutationObserver((records) => records.forEach((record) => record.addedNodes.forEach((node) => {
       if (node.parentElement !== region || node.localName !== "div") return
       region.querySelectorAll(":scope > div").forEach((old) => { if (old !== node) old.remove() })
+      raise()
       watch(node)
     })))
     observer.observe(region, { childList: true })

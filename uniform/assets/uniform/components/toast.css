@@ -10,6 +10,17 @@ u-toast {
   pointer-events: none;
 }
 
+u-toast[popover] {
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: visible;
+  background: none;
+  color: inherit;
+}
+
 @supports (anchor-name: --u-app-main) {
   u-toast {
     right: calc(anchor(--u-app-main right, 0px) + var(--u-space-6));

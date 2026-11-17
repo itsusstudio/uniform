@@ -3,8 +3,8 @@
   margin: 0;
   padding: 0;
   color: var(--u-color-text-default);
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  font-size: var(--u-font-size-body);
+  line-height: var(--u-line-height-body);
   list-style: none;
 }
 
@@ -27,10 +27,45 @@
 
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(div, span, p) > * { margin: 0; }
 
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > div { min-width: 0; }
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > .u-progress { flex: 1 1 auto; }
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > .u-progress:not(:has(> p)) { flex: 0 0 40%; }
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item):has(> .u-progress) > div:not(.u-progress) { flex: 1 1 auto; }
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > .u-text-data:first-child { flex: none; min-width: 6ch; }
+
+.u-list > li:has(> div > p:first-child > a:not(.u-btn)) {
+  position: relative;
+  cursor: pointer;
+}
+
+.u-list > li > div > p:first-child > a:not(.u-btn) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.u-list > li > div > p:first-child > a:not(.u-btn)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.u-list > li:where(:has(> div > p:first-child > a:not(.u-btn)):hover) { background: color-mix(in srgb, var(--u-color-text-default) 4%, transparent); }
+
+.u-list > li > div > p:first-child > a:not(.u-btn):focus-visible { text-decoration: underline; }
+
+.u-list > li:has(> div > p:first-child > a:not(.u-btn)) :is(a, button, input, label, select, summary):not(li > div > p:first-child > a) {
+  position: relative;
+  z-index: 1;
+}
+
 .u-list-item-detail {
   color: var(--u-color-text-muted);
-  font-size: var(--u-font-size-caption);
-  line-height: var(--u-line-height-caption);
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
 }
 
 .u-card > .u-list :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: var(--u-space-6); }

@@ -127,6 +127,10 @@ entry.
 </li>
 ```
 
+## Rows that open something
+
+When a row opens a page, make its title a link: `<p><a href="…">Ana Reyes</a></p>` as the first line. The link keeps the text colour, the whole row becomes the click target and lightens on hover, and other buttons in the row still work on their own, as in a [table](/components/table/).
+
 ## Adding and removing rows
 
 To fade a row in or out, give its `<li>` `u-enter` or `u-exit` from

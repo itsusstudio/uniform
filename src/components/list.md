@@ -127,6 +127,11 @@ entry.
 </li>
 ```
 
+## The first line
+
+A row's first line is its name, in medium weight, and the lines after it are its
+details in regular weight. Put the thing people scan for first.
+
 ## Rows that open something
 
 When a row opens a page, make its title a link: `<p><a href="…">Ana Reyes</a></p>` as the first line. The link keeps the text colour, the whole row becomes the click target and lightens on hover, and other buttons in the row still work on their own, as in a [table](/components/table/).

@@ -29,6 +29,8 @@
 
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > div { min-width: 0; }
 
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > div > p:first-child { font-weight: 500; }
+
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > .u-progress { flex: 1 1 auto; }
 
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > .u-progress:not(:has(> p)) { flex: 0 0 40%; }

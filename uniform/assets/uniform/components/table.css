@@ -27,7 +27,7 @@
 :is(.u-table, u-chart) > table thead th {
   border-bottom: 1px solid var(--u-color-text-default);
   color: var(--u-color-text-muted);
-  font-weight: 500;
+  font-weight: 400;
   white-space: nowrap;
 }
 

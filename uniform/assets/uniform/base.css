@@ -12,6 +12,7 @@
   font-family: var(--u-font-sans);
   font-size: var(--u-font-size-body);
   line-height: var(--u-line-height-body);
+  letter-spacing: -0.015em;
   -webkit-font-smoothing: antialiased;
 }
 

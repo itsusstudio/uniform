@@ -4,6 +4,7 @@
   font-family: var(--u-font-mono);
   font-size: var(--u-font-size-small);
   font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
   line-height: var(--u-line-height-small);
   white-space: nowrap;
 }

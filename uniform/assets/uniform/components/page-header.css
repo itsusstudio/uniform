@@ -49,9 +49,9 @@
 
 .u-page-header > hgroup > :is(h1, h2, h3, h4) {
   font-family: var(--u-font-sans);
-  font-size: var(--u-font-size-32);
+  font-size: var(--u-font-size-24);
   font-weight: 500;
-  line-height: var(--u-line-height-32);
+  line-height: var(--u-line-height-24);
   letter-spacing: -0.02em;
   text-wrap: balance;
 }

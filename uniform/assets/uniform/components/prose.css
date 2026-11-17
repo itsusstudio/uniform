@@ -1,6 +1,6 @@
 @layer uniform.components {
 .u-prose {
-  font-size: var(--u-font-size-body);
+  font-size: var(--u-font-size-prose);
   line-height: var(--u-line-height-prose);
 }
 
@@ -33,7 +33,7 @@
 
 .u-prose > :where(h3) {
   margin: var(--u-space-6) 0 var(--u-space-2);
-  font-size: var(--u-font-size-body);
+  font-size: var(--u-font-size-prose);
   font-weight: 500;
 }
 
@@ -71,7 +71,7 @@
   margin-top: calc(-1 * var(--u-space-2));
   padding-top: 0;
   border-top: 0;
-  font-size: var(--u-font-size-body);
+  font-size: var(--u-font-size-prose);
   color: var(--u-color-text-muted);
 }
 

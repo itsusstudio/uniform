@@ -71,7 +71,7 @@
 - name: u-text-page-title
   group: Type
   page: /start/reference/
-  description: 32, Inter. The title of an app page.
+  description: 24, Inter. The title of an app page.
 
 - name: u-text-heading
   group: Type
@@ -99,12 +99,12 @@
 - name: u-text-body
   group: Type
   page: /start/reference/
-  description: 16, Inter. Reading text.
+  description: 14 in business apps, 16 for consumers, Inter. Interface text.
 
 - name: u-text-small
   group: Type
   page: /start/reference/
-  description: 14, Inter. Labels, table cells, buttons and hints.
+  description: 14, Inter. Labels, table cells, buttons and hints. The same as body text in business apps.
 
 - name: u-text-caption
   group: Type

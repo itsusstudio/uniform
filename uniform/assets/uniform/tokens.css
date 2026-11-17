@@ -25,6 +25,7 @@
   --u-line-height-56: 1.07;
   --u-line-height-96: 1;
   --u-line-height-prose: 1.6;
+  --u-font-size-prose: var(--u-font-size-16);
 
 
   --u-space-1: 4px;
@@ -99,10 +100,10 @@
 
 
 [data-u-audience="business"] {
-  --u-font-size-body: var(--u-font-size-16);
+  --u-font-size-body: var(--u-font-size-14);
   --u-font-size-small: var(--u-font-size-14);
   --u-font-size-caption: var(--u-font-size-12);
-  --u-line-height-body: var(--u-line-height-16);
+  --u-line-height-body: var(--u-line-height-14);
   --u-line-height-small: var(--u-line-height-14);
   --u-line-height-caption: var(--u-line-height-12);
   --u-font-size-title: var(--u-font-size-16);

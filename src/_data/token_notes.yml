@@ -39,6 +39,7 @@
 "--u-font-headline": "Apfel Grotezk Mittel. Headlines on marketing sites and blogs, at 32px and larger. Never in an app."
 "--u-font-sans": "Inter. All other text, in apps and on sites."
 "--u-font-mono": "IBM Plex Mono. Prices, dates, order numbers and codes."
+"--u-font-size-prose": "Long reading text inside u-prose: 16 in every audience, a step above business interface text."
 "--u-line-height-prose": "Long reading text inside u-prose, so articles and docs breathe more than app screens."
 "--u-font-size-56": "Site headlines. Grows with its container, from 36px to 56px."
 "--u-font-size-96": "The one hero headline on a site. Grows with its container, from 44px to 96px."

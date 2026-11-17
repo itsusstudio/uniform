@@ -52,6 +52,7 @@ Uniform for every product, not into a one-off tweak on the page.
 
 - [Norma](https://normadesign.it/en/){:target="_blank" rel="noopener"}
 - Swiss posters of the 1950s and 60s
+- Braun product design of the 1960s and 70s
 - Old technical papers
 - [Dalton Mills](https://daltonmills.com/){:target="_blank" rel="noopener"}
 - [Brunch](https://www.brunch.work/information){:target="_blank" rel="noopener"}

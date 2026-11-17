@@ -113,7 +113,7 @@ u-sidebar > div:first-child > button[aria-expanded] {
   height: 28px;
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--u-radius-default);
   background: transparent;
   color: var(--u-nav-label);
   cursor: pointer;
@@ -187,7 +187,7 @@ u-sidebar > div:last-child > button {
   min-height: var(--u-size-target);
   padding: 0 var(--u-space-2);
   border: 0;
-  border-radius: 6px;
+  border-radius: var(--u-radius-default);
   background: transparent;
   color: var(--u-nav-text);
   font: inherit;
@@ -379,7 +379,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     width: var(--u-size-control);
     min-height: var(--u-size-control);
     padding-inline: 0;
-    border-radius: 6px;
+    border-radius: var(--u-radius-default);
   }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)) > span {

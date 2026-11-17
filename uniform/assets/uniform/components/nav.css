@@ -28,7 +28,7 @@
   gap: var(--u-space-2);
   min-height: var(--u-size-target);
   padding-inline: var(--u-space-2);
-  border-radius: 6px;
+  border-radius: var(--u-radius-default);
   font-size: var(--u-font-size-small);
   color: var(--u-color-text-default);
   text-decoration: none;

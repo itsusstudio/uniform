@@ -11,12 +11,12 @@ a thing is. Components set them, so read this when you build a new one.
 
 ## Corners
 
-Three shapes. Components set them, so you never pick a radius.
+Three shapes. What holds things is near square and what you press is round. Components set them, so you never pick a radius.
 
 <%= render "examples/shape_specs", rows: [
-  { name: "Square", detail: "no token, the default", sample: '<span class="shape-box"></span>', job: "Anything that holds content inside a card or on the page: tables, menus, images, screenshots and badges.", never: "rounded corners, even slightly" },
-  { copy: "var(--u-radius-default)", detail: "8px", sample: '<span class="shape-box" style="border-radius: var(--u-radius-default)"></span>', job: "Cards and dialogs, the frames that group things, and the fields you type into: text fields, selects, comboboxes, colour fields and dropzones.", never: "tables, menus or images" },
-  { copy: "var(--u-radius-pill)", detail: "999px", sample: '<span class="shape-pill"></span>', job: "Anything you press or that labels something: buttons, chips, the current nav item and segmented controls.", never: "cards, inputs or anything that holds content" },
+  { name: "Square", detail: "no token, the default", sample: '<span class="shape-box"></span>', job: "Anything that holds content inside a card or on the page: tables, images, screenshots and badges.", never: "rounded corners, even slightly" },
+  { copy: "var(--u-radius-default)", detail: "4px", sample: '<span class="shape-box" style="border-radius: var(--u-radius-default)"></span>', job: "What holds things: cards, dialogs, menus, the fields you type into, and the rows of a sidebar. Near square, so frames sit on the grid.", never: "buttons, tables or images" },
+  { copy: "var(--u-radius-pill)", detail: "999px", sample: '<span class="shape-pill"></span>', job: "What you press: buttons, chips, page tabs and segmented controls. Round against square frames, like the buttons on a Braun calculator.", never: "cards, inputs, sidebar rows or anything that holds content" },
 ] %>
 
 ## Lines

@@ -22,15 +22,19 @@
     <% end %>
   <% end %>
   </nav>
-  <div class="u-stack u-gap-4 site-nav-footer">
+  <div class="site-nav-footer">
+    <ul>
+      <li>
+        <button type="button" popovertarget="site-appearance"><%= raw render("icon", name: "monitor", small: true).strip %><span>Appearance</span></button>
+        <div class="u-menu" id="site-appearance" popover>
+          <u-theme>
+            <button type="button" value="system"><%= raw render("icon", name: "monitor", small: true).strip %>Use system setting</button>
+            <button type="button" value="light"><%= raw render("icon", name: "sun", small: true).strip %>Light</button>
+            <button type="button" value="dark"><%= raw render("icon", name: "moon", small: true).strip %>Dark</button>
+          </u-theme>
+        </div>
+      </li>
+    </ul>
     <%= render "audience_switch", legend_class: "u-text-small" %>
-    <fieldset class="u-fieldset">
-      <legend class="u-text-small">Theme</legend>
-      <div class="u-toggle-group">
-        <label><input type="radio" name="site-theme" value="system" checked> System</label>
-        <label><input type="radio" name="site-theme" value="light"> Light</label>
-        <label><input type="radio" name="site-theme" value="dark"> Dark</label>
-      </div>
-    </fieldset>
   </div>
 </u-sidebar>

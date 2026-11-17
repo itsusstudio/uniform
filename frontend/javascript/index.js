@@ -8,12 +8,6 @@ import components from "$components/**/*.{js,jsx,js.rb,css}"
 const root = document.documentElement
 
 const settings = {
-  "site-theme": {
-    key: "uniform-theme",
-    fallback: "system",
-    read: () => root.dataset.uTheme || "system",
-    write: (value) => { if (value === "system") delete root.dataset.uTheme; else root.dataset.uTheme = value },
-  },
   "site-audience": {
     key: "uniform-audience",
     fallback: "business",

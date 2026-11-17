@@ -13,6 +13,8 @@
   box-shadow: var(--u-shadow-float);
 }
 
+.u-dialog-wide { max-width: 720px; }
+
 .u-dialog::backdrop { background: var(--u-color-backdrop); }
 
 .u-dialog:modal { overscroll-behavior: contain; }

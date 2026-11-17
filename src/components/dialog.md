@@ -70,6 +70,10 @@ width, with the primary on the right. Three actions, or two whose labels don't
 fit side by side, stack at full width with the primary at the bottom. Open this
 one on a phone to see it.
 
+Add `u-dialog-wide` when the content needs room: a signature pad, a photo grid,
+or a preview someone has to read. It widens the dialog to 720px and leaves
+phones as they are.
+
 ## Code
 
 ```html

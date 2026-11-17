@@ -407,6 +407,11 @@
   page: /components/dialog/
   description: On a `u-dialog`, docks it to the bottom of the screen below 640px.
 
+- name: u-dialog-wide
+  group: Components
+  page: /components/dialog/
+  description: On a `u-dialog`, widens it to 720px for a signature pad, a photo grid or a preview.
+
 - name: <u-dropzone>
   group: Components
   page: /components/dropzone/

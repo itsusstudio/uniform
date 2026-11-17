@@ -44,7 +44,21 @@ Confirm
 : A [dialog](/components/dialog/) asks the question with the name in it, says what goes and that it can't be undone, and puts Cancel first with focus. The dialog shows what's lost in numbers people recognise, like 214 jobs, loaded when it opens, for example from a lazy Turbo Frame, so the settings page never pays for the count. Deleting something big asks for its name: the field's `pattern` holds the exact name, so the browser won't send the form until it matches, with no script. The server checks it again.
 
 After
-: Deleting signs people out to a plain page that says it's done. Smaller deletions, like one job, skip the typed name and use a plain [confirm](/components/dialog/).
+: Deleting signs people out to a plain page that says it's done.
+
+## The confirm grows with what goes
+
+Nothing else goes with it
+: A record with nothing hanging off it, like a note, gets a plain [confirm](/components/dialog/).
+
+Other records go with it
+: The dialog names them, like "Ana Reyes and all 12 of her jobs will be deleted", and asks you to type a word before it deletes.
+
+It would destroy live work
+: The delete is blocked and says what to do first, like closing a customer's open jobs.
+
+The whole shop or account
+: This danger zone: the last group on the settings page, and a confirm that asks for the shop's name.
 
 ## When to use it
 
@@ -52,4 +66,4 @@ Use it for
 : Deleting an account, a shop or a workspace, leaving one, or handing it to someone else.
 
 Not for
-: Deleting one record, like a job or a customer. That's a danger item in the record's [menu](/components/menu/) with a plain confirm.
+: Deleting one record, like a job or a customer. That's a danger item in the record's [menu](/components/menu/), with the confirm the table above calls for.

@@ -198,6 +198,10 @@ with `aria-invalid="true"` on the input and a `u-error` saying what to change.
 For notes longer than a line. It grows as you type, and you can drag it taller
 or shorter.
 
+It starts one line tall, and `rows` has no effect because the field sizes to
+its content. Set `--u-input-rows` to start a textarea taller, for example 4 for
+notes: `style="--u-input-rows: 4"`.
+
 ```html
 <%= raw render("examples/text_field_textarea").strip %>
 ```

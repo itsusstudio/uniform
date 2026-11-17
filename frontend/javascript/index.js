@@ -40,7 +40,8 @@ document.addEventListener("change", (event) => {
   } catch (error) {}
 })
 
-const siteNav = document.getElementById("site-nav")
+// The sidebar itself doesn't scroll; its .u-nav does.
+const siteNav = document.querySelector("#site-nav > .u-nav")
 if (siteNav) {
   let saved = null
   try { saved = sessionStorage.getItem("uniform-nav-scroll") } catch {}
@@ -48,7 +49,7 @@ if (siteNav) {
     siteNav.scrollTop = Number(saved)
   } else {
     const current = siteNav.querySelector("[aria-current='page']")
-    if (current) siteNav.scrollTop = current.offsetTop - siteNav.clientHeight / 2
+    if (current) siteNav.scrollTop += current.getBoundingClientRect().top - siteNav.getBoundingClientRect().top - siteNav.clientHeight / 2
   }
   addEventListener("pagehide", () => {
     try { sessionStorage.setItem("uniform-nav-scroll", siteNav.scrollTop) } catch {}

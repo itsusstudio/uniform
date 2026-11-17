@@ -28,12 +28,15 @@ it does and its control. Use it for settings and preferences, inside
     </div>
     <label class="u-switch"><input type="checkbox" switch role="switch" aria-label="Text customers when a job is ready" checked></label>
   </section>
-  <section class="u-setting u-setting-stacked">
+  <section class="u-setting">
     <div>
       <h3>Shop name</h3>
       <p>Customers see it on texts, emails and their pickup page.</p>
     </div>
-    <input class="u-input" aria-label="Shop name" value="Kensington Jewellery Repair">
+    <div class="u-setting-edit">
+      <p>Kensington Jewellery Repair</p>
+      <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit shop name">…</button>
+    </div>
   </section>
   <hr>
   …
@@ -45,10 +48,13 @@ it does and its control. Use it for settings and preferences, inside
 <%= render "classes", classes_page: "/components/settings/" %>
 
 Control on the right
-: A switch or a single button sits beside the text and applies straight away.
+: A switch, a select or a single button sits beside the text and applies straight away. A choice is one click with one clear result, so it saves as soon as it changes.
 
-Field underneath
-: A field you type into goes under the text with `u-setting-stacked`, at form width, and saves when you leave it.
+Text with an Edit button
+: Text people type, like a name, an email address or an address, shows as plain text in `u-setting-edit` with a pencil button. The button opens a [dialog](/components/dialog/) with the field and a Save button. Typed text never saves on its own: a half-typed value could reach customers, and nothing tells people when it saved. A setting made of several fields, like an address, is one row and one dialog. When there's no value yet, say "Not set" in `u-text-muted`.
+
+Wide control underneath
+: A control too wide for the right, like a long select, goes under the text with `u-setting-stacked`, at form width.
 
 Groups
 : An `<h2>` names each group and an `<hr>` separates groups. Space alone separates the rows inside one.
@@ -64,7 +70,7 @@ Not for
 ## Accessibility
 
 Labels
-: A switch or field beside a heading has no visible label of its own, so give it an `aria-label` that matches the heading.
+: A switch or select beside a heading has no visible label of its own, so give it an `aria-label` that matches the heading. Name the pencil button for what it edits, like "Edit shop name".
 
 Saving
 : Each row saves on its own. Say so when it lands, with a [toast](/components/toast/), so a change isn't silent.

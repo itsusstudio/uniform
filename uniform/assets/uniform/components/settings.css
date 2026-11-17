@@ -47,6 +47,21 @@
 
 .u-setting-stacked > :not(div:first-of-type) { max-width: var(--u-max-width-form); }
 
+.u-setting-edit {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--u-space-2);
+  min-width: 0;
+  max-width: var(--u-max-width-form);
+  text-align: end;
+}
+
+.u-setting-edit > :first-child {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
 
 .u-setting-value {
   display: flex;

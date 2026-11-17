@@ -807,7 +807,12 @@
 - name: u-setting-stacked
   group: Components
   page: /components/settings/
-  description: With u-setting, puts a field you type into under the text, at form width.
+  description: With u-setting, puts a control too wide for the right under the text, at form width, like a long select.
+
+- name: u-setting-edit
+  group: Components
+  page: /components/settings/
+  description: A text value on the right with an Edit button that opens a dialog to change it, like a shop name or address.
 
 - name: u-setting-value
   group: Components

@@ -1,11 +1,21 @@
 <div class="u-settings">
   <h2>General</h2>
-  <section class="u-setting u-setting-stacked">
+  <section class="u-setting">
     <div>
       <h3>Shop name</h3>
       <p>Customers see it on texts, emails and their pickup page.</p>
     </div>
-    <input class="u-input" aria-label="Shop name" value="Kensington Jewellery Repair">
+    <div class="u-setting-edit">
+      <p>Kensington Jewellery Repair</p>
+      <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit shop name"><%= raw render("icon", name: "pencil", small: true).strip %></button>
+    </div>
+  </section>
+  <section class="u-setting">
+    <div>
+      <h3>Time zone</h3>
+      <p>Due dates and reminders follow it.</p>
+    </div>
+    <select class="u-input" aria-label="Time zone"><option>(GMT-05:00) Toronto</option><option>(GMT-08:00) Vancouver</option></select>
   </section>
   <section class="u-setting">
     <div>

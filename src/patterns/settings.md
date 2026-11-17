@@ -25,7 +25,7 @@ Page
 : A [page header](/components/page-header/) and [settings](/components/settings/) rows inside `u-container u-container-narrow`, so the eye runs down one column.
 
 Rows
-: Each setting saves on its own: a switch or a button when it's clicked, a field when you leave it. There's no Save button for the page.
+: Each setting saves on its own. A switch, select or button applies when it changes. Text opens in a dialog from its pencil button and saves with the dialog's Save button. There's no Save button for the page.
 
 Danger
 : Leaving, handing over and deleting go last, in a [danger zone](/patterns/danger-zone/).

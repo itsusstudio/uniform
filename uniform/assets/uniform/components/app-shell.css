@@ -291,7 +291,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   --u-nav-current-text: var(--u-color-text-on-ink);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 64em) {
   .u-app-shell > u-sidebar {
     grid-column: 1;
     grid-row: 1 / -1;
@@ -416,7 +416,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button > :not(:first-child) { display: none; }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 63.9375em) {
   .u-app-shell > * { grid-column: 1 / -1; }
 
   .u-app-shell > header {

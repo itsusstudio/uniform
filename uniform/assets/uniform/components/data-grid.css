@@ -145,7 +145,7 @@ u-data-grid .u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) :is(a,
   z-index: auto;
 }
 
-@container u-data-grid (max-width: 599px) {
+@container u-data-grid (max-width: 37.4375rem) {
   u-data-grid:has(thead [data-keep-narrow]) .u-table {
     max-height: none;
     overflow: visible;

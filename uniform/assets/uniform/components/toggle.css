@@ -88,7 +88,7 @@
   cursor: pointer;
 }
 
-@container (max-width: 479px) {
+@container (max-width: 29.9375rem) {
   .u-toggle-group > label { padding-inline: var(--u-space-2); }
 }
 

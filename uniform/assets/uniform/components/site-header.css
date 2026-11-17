@@ -87,7 +87,7 @@
   forced-color-adjust: none;
 }
 
-@container u-site-header (max-width: 1023px) {
+@container u-site-header (max-width: 63.9375rem) {
   .u-site-header > .u-container { gap: var(--u-space-2); }
 
   .u-site-header > .u-container > .u-wordmark { margin-inline-end: var(--u-space-2); }

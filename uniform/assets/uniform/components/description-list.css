@@ -22,7 +22,7 @@
   overflow-wrap: anywhere;
 }
 
-@container u-dl (max-width: 279px) {
+@container u-dl (max-width: 17.4375rem) {
   .u-dl > dt, .u-dl > dd { grid-column: 1 / -1; }
 
   .u-dl > dt { margin-bottom: calc(-1 * var(--u-space-2)); }

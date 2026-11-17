@@ -172,7 +172,7 @@
 
 .u-table-controls > form > select.u-input { width: auto; }
 
-@container u-table-controls (max-width: 479px) {
+@container u-table-controls (max-width: 29.9375rem) {
   .u-table-controls > form > :is(input[type="search"], :has(input[type="search"])) {
     flex: 1 0 100%;
     max-width: none;

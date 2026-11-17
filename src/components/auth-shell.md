@@ -10,9 +10,10 @@ The auth shell holds the screens people see before they're signed in: the app's
 name, one column for the form, and the terms and privacy links. Every studio app
 uses the same one, so only the name changes.
 
-From 640px wide the shell splits into two equal halves: the name and a short blurb on ink on the left, and the
-form centred top to bottom on the right. On a phone the name sits on white
-above the form.
+From 1024px wide the shell splits into two equal halves: the name and a short blurb on ink on the left, and the
+form centred top to bottom on the right. On a tablet the name sits on white
+above the form, centred top to bottom. On a phone the form stays at the top, so
+the keyboard never pushes it out of view.
 
 ## Example
 
@@ -35,7 +36,7 @@ above the form.
 A `u-auth-shell` holds three parts, in order:
 
 Header
-: The app name in [`u-wordmark`](/components/wordmark/), linked to the app's home page, then a `<p class="u-text-article-title">` with the app's blurb. From 640px the header is the ink half, with the name at the top and the blurb at the bottom, and it stays ink in dark mode. On a phone only the name shows.
+: The app name in [`u-wordmark`](/components/wordmark/), linked to the app's home page, then a `<p class="u-text-article-title">` with the app's blurb. From 1024px the header is the ink half, with the name at the top and the blurb at the bottom, and it stays ink in dark mode. On a phone or tablet only the name shows.
 
 Main
 : The screen itself, with its parts 24px apart and each up to 384px wide. Put one heading, one form and the links under it straight inside. Paragraphs in a row sit 8px apart, as one group of notes.

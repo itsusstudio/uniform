@@ -711,7 +711,7 @@
 - name: u-auth-shell
   group: Page frame
   page: /components/auth-shell/
-  description: "The frame around sign-in and sign-up screens, split into an ink half with the name and a two-line blurb, and the form, from 640px wide. Inside it, in order: a `<header>` with the app name in `u-wordmark` and a `<p class=\"u-text-article-title\">` blurb, the `<main>` with the form, and an optional `<footer>` for terms and privacy links."
+  description: "The frame around sign-in and sign-up screens, split into an ink half with the name and a two-line blurb, and the form, from 1024px wide. Inside it, in order: a `<header>` with the app name in `u-wordmark` and a `<p class=\"u-text-article-title\">` blurb, the `<main>` with the form, and an optional `<footer>` for terms and privacy links."
 
 - name: u-app-shell-paper
   group: Page frame

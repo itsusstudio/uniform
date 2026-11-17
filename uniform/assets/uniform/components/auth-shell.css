@@ -48,7 +48,12 @@
 
 .u-auth-shell > footer a { color: inherit; }
 
+/* Phones keep the form at the top, where the keyboard can't push it out of view. */
 @media (min-width: 40em) {
+  .u-auth-shell > header + * { justify-content: center; }
+}
+
+@media (min-width: 64em) {
   .u-auth-shell > * { grid-column: 2; }
 
   .u-auth-shell > header {

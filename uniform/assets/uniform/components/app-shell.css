@@ -448,8 +448,9 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     translate: -100% 0;
     transition:
       translate var(--u-motion-exit) var(--u-motion-ease),
-      display var(--u-motion-exit) allow-discrete,
-      overlay var(--u-motion-exit) allow-discrete;
+      display var(--u-motion-exit),
+      overlay var(--u-motion-exit);
+    transition-behavior: allow-discrete;
   }
 
   .u-app-shell > u-sidebar:not(:popover-open) { display: none; }
@@ -468,8 +469,9 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     opacity: 0;
     transition:
       opacity var(--u-motion-exit) var(--u-motion-ease),
-      display var(--u-motion-exit) allow-discrete,
-      overlay var(--u-motion-exit) allow-discrete;
+      display var(--u-motion-exit),
+      overlay var(--u-motion-exit);
+    transition-behavior: allow-discrete;
   }
 
   .u-app-shell > u-sidebar:popover-open::backdrop {

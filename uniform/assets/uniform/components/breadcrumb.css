@@ -64,12 +64,29 @@
 }
 
 @container (max-width: 479px) {
+  .u-breadcrumb ol { flex-wrap: nowrap; }
+
   .u-breadcrumb li { display: none; }
 
-  .u-breadcrumb li:nth-last-child(2) { display: flex; }
+  .u-breadcrumb li:nth-last-child(2) { display: flex; flex: none; }
+
+  .u-breadcrumb li:last-child { display: flex; flex: 1 1 0; }
+
+  .u-breadcrumb li:last-child > * {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
   .u-breadcrumb li:nth-last-child(2)::before { content: none; }
 
   .u-breadcrumb li:nth-last-child(2) > a::before { display: block; }
+}
+
+@media (forced-colors: active) {
+  .u-breadcrumb [aria-current="page"] { text-decoration: underline; }
+
+  .u-breadcrumb li:nth-last-child(2) > a::before { background: CanvasText; }
 }
 }

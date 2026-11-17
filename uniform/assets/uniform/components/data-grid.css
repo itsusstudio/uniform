@@ -1,5 +1,8 @@
 @layer uniform.components {
-u-data-grid { container: u-data-grid / inline-size; }
+u-data-grid {
+  container: u-data-grid / inline-size;
+  width: 100%;
+}
 
 u-data-grid .u-table {
   max-height: 70dvh;

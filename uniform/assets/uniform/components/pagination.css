@@ -47,4 +47,8 @@
   color: var(--u-color-text-default);
   white-space: nowrap;
 }
+
+@media (forced-colors: active) {
+  .u-pagination > :is(a, button):is([aria-disabled="true"], :disabled) { border-style: dashed; }
+}
 }

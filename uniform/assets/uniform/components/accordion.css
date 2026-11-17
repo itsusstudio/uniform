@@ -51,4 +51,10 @@
 }
 
 .u-accordion > details[open] > summary { padding-bottom: var(--u-space-2); }
+
+@media (forced-colors: active) {
+  .u-accordion > details > summary::after {
+    background-image: linear-gradient(CanvasText, CanvasText), linear-gradient(CanvasText, CanvasText);
+  }
+}
 }

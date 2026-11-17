@@ -21,6 +21,7 @@
 .u-grid {
   --u-gap: var(--u-grid-gutter);
   container: u-grid / inline-size;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--u-gap);
@@ -44,6 +45,7 @@
 .u-sidebar-layout {
   --u-gap: 0;
   container: u-sidebar-layout / inline-size;
+  width: 100%;
   display: grid;
   grid-template-columns: var(--u-width-sidebar) minmax(0, 1fr);
   gap: var(--u-gap);

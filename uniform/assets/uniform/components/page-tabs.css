@@ -1,11 +1,16 @@
 @layer uniform.components {
 .u-page-tabs {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: var(--u-space-1);
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
+.u-page-tabs::-webkit-scrollbar { display: none; }
+
 .u-page-tabs > a {
+  flex: none;
   display: inline-flex;
   align-items: center;
   min-height: var(--u-size-target);

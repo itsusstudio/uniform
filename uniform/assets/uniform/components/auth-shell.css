@@ -1,6 +1,5 @@
 @layer uniform.components {
 .u-auth-shell {
-  container: u-auth-shell / inline-size;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
@@ -49,7 +48,7 @@
 
 .u-auth-shell > footer a { color: inherit; }
 
-@container u-auth-shell (min-width: 640px) {
+@media (min-width: 640px) {
   .u-auth-shell > * { grid-column: 2; }
 
   .u-auth-shell > header {

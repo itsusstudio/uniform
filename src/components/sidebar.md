@@ -20,8 +20,8 @@ places in the middle and the account at the bottom. Use it inside the
 </div>
 </div>
 
-Jobs is the current page, so it gets a soft grey background and medium weight. The account at the bottom opens a
-menu upward. The button beside the app name folds the column to its icons, and
+Jobs is the current page, so it gets a soft grey background and medium weight. Reports folds, with its
+pages on a guide line. The account at the bottom opens a menu upward, with Appearance and Log out. The button beside the app name folds the column to its icons, and
 so does a click anywhere along its right edge, where the cursor turns into an
 arrow. Try them.
 
@@ -40,7 +40,10 @@ Places
 : A [navigation](/components/navigation/) `u-nav`. Give each link a 16px [icon](/foundations/iconography/) and its name in a `<span>`.
 
 Footer
-: The last `<div>`. It stays at the bottom with a line above it while the places scroll. Put the account here, or help, settings and switches. Help is a `<button>` in a list item, with its icon and name like a link, opening a [menu](/components/menu/) of the app's help entries, like Speak with us and What's new. The account is a `<button>` with the initials in one `<span>` and the name in the next, opening a [menu](/components/menu/).
+: The last `<div>`. It stays at the bottom while the places scroll. A list comes first, with a line under it: guides, and Help as a `<button>` in a list item, with its icon and name like a link, opening a [menu](/components/menu/) of the app's own help entries, like Help centre, What's new and Speak with us. Then the account: a `<button>` with the initials in one `<span>`, and the name and email address in the next, the address in a `<small>`. It opens a [menu](/components/menu/) with Appearance and Log out.
+
+Appearance
+: A `<details>` in the account menu, holding a `<u-theme>` of three buttons: `value="system"`, `"light"` and `"dark"`. `uniform.js` marks the chosen one, sets `data-u-theme` on the page, remembers it in this browser and fires `theme:change`, so an app can save it to the account too.
 
 Inside the app shell, give the sidebar an `id` and `popover`, so the Menu button
 can open it on a phone.

@@ -10,8 +10,8 @@
   --u-nav-current-bg: var(--u-color-text-on-ink);
   --u-nav-current-text: var(--u-color-bg-ink);
   --u-nav-focus: var(--u-color-info-on-ink);
-  --u-nav-hover: color-mix(in srgb, var(--u-nav-text) 5%, transparent);
-  --u-nav-current: color-mix(in srgb, var(--u-nav-text) 9%, transparent);
+  --u-nav-hover: color-mix(in srgb, var(--u-nav-text) 3%, transparent);
+  --u-nav-current: color-mix(in srgb, var(--u-nav-text) 5%, transparent);
 }
 
 .u-app-shell-paper {
@@ -140,31 +140,36 @@ u-sidebar > div:last-child:not(:first-child) {
   bottom: 0;
   margin-inline: calc(-1 * var(--u-space-2));
   padding: var(--u-space-2) var(--u-space-2) var(--u-space-4);
-  border-top: 1px solid var(--u-nav-line);
   background: var(--u-nav-bg);
+}
+
+u-sidebar > div:last-child > ul:has(~ button) {
+  margin-bottom: var(--u-space-2);
+  padding-bottom: var(--u-space-2);
+  border-bottom: 1px solid var(--u-nav-line);
 }
 
 u-sidebar > div:last-child:not(:first-child) > :not(ul, button, [popover]) { padding-inline: var(--u-space-2); }
 
-u-sidebar :is(.u-nav > :is(div, details) > :first-child, legend) { color: var(--u-nav-label); }
+u-sidebar legend { color: var(--u-nav-label); }
 
 u-sidebar .u-nav .u-nav-link-section { color: var(--u-nav-text); }
 
-u-sidebar :is(.u-nav > a, li > :is(a, button)) { color: var(--u-nav-link); }
+u-sidebar :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary) { color: var(--u-nav-link); }
 
-u-sidebar :is(.u-nav > a, li > :is(a, button)) > .u-icon { color: var(--u-nav-label); }
+u-sidebar :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary) > .u-icon { color: var(--u-nav-link); }
 
-u-sidebar :is(.u-nav > a, li > :is(a, button)):hover {
+u-sidebar :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary):hover {
   background: var(--u-nav-hover);
   color: var(--u-nav-text);
 }
 
-u-sidebar :is(.u-nav > a, li > :is(a, button))[aria-current="page"] {
+u-sidebar :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary)[aria-current="page"] {
   background: var(--u-nav-current);
   color: var(--u-nav-text);
 }
 
-u-sidebar :is(.u-nav > a, li > :is(a, button))[aria-current="page"] > .u-icon { color: var(--u-nav-text); }
+u-sidebar :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary)[aria-current="page"] > .u-icon { color: var(--u-nav-text); }
 
 u-sidebar .u-toggle-group { border-color: var(--u-nav-edge); }
 
@@ -185,7 +190,7 @@ u-sidebar > div:last-child > button {
   gap: var(--u-space-2);
   width: 100%;
   min-height: var(--u-size-target);
-  padding: 0 var(--u-space-2);
+  padding: var(--u-space-2);
   border: 0;
   border-radius: var(--u-radius-default);
   background: transparent;
@@ -203,33 +208,36 @@ u-sidebar > div:last-child > button > span:first-child {
   display: grid;
   flex: none;
   place-items: center;
-  width: 24px;
-  height: 24px;
-  margin-inline: calc(-1 * var(--u-space-1));
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   background: var(--u-nav-current-bg);
   color: var(--u-nav-current-text);
-  font-family: var(--u-font-mono);
   font-size: var(--u-font-size-caption);
   font-weight: 500;
 }
 
 u-sidebar > div:last-child > button > span:first-child + span {
+  display: grid;
   flex: 1;
   min-width: 0;
+}
+
+u-sidebar > div:last-child > button > span:first-child + span > * {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-u-sidebar > div:last-child > button::after {
-  content: "";
-  flex: none;
-  width: 16px;
-  height: 16px;
-  background: var(--u-nav-label);
-  mask: url("./../icons/chevrons-up-down.svg") center / contain no-repeat;
-  forced-color-adjust: none;
+u-sidebar > div:last-child > button > span:first-child + span > small {
+  color: var(--u-nav-label);
+  font-size: var(--u-font-size-caption);
+  line-height: var(--u-line-height-caption);
 }
+
+u-sidebar > div:last-child :is(button, li > button) + .u-menu[popover] { min-width: calc(var(--u-width-sidebar) - var(--u-space-4)); }
+
+u-sidebar > div:last-child :is(button, li > button) + .u-menu[popover] > :is(a, button, form > button) { min-height: var(--u-size-control); }
 
 u-sidebar > div:last-child form { margin: 0; }
 
@@ -369,11 +377,11 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav { gap: var(--u-space-2); }
 
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav > :is(div, details) > :first-child { display: none; }
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav > details > ul { display: none; }
 
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav > details::details-content { content-visibility: visible; }
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav > details > summary::after { display: none; }
 
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)) {
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary) {
     position: relative;
     justify-content: center;
     width: var(--u-size-control);
@@ -382,7 +390,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     border-radius: var(--u-radius-default);
   }
 
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)) > span {
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary) > span {
     position: absolute;
     top: 50%;
     inset-inline-start: calc(100% + var(--u-space-2));
@@ -397,9 +405,9 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     translate: 0 -50%;
   }
 
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)):is(:hover, :focus-visible) { text-decoration: none; }
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary):is(:hover, :focus-visible) { text-decoration: none; }
 
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)):is(:hover, :focus-visible) > span { clip-path: none; }
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary):is(:hover, :focus-visible) > span { clip-path: none; }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button {
     justify-content: center;
@@ -407,8 +415,6 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button > :not(:first-child) { display: none; }
-
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button::after { display: none; }
 }
 
 @container u-app-shell (max-width: 1023px) {
@@ -552,7 +558,4 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   }
 }
 
-@media (forced-colors: active) {
-  u-sidebar > div:last-child > button::after { background: CanvasText; }
-}
 }

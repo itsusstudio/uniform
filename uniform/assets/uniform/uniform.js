@@ -1570,6 +1570,33 @@ define("u-toggle-panels", class extends UniformElement {
   }
 })
 
+const applyTheme = (value) => {
+  if (value === "light" || value === "dark") document.documentElement.dataset.uTheme = value
+  else delete document.documentElement.dataset.uTheme
+}
+
+try { applyTheme(localStorage.getItem("u-theme")) } catch {}
+
+define("u-theme", class extends UniformElement {
+  setup(signal) {
+    const buttons = [...this.querySelectorAll(":scope > button[value]")]
+    if (!buttons.length) return
+    const mark = () => {
+      const current = document.documentElement.dataset.uTheme || "system"
+      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.value === current)))
+    }
+    mark()
+    this.addEventListener("click", (event) => {
+      const button = event.target.closest("button[value]")
+      if (!buttons.includes(button)) return
+      applyTheme(button.value)
+      try { localStorage.setItem("u-theme", button.value) } catch {}
+      document.dispatchEvent(new CustomEvent("theme:change", { detail: { value: button.value, source: this } }))
+    }, { signal })
+    document.addEventListener("theme:change", mark, { signal })
+  }
+})
+
 // Page-wide behaviour and platform fallbacks: document listeners, set up once however often this file loads.
 const pageReady = Symbol.for("uniform.page")
 

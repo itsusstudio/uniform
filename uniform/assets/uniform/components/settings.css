@@ -63,6 +63,8 @@
   overflow-wrap: anywhere;
 }
 
+.u-setting > * { min-width: 0; }
+
 .u-setting-value {
   display: flex;
   align-items: center;
@@ -70,5 +72,12 @@
   padding-inline-start: var(--u-space-4);
   border-radius: var(--u-radius-default);
   background: color-mix(in srgb, var(--u-color-text-default) 5%, transparent);
+}
+
+.u-setting-value > :first-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 }

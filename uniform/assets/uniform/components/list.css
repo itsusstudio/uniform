@@ -35,6 +35,23 @@
 
 .u-card > .u-list :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: var(--u-space-6); }
 
+.u-checklist > li::before {
+  content: "";
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background: var(--u-color-text-muted);
+  mask: url("./../icons/circle-dashed.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-checklist > li[data-state="done"]::before {
+  background: var(--u-color-success);
+  mask-image: url("./../icons/circle-check.svg");
+}
+
+.u-checklist > li[data-state="done"] > div > p:first-child { color: var(--u-color-text-muted); }
+
 .u-list-group + .u-list-group { border-top: 1px solid var(--u-color-divider); }
 
 .u-list-group > h3 {

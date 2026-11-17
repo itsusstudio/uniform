@@ -45,6 +45,22 @@ the far right.
 ```
 
 
+## Checklist
+
+Add `u-checklist` for a short list of steps to finish, like setting up a product. Give each `li` a `data-state` of `done`, `next` or `todo`: Uniform draws a dashed circle for steps still to do and a green check for done ones, and mutes the title of a done step. Only the `next` step gets a primary button. Put the count and a [progress bar](/components/progress/) above the list.
+
+```html
+<section class="u-card">
+  <header><hgroup><h2>Set up Workbench</h2><p>2 of 5 done</p></hgroup></header>
+  <div class="u-card-content"><div class="u-progress"><progress max="5" value="2" aria-label="Setup progress">2 of 5</progress></div></div>
+  <ul class="u-list u-checklist">
+    <li data-state="done"><div><p>Add your shop details</p><p class="u-list-item-detail">Shown on every text and receipt.</p></div></li>
+    <li data-state="next"><div><p>Take in your first job</p><p class="u-list-item-detail">About a minute.</p></div><a class="u-btn u-btn-primary" href="/jobs/new">Take in a job</a></li>
+    <li data-state="todo"><div><p>Turn on pickup texts</p><p class="u-list-item-detail">Customers hear when their piece is ready.</p></div><a class="u-btn u-btn-outline" href="/settings/texts">Set up texts</a></li>
+  </ul>
+</section>
+```
+
 ## Groups you can edit
 
 For a short list people arrange themselves, like job statuses, split a card into `u-list-group` sections. Each one has an `h3` (an icon, the name, a `u-meta` count and an action at the end) and a `u-list`. Rows can carry a `u-list-handle` to drag, a `u-swatch` for a colour, and a `u-input-inline` to rename in place.

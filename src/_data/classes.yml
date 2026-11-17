@@ -773,3 +773,8 @@
   group: Components
   page: /components/list/
   description: A text field that looks like plain text until pointed at or focused, for renaming in place.
+
+- name: u-checklist
+  group: Components
+  page: /components/list/
+  description: Added to `u-list` for steps to finish. Each li takes data-state done, next or todo.

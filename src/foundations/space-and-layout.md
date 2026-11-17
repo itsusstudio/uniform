@@ -35,8 +35,10 @@ no block covers. The number is how many 4px units it holds, so `u-gap-6` is
 ## Layout
 
 Every page answers two questions the same way: where things start, and where they
-stop. Things start on one of twelve column lines. They stop at 1280px for a page,
-and at about 65 characters for running text, so lines never get too long to read.
+stop. Things start on one of twelve column lines. They stop at 1280px for most
+pages, 1600px for an app's data pages and 768px for settings, forms and reading
+(see [Container](/components/container/)), and at about 65 characters for
+running text, so lines never get too long to read.
 
 <%= render "examples/grid_demo" %>
 

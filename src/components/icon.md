@@ -27,6 +27,29 @@ An icon is an inline Lucide SVG with `u-icon`. When to use one is on [Iconograph
 </div>
 </div>
 
+## In a toolbar
+
+<div class="example-frame">
+<div class="u-stack u-gap-4">
+<div class="u-actions">
+<button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "search", small: true %>Search</button>
+<button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "filter", small: true %>Filter</button>
+<button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "arrow-down-up", small: true %>Sort</button>
+<button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "upload", small: true %>Import</button>
+</div>
+<div class="u-actions u-actions-icons">
+<button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit job"><%= render "icon", name: "pencil", small: true %></button>
+<button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Preview ticket"><%= render "icon", name: "eye", small: true %></button>
+<button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Upload photos"><%= render "icon", name: "upload", small: true %></button>
+<button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Delete job"><%= render "icon", name: "trash-2", small: true %></button>
+<button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="More actions"><%= render "icon", name: "ellipsis", small: true %></button>
+</div>
+</div>
+</div>
+
+A word beside an icon says what the button does; an icon on its own needs an
+`aria-label` and a job everyone knows, like edit, delete or more.
+
 ## Code
 
 ```html

@@ -126,7 +126,7 @@ Bulk bar
 : Optional. A second form inside the controls, right after the filter form, which takes the place of the filters while rows are ticked: an `<output>` for the count, outline buttons for the bulk actions, and a reset button that clears the selection. With it, wrap the bars and the card in [`<u-data-grid>`](/components/data-grid/#selecting-rows).
 
 Table
-: A [table](/components/table/) straight inside a [card](/components/card/), in a `u-table`. A [checkbox](/components/checkbox/) starts each row, the job number links to the job, the status is a [badge](/components/badge/), dates use `u-text-data`, amounts use `u-table-num`, and sortable headings use `u-table-sort`. Add `u-table-sticky` to the wrapper for long pages.
+: A [table](/components/table/) straight inside a [card](/components/card/), in a `u-table`. Each row starts with a [checkbox](/components/checkbox/) and the job number, which links to the job, and a click anywhere on the row opens it. The status is a [badge](/components/badge/), dates use `u-text-data`, amounts use `u-table-num`, and sortable headings use `u-table-sort`. Add `u-table-sticky` to the wrapper for long pages.
 
 Row actions
 : A ghost icon button at the end of each row that opens a [menu](/components/menu/).

@@ -22,6 +22,12 @@ Put a checkbox in the first header and each row's first cell, with `form`
 pointing at a bulk `<form>` in the controls. The form holds an `<output>` for
 the count and a `<button type="reset">` to clear.
 
+## Opening a row
+
+Put the row's link in its first cell, beside the checkbox. A click anywhere
+else in the row opens it, and Ctrl or ⌘ opens it in a new tab. Clicks on the
+checkbox, an editable cell, a button or another link do their own job.
+
 ## Editing in place
 
 Put a `<template>` in a cell holding a `<form>` with one field, like a
@@ -75,7 +81,7 @@ it opens the record.
         <table>
           <thead>
             <tr>
-              <th scope="col"><label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden">Select all jobs</span></label> Job</th>
+              <th scope="col"><div class="u-row u-gap-4"><label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden">Select all jobs</span></label><span>Job</span></div></th>
               <th scope="col" data-keep-narrow>Customer</th>
               <th scope="col" data-keep-narrow>Status</th>
               <th scope="col" aria-label="Actions"></th>
@@ -83,7 +89,7 @@ it opens the record.
           </thead>
           <tbody>
             <tr>
-              <th scope="row"><label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="1042" form="jobs-bulk"><span class="u-visually-hidden">Select job #1042</span></label> <a class="u-text-data" href="/jobs/1042">#1042</a></th>
+              <th scope="row"><div class="u-row u-gap-4"><label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="1042" form="jobs-bulk"><span class="u-visually-hidden">Select job #1042</span></label><a class="u-text-data" href="/jobs/1042">#1042</a></div></th>
               <td><mark>Ana</mark> Reyes</td>
               <td>
                 <span class="u-badge u-badge-info">On the bench</span>

@@ -129,7 +129,9 @@ form:has(> span > output) output {
 
 u-data-grid .u-table td.u-data-grid-changed { background: var(--u-color-highlight); }
 
-u-data-grid .u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) { cursor: auto; }
+u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)) { cursor: pointer; }
+
+u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)):hover > * { background: var(--u-color-divider); }
 
 u-data-grid .u-table > table tbody tr > :first-child > a:not(.u-btn)::after { content: none; }
 

@@ -109,8 +109,8 @@
           <table>
             <thead>
               <tr>
-                <th scope="col"><label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden">Select all jobs on this page</span></label></th>
-<% columns.each do |words, key| -%>
+                <th scope="col"><div class="u-row u-gap-4"><label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden">Select all jobs on this page</span></label><span>Job</span></div></th>
+<% columns.drop(1).each do |words, key| -%>
 <% num = key == "quote" ? %( class="u-table-num") : "" -%>
 <% if key.nil? -%>
                 <th scope="col"><%= words %></th>
@@ -127,8 +127,7 @@
 <% jobs.each do |number, customer, work, variant, status, due, quote| -%>
 <% menu = uid.("job-#{number}-actions") -%>
               <tr>
-                <td><label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="<%= number %>" form="<%= uid.("jobs-bulk") %>"<% if checked.include?(number) %> checked<% end %>><span class="u-visually-hidden">Select job #<%= number %></span></label></td>
-                <td><a class="u-text-data" href="<%= href.("/jobs/#{number}") %>">#<%= number %></a></td>
+                <th scope="row"><div class="u-row u-gap-4"><label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="<%= number %>" form="<%= uid.("jobs-bulk") %>"<% if checked.include?(number) %> checked<% end %>><span class="u-visually-hidden">Select job #<%= number %></span></label><a class="u-text-data" href="<%= href.("/jobs/#{number}") %>">#<%= number %></a></div></th>
                 <td><%= raw mark.(customer) %></td>
                 <td><%= work %></td>
                 <td><span class="u-badge u-badge-<%= variant %>"><%= status %></span></td>

@@ -1292,6 +1292,7 @@ define("u-data-grid", class extends UniformElement {
     const words = (name, fallback) => this.dataset[name] || fallback
     this.keepNarrow(tbody, headers)
     this.selection(on, tbody)
+    this.rowLinks(on, tbody)
     this.columns(on, table, headers, stored, store)
     this.editing(on, signal, tbody, headers, words)
   }
@@ -1331,6 +1332,21 @@ define("u-data-grid", class extends UniformElement {
       requestAnimationFrame(() => { rows().forEach((box) => { box.checked = false }); update(); all?.focus() })
     }))
     update()
+  }
+
+  // The frozen first cell is sticky, so its link can't stretch over the row
+  // the way it does in a plain table. A click on the row follows it instead.
+  rowLinks(on, tbody) {
+    on(tbody, "click", (event) => {
+      if (event.defaultPrevented || event.button !== 0) return
+      if (event.target.closest("a, button, input, label, select, summary, textarea, [popover], .u-data-grid-editor")) return
+      const cell = event.target.closest("td, th")
+      if (!cell || cell.querySelector(":scope > template")) return
+      const link = cell.parentElement.cells[0]?.querySelector("a:not(.u-btn)")
+      if (!link || getSelection()?.toString()) return
+      if (event.metaKey || event.ctrlKey) window.open(link.href, "_blank", "noopener")
+      else link.click()
+    })
   }
 
   columns(on, table, headers, stored, store) {

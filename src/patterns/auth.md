@@ -18,20 +18,20 @@ one box to fill in.
 
 ### Sign in
 
-<div class="frame" style="min-height: 560px">
-<%= render "examples/pattern_auth_sign_in", id: "auth-in", tag: "div" %>
+<div class="frame" style="height: 560px">
+<%= render "screen", title: "Sign in", html: render("examples/pattern_auth_sign_in", id: "auth-in", tag: "div") %>
 </div>
 
 ### Enter the code
 
-<div class="frame" style="min-height: 560px">
-<%= render "examples/pattern_auth_code", id: "auth-code", tag: "div", error: false %>
+<div class="frame" style="height: 560px">
+<%= render "screen", title: "Enter the code", html: render("examples/pattern_auth_code", id: "auth-code", tag: "div", error: false) %>
 </div>
 
 ### Wrong code
 
-<div class="frame" style="min-height: 560px">
-<%= render "examples/pattern_auth_code", id: "auth-code-error", tag: "div", error: true %>
+<div class="frame" style="height: 560px">
+<%= render "screen", title: "Wrong code", html: render("examples/pattern_auth_code", id: "auth-code-error", tag: "div", error: true) %>
 </div>
 
 The field keeps what they typed, its border turns vermilion and the message says
@@ -39,18 +39,18 @@ what to do next. The way out, sending a new code, sits right below.
 
 ### Sign up
 
-<div class="frame" style="min-height: 560px">
-<%= render "examples/pattern_auth_sign_up", id: "auth-up", tag: "div" %>
+<div class="frame" style="height: 560px">
+<%= render "screen", title: "Sign up", html: render("examples/pattern_auth_sign_up", id: "auth-up", tag: "div") %>
 </div>
 
 ### On a phone
 
 <div class="u-row u-row-top u-gap-6 frame-phones">
-<div class="frame frame-phone" style="min-height: 720px">
-<%= render "examples/pattern_auth_sign_in", id: "auth-phone-in", tag: "div" %>
+<div class="frame frame-phone" style="height: 720px">
+<%= render "screen", title: "Sign in on a phone", html: render("examples/pattern_auth_sign_in", id: "auth-phone-in", tag: "div") %>
 </div>
-<div class="frame frame-phone" style="min-height: 720px">
-<%= render "examples/pattern_auth_code", id: "auth-phone-code", tag: "div", error: true %>
+<div class="frame frame-phone" style="height: 720px">
+<%= render "screen", title: "Wrong code on a phone", html: render("examples/pattern_auth_code", id: "auth-phone-code", tag: "div", error: true) %>
 </div>
 </div>
 

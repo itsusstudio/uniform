@@ -32,39 +32,11 @@
 
 .frame-column:has(> u-sidebar > div:first-child > button[aria-expanded="false"]) { width: fit-content; }
 
-.frame .u-auth-shell { min-height: inherit; }
-
-.frame .u-app-shell {
-  position: relative;
-  min-height: 0;
+.frame > .screen {
+  display: block;
+  width: 100%;
   height: 100%;
-  anchor-name: --frame-shell;
-  anchor-scope: --frame-shell;
-}
-
-@supports (anchor-scope: --a) {
-  .frame .u-app-shell > u-sidebar:popover-open {
-    position-anchor: --frame-shell;
-    inset: anchor(top) auto anchor(bottom) anchor(left);
-    width: calc(anchor-size(width) * 0.75);
-  }
-
-  .frame .u-app-shell > u-sidebar::backdrop { background: transparent; }
-
-  .frame .u-app-shell:has(> u-sidebar:popover-open)::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: 4;
-    background: var(--u-color-backdrop);
-  }
-}
-
-.frame .u-app-shell > main { overflow-y: auto; }
-
-.frame .u-app-shell > u-sidebar:not(:popover-open) {
-  position: relative;
-  height: auto;
+  border: 0;
 }
 
 .frame-desktop {
@@ -73,6 +45,8 @@
 }
 
 .frame-desktop > * { min-width: 880px; }
+
+.frame-desktop > .screen { min-width: 1024px; }
 
 .frame-phone {
   --u-page-margin: var(--u-space-4);

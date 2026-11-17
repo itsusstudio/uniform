@@ -1,0 +1,21 @@
+<%# locals: (html:, title:, state: nil, fit: false) -%>
+<%
+  body_class = defined?(state) && state
+  fit_height = defined?(fit) && fit
+  document = <<~HTML
+    <!doctype html>
+    <html lang="#{site.locale}" data-u-audience="business">
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>try { const theme = parent.document.documentElement.dataset.uTheme; if (theme) document.documentElement.dataset.uTheme = theme; const audience = parent.document.documentElement.dataset.uAudience; if (audience) document.documentElement.dataset.uAudience = audience } catch (error) {}</script>
+    <link rel="stylesheet" href="#{asset_path :css}">
+    <script src="#{asset_path :js}" defer></script>
+    </head>
+    <body#{%( class="#{body_class}") if body_class}>
+    #{html}
+    </body>
+    </html>
+  HTML
+-%>
+<iframe class="screen" title="<%= h title %>" loading="lazy"<% if fit_height %> onload="this.style.height = this.contentDocument.documentElement.scrollHeight + 'px'"<% end %> srcdoc="<%= raw h(document) %>"></iframe>

@@ -11,7 +11,7 @@ The app shell holds the sidebar and the page beside it. Use it once, around ever
 ## Example
 
 <div class="frame frame-desktop" style="height: 480px">
-<%= render "examples/app_shell", id: "app-shell-demo", live: true %>
+<%= render "screen", title: "App shell on a wide screen", html: render("examples/app_shell", id: "app-shell-demo", live: true) %>
 </div>
 
 Try the button beside the app name: it folds the nav down to its icons. So does a click along the column's right edge. On a phone, the nav moves behind a Menu button.
@@ -37,7 +37,7 @@ Escape or a tap outside closes it. See the
 
 <div class="u-row u-row-top u-gap-6 frame-phones">
 <div class="frame frame-phone" style="height: 560px">
-<%= render "examples/app_shell", id: "app-shell-tabs", live: true, tabs: true %>
+<%= render "screen", title: "App shell with a tab bar on a phone", html: render("examples/app_shell", id: "app-shell-tabs", live: true, tabs: true) %>
 </div>
 </div>
 

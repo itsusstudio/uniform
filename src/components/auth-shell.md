@@ -16,13 +16,13 @@ above the form.
 
 ## Example
 
-<div class="frame frame-desktop" style="min-height: 560px">
-<%= render "examples/pattern_auth_sign_in", id: "auth-shell-demo", tag: "div" %>
+<div class="frame frame-desktop" style="height: 560px">
+<%= render "screen", title: "Auth shell on a wide screen", html: render("examples/pattern_auth_sign_in", id: "auth-shell-demo", tag: "div") %>
 </div>
 
 <div class="u-row u-row-top u-gap-6 frame-phones">
-<div class="frame frame-phone" style="min-height: 640px">
-<%= render "examples/pattern_auth_sign_in", id: "auth-shell-phone", tag: "div" %>
+<div class="frame frame-phone" style="height: 640px">
+<%= render "screen", title: "Auth shell on a phone", html: render("examples/pattern_auth_sign_in", id: "auth-shell-phone", tag: "div") %>
 </div>
 </div>
 

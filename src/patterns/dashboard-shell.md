@@ -12,7 +12,7 @@ beside the page. Use it for every screen people see once they've signed in.
 ## Example
 
 <div class="frame frame-desktop" style="height: 600px">
-<%= render "examples/pattern_dashboard_shell_app", id: "shell-desktop", live: true %>
+<%= render "screen", title: "Dashboard shell on a wide screen", html: render("examples/pattern_dashboard_shell_app", id: "shell-desktop", live: true) %>
 </div>
 
 The sidebar stays on the left on ink, and the page sits beside it on white,
@@ -24,13 +24,13 @@ folds the nav down to its icons.
 <div class="u-row u-row-top u-gap-6 frame-phones">
 <div class="u-stack u-gap-2">
 <div class="frame frame-phone" style="height: 720px">
-<%= render "examples/pattern_dashboard_shell_app", id: "shell-phone", live: false %>
+<%= render "screen", title: "Dashboard shell on a phone, menu closed", html: render("examples/pattern_dashboard_shell_app", id: "shell-phone", live: false) %>
 </div>
 <p class="u-text-small u-text-muted">Menu closed: the bar and the page.</p>
 </div>
 <div class="u-stack u-gap-2">
 <div class="frame frame-phone frame-phone-open" style="height: 720px">
-<%= render "examples/pattern_dashboard_shell_app", id: "shell-phone-open", live: false %>
+<%= render "screen", title: "Dashboard shell on a phone, menu open", state: "frame-phone-open", html: render("examples/pattern_dashboard_shell_app", id: "shell-phone-open", live: false) %>
 </div>
 <p class="u-text-small u-text-muted">Menu open: the nav slides in over a backdrop, three quarters wide.</p>
 </div>

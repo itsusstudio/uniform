@@ -1,7 +1,4 @@
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
-<p class="example-verdict example-verdict-dont">Don’t</p>
-<div class="frame frame-phone" style="height: 260px">
+<% dont_shell = capture do %>
 <div class="u-app-shell">
 <header>
 <span class="u-wordmark u-wordmark-serif">Workbench</span>
@@ -21,12 +18,8 @@
 </div>
 </main>
 </div>
-</div>
-<figcaption class="example-caption example-caption-dont"><span>New job moved up into the bar. Now the bar changes from page to page, and the page header has lost the one action it was for.</span></figcaption>
-</figure>
-<figure class="example u-span-6">
-<p class="example-verdict example-verdict-do">Do</p>
-<div class="frame frame-phone" style="height: 260px">
+<% end %>
+<% do_shell = capture do %>
 <div class="u-app-shell">
 <header>
 <span class="u-wordmark u-wordmark-serif">Workbench</span>
@@ -46,6 +39,19 @@
 </div>
 </main>
 </div>
+<% end %>
+<div class="examples u-grid u-gap-6">
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-dont">Don’t</p>
+<div class="frame frame-phone" style="height: 260px">
+<%= render "screen", title: "New job in the bar", html: dont_shell %>
+</div>
+<figcaption class="example-caption example-caption-dont"><span>New job moved up into the bar. Now the bar changes from page to page, and the page header has lost the one action it was for.</span></figcaption>
+</figure>
+<figure class="example u-span-6">
+<p class="example-verdict example-verdict-do">Do</p>
+<div class="frame frame-phone" style="height: 260px">
+<%= render "screen", title: "New job in the page header", html: do_shell %>
 </div>
 <figcaption class="example-caption example-caption-do"><span>The bar holds the app name and Menu, the same on every page. New job stays in the page header, where it sits on a computer too.</span></figcaption>
 </figure>

@@ -13,7 +13,7 @@ a record.
 ## Example
 
 <div class="frame frame-desktop">
-<%= render "examples/pattern_timeline_app", id: "tl-desktop", live: true %>
+<%= render "screen", title: "Job page with its timeline on a wide screen", fit: true, html: render("examples/pattern_timeline_app", id: "tl-desktop", live: true) %>
 </div>
 
 Job details come first in their own card, then the history, straight on the page under its own heading. A status
@@ -47,7 +47,7 @@ in the same list.
 
 <div class="u-row u-row-top u-gap-6 frame-phones">
 <div class="frame frame-phone">
-<%= render "examples/pattern_timeline_app", id: "tl-phone", live: false %>
+<%= render "screen", title: "Job page with its timeline on a phone", fit: true, html: render("examples/pattern_timeline_app", id: "tl-phone", live: false) %>
 </div>
 </div>
 

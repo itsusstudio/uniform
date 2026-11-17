@@ -52,7 +52,7 @@ running text, so lines never get too long to read.
 | `u-span-*` classes | ignored, every child is full width | applied | applied |
 | `u-sidebar-layout` | sidebar above the content | sidebar above the content | 264px sidebar beside the content |
 
-The page edge and column spacing follow the screen. Grid, Split, Sidebar layout, App shell, Site header and Description list follow their own width instead, so each one adapts wherever it's placed, like a narrow side panel.
+The page edge, column spacing and the app and auth shells follow the screen. Grid, Split, Sidebar layout, Site header and Description list follow their own width instead, so each one adapts wherever it's placed, like a narrow side panel.
 
 ## Tokens
 

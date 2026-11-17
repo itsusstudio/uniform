@@ -42,7 +42,7 @@
 
 - name: <u-dropzone>
   wraps: The `u-field` holding a `u-dropzone`, the `u-list` for the files and the row `<template>`.
-  adds: The drag highlight and a row for each file, cleared when the form resets. Fires `dropzone:change`.
+  adds: The drag highlight and a row for each file, cleared when the form resets. Fires `dropzone:change`. With `data-upload-url` on the input, uploads each file as it's picked, marks saved files for removal with Undo, and fires `dropzone:dirty`.
   without: The file input still takes files.
   page: /components/dropzone/
 

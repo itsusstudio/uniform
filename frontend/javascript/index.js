@@ -1,7 +1,20 @@
 import "$styles/index.css"
 import "$styles/syntax-highlighting.css"
 
-import "../../uniform/assets/uniform/uniform.js"
+import { uploads } from "../../uniform/assets/uniform/uniform.js"
+
+// Docs examples upload nowhere: progress runs on a timer and each file gets a made-up id.
+uploads.upload = (file, { progress, signal }) => new Promise((resolve, reject) => {
+  let sent = 0
+  const timer = setInterval(() => {
+    sent = Math.min(1, sent + 0.1)
+    progress(sent)
+    if (sent < 1) return
+    clearInterval(timer)
+    resolve(`demo-${file.name}`)
+  }, 120)
+  signal.addEventListener("abort", () => { clearInterval(timer); reject(new Error("Cancelled")) }, { once: true })
+})
 
 import components from "$components/**/*.{js,jsx,js.rb,css}"
 

@@ -1,0 +1,48 @@
+<%# locals: (id:) -%>
+<form class="u-stack u-gap-4" id="<%= id %>-form">
+  <u-dropzone data-remove-name="photo_changes[remove][]">
+    <div class="u-field">
+      <label id="<%= id %>-label" for="<%= id %>">Photos of the piece</label>
+      <label class="u-dropzone">
+        <input id="<%= id %>" type="file" name="photo_changes[add][]" multiple
+          accept="image/jpeg,image/png,image/heic,.heic" data-upload-url="/direct_uploads?policy=job_photos"
+          data-max-size="10485760" data-max-files="4"
+          aria-labelledby="<%= id %>-label" aria-describedby="<%= id %>-hint">
+        <span>Drop photos here or <span class="u-dropzone-link">choose files</span></span>
+        <small id="<%= id %>-hint">JPG, PNG or HEIC, up to 4 photos.</small>
+      </label>
+      <p class="u-error" data-dropzone-error="limit" hidden>A job can have up to 4 photos.</p>
+      <ul class="u-list" aria-live="polite">
+        <li data-dropzone-saved="4821">
+          <img src="<%= relative_url "/images/dropzone/ring-4821.webp" %>" width="48" height="48" alt="">
+          <div>
+            <p>IMG_4821.HEIC</p>
+            <p><span class="u-badge u-badge-danger" data-dropzone-marked hidden>Will be removed</span><span class="u-meta">2.4 MB</span></p>
+          </div>
+          <button type="button" class="u-btn-close" data-dropzone-remove aria-label="Remove IMG_4821.HEIC"></button>
+          <button type="button" class="u-link-btn" data-dropzone-undo hidden>Undo</button>
+        </li>
+      </ul>
+      <template>
+        <li>
+          <span></span>
+          <div>
+            <p></p>
+            <p><span class="u-meta"></span><span data-dropzone-done hidden>New</span></p>
+            <progress max="100" value="0" aria-label="Uploading" hidden></progress>
+            <p class="u-error" data-dropzone-error="size" hidden>Too big. Photos can be up to 10 MB.</p>
+            <p class="u-error" data-dropzone-error="type" hidden>That type won’t open here. Use JPG, PNG or HEIC.</p>
+            <p class="u-error" data-dropzone-error="upload" hidden>That photo didn’t upload.</p>
+          </div>
+          <button type="button" class="u-btn u-btn-outline" data-dropzone-retry hidden>Retry</button>
+          <button type="button" class="u-btn-close" data-dropzone-remove aria-label="Remove"></button>
+        </li>
+      </template>
+    </div>
+  </u-dropzone>
+  <div class="u-actions">
+    <span class="u-meta" id="<%= id %>-changes" aria-live="polite">No changes</span>
+    <button type="reset" class="u-btn u-btn-outline">Discard</button>
+    <button type="submit" class="u-btn u-btn-primary">Save</button>
+  </div>
+</form>

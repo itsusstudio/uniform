@@ -132,4 +132,10 @@
   mask: url("./../icons/check.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
+
+.u-dropzone ~ .u-list > li[data-dropzone-marked-row] > :is(:first-child, div > p:first-child) { opacity: 0.5; }
+
+.u-dropzone ~ .u-list > li[data-dropzone-marked-row] > div > p:first-child { text-decoration: line-through; }
+
+.u-dropzone ~ .u-list > li > [data-dropzone-retry] { margin-inline-start: auto; }
 }

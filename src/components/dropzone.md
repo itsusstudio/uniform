@@ -179,6 +179,99 @@ Uploading
 On phones
 : A tap opens the phone's picker, with the camera and the photo library. Add `capture="environment"` only when every file is a new photo, because some phones then skip the library.
 
+## Direct uploads
+
+<div class="example-frame">
+<div class="u-max-width-form">
+<%= render "examples/dropzone_direct", id: "dz-direct" %>
+</div>
+</div>
+
+<script>
+document.getElementById("dz-direct-form").addEventListener("dropzone:dirty", (event) => {
+  const { changes } = event.detail
+  document.getElementById("dz-direct-changes").textContent = changes === 0 ? "No changes" : changes === 1 ? "1 change" : `${changes} changes`
+})
+document.getElementById("dz-direct-form").addEventListener("submit", (event) => event.preventDefault())
+</script>
+
+Set `data-upload-url` on the file input and each file goes to storage the moment it's picked, with its own upload bar. The form sends the ids storage hands back, never the files, so saving is instant. Nothing changes on the record until the form is saved: removing a saved photo marks it, with Undo, and Discard puts everything back. Here the uploads are pretend.
+
+```html
+<%= raw render("examples/dropzone_direct", id: "job-photos").strip %>
+```
+
+```erb
+<u-dropzone data-remove-name="photo_changes[remove][]">
+  <div class="u-field">
+    <%%= label_tag :job_photos, t(".photos"), id: "job-photos-label" %>
+    <label class="u-dropzone">
+      <%%= file_field_tag "photo_changes[add][]", id: "job_photos", multiple: true,
+        accept: "image/jpeg,image/png,image/heic,.heic",
+        data: { upload_url: direct_uploads_path, max_size: 10.megabytes, max_files: 4 },
+        aria: { labelledby: "job-photos-label", describedby: "job-photos-hint" } %>
+      <span><%%= t(".drop_html", choose: tag.span(t(".choose_files"), class: "u-dropzone-link")) %></span>
+      <small id="job-photos-hint"><%%= t(".photos_hint", count: 4) %></small>
+    </label>
+    <p class="u-error" data-dropzone-error="limit" hidden><%%= t(".photo_limit", count: 4) %></p>
+    <ul class="u-list" aria-live="polite">
+      <%% job.photos.each do |photo| %>
+        <li data-dropzone-saved="<%%= photo.id %>">
+          <%%= image_tag photo.variant(:thumb), width: 48, height: 48, alt: "" %>
+          <div>
+            <p><%%= photo.filename %></p>
+            <p><span class="u-badge u-badge-danger" data-dropzone-marked hidden><%%= t(".will_be_removed") %></span><span class="u-meta"><%%= number_to_human_size(photo.byte_size) %></span></p>
+          </div>
+          <button type="button" class="u-btn-close" data-dropzone-remove aria-label="<%%= t(".remove", name: photo.filename) %>"></button>
+          <button type="button" class="u-link-btn" data-dropzone-undo hidden><%%= t(".undo") %></button>
+        </li>
+      <%% end %>
+    </ul>
+    <template><%%# the row, as above %></template>
+  </div>
+</u-dropzone>
+```
+
+The form sends `photo_changes[add][]` for each finished upload and `photo_changes[remove][]` for each saved photo marked for removal. Apply both when the record saves, and check each id again on the server.
+
+`data-max-files`
+: The most files the field holds, counting saved photos that aren't marked. Past it, the `limit` error shows and no row is added.
+
+`data-dropzone-saved`
+: On a row for a file already on the record. Its value is the id sent for removal, under the name in `data-remove-name`.
+
+Row parts
+: `data-dropzone-done` shows once a file is uploaded and waiting for Save, so say "New" in a form like this one. `data-dropzone-error="upload"` and `data-dropzone-retry` show when an upload fails. `data-dropzone-marked` and `data-dropzone-undo` show on a saved row marked for removal.
+
+Saving
+: Saving while a file is still uploading waits for it, then saves. The browser asks before the page closes with changes that aren't saved. `dropzone:dirty` fires with `{ changes, busy }` whenever they move, and the element's `changes` and `busy` give the same numbers. Use them for a "2 changes" line or a guard before an in-app page change.
+
+### Connect your storage
+
+```js
+import { uploads } from "uniform"
+import { activeStorageUpload } from "uniform/active_storage"
+
+uploads.upload = activeStorageUpload
+uploads.prepare = shrinkPhoto
+```
+
+Uniform never talks to a server. `uploads.upload` gets each file with `{ url, progress, signal }`, where `url` is the input's `data-upload-url`, and returns a promise for the id to send. `uploads.prepare` is optional and runs first, for work like turning HEIC into JPEG. Rails apps use `uniform/active_storage`, which uploads with Active Storage's direct upload and returns the blob's signed id. Pin it next to `uniform` in the import map.
+
+### Without a dropzone
+
+```html
+<form action="/parties/12/cover" method="post">
+  <label class="u-btn u-btn-outline">
+    <input type="file" name="party[cover]" accept="image/*" data-upload-url="/direct_uploads" hidden>
+    Upload a cover
+  </label>
+  <progress class="cover-progress" max="1"></progress>
+</form>
+```
+
+Any file input with `data-upload-url` uploads the same way, so a button, an avatar or a cover photo needs no dropzone. A single-file input keeps only the newest file. While files upload, the form has `data-upload-state` (`uploading`, `uploaded`, `failed` or `idle`) and `--u-upload-progress` from 0 to 1 for your own bar. The input fires `upload:start`, `upload:progress`, `upload:finish` and `upload:remove`, each with `{ upload }`: its `file`, the `prepared` file, `state`, `progress`, `id`, `error` and `timings` in milliseconds. To save as soon as a file is up, call `form.requestSubmit()` on `upload:finish`.
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/dropzone/" %>

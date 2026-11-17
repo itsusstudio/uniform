@@ -411,7 +411,175 @@ const sizeText = (bytes, lang) => {
   return new Intl.NumberFormat(lang, { style: "unit", unit: mega ? "megabyte" : "kilobyte", maximumFractionDigits: mega ? 1 : 0 }).format(value)
 }
 
+// Direct uploads: a file input with data-upload-url sends each file to storage
+// the moment it's picked, through the upload function the app registers, and
+// the form sends the returned ids in hidden fields under the input's name.
+//   uploads.upload = (file, { url, progress, signal }) => Promise<id>
+//   uploads.prepare = (file) => Promise<File>   (optional, runs first)
+export const uploads = { upload: null, prepare: null }
+
+const uploadsByInput = new WeakMap()
+const uploadsOf = (input) => {
+  if (!uploadsByInput.has(input)) uploadsByInput.set(input, new Map())
+  return uploadsByInput.get(input)
+}
+const directInputs = (form) => [...form.querySelectorAll('input[type="file"][data-upload-url]')]
+const formUploads = (form) => directInputs(form).flatMap((input) => [...uploadsOf(input).values()])
+const uploadBusy = (upload) => upload.state === "preparing" || upload.state === "uploading"
+let nextUpload = 0
+
+const fileProblem = (input, file) => {
+  const accepts = input.accept.split(",").map((rule) => rule.trim().toLowerCase()).filter(Boolean)
+  const name = file.name.toLowerCase()
+  const type = file.type.toLowerCase()
+  const fits = accepts.length === 0 || accepts.some((rule) => {
+    if (rule.startsWith(".")) return name.endsWith(rule)
+    if (rule.endsWith("/*")) return type.startsWith(rule.slice(0, -1))
+    return type === rule
+  })
+  if (!fits) return "type"
+  if (file.size > (Number(input.dataset.maxSize) || Infinity)) return "size"
+  return null
+}
+
+const syncForm = (form) => {
+  if (!form) return
+  const all = formUploads(form)
+  const active = all.filter((upload) => upload.state !== "removed")
+  const state = active.some(uploadBusy) ? "uploading"
+    : active.some((upload) => upload.state === "failed") ? "failed"
+    : active.some((upload) => upload.state === "uploaded") ? "uploaded" : "idle"
+  form.dataset.uploadState = state
+  const total = active.reduce((sum, upload) => sum + (upload.prepared ?? upload.file).size, 0)
+  const sent = active.reduce((sum, upload) => sum + upload.progress * (upload.prepared ?? upload.file).size, 0)
+  form.style.setProperty("--u-upload-progress", total ? (sent / total).toFixed(3) : "0")
+  if (state === "uploading" || !form.uploadSubmitter) return
+  const submitter = form.uploadSubmitter
+  form.uploadSubmitter = null
+  if (state !== "failed") form.requestSubmit(submitter === form ? undefined : submitter)
+}
+
+const emit = (input, type, upload) => input.dispatchEvent(new CustomEvent(`upload:${type}`, { bubbles: true, detail: { upload } }))
+
+const runUpload = async (input, upload) => {
+  const started = performance.now()
+  let step = "prepare"
+  upload.attempts += 1
+  upload.controller = new AbortController()
+  const { signal } = upload.controller
+  const change = (attributes, type = "progress") => {
+    Object.assign(upload, attributes)
+    emit(input, type, upload)
+    syncForm(input.form)
+  }
+  change({ state: "preparing", progress: 0, error: null })
+  try {
+    if (!uploads.upload) throw new Error("No upload function. Set uploads.upload from uniform.js.")
+    const prepareStart = performance.now()
+    upload.prepared ??= uploads.prepare ? await uploads.prepare(upload.file) : upload.file
+    upload.timings.prepare_ms = Math.round(performance.now() - prepareStart)
+    if (signal.aborted) return
+    step = "upload"
+    change({ state: "uploading" })
+    const uploadStart = performance.now()
+    const id = await uploads.upload(upload.prepared, {
+      url: input.dataset.uploadUrl,
+      signal,
+      progress: (fraction) => { if (!signal.aborted) change({ progress: Math.min(1, Math.max(0, fraction)) }) }
+    })
+    if (signal.aborted) return
+    upload.timings.upload_ms = Math.round(performance.now() - uploadStart)
+    upload.timings.total_ms = Math.round(performance.now() - started)
+    const field = document.createElement("input")
+    field.type = "hidden"
+    field.name = input.name
+    field.value = id
+    field.dataset.uploadField = ""
+    input.after(field)
+    change({ state: "uploaded", progress: 1, id, field }, "finish")
+  } catch (error) {
+    if (signal.aborted) return
+    upload.timings.total_ms = Math.round(performance.now() - started)
+    change({ state: "failed", error, step }, "finish")
+  }
+}
+
+// Starts uploading files on a direct input. A single-file input keeps only the
+// newest. Returns the uploads, so a client like <u-dropzone> can draw them.
+export const startUploads = (input, files) => {
+  const current = uploadsOf(input)
+  if (!input.multiple) [...current.values()].forEach((upload) => removeUpload(input, upload))
+  const picked = input.multiple ? [...files] : [...files].slice(0, 1)
+  return picked.map((file) => {
+    const upload = { key: ++nextUpload, file, state: "queued", progress: 0, attempts: 0, timings: {} }
+    current.set(upload.key, upload)
+    emit(input, "start", upload)
+    runUpload(input, upload)
+    return upload
+  })
+}
+
+export const retryUpload = (input, upload) => {
+  if (upload.state === "failed") runUpload(input, upload)
+}
+
+export const removeUpload = (input, upload) => {
+  upload.controller?.abort()
+  upload.field?.remove()
+  upload.state = "removed"
+  uploadsOf(input).delete(upload.key)
+  emit(input, "remove", upload)
+  syncForm(input.form)
+}
+
+export const inputUploads = (input) => [...uploadsOf(input).values()]
+
+addEventListener("change", (event) => {
+  const input = event.target
+  if (!input.matches?.('input[type="file"][data-upload-url]') || input.closest("u-dropzone")) return
+  const files = [...input.files]
+  input.value = ""
+  const refused = files.filter((file) => fileProblem(input, file))
+  refused.forEach((file) => input.dispatchEvent(new CustomEvent("upload:refuse", { bubbles: true, detail: { file, reason: fileProblem(input, file) } })))
+  startUploads(input, files.filter((file) => !fileProblem(input, file)))
+})
+
+// A direct input's own files never travel with the form, only the ids.
+addEventListener("formdata", ({ target: form, formData }) => {
+  directInputs(form).forEach((input) => {
+    if (!input.name) return
+    const ids = formData.getAll(input.name).filter((value) => typeof value === "string" && value !== "")
+    formData.delete(input.name)
+    ids.forEach((id) => formData.append(input.name, id))
+  })
+})
+
+// Saving while a file is still uploading waits for it, then saves.
+addEventListener("submit", (event) => {
+  const form = event.target
+  if (!formUploads(form).some(uploadBusy)) return
+  event.preventDefault()
+  event.stopImmediatePropagation()
+  form.uploadSubmitter = event.submitter ?? form
+}, true)
+
+addEventListener("reset", ({ target: form }) => {
+  if (!(form instanceof HTMLFormElement)) return
+  directInputs(form).forEach((input) => inputUploads(input).forEach((upload) => removeUpload(input, upload)))
+  form.uploadSubmitter = null
+}, true)
+
+addEventListener("beforeunload", (event) => {
+  const busy = [...document.forms].some((form) => formUploads(form).some(uploadBusy))
+  if (busy) event.preventDefault()
+})
+
 define("u-dropzone", class extends UniformElement {
+  // Direct mode only: changes waiting for the form to save, and whether a
+  // file is still on its way to storage.
+  get changes() { return this.client?.changes() ?? 0 }
+  get busy() { return this.client?.busy() ?? false }
+
   setup(signal) {
     const root = this.querySelector(".u-dropzone")
     const input = root?.querySelector(':scope > input[type="file"]')
@@ -419,42 +587,15 @@ define("u-dropzone", class extends UniformElement {
     const template = this.querySelector("template")
     if (!root || !input || !list || !template) return
     const on = (target, type, listener) => target.addEventListener(type, listener, { signal })
-    const maxSize = Number(input.dataset.maxSize) || Infinity
-    const accepts = input.accept.split(",").map((rule) => rule.trim().toLowerCase()).filter(Boolean)
-    const chosen = this.chosen ??= new Map()
     const key = (file) => `${file.name}:${file.size}:${file.lastModified}`
-    const problem = (file) => {
-      const name = file.name.toLowerCase()
-      const type = file.type.toLowerCase()
-      const fits = accepts.length === 0 || accepts.some((rule) => {
-        if (rule.startsWith(".")) return name.endsWith(rule)
-        if (rule.endsWith("/*")) return type.startsWith(rule.slice(0, -1))
-        return type === rule
-      })
-      if (!fits) return "type"
-      if (file.size > maxSize) return "size"
-      return null
-    }
-    const sync = () => {
-      const transfer = new DataTransfer()
-      chosen.forEach((row, file) => { if (!problem(file)) transfer.items.add(file) })
-      input.files = transfer.files
-      list.hidden = chosen.size === 0
-    }
-    const remove = (file) => {
-      const row = chosen.get(file)
-      row.querySelectorAll("img").forEach((image) => URL.revokeObjectURL(image.src))
-      row.remove()
-      chosen.delete(file)
-    }
-    const render = (file) => {
+    const render = (file, problem) => {
       const row = template.content.firstElementChild.cloneNode(true)
       row.querySelector(":scope > div > p:first-child").textContent = file.name
       row.querySelector(".u-meta").textContent = sizeText(file.size, langOf(this))
-      row.querySelectorAll("[data-dropzone-error]").forEach((error) => { error.hidden = error.dataset.dropzoneError !== problem(file) })
+      row.querySelectorAll("[data-dropzone-error]").forEach((error) => { error.hidden = error.dataset.dropzoneError !== problem })
       row.querySelectorAll("[aria-label]").forEach((each) => each.setAttribute("aria-label", `${each.getAttribute("aria-label")} ${file.name}`))
       const thumb = row.firstElementChild
-      if (thumb && file.type.startsWith("image/") && !problem(file)) {
+      if (thumb && file.type.startsWith("image/") && !problem) {
         const image = document.createElement("img")
         image.alt = ""
         image.addEventListener("error", () => image.replaceWith(thumb), { once: true, signal })
@@ -462,6 +603,56 @@ define("u-dropzone", class extends UniformElement {
         thumb.replaceWith(image)
       }
       return row
+    }
+    const dropRow = (row) => {
+      row.querySelectorAll("img").forEach((image) => { if (image.src.startsWith("blob:")) URL.revokeObjectURL(image.src) })
+      row.remove()
+    }
+    // The list is the live region: it has to be in the page before the first row goes in, or that row isn't announced.
+    const show = (rows, added) => {
+      list.hidden = false
+      if (!rows.length) return
+      requestAnimationFrame(() => {
+        if (signal.aborted) return
+        list.append(...rows)
+        this.dispatchEvent(new CustomEvent("dropzone:change", { bubbles: true, detail: { added } }))
+      })
+    }
+    const take = (add) => {
+      on(input, "change", () => {
+        const files = [...input.files]
+        add(files)
+      })
+      on(root, "dragover", (event) => {
+        if (!hasFiles(event)) return
+        event.preventDefault()
+        event.dataTransfer.dropEffect = input.disabled ? "none" : "copy"
+        root.classList.toggle("u-dropzone-over", !input.disabled)
+      })
+      on(root, "dragleave", (event) => {
+        if (!root.contains(event.relatedTarget)) root.classList.remove("u-dropzone-over")
+      })
+      on(root, "drop", (event) => {
+        if (!hasFiles(event)) return
+        event.preventDefault()
+        root.classList.remove("u-dropzone-over")
+        if (!input.disabled) add(event.dataTransfer.files)
+      })
+    }
+    const hasFiles = (event) => [...event.dataTransfer.types].includes("Files")
+
+    if (input.hasAttribute("data-upload-url")) return this.setupDirect({ signal, on, input, list, render, dropRow, show, take })
+
+    const chosen = this.chosen ??= new Map()
+    const sync = () => {
+      const transfer = new DataTransfer()
+      chosen.forEach((row, file) => { if (!fileProblem(input, file)) transfer.items.add(file) })
+      input.files = transfer.files
+      list.hidden = chosen.size === 0
+    }
+    const remove = (file) => {
+      dropRow(chosen.get(file))
+      chosen.delete(file)
     }
     const add = (files) => {
       const known = new Set([...chosen.keys()].map(key))
@@ -471,23 +662,14 @@ define("u-dropzone", class extends UniformElement {
         if (fresh.length) [...chosen.keys()].forEach(remove)
       }
       const added = fresh.map((file) => {
-        const row = render(file)
+        const row = render(file, fileProblem(input, file))
         chosen.set(file, row)
-        return { file, row, error: problem(file) }
+        return { file, row, error: fileProblem(input, file) }
       })
       sync()
-      if (!added.length) return
-      // The list is the live region: it has to be in the page before the first row goes in, or that row isn't announced.
-      requestAnimationFrame(() => {
-        if (signal.aborted) return
-        const kept = added.filter(({ file, row }) => chosen.get(file) === row)
-        if (!kept.length) return
-        list.append(...kept.map(({ row }) => row))
-        root.dispatchEvent(new CustomEvent("dropzone:change", { bubbles: true, detail: { added: kept } }))
-      })
+      show(added.map(({ row }) => row), added)
     }
-    const hasFiles = (event) => [...event.dataTransfer.types].includes("Files")
-    on(input, "change", () => add(input.files))
+    take(add)
     afterReset(input.form, signal, () => {
       [...chosen.keys()].forEach(remove)
       list.hidden = true
@@ -500,21 +682,126 @@ define("u-dropzone", class extends UniformElement {
       sync()
       input.focus()
     })
-    on(root, "dragover", (event) => {
-      if (!hasFiles(event)) return
-      event.preventDefault()
-      event.dataTransfer.dropEffect = input.disabled ? "none" : "copy"
-      root.classList.toggle("u-dropzone-over", !input.disabled)
+  }
+
+  // Files upload as they're picked. Saved files are rows marked
+  // data-dropzone-saved; removing one marks it, and data-remove-name on the
+  // element names the hidden field that carries its id.
+  setupDirect({ signal, on, input, list, render, dropRow, show, take }) {
+    const rows = this.uploadRows ??= new Map()
+    const marked = this.marked ??= new Map()
+    const maxFiles = Number(input.dataset.maxFiles) || Infinity
+    const limit = this.querySelector('[data-dropzone-error="limit"]')
+    const saved = () => [...list.querySelectorAll(":scope > [data-dropzone-saved]")]
+    const live = () => [...rows.values()].filter(({ upload }) => upload && upload.state !== "failed")
+    const count = () => saved().length - marked.size + live().length
+    this.client = {
+      changes: () => marked.size + live().length,
+      busy: () => live().some(({ upload }) => upload.state === "preparing" || upload.state === "uploading")
+    }
+    const dirty = () => this.dispatchEvent(new CustomEvent("dropzone:dirty", { bubbles: true, detail: { changes: this.changes, busy: this.busy } }))
+    const paint = (row, upload) => {
+      const bar = row.querySelector("progress")
+      const working = upload.state === "preparing" || upload.state === "uploading"
+      if (bar) {
+        bar.hidden = !working
+        if (upload.state === "preparing") bar.removeAttribute("value")
+        else bar.value = Math.round(upload.progress * bar.max)
+      }
+      if (upload.prepared) row.querySelector(".u-meta").textContent = sizeText(upload.prepared.size, langOf(this))
+      row.querySelectorAll("[data-dropzone-done]").forEach((done) => { done.hidden = upload.state !== "uploaded" })
+      row.querySelectorAll('[data-dropzone-error="upload"]').forEach((error) => { error.hidden = upload.state !== "failed" })
+      row.querySelectorAll("[data-dropzone-retry]").forEach((retry) => { retry.hidden = upload.state !== "failed" })
+    }
+    const rowOf = (upload) => [...rows].find(([, entry]) => entry.upload === upload)?.[0]
+    const add = (files) => {
+      input.value = ""
+      if (limit) limit.hidden = true
+      const known = new Set([...rows.values()].map(({ file }) => key(file)))
+      const fresh = [...files].filter((file) => !known.has(key(file)))
+      const added = []
+      for (const file of input.multiple ? fresh : fresh.slice(0, 1)) {
+        const problem = fileProblem(input, file)
+        if (!problem && input.multiple && count() >= maxFiles) {
+          if (limit) limit.hidden = false
+          break
+        }
+        const row = render(file, problem)
+        const entry = { file }
+        rows.set(row, entry)
+        added.push({ file, row, error: problem })
+        if (!problem) [entry.upload] = startUploads(input, [file])
+        if (entry.upload) paint(row, entry.upload)
+      }
+      show(added.map(({ row }) => row), added)
+      dirty()
+    }
+    const key = (file) => `${file.name}:${file.size}:${file.lastModified}`
+    const mark = (row, on) => {
+      const id = row.dataset.dropzoneSaved
+      if (on && !marked.has(id) && this.dataset.removeName) {
+        const field = document.createElement("input")
+        field.type = "hidden"
+        field.name = this.dataset.removeName
+        field.value = id
+        input.after(field)
+        marked.set(id, field)
+      } else if (!on) {
+        marked.get(id)?.remove()
+        marked.delete(id)
+      }
+      row.toggleAttribute("data-dropzone-marked-row", marked.has(id))
+      row.querySelectorAll("[data-dropzone-marked], [data-dropzone-undo]").forEach((part) => { part.hidden = !marked.has(id) })
+      row.querySelectorAll("[data-dropzone-remove]").forEach((part) => { part.hidden = marked.has(id) })
+      row.querySelector(marked.has(id) ? "[data-dropzone-undo]" : "[data-dropzone-remove]")?.focus()
+      if (limit && count() < maxFiles) limit.hidden = true
+      dirty()
+    }
+    take(add)
+    saved().forEach((row) => { if (marked.has(row.dataset.dropzoneSaved)) mark(row, true) })
+    for (const type of ["start", "progress", "finish"]) {
+      on(input, `upload:${type}`, ({ detail: { upload } }) => {
+        const row = rowOf(upload)
+        if (row) paint(row, upload)
+        if (type !== "progress") dirty()
+      })
+    }
+    on(input, "upload:remove", ({ detail: { upload } }) => {
+      const row = rowOf(upload)
+      if (!row) return
+      rows.delete(row)
+      dropRow(row)
+      list.hidden = list.children.length === 0
+      dirty()
     })
-    on(root, "dragleave", (event) => {
-      if (!root.contains(event.relatedTarget)) root.classList.remove("u-dropzone-over")
+    on(list, "click", (event) => {
+      const button = event.target.closest("[data-dropzone-remove], [data-dropzone-undo], [data-dropzone-retry]")
+      const row = button?.closest("li")
+      if (!row) return
+      if (row.hasAttribute("data-dropzone-saved")) return mark(row, !button.hasAttribute("data-dropzone-undo"))
+      const entry = rows.get(row)
+      if (!entry) return
+      if (button.hasAttribute("data-dropzone-retry")) return retryUpload(input, entry.upload)
+      if (entry.upload) return removeUpload(input, entry.upload)
+      rows.delete(row)
+      dropRow(row)
+      list.hidden = list.children.length === 0
+      input.focus()
+      dirty()
     })
-    on(root, "drop", (event) => {
-      if (!hasFiles(event)) return
-      event.preventDefault()
-      root.classList.remove("u-dropzone-over")
-      if (!input.disabled) add(event.dataTransfer.files)
+    afterReset(input.form, signal, () => {
+      saved().forEach((row) => mark(row, false))
+      rows.forEach((entry, row) => { if (!entry.upload) dropRow(row) })
+      rows.clear()
+      list.hidden = list.children.length === 0
+      dirty()
     })
+    on(window, "beforeunload", (event) => {
+      if (this.changes && !input.form?.dataset.submitting) event.preventDefault()
+    })
+    on(input.form ?? this, "submit", () => { if (input.form) input.form.dataset.submitting = "" })
+    list.hidden = list.children.length === 0
+    dirty()
   }
 })
 

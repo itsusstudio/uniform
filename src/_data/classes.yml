@@ -430,7 +430,7 @@
 - name: Dropzone file row
   group: Components
   page: /components/dropzone/
-  description: "An `<li>` in the `u-list`: a `<span>` for the file icon or an `<img>` preview; a `<div>` with the name, a line holding the size in `u-meta` and `<span data-dropzone-done>`, a `<progress>` and the `u-error`s; and a `u-btn-close`."
+  description: "An `<li>` in the `u-list`: a `<span>` for the file icon or an `<img>` preview; a `<div>` with the name, a line holding the size in `u-meta` and `<span data-dropzone-done>`, a `<progress>` and the `u-error`s; and a `u-btn-close`. Direct uploads add a retry button, and saved rows a marked badge and Undo."
 
 - name: u-dropzone-over
   group: Components

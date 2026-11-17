@@ -32,9 +32,11 @@
 
 .example-caption-dont, .example-caption-do { display: block; }
 
-.nav-dont .u-nav > div > :first-child {
+.nav-dont .u-nav > div > p {
+  margin: 0;
+  padding-inline: var(--u-space-2);
   color: var(--u-color-text-muted);
-  font-weight: 400;
+  font-size: var(--u-font-size-caption);
 }
 
 .nav-dont :is(.u-nav > a, .u-nav li > a) {

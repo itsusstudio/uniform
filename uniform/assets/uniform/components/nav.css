@@ -7,22 +7,11 @@
 
 .u-nav > :is(div, details) { display: grid; }
 
-.u-nav > :is(div, details) > :first-child {
-  margin: 0 0 2px;
-  padding-inline: var(--u-space-2);
-  font-size: var(--u-font-size-caption);
-  font-weight: 500;
-  color: var(--u-color-text-muted);
-}
-
 :is(.u-nav, u-sidebar) ul { list-style: none; margin: 0; padding: 0; }
 
-.u-nav ul {
-  display: grid;
-  gap: 1px;
-}
+.u-nav ul { display: grid; }
 
-:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)) {
+:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button), .u-nav > details > summary) {
   display: flex;
   align-items: center;
   gap: var(--u-space-2);
@@ -34,10 +23,10 @@
   text-decoration: none;
 }
 
-:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)) > .u-icon { flex: none; }
+:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button), .u-nav > details > summary) > .u-icon { flex: none; }
 
-:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)):hover {
-  background: color-mix(in srgb, var(--u-color-text-default) 5%, transparent);
+:is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button), .u-nav > details > summary):hover {
+  background: color-mix(in srgb, var(--u-color-text-default) 3%, transparent);
   color: var(--u-color-text-default);
 }
 
@@ -47,14 +36,12 @@
 }
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button))[aria-current="page"] {
-  background: color-mix(in srgb, var(--u-color-text-default) 9%, transparent);
+  background: color-mix(in srgb, var(--u-color-text-default) 5%, transparent);
   color: var(--u-color-text-default);
   font-weight: 500;
 }
 
-.u-sidebar-layout > .u-nav > :is(div, details) > :first-child { font-size: var(--u-font-size-small); }
-
-.u-sidebar-layout > .u-nav :is(.u-nav > a, li > a) { font-size: var(--u-font-size-body); }
+.u-sidebar-layout > .u-nav :is(.u-nav > a, li > a, details > summary) { font-size: var(--u-font-size-body); }
 
 .u-nav .u-nav-link-highlight,
 .u-nav .u-nav-link-highlight:hover,
@@ -71,10 +58,6 @@
 .u-nav .u-nav-link-highlight .u-meta { margin-inline-start: auto; }
 
 .u-nav > details > summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: var(--u-size-target);
   margin: 0;
   list-style: none;
   cursor: pointer;
@@ -87,13 +70,51 @@
   flex: none;
   width: 16px;
   height: 16px;
-  background: currentcolor;
-  mask: url("./../icons/chevron-down.svg") center / contain no-repeat;
+  margin-inline-start: auto;
+  background-image: linear-gradient(currentcolor, currentcolor), linear-gradient(currentcolor, currentcolor);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10px var(--u-icon-stroke), var(--u-icon-stroke) 10px;
   forced-color-adjust: none;
-  rotate: -90deg;
 }
 
-.u-nav > details[open] > summary::after { rotate: 0deg; }
+.u-nav > details[open] > summary::after { background-size: 10px var(--u-icon-stroke), 0 0; }
+
+.u-nav > details > ul {
+  --u-nav-guide: var(--u-space-2);
+  --u-nav-indent: calc(var(--u-space-4) + var(--u-space-2));
+  position: relative;
+}
+
+.u-nav > details:has(> summary > .u-icon) > ul {
+  --u-nav-guide: calc(var(--u-space-4) - 1px);
+  --u-nav-indent: calc(var(--u-space-4) * 2);
+}
+
+.u-nav > details > ul::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: var(--u-nav-guide);
+  width: 1px;
+  background: color-mix(in srgb, currentcolor 28%, transparent);
+}
+
+.u-nav > details > ul > li > a {
+  position: relative;
+  padding-inline-start: var(--u-nav-indent);
+}
+
+.u-nav > details > ul > li > a[aria-current="page"]::before {
+  content: "";
+  position: absolute;
+  inset-block: var(--u-space-2);
+  inset-inline-start: calc(var(--u-nav-guide) - 1px);
+  width: 3px;
+  border-radius: var(--u-radius-pill);
+  background: currentcolor;
+  opacity: 0.55;
+}
 
 @media (forced-colors: active) {
   :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button))[aria-current="page"]:not(:focus-visible) {

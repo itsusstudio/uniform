@@ -9,8 +9,8 @@
     <% if group.url %>
       <a class="u-nav-link-section" href="<%= relative_url group.url %>"<% if group.url == current_url %> aria-current="page"<% end %>><%= group.label %></a>
     <% else %>
-      <div>
-        <p><%= group.label %></p>
+      <details<% if group.items.any? { |item| item.url == current_url } %> open<% end %>>
+        <summary><%= group.label %></summary>
         <ul>
           <% group.items.each do |item| %>
             <li>
@@ -18,7 +18,7 @@
             </li>
           <% end %>
         </ul>
-      </div>
+      </details>
     <% end %>
   <% end %>
   </nav>

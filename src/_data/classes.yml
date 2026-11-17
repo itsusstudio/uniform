@@ -39,6 +39,16 @@
   page: /components/container/
   description: Centres content at the 1280px page width with the page margin on each side.
 
+- name: u-container-wide
+  group: Layout
+  page: /components/container/
+  description: With u-container, lets an app's data pages, like lists, tables and a dashboard, open up to 1600px.
+
+- name: u-container-narrow
+  group: Layout
+  page: /components/container/
+  description: With u-container, holds settings, forms and reading pages to a 768px column.
+
 - name: u-section
   group: Layout
   page: /components/section/

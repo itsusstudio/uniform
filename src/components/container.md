@@ -30,6 +30,17 @@ Width
 Page margin
 : 16px on phones, 24px on tablets, 48px on wide screens.
 
+## Three widths
+
+Data pages
+: `u-container u-container-wide`, up to 1600px. Lists, tables and dashboards use the room on a big screen.
+
+Most pages
+: `u-container`, up to 1280px. Sites and pages that mix content.
+
+Settings, forms and reading
+: `u-container u-container-narrow`, a 768px column. A page you work down one setting at a time stays in one line of sight.
+
 ## When to use it
 
 Use it for

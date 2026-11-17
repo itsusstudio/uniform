@@ -32,6 +32,8 @@
 "--u-space-12": "48px. Between sections of an app page, and between stats in a row."
 "--u-space-24": "96px. Between sections of a marketing site. Never in apps."
 "--u-max-width-page": "The widest a page's content gets. Past it, the space at the sides grows."
+"--u-max-width-page-wide": "u-container-wide: data pages in an app, up to 1600px."
+"--u-max-width-page-narrow": "u-container-narrow: settings, forms and reading pages, a 768px column."
 "--u-max-width-prose": "The widest running text gets, about 65 characters a line, so it stays easy to read."
 "--u-width-sidebar": "The width of the sidebar in u-sidebar-layout on wide screens."
 "--u-grid-gutter": "The space between grid columns. 24px, and 16px on phones."

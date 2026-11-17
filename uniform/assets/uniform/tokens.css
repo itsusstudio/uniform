@@ -36,6 +36,8 @@
   --u-space-24: 96px;
 
   --u-max-width-page: 1280px;
+  --u-max-width-page-wide: 1600px;
+  --u-max-width-page-narrow: 768px;
   --u-max-width-prose: 65ch;
   --u-max-width-form: 384px;
   --u-width-sidebar: 264px;

@@ -58,6 +58,10 @@
   padding-inline: var(--u-page-margin);
 }
 
+.u-container-wide { max-width: var(--u-max-width-page-wide); }
+
+.u-container-narrow { max-width: var(--u-max-width-page-narrow); }
+
 .u-section { padding-block: var(--u-section-space); }
 
 .u-scroll-row {

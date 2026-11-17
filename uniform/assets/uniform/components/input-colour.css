@@ -35,6 +35,21 @@ u-input-colour:has(> .u-input) > [type="color"] {
   border-color: var(--u-color-border);
 }
 
+@media (pointer: coarse) {
+  u-input-colour:has(> .u-input) > [type="color"] {
+    top: calc((var(--u-size-control) - 32px) / 2);
+    inset-inline-start: calc(var(--u-space-2) - 6px);
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    border: 0;
+  }
+
+  u-input-colour:has(> .u-input) > [type="color"]::-webkit-color-swatch { border: 1px solid var(--u-color-border); }
+
+  u-input-colour:has(> .u-input) > [type="color"]::-moz-color-swatch { border: 1px solid var(--u-color-border); }
+}
+
 u-input-colour > .u-input {
   padding-inline-start: calc(var(--u-space-2) + 20px + var(--u-space-2));
   font-family: var(--u-font-mono);

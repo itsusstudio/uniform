@@ -29,6 +29,8 @@
   padding-block: var(--u-space-4);
 }
 
+.u-setting:first-child { padding-top: 0; }
+
 .u-setting > div:first-child > * { margin: 0; }
 
 .u-setting > div:first-child > :is(h3, h4) {

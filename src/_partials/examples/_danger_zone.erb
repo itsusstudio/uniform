@@ -1,0 +1,43 @@
+<div class="u-settings">
+  <h2>Leave or delete</h2>
+  <section class="u-setting">
+    <div>
+      <h3>Download your data</h3>
+      <p>Every job, customer and photo, as a spreadsheet and a folder of images.</p>
+    </div>
+    <button type="button" class="u-btn u-btn-outline">Download</button>
+  </section>
+  <section class="u-setting">
+    <div>
+      <h3>Hand the shop to someone else</h3>
+      <p>They become the owner and you stay on as staff.</p>
+    </div>
+    <button type="button" class="u-btn u-btn-outline">Change owner</button>
+  </section>
+  <section class="u-setting">
+    <div>
+      <h3>Delete Kensington Jewellery Repair</h3>
+      <p>Deletes 214 jobs, 168 customers and every photo. You can’t undo this.</p>
+    </div>
+    <button type="button" class="u-btn u-btn-danger" commandfor="danger-zone-delete" command="show-modal">Delete shop</button>
+  </section>
+</div>
+<dialog class="u-dialog" id="danger-zone-delete" aria-labelledby="danger-zone-delete-title">
+  <form method="dialog">
+    <header>
+      <h2 id="danger-zone-delete-title">Delete Kensington Jewellery Repair?</h2>
+      <button type="submit" value="cancel" class="u-btn-close" aria-label="Close" formnovalidate></button>
+    </header>
+    <div class="u-card-content">
+      <p>214 jobs, 168 customers and every photo will be deleted, and customers can no longer see their pickup pages. You can’t undo this.</p>
+      <div class="u-field">
+        <label for="danger-zone-name">Type the shop’s name to confirm</label>
+        <input class="u-input" id="danger-zone-name" required pattern="Kensington Jewellery Repair" autocomplete="off" placeholder="Kensington Jewellery Repair">
+      </div>
+    </div>
+    <div class="u-actions">
+      <button type="submit" value="cancel" class="u-btn u-btn-outline" formnovalidate autofocus>Cancel</button>
+      <button type="submit" value="delete" class="u-btn u-btn-danger">Delete shop</button>
+    </div>
+  </form>
+</dialog>

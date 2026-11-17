@@ -28,4 +28,4 @@ Rows
 : Each setting saves on its own: a switch or a button when it's clicked, a field when you leave it. There's no Save button for the page.
 
 Danger
-: Deleting the shop goes last, in its own group, with a danger button that opens a [dialog](/components/dialog/) to confirm.
+: Leaving, handing over and deleting go last, in a [danger zone](/patterns/danger-zone/).

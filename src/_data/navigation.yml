@@ -224,6 +224,8 @@
       url: /patterns/data-grid/
     - title: Settings page
       url: /patterns/settings/
+    - title: Danger zone
+      url: /patterns/danger-zone/
     - title: Timeline
       url: /patterns/timeline/
     - title: Charts

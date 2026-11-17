@@ -23,7 +23,7 @@ Opening line
 : The total paid and the date paid in the first sentence. That's what most people open a receipt to check.
 
 Line items
-: A real table with a header row. Each charge on its own row, then the subtotal, the tax with its rate, and the total paid in medium weight. Amounts sit right-aligned in mono so the decimals line up. Rows are split by `#e7e7e3` dividers, with an ink rule under the header, like Uniform's table.
+: A real table with a header row. Each charge on its own row, then the subtotal, the tax with its rate, and the total paid in medium weight. Amounts sit right-aligned in mono so the decimals line up. Rows are split by `#ebeae6` dividers, with an ink rule under the header, like Uniform's table.
 
 Payment details
 : A second table, 48px below: how they paid (card brand and last four digits only), the date, the receipt number, the job number and the shop's HST number. Labels in muted text, values in mono.

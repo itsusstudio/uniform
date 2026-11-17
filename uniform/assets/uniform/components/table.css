@@ -35,7 +35,10 @@
 
 :is(.u-table, u-chart) > table tbody th { font-weight: 500; }
 
-:is(.u-table, u-chart) > table :where(a:not(.u-btn)) { text-decoration: none; }
+:is(.u-table, u-chart) > table :where(a:not(.u-btn)) {
+  color: inherit;
+  text-decoration: none;
+}
 
 :is(.u-table, u-chart) > table tbody tr:hover :where(a:not(.u-btn)),
 :is(.u-table, u-chart) > table :where(a:not(.u-btn)):focus-visible { text-decoration: underline; }

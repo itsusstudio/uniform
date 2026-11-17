@@ -29,10 +29,10 @@ Four greys, one job each. They're named by their job, never by how light they
 are, so nobody picks one because it looks right.
 
 <%= render "examples/colour_specs", rows: [
-  { token: "--u-color-divider", hex: "#e7e7e3 / #2d2d2b", sample: :line, job: "1px lines between rows or items inside a container.", never: "the outer edge of a container, text or fills" },
-  { token: "--u-color-border", hex: "#d3d3ce / #353533", sample: :border, job: "The 1px outer edge of a card, table, panel or screenshot.", never: "row dividers, inputs or text" },
+  { token: "--u-color-divider", hex: "#ebeae6 / #2a2a28", sample: :line, job: "1px lines between rows or items inside a container.", never: "the outer edge of a container, text or fills" },
+  { token: "--u-color-border", hex: "#e3e2dd / #2f2f2d", sample: :border, job: "The 1px outer edge of a card, table, panel or screenshot.", never: "row dividers, inputs or text" },
   { token: "--u-color-border-input", hex: "#8c8981 / #6e6c67", sample: :control, job: "The edge of inputs, selects and checkboxes, disabled controls, and scrollbar thumbs.", never: "text people need to read, or containers" },
-  { token: "--u-color-text-muted", class: "u-text-muted", hex: "#6b6964 / #9d9c97", sample: :text, text: "2 hours ago", job: "Secondary text: captions, meta, table headers, hints and placeholders.", never: "headings, primary content, lines or fills" },
+  { token: "--u-color-text-muted", class: "u-text-muted", hex: "#6b6964 / #9d9c97", sample: :text, text: "2 hours ago", job: "Labels only: column headers, field hints, meta, captions and placeholders. Anything people read, subtitles and a row's second line included, stays in the default text colour.", never: "headings, primary content, lines or fills" },
 ] %>
 
 ## Signals
@@ -86,6 +86,6 @@ name the job each colour does in a chart, so canvas scripts can read them. See
   { token: "--u-color-chart-current", hex: "#1a1a18 / #e2e1dd", sample: :fill, job: "Ink. The main series: this month, this week, the bar the figure talks about. Same as --u-color-text-default." },
   { token: "--u-color-chart-previous", hex: "#949189 / #6f6d67", sample: :fill, job: "Grey for the series you compare against, like last month or past weeks. 3:1 against white and against the dark surface.", never: "text or the main series" },
   { token: "--u-color-chart-fill", hex: "#1a1a18 / #e2e1dd", sample: :fill, job: "The colour of the fade under the main line and sparklines: ink, at --u-chart-fill-opacity (0.14, or 0.12 in dark mode) under the line, down to nothing at the baseline. Same as --u-color-chart-current.", never: "a flat fill, or anywhere outside a chart" },
-  { token: "--u-color-chart-grid", hex: "#e7e7e3 / #2d2d2b", sample: :line, job: "Horizontal gridlines. Same as --u-color-divider." },
-  { token: "--u-color-chart-track", hex: "#e7e7e3 / #2d2d2b", sample: :fill, job: "The empty part of a meter. Same as --u-color-divider." },
+  { token: "--u-color-chart-grid", hex: "#ebeae6 / #2a2a28", sample: :line, job: "Horizontal gridlines. Same as --u-color-divider." },
+  { token: "--u-color-chart-track", hex: "#ebeae6 / #2a2a28", sample: :fill, job: "The empty part of a meter. Same as --u-color-divider." },
 ] %>

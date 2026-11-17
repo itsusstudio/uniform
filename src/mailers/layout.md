@@ -83,7 +83,7 @@ changes there, change it here and in every mailer.
 | `--u-color-bg-surface` | `#ffffff` | The whole email |
 | `--u-color-bg-paper` | `#f5f4ef` | Text on the button |
 | `--u-color-border-input` | `#8c8981` | The line around a sign-in code |
-| `--u-color-divider` | `#e7e7e3` | Lines between rows, like on a receipt |
+| `--u-color-divider` | `#ebeae6` | Lines between rows, like on a receipt |
 | `--u-color-link` | `#2449b0` | Links |
 | `--u-color-danger` | `#c03a26` | Signal square for something wrong |
 | `--u-color-warning` | `#f3c22c` | Signal square for something that needs attention |

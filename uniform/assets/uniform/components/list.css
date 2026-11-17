@@ -71,7 +71,6 @@
 }
 
 .u-list-item-detail {
-  color: var(--u-color-text-muted);
   font-size: var(--u-font-size-small);
   line-height: var(--u-line-height-small);
 }

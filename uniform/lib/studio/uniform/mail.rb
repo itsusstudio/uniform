@@ -6,7 +6,7 @@ module Studio
     module Mail
       INK = "#1a1a18"
       MUTED = "#6b6964"
-      LINE = "#e7e7e3"
+      LINE = "#ebeae6"
       INPUT = "#8c8981"
       LINK = "#2449b0"
       PAPER = "#f5f4ef"

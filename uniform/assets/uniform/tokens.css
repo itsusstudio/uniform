@@ -79,9 +79,9 @@
 
   --u-color-link: light-dark(#2449b0, #9db3f0);
 
-  --u-color-divider: light-dark(#e7e7e3, #2d2d2b);
+  --u-color-divider: light-dark(#ebeae6, #2a2a28);
   --u-color-divider-on-ink: #3a3935;
-  --u-color-border: light-dark(#d3d3ce, #353533);
+  --u-color-border: light-dark(#e3e2dd, #2f2f2d);
   --u-color-border-input: light-dark(#8c8981, #6e6c67);
 
   --u-color-chart-current: var(--u-color-text-default);

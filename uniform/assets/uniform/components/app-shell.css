@@ -144,8 +144,8 @@ u-sidebar > div:last-child:not(:first-child) {
 }
 
 u-sidebar > div:last-child > ul:has(~ button) {
-  margin-bottom: var(--u-space-2);
-  padding-bottom: var(--u-space-2);
+  margin: 0 calc(-1 * var(--u-space-2)) var(--u-space-2);
+  padding: 0 var(--u-space-2) var(--u-space-2);
   border-bottom: 1px solid var(--u-nav-line);
 }
 

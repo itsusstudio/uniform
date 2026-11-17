@@ -28,7 +28,6 @@
 }
 
 .u-app-shell {
-  container: u-app-shell / inline-size;
   display: grid;
   grid-template-columns: var(--u-width-sidebar) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
@@ -292,7 +291,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   --u-nav-current-text: var(--u-color-text-on-ink);
 }
 
-@container u-app-shell (min-width: 1024px) {
+@media (min-width: 1024px) {
   .u-app-shell > u-sidebar {
     grid-column: 1;
     grid-row: 1 / -1;
@@ -417,7 +416,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button > :not(:first-child) { display: none; }
 }
 
-@container u-app-shell (max-width: 1023px) {
+@media (max-width: 1023px) {
   .u-app-shell > * { grid-column: 1 / -1; }
 
   .u-app-shell > header {
@@ -503,7 +502,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
   .u-app-shell > main > .u-banner-full { margin-block: calc(var(--u-space-6) * -1) var(--u-space-6); }
 
-  /* The page scrolls on the root, which a container query can't reach, so each target keeps clear of the sticky bars instead. */
+  /* The page scrolls on the root, so each target keeps clear of the sticky bars instead. */
   .u-app-shell > main * { scroll-margin-block-start: calc(var(--u-size-control) + var(--u-space-2) * 2 + 1px + env(safe-area-inset-top)); }
 
   .u-app-shell:has(> nav) > main * { scroll-margin-block-end: calc(var(--u-space-1) * 7 + 20px + var(--u-font-size-caption) * var(--u-line-height-caption) + 1px + env(safe-area-inset-bottom)); }

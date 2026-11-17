@@ -29,7 +29,10 @@ Delete shop opens the confirm. Try it.
 ## How it's built
 
 Place
-: The last group of a [settings page](/patterns/settings/), after a rule. Nothing goes below it, so it's never in the way of everyday settings.
+: The last group of a [settings page](/patterns/settings/), after its `<hr>`. Nothing goes below it, so it's never in the way of everyday settings.
+
+Grid
+: A [grid](/components/grid/) of four and eight columns: a [heading group](/components/heading-group/) on the left names the group in one plain sentence, and the rows sit on the right. On a phone the two stack.
 
 Rows
 : [Setting](/components/settings/) rows, safest first: get your data out, hand it over, then delete. Each says in words what happens, like every job and photo. Counting a shop's records on every visit to settings is slow for an old shop, so the rows never show numbers.

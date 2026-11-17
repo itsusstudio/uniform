@@ -1,26 +1,31 @@
-<div class="u-settings">
-  <h2>Leave or delete</h2>
-  <section class="u-setting">
-    <div>
-      <h3>Download your data</h3>
-      <p>Every job, customer and photo, as a spreadsheet and a folder of images.</p>
-    </div>
-    <button type="button" class="u-btn u-btn-outline">Download</button>
-  </section>
-  <section class="u-setting">
-    <div>
-      <h3>Hand the shop to someone else</h3>
-      <p>They become the owner and you stay on as staff.</p>
-    </div>
-    <button type="button" class="u-btn u-btn-outline">Change owner</button>
-  </section>
-  <section class="u-setting">
-    <div>
-      <h3>Delete Kensington Jewellery Repair</h3>
-      <p>Deletes every job, customer and photo. You can’t undo this.</p>
-    </div>
-    <button type="button" class="u-btn u-btn-danger" commandfor="danger-zone-delete" command="show-modal">Delete shop</button>
-  </section>
+<div class="u-grid">
+  <hgroup class="u-span-4">
+    <h2>Leave or delete</h2>
+    <p>Changes here can’t be undone, except for the download.</p>
+  </hgroup>
+  <div class="u-span-8">
+    <section class="u-setting">
+      <div>
+        <h3>Download your data</h3>
+        <p>A spreadsheet of jobs and customers, and a folder of photos.</p>
+      </div>
+      <button type="button" class="u-btn u-btn-outline">Download</button>
+    </section>
+    <section class="u-setting">
+      <div>
+        <h3>Hand the shop to someone else</h3>
+        <p>They become the owner and you stay on as staff.</p>
+      </div>
+      <button type="button" class="u-btn u-btn-outline">Change owner</button>
+    </section>
+    <section class="u-setting">
+      <div>
+        <h3>Delete Kensington Jewellery Repair</h3>
+        <p>Deletes every job, customer and photo, and customers lose their pickup pages.</p>
+      </div>
+      <button type="button" class="u-btn u-btn-danger" commandfor="danger-zone-delete" command="show-modal">Delete shop</button>
+    </section>
+  </div>
 </div>
 <dialog class="u-dialog" id="danger-zone-delete" aria-labelledby="danger-zone-delete-title">
   <form method="dialog">

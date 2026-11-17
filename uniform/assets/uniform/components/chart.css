@@ -281,6 +281,10 @@ u-chart:defined > .u-chart-plot:has(> .u-chart-tooltip) { padding-top: var(--u-c
   font-size: var(--u-font-size-small);
 }
 
+.u-chart-empty-plot {
+  min-height: calc(var(--u-chart-lane) + var(--u-chart-height, 200px) + var(--u-space-2) + var(--u-font-size-caption) * var(--u-line-height-caption));
+}
+
 .u-chart-loading {
   position: relative;
   display: flex;

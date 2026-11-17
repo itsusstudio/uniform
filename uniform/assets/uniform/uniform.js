@@ -887,7 +887,9 @@ define("u-chart", class extends UniformElement {
     const type = this.getAttribute("type") || "bar"
     const hasData = rows.some((row) => row.cells.some((cell) => chartNumber(cell)))
     if (!hasData) {
-      this.mark(chartHtml("p", "u-chart-empty", this.dataset.empty || ""))
+      const empty = this.mark(chartHtml("p", "u-chart-empty", this.dataset.empty || ""))
+      if (this.hasAttribute("height")) empty.style.setProperty("--u-chart-height", `${this.getAttribute("height")}px`)
+      if (type === "bar" || type === "line") empty.classList.add("u-chart-empty-plot")
       this.dataset.drawn = ""
       return
     }

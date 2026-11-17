@@ -112,7 +112,7 @@
   --u-size-control: 36px;
   --u-size-field: var(--u-size-control);
   --u-size-row: 36px;
-  --u-icon-stroke: 1.5px;
+  --u-icon-stroke: 1.33px;
 }
 
 [data-u-audience="consumer"] {

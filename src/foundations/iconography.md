@@ -37,7 +37,7 @@ Two sizes
 : `u-icon` is 20px, for icons on their own and beside 16px text and up. Add `u-icon-sm` for 16px beside 12 and 14px text. Inside a button with a word, Uniform makes it 16px for you.
 
 Line width
-: Every icon's line is `--u-icon-stroke` wide, whatever its size: 1.5px for business and 1.75px for consumer, about as thick as the letters beside it. `u-icon` sets it, so a 16px and a 20px icon match.
+: Every icon's line is `--u-icon-stroke` wide, whatever its size: 1.33px for business, the line Lucide itself draws at 16px, and 1.75px for consumer, about as thick as the letters beside it. `u-icon` sets it, so a 16px and a 20px icon match.
 
 Alone, it needs a label
 : An icon with no word goes in a `u-btn-icon` button with an `aria-label` naming what it does, like "Delete job #1042", not "Trash".

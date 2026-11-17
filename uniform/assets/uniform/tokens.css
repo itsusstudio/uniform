@@ -83,7 +83,7 @@
 
   --u-color-divider: light-dark(#ebeae6, #2a2a28);
   --u-color-divider-on-ink: #3a3935;
-  --u-color-border: light-dark(#e3e2dd, #2f2f2d);
+  --u-color-border: light-dark(#d4d2cb, #3a3a37);
   --u-color-border-input: light-dark(#8c8981, #7a7873);
 
   --u-color-chart-current: var(--u-color-text-default);

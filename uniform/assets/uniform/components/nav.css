@@ -56,6 +56,20 @@
 
 .u-sidebar-layout > .u-nav :is(.u-nav > a, li > a) { font-size: var(--u-font-size-body); }
 
+.u-nav .u-nav-link-highlight,
+.u-nav .u-nav-link-highlight:hover,
+.u-nav .u-nav-link-highlight[aria-current="page"] {
+  --u-nav-text: var(--u-color-bg-surface);
+  --u-nav-label: var(--u-color-bg-surface);
+  background: var(--u-color-text-default);
+  color: var(--u-color-bg-surface);
+  font-weight: 500;
+}
+
+.u-nav .u-nav-link-highlight :is(.u-icon, .u-meta) { color: inherit; }
+
+.u-nav .u-nav-link-highlight .u-meta { margin-inline-start: auto; }
+
 .u-nav > details > summary {
   display: flex;
   align-items: center;

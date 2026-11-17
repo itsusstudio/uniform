@@ -95,6 +95,15 @@ link is never hidden.
 </nav>
 ```
 
+
+## A highlighted link
+
+Add `u-nav-link-highlight` to one link that should stand out for a while, like a setup guide a new account hasn't finished. It sits on ink at the top of the nav, with a `u-meta` count at the end. Remove it once the task is done; only one link in a nav is ever highlighted.
+
+```html
+<li><a class="u-nav-link-highlight" href="/get-started"><svg class="u-icon u-icon-sm">…</svg><span>Get started</span><span class="u-meta">2/5</span></a></li>
+```
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/navigation/" %>

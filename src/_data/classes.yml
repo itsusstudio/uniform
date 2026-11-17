@@ -778,3 +778,8 @@
   group: Components
   page: /components/list/
   description: Added to `u-list` for steps to finish. Each li takes data-state done, next or todo.
+
+- name: u-nav-link-highlight
+  group: Components
+  page: /components/navigation/
+  description: Puts one nav link on ink to stand out for a while, like an unfinished setup guide.

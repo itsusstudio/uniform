@@ -39,6 +39,23 @@ A banner holds a message for everyone on the page, like an announcement or an ac
 <%% end %>
 ```
 
+## Across the whole app
+
+Add `u-banner-full` for news about the whole app. It runs edge to edge across the top of the page area.
+
+<div class="u-banner u-banner-info u-banner-full" role="status">
+<p><strong>Workbench 2.0 is rolling out.</strong> Improvements are coming over the next few weeks.</p>
+</div>
+
+```erb
+<main>
+  <div class="u-banner u-banner-info u-banner-full" role="status">
+    <p><strong><%%= t(".title") %></strong> <%%= t(".body") %></p>
+  </div>
+  <div class="u-container">...</div>
+</main>
+```
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/banner/" %>

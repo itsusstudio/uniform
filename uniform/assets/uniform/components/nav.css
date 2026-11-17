@@ -2,20 +2,25 @@
 .u-nav {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-6);
+  gap: var(--u-space-4);
 }
 
 .u-nav > :is(div, details) { display: grid; }
 
 .u-nav > :is(div, details) > :first-child {
-  margin: 0 0 var(--u-space-1);
+  margin: 0 0 2px;
   padding-inline: var(--u-space-2);
-  font-size: var(--u-font-size-small);
+  font-size: var(--u-font-size-caption);
   font-weight: 500;
-  color: var(--u-color-text-default);
+  color: var(--u-color-text-muted);
 }
 
 :is(.u-nav, u-sidebar) ul { list-style: none; margin: 0; padding: 0; }
+
+.u-nav ul {
+  display: grid;
+  gap: 1px;
+}
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)) {
   display: flex;
@@ -23,16 +28,17 @@
   gap: var(--u-space-2);
   min-height: var(--u-size-target);
   padding-inline: var(--u-space-2);
+  border-radius: 6px;
   font-size: var(--u-font-size-small);
-  color: var(--u-color-text-muted);
+  color: var(--u-color-text-default);
   text-decoration: none;
 }
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)) > .u-icon { flex: none; }
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button)):hover {
+  background: color-mix(in srgb, var(--u-color-text-default) 5%, transparent);
   color: var(--u-color-text-default);
-  text-decoration: underline;
 }
 
 .u-nav .u-nav-link-section {
@@ -41,9 +47,9 @@
 }
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button))[aria-current="page"] {
-  border-radius: var(--u-radius-pill);
-  background: var(--u-color-divider);
+  background: color-mix(in srgb, var(--u-color-text-default) 9%, transparent);
   color: var(--u-color-text-default);
+  font-weight: 500;
 }
 
 .u-nav > details > summary {

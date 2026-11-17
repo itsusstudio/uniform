@@ -703,7 +703,10 @@ define("u-sidebar", class extends UniformElement {
     if (!button) return
     button.addEventListener("click", () => {
       if (this.matches(":popover-open")) return this.hidePopover()
-      button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") === "false"))
+      const expanded = button.getAttribute("aria-expanded") === "false"
+      button.setAttribute("aria-expanded", String(expanded))
+      // The server renders aria-expanded from this cookie, so the column doesn't flash open on the next page.
+      if (this.dataset.remember) document.cookie = `${this.dataset.remember}=${expanded ? "open" : "collapsed"}; path=/; max-age=31536000; samesite=lax`
     }, { signal })
     let edge = this.querySelector(":scope > div:first-child + button")
     if (!edge) {
@@ -1073,7 +1076,7 @@ define("u-chart", class extends UniformElement {
     const step = 96 / Math.max(1, values.length - 1)
     const points = values.map((value, i) => [i * step, 22 - (20 * (value - low)) / range])
     const id = `u-chart-fade-${++chartFades}`
-    const svg = chartSvg("svg", { class: "u-chart-spark", viewBox: "0 0 96 24", "aria-hidden": "true" })
+    const svg = chartSvg("svg", { class: "u-chart-spark", viewBox: "0 0 96 24", preserveAspectRatio: "none", "aria-hidden": "true" })
     const defs = chartSvg("defs")
     const fade = chartSvg("linearGradient", { id, x1: 0, x2: 0, y1: 0, y2: 1 })
     fade.append(chartSvg("stop", { class: "u-chart-fade-top", offset: "0" }), chartSvg("stop", { class: "u-chart-fade-bottom", offset: "1" }))

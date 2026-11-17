@@ -6,7 +6,7 @@ section: Components
 permalink: /components/stat/
 ---
 
-A stat shows one figure that matters on its own. Several sit in a `u-stats` row.
+A stat shows one figure that matters on its own. Several sit in a `u-stats` row of equal columns.
 
 ## Example
 

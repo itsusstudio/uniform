@@ -132,8 +132,8 @@ u-chart[data-drawn] > table {
 
 .u-chart-spark {
   display: block;
-  width: 96px;
-  height: 24px;
+  width: 100%;
+  height: 32px;
   overflow: visible;
 }
 

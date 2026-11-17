@@ -54,8 +54,9 @@
   --u-motion-hover: 100ms;
   --u-motion-ease: cubic-bezier(0.2, 0, 0, 1);
 
-  --u-color-bg-surface: light-dark(#ffffff, #0f0f0e);
-  --u-color-bg-paper: light-dark(#f5f4ef, #161513);
+  --u-color-bg-page: light-dark(#ffffff, #191918);
+  --u-color-bg-surface: light-dark(#ffffff, #20201f);
+  --u-color-bg-paper: light-dark(#f5f4ef, #262625);
   --u-color-bg-ink: #1a1a18;
 
   --u-color-danger: light-dark(#c03a26, #ef6450);
@@ -66,8 +67,8 @@
   --u-color-highlight: light-dark(#fbeeb0, #735a00);
   --u-color-backdrop: light-dark(color-mix(in srgb, #1a1a18 28%, transparent), color-mix(in srgb, #000000 60%, transparent));
 
-  --u-color-text-default: light-dark(#1a1a18, #ecebe6);
-  --u-color-text-muted: light-dark(#6b6964, #9c9890);
+  --u-color-text-default: light-dark(#1a1a18, #e2e1dd);
+  --u-color-text-muted: light-dark(#6b6964, #9d9c97);
   --u-color-text-on-ink: #f5f4ef;
   --u-color-text-muted-on-ink: #a8a59d;
   --u-color-text-on-danger: light-dark(#ffffff, #131311);
@@ -75,15 +76,15 @@
   --u-color-text-on-warning: light-dark(#1a1a18, #131311);
   --u-color-text-on-success: light-dark(#ffffff, #131311);
 
-  --u-color-link: light-dark(#2449b0, #8aa5f0);
+  --u-color-link: light-dark(#2449b0, #9db3f0);
 
-  --u-color-divider: light-dark(#e7e7e3, #383733);
+  --u-color-divider: light-dark(#e7e7e3, #2d2d2b);
   --u-color-divider-on-ink: #3a3935;
-  --u-color-border: light-dark(#d3d3ce, #4a4844);
-  --u-color-border-input: light-dark(#8c8981, #75726b);
+  --u-color-border: light-dark(#d3d3ce, #353533);
+  --u-color-border-input: light-dark(#8c8981, #6e6c67);
 
   --u-color-chart-current: var(--u-color-text-default);
-  --u-color-chart-previous: light-dark(#949189, #66635d);
+  --u-color-chart-previous: light-dark(#949189, #6f6d67);
   --u-color-chart-fill: var(--u-color-chart-current);
   --u-chart-fill-opacity: 0.14;
   --u-chart-dim-opacity: 0.35;
@@ -144,11 +145,21 @@
 :root[data-u-theme="light"] { color-scheme: light; }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-u-theme="light"]) { --u-chart-fill-opacity: 0.12; }
+  :root:not([data-u-theme="light"]) {
+    --u-chart-fill-opacity: 0.12;
+    --u-color-bg-ink: #20201f;
+    --u-color-text-on-ink: #e2e1dd;
+    --u-color-text-muted-on-ink: #9d9c97;
+    --u-color-divider-on-ink: #2d2d2b;
+  }
 }
 
 :root[data-u-theme="dark"] {
   --u-chart-fill-opacity: 0.12;
+  --u-color-bg-ink: #20201f;
+  --u-color-text-on-ink: #e2e1dd;
+  --u-color-text-muted-on-ink: #9d9c97;
+  --u-color-divider-on-ink: #2d2d2b;
 
   color-scheme: dark;
 }

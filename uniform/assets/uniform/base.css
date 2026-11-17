@@ -7,7 +7,7 @@
 
 :where(body) {
   margin: 0;
-  background: var(--u-color-bg-surface);
+  background: var(--u-color-bg-page);
   color: var(--u-color-text-default);
   font-family: var(--u-font-sans);
   font-size: var(--u-font-size-body);

@@ -20,7 +20,7 @@ places in the middle and the account at the bottom. Use it inside the
 </div>
 </div>
 
-Jobs is the current page, so it gets the pill and medium weight. The account at the bottom opens a
+Jobs is the current page, so it gets a soft grey background and medium weight. The account at the bottom opens a
 menu upward. The button beside the app name folds the column to its icons, and
 so does a click anywhere along its right edge, where the cursor turns into an
 arrow. Try them.
@@ -60,11 +60,25 @@ wider. Narrower, the sidebar slides in from the left behind the app shell's Menu
 button, three quarters wide, over a backdrop. Tapping the backdrop, pressing
 Escape or the button beside the app name closes it.
 
+## Remember the choice
+
+Give the sidebar `data-remember` with a cookie name. `uniform.js` saves
+`open` or `collapsed` there; render `aria-expanded` from it on the server.
+
+```erb
+<u-sidebar id="nav" popover data-remember="sidebar">
+  <div>
+    <a class="u-wordmark" href="/">Workbench</a>
+    <button type="button" aria-label="Sidebar" aria-expanded="<%%= cookies[:sidebar] != "collapsed" %>"></button>
+  </div>
+  …
+</u-sidebar>
+```
+
 ## Ink or paper
 
 The sidebar sits on ink. Add `u-app-shell-paper` to the [app shell](/components/app-shell/)
-to put it on paper. Use ink for a short list of places and paper for a long one,
-like these docs.
+to put it on paper. Paper is quieter; ink sets the column apart.
 
 ## Parts
 
@@ -100,4 +114,4 @@ Every place gets an icon
 : In the rail the icon is all that's left, so each link needs one that reads on its own.
 
 Remember the choice on the server
-: Save collapsed or open in the person's settings or a cookie, and render the button with that `aria-expanded`. Setting it from JavaScript after the page loads makes the column flash open.
+: Save collapsed or open with `data-remember` or in the person's settings, and render the button with that `aria-expanded`. Setting it from JavaScript after the page loads makes the column flash open.

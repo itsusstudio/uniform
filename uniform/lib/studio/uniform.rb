@@ -13,6 +13,10 @@ module Studio
         root.join("assets")
       end
 
+      def icon(name)
+        assets_path.join("uniform/icons/#{File.basename(name.to_s)}.svg").read
+      end
+
       def manifest
         JSON.parse(assets_path.join("uniform/manifest.json").read)
       end

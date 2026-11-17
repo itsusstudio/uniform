@@ -24,8 +24,7 @@ the account. It folds to an icon rail on wide screens.
 ## Ink or paper
 
 The sidebar and the tab bar sit on ink. Add `u-app-shell-paper` to the shell
-to put them on paper instead. Use ink for a short list of places, like
-Workbench, and paper for a long one, like these docs.
+to put them on paper instead. Paper is quieter; ink sets the frame apart.
 
 ## On a phone
 

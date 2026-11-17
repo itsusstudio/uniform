@@ -198,6 +198,11 @@
   page: /components/banner/
   description: The title, saying what's going on.
 
+- name: u-banner-full
+  group: Components
+  page: /components/banner/
+  description: Added to `u-banner` for a square-cornered strip across the top of the page area.
+
 - name: u-banner-info
   group: Components
   page: /components/banner/

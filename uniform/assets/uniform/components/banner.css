@@ -14,6 +14,15 @@
 
 .u-banner > .u-actions { margin-top: var(--u-space-2); }
 
+.u-banner-full {
+  padding: var(--u-space-2) var(--u-space-6);
+  border-radius: 0;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.u-banner-full strong { font-weight: 500; }
+
 .u-banner-title {
   font-size: var(--u-font-size-title);
   line-height: var(--u-line-height-title);
@@ -21,6 +30,8 @@
 }
 
 .u-banner :where(a:not(.u-btn)) { color: inherit; }
+
+.u-banner .u-link-btn { color: inherit; }
 
 .u-banner :focus-visible { outline-color: currentColor; }
 

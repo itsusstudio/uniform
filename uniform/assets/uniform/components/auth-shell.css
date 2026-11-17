@@ -5,7 +5,7 @@
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   min-height: 100dvh;
-  background: var(--u-color-bg-surface);
+  background: var(--u-color-bg-page);
   color: var(--u-color-text-default);
 }
 

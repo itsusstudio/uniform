@@ -6,7 +6,7 @@ section: Components
 permalink: /components/chart-spark/
 ---
 
-A sparkline shows the trend behind a [stat](/components/stat/) in 96 by 24px.
+A sparkline shows the trend behind a [stat](/components/stat/), 32px tall and full width.
 It has no axes, labels or hover: the figure says the number.
 
 ## Example

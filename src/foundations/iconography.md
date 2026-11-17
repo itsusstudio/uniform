@@ -27,6 +27,12 @@ Paste the SVG inline and add `u-icon`. It takes the colour of the text around it
 </button>
 ```
 
+In Rails, `uniform_icon` inlines a shipped icon. `small: true` adds `u-icon-sm`.
+
+```erb
+<%%= link_to jobs_path do %><%%= uniform_icon "wrench", small: true %><span>Jobs</span><%% end %>
+```
+
 Two sizes
 : `u-icon` is 20px, for icons on their own and beside 16px text and up. Add `u-icon-sm` for 16px beside 12 and 14px text. Inside a button with a word, Uniform makes it 16px for you.
 

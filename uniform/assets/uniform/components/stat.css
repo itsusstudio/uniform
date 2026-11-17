@@ -1,8 +1,8 @@
 @layer uniform.components {
 .u-stats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--u-space-6) var(--u-space-12);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 136px), 1fr));
+  gap: var(--u-space-6);
 }
 
 .u-stat {

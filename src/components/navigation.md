@@ -35,7 +35,7 @@ Navigation lists the places in an app and marks the one you're on. In an app it 
 </div>
 </div>
 <div class="u-span-6 u-stack u-gap-4 u-text-small">
-<p>Jobs is the current page, so it has <code class="u-text-data">aria-current="page"</code> and the grey pill.</p>
+<p>Jobs is the current page, so it has <code class="u-text-data">aria-current="page"</code> and a soft grey background.</p>
 <p>Today and Settings have nothing under them, so they're section links, not groups of one.</p>
 </div>
 </div>
@@ -100,7 +100,7 @@ link is never hidden.
 <%= render "classes", classes_page: "/components/navigation/" %>
 
 `aria-current="page"`
-: Put it on the link for the page you're on to give it a grey pill and ink text.
+: Put it on the link for the page you're on to give it a soft grey background and medium weight.
 
 ## Do and don't
 

@@ -10,13 +10,15 @@
   --u-nav-current-bg: var(--u-color-text-on-ink);
   --u-nav-current-text: var(--u-color-bg-ink);
   --u-nav-focus: var(--u-color-info-on-ink);
+  --u-nav-hover: color-mix(in srgb, var(--u-nav-text) 5%, transparent);
+  --u-nav-current: color-mix(in srgb, var(--u-nav-text) 9%, transparent);
 }
 
 .u-app-shell-paper {
   --u-nav-bg: var(--u-color-bg-paper);
   --u-nav-text: var(--u-color-text-default);
-  --u-nav-link: var(--u-color-text-muted);
-  --u-nav-label: var(--u-color-text-default);
+  --u-nav-link: var(--u-color-text-default);
+  --u-nav-label: var(--u-color-text-muted);
   --u-nav-name: var(--u-color-link);
   --u-nav-line: var(--u-color-divider);
   --u-nav-edge: var(--u-color-text-default);
@@ -31,7 +33,7 @@
   grid-template-columns: var(--u-width-sidebar) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   min-height: 100dvh;
-  background: var(--u-color-bg-surface);
+  background: var(--u-color-bg-page);
 }
 
 .u-app-shell > * { min-width: 0; }
@@ -65,7 +67,7 @@ u-sidebar {
   width: auto;
   height: 100dvh;
   margin: 0;
-  padding: var(--u-space-6) var(--u-space-4);
+  padding: var(--u-space-4) var(--u-space-2);
   overflow: visible;
   border: 0;
   background: var(--u-nav-bg);
@@ -86,8 +88,6 @@ u-sidebar [popover] { color-scheme: light dark; }
 u-sidebar > .u-nav {
   flex: 1 1 auto;
   min-height: 0;
-  margin-inline: calc(-1 * var(--u-space-2));
-  padding-inline: var(--u-space-2);
   overflow-y: auto;
 }
 
@@ -109,20 +109,20 @@ u-sidebar > div:first-child > button[aria-expanded] {
   display: inline-grid;
   flex: none;
   place-items: center;
-  width: var(--u-size-control);
-  height: var(--u-size-control);
+  width: 28px;
+  height: 28px;
   padding: 0;
   border: 0;
-  border-radius: var(--u-radius-pill);
+  border-radius: 6px;
   background: transparent;
-  color: var(--u-nav-text);
+  color: var(--u-nav-label);
   cursor: pointer;
 }
 
 u-sidebar > div:first-child > button[aria-expanded]::before {
   content: "";
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background: currentcolor;
   mask: url("./../icons/panel-left.svg") center / contain no-repeat;
   forced-color-adjust: none;
@@ -130,40 +130,41 @@ u-sidebar > div:first-child > button[aria-expanded]::before {
 
 :is(u-sidebar, .u-app-shell > nav) :focus-visible { outline-color: var(--u-nav-focus); }
 
-u-sidebar > div:first-child > button[aria-expanded]:hover { background: var(--u-nav-line); }
+u-sidebar > div:first-child > button[aria-expanded]:hover {
+  background: var(--u-nav-hover);
+  color: var(--u-nav-text);
+}
 
 u-sidebar > div:last-child:not(:first-child) {
   position: sticky;
   bottom: 0;
-  margin-inline: calc(-1 * var(--u-space-4));
-  padding: var(--u-space-4) var(--u-space-4) var(--u-space-6);
+  margin-inline: calc(-1 * var(--u-space-2));
+  padding: var(--u-space-2) var(--u-space-2) var(--u-space-4);
   border-top: 1px solid var(--u-nav-line);
   background: var(--u-nav-bg);
 }
 
 u-sidebar > div:last-child:not(:first-child) > :not(ul, button, [popover]) { padding-inline: var(--u-space-2); }
 
-u-sidebar :is(.u-nav > :is(div, details) > :first-child, legend) {
-  color: var(--u-nav-label);
-  font-weight: 400;
-}
+u-sidebar :is(.u-nav > :is(div, details) > :first-child, legend) { color: var(--u-nav-label); }
 
 u-sidebar .u-nav .u-nav-link-section { color: var(--u-nav-text); }
 
 u-sidebar :is(.u-nav > a, li > :is(a, button)) { color: var(--u-nav-link); }
 
+u-sidebar :is(.u-nav > a, li > :is(a, button)) > .u-icon { color: var(--u-nav-label); }
+
 u-sidebar :is(.u-nav > a, li > :is(a, button)):hover {
-  border-radius: var(--u-radius-pill);
-  background: var(--u-nav-line);
+  background: var(--u-nav-hover);
   color: var(--u-nav-text);
-  text-decoration: none;
 }
 
 u-sidebar :is(.u-nav > a, li > :is(a, button))[aria-current="page"] {
-  background: var(--u-nav-line);
+  background: var(--u-nav-current);
   color: var(--u-nav-text);
-  font-weight: 500;
 }
+
+u-sidebar :is(.u-nav > a, li > :is(a, button))[aria-current="page"] > .u-icon { color: var(--u-nav-text); }
 
 u-sidebar .u-toggle-group { border-color: var(--u-nav-edge); }
 
@@ -186,7 +187,7 @@ u-sidebar > div:last-child > button {
   min-height: var(--u-size-target);
   padding: 0 var(--u-space-2);
   border: 0;
-  border-radius: var(--u-radius-pill);
+  border-radius: 6px;
   background: transparent;
   color: var(--u-nav-text);
   font: inherit;
@@ -196,7 +197,7 @@ u-sidebar > div:last-child > button {
 }
 
 u-sidebar > div:last-child > button:hover,
-u-sidebar > div:last-child > button:has(+ .u-menu:popover-open) { background: var(--u-nav-line); }
+u-sidebar > div:last-child > button:has(+ .u-menu:popover-open) { background: var(--u-nav-hover); }
 
 u-sidebar > div:last-child > button > span:first-child {
   display: grid;
@@ -243,8 +244,7 @@ u-sidebar li > button {
 }
 
 u-sidebar li > button:has(+ .u-menu:popover-open) {
-  border-radius: var(--u-radius-pill);
-  background: var(--u-nav-line);
+  background: var(--u-nav-hover);
   color: var(--u-nav-text);
 }
 
@@ -265,7 +265,23 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
 .u-app-shell > main {
   padding-block: var(--u-space-12) var(--u-space-24);
-  background: var(--u-color-bg-surface);
+  background: var(--u-color-bg-page);
+}
+
+.u-app-shell > main > .u-banner-full { margin-block: calc(var(--u-space-12) * -1) var(--u-space-12); }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-u-theme="light"]) .u-app-shell:not(.u-app-shell-paper) > u-sidebar {
+    border-inline-end: 1px solid var(--u-nav-line);
+    --u-nav-current-bg: #2f2f2d;
+    --u-nav-current-text: var(--u-color-text-on-ink);
+  }
+}
+
+:root[data-u-theme="dark"] .u-app-shell:not(.u-app-shell-paper) > u-sidebar {
+  border-inline-end: 1px solid var(--u-nav-line);
+  --u-nav-current-bg: #2f2f2d;
+  --u-nav-current-text: var(--u-color-text-on-ink);
 }
 
 @container u-app-shell (min-width: 1024px) {
@@ -363,7 +379,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     width: var(--u-size-control);
     min-height: var(--u-size-control);
     padding-inline: 0;
-    border-radius: var(--u-radius-pill);
+    border-radius: 6px;
   }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button)) > span {
@@ -478,6 +494,8 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
 
   .u-app-shell > main { padding-block: var(--u-space-6) calc(var(--u-space-12) + env(safe-area-inset-bottom)); }
+
+  .u-app-shell > main > .u-banner-full { margin-block: calc(var(--u-space-6) * -1) var(--u-space-6); }
 
   /* The page scrolls on the root, which a container query can't reach, so each target keeps clear of the sticky bars instead. */
   .u-app-shell > main * { scroll-margin-block-start: calc(var(--u-size-control) + var(--u-space-2) * 2 + 1px + env(safe-area-inset-top)); }

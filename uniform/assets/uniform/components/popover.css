@@ -18,6 +18,11 @@ dialog.u-popover:not([popover]) {
   margin: 0;
 }
 
+.u-popover[popover] {
+  max-height: calc(100dvh - 2 * var(--u-space-2));
+  overflow-y: auto;
+}
+
 @supports (position-area: block-end) {
   .u-popover[popover] {
     inset: auto;

@@ -10,4 +10,11 @@
 }
 
 :where(p).u-meta { margin: 0; }
+
+@media (width < 40em) {
+  .u-meta {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
 }

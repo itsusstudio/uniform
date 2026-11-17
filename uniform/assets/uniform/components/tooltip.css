@@ -40,6 +40,10 @@
 .u-tooltip:hover > :last-child,
 .u-tooltip:has(:focus-visible) > :last-child { display: block; }
 
+@media (hover: none) {
+  .u-tooltip:focus-within > :last-child { display: block; }
+}
+
 .u-tooltip[data-dismissed] > :last-child { display: none; }
 
 /* Fixed and anchored, the label escapes the overflow of tables, cards and dialogs. */

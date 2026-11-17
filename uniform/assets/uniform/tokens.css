@@ -66,7 +66,7 @@
   --u-color-info: light-dark(#2f5bd3, #5b7fe6);
   --u-color-info-on-ink: #5b7fe6;
   --u-color-warning: #f3c22c;
-  --u-color-success: light-dark(#277a4d, #3f9b68);
+  --u-color-success: light-dark(#277a4d, #4aa874);
   --u-color-highlight: light-dark(#fbeeb0, #735a00);
   --u-color-backdrop: light-dark(color-mix(in srgb, #1a1a18 28%, transparent), color-mix(in srgb, #000000 60%, transparent));
 
@@ -84,7 +84,7 @@
   --u-color-divider: light-dark(#ebeae6, #2a2a28);
   --u-color-divider-on-ink: #3a3935;
   --u-color-border: light-dark(#e3e2dd, #2f2f2d);
-  --u-color-border-input: light-dark(#8c8981, #6e6c67);
+  --u-color-border-input: light-dark(#8c8981, #7a7873);
 
   --u-color-chart-current: var(--u-color-text-default);
   --u-color-chart-previous: light-dark(#949189, #6f6d67);

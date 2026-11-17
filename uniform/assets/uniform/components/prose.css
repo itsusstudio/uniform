@@ -29,12 +29,14 @@
   font-weight: 500;
   line-height: var(--u-line-height-20);
   letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .u-prose > :where(h3) {
   margin: var(--u-space-6) 0 var(--u-space-2);
   font-size: var(--u-font-size-prose);
   font-weight: 500;
+  text-wrap: balance;
 }
 
 .u-prose > :where(div, figure, table, section, nav, header, form, fieldset) { margin-block: var(--u-space-6); }
@@ -75,7 +77,7 @@
   color: var(--u-color-text-muted);
 }
 
-@container u-prose-dl (max-width: 479px) {
+@container u-prose-dl (max-width: 29.99em) {
   .u-prose > :where(dl) > :where(dt) {
     grid-column: 1 / -1;
     padding-inline-end: 0;

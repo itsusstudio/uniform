@@ -12,6 +12,7 @@
   font-size: var(--u-font-size-title);
   font-weight: 500;
   line-height: var(--u-line-height-title);
+  text-wrap: balance;
 }
 
 :where(hgroup) > :where(p) {

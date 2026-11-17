@@ -31,7 +31,7 @@ A description list shows the details of one record, with muted labels beside the
 </div>
 </div>
 
-Below 480px wide, each label sits on top of its value.
+Below 280px wide, each label sits on top of its value. A narrow card keeps them side by side.
 
 ## Code
 

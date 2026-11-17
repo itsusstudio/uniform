@@ -58,6 +58,24 @@
 
 .u-radio > input:disabled::before { background: var(--u-color-border-input); }
 
+.u-radio > input:disabled:checked {
+  border-color: var(--u-color-text-muted);
+  background: var(--u-color-bg-surface);
+}
+
+.u-radio > input:disabled:checked::before { background: var(--u-color-text-muted); }
+
+@media (pointer: coarse) {
+  .u-radio { position: relative; }
+
+  .u-radio::after {
+    content: "";
+    position: absolute;
+    inset-block: -6px;
+    inset-inline: 0;
+  }
+}
+
 @media (forced-colors: active) {
   .u-radio > input::before { background: CanvasText; }
 }

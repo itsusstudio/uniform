@@ -68,6 +68,26 @@
   cursor: not-allowed;
 }
 
+.u-checkbox > input:disabled:is(:checked, :indeterminate) {
+  border-color: var(--u-color-text-muted);
+  background: var(--u-color-text-muted);
+}
+
+.u-checkbox > input:disabled:checked::before { border-color: var(--u-color-bg-surface); }
+
+.u-checkbox > input:disabled:indeterminate::before { background: var(--u-color-bg-surface); }
+
+@media (pointer: coarse) {
+  .u-checkbox { position: relative; }
+
+  .u-checkbox::after {
+    content: "";
+    position: absolute;
+    inset-block: -6px;
+    inset-inline: 0;
+  }
+}
+
 @media (forced-colors: active) {
   .u-checkbox > input:indeterminate::before { background: CanvasText; }
 }

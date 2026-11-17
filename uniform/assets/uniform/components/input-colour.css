@@ -60,7 +60,9 @@ u-input-colour > button {
   outline-offset: 0;
 }
 
-u-input-colour > button:hover { background: var(--u-color-divider); }
+@media (hover: hover) {
+  u-input-colour > button:hover { background: var(--u-color-divider); }
+}
 
 u-input-colour > button:disabled {
   background: transparent;

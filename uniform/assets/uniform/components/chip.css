@@ -18,7 +18,9 @@
   white-space: nowrap;
 }
 
-a.u-chip:hover { background: var(--u-color-border); }
+@media (hover: hover) {
+  a.u-chip:hover { background: var(--u-color-border); }
+}
 
 .u-chip > .u-icon {
   width: 16px;
@@ -51,7 +53,9 @@ a.u-chip:hover { background: var(--u-color-border); }
   inset: calc(-1 * var(--u-space-1));
 }
 
-.u-chip > :is(a, button):hover { background: var(--u-color-border); }
+@media (hover: hover) {
+  .u-chip > :is(a, button):hover { background: var(--u-color-border); }
+}
 
 .u-chip > :is(a, button)::before {
   content: "";

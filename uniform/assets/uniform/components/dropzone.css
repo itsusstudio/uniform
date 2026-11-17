@@ -54,6 +54,13 @@
   background: var(--u-color-bg-paper);
 }
 
+@media (forced-colors: active) {
+  .u-dropzone-over {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+}
+
 .u-dropzone:has(> input[aria-invalid="true"]) { border-color: var(--u-color-danger); }
 
 .u-dropzone:has(> input:disabled) {

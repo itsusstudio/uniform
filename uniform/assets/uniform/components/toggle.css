@@ -18,7 +18,9 @@
   cursor: pointer;
 }
 
-.u-toggle:hover { background: var(--u-color-divider); }
+@media (hover: hover) {
+  .u-toggle:hover { background: var(--u-color-divider); }
+}
 
 .u-toggle:is([aria-pressed="true"], :has(> input:checked)) {
   background: var(--u-color-text-default);
@@ -102,7 +104,9 @@
   border-end-end-radius: var(--u-radius-pill);
 }
 
-.u-toggle-group > label:hover { background: var(--u-color-divider); }
+@media (hover: hover) {
+  .u-toggle-group > label:hover { background: var(--u-color-divider); }
+}
 
 .u-toggle-group > label > input {
   position: absolute;

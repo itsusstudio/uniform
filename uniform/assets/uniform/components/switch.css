@@ -55,6 +55,23 @@
 
 .u-switch > input:disabled::before { background: var(--u-color-border-input); }
 
+.u-switch > input:disabled:checked { background: var(--u-color-text-muted); }
+
+.u-switch > input:disabled:checked::before { background: var(--u-color-bg-surface); }
+
+:dir(rtl) .u-switch > input:checked::before { transform: translate(-18px, 2px); }
+
+@media (pointer: coarse) {
+  .u-switch { position: relative; }
+
+  .u-switch::after {
+    content: "";
+    position: absolute;
+    inset-block: -6px;
+    inset-inline: 0;
+  }
+}
+
 @media (forced-colors: active) {
   .u-switch > input {
     width: 16px;

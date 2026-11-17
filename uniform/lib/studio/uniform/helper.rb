@@ -14,6 +14,12 @@ module Studio
         Mail.for(formats.first)
       end
 
+      # Only clients that load remote fonts (Apple Mail, iOS) use these, and only
+      # with an absolute URL, so they need action_mailer.asset_host.
+      def uniform_mail_fonts
+        Mail::FONTS.to_h { |_, _, file| [file, asset_url("uniform/fonts/#{file}")] }.select { |_, url| url.start_with?("http") }
+      end
+
       def uniform_form_with(**options, &)
         form_with(**options, builder: FormBuilder, class: ["u-form", options[:class]].compact.join(" "), &)
       end

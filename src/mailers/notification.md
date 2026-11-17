@@ -35,7 +35,7 @@ Greeting
 : One or two sentences to the customer by first name, saying what happened and what to do next.
 
 Details
-: Rows of label and value, split by divider lines. Labels are 16px muted, values 16px ink. Job numbers, amounts and codes are in Menlo. Keep to what someone needs at the counter: the job, the work, the status, what's owing (or "Paid"), hours and where.
+: Rows of label and value, split by divider lines. Labels are 16px muted, values 16px ink. Job numbers, amounts and codes are in IBM Plex Mono. Keep to what someone needs at the counter: the job, the work, the status, what's owing (or "Paid"), hours and where.
 
 Status
 : An 8px coloured square with an ink word beside it, like the status on screen. The word carries the meaning, so the row still reads right in clients that drop the square.

@@ -15,14 +15,25 @@ middle.
 Email clients are old browsers with odd rules. Outlook on Windows draws HTML with
 Word, so it ignores flex, grid and most padding on anything but table cells.
 Gmail drops custom properties and cascade layers, and some clients strip the
-`<style>` in the head altogether. Web fonts load almost nowhere.
+`<style>` in the head altogether. Web fonts load only in Apple Mail and on iOS.
 
 So Uniform's CSS can't come along. Mailers are copyable HTML templates instead
 of classes: tables with `role="presentation"` for the layout, a single centred
-column up to 600px wide, every style written inline on its element, and system
-fonts. The look carries over by hand, using the same hex values as the tokens.
-The small `<style>` in the head only tightens the margins on phones and resets
-link colours, and the email still reads fine when a client throws it away.
+column up to 600px wide, and every style written inline on its element. The look
+carries over by hand, using the same hex values and typefaces as the tokens.
+The small `<style>` in the head loads the fonts, tightens the margins on phones
+and resets link colours, and the email still reads fine when a client throws it
+away.
+
+## Fonts
+
+Switzer for text, Instrument Serif for the Workbench wordmark, Apfel Grotezk
+for the heading and a shop's name, IBM Plex
+Mono for codes and amounts, the same as the app. Apple Mail and iOS load them;
+Gmail and Outlook fall back to Helvetica Neue, Helvetica, then Arial, which keep
+the same shape. In Rails, the layout loads them when
+`config.action_mailer.asset_host` is set, since an email can only fetch a font
+from a full URL.
 
 ## Example
 
@@ -44,13 +55,13 @@ Column
 : One table, 600px at most and fluid below that, with no border. It holds the sender's name and the content, 48px in from each side, 24px on a phone.
 
 Sender's name
-: Set in type at 16px medium, 24px from the top. No logo, so it reads the same with images off. For Workbench's own emails it's "Workbench". For an email sent for a shop, it's the shop's name.
+: Set in type, 24px from the top. Workbench's own name is its [wordmark](/components/wordmark/), the serif at 24px, falling back to Georgia italic. A shop's name is Apfel Grotezk at 18px medium, since the wordmark is the product's, not the shop's. No logo, so it reads the same with images off. For Workbench's own emails it's "Workbench". For an email sent for a shop, it's the shop's name.
 
 Content
 : Whatever the email says, 48px below the name and 48px above the footer. One `h1` at 24px, paragraphs at 16px with 24px between them, detail rows with 16px above and below, and at most one primary button, 44px tall with 48px of space around it. Every size and space comes from the Uniform scale.
 
 Footer
-: Below a hairline. The sender's name in ink, then the street and the city on their own lines in grey, one fact per line. Then Terms · Privacy as underlined links, and an Unsubscribe link on emails that aren't transactional. When a product sends for one of its users, like a shop's pickup email, Terms and Privacy are left out and a last line says “Powered by Workbench”.
+: 14px, below the content with no line between. One line in ink saying who sent it and where it's made, “Workbench, made in Montréal”, then the postal address in grey, one fact per line. Then Terms and Privacy as underlined grey links, and an Unsubscribe link on emails that aren't transactional. When a product sends for one of its users, like a shop's pickup email, Terms and Privacy are left out and a last line says “Powered by Workbench”. Digits in the address are kept from turning into map links, so the address stays grey and whole.
 
 ## Who sends what
 
@@ -70,7 +81,8 @@ changes there, change it here and in every mailer.
 | `--u-color-text-default` | `#1a1a18` | Body text, headings, the button's fill |
 | `--u-color-text-muted` | `#6b6964` | Footer and small print |
 | `--u-color-bg-surface` | `#ffffff` | The whole email |
-| `--u-color-bg-paper` | `#f5f4ef` | Text on the button, and the box around a sign-in code |
+| `--u-color-bg-paper` | `#f5f4ef` | Text on the button |
+| `--u-color-border-input` | `#8c8981` | The line around a sign-in code |
 | `--u-color-divider` | `#e7e7e3` | Lines between rows, like on a receipt |
 | `--u-color-link` | `#2449b0` | Links |
 | `--u-color-danger` | `#c03a26` | Signal square for something wrong |

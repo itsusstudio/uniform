@@ -11,7 +11,7 @@ screen. Send it each time someone asks to sign in.
 
 ## Example
 
-<% email = render("examples/mailer_preview", slug: "sign-in-code", title: "482915 is your Workbench code", preheader: "This code works for 10 minutes.", sender: "Workbench", reason: "You’re getting this because someone asked to sign in to Workbench with this email address.", address: "it's us studio, 216-4035 rue Saint-Ambroise, Montréal QC H4C 2E1") %>
+<% email = render("examples/mailer_preview", slug: "sign-in-code", title: "482915 is your Workbench sign-in code", preheader: "This code works for 10 minutes.", sender: "Workbench", reason: "You’re getting this because someone asked to sign in to Workbench with this email address.", address: "it's us studio, 216-4035 rue Saint-Ambroise, Montréal QC H4C 2E1") %>
 <%= render "examples/mailer_frames", email: email, name: "Sign-in code email", height: 660, phone_height: 720 %>
 
 The code goes in the subject, the inbox preview and big at the top of the
@@ -22,7 +22,7 @@ from a shop, because it's about the reader's own account.
 ## Anatomy
 
 Subject
-: The code first, then what it's for: “482915 is your Workbench code”. Phones show it in the notification, so people can read it off the lock screen.
+: The code first, then what it's for: “482915 is your Workbench sign-in code”. Phones show it in the notification, so people can read it off the lock screen.
 
 Preheader
 : How long it lasts, in one line: "This code works for 10 minutes."
@@ -34,7 +34,7 @@ What to do
 : One line that says what the code is for. No greeting: the reader is mid sign-in and wants the digits.
 
 Code
-: The six digits in Menlo at 32px with 8px letter spacing, in a square paper box 24px from the text around it. The digits are one unbroken string with no spaces or dashes, so they copy cleanly, and `user-select: all` lets one tap pick up the whole code.
+: The six digits in IBM Plex Mono at 32px with 4px letter spacing, in a box with a 1px input border and the default 8px radius, like the code fields on the sign-in screen, 24px from the text around it. Outlook on Windows draws the corners square. The digits are one unbroken string with no spaces or dashes, so they copy cleanly, and `user-select: all` lets one tap pick up the whole code.
 
 How long it lasts
 : 10 minutes, the same as the hint on the code screen.
@@ -53,12 +53,12 @@ The view. One file makes both the HTML and the plain-text part: in Rails,
 The filled plain-text email, with the layout around it:
 
 ```text
-<%= raw render("examples/mailer_preview", slug: "sign-in-code", title: "482915 is your Workbench code", preheader: "This code works for 10 minutes.", sender: "Workbench", reason: "You’re getting this because someone asked to sign in to Workbench with this email address.", address: "it's us studio, 216-4035 rue Saint-Ambroise, Montréal QC H4C 2E1", plain_text: true).strip %>
+<%= raw render("examples/mailer_preview", slug: "sign-in-code", title: "482915 is your Workbench sign-in code", preheader: "This code works for 10 minutes.", sender: "Workbench", reason: "You’re getting this because someone asked to sign in to Workbench with this email address.", address: "it's us studio, 216-4035 rue Saint-Ambroise, Montréal QC H4C 2E1", plain_text: true).strip %>
 ```
 
 In Rails, swap `482915` for `<%%= @code %>` in both files, and put the code
 in the subject with
-`mail(subject: "#{@code} is your Workbench code")`.
+`mail(subject: "#{@code} is your Workbench sign-in code")`.
 
 ## Do and don't
 
@@ -79,7 +79,7 @@ in the subject with
 <div class="example-frame">
 <div class="mailer-sign-in-code-inbox">
 <p>Workbench</p>
-<p><span class="u-text-data">482915</span> is your Workbench code</p>
+<p><span class="u-text-data">482915</span> is your Workbench sign-in code</p>
 <p class="u-text-muted">This code works for 10 minutes.</p>
 </div>
 </div>

@@ -29,8 +29,31 @@ module Studio
         html = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], labels: labels)
         text = Mail::Text.layout("Hi", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], labels: labels)
 
-        assert_includes html, "Workbench&nbsp;&nbsp;&middot;&nbsp;&nbsp;Made in Montréal"
-        assert_includes text, "Workbench · Made in Montréal\n\nStudio"
+        assert_includes html, "Workbench, Made in Montréal"
+        assert_includes text, "Workbench, Made in Montréal\n\nStudio"
+      end
+
+      def test_footer_address_does_not_become_a_map_link
+        html = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["it's us studio", "216-4035 rue Saint-Ambroise"])
+
+        assert_includes html, "it&#39;s us studio"
+        assert_includes html, "2&zwnj;1&zwnj;6-4&zwnj;0&zwnj;3&zwnj;5 rue Saint-Ambroise"
+      end
+
+      def test_only_the_product_name_is_set_as_a_wordmark
+        own = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"])
+        shop = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Shop", address: ["Shop"], labels: {powered_by: "Powered by %{name}"}, sent_with: "Workbench", sent_with_url: "https://useworkbench.co")
+
+        assert_includes own, "#{Mail::WORDMARK} color: #{Mail::INK};\">Workbench</td>"
+        refute_includes shop, "Instrument Serif"
+      end
+
+      def test_layout_loads_brand_fonts_only_when_given
+        bare = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"])
+        loaded = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], fonts: {"Switzer-Regular.woff2" => "https://cdn.example/Switzer-Regular-abc.woff2"})
+
+        refute_includes bare, "@font-face"
+        assert_includes loaded, %(@font-face { font-family: "Switzer"; src: url("https://cdn.example/Switzer-Regular-abc.woff2"))
       end
 
       def test_layout_shows_footer_links_only_when_given

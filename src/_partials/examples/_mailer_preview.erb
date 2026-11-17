@@ -11,6 +11,7 @@
     title: title, preheader: preheader, sender: sender, address: address.split(", ", 3), labels: labels,
     terms_url: (on_behalf ? nil : "#{site}/terms"), privacy_url: "#{site}/privacy",
     unsubscribe_url: (given.include?(:unsubscribe_url) ? unsubscribe_url : nil),
-    sent_with: (on_behalf ? "Workbench" : nil), sent_with_url: "https://useworkbench.co")
+    sent_with: (on_behalf ? "Workbench" : nil), sent_with_url: "https://useworkbench.co",
+    fonts: Studio::Uniform::Mail::FONTS.to_h { |_, _, file| [file, asset_path("uniform/assets/uniform/fonts/#{file}")] })
 -%>
 <%= raw email %>

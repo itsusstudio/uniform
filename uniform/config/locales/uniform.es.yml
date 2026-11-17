@@ -16,7 +16,7 @@ es:
     input_phone:
       invalid: Escribe el número de teléfono completo, o empieza con + y el código del país.
     mail:
-      made_in: hecho en montreal
+      made_in: hecho en Montreal
       powered_by: "Con la tecnología de %{name}"
       privacy: Privacidad
       terms: Términos

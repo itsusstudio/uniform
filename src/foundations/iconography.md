@@ -12,8 +12,11 @@ only where a symbol reads faster than a word, like close, search, menu or back.
 ## Icons that stand alone
 
 These are the only icons that may appear without a word, because almost everyone
-reads them the same way. Each one ships in `uniform/icons/`. Any other Lucide
-icon may sit beside a word.
+reads them the same way. Any other Lucide icon may sit beside a word.
+
+`uniform/icons/` ships these and a core set an app reaches for most, from
+navigation and files to messages, money and jewellery work, like `gem`, `watch`
+and `hammer`. Look there before adding one.
 
 <%= render "examples/icon_set" %>
 
@@ -46,7 +49,7 @@ Beside a word, it's hidden
 : When a word sits next to it, the icon gets `aria-hidden="true"` so screen readers don't say it twice.
 
 Getting more icons
-: Browse [lucide.dev](https://lucide.dev/icons/){:target="_blank" rel="noopener"} and copy the SVG from `lucide-static`, keeping Lucide's name for the file. Drop the `class`, `width` and `height` and leave the rest as published: `u-icon` sets the size and the line width, and `stroke="currentColor"` takes the colour of the text. No other icon sets and no edits to the drawing.
+: Browse [lucide.dev](https://lucide.dev/icons/){:target="_blank" rel="noopener"} and copy the SVG from `lucide-static`, keeping Lucide's name for the file. Drop the `class`, `width` and `height` from the `<svg>` tag only, never from the shapes inside it, and leave the rest as published: `u-icon` sets the size and the line width, and `stroke="currentColor"` takes the colour of the text. No other icon sets and no edits to the drawing.
 
 ## In use
 

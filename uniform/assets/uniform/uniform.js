@@ -1764,6 +1764,12 @@ if (!document[pageReady]) {
     }, true)
   }
 
+  document.addEventListener("beforetoggle", (event) => {
+    const nav = event.target
+    if (event.newState !== "open" || !nav.matches?.(".u-site-header > .u-container > nav")) return
+    nav.style.setProperty("--u-site-header-bottom", `${nav.closest(".u-site-header").getBoundingClientRect().bottom}px`)
+  }, true)
+
   document.addEventListener("toggle", (event) => {
     const popover = event.target
     if (!popover.matches?.(anchoredPopovers)) return

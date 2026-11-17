@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--u-space-4);
-  padding-top: var(--u-space-6);
+  padding-top: calc(var(--u-space-6) + env(safe-area-inset-top));
 }
 
 .u-auth-shell > header > p { display: none; }
@@ -39,7 +39,7 @@
 .u-auth-shell > header + * > p + p { margin-top: calc(var(--u-space-2) - var(--u-space-6)); }
 
 .u-auth-shell > footer {
-  padding-bottom: var(--u-space-12);
+  padding-bottom: calc(var(--u-space-12) + env(safe-area-inset-bottom));
   color: var(--u-color-text-muted);
   font-size: var(--u-font-size-small);
   line-height: var(--u-line-height-small);

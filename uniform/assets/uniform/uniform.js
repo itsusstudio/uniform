@@ -1794,6 +1794,29 @@ if (!document[pageReady]) {
       if (hide && isOpen) target.hidePopover()
     })
   }
+
+  // iPadOS 17 ignores popovertarget on a button inside a form, so once the browser has had its turn, the popover is set to what the press asked for.
+  let pressedInForm = null
+  document.addEventListener("pointerdown", (event) => {
+    const button = event.target.closest?.("form button[popovertarget]")
+    const target = button && document.getElementById(button.getAttribute("popovertarget"))
+    pressedInForm = target ? { button, open: target.matches(":popover-open") } : null
+  }, true)
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest?.("form button[popovertarget]")
+    const target = button && !button.disabled && document.getElementById(button.getAttribute("popovertarget"))
+    if (!target?.hasAttribute("popover")) return
+    const wasOpen = pressedInForm?.button === button ? pressedInForm.open : target.matches(":popover-open")
+    pressedInForm = null
+    const action = (button.getAttribute("popovertargetaction") || "toggle").toLowerCase()
+    const show = action === "show" || (action === "toggle" && !wasOpen)
+    const hide = action === "hide" || (action === "toggle" && wasOpen)
+    setTimeout(() => {
+      const isOpen = target.matches(":popover-open")
+      if (show && !isOpen) target.showPopover({ source: button })
+      if (hide && isOpen) target.hidePopover()
+    })
+  })
 }
 
 if (!document.querySelector("[data-u-audience]")) console.error("Uniform: set data-u-audience=\"business\" or data-u-audience=\"consumer\" on <html>.")

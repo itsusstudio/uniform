@@ -5,6 +5,7 @@ class UniformElement extends HTMLElement {
     if (this.controller) return
     this.controller = new AbortController()
     this.setup(this.controller.signal)
+    this.built = this.innerHTML
   }
 
   disconnectedCallback() {
@@ -16,6 +17,7 @@ class UniformElement extends HTMLElement {
   connectedMoveCallback() {}
 
   refresh() {
+    if (this.controller && this.isConnected && this.innerHTML === this.built) return
     this.disconnectedCallback()
     this.connectedCallback()
   }
@@ -216,6 +218,8 @@ define("u-input-password", class extends UniformElement {
     const input = this.querySelector(":scope > .u-input")
     const toggle = this.querySelector(":scope > button")
     if (!input || !toggle) return
+    Object.assign(input, { autocapitalize: "none", spellcheck: false })
+    input.setAttribute("autocorrect", "off")
     const show = (visible) => {
       input.type = visible ? "text" : "password"
       toggle.setAttribute("aria-pressed", String(visible))
@@ -542,7 +546,8 @@ define("u-input-colour", class extends UniformElement {
     stale.forEach((node) => node.remove())
     const shared = ["aria-describedby", "aria-errormessage", "aria-invalid"]
     const input = part("input", "u-input")
-    Object.assign(input, { type: "text", maxLength: 7, autocomplete: "off", spellcheck: false, placeholder: " ", pattern: "#?([0-9A-Fa-f]{3}){1,2}", disabled: swatch.disabled, defaultValue: (swatch.defaultValue || swatch.value).toUpperCase(), value: swatch.value.toUpperCase() })
+    Object.assign(input, { type: "text", maxLength: 7, autocomplete: "off", autocapitalize: "none", spellcheck: false, placeholder: " ", pattern: "#?([0-9A-Fa-f]{3}){1,2}", disabled: swatch.disabled, defaultValue: (swatch.defaultValue || swatch.value).toUpperCase(), value: swatch.value.toUpperCase() })
+    input.setAttribute("autocorrect", "off")
     if (this.fieldId) {
       swatch.removeAttribute("id")
       input.id = this.fieldId
@@ -994,6 +999,7 @@ define("u-chart", class extends UniformElement {
 
     const columns = [...svg.querySelectorAll(".u-chart-col")]
     let active = null
+    let rects = null
     const hide = () => {
       tooltip.hidden = true
       columns[active]?.classList.remove("u-chart-col-active")
@@ -1017,11 +1023,15 @@ define("u-chart", class extends UniformElement {
       })
       tooltip.hidden = !shown
       if (!shown) return
-      const box = plot.getBoundingClientRect()
-      const area = svg.getBoundingClientRect()
+      rects ??= { box: plot.getBoundingClientRect(), area: svg.getBoundingClientRect() }
+      const { box, area } = rects
       const hit = column.querySelector(".u-chart-hit").getBoundingClientRect()
       chartTip(tooltip, hit.left + hit.width / 2 - box.left, area.left - box.left, area.right - box.left)
     }
+    const measured = new ResizeObserver(() => { rects = null })
+    measured.observe(plot)
+    signal.addEventListener("abort", () => measured.disconnect())
+    addEventListener("scroll", () => { rects = null }, { signal, passive: true, capture: true })
     svg.addEventListener("pointerover", (event) => {
       const column = event.target.closest(".u-chart-col")
       if (column) show(Number(column.dataset.index))
@@ -1189,9 +1199,17 @@ define("u-toast", class extends UniformElement {
     region.addEventListener("focusin", (event) => {
       if (!region.contains(event.relatedTarget)) before = event.relatedTarget
     }, { signal })
+    const leave = (toast) => {
+      if (toast.classList.contains("u-toast-leaving")) return
+      toast.classList.add("u-toast-leaving")
+      toast.inert = true
+      const done = () => toast.remove()
+      toast.addEventListener("transitionend", (event) => { if (event.target === toast) done() })
+      setTimeout(done, 300)
+    }
     const close = (toast) => {
       const hadFocus = toast.contains(document.activeElement)
-      toast.remove()
+      leave(toast)
       if (hadFocus && before?.isConnected) before.focus()
     }
     const watch = (toast) => {
@@ -1270,7 +1288,7 @@ define("u-toast", class extends UniformElement {
     raise()
     const observer = new MutationObserver((records) => records.forEach((record) => record.addedNodes.forEach((node) => {
       if (node.parentElement !== region || node.localName !== "div") return
-      region.querySelectorAll(":scope > div").forEach((old) => { if (old !== node) old.remove() })
+      region.querySelectorAll(":scope > div:not(.u-toast-leaving)").forEach((old) => { if (old !== node) leave(old) })
       raise()
       watch(node)
     })))
@@ -1290,11 +1308,37 @@ define("u-data-grid", class extends UniformElement {
     const stored = () => { try { return JSON.parse(localStorage.getItem(key)) || {} } catch { return {} } }
     const store = (patch) => { if (!key) return; try { localStorage.setItem(key, JSON.stringify({ ...stored(), ...patch })) } catch {} }
     const words = (name, fallback) => this.dataset[name] || fallback
+    this.semantics(table)
     this.keepNarrow(tbody, headers)
     this.selection(on, tbody)
     this.rowLinks(on, tbody)
     this.columns(on, table, headers, stored, store)
     this.editing(on, signal, tbody, headers, words)
+  }
+
+  semantics(table) {
+    const scroller = this.querySelector(".u-table")
+    if (scroller) {
+      if (!scroller.hasAttribute("role")) scroller.setAttribute("role", "region")
+      if (!scroller.hasAttribute("tabindex")) scroller.tabIndex = 0
+      if (!scroller.hasAttribute("aria-label") && !scroller.hasAttribute("aria-labelledby")) {
+        const caption = table.caption
+        if (caption) {
+          caption.id ||= `${this.id || this.anchorName("u-data-grid").slice(2)}-caption`
+          scroller.setAttribute("aria-labelledby", caption.id)
+        } else {
+          scroller.setAttribute("aria-label", this.getAttribute("aria-label") || this.title || "Table")
+        }
+      }
+    }
+    const role = (node, name) => { if (node && !node.hasAttribute("role")) node.setAttribute("role", name) }
+    // display: block on the stacked cells makes browsers drop the native table semantics.
+    role(table, "table")
+    ;[table.tHead, ...table.tBodies, table.tFoot].forEach((group) => role(group, "rowgroup"))
+    ;[...table.rows].forEach((row) => {
+      role(row, "row")
+      ;[...row.cells].forEach((cell) => role(cell, cell.localName === "th" ? (row.parentElement === table.tHead ? "columnheader" : "rowheader") : "cell"))
+    })
   }
 
   keepNarrow(tbody, headers) {
@@ -1393,8 +1437,11 @@ define("u-data-grid", class extends UniformElement {
       cell.prepend(button)
     })
     // On a phone the row is one link and cells don't edit.
+    let was = null
     const fit = () => {
       const narrow = this.narrow()
+      if (narrow === was) return
+      was = narrow
       cells().forEach((cell) => { if (valueOf(cell)) valueOf(cell).disabled = narrow })
     }
     const resize = new ResizeObserver(fit)
@@ -1779,6 +1826,21 @@ if (!document[pageReady]) {
     if (menu?.matches(":popover-open") && event.relatedTarget && !menu.contains(event.relatedTarget)) menu.hidePopover()
   })
 
+  const closeDialog = (dialog, value) => {
+    if (dialog.requestClose) return dialog.requestClose(value)
+    if (dialog.dispatchEvent(new Event("cancel", { cancelable: true }))) dialog.close(value)
+  }
+
+  if (!("closedBy" in HTMLDialogElement.prototype)) {
+    document.addEventListener("click", (event) => {
+      const dialog = event.target
+      if (!(dialog instanceof HTMLDialogElement) || !dialog.open || dialog.getAttribute("closedby") !== "any" || !dialog.matches(":modal")) return
+      const box = dialog.getBoundingClientRect()
+      const inside = event.clientX >= box.left && event.clientX <= box.right && event.clientY >= box.top && event.clientY <= box.bottom
+      if (!inside) closeDialog(dialog)
+    })
+  }
+
   // Invoker commands for browsers without them. The press records whether the popover was open, because light dismiss closes it before the click.
   if (commandFallback) {
     let pressed = null
@@ -1798,8 +1860,7 @@ if (!document[pageReady]) {
         if (command === "show-modal" && !target.open) target.showModal()
         if (command === "close" && target.open) target.close(button.value)
         if (command === "request-close" && target.open) {
-          if (target.requestClose) target.requestClose(button.value)
-          else target.close(button.value)
+          closeDialog(target, button.value)
         }
       }
       if (!target.hasAttribute("popover")) return

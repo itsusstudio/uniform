@@ -86,6 +86,6 @@ name the job each colour does in a chart, so canvas scripts can read them. See
   { token: "--u-color-chart-current", hex: "#1a1a18 / #e2e1dd", sample: :fill, job: "Ink. The main series: this month, this week, the bar the figure talks about. Same as --u-color-text-default." },
   { token: "--u-color-chart-previous", hex: "#949189 / #6f6d67", sample: :fill, job: "Grey for the series you compare against, like last month or past weeks. 3:1 against white and against the dark surface.", never: "text or the main series" },
   { token: "--u-color-chart-fill", hex: "#1a1a18 / #e2e1dd", sample: :fill, job: "The colour of the fade under the main line and sparklines: ink, at --u-chart-fill-opacity (0.14, or 0.12 in dark mode) under the line, down to nothing at the baseline. Same as --u-color-chart-current.", never: "a flat fill, or anywhere outside a chart" },
-  { token: "--u-color-chart-grid", hex: "#e7e7e3 / #2d2d2b", sample: :line, job: "Horizontal gridlines, and the top and bottom edges of an empty chart. Same as --u-color-divider." },
+  { token: "--u-color-chart-grid", hex: "#e7e7e3 / #2d2d2b", sample: :line, job: "Horizontal gridlines. Same as --u-color-divider." },
   { token: "--u-color-chart-track", hex: "#e7e7e3 / #2d2d2b", sample: :fill, job: "The empty part of a meter. Same as --u-color-divider." },
 ] %>

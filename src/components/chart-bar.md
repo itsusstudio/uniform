@@ -41,6 +41,9 @@ no bar is the one the stat describes.
 Bars start at zero
 : The scale always starts at zero, so bar lengths compare honestly.
 
+Whole numbers
+: Add `whole` when the values are counts, like jobs or clients, so the gridlines land on whole numbers: `<u-chart type="bar" whole>`. Leave it off for money and rates, which can fall between.
+
 Twelve to twenty-six bars
 : Fewer reads as a list, more as noise. For a longer span, group by month.
 

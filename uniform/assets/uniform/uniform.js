@@ -740,6 +740,11 @@ const chartNice = (max) => {
   return [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find((step) => step * power >= max) * power
 }
 
+const chartWholeTop = (top) => {
+  const whole = Math.max(2, Math.ceil(top))
+  return whole % 2 ? whole + 1 : whole
+}
+
 const chartCurve = (points) => {
   if (points.length < 2) return ""
   const count = points.length
@@ -904,7 +909,9 @@ define("u-chart", class extends UniformElement {
     const line = type === "line"
     const seriesCount = line ? Math.min(2, names.length || 1) : 1
     const series = Array.from({ length: seriesCount }, (_, s) => rows.map((row) => chartNumber(row.cells[s])))
-    const top = Number(this.getAttribute("max")) || chartNice(Math.max(...series.flat().filter((value) => value != null)))
+    const values = series.flat().filter((value) => value != null)
+    const nice = chartNice(Math.max(...values))
+    const top = Number(this.getAttribute("max")) || (this.hasAttribute("whole") ? chartWholeTop(nice) : nice)
     const ticks = [0, top / 2, top]
     const slot = 10
     const width = rows.length * slot

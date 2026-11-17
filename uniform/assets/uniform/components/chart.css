@@ -277,7 +277,6 @@ u-chart:defined > .u-chart-plot:has(> .u-chart-tooltip) { padding-top: var(--u-c
   align-items: center;
   min-height: var(--u-chart-height, 200px);
   margin: 0;
-  border-block: 1px solid var(--u-color-chart-grid);
   color: var(--u-color-text-muted);
   font-size: var(--u-font-size-small);
 }

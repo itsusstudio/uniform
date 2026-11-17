@@ -17,7 +17,7 @@
 "--u-line-height-caption": "The line height that goes with --u-font-size-caption."
 "--u-size-field": "The height of a text field or select with its label. Matches controls for business; 64px for consumer, with the label inside the box. A field with no visible label is the control height."
 "--u-icon-stroke": "The line width of every icon, whatever its size. 1.5px for business and 1.75px for consumer, about as thick as the letters beside it."
-"--u-size-row": "The smallest height of a table body row. 36px for business, 48px for consumer, so rows are easy to tap on a phone."
+"--u-size-row": "The smallest height of a table or list row. 44px for business, so one line of 14px text has room to breathe, and 48px for consumer, so rows are easy to tap on a phone."
 "--u-font-size-title": "Titles of cards, banners, popovers and empty states. 16px for business, 20px for consumer, so a title stays a step above the 16px text under it."
 "--u-line-height-title": "The line height that goes with --u-font-size-title."
 "--u-width-scroll-item": "The widest a card gets in a u-scroll-row. On a phone it stops at 80% of the row, so the next card peeks in."

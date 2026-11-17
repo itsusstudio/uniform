@@ -59,5 +59,8 @@ One size for figures
 Arrows, not colours
 : A change stays muted, never green or red, because up isn't always good.
 
+Phones
+: Figures shrink with the row, down to 20px, and stay on one line. On a phone the row holds two stats and the next ones go underneath.
+
 Few stats
 : Four at most in a row. Show a stat only when it changes what someone does today.

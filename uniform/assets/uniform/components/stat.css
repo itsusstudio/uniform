@@ -1,7 +1,8 @@
 @layer uniform.components {
 .u-stats {
+  container: u-stats / inline-size;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 136px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(136px, max(124px, (100% - 2 * var(--u-space-6)) / 3)), 1fr));
   gap: var(--u-space-6);
 }
 
@@ -16,10 +17,11 @@
 
 .u-stat > :first-child {
   font-family: var(--u-font-mono);
-  font-size: var(--u-font-size-32);
+  font-size: clamp(var(--u-font-size-20), 4.8cqi, var(--u-font-size-32));
   font-weight: 400;
   font-variant-numeric: tabular-nums;
   line-height: var(--u-line-height-32);
+  white-space: nowrap;
 }
 
 .u-stat > :not(:first-child) {

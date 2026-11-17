@@ -109,6 +109,22 @@ is the model's own message; `messages:` words it per error type for one form.
 A field inside a custom element, like `<u-input-phone>`, counts as a field. So
 does a `u-fieldset` of checkboxes or radios.
 
+## Time zone
+
+Wrap a hidden input in `<u-time-zone>` to send the browser's time zone with
+the form, like America/Toronto, so the server can set up an account in the
+right zone without asking. It fills the input only when it's empty, so a value
+the server set wins. Without a script the input stays empty: treat a blank or
+unknown zone as "use the default".
+
+```html
+<u-time-zone><input type="hidden" name="time_zone"></u-time-zone>
+```
+
+```erb
+<u-time-zone><%%= form.hidden_field :time_zone %></u-time-zone>
+```
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/form/" %>

@@ -1192,6 +1192,13 @@ define("u-relative-time", class extends UniformElement {
   }
 })
 
+define("u-time-zone", class extends UniformElement {
+  setup() {
+    const input = this.querySelector(":scope > input")
+    if (input && !input.value) input.value = localZone
+  }
+})
+
 define("u-toast", class extends UniformElement {
   setup(signal) {
     const region = this
@@ -1606,6 +1613,32 @@ define("u-copy", class extends UniformElement {
         status.textContent = ""
       }, 1500)
     }, { signal })
+  }
+})
+
+define("u-countdown", class extends UniformElement {
+  setup(signal) {
+    const button = this.querySelector(":scope > button")
+    const seconds = Number(this.getAttribute("seconds"))
+    if (!button || !(seconds > 0)) return
+    const words = this.dataset.waiting || "Wait {time}"
+    const original = button.textContent
+    const end = Date.now() + seconds * 1000
+    let timer = null
+    const tick = () => {
+      const left = Math.ceil((end - Date.now()) / 1000)
+      if (left <= 0) {
+        clearInterval(timer)
+        button.disabled = false
+        button.textContent = original
+        return
+      }
+      button.disabled = true
+      button.textContent = words.replace("{time}", `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`)
+    }
+    timer = setInterval(tick, 1000)
+    signal.addEventListener("abort", () => clearInterval(timer))
+    tick()
   }
 })
 

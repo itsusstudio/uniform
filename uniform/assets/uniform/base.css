@@ -53,6 +53,21 @@
 
 :where(mark) { background: var(--u-color-highlight); color: inherit; }
 
+:where(fieldset:not(.u-fieldset)) {
+  display: grid;
+  gap: var(--u-space-2);
+  min-width: 0;
+  margin: 0;
+  padding: var(--u-space-2) var(--u-space-4) var(--u-space-4);
+  border: 1px solid var(--u-color-border-input);
+  border-radius: var(--u-radius-default);
+}
+
+:where(fieldset:not(.u-fieldset) > legend) {
+  margin-inline-start: calc(-1 * var(--u-space-1));
+  padding-inline: var(--u-space-1);
+}
+
 :where(:focus-visible) { outline: 2px solid var(--u-color-info); outline-offset: 2px; }
 
 :where(u-combobox, u-input-code, u-input-password, u-character-count, u-input-phone, u-dropzone, u-input-colour, u-sidebar, u-chart, u-toast, u-data-grid, u-toggle-panels) { display: block; }

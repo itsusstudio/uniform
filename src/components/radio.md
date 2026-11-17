@@ -66,6 +66,21 @@ A radio picks exactly one option from a few, all in view. The whole label is the
 Put the input first, inside its label. Give every radio in a group the same
 `name`.
 
+## Framed groups
+
+A plain `<fieldset>` frames its options in a hairline box with the legend set
+into the line, like a group on a printed form. Use `u-fieldset` instead when the
+group sits in a form's own column and needs no frame.
+
+<div class="u-grid"><div class="u-span-6">
+<fieldset>
+<legend>Paid by</legend>
+<label class="u-radio"><input type="radio" name="framed_paid_by" value="card" checked> Card</label>
+<label class="u-radio"><input type="radio" name="framed_paid_by" value="cash"> Cash</label>
+<label class="u-radio"><input type="radio" name="framed_paid_by" value="etransfer"> E-transfer <span class="u-radio-hint">Mark it paid once it lands.</span></label>
+</fieldset>
+</div></div>
+
 ## Classes
 
 <%= render "classes", classes_page: "/components/radio/" %>

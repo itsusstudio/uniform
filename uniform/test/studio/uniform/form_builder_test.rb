@@ -50,7 +50,44 @@ module Studio
         refute_includes field(Shop.new(nil, Errors.new([])), :name), "u-field"
       end
 
+      def test_a_labelled_select_gets_uniform_markup_and_its_error
+        html = builder(Shop.new(nil, BLANK)).select(:name, [["Kensington", "k"]], {label: "Shop", hint: "Pick one."})
+
+        assert_includes html, %(<div class="u-field">)
+        assert_includes html, %(<label for="shop_name">Shop</label>)
+        assert_match(/<select id="shop_name" class="u-input" aria-invalid="true" aria-describedby="shop_name-hint shop_name-error"/, html)
+        assert_includes html, %(<p id="shop_name-error" class="u-error">)
+      end
+
+      def test_a_labelled_check_box_sits_inside_its_label_with_the_hint
+        html = builder(Shop.new("1", Errors.new([]))).check_box(:name, label: "Okay to text", hint: "Only about this job.")
+
+        assert_match(%r{<label class="u-checkbox"><input name="shop\[name\]" type="hidden" value="0"}, html)
+        assert_includes html, %(aria-describedby="shop_name-hint")
+        assert_includes html, %(Okay to text<span id="shop_name-hint" class="u-checkbox-hint">Only about this job.</span></label>)
+      end
+
+      def test_a_radio_group_is_a_fieldset_of_uniform_radios
+        html = builder(Shop.new("cash", BLANK)).radio_group(:name, [["Card", "card"], ["Cash", "cash", "Count it twice."]], legend: "Paid by")
+
+        assert_includes html, %(<fieldset class="u-fieldset" aria-describedby="shop_name-error"><legend>Paid by</legend>)
+        assert_match(/<label class="u-radio"><input aria-invalid="true" type="radio" value="cash" checked="checked"/, html)
+        assert_includes html, %(<span class="u-radio-hint">Count it twice.</span>)
+        assert_includes html, %(class="u-error")
+      end
+
+      def test_without_a_label_a_select_and_check_box_render_as_rails_does
+        shop = Shop.new(nil, Errors.new([]))
+
+        refute_includes builder(shop).select(:name, [["A", "a"]]), "u-field"
+        refute_includes builder(shop).check_box(:name), "u-checkbox"
+      end
+
       private
+
+      def builder(shop)
+        FormBuilder.new(:shop, shop, ActionView::Base.empty, {})
+      end
 
       def field(shop, method, **options)
         FormBuilder.new(:shop, shop, ActionView::Base.empty, {}).text_field(method, **options)

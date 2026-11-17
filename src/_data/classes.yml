@@ -753,3 +753,23 @@
   group: Components
   page: /components/toggle-group/
   description: Wraps a `u-fieldset` holding a toggle group and one `<section>` per choice, and shows the section whose `data-value` matches the checked radio.
+
+- name: u-list-group
+  group: Components
+  page: /components/list/
+  description: A titled section of a list inside a card, with an h3 and a u-list.
+
+- name: u-list-handle
+  group: Components
+  page: /components/list/
+  description: The drag handle at the start of a row, shown when the row is pointed at or focused.
+
+- name: u-swatch
+  group: Components
+  page: /components/list/
+  description: A small colour dot. Set the colour with --u-swatch.
+
+- name: u-input-inline
+  group: Components
+  page: /components/list/
+  description: A text field that looks like plain text until pointed at or focused, for renaming in place.

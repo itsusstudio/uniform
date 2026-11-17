@@ -52,6 +52,10 @@
   font-weight: 500;
 }
 
+.u-sidebar-layout > .u-nav > :is(div, details) > :first-child { font-size: var(--u-font-size-small); }
+
+.u-sidebar-layout > .u-nav :is(.u-nav > a, li > a) { font-size: var(--u-font-size-body); }
+
 .u-nav > details > summary {
   display: flex;
   align-items: center;

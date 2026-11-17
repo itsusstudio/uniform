@@ -44,6 +44,29 @@ the far right.
 </section>
 ```
 
+
+## Groups you can edit
+
+For a short list people arrange themselves, like job statuses, split a card into `u-list-group` sections. Each one has an `h3` (an icon, the name, a `u-meta` count and an action at the end) and a `u-list`. Rows can carry a `u-list-handle` to drag, a `u-swatch` for a colour, and a `u-input-inline` to rename in place.
+
+```html
+<section class="u-card">
+  <div class="u-list-group">
+    <h3><svg class="u-icon u-icon-sm">…</svg>Waiting <span class="u-meta">5 jobs</span><button class="u-btn u-btn-ghost u-btn-icon" aria-label="Add a Waiting status">…</button></h3>
+    <ul class="u-list">
+      <li>
+        <div class="u-row">
+          <span class="u-list-handle" aria-hidden="true">…</span>
+          <span class="u-swatch" style="--u-swatch: #e9c46a"></span>
+          <input class="u-input-inline" value="Quote needed" aria-label="Status name">
+        </div>
+        <span class="u-meta">2 jobs</span>
+      </li>
+    </ul>
+  </div>
+</section>
+```
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/list/" %>

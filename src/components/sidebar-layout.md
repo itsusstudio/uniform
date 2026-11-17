@@ -28,6 +28,9 @@ A sidebar layout puts a 264px sidebar beside the main content. Use it for the fr
 Smaller screens
 : When the layout is narrower than 1024px, the sidebar moves above the content. Hide a long one behind a menu button.
 
+Navigation inside
+: A [nav](/components/navigation/) placed directly in the sidebar, like a settings menu, sets its links at body size and its group labels at small size, a step up from the app sidebar.
+
 ## When to use it
 
 Use it for

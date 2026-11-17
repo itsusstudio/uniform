@@ -3,7 +3,10 @@
   box-sizing: border-box;
 }
 
-:where(html) { -webkit-text-size-adjust: 100%; }
+:where(html) {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+}
 
 :where(body) {
   margin: 0;

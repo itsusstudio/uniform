@@ -52,6 +52,7 @@ select.u-input:disabled {
     select.u-input::picker-icon { display: none; }
 
     select.u-input::picker(select) {
+      max-height: calc(var(--u-size-target) * 8 + var(--u-space-1) * 2 + 2px);
       margin-block: var(--u-space-1);
       padding: var(--u-space-1) 0;
       border: 1px solid var(--u-color-border);

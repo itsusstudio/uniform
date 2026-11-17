@@ -1,5 +1,6 @@
 @layer uniform.components {
 .u-table {
+  position: relative;
   max-width: 100%;
   overflow-x: auto;
 }

@@ -25,6 +25,8 @@
 
 .u-dialog > form { margin: 0; }
 
+.u-dialog > form.u-form { gap: 0; }
+
 .u-dialog .u-card-content { font-size: var(--u-font-size-small); }
 
 @media (max-width: 639px) {

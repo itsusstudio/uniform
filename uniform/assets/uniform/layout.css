@@ -83,6 +83,7 @@
 
 @container u-grid (max-width: 639px) {
   .u-grid > [class*="u-span-"] { grid-column: 1 / -1; }
+  .u-grid > .u-first-when-stacked { order: -1; }
 }
 
 @container u-sidebar-layout (max-width: 1023px) {

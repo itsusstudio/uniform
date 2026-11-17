@@ -29,6 +29,11 @@
   page: /components/grid/
   description: How many of the twelve columns a child takes. Two children that add up to 12 fill a row, like `u-span-4` and `u-span-8`.
 
+- name: u-first-when-stacked
+  group: Layout
+  page: /components/grid/
+  description: On a grid child, moves it to the top when the grid stacks on a phone, like a client's contact details beside their jobs.
+
 - name: u-sidebar-layout
   group: Layout
   page: /components/sidebar-layout/

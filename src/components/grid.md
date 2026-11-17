@@ -34,6 +34,9 @@ Gutter
 Phones
 : When the grid is narrower than 640px, every child takes all twelve columns. This goes by the grid's own width, so a grid in a narrow panel stacks too.
 
+First on a phone
+: Put the column people need first on a phone, like a record's contact details, first when the grid stacks with `u-first-when-stacked`. On wider screens it stays where it is in the row.
+
 ## When to use it
 
 Use it for

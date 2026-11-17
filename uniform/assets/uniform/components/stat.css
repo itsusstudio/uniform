@@ -1,13 +1,14 @@
 @layer uniform.components {
 .u-stats {
   container: u-stats / inline-size;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(136px, max(124px, (100% - 2 * var(--u-space-6)) / 3)), 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--u-space-6);
 }
 
 .u-stat {
   display: flex;
+  flex: 1 1 124px;
   flex-direction: column;
   gap: var(--u-space-2);
   min-width: 0;

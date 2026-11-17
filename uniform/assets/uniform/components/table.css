@@ -25,6 +25,11 @@
 
 :is(.u-table, u-chart) > table tbody :where(th, td) { height: var(--u-size-row); }
 
+:is(.u-table, u-chart) > table :where(th, td) > .u-row {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
 :is(.u-table, u-chart) > table thead th {
   border-bottom: 1px solid var(--u-color-text-default);
   color: var(--u-color-text-muted);

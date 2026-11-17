@@ -33,6 +33,7 @@ p > .u-badge { margin-inline-start: var(--u-space-1); }
 .u-badge-danger {
   --u-badge-color: var(--u-color-danger);
   --u-badge-text: var(--u-color-text-on-danger);
+  color: var(--u-color-danger);
 }
 
 .u-badge-success {

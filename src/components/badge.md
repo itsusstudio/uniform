@@ -16,7 +16,7 @@ A badge says where something stands, or flags a fact, with a word beside a squar
 </div>
 </div>
 
-States in a list get the square and word. The few facts that have to stand out, like a declined card, are `u-badge-strong`.
+States in a list get the square and word. A danger badge's word is red too, like an error message, so a problem reads as one at a glance. The few facts that have to stand out, like a declined card, are `u-badge-strong`.
 
 ## Variants
 

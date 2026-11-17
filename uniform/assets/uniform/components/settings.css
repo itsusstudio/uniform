@@ -1,0 +1,55 @@
+@layer uniform.components {
+.u-settings {
+  display: flex;
+  flex-direction: column;
+}
+
+.u-settings > :is(h2, h3) {
+  margin: var(--u-space-6) 0 0;
+  font-size: var(--u-font-size-20);
+  font-weight: 500;
+  line-height: var(--u-line-height-20);
+}
+
+.u-settings > :is(h2, h3):first-child { margin-top: 0; }
+
+.u-settings > hr {
+  width: 100%;
+  height: 1px;
+  margin: var(--u-space-6) 0 0;
+  border: 0;
+  background: var(--u-color-divider);
+}
+
+.u-setting {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--u-space-2) var(--u-space-6);
+  padding-block: var(--u-space-4);
+}
+
+.u-setting > div:first-child > * { margin: 0; }
+
+.u-setting > div:first-child > :is(h3, h4) {
+  font-size: var(--u-font-size-title);
+  font-weight: 500;
+  line-height: var(--u-line-height-title);
+}
+
+.u-setting > div:first-child > p + p,
+.u-setting > div:first-child > :is(h3, h4) + p { margin-top: var(--u-space-1); }
+
+.u-setting-stacked { grid-template-columns: minmax(0, 1fr); }
+
+.u-setting-stacked > :not(:first-child) { max-width: var(--u-max-width-form); }
+
+.u-setting-value {
+  display: flex;
+  align-items: center;
+  gap: var(--u-space-2);
+  padding-inline-start: var(--u-space-4);
+  border-radius: var(--u-radius-default);
+  background: color-mix(in srgb, var(--u-color-text-default) 5%, transparent);
+}
+}

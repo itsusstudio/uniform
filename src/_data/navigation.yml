@@ -118,6 +118,8 @@
       url: /components/menu/
     - title: Pagination
       url: /components/pagination/
+    - title: Settings
+      url: /components/settings/
     - title: Popover
       url: /components/popover/
     - title: Progress
@@ -220,6 +222,8 @@
       url: /patterns/data-table/
     - title: Data grid
       url: /patterns/data-grid/
+    - title: Settings page
+      url: /patterns/settings/
     - title: Timeline
       url: /patterns/timeline/
     - title: Charts

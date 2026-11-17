@@ -27,6 +27,7 @@
     "components/toast.css",
     "components/table.css",
     "components/list.css",
+    "components/settings.css",
     "components/description-list.css",
     "components/heading-group.css",
     "components/caption.css",

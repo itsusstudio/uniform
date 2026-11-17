@@ -793,3 +793,23 @@
   group: Components
   page: /components/navigation/
   description: Puts one nav link on ink to stand out for a while, like an unfinished setup guide.
+
+- name: u-settings
+  group: Components
+  page: /components/settings/
+  description: A settings page without cards. Holds u-setting rows, an h2 for each group and an hr between groups.
+
+- name: u-setting
+  group: Components
+  page: /components/settings/
+  description: One setting. A div with its heading and a line saying what it does, then its control on the right.
+
+- name: u-setting-stacked
+  group: Components
+  page: /components/settings/
+  description: With u-setting, puts a field you type into under the text, at form width.
+
+- name: u-setting-value
+  group: Components
+  page: /components/settings/
+  description: A read-only value with a Copy button, like a studio ID, on a soft tint.

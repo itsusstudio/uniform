@@ -37,6 +37,12 @@
 
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > .u-text-data:first-child { flex: none; min-width: 6ch; }
 
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(.u-avatar, .u-avatar-group) { flex: none; }
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item):has(> .u-progress) > .u-meta:last-child { min-width: 3ch; text-align: end; }
+
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > .u-icon:last-child:not(:first-child) { margin-inline-start: auto; }
+
 .u-list > li:has(> div > p:first-child > a:not(.u-btn)) {
   position: relative;
   cursor: pointer;

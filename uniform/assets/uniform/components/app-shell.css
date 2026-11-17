@@ -139,7 +139,7 @@ u-sidebar > div:last-child:not(:first-child) {
   position: sticky;
   bottom: 0;
   margin-inline: calc(-1 * var(--u-space-2));
-  padding: var(--u-space-2) var(--u-space-2) var(--u-space-4);
+  padding: var(--u-space-2) var(--u-space-2) var(--u-space-1);
   background: var(--u-nav-bg);
 }
 

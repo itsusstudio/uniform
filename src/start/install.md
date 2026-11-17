@@ -197,7 +197,7 @@ The full list is in `uniform/config/locales/uniform.en.yml`.
 
 ## Fonts
 
-Switzer, Apfel Grotezk, IBM Plex Mono, Instrument Serif and Bricolage Grotesque
+Inter, Apfel Grotezk, IBM Plex Mono, Instrument Serif and Bricolage Grotesque
 ship in the gem and load from the CSS. There are no font links to add.
 
 ## Point an agent at it

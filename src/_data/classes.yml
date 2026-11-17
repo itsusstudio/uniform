@@ -71,45 +71,45 @@
 - name: u-text-page-title
   group: Type
   page: /start/reference/
-  description: 32, Switzer. The title of an app page.
+  description: 32, Inter. The title of an app page.
 
 - name: u-text-heading
   group: Type
   page: /start/reference/
-  description: 20, Switzer medium. Headings inside a page.
+  description: 20, Inter medium. Headings inside a page.
 
 - name: u-text-lead
   group: Type
   page: /start/reference/
-  description: 24, Switzer. The opening line under a title.
+  description: 24, Inter. The opening line under a title.
   scope: sites
 
 - name: u-text-feature-title
   group: Type
   page: /start/reference/
-  description: 24, Switzer medium. The heading of a feature, a tile or a step on a site.
+  description: 24, Inter medium. The heading of a feature, a tile or a step on a site.
   scope: sites
 
 - name: u-text-reading
   group: Type
   page: /start/reference/
-  description: 20, Switzer at the prose line height. Paragraphs on a site.
+  description: 20, Inter at the prose line height. Paragraphs on a site.
   scope: sites
 
 - name: u-text-body
   group: Type
   page: /start/reference/
-  description: 16, Switzer. Reading text.
+  description: 16, Inter. Reading text.
 
 - name: u-text-small
   group: Type
   page: /start/reference/
-  description: 14, Switzer. Labels, table cells, buttons and hints.
+  description: 14, Inter. Labels, table cells, buttons and hints.
 
 - name: u-text-caption
   group: Type
   page: /start/reference/
-  description: 12, Switzer. Figure captions and timestamps.
+  description: 12, Inter. Figure captions and timestamps.
 
 - name: u-text-data
   group: Type

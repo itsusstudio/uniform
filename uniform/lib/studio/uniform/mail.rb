@@ -10,13 +10,13 @@ module Studio
       INPUT = "#8c8981"
       LINK = "#2449b0"
       PAPER = "#f5f4ef"
-      SANS = "font-family: Switzer, 'Helvetica Neue', Helvetica, Arial, sans-serif;"
-      HEADLINE = "font-family: 'Apfel Grotezk', Switzer, 'Helvetica Neue', Helvetica, Arial, sans-serif;"
+      SANS = "font-family: Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;"
+      HEADLINE = "font-family: 'Apfel Grotezk', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;"
       WORDMARK = "font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 28px; font-style: italic; font-weight: 400; letter-spacing: -0.005em;"
       MONO = "font-family: 'IBM Plex Mono', Menlo, Consolas, monospace;"
       FONTS = [
-        ["Switzer", 400, "Switzer-Regular.woff2"],
-        ["Switzer", 500, "Switzer-Medium.woff2"],
+        ["Inter", 400, "Inter-Regular.woff2"],
+        ["Inter", 500, "Inter-Medium.woff2"],
         ["Apfel Grotezk", 500, "ApfelGrotezk-Mittel.woff2"],
         ["Instrument Serif", 400, "InstrumentSerif-Italic.woff2", "italic"],
         ["IBM Plex Mono", 400, "IBMPlexMono-Regular.woff2"]

@@ -44,7 +44,7 @@ Your own styles always win. Uniform sits in cascade layers (`uniform.tokens`, `u
 | `components/` | One file per component, all classes prefixed `u-`. The larger ones: `app-shell.css` (the app frame and sidebar), `auth-shell.css` (the sign-in and sign-up frame), `site-header.css` (a marketing site's top row), `data-grid.css` and `chart.css` |
 | `uniform.js` | Custom elements that add behaviour to markup that already works (see below) |
 | `utilities.css` | Type intent classes (`u-text-*`, `u-wordmark`), backgrounds (`u-bg-*`), `u-gap-*` |
-| `fonts/` | Switzer, Apfel Grotezk, IBM Plex Mono, Instrument Serif and Bricolage Grotesque |
+| `fonts/` | Inter, Apfel Grotezk, IBM Plex Mono, Instrument Serif and Bricolage Grotesque |
 | `icons/` | The SVG icons, drawn with `mask` so they take the text colour |
 
 The files above live in `assets/uniform/`.
@@ -98,7 +98,7 @@ Two breakpoints: phones below 640px and wide screens from 1024px. The page margi
 
 ## Fonts
 
-Switzer, Apfel Grotezk and IBM Plex Mono ship in `fonts/` and load from the CSS. Apfel Grotezk and IBM Plex Mono are under the SIL Open Font License; Switzer is from Fontshare.
+Inter, Apfel Grotezk and IBM Plex Mono ship in `fonts/` and load from the CSS, all under the SIL Open Font License.
 
 ## Rules
 

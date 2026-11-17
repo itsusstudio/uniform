@@ -16,7 +16,7 @@ Sites get a display face for their voice, and apps stay in one plain face.
 Apfel Grotezk Mittel
 : Headlines on marketing sites and blogs, at 32px and larger. Never inside an app.
 
-Switzer
+Inter
 : All other text, in apps and on sites. Regular weight for reading, medium for headings and labels, and never bold.
 
 IBM Plex Mono

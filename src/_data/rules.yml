@@ -204,11 +204,11 @@
 
 - id: framework-default-type
   name: Framework default type
-  summary: No Inter or Geist for everything, and no tight tracking on every heading.
-  body: No Inter or Geist set for every word on the page, and no tight negative letter spacing on every heading whatever its size. Uniform sets apps in Switzer and site headlines in Apfel Grotezk, with spacing tuned per size in the type classes. See [Typography](/foundations/typography/).
+  summary: One plain face for interface text, a display face for headlines, and no tight tracking on every heading.
+  body: No single framework face set for every word on the page, headlines included, and no tight negative letter spacing on every heading whatever its size. Uniform sets interface text in Inter, site headlines in Apfel Grotezk, codes in IBM Plex Mono and the wordmark in its own face, with spacing tuned per size in the type classes. See [Typography](/foundations/typography/).
   home: /start/rules/
   section: Don't look generated
-  check: No Inter or Geist, and no letter spacing set by hand on headings. Type comes from the `u-text-*` classes.
+  check: Headlines on sites use Apfel Grotezk, not the interface face, and no letter spacing set by hand on headings. Type comes from the `u-text-*` classes.
 
 - id: card-soup
   name: Card soup

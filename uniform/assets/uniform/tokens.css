@@ -1,9 +1,9 @@
 @layer uniform.tokens {
 :root {
   --u-font-wordmark-serif: "Instrument Serif", Georgia, serif;
-  --u-font-wordmark-sans: "Bricolage Grotesque", "Switzer", "Helvetica Neue", Arial, sans-serif;
-  --u-font-headline: "Apfel Grotezk", "Switzer", "Helvetica Neue", Arial, sans-serif;
-  --u-font-sans: "Switzer", "Helvetica Neue", Arial, sans-serif;
+  --u-font-wordmark-sans: "Bricolage Grotesque", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --u-font-headline: "Apfel Grotezk", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --u-font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
   --u-font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 
   --u-font-size-12: 0.75rem;

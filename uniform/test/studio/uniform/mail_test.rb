@@ -50,10 +50,10 @@ module Studio
 
       def test_layout_loads_brand_fonts_only_when_given
         bare = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"])
-        loaded = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], fonts: {"Switzer-Regular.woff2" => "https://cdn.example/Switzer-Regular-abc.woff2"})
+        loaded = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], fonts: {"Inter-Regular.woff2" => "https://cdn.example/Inter-Regular-abc.woff2"})
 
         refute_includes bare, "@font-face"
-        assert_includes loaded, %(@font-face { font-family: "Switzer"; src: url("https://cdn.example/Switzer-Regular-abc.woff2"))
+        assert_includes loaded, %(@font-face { font-family: "Inter"; src: url("https://cdn.example/Inter-Regular-abc.woff2"))
       end
 
       def test_layout_shows_footer_links_only_when_given

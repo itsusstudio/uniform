@@ -27,7 +27,7 @@ away.
 
 ## Fonts
 
-Switzer for text, Instrument Serif for the Workbench wordmark, Apfel Grotezk
+Inter for text, Instrument Serif for the Workbench wordmark, Apfel Grotezk
 for the heading and a shop's name, IBM Plex
 Mono for codes and amounts, the same as the app. Apple Mail and iOS load them;
 Gmail and Outlook fall back to Helvetica Neue, Helvetica, then Arial, which keep

@@ -281,14 +281,14 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 @media (prefers-color-scheme: dark) {
   :root:not([data-u-theme="light"]) .u-app-shell:not(.u-app-shell-paper) > u-sidebar {
     border-inline-end: 1px solid var(--u-nav-line);
-    --u-nav-current-bg: #2f2f2d;
+    --u-nav-current-bg: color-mix(in srgb, var(--u-color-text-on-ink) 10%, var(--u-color-bg-ink));
     --u-nav-current-text: var(--u-color-text-on-ink);
   }
 }
 
 :root[data-u-theme="dark"] .u-app-shell:not(.u-app-shell-paper) > u-sidebar {
   border-inline-end: 1px solid var(--u-nav-line);
-  --u-nav-current-bg: #2f2f2d;
+  --u-nav-current-bg: color-mix(in srgb, var(--u-color-text-on-ink) 10%, var(--u-color-bg-ink));
   --u-nav-current-text: var(--u-color-text-on-ink);
 }
 

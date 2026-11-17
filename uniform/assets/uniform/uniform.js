@@ -1494,12 +1494,16 @@ define("u-data-grid", class extends UniformElement {
 
 let lastCopyMessage = ""
 
+const COPY_ICON_DONE = '<path d="M20 6 9 17l-5-5"/>'
+const COPY_ICON_FAILED = '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>'
+
 define("u-copy", class extends UniformElement {
   setup(signal) {
     const button = this.querySelector("[data-copy]")
     if (!button || !navigator.clipboard) return
     const label = button.querySelector("[data-copy-label]") || button
-    const original = label.textContent
+    const icon = label === button && !button.textContent.trim() ? button.querySelector("svg") : null
+    const original = icon ? icon.innerHTML : label.textContent
     // A button's children aren't announced reliably, so the message goes in a status beside it.
     let status = this.querySelector('[role="status"]')
     if (!status) {
@@ -1520,12 +1524,14 @@ define("u-copy", class extends UniformElement {
       }
       if (signal.aborted) return
       clearTimeout(timer)
-      label.textContent = message
+      if (icon) icon.innerHTML = message === button.dataset.copied ? COPY_ICON_DONE : COPY_ICON_FAILED
+      else label.textContent = message
       status.textContent = ""
       // VoiceOver skips a message that repeats the last one, and the no-break space isn't read.
       requestAnimationFrame(() => { status.textContent = message === lastCopyMessage ? `${message}\u00A0` : message; lastCopyMessage = status.textContent })
       timer = setTimeout(() => {
-        label.textContent = original
+        if (icon) icon.innerHTML = original
+        else label.textContent = original
         status.textContent = ""
       }, 1500)
     }, { signal })

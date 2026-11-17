@@ -85,6 +85,23 @@ the browser blocks it. Set both from the gem's `uniform.copy.copied` and `unifor
 </u-copy>
 ```
 
+For an icon-only copy button, put the copy icon in a `u-btn-icon` button with an
+`aria-label`. The icon turns into a check mark for a moment, or a cross when the
+browser blocks it.
+
+<div class="u-row">
+<span class="u-text-data">kensingtonrepair.ca/jobs/1042</span>
+<u-copy><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Copy link" data-copy="https://kensingtonrepair.ca/jobs/1042" data-copied="Copied" data-copy-failed="Couldn’t copy" hidden><%= raw render("icon", name: "copy", small: true).strip %></button></u-copy>
+</div>
+
+```erb
+<u-copy>
+  <%%= tag.button type: "button", class: "u-btn u-btn-ghost u-btn-icon", aria: { label: t(".copy_link") }, data: { copy: job_url(job), copied: t("uniform.copy.copied"), copy_failed: t("uniform.copy.failed") }, hidden: true do %>
+    <%%= uniform_icon "copy", small: true %>
+  <%% end %>
+</u-copy>
+```
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/button/" %>

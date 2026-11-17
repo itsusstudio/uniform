@@ -4,3 +4,5 @@
   line-height: var(--u-line-height-prose);
   letter-spacing: -0.01em;
 }
+
+.site-nav-footer { padding-bottom: var(--u-space-4); }

@@ -29,22 +29,24 @@
   padding-block: var(--u-space-4);
 }
 
-.u-setting:first-child { padding-top: 0; }
+.u-setting:first-child,
+.u-settings > .u-setting:not(:is(.u-setting, h2, h3, hr) ~ *) { padding-top: 0; }
 
-.u-setting > div:first-child > * { margin: 0; }
+.u-setting > div:first-of-type > * { margin: 0; }
 
-.u-setting > div:first-child > :is(h3, h4) {
+.u-setting > div:first-of-type > :is(h3, h4) {
   font-size: var(--u-font-size-title);
   font-weight: 500;
   line-height: var(--u-line-height-title);
 }
 
-.u-setting > div:first-child > p + p,
-.u-setting > div:first-child > :is(h3, h4) + p { margin-top: var(--u-space-1); }
+.u-setting > div:first-of-type > p + p,
+.u-setting > div:first-of-type > :is(h3, h4) + p { margin-top: var(--u-space-1); }
 
 .u-setting-stacked { grid-template-columns: minmax(0, 1fr); }
 
-.u-setting-stacked > :not(:first-child) { max-width: var(--u-max-width-form); }
+.u-setting-stacked > :not(div:first-of-type) { max-width: var(--u-max-width-form); }
+
 
 .u-setting-value {
   display: flex;

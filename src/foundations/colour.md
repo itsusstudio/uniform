@@ -46,7 +46,7 @@ square. Text on them is set in the colour named beside them.
   { token: "--u-color-info", hex: "#2f5bd3 / #5b7fe6", sample: :on, on: "--u-color-text-on-info", on_text: "In progress", job: "Cobalt. In progress and information. Text on it is white in light mode, ink in dark." },
   { token: "--u-color-warning", hex: "#f3c22c", sample: :on, on: "--u-color-text-on-warning", on_text: "Waiting", job: "Warm yellow. Waiting and needs attention. Text on it is ink." },
   { token: "--u-color-success", hex: "#277a4d / #3f9b68", sample: :on, on: "--u-color-text-on-success", on_text: "Ready", job: "Pine. Done, paid and ready. Text on it is white in light mode, ink in dark. Also the text of a short confirmation like “Uploaded”, where it passes contrast." },
-  { token: "--u-color-link", hex: "#2449b0 / #9db3f0", sample: :text, text: "View all", job: "Links. A darker cobalt so it passes contrast." },
+  { token: "--u-color-link", hex: "#2449b0 / #8ab4f8", sample: :text, text: "View all", job: "Links. A darker cobalt so it passes contrast." },
   { token: "--u-color-highlight", hex: "#fbeeb0 / #735a00", sample: :wash, text: "Mia Chen", job: "The yellow wash behind a search match or the row someone just changed.", never: "a status, a selection or decoration" },
 ] %>
 

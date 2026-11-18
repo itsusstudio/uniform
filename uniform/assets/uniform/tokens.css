@@ -1,7 +1,7 @@
 @layer uniform.tokens {
 :root {
   --u-font-wordmark-serif: "Instrument Serif", Georgia, serif;
-  --u-font-wordmark-sans: "Bricolage Grotesque", "Inter", "Helvetica Neue", Arial, sans-serif;
+  --u-font-wordmark-sans: "Apfel Grotezk", "Inter", "Helvetica Neue", Arial, sans-serif;
   --u-font-headline: "Apfel Grotezk", "Inter", "Helvetica Neue", Arial, sans-serif;
   --u-font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
   --u-font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
@@ -79,7 +79,7 @@
   --u-color-text-on-warning: light-dark(#1a1a18, #131311);
   --u-color-text-on-success: light-dark(#ffffff, #131311);
 
-  --u-color-link: light-dark(#2449b0, #9db3f0);
+  --u-color-link: light-dark(#2449b0, #8ab4f8);
 
   --u-color-divider: light-dark(#ebeae6, #2a2a28);
   --u-color-divider-on-ink: #3a3935;

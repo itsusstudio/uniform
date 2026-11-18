@@ -4,7 +4,7 @@
 <u-input-phone>
   <div class="u-field">
     <label for="<%= id %>">Phone number</label>
-    <input class="u-input" id="<%= id %>" type="tel" name="phone" inputmode="tel" autocomplete="tel"<% if phone_text %> value="<%= phone_text %>"<% end %><% if is_invalid %> aria-invalid="true"<% end %> aria-describedby="<%= id %>-hint<% if is_invalid %> <%= id %>-error<% end %>" placeholder=" ">
+    <input class="u-input" id="<%= id %>" type="tel" name="phone" inputmode="tel" autocomplete="tel"<% if phone_text %> value="<%= phone_text %>"<% end %><% if is_invalid %> aria-invalid="true"<% end %> aria-describedby="<%= id %>-<%= is_invalid ? "error" : "hint" %>" placeholder=" ">
     <small id="<%= id %>-hint">We text pickup updates to this number.</small>
     <p class="u-error" id="<%= id %>-error"<% unless is_invalid %> hidden<% end %>>Enter all 10 digits of the phone number, or start with + and the country code.</p>
   </div>

@@ -86,7 +86,7 @@ module Studio
           @template.safe_join([
             super(method, options, checked_value, unchecked_value),
             label_text,
-            (@template.tag.span(hint, id: field_ids(method)[:hint], class: "u-checkbox-hint") if hint)
+            (@template.tag.span(hint, id: field_ids(method)[:hint], class: "u-checkbox-hint") if hint && !error)
           ].compact)
         end
         @template.safe_join([box, error_tag(method, error, messages)].compact)
@@ -102,7 +102,7 @@ module Studio
         @template.tag.fieldset(class: "u-fieldset", aria: {describedby: described_by(ids, hint:, error:)}.compact) do
           @template.safe_join([
             @template.tag.legend(legend),
-            (@template.tag.small(hint, id: ids[:hint]) if hint),
+            (@template.tag.small(hint, id: ids[:hint]) if hint && !error),
             *choices.map { |label_text, value, choice_hint| radio_choice(method, label_text, value, choice_hint, error) },
             error_tag(method, error, messages)
           ].compact)
@@ -126,7 +126,7 @@ module Studio
           @template.safe_join([
             label(method, label_text, for: input_id),
             yield,
-            (@template.tag.small(hint, id: field_ids(method)[:hint]) if hint),
+            (@template.tag.small(hint, id: field_ids(method)[:hint]) if hint && !error),
             error_tag(method, error, messages)
           ].compact)
         end
@@ -147,7 +147,7 @@ module Studio
       end
 
       def described_by(ids, hint:, error:)
-        [(ids[:hint] if hint), (ids[:error] if error)].compact.join(" ").presence
+        error ? ids[:error] : (ids[:hint] if hint)
       end
 
       def aria_for(method, aria, hint:, error:)

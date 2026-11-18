@@ -75,7 +75,7 @@ Empty
 : A placeholder can show the shape of an answer, like `name@example.com`. It never replaces the label.
 
 Error
-: Set `aria-invalid="true"` on the input and put a `u-error` under it saying what to fix. A failure of the whole form, like a save that didn't go through, goes in a danger [banner](/components/banner/) instead.
+: Set `aria-invalid="true"` on the input and put a `u-error` under it saying what to fix. The error takes the hint's place, so write it to say what to do, like "Enter your business name." A failure of the whole form, like a save that didn't go through, goes in a danger [banner](/components/banner/) instead.
 
 Disabled
 : Greyed out and skipped by the keyboard. Add a hint saying why.

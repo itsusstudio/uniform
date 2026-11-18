@@ -55,8 +55,15 @@ module Studio
 
         assert_includes html, %(<div class="u-field">)
         assert_includes html, %(<label for="shop_name">Shop</label>)
-        assert_match(/<select id="shop_name" class="u-input" aria-invalid="true" aria-describedby="shop_name-hint shop_name-error"/, html)
+        assert_match(/<select id="shop_name" class="u-input" aria-invalid="true" aria-describedby="shop_name-error"/, html)
         assert_includes html, %(<p id="shop_name-error" class="u-error">)
+      end
+
+      def test_an_error_takes_the_hints_place
+        html = field(Shop.new(nil, BLANK), :name, label: "Business name", hint: "On receipts.")
+
+        refute_includes html, "On receipts."
+        assert_match(/aria-describedby="shop_name-error"/, html)
       end
 
       def test_a_labelled_check_box_sits_inside_its_label_with_the_hint

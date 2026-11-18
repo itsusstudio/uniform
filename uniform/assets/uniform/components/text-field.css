@@ -139,6 +139,8 @@ u-combobox:has(> .u-input:disabled)::after { background: var(--u-color-border-in
   line-height: var(--u-line-height-small);
 }
 
+:is(.u-field, .u-fieldset):not(u-character-count *):has(> .u-error) > small { display: none; }
+
 .u-error {
   display: grid;
   grid-template-columns: 8px minmax(0, 1fr);

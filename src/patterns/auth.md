@@ -11,9 +11,9 @@ their email address, never a password. Use it for every app's way in.
 
 <%= render "example_heading" %>
 
-Every screen sits in the [auth shell](/components/auth-shell/): from 640px up,
-the app's name and a two-line blurb on ink on the left and the form on the right, with the terms
-and privacy links under it. Each screen asks one thing, so people see where they are and then the
+Every screen sits in the [auth shell](/components/auth-shell/): from 1024px up,
+the form on the left third with the terms and privacy links under it, and an ink
+poster with the app's name and a two-line blurb on the right two thirds. Each screen asks one thing, so people see where they are and then the
 one box to fill in.
 
 ### Sign in
@@ -34,7 +34,7 @@ one box to fill in.
 <%= render "screen", title: "Wrong code", html: render("examples/pattern_auth_code", id: "auth-code-error", tag: "div", error: true) %>
 </div>
 
-The field keeps what they typed, its border turns vermilion and the message says
+The field keeps what they typed, a vermilion ring sits around it and the message says
 what to do next. The way out, sending a new code, sits right below.
 
 ### Sign up
@@ -54,7 +54,7 @@ what to do next. The way out, sending a new code, sits right below.
 </div>
 </div>
 
-On a phone the ink half goes and the app's name sits on white above the form.
+On a tablet the poster narrows to a plain ink third on the right, and on a phone it goes. On both the app's name sits on white above the form.
 The column fills the width inside a 16px margin, and the button stays full
 width, right under your thumb.
 
@@ -64,7 +64,7 @@ Frame
 : The [auth shell](/components/auth-shell/): the app name in its `<header>`, the screen in its `<main>`, and the terms and privacy links in its `<footer>`. Every studio app uses the same one.
 
 Heading
-: `u-text-page-title`, the screen's one `h1`. A line under it, like where the code went, goes with it in an `<hgroup>`. See [Typography](/foundations/typography/).
+: `u-text-page-title`, the screen's one `h1`. A line under it, like where the code went or why someone is back on this screen, goes with it in an `<hgroup>`. See [Typography](/foundations/typography/).
 
 Form
 : A [`u-form`](/components/form/) holding the [text fields](/components/text-field/), then the [primary button](/components/button/). The form stretches the button to the column's width.
@@ -73,7 +73,7 @@ Code field
 : A [code input](/components/input-code/): one box per digit over a single input, so pasting and filling the code from a text message work. A wrong code gets `aria-invalid="true"` and a `u-error` under it.
 
 Links
-: Going to another screen, like “Change” or “Sign up”, is a plain [link](/components/link/). Sending a new code does something, so it's a `<button>` in its own form with [`u-link-btn`](/components/link/#link-button), which makes it look like a link.
+: Going to another screen, like “Sign up”, is a plain [link](/components/link/). Sending a new code does something, so it's a `<button>` in its own form with [`u-link-btn`](/components/link/#link-button), which makes it look like a link.
 
 ## Code
 
@@ -86,7 +86,7 @@ Links
 ```
 
 The page's `<body>` stays white. On the code screen, leave out `aria-invalid`
-and the error until a code doesn't match, and show the hint instead.
+and the error until a code doesn't match.
 
 ## Do and don't
 
@@ -128,16 +128,19 @@ and the error until a code doesn't match, and show the hint instead.
 ## Rules
 
 Ink for the name, the surface for the work
-: The ink half carries the app's name and a two-line blurb, and nothing else: no feature list, screenshot or testimonial. The form sits on the app's own surface, so a link from the site lands you in the place you'll work.
+: The ink poster carries the app's name and a two-line blurb, and nothing else: no feature list, screenshot or testimonial. The form sits on the app's own surface, so a link from the site lands you in the place you'll work.
 
 Keep the form flush left
 : The app name, heading, labels, boxes and button share one left edge on the page margin.
 
 One question per screen
-: Ask for the email address, then the code, then nothing else. Sign up adds only the name and business name we need to set up the account.
+: Ask for the email address, then the code, then nothing else. Sign up adds only the person's name. Anything the app needs to set up comes after, on its own screen.
 
-Always offer a way back
-: Show where the code went with a “Change” link, and let people send a new code from the same screen. Nobody should need the back button to fix a typo.
+Show where the code went
+: Set the address in medium weight in the line under the heading, so a typo stands out before anyone waits for a code. Sending a new code sits on the same screen.
+
+Say why they're back under the heading
+: When a code ran out, took too many wrong tries or an invite link no longer works, sign-in says so under its heading as a `u-error` line. News like being signed out everywhere is a small grey line in the same place. Never a banner: nothing failed, and the next step is right below.
 
 <script>
 document.addEventListener("submit", (event) => { if (event.target.closest(".frame, .example")) event.preventDefault() })

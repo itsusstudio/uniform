@@ -10,9 +10,11 @@ The auth shell holds the screens people see before they're signed in: the app's
 name, one column for the form, and the terms and privacy links. Every studio app
 uses the same one, so only the name changes.
 
-From 1024px wide the shell splits into two equal halves: the name and a short blurb on ink on the left, and the
-form centred top to bottom on the right. On a tablet the name sits on white
-above the form, centred top to bottom. On a phone the form stays at the top, so
+From 1024px wide the form takes the left third, hung near the top, and an ink
+poster fills the right two thirds with the name at the top and a short blurb
+at 56px at the bottom. On a tablet the name and the form sit on white in the
+left two thirds and a plain ink band fills the right third, with no blurb. On a
+phone there's no ink. Either way the form hangs below the name near the top, so
 the keyboard never pushes it out of view.
 
 ## Example
@@ -36,7 +38,7 @@ the keyboard never pushes it out of view.
 A `u-auth-shell` holds three parts, in order:
 
 Header
-: The app name in [`u-wordmark`](/components/wordmark/), linked to the app's home page, then a `<p class="u-text-article-title">` with the app's blurb. From 1024px the header is the ink half, with the name at the top and the blurb at the bottom, and it stays ink in dark mode. On a phone or tablet only the name shows.
+: The app name in [`u-wordmark`](/components/wordmark/), linked to the app's home page, then a `<p class="u-text-section-title">` with the app's blurb. From 1024px the header is the ink poster on the right two thirds, with the name at the top and the blurb at 56px at the bottom. In dark mode it lifts to the paper grey, so it still reads as a panel beside the dark page. The form column never narrows below 480px, so the form keeps its full 384px at 1024px. On a tablet the name stays on white above the form and the right third is plain ink; on a phone only the name shows.
 
 Main
 : The screen itself, with its parts 24px apart and each up to 384px wide. Put one heading, one form and the links under it straight inside. Paragraphs in a row sit 8px apart, as one group of notes.
@@ -52,7 +54,7 @@ screen that goes in it.
 Only the name changes
 : Every app uses the same shell. Its own name in its own [wordmark](/components/wordmark/) voice is the only difference.
 
-The ink half holds the name and a two-line blurb
+The poster holds the name and a two-line blurb
 : One plain sentence about what the app does, two lines at most. No feature list, screenshot or testimonial. People came to sign in.
 
 One left edge for the form

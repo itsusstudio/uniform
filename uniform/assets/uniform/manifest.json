@@ -42,6 +42,7 @@
     "components/app-shell.css",
     "components/auth-shell.css",
     "components/task-shell.css",
+    "components/setup-shell.css",
     "components/site-header.css",
     "components/badge.css",
     "components/chip.css",

@@ -58,6 +58,8 @@
       url: /components/app-shell/
     - title: Auth shell
       url: /components/auth-shell/
+    - title: Setup shell
+      url: /components/setup-shell/
     - title: Task shell
       url: /components/task-shell/
     - title: Sidebar

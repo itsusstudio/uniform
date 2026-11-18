@@ -723,6 +723,11 @@
   page: /components/auth-shell/
   description: "The frame around sign-in and sign-up screens, split from 1024px wide into the form on the left third and an ink poster with the name and a two-line blurb on the right two thirds. Inside it, in order: a `<header>` with the app name in `u-wordmark` and a `<p class=\"u-text-section-title\">` blurb, the `<main>` with the form, and an optional `<footer>` for terms and privacy links."
 
+- name: u-setup-shell
+  group: Page frame
+  page: /components/setup-shell/
+  description: "The frame for the questions right after sign-up: a `<header>` with the name, an `<ol aria-hidden=\"true\">` of one `<li>` per step (`aria-current=\"step\"` on the current one) and a `<p>` with the count, a centred `<main>`, and an optional `<footer>` for the language select."
+
 - name: u-task-shell
   group: Page frame
   page: /components/task-shell/

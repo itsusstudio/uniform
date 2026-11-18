@@ -33,6 +33,14 @@ addEventListener("turbo:morph-element", ({ target }) => {
   if (target instanceof UniformElement) target.refresh()
 })
 
+const focusFirstError = () => {
+  const field = document.querySelector('form [aria-invalid="true"]')
+  if (field && document.activeElement !== field) field.focus()
+}
+addEventListener("DOMContentLoaded", focusFirstError)
+addEventListener("turbo:load", focusFirstError)
+addEventListener("turbo:render", focusFirstError)
+
 const define = (name, element) => {
   if (!customElements.get(name)) customElements.define(name, element)
 }
@@ -257,7 +265,7 @@ define("u-input-code", class extends UniformElement {
     const on = (type, listener) => input.addEventListener(type, listener, { signal })
     const toEnd = () => input.setSelectionRange(input.value.length, input.value.length)
     const render = () => {
-      const digits = input.value.replace(/\D/g, "").slice(0, size)
+      const digits = input.value.replace(/\P{Nd}/gu, "").slice(0, size)
       if (digits !== input.value) input.value = digits
       const focused = document.activeElement === input
       slots.forEach((slot, i) => {
@@ -270,7 +278,7 @@ define("u-input-code", class extends UniformElement {
       if (input.value.length === size && this.hasAttribute("submit")) input.form?.requestSubmit()
     })
     on("paste", (event) => {
-      const pasted = event.clipboardData?.getData("text").replace(/\D/g, "")
+      const pasted = event.clipboardData?.getData("text").replace(/\P{Nd}/gu, "")
       if (!pasted) return
       event.preventDefault()
       input.value = pasted.slice(0, size)
@@ -1900,32 +1908,6 @@ define("u-copy", class extends UniformElement {
         status.textContent = ""
       }, 1500)
     }, { signal })
-  }
-})
-
-define("u-countdown", class extends UniformElement {
-  setup(signal) {
-    const button = this.querySelector(":scope > button")
-    const seconds = Number(this.getAttribute("seconds"))
-    if (!button || !(seconds > 0)) return
-    const words = this.dataset.waiting || "Wait {time}"
-    const original = button.textContent
-    const end = Date.now() + seconds * 1000
-    let timer = null
-    const tick = () => {
-      const left = Math.ceil((end - Date.now()) / 1000)
-      if (left <= 0) {
-        clearInterval(timer)
-        button.disabled = false
-        button.textContent = original
-        return
-      }
-      button.disabled = true
-      button.textContent = words.replace("{time}", `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`)
-    }
-    timer = setInterval(tick, 1000)
-    signal.addEventListener("abort", () => clearInterval(timer))
-    tick()
   }
 })
 

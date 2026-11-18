@@ -78,7 +78,7 @@
 
 :where(u-combobox, u-input-code, u-input-password, u-character-count, u-input-phone, u-dropzone, u-input-colour, u-sidebar, u-chart, u-toast, u-data-grid, u-toggle-panels) { display: block; }
 
-:where(u-toggle) { display: contents; }
+:where(u-toggle, u-time-zone) { display: contents; }
 
 :where(u-theme-preference:not(:defined)) { display: none; }
 }

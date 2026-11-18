@@ -102,31 +102,6 @@ browser blocks it.
 </u-copy>
 ```
 
-## Countdown
-
-Wrap a button in `<u-countdown>` to turn it off for a few seconds, like "Send a
-new code" right after a code went out. `seconds` sets how long. The button's
-text shows the time left from `data-waiting`, with `{time}` for the time, then
-goes back to its own words. Count from when the action happened, not from the
-page load, so a page opened later waits only what's left.
-
-The countdown is a convenience. The server still turns away a request that
-comes too soon, because the button works as soon as a script is blocked.
-
-<p class="u-text-small">Didn’t get it? <u-countdown seconds="30" data-waiting="Send a new code in {time}"><button type="button" class="u-link-btn">Send a new code</button></u-countdown></p>
-
-```html
-<u-countdown seconds="30" data-waiting="Send a new code in {time}">
-  <button type="submit" class="u-link-btn">Send a new code</button>
-</u-countdown>
-```
-
-```erb
-<u-countdown seconds="<%%= wait %>" data-waiting="<%%= t(".resend_wait") %>">
-  <%%= form.button t(".resend"), class: "u-link-btn" %>
-</u-countdown>
-```
-
 ## Parts
 
 <%= render "classes", classes_page: "/components/button/" %>

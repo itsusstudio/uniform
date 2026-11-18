@@ -31,9 +31,8 @@ the form on the last digit.
   <u-input-code>
     <%%= form.text_field :code, class: "u-input", inputmode: "numeric", autocomplete: "one-time-code",
       pattern: "[0-9]{6}", maxlength: 6, required: true,
-      aria: { describedby: form.field_id(:code, :hint) }, placeholder: " " %>
+      placeholder: " " %>
   </u-input-code>
-  <small id="<%%= form.field_id(:code, :hint) %>"><%%= t(".code_hint", count: 10) %></small>
 </div>
 ```
 
@@ -47,12 +46,12 @@ One field
 : The boxes are `aria-hidden="true"`. Screen readers hear the one input, named by its label, and read the code as you type it.
 
 Errors in words
-: Set `aria-invalid="true"` on a wrong code to turn every box red. The `u-error` under the boxes says what to do next.
+: Set `aria-invalid="true"` on a wrong code to put the vermilion ring around every box. The `u-error` under the boxes says what to do next.
 
 ## Rules
 
-Say how long the code works
-: Put it in the hint, like "The code works for 10 minutes."
+Say how long the code works in the email
+: The email gives the time limit next to the code. The screen leaves it out, and a code that ran out gets an error that says to send a new one.
 
 Fill it from a text
 : Set `inputmode="numeric"` and `autocomplete="one-time-code"`, so phones show the number pad and offer the code.

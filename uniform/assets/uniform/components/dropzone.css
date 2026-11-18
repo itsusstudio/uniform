@@ -61,7 +61,12 @@
   }
 }
 
-.u-dropzone:has(> input[aria-invalid="true"]) { border-color: var(--u-color-danger); }
+.u-dropzone:has(> input[aria-invalid="true"]) {
+  outline: 2px solid var(--u-color-danger);
+  outline-offset: 2px;
+}
+
+.u-dropzone:has(> input[aria-invalid="true"]:focus-visible) { outline-color: var(--u-color-info); }
 
 .u-dropzone:has(> input:disabled) {
   background: var(--u-color-divider);

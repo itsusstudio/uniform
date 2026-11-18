@@ -100,8 +100,3 @@
   without: The form sends no time zone, and the server uses its default.
   page: /components/form/#time-zone
 
-- name: <u-countdown>
-  wraps: One `<button>` with text, and a `seconds` attribute.
-  adds: Turns the button off for that many seconds, showing the time left in its text. `data-waiting` words it, with `{time}` for the time, like "Send a new code in {time}".
-  without: The button works straight away, and the server answers if it's pressed too soon.
-  page: /components/button/#countdown

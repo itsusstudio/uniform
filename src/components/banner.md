@@ -98,3 +98,6 @@ One at a time
 
 For news and lasting problems
 : Use a banner for news people should see, or a problem that stays until it's fixed. Confirm something someone just did with a [toast](/components/toast/).
+
+Not for why you landed here
+: A message about why someone arrived on a page, like a sign-in code that ran out or being signed out everywhere, goes under the page's heading as its second line: a `u-error` for a problem, a small grey line for news. A banner there outshouts the one thing to do next.

@@ -64,9 +64,11 @@ textarea.u-input {
 }
 
 .u-input[aria-invalid="true"] {
-  border-color: var(--u-color-danger);
-  box-shadow: inset 0 0 0 1px var(--u-color-danger);
+  outline: 2px solid var(--u-color-danger);
+  outline-offset: 2px;
 }
+
+.u-input[aria-invalid="true"]:focus-visible { outline-color: var(--u-color-info); }
 
 .u-input:disabled {
   background: var(--u-color-divider);

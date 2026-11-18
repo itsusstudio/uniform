@@ -37,7 +37,9 @@ permalink: /components/form/
 
 A problem with one field shows under that field. A problem with the whole
 form, like a failed save, shows in a danger [banner](/components/banner/) at
-the top, saying what happened.
+the top, saying what happened. A message about why someone landed on the
+page, like a code that ran out, isn't a failure: it goes under the page's
+heading as a `u-error` line.
 
 <div class="example-frame">
 <div class="u-max-width-form">
@@ -108,6 +110,26 @@ is the model's own message; `messages:` words it per error type for one form.
 
 A field inside a custom element, like `<u-input-phone>`, counts as a field. So
 does a `u-fieldset` of checkboxes or radios.
+
+A form without a model, like a sign-in form posting flat params, has no model
+errors to read. Pass the message yourself with `error:`, and the field gets the
+same `u-error` and `aria-invalid` as a model error would give it.
+
+```erb
+<%%= uniform_form_with url: login_path do |form| %>
+  <%%= form.email_field :email_address, label: t(".email_address"),
+        value: @email_address, error: @field_error, autocomplete: "email" %>
+<%% end %>
+```
+
+`form.code_field` writes a [code input](/components/input-code/): six boxes in
+a `<u-input-code>`, with the right `inputmode`, `autocomplete` and `pattern`.
+Add `submit: true` to send the form once the last digit is in, and `length:`
+for a code that isn't six digits.
+
+```erb
+<%%= form.code_field :code, label: t(".code"), error: @field_error, submit: true, autofocus: true %>
+```
 
 ## Time zone
 

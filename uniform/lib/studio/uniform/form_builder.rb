@@ -26,7 +26,7 @@ module Studio
 
           hint = options.delete(:hint)
           messages = options.delete(:messages) || {}
-          error = error_for(method)
+          error = options.delete(:error).presence || error_for(method)
 
           options[:id] ||= field_id(method)
           options[:class] = ["u-input", options[:class]].compact.join(" ")
@@ -34,6 +34,22 @@ module Studio
           options[:aria] = aria_for(method, options[:aria], hint:, error:)
 
           field_wrapper(method, label_text, options[:id], hint:, error:, messages:) { super(method, options) }
+        end
+      end
+
+      def code_field(method, label:, hint: nil, error: nil, messages: {}, length: 6, submit: false, **options)
+        error = error.presence || error_for(method)
+        options[:id] ||= field_id(method)
+        options[:class] = ["u-input", options[:class]].compact.join(" ")
+        options[:aria] = aria_for(method, options[:aria], hint:, error:)
+        options = {
+          placeholder: " ", inputmode: "numeric", autocomplete: "one-time-code",
+          pattern: "[0-9]{#{length}}", maxlength: length, size: nil
+        }.merge(options)
+
+        field_wrapper(method, label, options[:id], hint:, error:, messages:) do
+          @template.content_tag("u-input-code", @template.text_field(@object_name, method, objectify_options(options)),
+            submit: (true if submit))
         end
       end
 
@@ -45,7 +61,7 @@ module Studio
 
         hint = options.delete(:hint)
         messages = options.delete(:messages) || {}
-        error = error_for(method)
+        error = options.delete(:error).presence || error_for(method)
 
         html_options = html_options.dup
         html_options[:id] ||= field_id(method)
@@ -63,7 +79,7 @@ module Studio
 
         hint = options.delete(:hint)
         messages = options.delete(:messages) || {}
-        error = error_for(method)
+        error = options.delete(:error).presence || error_for(method)
         options[:aria] = aria_for(method, options[:aria], hint:, error:)
 
         box = @template.tag.label(class: "u-checkbox") do
@@ -79,8 +95,8 @@ module Studio
       # Each choice is [label, value] or [label, value, hint].
       #
       #   <%= form.radio_group :paid_by, [["Card", "card"], ["Cash", "cash"]], legend: "Paid by" %>
-      def radio_group(method, choices, legend:, hint: nil, messages: {})
-        error = error_for(method)
+      def radio_group(method, choices, legend:, hint: nil, error: nil, messages: {})
+        error = error.presence || error_for(method)
         ids = field_ids(method)
 
         @template.tag.fieldset(class: "u-fieldset", aria: {describedby: described_by(ids, hint:, error:)}.compact) do
@@ -139,6 +155,8 @@ module Studio
       end
 
       def error_message(error, messages)
+        return error if error.is_a?(String)
+
         messages.with_indifferent_access[error.type] || error.full_message
       end
     end

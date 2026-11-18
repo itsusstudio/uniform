@@ -4,11 +4,9 @@
 <div class="u-field">
   <label for="<%= id %>">Code</label>
   <u-input-code>
-    <input class="u-input" id="<%= id %>" name="code"<% if value_text %> value="<%= value_text %>"<% end %> inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required aria-describedby="<%= id %>-<%= error_text ? "error" : "hint" %>"<% if error_text %> aria-invalid="true"<% end %> placeholder=" ">
+    <input class="u-input" id="<%= id %>" name="code"<% if value_text %> value="<%= value_text %>"<% end %> inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required<% if error_text %> aria-invalid="true" aria-describedby="<%= id %>-error"<% end %> placeholder=" ">
   </u-input-code>
 <% if error_text -%>
   <p class="u-error" id="<%= id %>-error"><%= error_text %></p>
-<% else -%>
-  <small id="<%= id %>-hint">The code works for 10 minutes.</small>
 <% end -%>
 </div>

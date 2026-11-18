@@ -75,7 +75,7 @@ Empty
 : A placeholder can show the shape of an answer, like `name@example.com`. It never replaces the label.
 
 Error
-: Set `aria-invalid="true"` on the input and put a `u-error` under it saying what to fix. A problem with the whole form goes in a danger [banner](/components/banner/) instead.
+: Set `aria-invalid="true"` on the input and put a `u-error` under it saying what to fix. A failure of the whole form, like a save that didn't go through, goes in a danger [banner](/components/banner/) instead.
 
 Disabled
 : Greyed out and skipped by the keyboard. Add a hint saying why.
@@ -333,7 +333,10 @@ Connect the help
 : Give the hint and error ids and list them in the input's `aria-describedby`. Screen readers read them after the label.
 
 Errors in words
-: Always say what's wrong in a sentence. The vermilion border and square only catch the eye.
+: Always say what's wrong in a sentence. The vermilion ring only catches the eye.
+
+Focus the first error
+: When a form comes back with errors, uniform.js puts the cursor in the first field with `aria-invalid="true"`, over any `autofocus`, so people land on what to fix and screen readers read its error. Keep `autofocus` on the first field for a fresh form.
 
 Right keyboard
 : Use the right `type` or `inputmode` (`tel`, `email`, `decimal`) so phones show the right keys, and `autocomplete` where it fits.

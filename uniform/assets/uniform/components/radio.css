@@ -38,7 +38,11 @@
 
 .u-radio > input:checked::before { visibility: visible; }
 
-.u-radio > input[aria-invalid="true"] { border-color: var(--u-color-danger); }
+.u-fieldset:has(> .u-radio > input[aria-invalid="true"]) {
+  border-radius: var(--u-radius-default);
+  outline: 2px solid var(--u-color-danger);
+  outline-offset: var(--u-space-2);
+}
 
 .u-radio-hint {
   color: var(--u-color-text-muted);

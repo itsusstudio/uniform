@@ -112,6 +112,8 @@
       url: /components/dropzone/
     - title: Icon
       url: /components/icon/
+    - title: Language select
+      url: /components/language-select/
     - title: Link
       url: /components/link/
     - title: List

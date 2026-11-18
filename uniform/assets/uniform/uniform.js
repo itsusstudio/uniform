@@ -42,6 +42,10 @@ addEventListener("turbo:load", focusFirstError)
 addEventListener("turbo:render", focusFirstError)
 
 addEventListener("change", ({ target }) => {
+  if (target.matches?.("select.u-language-select") && target.form) target.form.requestSubmit()
+})
+
+addEventListener("change", ({ target }) => {
   if (!target.matches?.('.u-fieldset input[type="checkbox"]') || !target.checked) return
 
   const boxes = target.closest(".u-fieldset").querySelectorAll('input[type="checkbox"]')

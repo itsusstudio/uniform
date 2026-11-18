@@ -20,6 +20,7 @@
     "components/input-password.css",
     "components/input-code.css",
     "components/select.css",
+    "components/language-select.css",
     "components/radio.css",
     "components/dialog.css",
     "components/menu.css",

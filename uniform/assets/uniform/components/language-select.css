@@ -1,0 +1,62 @@
+@layer uniform.components {
+:root {
+  --u-language-globe: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%231a1a18%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22 /%3E%3Cpath d=%22M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20%22 /%3E%3Cpath d=%22M2 12h20%22 /%3E%3C/svg%3E");
+  --u-language-chevron: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%231a1a18%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m6 9 6 6 6-6%22 /%3E%3C/svg%3E");
+  --u-language-border: var(--u-color-border);
+  --u-language-bg: var(--u-color-bg-surface);
+  --u-language-text: var(--u-color-text-default);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-u-theme="light"]) {
+    --u-language-globe: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ecebe6%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22 /%3E%3Cpath d=%22M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20%22 /%3E%3Cpath d=%22M2 12h20%22 /%3E%3C/svg%3E");
+    --u-language-chevron: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ecebe6%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m6 9 6 6 6-6%22 /%3E%3C/svg%3E");
+  }
+}
+
+:root[data-u-theme="dark"] {
+  --u-language-globe: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ecebe6%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Ccircle cx=%2212%22 cy=%2212%22 r=%2210%22 /%3E%3Cpath d=%22M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20%22 /%3E%3Cpath d=%22M2 12h20%22 /%3E%3C/svg%3E");
+  --u-language-chevron: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ecebe6%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m6 9 6 6 6-6%22 /%3E%3C/svg%3E");
+}
+
+select.u-input.u-language-select {
+  width: calc(var(--u-space-4) * 2 + 20px + var(--u-space-2) + 16px);
+  padding: 0;
+  border-color: var(--u-language-border);
+  border-radius: var(--u-radius-pill);
+  background-color: var(--u-language-bg);
+  background-image: var(--u-language-globe), var(--u-language-chevron);
+  background-position: left var(--u-space-4) center, right var(--u-space-4) center;
+  background-repeat: no-repeat;
+  background-size: 20px, 16px;
+  color: transparent;
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+select.u-input.u-language-select.u-language-select-full {
+  width: auto;
+  padding-right: calc(var(--u-space-4) + 16px + var(--u-space-2));
+  padding-left: calc(var(--u-space-4) + 20px + var(--u-space-2));
+  color: var(--u-language-text);
+}
+
+:dir(rtl) select.u-input.u-language-select {
+  background-position: right var(--u-space-4) center, left var(--u-space-4) center;
+}
+
+:dir(rtl) select.u-input.u-language-select.u-language-select-full {
+  padding-right: calc(var(--u-space-4) + 20px + var(--u-space-2));
+  padding-left: calc(var(--u-space-4) + 16px + var(--u-space-2));
+}
+
+@media (pointer: fine) {
+  @supports (appearance: base-select) {
+    select.u-input.u-language-select::picker(select) {
+      width: max-content;
+      min-width: 0;
+      position-area: block-end span-inline-start;
+    }
+  }
+}
+}

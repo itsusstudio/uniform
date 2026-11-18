@@ -617,6 +617,16 @@
   page: /components/input-code/
   description: The box where the next digit goes, with the focus ring and a blinking caret. `<u-input-code>` sets it while the input has focus.
 
+- name: u-language-select
+  group: Components
+  page: /components/language-select/
+  description: "On a `select.u-input`, sets it as a small pill with a globe and a chevron, for switching the language on pages without a settings page."
+
+- name: u-language-select-full
+  group: Components
+  page: /components/language-select/
+  description: "With `u-language-select`, shows the language's name between the globe and the chevron."
+
 - name: u-input-prefixed
   group: Components
   page: /components/text-field/

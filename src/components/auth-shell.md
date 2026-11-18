@@ -43,6 +43,9 @@ Header
 Main
 : The screen itself, with its parts 24px apart and each up to 384px wide. Put one heading, one form and the links under it straight inside. Paragraphs in a row sit 8px apart, as one group of notes.
 
+Language
+: Optional, before the header: a `<form class="u-auth-shell-language">` holding a [language select](/components/language-select/). It sits at the far right on the ink, at the top of the poster from 1024px and of the ink third on a tablet, in white on the ink; on a phone, with no ink, it's the far end of the header.
+
 Footer
 : Optional. The terms and privacy links in small grey type, at the bottom of the form's side.
 

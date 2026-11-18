@@ -115,4 +115,7 @@ Square, like a field
 Say what ticking does
 : The label says what happens when it's ticked, like “Text me when it's ready”.
 
+One answer that rules out the rest
+: For an answer like “Nothing yet” in a group of “tick all that apply”, add `data-u-exclusive` to its checkbox inside the `u-fieldset`. Ticking it clears the other boxes, and ticking any other box clears it. Check the same rule on the server.
+
 <script>document.getElementById("checkbox-mixed").indeterminate = true</script>

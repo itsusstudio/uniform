@@ -41,6 +41,15 @@ addEventListener("DOMContentLoaded", focusFirstError)
 addEventListener("turbo:load", focusFirstError)
 addEventListener("turbo:render", focusFirstError)
 
+addEventListener("change", ({ target }) => {
+  if (!target.matches?.('.u-fieldset input[type="checkbox"]') || !target.checked) return
+
+  const boxes = target.closest(".u-fieldset").querySelectorAll('input[type="checkbox"]')
+  boxes.forEach((box) => {
+    if (box !== target && (target.hasAttribute("data-u-exclusive") || box.hasAttribute("data-u-exclusive"))) box.checked = false
+  })
+})
+
 const define = (name, element) => {
   if (!customElements.get(name)) customElements.define(name, element)
 }

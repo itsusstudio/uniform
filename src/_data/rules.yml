@@ -125,7 +125,7 @@
 
 - id: every-app-shares-the-frame
   name: Every app shares the frame
-  summary: Every studio app uses the same app shell, auth shell and mailer layout. Only the name, monogram and menu entries change.
+  summary: Every studio app uses the same app shell, auth shell, task shell and mailer layout. Only the name, monogram and menu entries change.
   body: Products differ in their pages and their words, not in how they're framed. An app supplies its name in its wordmark voice, its monogram and its own help and account entries, and changes nothing else in the frame.
   home: /start/rules/
   section: Building
@@ -419,8 +419,8 @@
 
 - id: space-before-boxes
   name: Space before boxes
-  summary: A card only for a real object, never a card inside a card.
-  body: A card only for a real object, like a table or a panel. Never a card inside a card.
+  summary: Space and a heading group things first, and a card holds one object people act on.
+  body: Group things with space first, then with a heading. On an app screen, a block people scan and act on, like a job's details, a list with its own actions or a table, sits in a card so its edge helps the eye find it. Never a card inside a card.
   home: /foundations/space-and-layout/
 
 - id: hang-from-the-grid
@@ -438,9 +438,10 @@
 
 - id: thin-lines
   name: Thin lines
-  summary: 1px for lines and borders, 2px for the focus ring and a field with an error.
-  body: 1px for lines and borders, 2px for the focus ring and a field with an error. Lines only separate things.
+  summary: 1px for lines and borders, 2px for the focus ring and its vermilion twin on a field with an error.
+  body: 1px for lines and borders, 2px for the focus ring and a field with an error, which gets the same ring in vermilion until it has focus. Lines only separate things. A rule between sections belongs on reading pages, prose and marketing, where it can be ink. App screens separate their sections with space and cards instead.
   home: /foundations/shape-and-depth/
+  check: Rules between sections appear only on prose and marketing pages, never on an app screen.
 
 - id: shadows-only-float
   name: Shadows only float

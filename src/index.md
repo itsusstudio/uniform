@@ -48,10 +48,26 @@ Uniform is missing.
 When a component doesn't fit, Uniform is missing something. The fix goes into
 Uniform for every product, not into a one-off tweak on the page.
 
+## The Swiss style
+
+Much of Uniform comes from the International Typographic Style, the Swiss
+graphic design of the 1950s and 60s. We take its method. Proportion and space
+do the work, every line starts on one left edge with a ragged right, size and
+order set the hierarchy, whitespace holds each group together, and nothing is
+added for decoration.
+
+We leave its costume behind. Bold display type, heavy black rules, square
+corners on everything, black blocks and visible grid lines are what most
+imitations copy, and on a screen they look generated. Uniform also softens the
+style on purpose: buttons are pills so people can see what to press, type
+stops at medium weight, and marketing pages sit on warm paper. When a screen
+starts to look like a Swiss poster, it has gone too far. See
+[Don't look generated](/start/rules/#dont-look-generated).
+
 ## Inspiration
 
 - [Norma](https://normadesign.it/en/){:target="_blank" rel="noopener"}
-- Swiss posters of the 1950s and 60s
+- The International Typographic Style, the Swiss posters of the 1950s and 60s
 - Josef Müller-Brockmann
 - Emil Ruder
 - Braun product design of the 1960s and 70s

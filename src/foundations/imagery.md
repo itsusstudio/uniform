@@ -13,7 +13,7 @@ picture only when words can't do the job.
 
 Pick the kind by what the image is for, never by what looks good. Colour photos
 are for things people buy, and one-ink halftones are for people and tools.
-Nothing is staged and nothing is stock.
+Nothing is stock. A halftone can start from a photo or a generated image, and a person approves it before it ships.
 
 <%= render "examples/image_types" %>
 
@@ -31,7 +31,7 @@ is too light to hold the dots on paper.
 ## Making a halftone
 
 Every halftone comes from one script, so they all share the same dot screen.
-Start from a photo of one subject on a plain, light background.
+Start from a photo or a generated image of one subject on a plain, light background.
 
 ```sh
 bin/halftone tape.jpg src/images/tape.webp --ratio 1:1 --background "#f5f4ef"

@@ -28,16 +28,16 @@ Preheader
 : How long it lasts, in one line: "This code works for 10 minutes."
 
 Heading
-: “Your sign-in code”, one `h1` at 24px.
+: “Your sign-in code”, one `h1` at 32px.
 
 What to do
 : One line that says what the code is for. No greeting: the reader is mid sign-in and wants the digits.
 
 Code
-: The six digits in IBM Plex Mono at 32px with 4px letter spacing, in a box with a 1px input border and the default 8px radius, like the code fields on the sign-in screen, 24px from the text around it. Outlook on Windows draws the corners square. The digits are one unbroken string with no spaces or dashes, so they copy cleanly, and `user-select: all` lets one tap pick up the whole code.
+: The six digits in IBM Plex Mono at 32px with 4px letter spacing and no box, 24px from the text around it. Size alone sets it apart. The digits are one unbroken string with no spaces or dashes, so they copy cleanly, and `user-select: all` lets one tap pick up the whole code.
 
 How long it lasts
-: 10 minutes, the same as the hint on the code screen.
+: 10 minutes. The code screen doesn't repeat it, so the email is where people learn it.
 
 If it wasn't you
 : One line saying they can ignore it.
@@ -96,7 +96,7 @@ No button, no link
 : The code gets typed into the screen they already have open, as in the [Auth](/patterns/auth/) pattern. A sign-in link would open a new tab, or the wrong browser on a phone, and it's the thing phishing emails copy. With nothing to click, there's no primary button.
 
 Say when it runs out
-: Give the same 10 minutes the code screen shows. The screen itself offers a new code, so the email doesn't need to.
+: Give the 10 minutes here, since the code screen leaves it out. The screen itself offers a new code, so the email doesn't need to.
 
 Tell them what to do if it wasn't them
 : Nothing, in this case. Say that in one line, so a code they didn't ask for doesn't worry them.

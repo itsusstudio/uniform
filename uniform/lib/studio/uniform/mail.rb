@@ -7,12 +7,14 @@ module Studio
       INK = "#1a1a18"
       MUTED = "#6b6964"
       LINE = "#ebeae6"
-      INPUT = "#8c8981"
       LINK = "#2449b0"
       PAPER = "#f5f4ef"
-      SANS = "font-family: Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;"
-      HEADLINE = "font-family: 'Apfel Grotezk', Inter, 'Helvetica Neue', Helvetica, Arial, sans-serif;"
-      WORDMARK = "font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 28px; font-style: italic; font-weight: 400; letter-spacing: -0.005em;"
+      SANS = "font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;"
+      HEADLINE = "font-family: 'Apfel Grotezk', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;"
+      WORDMARKS = {
+        "serif" => "font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 28px; font-style: italic; font-weight: 400; letter-spacing: -0.005em;",
+        "sans" => "font-family: 'Apfel Grotezk', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 24px; line-height: 28px; font-weight: 500; letter-spacing: -0.03em;"
+      }.freeze
       MONO = "font-family: 'IBM Plex Mono', Menlo, Consolas, monospace;"
       FONTS = [
         ["Inter", 400, "Inter-Regular.woff2"],
@@ -42,18 +44,19 @@ module Studio
 
       module Html
         class << self
-          def layout(content, title:, preheader:, sender:, address:, labels: {}, terms_url: nil, privacy_url: nil, unsubscribe_url: nil, sent_with: nil, sent_with_url: nil, fonts: {})
+          def layout(content, title:, preheader:, sender:, wordmark_style:, address: Uniform::STUDIO_ADDRESS, labels: {}, unsubscribe_url: nil, sent_with: nil, sent_with_url: nil, fonts: {})
             name, street, *city = Array(address)
             link = "color: #{MUTED}; text-decoration: underline;"
             footer = [
               labels[:made_in] && %(<p style="margin: 0 0 16px; color: #{INK};">#{h(sender)}, #{h(labels[:made_in])}</p>),
               %(<p style="margin: 0;">#{[name, street, (city.join(", ") if city.any?)].compact.map { |line| undetected(line) }.join("<br>")}</p>),
-              terms_url && %(<p style="margin: 16px 0 0;"><a href="#{h(terms_url)}" style="#{link}">#{h(labels.fetch(:terms))}</a>&nbsp;&nbsp;<a href="#{h(privacy_url)}" style="#{link}">#{h(labels.fetch(:privacy))}</a></p>),
               unsubscribe_url && %(<p style="margin: 16px 0 0;"><a href="#{h(unsubscribe_url)}" style="#{link}">#{h(labels.fetch(:unsubscribe))}</a></p>),
               sent_with && %(<p style="margin: 16px 0 0;">#{h(labels.fetch(:powered_by)).sub("%{name}", %(<a href="#{h(sent_with_url)}" style="#{link}">#{h(sent_with)}</a>))}</p>)
-            ].select { |line| line.is_a?(String) }.join("\n            ")
+            ].select { |line| line.is_a?(String) }.join("\n                ")
+            small = "#{SANS} font-size: 14px; line-height: 20px; color: #{MUTED};"
+            policies = !sent_with && %(<td class="u-mail-col" valign="top" align="right" style="padding: 24px 0 0 24px; #{small} text-align: right; white-space: nowrap;"><a href="#{h(Uniform::TERMS_URL)}" style="#{link}">#{h(labels.fetch(:terms))}</a> — <a href="#{h(Uniform::PRIVACY_URL)}" style="#{link}">#{h(labels.fetch(:privacy))}</a></td>)
             # Only the product's own name is a wordmark; a shop sending through it is set in the headline face.
-            masthead = sent_with ? "#{HEADLINE} font-size: 18px; line-height: 24px; font-weight: 500;" : WORDMARK
+            masthead = sent_with ? "#{HEADLINE} font-size: 18px; line-height: 24px; font-weight: 500;" : WORDMARKS.fetch(wordmark_style.to_s)
             faces = FONTS.filter_map { |family, weight, file, style = "normal"|
               url = fonts[file] and %(@font-face { font-family: "#{family}"; src: url("#{h(url)}") format("woff2"); font-weight: #{weight}; font-style: #{style}; }\n  )
             }.join
@@ -80,6 +83,8 @@ module Studio
                 @media (max-width: 599px) {
                   .u-mail-outer { padding: 0 !important; }
                   .u-mail-pad { padding-left: 24px !important; padding-right: 24px !important; }
+                  .u-mail-col { display: block !important; width: 100% !important; }
+                  .u-mail-col + .u-mail-col { padding: 16px 0 0 !important; text-align: left !important; }
                 }
               </style>
               </head>
@@ -101,8 +106,15 @@ module Studio
                     </table>
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; max-width: 600px;">
                       <tr>
-                        <td class="u-mail-pad" style="padding: 0 48px 48px; #{SANS} font-size: 14px; line-height: 20px; color: #{MUTED};">
-                          #{footer}
+                        <td class="u-mail-pad" style="padding: 0 48px 48px;">
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width: 100%; border-top: 1px solid #{LINE};">
+                            <tr>
+                              <td class="u-mail-col" valign="top" style="padding-top: 24px; #{small}">
+                #{footer}
+                              </td>
+                              #{policies}
+                            </tr>
+                          </table>
                         </td>
                       </tr>
                     </table>
@@ -116,7 +128,7 @@ module Studio
           end
 
           def heading(text)
-            Mail.safe(%(<h1 style="margin: 0 0 24px; #{HEADLINE} font-size: 24px; line-height: 32px; font-weight: 500; color: #{INK};">#{inline(text)}</h1>\n))
+            Mail.safe(%(<h1 style="margin: 0 0 24px; #{HEADLINE} font-size: 32px; line-height: 36px; font-weight: 500; color: #{INK};">#{inline(text)}</h1>\n))
           end
 
           def paragraph(text)
@@ -164,7 +176,7 @@ module Studio
             Mail.safe(<<~HTML)
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" style="margin: 0 0 24px;">
                 <tr>
-                  <td style="padding: 12px 20px 12px 24px; border: 1px solid #{INPUT}; border-radius: 8px; #{MONO} font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 4px; color: #{INK}; -webkit-user-select: all; user-select: all;">#{h(digits)}</td>
+                  <td style="#{MONO} font-size: 32px; line-height: 40px; font-weight: 400; letter-spacing: 4px; color: #{INK}; -webkit-user-select: all; user-select: all;">#{h(digits)}</td>
                 </tr>
               </table>
             HTML
@@ -229,12 +241,12 @@ module Studio
 
       module Text
         class << self
-          def layout(content, title:, preheader:, sender:, address:, labels: {}, terms_url: nil, privacy_url: nil, unsubscribe_url: nil, sent_with: nil, sent_with_url: nil, fonts: {})
+          def layout(content, title:, preheader:, sender:, address: Uniform::STUDIO_ADDRESS, wordmark_style: nil, labels: {}, unsubscribe_url: nil, sent_with: nil, sent_with_url: nil, fonts: {})
             name, street, *city = Array(address)
             lines = [sender, "", content.to_s.strip, "", "--"]
             lines += ["#{sender}, #{labels[:made_in]}", ""] if labels[:made_in]
             lines += [name, street, (city.join(", ") if city.any?)]
-            lines += ["", "#{labels.fetch(:terms)}: #{terms_url}", "#{labels.fetch(:privacy)}: #{privacy_url}"] if terms_url
+            lines += ["", "#{labels.fetch(:terms)}: #{Uniform::TERMS_URL}", "#{labels.fetch(:privacy)}: #{Uniform::PRIVACY_URL}"] if !sent_with
             lines += ["", "#{labels.fetch(:unsubscribe)}: #{unsubscribe_url}"] if unsubscribe_url
             lines += ["", "#{labels.fetch(:powered_by).sub("%{name}", sent_with)}: #{sent_with_url}"] if sent_with
             Mail.safe(lines.compact.join("\n") + "\n")

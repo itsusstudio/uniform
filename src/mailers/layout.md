@@ -27,11 +27,12 @@ away.
 
 ## Fonts
 
-Inter for text, Instrument Serif for the Workbench wordmark, Apfel Grotezk
-for the heading and a shop's name, IBM Plex
+Inter for text, Instrument Serif or Apfel Grotezk for the product's wordmark,
+Apfel Grotezk for the heading and a shop's name, IBM Plex
 Mono for codes and amounts, the same as the app. Apple Mail and iOS load them;
-Gmail and Outlook fall back to Helvetica Neue, Helvetica, then Arial, which keep
-the same shape. In Rails, the layout loads them when
+Gmail and Outlook fall back to the system's own interface font: San Francisco
+on Apple devices, Segoe UI on Windows and Roboto on Android, then Helvetica and
+Arial. Those sit closest to Inter. In Rails, the layout loads them when
 `config.action_mailer.asset_host` is set, since an email can only fetch a font
 from a full URL.
 
@@ -55,13 +56,13 @@ Column
 : One table, 600px at most and fluid below that, with no border. It holds the sender's name and the content, 48px in from each side, 24px on a phone.
 
 Sender's name
-: Set in type, 24px from the top. Workbench's own name is its [wordmark](/components/wordmark/), the serif at 24px, falling back to Georgia italic. A shop's name is Apfel Grotezk at 18px medium, since the wordmark is the product's, not the shop's. No logo, so it reads the same with images off. For Workbench's own emails it's "Workbench". For an email sent for a shop, it's the shop's name.
+: Set in type, 24px from the top. A product's own name is its [wordmark](/components/wordmark/) at 24px, in the voice the app picks with `wordmark_style`: Instrument Serif italic, falling back to Georgia, or Apfel Grotezk Mittel, falling back to Inter. A shop's name is Apfel Grotezk at 18px medium, since the wordmark is the product's, not the shop's. No logo, so it reads the same with images off. For Workbench's own emails it's "Workbench". For an email sent for a shop, it's the shop's name.
 
 Content
-: Whatever the email says, 48px below the name and 48px above the footer. One `h1` at 24px, paragraphs at 16px with 24px between them, detail rows with 16px above and below, and at most one primary button, 44px tall with 48px of space around it. Every size and space comes from the Uniform scale.
+: Whatever the email says, 48px below the name and 48px above the footer. One `h1` at 32px, paragraphs at 16px with 24px between them, detail rows with 16px above and below, and at most one primary button, 44px tall with 48px of space around it. Every size and space comes from the Uniform scale.
 
 Footer
-: 14px, below the content with no line between. One line in ink saying who sent it and where it's made, “Workbench, made in Montréal”, then the postal address in grey, one fact per line. Then Terms and Privacy as underlined grey links, and an Unsubscribe link on emails that aren't transactional. When a product sends for one of its users, like a shop's pickup email, Terms and Privacy are left out and a last line says “Powered by Workbench”. Digits in the address are kept from turning into map links, so the address stays grey and whole.
+: 14px, set like a letterhead under a grey hairline with 24px above the text. On the left, one line in ink saying who sent it and where it's made, “Workbench, made in montréal”, then the postal address in grey, one fact per line. Terms and Privacy sit on the right as underlined grey links, and drop below the address on a phone. An Unsubscribe link goes under the address on emails on emails that aren't transactional. When a product sends for one of its users, like a shop's pickup email, Terms and Privacy are left out and a last line says “Powered by Workbench”. Digits in the address are kept from turning into map links, so the address stays grey and whole.
 
 ## Who sends what
 
@@ -149,7 +150,7 @@ which is fine.
 Every block, for the format being rendered:
 
 `u.heading(text)`
-: The one heading, 24px.
+: The one heading, 32px.
 
 `u.paragraph(text)`
 : A paragraph. Links written out in the text become blue and underlined.

@@ -30,7 +30,7 @@ module Studio
         prepend_view_path VIEWS
 
         def code
-          @uniform_mail = {sender: "Workbench", address: ["it's us studio", "216-4035 rue Saint-Ambroise", "Montréal QC"], preheader: "Works for 10 minutes."}
+          @uniform_mail = {sender: "Workbench", address: ["it's us studio", "216-4035 rue Saint-Ambroise", "Montréal QC"], wordmark_style: "serif", preheader: "Works for 10 minutes."}
           mail(to: "dana@example.com", from: "hello@example.com", subject: "482915 is your code")
         end
       end

@@ -3,6 +3,8 @@ require "test_helper"
 module Studio
   module Uniform
     class MailTest < Minitest::Test
+      LABELS = {terms: "Terms", privacy: "Privacy", unsubscribe: "Unsubscribe", powered_by: "Powered by %{name}"}.freeze
+
       def test_html_escapes_text_and_links_urls
         html = Mail::Html.paragraph("Tom & Jerry, see https://example.com/a")
 
@@ -25,8 +27,8 @@ module Studio
       end
 
       def test_footer_names_the_product_and_where_it_is_made
-        labels = {made_in: "Made in Montréal"}
-        html = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], labels: labels)
+        labels = LABELS.merge(made_in: "Made in Montréal")
+        html = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], wordmark_style: "serif", labels: labels)
         text = Mail::Text.layout("Hi", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], labels: labels)
 
         assert_includes html, "Workbench, Made in Montréal"
@@ -34,35 +36,44 @@ module Studio
       end
 
       def test_footer_address_does_not_become_a_map_link
-        html = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["it's us studio", "216-4035 rue Saint-Ambroise"])
+        html = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["it's us studio", "216-4035 rue Saint-Ambroise"], wordmark_style: "serif", labels: LABELS)
 
         assert_includes html, "it&#39;s us studio"
         assert_includes html, "2&zwnj;1&zwnj;6-4&zwnj;0&zwnj;3&zwnj;5 rue Saint-Ambroise"
       end
 
       def test_only_the_product_name_is_set_as_a_wordmark
-        own = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"])
-        shop = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Shop", address: ["Shop"], labels: {powered_by: "Powered by %{name}"}, sent_with: "Workbench", sent_with_url: "https://useworkbench.co")
+        own = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], wordmark_style: "serif", labels: LABELS)
+        shop = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Shop", address: ["Shop"], wordmark_style: "serif", labels: {powered_by: "Powered by %{name}"}, sent_with: "Workbench", sent_with_url: "https://useworkbench.co")
 
-        assert_includes own, "#{Mail::WORDMARK} color: #{Mail::INK};\">Workbench</td>"
+        assert_includes own, "#{Mail::WORDMARKS["serif"]} color: #{Mail::INK};\">Workbench</td>"
         refute_includes shop, "Instrument Serif"
       end
 
       def test_layout_loads_brand_fonts_only_when_given
-        bare = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"])
-        loaded = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], fonts: {"Inter-Regular.woff2" => "https://cdn.example/Inter-Regular-abc.woff2"})
+        bare = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], wordmark_style: "serif", labels: LABELS)
+        loaded = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", address: ["Studio"], wordmark_style: "serif", labels: LABELS, fonts: {"Inter-Regular.woff2" => "https://cdn.example/Inter-Regular-abc.woff2"})
 
         refute_includes bare, "@font-face"
         assert_includes loaded, %(@font-face { font-family: "Inter"; src: url("https://cdn.example/Inter-Regular-abc.woff2"))
       end
 
       def test_layout_shows_footer_links_only_when_given
-        labels = {terms: "Terms", privacy: "Privacy", unsubscribe: "Unsubscribe", powered_by: "Powered by %{name}"}
-        bare = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Shop", address: ["Shop", "1 Main St", "Toronto"], labels: labels)
+        labels = LABELS
+        bare = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Shop", address: ["Shop", "1 Main St", "Toronto"], wordmark_style: "serif", labels: labels)
         full = Mail::Text.layout("Hi", title: "Hi", preheader: "Hi", sender: "Shop", address: ["Shop"], labels: labels, sent_with: "Workbench", sent_with_url: "https://useworkbench.co")
 
         refute_includes bare, "Unsubscribe"
         assert_includes full, "Powered by Workbench: https://useworkbench.co"
+      end
+
+      def test_the_studio_terms_close_the_product_mails_but_not_a_shop_mail
+        own = Mail::Html.layout("<p>Hi</p>", title: "Hi", preheader: "Hi", sender: "Workbench", wordmark_style: "serif", labels: LABELS)
+        shop = Mail::Text.layout("Hi", title: "Hi", preheader: "Hi", sender: "Shop", address: ["Shop"], labels: LABELS, sent_with: "Workbench", sent_with_url: "https://useworkbench.co")
+
+        assert_includes own, %(href="#{TERMS_URL}")
+        assert_includes own, "it&#39;s us studio"
+        refute_includes shop, TERMS_URL
       end
     end
   end

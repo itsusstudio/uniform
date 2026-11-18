@@ -16,7 +16,7 @@ fr:
     input_phone:
       invalid: Entrez le numéro de téléphone complet, ou commencez par + et l’indicatif du pays.
     mail:
-      made_in: fabriqué à Montréal
+      made_in: fabriqué à montréal
       powered_by: "Propulsé par %{name}"
       privacy: Confidentialité
       terms: Conditions

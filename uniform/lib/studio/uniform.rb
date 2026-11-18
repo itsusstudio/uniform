@@ -1,5 +1,6 @@
 require "json"
 require "studio/uniform/version"
+require "studio/uniform/studio"
 require "studio/uniform/mail"
 
 module Studio

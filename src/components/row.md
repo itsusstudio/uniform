@@ -36,6 +36,9 @@ Wrapping
 Top edge
 : Add `u-row-top` to line up items of different heights along the top, like two open menus side by side.
 
+Spread
+: Add `u-row-spread` to push the first and last items to opposite ends, like Back and Skip under a form.
+
 ## When to use it
 
 Use it for

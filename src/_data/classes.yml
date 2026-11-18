@@ -19,6 +19,12 @@
   variant: true
   description: Lines the children up along their top edge, for items of different heights.
 
+- name: u-row-spread
+  group: Layout
+  page: /components/row/
+  variant: true
+  description: Pushes the first and last children to opposite ends, like Back and Skip under a form.
+
 - name: u-grid
   group: Layout
   page: /components/grid/

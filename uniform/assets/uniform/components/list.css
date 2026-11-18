@@ -23,6 +23,8 @@
   margin: 0;
 }
 
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(.u-icon, .u-btn, .u-badge) { flex: none; }
+
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(.u-meta, .u-btn, .u-btn-close, .u-actions, .u-badge, button):not(:is(.u-meta, .u-btn, .u-btn-close, .u-actions, .u-badge, button) ~ *) { margin-inline-start: auto; }
 
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(div, span, p) > * { margin: 0; }

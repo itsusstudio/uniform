@@ -1,0 +1,64 @@
+@layer uniform.components {
+.u-task-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  background: var(--u-color-bg-page);
+  color: var(--u-color-text-default);
+}
+
+.u-task-shell > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--u-space-4);
+  padding: calc(var(--u-space-6) + env(safe-area-inset-top)) var(--u-page-margin) var(--u-space-6);
+}
+
+.u-task-shell > header > a:last-child:not(:first-child) {
+  font-size: var(--u-font-size-small);
+  line-height: var(--u-line-height-small);
+}
+
+.u-task-shell > main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--u-space-6);
+  width: 100%;
+  max-width: calc(var(--u-max-width-form) + 2 * var(--u-page-margin));
+  padding: var(--u-space-24) var(--u-page-margin) calc(var(--u-space-12) + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.u-task-shell > main > * { margin: 0; }
+
+.u-task-shell > main > p + p { margin-top: calc(var(--u-space-2) - var(--u-space-6)); }
+
+@media (min-width: 40em) {
+  .u-task-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .u-task-shell > * { grid-column: 1; }
+
+  .u-task-shell::after {
+    content: "";
+    grid-column: 2;
+    grid-row: 1 / -1;
+    background: var(--u-color-bg-paper);
+  }
+}
+
+@media (min-width: 64em) {
+  .u-task-shell { grid-template-columns: minmax(480px, 1fr) minmax(0, 2fr); }
+
+  .u-task-shell::after {
+    background-image: url("./../images/cog-cobalt.webp");
+    background-position: left var(--u-space-12) bottom var(--u-space-12);
+    background-repeat: no-repeat;
+    background-size: 40%;
+  }
+}
+}

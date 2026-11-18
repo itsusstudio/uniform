@@ -38,6 +38,7 @@
 @import url("components/link.css");
 @import url("components/app-shell.css");
 @import url("components/auth-shell.css");
+@import url("components/task-shell.css");
 @import url("components/site-header.css");
 @import url("components/badge.css");
 @import url("components/chip.css");

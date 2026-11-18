@@ -1,0 +1,18 @@
+<%# locals: (id:, tag:) -%>
+<div class="u-task-shell">
+  <header>
+    <a class="u-wordmark u-wordmark-serif" href="/">Workbench</a>
+    <a href="/settings">Back to settings</a>
+  </header>
+  <<%= tag %>>
+    <hgroup>
+      <h1 class="u-text-page-title">Confirm it’s you</h1>
+      <p class="u-text-small">To change your email address, enter the code we sent to <strong class="u-text-strong">dana@kensingtonrepair.ca</strong>.</p>
+    </hgroup>
+    <form class="u-form" action="/account/email_address/verify" method="post">
+      <%= raw render("examples/text_field_code", id: "#{id}-code").strip.gsub("\n", "\n      ") %>
+      <button type="submit" class="u-btn u-btn-primary">Continue</button>
+    </form>
+    <form class="u-text-small" action="/account/email_address/resend" method="post">Didn’t get it? <button type="submit" class="u-link-btn">Send a new code</button></form>
+  </<%= tag %>>
+</div>

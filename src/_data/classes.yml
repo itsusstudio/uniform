@@ -151,7 +151,7 @@
   group: Components
   page: /components/wordmark/
   variant: true
-  description: Bricolage Grotesque medium, letters drawn close. It keeps the casing you write.
+  description: Apfel Grotezk Mittel, letters drawn close. It keeps the casing you write.
 
 - name: u-text-muted
   group: Type
@@ -605,7 +605,7 @@
 - name: u-input
   group: Components
   page: /components/text-field/
-  description: The box itself, on an `<input>`, `<textarea>` or `<select>`. `aria-invalid="true"` turns its border vermilion.
+  description: The box itself, on an `<input>`, `<textarea>` or `<select>`. `aria-invalid="true"` puts the focus ring around it in vermilion.
 
 - name: <u-input-code>
   group: Components
@@ -711,7 +711,12 @@
 - name: u-auth-shell
   group: Page frame
   page: /components/auth-shell/
-  description: "The frame around sign-in and sign-up screens, split into an ink half with the name and a two-line blurb, and the form, from 1024px wide. Inside it, in order: a `<header>` with the app name in `u-wordmark` and a `<p class=\"u-text-article-title\">` blurb, the `<main>` with the form, and an optional `<footer>` for terms and privacy links."
+  description: "The frame around sign-in and sign-up screens, split from 1024px wide into the form on the left third and an ink poster with the name and a two-line blurb on the right two thirds. Inside it, in order: a `<header>` with the app name in `u-wordmark` and a `<p class=\"u-text-section-title\">` blurb, the `<main>` with the form, and an optional `<footer>` for terms and privacy links."
+
+- name: u-task-shell
+  group: Page frame
+  page: /components/task-shell/
+  description: "The frame around one task someone does while signed in, away from the app's pages, like changing their email address. Inside it, in order: a `<header>` with the app name in `u-wordmark` and one link back to where the task started, then the `<main>` with the task in one centred column."
 
 - name: u-app-shell-paper
   group: Page frame

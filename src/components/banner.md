@@ -21,6 +21,15 @@ A banner holds a message for everyone on the page, like an announcement or an ac
 
 ## Code
 
+Start the banner with an icon, like `triangle-alert` on a warning, and it sits in its own column beside the text.
+
+```html
+<div class="u-banner u-banner-warning" role="status">
+  <svg class="u-icon u-icon-sm" aria-hidden="true">…</svg>
+  <p>Camera access is off for this site. Turn it on in your browser settings, or upload photos.</p>
+</div>
+```
+
 ```html
 <div class="u-banner u-banner-warning" role="status">
   <p class="u-banner-title">Your card expires on Nov 30</p>

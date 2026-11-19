@@ -12,6 +12,20 @@
 
 .u-banner > * { margin: 0; }
 
+.u-banner:has(> .u-icon:first-child) {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: var(--u-space-2);
+  align-items: start;
+}
+
+.u-banner:has(> .u-icon:first-child) > .u-icon {
+  grid-row: 1;
+  margin-block-start: calc((1lh - 16px) / 2);
+}
+
+.u-banner:has(> .u-icon:first-child) > :not(.u-icon) { grid-column: 2; }
+
 .u-banner > .u-actions { margin-top: var(--u-space-2); }
 
 .u-banner-full {

@@ -566,6 +566,11 @@
   page: /components/spinner/
   description: The 24px size, for a panel.
 
+- name: u-spinner-xl
+  group: Components
+  page: /components/spinner/
+  description: The 40px size with a thicker ring, for something that fills a large area while it loads, like a camera view.
+
 - name: u-timeline
   group: Components
   page: /components/timeline/

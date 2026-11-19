@@ -21,6 +21,12 @@
   height: 24px;
 }
 
+.u-spinner-xl {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
 .u-btn[aria-busy="true"]::before { content: ""; }
 
 .u-btn[aria-busy="true"] > .u-icon { display: none; }

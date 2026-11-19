@@ -63,7 +63,7 @@ Nothing
 : A page load, or a form that takes you to a new page. The browser shows its own loading. That's almost every screen.
 
 Spinner
-: A button while it saves.
+: A button while it saves. Or a camera or video that takes a moment to start, where the frame is already the right size: put a `u-spinner-xl` in the middle of it.
 
 Shimmer
 : Content that loads after the page, like a panel or a list. [Shimmer](/components/shimmer/) shows its shape.

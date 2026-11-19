@@ -51,7 +51,7 @@ dismiss it.
 
 Toasts sit at the bottom, centred on the page's content. In an
 [app shell](/components/app-shell/) they centre on the main area, beside the
-sidebar, and rise above the phone's tab bar.
+sidebar.
 
 ## Problems
 

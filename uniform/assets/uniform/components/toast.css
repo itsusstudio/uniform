@@ -24,7 +24,7 @@ u-toast[popover] {
 @supports (anchor-name: --u-app-main) {
   u-toast {
     right: calc(anchor(--u-app-main right, 0px) + var(--u-space-6));
-    bottom: calc(anchor(--u-app-tabs top, env(safe-area-inset-bottom, 0px)) + var(--u-space-6));
+    bottom: calc(env(safe-area-inset-bottom, 0px) + var(--u-space-6));
     left: calc(anchor(--u-app-main left, 0px) + var(--u-space-6));
   }
 }
@@ -105,7 +105,7 @@ u-toast > div > p {
   margin: 0;
 }
 
-u-toast > div > button:not(.u-btn-close) {
+u-toast > div > :is(button:not(.u-btn-close), a) {
   display: inline-flex;
   align-items: center;
   min-height: var(--u-size-target);
@@ -124,7 +124,7 @@ u-toast > div > button:not(.u-btn-close) {
 u-toast > div > .u-btn-close { color: inherit; }
 
 u-toast > div > .u-btn-close:hover,
-u-toast > div > button:not(.u-btn-close):hover { background: color-mix(in srgb, currentColor 15%, transparent); }
+u-toast > div > :is(button:not(.u-btn-close), a):hover { background: color-mix(in srgb, currentColor 15%, transparent); }
 
 u-toast > div :focus-visible { outline-color: currentColor; }
 }

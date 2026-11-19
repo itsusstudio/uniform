@@ -275,7 +275,12 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   background: var(--u-color-bg-page);
 }
 
-.u-app-shell > main > .u-banner-full { margin-block: calc(var(--u-space-12) * -1) var(--u-space-12); }
+.u-app-shell > main > .u-banner-full {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  margin-block: calc(var(--u-space-12) * -1) var(--u-space-12);
+}
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-u-theme="light"]) .u-app-shell:not(.u-app-shell-paper) > u-sidebar {
@@ -502,7 +507,10 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
   .u-app-shell > main { padding-block: var(--u-space-6) calc(var(--u-space-12) + env(safe-area-inset-bottom)); }
 
-  .u-app-shell > main > .u-banner-full { margin-block: calc(var(--u-space-6) * -1) var(--u-space-6); }
+  .u-app-shell > main > .u-banner-full {
+    top: calc(var(--u-size-control) + var(--u-space-2) * 2 + 1px + env(safe-area-inset-top));
+    margin-block: calc(var(--u-space-6) * -1) var(--u-space-6);
+  }
 
   /* The page scrolls on the root, so each target keeps clear of the sticky bars instead. */
   .u-app-shell > main * { scroll-margin-block-start: calc(var(--u-size-control) + var(--u-space-2) * 2 + 1px + env(safe-area-inset-top)); }

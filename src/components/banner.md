@@ -41,7 +41,7 @@ A banner holds a message for everyone on the page, like an announcement or an ac
 
 ## Across the whole app
 
-Add `u-banner-full` for news about the whole app. It runs edge to edge across the top of the page area.
+Add `u-banner-full` for news about the whole app. It runs edge to edge across the top of the page area and stays in view as the page scrolls, under the header on a phone.
 
 <div class="u-banner u-banner-info u-banner-full" role="status">
 <p><strong>Workbench 2.0 is rolling out.</strong> Improvements are coming over the next few weeks.</p>

@@ -1710,7 +1710,7 @@ define("u-data-grid", class extends UniformElement {
   rowLinks(on, tbody) {
     on(tbody, "click", (event) => {
       if (event.defaultPrevented || event.button !== 0) return
-      if (event.target.closest("a, button, input, label, select, summary, textarea, [popover], .u-data-grid-editor")) return
+      if (event.target.closest("a, button, input, label, select, summary, textarea, [popover], .u-data-grid-editor, .u-table-actions")) return
       const cell = event.target.closest("td, th")
       if (!cell || cell.querySelector(":scope > template")) return
       const link = cell.parentElement.cells[0]?.querySelector("a:not(.u-btn)")

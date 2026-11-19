@@ -61,6 +61,17 @@
   z-index: 1;
 }
 
+:is(.u-table, u-chart) > table .u-table-actions {
+  position: relative;
+  z-index: 1;
+  width: 1%;
+  white-space: nowrap;
+  text-align: end;
+  cursor: default;
+}
+
+.u-table > table tbody tr:hover > .u-table-actions { background: none; }
+
 :is(.u-table, u-chart) > table .u-table-num {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;

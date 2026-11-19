@@ -148,6 +148,8 @@ u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)) { cursor
 
 u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)):hover > * { background: var(--border-color-divider); }
 
+u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)):hover > .u-table-actions { background: none; }
+
 u-data-grid .u-table > table tbody tr > :first-child > a:not(.u-btn)::after { content: none; }
 
 :where(u-data-grid) .u-table > table tbody tr:where(:hover) > * { background: none; }

@@ -1,9 +1,8 @@
-<%# locals: (id:, live:, tabs: false) -%>
-<% tabs_on = defined?(tabs) && tabs -%>
+<%# locals: (id:, live:) -%>
 <div class="u-app-shell">
   <header>
     <a class="u-wordmark u-wordmark-serif" href="/" data-monogram="W">Workbench</a>
-    <button type="button" class="u-btn u-btn-ghost"<% if live %> popovertarget="<%= id %>-nav"<% end %>>Menu</button>
+    <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Menu"<% if live %> popovertarget="<%= id %>-nav"<% end %>></button>
   </header>
   <%= raw render("examples/app_shell_nav", id: "#{id}-nav", popover: true).strip.gsub("\n", "\n  ") %>
   <main>
@@ -19,11 +18,4 @@
       </header>
     </div>
   </main>
-<% if tabs_on -%>
-  <nav aria-label="Workbench">
-<% [["/", "house", "Home"], ["/jobs", "wrench", "Jobs"], ["/customers", "users", "Customers"], ["/payments", "credit-card", "Payments"]].each do |href, icon_name, label| -%>
-    <a href="<%= href %>"<% if label == "Jobs" %> aria-current="page"<% end %>><%= raw render("icon", name: icon_name, small: false).strip %><span><%= label %></span></a>
-<% end -%>
-  </nav>
-<% end -%>
 </div>

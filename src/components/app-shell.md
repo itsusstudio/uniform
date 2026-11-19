@@ -23,8 +23,8 @@ the account. It folds to an icon rail on wide screens.
 
 ## Ink or paper
 
-The sidebar and the tab bar sit on ink. Add `u-app-shell-paper` to the shell
-to put them on paper instead. Paper is quieter; ink sets the frame apart.
+The sidebar sits on ink. Add `u-app-shell-paper` to the shell
+to put it on paper instead. Paper is quieter; ink sets the frame apart.
 
 ## On a phone
 
@@ -32,28 +32,6 @@ Below 1024px, the nav hides and the shell's `<header>` takes its place, with
 the app name and a Menu button. Menu opens the same nav over the page, and
 Escape or a tap outside closes it. See the
 [dashboard shell](/patterns/dashboard-shell/#on-a-phone) for both states.
-
-## Tab bar
-
-<div class="u-row u-items-start u-gap-6 frame-phones">
-<div class="frame frame-phone" style="height: 560px">
-<%= render "screen", title: "App shell with a tab bar on a phone", html: render("examples/app_shell", id: "app-shell-tabs", live: true, tabs: true) %>
-</div>
-</div>
-
-A product people use on their phones can put its main places in a tab bar
-along the bottom, where a thumb reaches them. Add a `<nav>` after the `<main>`,
-with each link an icon above a one-word name. It shows only on phones.
-Everything else stays in Menu.
-
-```html
-<nav aria-label="Workbench">
-  <a href="/">…<span>Home</span></a>
-  <a href="/jobs" aria-current="page">…<span>Jobs</span></a>
-  <a href="/customers">…<span>Customers</span></a>
-  <a href="/payments">…<span>Payments</span></a>
-</nav>
-```
 
 ## Code
 
@@ -83,7 +61,7 @@ Landmarks
 : The bar is a `<header>`, the places are a `<nav>` with an `aria-label`, and the page is the one `<main>`.
 
 Menu button
-: A `<button>` with `popovertarget`. The browser handles focus, Escape and a tap outside.
+: A `<button>` with `popovertarget` and `aria-label="Menu"`. It shows only the menu icon, so the label is what screen readers announce. The browser handles focus, Escape and a tap outside.
 
 ## Rules
 

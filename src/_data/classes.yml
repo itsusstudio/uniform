@@ -730,7 +730,7 @@
 - name: u-app-shell
   group: Page frame
   page: /components/app-shell/
-  description: "The app's outer frame, with the sidebar beside the page. Inside it, in order: the phone bar `<header>` with the app name in `u-wordmark` and a ghost Menu button; the `<u-sidebar>`; the `<main>` with a `u-container` inside; and an optional `<nav>` tab bar."
+  description: "The app's outer frame, with the sidebar beside the page. Inside it, in order: the phone bar `<header>` with the app name in `u-wordmark` and an icon-only ghost Menu button (`u-btn-icon` with `aria-label=\"Menu\"`); the `<u-sidebar>`; and the `<main>` with a `u-container` inside."
 
 - name: u-auth-shell
   group: Page frame
@@ -751,17 +751,12 @@
   group: Page frame
   page: /components/app-shell/
   variant: true
-  description: Puts the sidebar and the tab bar on paper instead of ink.
+  description: Puts the sidebar on paper instead of ink.
 
 - name: <u-sidebar>
   group: Page frame
   page: /components/sidebar/
   description: "The sidebar column. Its first `<div>` holds the app name in `u-wordmark` and an empty collapse `<button aria-label=\"Sidebar\" aria-expanded=\"true\">`. Then comes the `u-nav`, each link with an icon and its name in a `<span>`. Its last `<div>` stays at the bottom: a `<ul>` of links, then the account `<button>` with the initials in one `<span>` and the name in the next, opening a `u-menu`. `aria-expanded=\"false\"` folds the column to an icon rail."
-
-- name: Tab bar
-  group: Page frame
-  page: /components/app-shell/
-  description: The `<nav>` after the `<main>`, shown below 1024px. Three to five links, each an icon above a one-word `<span>`.
 
 - name: u-table-controls
   group: Components

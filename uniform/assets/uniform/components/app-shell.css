@@ -39,8 +39,6 @@
 
 .u-app-shell > main { anchor-name: --u-app-main; }
 
-.u-app-shell > nav { anchor-name: --u-app-tabs; }
-
 .u-app-shell:has(> u-sidebar > div:first-child > button[aria-expanded="false"]) { grid-template-columns: auto minmax(0, 1fr); }
 
 .u-app-shell > header { display: none; }
@@ -48,14 +46,12 @@
 .u-app-shell > header > button::before {
   content: "";
   flex: none;
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   background: currentcolor;
   mask: url("./../icons/menu.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
-
-.u-app-shell > nav { display: none; }
 
 u-sidebar {
   display: flex;
@@ -75,7 +71,7 @@ u-sidebar {
 
 .u-app-shell-paper > u-sidebar { border-inline-end: 1px solid var(--u-nav-line); }
 
-:is(.u-app-shell:not(.u-app-shell-paper) > :is(u-sidebar, nav), :not(.u-app-shell) > u-sidebar:not(.u-app-shell-paper)) { color-scheme: dark; }
+:is(.u-app-shell:not(.u-app-shell-paper) > u-sidebar, :not(.u-app-shell) > u-sidebar:not(.u-app-shell-paper)) { color-scheme: dark; }
 
 /* Popovers opened from the ink panel, like the account menu, keep the page's theme. */
 u-sidebar [popover] { color-scheme: light dark; }
@@ -127,7 +123,7 @@ u-sidebar > div:first-child > button[aria-expanded]::before {
   forced-color-adjust: none;
 }
 
-:is(u-sidebar, .u-app-shell > nav) :focus-visible { outline-color: var(--u-nav-focus); }
+u-sidebar :focus-visible { outline-color: var(--u-nav-focus); }
 
 u-sidebar > div:first-child > button[aria-expanded]:hover {
   background: var(--u-nav-hover);
@@ -444,7 +440,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   .u-app-shell > u-sidebar {
     position: fixed;
     inset: 0 auto 0 0;
-    width: 75%;
+    width: min(85%, 20rem);
     height: auto;
     padding-top: calc(var(--u-space-6) + env(safe-area-inset-top));
     padding-inline:
@@ -514,57 +510,6 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
   /* The page scrolls on the root, so each target keeps clear of the sticky bars instead. */
   .u-app-shell > main * { scroll-margin-block-start: calc(var(--u-size-control) + var(--u-space-2) * 2 + 1px + env(safe-area-inset-top)); }
-
-  .u-app-shell:has(> nav) > main * { scroll-margin-block-end: calc(var(--u-space-1) * 7 + 20px + var(--u-font-size-caption) * var(--u-line-height-caption) + 1px + env(safe-area-inset-bottom)); }
-
-  .u-app-shell:has(> nav) > main { padding-bottom: var(--u-space-12); }
-
-  .u-app-shell > nav {
-    display: flex;
-    position: sticky;
-    bottom: 0;
-    z-index: 1;
-    padding:
-      var(--u-space-1)
-      env(safe-area-inset-right)
-      calc(var(--u-space-1) + env(safe-area-inset-bottom))
-      env(safe-area-inset-left);
-    border: 0;
-    border-top: 1px solid var(--u-nav-line);
-    background: var(--u-nav-bg);
-  }
-
-  .u-app-shell > nav > a {
-    display: flex;
-    flex: 1 1 0;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--u-space-1);
-    min-width: 0;
-    padding-block: var(--u-space-1);
-    color: var(--u-nav-link);
-    font-size: var(--u-font-size-caption);
-    line-height: var(--u-line-height-caption);
-    text-decoration: none;
-  }
-
-  .u-app-shell > nav > a > .u-icon {
-    box-sizing: content-box;
-    padding: var(--u-space-1) var(--u-space-4);
-    border-radius: var(--u-radius-pill);
-  }
-
-  .u-app-shell > nav > a:hover > .u-icon { background: var(--u-nav-line); }
-
-  .u-app-shell > nav > a[aria-current="page"] {
-    color: var(--u-nav-text);
-    font-weight: 500;
-  }
-
-  .u-app-shell > nav > a[aria-current="page"] > .u-icon {
-    background: var(--u-nav-current-bg);
-    color: var(--u-nav-current-text);
-  }
 }
 
 }

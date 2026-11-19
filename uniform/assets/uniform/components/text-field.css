@@ -160,8 +160,8 @@ u-combobox:has(> .u-input:disabled)::after { background: var(--u-color-border-in
 }
 
 .u-fieldset {
-  display: grid;
-  min-width: 0;
+  display: block;
+  min-inline-size: 0;
   margin: 0;
   padding: 0;
   border: 0;

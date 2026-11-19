@@ -21,18 +21,18 @@ folds the nav down to its icons.
 
 ### On a phone
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
-<div class="u-stack u-gap-2">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
+<div class="flex flex-col gap-2">
 <div class="frame frame-phone" style="height: 720px">
 <%= render "screen", title: "Dashboard shell on a phone, menu closed", html: render("examples/pattern_dashboard_shell_app", id: "shell-phone", live: false) %>
 </div>
-<p class="u-text-small u-text-muted">Menu closed: the bar and the page.</p>
+<p class="text-small text-muted">Menu closed: the bar and the page.</p>
 </div>
-<div class="u-stack u-gap-2">
+<div class="flex flex-col gap-2">
 <div class="frame frame-phone frame-phone-open" style="height: 720px">
 <%= render "screen", title: "Dashboard shell on a phone, menu open", state: "frame-phone-open", html: render("examples/pattern_dashboard_shell_app", id: "shell-phone-open", live: false) %>
 </div>
-<p class="u-text-small u-text-muted">Menu open: the nav slides in over a backdrop, three quarters wide.</p>
+<p class="text-small text-muted">Menu open: the nav slides in over a backdrop, three quarters wide.</p>
 </div>
 </div>
 
@@ -51,7 +51,7 @@ Sidebar
 : The column with the app's places and the account. See the [sidebar](/components/sidebar/) for what goes inside.
 
 Content
-: A [container](/components/container/) inside the `<main>`, holding a [stack](/components/stack/) with a 48px gap.
+: A [container](/components/container/) inside the `<main>`, holding a `flex flex-col gap-12` column.
 
 Page header
 : A [page header](/components/page-header/) at the top of the content, holding the title, the count line and “New job”.

@@ -31,7 +31,7 @@ takes the place of the filters, so the table doesn't move.
 
 ### On a phone
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
 <div class="data-grid-phone">
 <%= render "examples/pattern_data_grid_phone", prefix: "dg-phone", code: false, sheet_open: false %>
 </div>

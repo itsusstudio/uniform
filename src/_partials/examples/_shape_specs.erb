@@ -1,12 +1,12 @@
 <div class="spec-list">
 <% rows.each do |row| %>
 <div class="spec-row">
-<div class="spec-meta"><% if row[:copy] %><u-copy><button type="button" class="u-link-btn u-text-data" data-copy="<%= row[:copy] %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= row[:copy] %></button></u-copy><% else %><span class="u-text-data shape-meta-name"><%= row[:name] %></span><% end %><% if row[:detail] %><span><%= row[:detail] %></span><% end %></div>
+<div class="spec-meta"><% if row[:copy] %><u-copy><button type="button" class="u-link-btn u-data" data-copy="<%= row[:copy] %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= row[:copy] %></button></u-copy><% else %><span class="u-data shape-meta-name"><%= row[:name] %></span><% end %><% if row[:detail] %><span><%= row[:detail] %></span><% end %></div>
 <div class="colour-row shape-row">
 <span class="shape-sample"><%= raw row[:sample] %></span>
-<div class="u-stack u-gap-1">
-<p class="u-text-body"><%= row[:job] %></p>
-<% if row[:never] %><p class="u-text-small u-text-muted">Never: <%= row[:never] %></p><% end %>
+<div class="flex flex-col gap-1">
+<p class="text-body"><%= row[:job] %></p>
+<% if row[:never] %><p class="text-small text-muted">Never: <%= row[:never] %></p><% end %>
 </div>
 </div>
 </div>

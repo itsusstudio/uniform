@@ -75,22 +75,22 @@ The shop
 
 ## Colours
 
-The hex values come from the light mode in `uniform/tokens.css`. If a token
+The hex values come from the light mode in `uniform/theme.css`. If a token
 changes there, change it here and in every mailer.
 
 | Token | Hex | In email |
 |---|---|---|
-| `--u-color-text-default` | `#1a1a18` | Body text, headings, the button's fill |
-| `--u-color-text-muted` | `#6b6964` | Footer and small print |
-| `--u-color-bg-surface` | `#ffffff` | The whole email |
-| `--u-color-bg-paper` | `#f5f4ef` | Text on the button |
-| `--u-color-border-input` | `#8c8981` | The line around a sign-in code |
-| `--u-color-divider` | `#ebeae6` | Lines between rows, like on a receipt |
-| `--u-color-link` | `#2449b0` | Links |
-| `--u-color-danger` | `#c03a26` | Signal square for something wrong |
-| `--u-color-warning` | `#f3c22c` | Signal square for something that needs attention |
-| `--u-color-success` | `#277a4d` | Signal square for something done |
-| `--u-color-info` | `#2f5bd3` | Signal square for information |
+| `--text-color-default` | `#1a1a18` | Body text, headings, the button's fill |
+| `--text-color-muted` | `#6b6964` | Footer and small print |
+| `--background-color-surface` | `#ffffff` | The whole email |
+| `--background-color-paper` | `#f5f4ef` | Text on the button |
+| `--border-color-input` | `#8c8981` | The line around a sign-in code |
+| `--border-color-divider` | `#ebeae6` | Lines between rows, like on a receipt |
+| `--text-color-link` | `#2449b0` | Links |
+| `--color-danger` | `#c03a26` | Signal square for something wrong |
+| `--color-warning` | `#f3c22c` | Signal square for something that needs attention |
+| `--color-success` | `#277a4d` | Signal square for something done |
+| `--color-info` | `#2f5bd3` | Signal square for information |
 
 Emails are light only. The head sets `color-scheme` and
 `supported-color-schemes` to light, and every background is set on its own
@@ -176,25 +176,25 @@ Every block, for the format being rendered:
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="mailer-mock mailer-mock-centred">
 <div class="mailer-layout-blocked">Kensington logo</div>
-<p class="u-text-heading">WE’VE CHANGED OUR HOURS</p>
-<p class="u-text-small u-text-muted">Images are hidden. Show images</p>
+<p class="text-heading">WE’VE CHANGED OUR HOURS</p>
+<p class="text-small text-muted">Images are hidden. Show images</p>
 </div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A logo image and a centred headline up top. Plenty of inboxes block images, so the first thing the reader sees is an empty box.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="mailer-mock">
 <p>Kensington Jewellery Repair</p>
-<p class="u-text-heading">We’ve changed our hours</p>
-<p class="u-text-small">Hi Ana, from Monday, Nov 17 we open at 10am and close at 7pm.</p>
+<p class="text-heading">We’ve changed our hours</p>
+<p class="text-small">Hi Ana, from Monday, Nov 17 we open at 10am and close at 7pm.</p>
 </div>
 </div>
 <figcaption class="example-caption example-caption-do"><span>The sender's name in type and the heading flush left. It reads the same with images on or off.</span></figcaption>

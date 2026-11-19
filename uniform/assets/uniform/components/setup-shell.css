@@ -1,72 +1,66 @@
-@layer uniform.components {
+@layer components {
 .u-setup-shell {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  background: var(--u-color-bg-page);
-  color: var(--u-color-text-default);
+  background: var(--background-color-page);
+  color: var(--text-color-default);
 }
 
 .u-setup-shell > header {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: var(--u-space-4);
-  padding: calc(var(--u-space-6) + env(safe-area-inset-top)) var(--u-page-margin) var(--u-space-6);
+  gap: --spacing(4);
+  padding: calc(--spacing(6) + env(safe-area-inset-top)) var(--spacing-edge) --spacing(6);
 }
 
 .u-setup-shell > header > p {
   justify-self: end;
-  margin: 0;
-  color: var(--u-color-text-muted);
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  color: var(--text-color-muted);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
   white-space: nowrap;
 }
 
 .u-setup-shell > header > ol {
   display: flex;
-  gap: var(--u-space-1);
+  gap: --spacing(1);
   width: 12rem;
-  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .u-setup-shell > header > ol > li {
   flex: 1;
-  height: var(--u-space-1);
-  border-radius: var(--u-radius-pill);
-  background: var(--u-color-border);
+  height: --spacing(1);
+  border-radius: var(--radius-pill);
+  background: var(--border-color-default);
 }
 
-.u-setup-shell > header > ol > :is(li[aria-current="step"], li:has(~ li[aria-current="step"])) { background: var(--u-color-text-default); }
+.u-setup-shell > header > ol > :is(li[aria-current="step"], li:has(~ li[aria-current="step"])) { background: var(--text-color-default); }
 
 .u-setup-shell > main {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-6);
+  gap: --spacing(6);
   width: 100%;
-  max-width: calc(var(--u-max-width-form) + 2 * var(--u-page-margin));
+  max-width: calc(var(--container-form) + 2 * var(--spacing-edge));
   margin-inline: auto;
-  padding: var(--u-space-24) var(--u-page-margin) var(--u-space-12);
+  padding: --spacing(24) var(--spacing-edge) --spacing(12);
   box-sizing: border-box;
 }
-
-.u-setup-shell > main > * { margin: 0; }
 
 .u-setup-shell > footer {
   display: flex;
   justify-content: center;
   margin-top: auto;
-  padding: var(--u-space-6) var(--u-page-margin) calc(var(--u-space-6) + env(safe-area-inset-bottom));
+  padding: --spacing(6) var(--spacing-edge) calc(--spacing(6) + env(safe-area-inset-bottom));
 }
 
-.u-setup-shell > footer > form { margin: 0; }
-
-@media (max-width: 39.99em) {
+@media (width < --theme(--breakpoint-sm)) {
   .u-setup-shell > header > ol { width: 4.5rem; }
 
-  .u-setup-shell > main { padding-top: var(--u-space-12); }
+  .u-setup-shell > main { padding-top: --spacing(12); }
 }
 }

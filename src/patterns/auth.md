@@ -45,7 +45,7 @@ what to do next. The way out, sending a new code, sits right below.
 
 ### On a phone
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
 <div class="frame frame-phone" style="height: 720px">
 <%= render "screen", title: "Sign in on a phone", html: render("examples/pattern_auth_sign_in", id: "auth-phone-in", tag: "div") %>
 </div>
@@ -64,7 +64,7 @@ Frame
 : The [auth shell](/components/auth-shell/): the app name in its `<header>`, the screen in its `<main>`, and the terms and privacy links in its `<footer>`. Every studio app uses the same one.
 
 Heading
-: `u-text-page-title`, the screen's one `h1`. A line under it, like where the code went or why someone is back on this screen, goes with it in an `<hgroup>`. See [Typography](/foundations/typography/).
+: `text-page-title`, the screen's one `h1`. A line under it, like where the code went or why someone is back on this screen, goes with it in an `<hgroup>`. See [Typography](/foundations/typography/).
 
 Form
 : A [`u-form`](/components/form/) holding the [text fields](/components/text-field/), then the [primary button](/components/button/). The form stretches the button to the column's width.
@@ -90,14 +90,14 @@ and the error until a code doesn't match.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <section class="u-card auth-demo-centred">
 <div class="u-card-content">
-<p class="u-text-heading">Welcome back to Workbench</p>
-<p class="u-text-small u-text-muted">Enter your email address and we’ll send you a code</p>
+<p class="text-heading">Welcome back to Workbench</p>
+<p class="text-small text-muted">Enter your email address and we’ll send you a code</p>
 <input class="u-input" aria-label="Email address" placeholder="Email address">
 <button type="button" class="u-btn u-btn-primary">Send code</button>
 </div>
@@ -105,12 +105,12 @@ and the error until a code doesn't match.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Centred text in a box. Every line starts somewhere new, the placeholder stands in for a label, and the card draws a border around a form that’s already alone on the page.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="u-grid">
-<div class="u-span-8 u-stack">
-<p class="u-text-heading">Sign in</p>
+<div class="@grid:col-span-8 flex flex-col gap-6">
+<p class="text-heading">Sign in</p>
 <form class="u-form" action="#do-and-dont">
 <div class="u-field">
 <label for="auth-do-email">Email address</label>

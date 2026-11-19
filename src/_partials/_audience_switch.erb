@@ -1,8 +1,8 @@
 <% switch_legend_hidden = defined?(legend_hidden) && legend_hidden -%>
-<% switch_legend_class = (defined?(legend_class) && legend_class) || "u-text-small u-text-muted" -%>
-<form class="u-row">
+<% switch_legend_class = (defined?(legend_class) && legend_class) || "text-small text-muted" -%>
+<form class="flex flex-wrap items-center gap-2">
 <fieldset class="u-fieldset">
-<legend class="<%= switch_legend_hidden ? "u-visually-hidden" : switch_legend_class %>">Audience</legend>
+<legend class="<%= switch_legend_hidden ? "sr-only" : switch_legend_class %>">Audience</legend>
 <div class="u-toggle-group">
 <label><input type="radio" name="site-audience" value="business" checked> Business</label>
 <label><input type="radio" name="site-audience" value="consumer"> Consumer</label>

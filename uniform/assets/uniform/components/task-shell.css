@@ -1,40 +1,38 @@
-@layer uniform.components {
+@layer components {
 .u-task-shell {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
-  background: var(--u-color-bg-page);
-  color: var(--u-color-text-default);
+  background: var(--background-color-page);
+  color: var(--text-color-default);
 }
 
 .u-task-shell > header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--u-space-4);
-  padding: calc(var(--u-space-6) + env(safe-area-inset-top)) var(--u-page-margin) var(--u-space-6);
+  gap: --spacing(4);
+  padding: calc(--spacing(6) + env(safe-area-inset-top)) var(--spacing-edge) --spacing(6);
 }
 
 .u-task-shell > header > a:last-child:not(:first-child) {
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
 }
 
 .u-task-shell > main {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-6);
+  gap: --spacing(6);
   width: 100%;
-  max-width: calc(var(--u-max-width-form) + 2 * var(--u-page-margin));
-  padding: var(--u-space-24) var(--u-page-margin) calc(var(--u-space-12) + env(safe-area-inset-bottom));
+  max-width: calc(var(--container-form) + 2 * var(--spacing-edge));
+  padding: --spacing(24) var(--spacing-edge) calc(--spacing(12) + env(safe-area-inset-bottom));
   box-sizing: border-box;
 }
 
-.u-task-shell > main > * { margin: 0; }
+.u-task-shell > main > p + p { margin-top: calc(--spacing(2) - --spacing(6)); }
 
-.u-task-shell > main > p + p { margin-top: calc(var(--u-space-2) - var(--u-space-6)); }
-
-@media (min-width: 40em) {
+@media (width >= --theme(--breakpoint-sm)) {
   .u-task-shell {
     display: grid;
     grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
@@ -47,16 +45,16 @@
     content: "";
     grid-column: 2;
     grid-row: 1 / -1;
-    background: var(--u-color-bg-paper);
+    background: var(--background-color-paper);
   }
 }
 
-@media (min-width: 64em) {
+@media (width >= --theme(--breakpoint-lg)) {
   .u-task-shell { grid-template-columns: minmax(480px, 1fr) minmax(0, 2fr); }
 
   .u-task-shell::after {
-    background-image: url("./../images/cog-cobalt.webp");
-    background-position: left var(--u-space-12) bottom var(--u-space-12);
+    background-image: url("/uniform/images/cog-cobalt.webp");
+    background-position: left --spacing(12) bottom --spacing(12);
     background-repeat: no-repeat;
     background-size: 40%;
   }

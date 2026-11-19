@@ -11,7 +11,7 @@ A heading group is a heading with one line under it. It's the plain `<hgroup>` e
 ## Example
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <section class="u-card">
 <div class="u-card-content">
 <hgroup>
@@ -21,7 +21,7 @@ A heading group is a heading with one line under it. It's the plain `<hgroup>` e
 </div>
 </section>
 </div>
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <section class="u-card">
 <div class="u-card-content">
 <hgroup>
@@ -47,7 +47,7 @@ A heading group is a heading with one line under it. It's the plain `<hgroup>` e
 
 Use the heading level the page needs: `<h2>` for a card on a page whose title
 is the `<h1>`, `<h3>` inside a section. The level doesn't change the size. To
-make the heading larger, add a type class like `u-text-heading`.
+make the heading larger, add a type class like `text-heading`.
 
 ## Parts
 
@@ -61,7 +61,7 @@ One heading
 ## Rules
 
 Never build one by hand
-: A heading with a muted line under it is always an `<hgroup>`, never a stack with `u-text-small` and `u-text-muted`. Copies built by hand drift in size, colour or gap, and the screens stop matching.
+: A heading with a muted line under it is always an `<hgroup>`, never a stack with `text-small` and `text-muted`. Copies built by hand drift in size, colour or gap, and the screens stop matching.
 
 One line under the heading
 : Anything longer than a sentence is content. Put it in the card or section below.

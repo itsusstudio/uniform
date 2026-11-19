@@ -11,15 +11,15 @@ too long for one page.
 
 ## Example
 
-<div class="u-stack u-gap-4">
+<div class="flex flex-col gap-4">
 <section class="u-card">
 <header>
 <h3>Picked up</h3>
 </header>
 <ul class="u-list">
-<li><span class="u-text-data">#1012</span><span>Ana Reyes, ring resize</span><span class="u-meta">Nov 4</span></li>
-<li><span class="u-text-data">#1009</span><span>Omar Haddad, watch battery</span><span class="u-meta">Nov 3</span></li>
-<li><span class="u-text-data">#1007</span><span>June Park, chain repair</span><span class="u-meta">Nov 3</span></li>
+<li><span class="u-data">#1012</span><span>Ana Reyes, ring resize</span><span class="u-meta">Nov 4</span></li>
+<li><span class="u-data">#1009</span><span>Omar Haddad, watch battery</span><span class="u-meta">Nov 3</span></li>
+<li><span class="u-data">#1007</span><span>June Park, chain repair</span><span class="u-meta">Nov 3</span></li>
 </ul>
 </section>
 <nav class="u-pagination" aria-label="Pages">
@@ -31,7 +31,7 @@ too long for one page.
 
 ## States
 
-<div class="example-frame u-stack u-gap-4">
+<div class="example-frame flex flex-col gap-4">
 <nav class="u-pagination" aria-label="First page">
 <a aria-disabled="true" aria-label="Previous page"></a>
 <span>1–25 of 112</span>
@@ -82,23 +82,23 @@ Previous and next
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <nav class="u-pagination" aria-label="Don’t example">
 <a href="#do-and-dont" aria-label="Previous page"></a>
-<a class="u-btn u-btn-ghost u-btn-icon u-text-data" href="#do-and-dont">1</a>
-<a class="u-btn u-btn-outline u-btn-icon u-text-data" href="#do-and-dont">2</a>
-<a class="u-btn u-btn-ghost u-btn-icon u-text-data" href="#do-and-dont">3</a>
-<span class="u-text-muted">…</span>
-<a class="u-btn u-btn-ghost u-btn-icon u-text-data" href="#do-and-dont">5</a>
+<a class="u-btn u-btn-ghost u-btn-icon u-data" href="#do-and-dont">1</a>
+<a class="u-btn u-btn-outline u-btn-icon u-data" href="#do-and-dont">2</a>
+<a class="u-btn u-btn-ghost u-btn-icon u-data" href="#do-and-dont">3</a>
+<span class="text-muted">…</span>
+<a class="u-btn u-btn-ghost u-btn-icon u-data" href="#do-and-dont">5</a>
 <a href="#do-and-dont" aria-label="Next page"></a>
 </nav>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A strip of page numbers. Nobody knows their job is on page 3, and the strip doesn't say how many jobs there are.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <nav class="u-pagination" aria-label="Do example">

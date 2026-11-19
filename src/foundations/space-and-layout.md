@@ -19,17 +19,18 @@ Six steps, each for one kind of closeness. Most of the time a block sets the
 step for you: a [heading group](/components/heading-group/) or a
 [field](/components/text-field/) puts its parts 8px apart, a
 [form](/components/form/) puts fields 16px apart, a [card](/components/card/)
-pads its content by 24px. Pick a `u-gap` class only for a stack, row or grid
-no block covers. The number is how many 4px units it holds, so `u-gap-6` is
-6 × 4 = 24px.
+pads its content by 24px. Where no block covers a layout, use Tailwind's
+spacing utilities. Uniform sets Tailwind's spacing unit to 4px, so the number
+in a class counts 4px units: `gap-6` is 6 × 4 = 24px, and `p-12` is 48px.
+Stay on the six steps below.
 
 <%= render "examples/space_specs", rows: [
-  { token: "--u-space-1", px: 4, job: "Inside one element: an icon to its label, the padding of a chip.", uses: ["An icon and its label inside a button", "Icon buttons in `u-actions u-gap-1`", "Padding inside a chip"] },
-  { token: "--u-space-2", px: 8, job: "Parts of one item: a label to its input, a title to its meta.", uses: ["A label and its input in `u-field`", "A heading and its line in `<hgroup>`, a figure and its label in `u-stat`", "Buttons side by side in `u-actions`"] },
-  { token: "--u-space-4", px: 16, job: "Items in a group or list, and padding inside small components.", uses: ["One field and the next in `u-form`", "Items in a list or menu", "Padding inside a small card or popover"] },
-  { token: "--u-space-6", px: 24, job: "Between blocks, card padding and the grid gutter.", uses: ["Padding inside a card or panel", "The heading, fields and buttons of a `u-form`", "The grid gutter, and a site section title to its content"] },
-  { token: "--u-space-12", px: 48, job: "Between sections in an app, and from a site intro to its content.", uses: ["A page title and the content below it in an app", "One region of an app page and the next, and stats in `u-stats`", "A site intro and what follows it"] },
-  { token: "--u-space-24", px: 96, job: "Between sections on a site. The same on every screen size.", uses: ["One section of a marketing page and the next", "The end of a blog post and the footer", "Nothing in apps"] },
+  { px: 4, job: "Inside one element: an icon to its label, the padding of a chip.", uses: ["An icon and its label inside a button", "Icon buttons in `u-actions gap-1`", "Padding inside a chip"] },
+  { px: 8, job: "Parts of one item: a label to its input, a title to its meta.", uses: ["A label and its input in `u-field`", "A heading and its line in `<hgroup>`, a figure and its label in `u-stat`", "Buttons side by side in `u-actions`"] },
+  { px: 16, job: "Items in a group or list, and padding inside small components.", uses: ["One field and the next in `u-form`", "Items in a list or menu", "Padding inside a small card or popover"] },
+  { px: 24, job: "Between blocks, card padding and the grid gutter.", uses: ["Padding inside a card or panel", "The heading, fields and buttons of a `u-form`", "The grid gutter, and a site section title to its content"] },
+  { px: 48, job: "Between sections in an app, and from a site intro to its content.", uses: ["A page title and the content below it in an app", "One region of an app page and the next, and stats in `u-stats`", "A site intro and what follows it"] },
+  { px: 96, job: "Between sections on a site. The same on every screen size.", uses: ["One section of a marketing page and the next", "The end of a blog post and the footer", "Nothing in apps"] },
 ] %>
 
 ## Layout
@@ -49,10 +50,9 @@ running text, so lines never get too long to read.
 | Screen width | under 640px | 640 to 1023px | 1024px and up |
 | Space at the page edge | 16px | 24px | 48px |
 | Space between columns | 16px | 24px | 24px |
-| `u-span-*` classes | ignored, every child is full width | applied | applied |
-| `u-sidebar-layout` | sidebar above the content | sidebar above the content | 264px sidebar beside the content |
+| Grid children | full width | their `@grid:col-span-*` | their `@grid:col-span-*` |
 
-The page edge, column spacing and the app and auth shells follow the screen. Grid, Split, Sidebar layout, Site header and Description list follow their own width instead, so each one adapts wherever it's placed, like a narrow side panel.
+The page edge, column spacing and the app and auth shells follow the screen. Grid, Site header and Description list follow their own width instead, so each one adapts wherever it's placed, like a narrow side panel.
 
 ## Tokens
 

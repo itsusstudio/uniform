@@ -29,10 +29,10 @@
       <tbody>
 <% jobs.each do |number, customer, variant, status, due, quote| -%>
         <tr>
-          <td><a class="u-text-data" href="#long-lists">#<%= number %></a></td>
+          <td><a class="u-data" href="#long-lists">#<%= number %></a></td>
           <td><%= customer %></td>
           <td><span class="u-badge u-badge-<%= variant %>"><%= status %></span></td>
-          <td class="u-text-data"><%= due %></td>
+          <td class="u-data"><%= due %></td>
           <td class="u-table-num"><%= quote %></td>
         </tr>
 <% end -%>

@@ -3,6 +3,7 @@ PATH
   specs:
     studio-uniform (0.1.0)
       activesupport (>= 7.1)
+      tailwindcss-ruby (>= 4.3, < 5)
 
 GEM
   remote: https://rubygems.org/
@@ -243,6 +244,13 @@ GEM
       serbea (>= 2.1)
       zeitwerk (~> 2.5)
     string-format (0.2.0)
+    tailwindcss-ruby (4.3.4)
+    tailwindcss-ruby (4.3.4-aarch64-linux-gnu)
+    tailwindcss-ruby (4.3.4-aarch64-linux-musl)
+    tailwindcss-ruby (4.3.4-arm64-darwin)
+    tailwindcss-ruby (4.3.4-x86_64-darwin)
+    tailwindcss-ruby (4.3.4-x86_64-linux-gnu)
+    tailwindcss-ruby (4.3.4-x86_64-linux-musl)
     tilt (2.9.0)
     timeout (0.6.1)
     tsort (0.2.0)
@@ -261,6 +269,7 @@ PLATFORMS
   x86-linux-gnu
   x86-linux-musl
   x86_64-darwin
+  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -371,6 +380,13 @@ CHECKSUMS
   streamlined (0.6.2) sha256=58c73a95d0decd3e4f5739be22be1d629682669d4093829189cb3edf7e332de6
   string-format (0.2.0) sha256=bc981c14116b061f12134549f32fa2d61a17b5a35dd6fd36596c21722a789af6
   studio-uniform (0.1.0)
+  tailwindcss-ruby (4.3.4) sha256=9efb1c084c43cb53578b708f66c3f541616d49f094b1c4881691b4f332356b55
+  tailwindcss-ruby (4.3.4-aarch64-linux-gnu) sha256=09c647d5434b4be5c76ee607c1f52817f70f10c44bcfd9241ceeeaf783057d6b
+  tailwindcss-ruby (4.3.4-aarch64-linux-musl) sha256=4495aa1a28613661dbe3a23612e28a3f8cb6ef747c16139e12d7c19ac3f38b71
+  tailwindcss-ruby (4.3.4-arm64-darwin) sha256=8165d282ed3246b96cca271b097cd03412b2359c54169532e9697230c882ea96
+  tailwindcss-ruby (4.3.4-x86_64-darwin) sha256=1d0c718597ae57988ceda20e72abfe42e7bf948b44e1d5b6966f0af18810fe70
+  tailwindcss-ruby (4.3.4-x86_64-linux-gnu) sha256=d6654344039ef34114e100c7abbfbecf213956a18676801e3c92d3d98c00fc56
+  tailwindcss-ruby (4.3.4-x86_64-linux-musl) sha256=fca0843ab85b0c79f608a82210551b65940c991abc8d7a7f7b3276b42530e012
   tilt (2.9.0) sha256=da5735d0280bba96e9a91041bb14aee435ccad5c17b0fa519249ae543d9aa3a5
   timeout (0.6.1) sha256=78f57368a7e7bbadec56971f78a3f5ecbcfb59b7fcbb0a3ed6ddc08a5094accb
   tsort (0.2.0) sha256=9650a793f6859a43b6641671278f79cfead60ac714148aabe4e3f0060480089f

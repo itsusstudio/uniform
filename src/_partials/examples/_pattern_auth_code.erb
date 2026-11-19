@@ -2,14 +2,14 @@
 <div class="u-auth-shell">
   <header>
     <a class="u-wordmark u-wordmark-lg u-wordmark-serif" href="/">Workbench</a>
-    <p class="u-text-section-title">The back office for independent jewellers.</p>
+    <p class="text-section-title font-headline">The back office for independent jewellers.</p>
   </header>
   <<%= tag %>>
     <hgroup>
-      <h1 class="u-text-page-title">Check your email</h1>
-      <p class="u-text-small">We sent a six-digit code to <strong class="u-text-strong">ana@mapleandpine.ca</strong>.</p>
+      <h1 class="text-page-title">Check your email</h1>
+      <p class="text-small">We sent a six-digit code to <strong class="font-medium">ana@mapleandpine.ca</strong>.</p>
     </hgroup>
-    <form class="u-stack u-gap-6" action="/sign-in/code" method="post">
+    <form class="flex flex-col gap-6" action="/sign-in/code" method="post">
 <% if error -%>
       <%= raw render("examples/text_field_code", id: "#{id}-code", value: "482915", error: "That code doesn’t match. Check your latest email.").strip.gsub("\n", "\n        ") %>
 <% else -%>
@@ -17,7 +17,7 @@
 <% end -%>
       <button type="submit" class="u-btn u-btn-primary">Sign in</button>
     </form>
-    <form class="u-text-small" action="/sign-in/resend" method="post">Didn’t get it? <button type="submit" class="u-link-btn">Send a new code</button></form>
+    <form class="text-small" action="/sign-in/resend" method="post">Didn’t get it? <button type="submit" class="u-link-btn">Send a new code</button></form>
   </<%= tag %>>
   <footer>
     <p><a href="/terms">Terms</a> — <a href="/privacy">Privacy</a></p>

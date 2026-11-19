@@ -21,10 +21,10 @@ A list gaining or losing an item
 : The item fades and the space around it opens or closes. Wrap the item in `u-enter` when it arrives and `u-exit` when it leaves, then remove it when the animation ends.
 
 <%= render "examples/shape_specs", rows: [
-  { copy: "var(--u-motion-enter)", detail: "200ms", sample: '<span class="shape-box"></span>', job: "How long an item takes to arrive." },
-  { copy: "var(--u-motion-exit)", detail: "130ms", sample: '<span class="shape-box"></span>', job: "How long an item takes to leave. Shorter, because you already know it's going." },
-  { copy: "var(--u-motion-hover)", detail: "100ms", sample: '<span class="shape-box"></span>', job: "How long a hover change takes, like the other bars dimming on a chart. Short enough to feel instant, long enough not to flicker." },
-  { copy: "var(--u-motion-ease)", detail: "ease-out", sample: '<span class="shape-box"></span>', job: "The one curve for everything that moves. Fast at the start, settling gently, no bounce." },
+  { copy: "var(--u-duration-enter)", detail: "200ms", sample: '<span class="shape-box"></span>', job: "How long an item takes to arrive." },
+  { copy: "var(--u-duration-exit)", detail: "130ms", sample: '<span class="shape-box"></span>', job: "How long an item takes to leave. Shorter, because you already know it's going." },
+  { copy: "var(--u-duration-hover)", detail: "100ms", sample: '<span class="shape-box"></span>', job: "How long a hover change takes, like the other bars dimming on a chart. Short enough to feel instant, long enough not to flicker." },
+  { copy: "var(--ease-standard)", detail: "ease-out", sample: '<span class="shape-box"></span>', job: "The one curve for everything that moves. Fast at the start, settling gently, no bounce." },
 ] %>
 
 ## In use

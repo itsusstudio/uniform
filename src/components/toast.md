@@ -10,14 +10,14 @@ A toast says what happened after someone acts, whether it worked or failed. It g
 
 ## Example
 
-<div class="example-frame u-bg-paper">
+<div class="example-frame bg-paper">
 <u-toast class="toast-demo-still">
-<%= render "examples/toast", message: %(<span class="u-text-data">#1042</span> marked ready for pickup), action: "Undo", still: true %>
+<%= render "examples/toast", message: %(<span class="u-data">#1042</span> marked ready for pickup), action: "Undo", still: true %>
 <%= render "examples/toast", message: "Note saved", action: nil, still: true %>
 </u-toast>
 </div>
 
-<div class="example-frame u-bg-paper">
+<div class="example-frame bg-paper">
 <u-toast class="toast-demo-still">
 <%= render "examples/toast", message: "Text not sent to Ana Reyes", action: "Retry", tone: "danger", still: true %>
 </u-toast>
@@ -103,19 +103,19 @@ Dismiss
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
-<div class="example-frame u-bg-paper">
+<div class="example-frame bg-paper">
 <u-toast class="toast-demo-still">
 <%= render "examples/toast", message: "Couldn’t send the text to Ana Reyes. Her number was rejected by the carrier. Check it and try again.", action: "Edit number", still: true %>
 </u-toast>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A problem in a toast. It's gone before most people finish reading, and the fix goes with it.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
-<div class="example-frame u-bg-paper">
+<div class="example-frame bg-paper">
 <u-toast class="toast-demo-still">
 <%= render "examples/toast", message: "Text sent to Ana Reyes", action: nil, still: true %>
 </u-toast>

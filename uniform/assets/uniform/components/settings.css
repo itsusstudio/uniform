@@ -1,14 +1,14 @@
-@layer uniform.components {
+@layer components {
 .u-settings {
   display: flex;
   flex-direction: column;
 }
 
 .u-settings > :is(h2, h3) {
-  margin: var(--u-space-6) 0 0;
-  font-size: var(--u-font-size-20);
+  margin: --spacing(6) 0 0;
+  font-size: var(--text-400);
   font-weight: 500;
-  line-height: var(--u-line-height-20);
+  line-height: var(--text-400--line-height);
 }
 
 .u-settings > :is(h2, h3):first-child { margin-top: 0; }
@@ -16,50 +16,47 @@
 .u-settings > hr {
   width: 100%;
   height: 1px;
-  margin: var(--u-space-6) 0 0;
+  margin: --spacing(6) 0 0;
   border: 0;
-  background: var(--u-color-divider);
+  background: var(--border-color-divider);
 }
 
 .u-setting {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: var(--u-space-2) var(--u-space-6);
-  padding-block: var(--u-space-4);
+  gap: --spacing(2) --spacing(6);
+  padding-block: --spacing(4);
 }
 
 .u-setting:first-child,
 .u-settings > .u-setting:not(:is(.u-setting, h2, h3, hr) ~ *) { padding-top: 0; }
 
-.u-setting > div:first-of-type > * { margin: 0; }
-
 .u-setting > div:first-of-type > :is(h3, h4) {
-  font-size: var(--u-font-size-title);
+  font-size: var(--text-title);
   font-weight: 500;
-  line-height: var(--u-line-height-title);
+  line-height: var(--text-title--line-height);
 }
 
 .u-setting > div:first-of-type > p + p,
-.u-setting > div:first-of-type > :is(h3, h4) + p { margin-top: var(--u-space-1); }
+.u-setting > div:first-of-type > :is(h3, h4) + p { margin-top: --spacing(1); }
 
 .u-setting-stacked { grid-template-columns: minmax(0, 1fr); }
 
-.u-setting-stacked > :not(div:first-of-type) { max-width: var(--u-max-width-form); }
+.u-setting-stacked > :not(div:first-of-type) { max-width: var(--container-form); }
 
 .u-setting-edit {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--u-space-2);
+  gap: --spacing(2);
   min-width: 0;
-  max-width: var(--u-max-width-form);
+  max-width: var(--container-form);
   text-align: end;
 }
 
 .u-setting-edit > :first-child {
   min-width: 0;
-  margin: 0;
   overflow-wrap: anywhere;
 }
 
@@ -68,10 +65,10 @@
 .u-setting-value {
   display: flex;
   align-items: center;
-  gap: var(--u-space-2);
-  padding-inline-start: var(--u-space-4);
-  border-radius: var(--u-radius-default);
-  background: color-mix(in srgb, var(--u-color-text-default) 5%, transparent);
+  gap: --spacing(2);
+  padding-inline-start: --spacing(4);
+  border-radius: var(--radius-item);
+  background: color-mix(in srgb, var(--text-color-default) 5%, transparent);
 }
 
 .u-setting-value > :first-child {

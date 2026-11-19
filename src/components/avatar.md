@@ -12,7 +12,7 @@ An avatar shows a face, or initials, beside a person's name. Use it wherever a n
 
 <section class="u-card">
 <header>
-<h3>Notes on <span class="u-text-data">#1042</span></h3>
+<h3>Notes on <span class="u-data">#1042</span></h3>
 </header>
 <div class="u-card-content">
 <ol class="u-timeline">
@@ -38,14 +38,14 @@ An avatar shows a face, or initials, beside a person's name. Use it wherever a n
 
 ## Sizes
 
-<div class="example-frame u-row u-gap-6">
-<div class="u-stack u-gap-2">
+<div class="example-frame flex flex-wrap items-center gap-6">
+<div class="flex flex-col gap-2">
 <span class="u-avatar u-avatar-sm"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
-<p class="u-text-caption u-text-muted"><code>u-avatar-sm</code></p>
+<p class="text-caption text-muted"><code>u-avatar-sm</code></p>
 </div>
-<div class="u-stack u-gap-2">
+<div class="flex flex-col gap-2">
 <span class="u-avatar"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
-<p class="u-text-caption u-text-muted">Default</p>
+<p class="text-caption text-muted">Default</p>
 </div>
 </div>
 
@@ -59,7 +59,7 @@ The default
 
 ## Initials
 
-<div class="example-frame u-row u-gap-4">
+<div class="example-frame flex flex-wrap items-center gap-4">
 <span class="u-avatar u-avatar-sm" role="img" aria-label="Dana Whitfield">DW</span>
 <span class="u-avatar" role="img" aria-label="Dana Whitfield">DW</span>
 <span class="u-avatar" role="img" aria-label="Kensington Jewellery Repair">KJ</span>
@@ -71,7 +71,7 @@ letters of its name, like KJ for Kensington Jewellery Repair.
 ## Online
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <section class="u-card">
 <header>
 <h3>In the shop today</h3>
@@ -95,7 +95,7 @@ say it in words too, like "Online" beside the name.
 
 ## Group
 
-<div class="example-frame u-row u-gap-12">
+<div class="example-frame flex flex-wrap items-center gap-12">
 <div class="u-avatar-group" role="img" aria-label="Dana Whitfield, Luis Ortega, Mei Tanaka and 3 more">
 <span>DW</span>
 <span><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
@@ -166,11 +166,11 @@ avatar.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
-<div class="u-row u-gap-2">
+<div class="flex flex-wrap items-center gap-2">
 <span class="u-avatar u-avatar-online" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
 <span class="u-avatar" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "b").strip %></span>
 <span class="u-avatar" aria-hidden="true">DW</span>
@@ -178,12 +178,12 @@ avatar.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Faces with no names. Nobody can tell who's who, and the dot is the only sign of who's in.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
-<div class="u-row u-gap-2">
+<div class="flex flex-wrap items-center gap-2">
 <span class="u-avatar u-avatar-sm" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
-<span class="u-text-small">Luis Ortega</span>
+<span class="text-small">Luis Ortega</span>
 </div>
 </div>
 <figcaption class="example-caption example-caption-do"><span>An avatar beside the person's name, so the face helps you scan and the name says who it is.</span></figcaption>

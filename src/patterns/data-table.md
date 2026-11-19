@@ -126,7 +126,7 @@ Bulk bar
 : Optional. A second form inside the controls, right after the filter form, which takes the place of the filters while rows are ticked: an `<output>` for the count, outline buttons for the bulk actions, and a reset button that clears the selection. With it, wrap the bars and the card in [`<u-data-grid>`](/components/data-grid/#selecting-rows).
 
 Table
-: A [table](/components/table/) straight inside a [card](/components/card/), in a `u-table`. Each row starts with a [checkbox](/components/checkbox/) and the job number, which links to the job, and a click anywhere on the row opens it. The status is a [badge](/components/badge/), dates use `u-text-data`, amounts use `u-table-num`, and sortable headings use `u-table-sort`. Add `u-table-sticky` to the wrapper for long pages.
+: A [table](/components/table/) straight inside a [card](/components/card/), in a `u-table`. Each row starts with a [checkbox](/components/checkbox/) and the job number, which links to the job, and a click anywhere on the row opens it. The status is a [badge](/components/badge/), dates use `u-data`, amounts use `u-table-num`, and sortable headings use `u-table-sort`. Add `u-table-sticky` to the wrapper for long pages.
 
 Row actions
 : A ghost icon button at the end of each row that opens a [menu](/components/menu/).
@@ -186,31 +186,31 @@ pagination with all of it. The row checkboxes join the bulk form with
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="u-table" tabindex="0" role="region" aria-label="Jobs">
 <table>
-<thead><tr><th scope="col">Job</th><th scope="col"><span class="u-visually-hidden">Actions</span></th></tr></thead>
+<thead><tr><th scope="col">Job</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
 <tbody>
-<tr><td><a class="u-text-data" href="#do-and-dont">#1042</a></td><td><div class="u-actions"><button type="button" class="u-btn u-btn-outline">Edit</button><button type="button" class="u-btn u-btn-outline">Text</button><button type="button" class="u-btn u-btn-danger">Delete</button></div></td></tr>
-<tr><td><a class="u-text-data" href="#do-and-dont">#1039</a></td><td><div class="u-actions"><button type="button" class="u-btn u-btn-outline">Edit</button><button type="button" class="u-btn u-btn-outline">Text</button><button type="button" class="u-btn u-btn-danger">Delete</button></div></td></tr>
+<tr><td><a class="u-data" href="#do-and-dont">#1042</a></td><td><div class="u-actions"><button type="button" class="u-btn u-btn-outline">Edit</button><button type="button" class="u-btn u-btn-outline">Text</button><button type="button" class="u-btn u-btn-danger">Delete</button></div></td></tr>
+<tr><td><a class="u-data" href="#do-and-dont">#1039</a></td><td><div class="u-actions"><button type="button" class="u-btn u-btn-outline">Edit</button><button type="button" class="u-btn u-btn-outline">Text</button><button type="button" class="u-btn u-btn-danger">Delete</button></div></td></tr>
 </tbody>
 </table>
 </div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Every action as a button on every row. The table turns into a wall of buttons, and a red Delete sits one slip away from Edit on each line.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="u-table" tabindex="0" role="region" aria-label="Jobs">
 <table>
-<thead><tr><th scope="col">Job</th><th scope="col">Status</th><th scope="col"><span class="u-visually-hidden">Actions</span></th></tr></thead>
+<thead><tr><th scope="col">Job</th><th scope="col">Status</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
 <tbody>
-<tr><td><a class="u-text-data" href="#do-and-dont">#1042</a></td><td><span class="u-badge u-badge-info">On the bench</span></td><td><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Actions for job #1042"><%= render "icon", name: "ellipsis", small: false %></button></td></tr>
-<tr><td><a class="u-text-data" href="#do-and-dont">#1039</a></td><td><span class="u-badge u-badge-warning">Waiting on parts</span></td><td><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Actions for job #1039"><%= render "icon", name: "ellipsis", small: false %></button></td></tr>
+<tr><td><a class="u-data" href="#do-and-dont">#1042</a></td><td><span class="u-badge u-badge-info">On the bench</span></td><td><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Actions for job #1042"><%= render "icon", name: "ellipsis", small: false %></button></td></tr>
+<tr><td><a class="u-data" href="#do-and-dont">#1039</a></td><td><span class="u-badge u-badge-warning">Waiting on parts</span></td><td><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Actions for job #1039"><%= render "icon", name: "ellipsis", small: false %></button></td></tr>
 </tbody>
 </table>
 </div>

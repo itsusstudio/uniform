@@ -23,7 +23,7 @@ the keyboard never pushes it out of view.
 <%= render "screen", title: "Auth shell on a wide screen", html: render("examples/pattern_auth_sign_in", id: "auth-shell-demo", tag: "div") %>
 </div>
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
 <div class="frame frame-phone" style="height: 640px">
 <%= render "screen", title: "Auth shell on a phone", html: render("examples/pattern_auth_sign_in", id: "auth-shell-phone", tag: "div") %>
 </div>
@@ -38,7 +38,7 @@ the keyboard never pushes it out of view.
 A `u-auth-shell` holds three parts, in order:
 
 Header
-: The app name in [`u-wordmark`](/components/wordmark/), linked to the app's home page, then a `<p class="u-text-section-title">` with the app's blurb. From 1024px the header is the ink poster on the right two thirds, with the name at the top and the blurb at 56px at the bottom. In dark mode it lifts to the paper grey, so it still reads as a panel beside the dark page. The form column never narrows below 480px, so the form keeps its full 384px at 1024px. On a tablet the name stays on white above the form and the right third is plain ink; on a phone only the name shows.
+: The app name in [`u-wordmark`](/components/wordmark/), linked to the app's home page, then a `<p class="text-section-title font-headline">` with the app's blurb. From 1024px the header is the ink poster on the right two thirds, with the name at the top and the blurb at 56px at the bottom. In dark mode it lifts to the paper grey, so it still reads as a panel beside the dark page. The form column never narrows below 480px, so the form keeps its full 384px at 1024px. On a tablet the name stays on white above the form and the right third is plain ink; on a phone only the name shows.
 
 Main
 : The screen itself, with its parts 24px apart and each up to 384px wide. Put one heading, one form and the links under it straight inside. Paragraphs in a row sit 8px apart, as one group of notes.

@@ -1,9 +1,9 @@
 <%
-  shares = [["--u-color-danger", 9.52], ["--u-color-info", 42.86], ["--u-color-warning", 28.57], ["--u-color-success", 19.05]]
+  shares = [["--color-danger", 9.52], ["--color-info", 42.86], ["--color-warning", 28.57], ["--color-success", 19.05]]
   offset = 0
 -%>
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <section class="u-card">
@@ -20,7 +20,7 @@
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A donut in four colours with no words. You have to know the colours by heart, and nobody can tell 9 jobs from 6 by the size of an arc.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <%= render "examples/chart_stacked" %>

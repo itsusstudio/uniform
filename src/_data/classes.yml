@@ -1,146 +1,85 @@
-- name: u-stack
-  group: Layout
-  page: /components/stack/
-  description: Stacks children one under another with a gap, 24px by default.
-
-- name: u-row
-  group: Layout
-  page: /components/row/
-  description: Lays children side by side and centres them vertically.
-
-- name: u-scroll-row
-  group: Layout
-  page: /components/scroll-row/
-  description: A row of cards that scrolls sideways and snaps to each card.
-
 - name: u-grid
   group: Layout
   page: /components/grid/
-  description: On a block whose children sit on twelve columns.
-
-- name: u-span-1 to u-span-12
-  group: Layout
-  page: /components/grid/
-  description: How many of the twelve columns a child takes. Two children that add up to 12 fill a row, like `u-span-4` and `u-span-8`.
-
-- name: u-first-when-stacked
-  group: Layout
-  page: /components/grid/
-  description: On a grid child, moves it to the top when the grid stacks on a phone, like a client's contact details beside their jobs.
-
-- name: u-hidden-when-stacked
-  group: Layout
-  page: /components/grid/
-  description: On a grid child, hides it when the grid stacks, like an illustration beside a welcome message.
-
-- name: u-sidebar-layout
-  group: Layout
-  page: /components/sidebar-layout/
-  description: A 264px sidebar beside the content.
+  description: On a block whose children sit on twelve columns. Children set their span with `@grid:col-span-*`.
 
 - name: u-container
   group: Layout
   page: /components/container/
   description: Centres content at the 1280px page width with the page margin on each side.
 
-- name: u-container-wide
+- name: max-w-page-wide
   group: Layout
   page: /components/container/
   description: With u-container, lets an app's data pages, like lists, tables and a dashboard, open up to 1600px.
 
-- name: u-container-narrow
+- name: max-w-page-narrow
   group: Layout
   page: /components/container/
   description: With u-container, holds settings, forms and reading pages to a 768px column.
 
-- name: u-section
-  group: Layout
-  page: /components/section/
-  scope: sites
-  description: One band of a site page, with `--u-section-space` above and below.
-
-- name: u-gap-1, u-gap-2, u-gap-4, u-gap-6, u-gap-12, u-gap-24
-  group: Spacing
-  page: /start/reference/
-  description: Changes the gap of a stack, row or grid to 4, 8, 16, 24, 48 or 96px.
-
-- name: u-pad-12
-  group: Spacing
-  page: /start/reference/
-  description: 48px of padding on every side, like a welcome panel's `u-card-content` that needs more room than a card.
-
-- name: u-items-start, u-items-center, u-justify-center, u-justify-between, u-justify-end
-  group: Layout
-  page: /start/reference/
-  description: Lines up the children of a row or grid. `u-items-start` and `u-items-center` set them across the row, at the top or the middle. `u-justify-center`, `u-justify-between` and `u-justify-end` set them along it: centred, pushed to the two ends, or gathered at the end.
-
-- name: u-border-0, u-radius-default
-  group: Backgrounds
-  page: /start/reference/
-  description: Drops a card's border for a panel of colour, or gives an image the 4px corner.
-
-- name: u-text-hero
+- name: text-hero
   group: Type
   page: /start/reference/
-  description: 96, Apfel. Once, at the top of a site page.
+  description: 96, Apfel. Once, at the top of a site page. Pair it with `font-headline`.
   scope: sites
 
-- name: u-text-section-title
+- name: text-section-title
   group: Type
   page: /start/reference/
-  description: 56, Apfel. Section headlines.
+  description: 56, Apfel. Section headlines. Pair it with `font-headline`.
   scope: sites
 
-- name: u-text-article-title
+- name: text-article-title
   group: Type
   page: /start/reference/
-  description: 32, Apfel. Article and blog titles.
+  description: 32, Apfel. Article and blog titles. Pair it with `font-headline`.
   scope: sites
 
-- name: u-text-page-title
+- name: text-page-title
   group: Type
   page: /start/reference/
   description: 24, Inter. The title of an app page.
 
-- name: u-text-heading
+- name: text-heading
   group: Type
   page: /start/reference/
   description: 20, Inter medium. Headings inside a page.
 
-- name: u-text-lead
+- name: text-lead
   group: Type
   page: /start/reference/
   description: 24, Inter. The opening line under a title.
   scope: sites
 
-- name: u-text-feature-title
+- name: text-feature-title
   group: Type
   page: /start/reference/
   description: 24, Inter medium. The heading of a feature, a tile or a step on a site.
   scope: sites
 
-- name: u-text-reading
+- name: text-reading
   group: Type
   page: /start/reference/
   description: 20, Inter at the prose line height. Paragraphs on a site.
   scope: sites
 
-- name: u-text-body
+- name: text-body
   group: Type
   page: /start/reference/
   description: 14 in business apps, 16 for consumers, Inter. Interface text.
 
-- name: u-text-small
+- name: text-small
   group: Type
   page: /start/reference/
   description: 14, Inter. Labels, table cells, buttons and hints. The same as body text in business apps.
 
-- name: u-text-caption
+- name: text-caption
   group: Type
   page: /start/reference/
   description: 12, Inter. Figure captions and timestamps.
 
-- name: u-text-data
+- name: u-data
   group: Type
   page: /start/reference/
   description: Plex Mono with even-width digits. Prices, dates, order numbers and codes.
@@ -166,26 +105,6 @@
   page: /components/wordmark/
   variant: true
   description: Apfel Grotezk Mittel, letters drawn close. It keeps the casing you write.
-
-- name: u-text-muted
-  group: Type
-  page: /start/reference/
-  description: Muted grey, for secondary text.
-
-- name: u-text-strong
-  group: Type
-  page: /start/reference/
-  description: Medium weight. Never bold.
-
-- name: u-bg-surface
-  group: Backgrounds
-  page: /start/reference/
-  description: White, the default for apps. Add it only to a white block on paper.
-
-- name: u-bg-paper
-  group: Backgrounds
-  page: /start/reference/
-  description: Off-white paper. Put it on the `<body>` of a marketing site or blog.
 
 - name: u-accordion
   group: Components
@@ -256,11 +175,6 @@
   variant: true
   description: Something important finished. Pine with white text. Most successes are a [toast](/components/toast/) instead.
 
-- name: u-breadcrumb
-  group: Components
-  page: /components/breadcrumb/
-  description: On a `<nav aria-label="Breadcrumb">` around an `<ol>` of links, with a slash drawn between them.
-
 - name: u-btn
   group: Components
   page: /components/button/
@@ -305,6 +219,11 @@
   group: Components
   page: /components/button/
   description: Add to a variant for a square button holding only an icon. Give it an `aria-label`.
+
+- name: u-split-btn
+  group: Components
+  page: /components/button/
+  description: "On a `<div>` around two buttons of the same variant: the main action, then a `u-btn-icon` with `popovertarget` that opens a `u-menu` placed right after the `<div>`. The menu holds the other versions of the main action."
 
 - name: u-card
   group: Components
@@ -365,6 +284,12 @@
   page: /components/badge/
   variant: true
   description: Grey. Finished and out of the way, or not started yet.
+
+- name: u-badge-ink
+  group: Components
+  page: /components/badge/
+  variant: true
+  description: Ink. Marks the chosen or default item in a list of choices, like the default copy in a print menu.
 
 - name: u-badge-strong
   group: Components
@@ -556,21 +481,6 @@
   page: /components/shimmer/
   description: A `<span>` that stands in for loading text, as a grey bar with a light band sweeping across. A typical value inside, like `Nov 14`, sets its width and stays hidden. Empty, it fills the line.
 
-- name: u-spinner
-  group: Components
-  page: /components/spinner/
-  description: An empty `<span aria-hidden="true">`, a 16px ring with an arc that turns in the text colour.
-
-- name: u-spinner-lg
-  group: Components
-  page: /components/spinner/
-  description: The 24px size, for a panel.
-
-- name: u-spinner-xl
-  group: Components
-  page: /components/spinner/
-  description: The 40px size with a thicker ring, for something that fills a large area while it loads, like a camera view.
-
 - name: u-timeline
   group: Components
   page: /components/timeline/
@@ -595,6 +505,11 @@
   group: Components
   page: /components/table/
   description: A right-aligned cell for amounts and counts, in mono. Put it on the header cell too.
+
+- name: u-table-truncate
+  group: Components
+  page: /components/table/
+  description: A cell for free text, like a description. It takes the width left over by the other columns, never less than a short readable line, and cuts its text to one line with an ellipsis. Long text never widens the table on a wide screen; on a narrow screen the table scrolls sideways.
 
 - name: u-table-sort
   group: Components
@@ -645,11 +560,6 @@
   group: Components
   page: /components/text-field/
   description: Wraps an input with something in the box before the value. A `<span>` before the input holds a short unit like `$`. Around a `type="search"` input, it draws the search icon instead.
-
-- name: <u-input-password>
-  group: Components
-  page: /components/input-password/
-  description: "Wraps a password `u-input` and an empty `<button>` with `aria-label=\"Show password\"`, `aria-pressed=\"false\"` and `hidden`, inside the `u-field`. Shows the button and flips the input's type."
 
 - name: <u-character-count>
   group: Components
@@ -735,7 +645,7 @@
 - name: u-auth-shell
   group: Page frame
   page: /components/auth-shell/
-  description: "The frame around sign-in and sign-up screens, split from 1024px wide into the form on the left third and an ink poster with the name and a two-line blurb on the right two thirds. Inside it, in order: a `<header>` with the app name in `u-wordmark` and a `<p class=\"u-text-section-title\">` blurb, the `<main>` with the form, and an optional `<footer>` for terms and privacy links."
+  description: "The frame around sign-in and sign-up screens, split from 1024px wide into the form on the left third and an ink poster with the name and a two-line blurb on the right two thirds. Inside it, in order: a `<header>` with the app name in `u-wordmark` and a `<p class=\"text-section-title font-headline\">` blurb, the `<main>` with the form, and an optional `<footer>` for terms and privacy links."
 
 - name: u-setup-shell
   group: Page frame
@@ -777,26 +687,6 @@
   group: Page frame
   page: /components/site-header/
   description: A coloured `u-banner` right before the site header becomes a one-line announcement. Put a `u-container` inside, with no close button.
-
-- name: u-visually-hidden
-  group: Helpers
-  page: /start/reference/
-  description: Hides text on screen but keeps it for screen readers, like "(opens in a new tab)".
-
-- name: u-max-width-form
-  group: Helpers
-  page: /start/reference/
-  description: Keeps a block to the width of a form column, 384px, like a settings form or a field shown on its own.
-
-- name: u-max-width-prose
-  group: Helpers
-  page: /start/reference/
-  description: Keeps a block to a comfortable reading width, about 65 characters.
-
-- name: u-truncate
-  group: Helpers
-  page: /start/reference/
-  description: Cuts text to one line with an ellipsis. Pair it with a tooltip that shows the full text.
 
 - name: <u-toggle-panels>
   group: Components

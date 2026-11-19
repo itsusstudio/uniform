@@ -1,15 +1,15 @@
 .figure {
   margin: 0;
   display: grid;
-  gap: var(--u-space-2);
+  gap: --spacing(2);
 }
 
 .figure-field { aspect-ratio: 4 / 5; }
 
-.figure-field-info { background: var(--u-color-info); }
-.figure-field-danger { background: var(--u-color-danger); }
-.figure-field-warning { background: var(--u-color-warning); }
-.figure-field-success { background: var(--u-color-success); }
+.figure-field-info { background: var(--color-info); }
+.figure-field-danger { background: var(--color-danger); }
+.figure-field-warning { background: var(--color-warning); }
+.figure-field-success { background: var(--color-success); }
 
 .figure-plain img {
   display: block;

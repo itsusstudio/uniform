@@ -24,18 +24,18 @@ the rest in a sentence, with the numbers that matter.
 
 ### On a phone
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
-<div class="u-stack u-gap-2">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
+<div class="flex flex-col gap-2">
 <div class="frame frame-paper frame-phone" style="height: 600px">
 <%= render "examples/pattern_marketing_page", id: "marketing-phone", live: true, banner: false %>
 </div>
-<p class="u-text-small u-text-muted">Menu closed: the name, the trial and Menu. Try Menu.</p>
+<p class="text-small text-muted">Menu closed: the name, the trial and Menu. Try Menu.</p>
 </div>
-<div class="u-stack u-gap-2">
+<div class="flex flex-col gap-2">
 <div class="frame frame-paper frame-phone frame-phone-open" style="height: 600px">
 <%= render "examples/pattern_marketing_page", id: "marketing-phone-open", live: false, banner: false %>
 </div>
-<p class="u-text-small u-text-muted">Menu open: the links, then Sign in and Français under a divider.</p>
+<p class="text-small text-muted">Menu open: the links, then Sign in and Français under a divider.</p>
 </div>
 </div>
 
@@ -51,7 +51,7 @@ Announcement
 : The name, three to five links, Sign in and the language, and the trial button.
 
 Hero
-: A [container](/components/container/) holding a [stack](/components/stack/) with a 24px gap: the headline in `u-text-hero`, then a [grid](/components/grid/) whose `u-span-6` holds the lead in `u-text-lead`. See [Typography](/foundations/typography/).
+: A [container](/components/container/) holding a `flex flex-col gap-6` column: the headline in `text-hero font-headline`, then a [grid](/components/grid/) whose `@grid:col-span-6` holds the lead in `text-lead`. See [Typography](/foundations/typography/).
 
 ## Code
 
@@ -66,7 +66,7 @@ Hero
 ## Rules
 
 One hero line per page
-: `u-text-hero` appears once, at the top. Every heading after it is smaller.
+: `text-hero font-headline` appears once, at the top. Every heading after it is smaller.
 
 The trial lives in the header
 : Don't repeat the trial button under the headline. One way in, in the same spot on every page.

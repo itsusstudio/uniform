@@ -10,12 +10,12 @@ The page header opens every app page with its title and main actions.
 
 ## Example
 
-<div class="example-frame u-stack u-gap-12">
+<div class="example-frame flex flex-col gap-12">
 <header class="u-page-header">
 <a href="#example" aria-label="Back to Jobs">Jobs</a>
 <hgroup>
 <h1>Ana Reyes, ring resize</h1>
-<p>Job <span class="u-text-data">#1042</span>, due <span class="u-text-data">Nov 14</span></p>
+<p>Job <span class="u-data">#1042</span>, due <span class="u-data">Nov 14</span></p>
 </hgroup>
 <div class="u-actions">
 <button type="button" class="u-btn u-btn-outline">Text Ana</button>
@@ -25,7 +25,7 @@ The page header opens every app page with its title and main actions.
 <header class="u-page-header">
 <hgroup>
 <h1>Jobs</h1>
-<p><span class="u-text-data">38</span> open, <span class="u-text-data">6</span> due this week</p>
+<p><span class="u-data">38</span> open, <span class="u-data">6</span> due this week</p>
 </hgroup>
 <div class="u-actions">
 <a href="#example" class="u-btn u-btn-primary"><%= render "icon", name: "plus", small: true %>New job</a>
@@ -35,13 +35,13 @@ The page header opens every app page with its title and main actions.
 
 ## On a phone
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
 <div class="frame frame-phone frame-pad">
 <header class="u-page-header">
 <a href="#on-a-phone" aria-label="Back to Jobs">Jobs</a>
 <hgroup>
 <h1>Ana Reyes, ring resize</h1>
-<p>Job <span class="u-text-data">#1042</span>, due <span class="u-text-data">Nov 14</span></p>
+<p>Job <span class="u-data">#1042</span>, due <span class="u-data">Nov 14</span></p>
 </hgroup>
 <div class="u-actions">
 <button type="button" class="u-btn u-btn-outline">Text Ana</button>
@@ -61,7 +61,7 @@ on the left.
   <a href="/jobs" aria-label="Back to Jobs">Jobs</a>
   <hgroup>
     <h1>Ana Reyes, ring resize</h1>
-    <p>Job <span class="u-text-data">#1042</span>, due <span class="u-text-data">Nov 14</span></p>
+    <p>Job <span class="u-data">#1042</span>, due <span class="u-data">Nov 14</span></p>
   </hgroup>
   <div class="u-actions">
     <button type="button" class="u-btn u-btn-outline">Text Ana</button>
@@ -75,7 +75,7 @@ on the left.
   <%%= link_to t(".jobs"), jobs_path, aria: { label: t(".back_to_jobs") } %>
   <hgroup>
     <h1><%%= t(".title", customer: job.customer.name, work: job.work) %></h1>
-    <p><%%= t(".subtitle_html", number: tag.span("##{job.number}", class: "u-text-data"), due: tag.span(l(job.due_on, format: :short), class: "u-text-data")) %></p>
+    <p><%%= t(".subtitle_html", number: tag.span("##{job.number}", class: "u-data"), due: tag.span(l(job.due_on, format: :short), class: "u-data")) %></p>
   </hgroup>
   <div class="u-actions">
     <%%= link_to t(".text_customer", name: job.customer.first_name), new_job_message_path(job), class: "u-btn u-btn-outline" %>
@@ -87,7 +87,7 @@ on the left.
 Put the title and its optional line in an [`<hgroup>`](/components/heading-group/),
 and the buttons in [`u-actions`](/components/actions/). The back link is an `<a>`
 first in the header, named for the page it goes to, with an `aria-label` like
-"Back to Jobs" so screen readers say where it leads. Its arrow is drawn for you. Put the header first in the page's [stack](/components/stack/), with any
+"Back to Jobs" so screen readers say where it leads. Its arrow is drawn for you. Put the header first in the page's column, with any
 [page tabs](/components/page-tabs/) straight under it.
 
 ## Parts
@@ -96,8 +96,8 @@ first in the header, named for the page it goes to, with an `aria-label` like
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <header class="u-page-header">
@@ -115,7 +115,7 @@ first in the header, named for the page it goes to, with an `aria-label` like
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Every action on the page piled into the header, with two primaries fighting for attention.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <header class="u-page-header">

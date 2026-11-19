@@ -1,17 +1,15 @@
-@layer uniform.components {
+@layer components {
 .u-meta {
-  color: var(--u-color-text-muted);
-  font-family: var(--u-font-mono);
-  font-size: var(--u-font-size-small);
+  color: var(--text-color-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
-  line-height: var(--u-line-height-small);
+  line-height: var(--text-small--line-height);
   white-space: nowrap;
 }
 
-:where(p).u-meta { margin: 0; }
-
-@media (width < 40em) {
+@media (width < --theme(--breakpoint-sm)) {
   .u-meta {
     white-space: normal;
     overflow-wrap: anywhere;

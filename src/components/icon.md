@@ -11,33 +11,33 @@ An icon is an inline Lucide SVG with `u-icon`. When to use one is on [Iconograph
 ## Example
 
 <div class="example-frame">
-<div class="u-row u-gap-6">
+<div class="flex flex-wrap items-center gap-6">
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Delete job #1042"><%= render "icon", name: "trash-2", small: false %></button>
 <button type="button" class="u-btn u-btn-primary"><%= render "icon", name: "plus", small: false %>New job</button>
-<a class="u-text-small" href="#example">Ana Reyes’ status page <%= render "icon", name: "external-link", small: true %></a>
+<a class="text-small" href="#example">Ana Reyes’ status page <%= render "icon", name: "external-link", small: true %></a>
 </div>
 </div>
 
 ## Sizes
 
 <div class="example-frame">
-<div class="u-row u-gap-12">
-<span class="u-row u-gap-2"><%= render "icon", name: "search", small: false %><span class="u-text-small u-text-muted">20px, <code class="u-text-data">u-icon</code></span></span>
-<span class="u-row u-gap-2"><%= render "icon", name: "search", small: true %><span class="u-text-small u-text-muted">16px, <code class="u-text-data">u-icon u-icon-sm</code></span></span>
+<div class="flex flex-wrap items-center gap-12">
+<span class="flex flex-wrap items-center gap-2"><%= render "icon", name: "search", small: false %><span class="text-small text-muted">20px, <code class="u-data">u-icon</code></span></span>
+<span class="flex flex-wrap items-center gap-2"><%= render "icon", name: "search", small: true %><span class="text-small text-muted">16px, <code class="u-data">u-icon u-icon-sm</code></span></span>
 </div>
 </div>
 
 ## In a toolbar
 
 <div class="example-frame">
-<div class="u-stack u-gap-4">
+<div class="flex flex-col gap-4">
 <div class="u-actions">
 <button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "search", small: true %>Search</button>
 <button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "filter", small: true %>Filter</button>
 <button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "arrow-down-up", small: true %>Sort</button>
 <button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "upload", small: true %>Import</button>
 </div>
-<div class="u-actions u-gap-1">
+<div class="u-actions gap-1">
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit job"><%= render "icon", name: "pencil", small: true %></button>
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Preview ticket"><%= render "icon", name: "eye", small: true %></button>
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Upload photos"><%= render "icon", name: "upload", small: true %></button>
@@ -78,15 +78,15 @@ Drop its `class`, `width` and `height`, then add `class="u-icon"`, `aria-hidden=
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Mark ready"><%= render "icon", name: "ellipsis", small: false %></button>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>An icon on its own for an action nobody can guess from the symbol.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <button type="button" class="u-btn u-btn-outline">Mark ready</button>
@@ -106,7 +106,7 @@ Name the action
 ## Rules
 
 Lucide, unedited
-: Copy icons as published, without their `width` and `height`, and size them with these classes. `u-icon` sets the line width from `--u-icon-stroke`, so never set one on the SVG.
+: Copy icons as published, without their `width` and `height`, and size them with these classes. `u-icon` sets the line width from `--u-icon-stroke-width`, so never set one on the SVG.
 
 Same colour as the text
 : Keep `stroke="currentColor"`, so the icon takes the colour of the text around it. An icon never has a colour of its own.

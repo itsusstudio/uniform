@@ -1,12 +1,12 @@
-@layer uniform.components {
+@layer components {
 .u-radio {
   display: grid;
   grid-template-columns: 16px minmax(0, 1fr);
-  column-gap: var(--u-space-2);
+  column-gap: --spacing(2);
   align-items: center;
-  min-height: var(--u-size-target);
-  font-size: var(--u-font-size-small);
-  color: var(--u-color-text-default);
+  min-height: var(--spacing-target);
+  font-size: var(--text-small);
+  color: var(--text-color-default);
   cursor: pointer;
 }
 
@@ -17,10 +17,9 @@
   place-content: center;
   width: 16px;
   height: 16px;
-  margin: 0;
-  border: 1px solid var(--u-color-border-input);
-  border-radius: var(--u-radius-pill);
-  background: var(--u-color-bg-surface);
+  border: 1px solid var(--border-color-input);
+  border-radius: var(--radius-pill);
+  background: var(--background-color-surface);
   appearance: none;
   cursor: pointer;
 }
@@ -29,45 +28,45 @@
   content: "";
   width: 8px;
   height: 8px;
-  border-radius: var(--u-radius-pill);
-  background: var(--u-color-text-default);
+  border-radius: var(--radius-pill);
+  background: var(--text-color-default);
   visibility: hidden;
 }
 
-.u-radio > input:checked { border-color: var(--u-color-text-default); }
+.u-radio > input:checked { border-color: var(--text-color-default); }
 
 .u-radio > input:checked::before { visibility: visible; }
 
 .u-fieldset:has(> .u-radio > input[aria-invalid="true"]) {
-  border-radius: var(--u-radius-default);
-  outline: 2px solid var(--u-color-danger);
-  outline-offset: var(--u-space-2);
+  border-radius: var(--radius-item);
+  outline: 2px solid var(--color-danger);
+  outline-offset: --spacing(2);
 }
 
 .u-radio-hint {
-  color: var(--u-color-text-muted);
-  line-height: var(--u-line-height-small);
+  color: var(--text-color-muted);
+  line-height: var(--text-small--line-height);
 }
 
 .u-radio:has(> input:disabled) {
-  color: var(--u-color-border-input);
+  color: var(--border-color-input);
   cursor: not-allowed;
 }
 
 .u-radio > input:disabled {
-  border-color: var(--u-color-border-input);
-  background: var(--u-color-divider);
+  border-color: var(--border-color-input);
+  background: var(--border-color-divider);
   cursor: not-allowed;
 }
 
-.u-radio > input:disabled::before { background: var(--u-color-border-input); }
+.u-radio > input:disabled::before { background: var(--border-color-input); }
 
 .u-radio > input:disabled:checked {
-  border-color: var(--u-color-text-muted);
-  background: var(--u-color-bg-surface);
+  border-color: var(--text-color-muted);
+  background: var(--background-color-surface);
 }
 
-.u-radio > input:disabled:checked::before { background: var(--u-color-text-muted); }
+.u-radio > input:disabled:checked::before { background: var(--text-color-muted); }
 
 @media (pointer: coarse) {
   .u-radio { position: relative; }

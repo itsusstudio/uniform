@@ -41,12 +41,14 @@ and fields go in a `u-form`. Each one carries its own type, colour and gaps, so
 nobody has to remember that a meta line is 14px, muted and mono, or that
 fields sit 16px apart.
 
-The utility classes, like `u-text-small` or `u-gap-4`, stay for the rare screen
-no block covers. When the same mix of utilities turns up twice, it's a block
-Uniform is missing.
+Uniform is built on Tailwind, so every Tailwind utility is there for the
+layout and the one-off details around these blocks: `flex flex-col gap-6` for a
+column, `md:grid-cols-3` for a row of tiles. When the same mix of utilities
+turns up three times, it's a block Uniform is missing, and it moves into
+Uniform.
 
-When a component doesn't fit, Uniform is missing something. The fix goes into
-Uniform for every product, not into a one-off tweak on the page.
+When a component doesn't quite fit, override it with utilities on that screen.
+A fix that more than one screen needs goes into Uniform for every product.
 
 ## The Swiss style
 

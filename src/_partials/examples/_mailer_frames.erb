@@ -5,18 +5,18 @@
   from = sender == "Workbench" ? "Workbench <hello@useworkbench.co>" : "#{sender} <hello@kensingtonrepair.ca>"
   recipient = (defined?(to) && to) || (sender == "Workbench" ? "Dana Whitfield <dana@kensingtonrepair.ca>" : "Ana Reyes <ana.reyes@example.com>")
 -%>
-<div class="u-stack">
+<div class="flex flex-col gap-6">
 <dl class="u-dl">
 <dt>Subject</dt><dd><%= raw subject %></dd>
 <dt>From</dt><dd><%= from %></dd>
 <dt>To</dt><dd><%= recipient %></dd>
 </dl>
-<div class="u-row u-items-start u-gap-6">
-<figure class="u-stack u-gap-2 mailer-preview-desktop">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6">
+<figure class="flex flex-col gap-2 mailer-preview-desktop">
 <div class="mailer-frame"><iframe class="mailer-iframe" title="<%= h name %>, desktop preview" height="<%= height %>" loading="lazy" onload="this.style.height = '0'; this.style.height = this.contentDocument.documentElement.scrollHeight + 'px'" srcdoc="<%= raw srcdoc %>"></iframe></div>
 <figcaption>Desktop, 640px wide</figcaption>
 </figure>
-<figure class="u-stack u-gap-2 mailer-preview-phone">
+<figure class="flex flex-col gap-2 mailer-preview-phone">
 <div class="mailer-frame"><iframe class="mailer-iframe" title="<%= h name %>, phone preview" height="<%= phone_height %>" loading="lazy" onload="this.style.height = '0'; this.style.height = this.contentDocument.documentElement.scrollHeight + 'px'" srcdoc="<%= raw srcdoc %>"></iframe></div>
 <figcaption>Phone, 375px wide</figcaption>
 </figure>

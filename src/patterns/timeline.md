@@ -25,7 +25,7 @@ whom, and a note shows in full with its author.
 
 ### A brand-new job
 
-<div class="u-max-width-prose">
+<div class="max-w-prose">
 <%= render "examples/pattern_timeline_card", state: :empty, prefix: "tl-empty" %>
 </div>
 
@@ -35,7 +35,7 @@ one thing to do.
 
 ### A long history
 
-<div class="u-max-width-prose">
+<div class="max-w-prose">
 <%= render "examples/pattern_timeline_card", state: :long, prefix: "tl-long" %>
 </div>
 
@@ -45,7 +45,7 @@ in the same list.
 
 ## On a phone
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
 <div class="frame frame-phone">
 <%= render "screen", title: "Job page with its timeline on a phone", fit: true, html: render("examples/pattern_timeline_app", id: "tl-phone", live: false) %>
 </div>
@@ -57,16 +57,16 @@ event, and long lines wrap under their own text.
 ## Anatomy
 
 [Page header](/components/page-header/)
-: The job number in `u-text-data` as the title, the customer and the work as the description, and an outline “Edit job” [button](/components/button/).
+: The job number in `u-data` as the title, the customer and the work as the description, and an outline “Edit job” [button](/components/button/).
 
 Details
-: A [card](/components/card/) with a [description list](/components/description-list/). Dates, amounts and the phone number use `u-text-data`.
+: A [card](/components/card/) with a [description list](/components/description-list/). Dates, amounts and the phone number use `u-data`.
 
 Note box
 : A form at the top of the history: a [text area](/components/text-field/) labelled “Add a note” with a hint that only the shop sees notes, and a primary “Post note” button.
 
 Days
-: A [stack](/components/stack/) of days 48px apart. Each day is a `u-text-small u-text-strong` heading over its own [timeline](/components/timeline/). Dates use `u-text-data`, and “Today” and “Yesterday” don't.
+: A `flex flex-col gap-12` column of days, 48px apart. Each day is a `text-small font-medium` heading over its own [timeline](/components/timeline/). Dates use `u-data`, and “Today” and “Yesterday” don't.
 
 Events
 : Each event is an `<li>` with one line of what happened, an optional `<small>` detail line, and the time. A status change holds a [badge](/components/badge/).
@@ -102,17 +102,17 @@ A long history, with older events collapsed:
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
-<div class="example-frame u-stack u-gap-2">
+<div class="example-frame flex flex-col gap-2">
 <div class="u-card"><div class="u-card-content"><p>Quote sent to Ana Reyes</p></div></div>
-<div class="u-card"><div class="u-card-content"><p>Ana approved the quote, <span class="u-text-data">$85.00</span></p></div></div>
+<div class="u-card"><div class="u-card-content"><p>Ana approved the quote, <span class="u-data">$85.00</span></p></div></div>
 <div class="u-card"><div class="u-card-content"><p>Status changed to <span class="u-badge u-badge-info">On the bench</span></p></div></div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Every event in its own card. The borders outweigh the words, and a week of history fills three screens.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <ol class="u-timeline">
@@ -121,7 +121,7 @@ A long history, with older events collapsed:
     <u-relative-time format="time"><time datetime="2026-11-11T14:15:00-05:00">2:15pm</time></u-relative-time>
   </li>
   <li>
-    <div><p>Ana approved the quote, <span class="u-text-data">$85.00</span></p></div>
+    <div><p>Ana approved the quote, <span class="u-data">$85.00</span></p></div>
     <u-relative-time format="time"><time datetime="2026-11-11T14:12:00-05:00">2:12pm</time></u-relative-time>
   </li>
   <li>

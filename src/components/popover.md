@@ -10,12 +10,12 @@ A popover shows a few details or one quick change without leaving the page. It's
 
 ## Example
 
-<div class="example-frame u-row u-items-start u-gap-12">
+<div class="example-frame flex flex-wrap items-center gap-2 items-start gap-12">
 <%= render "examples/popover_customer", id: "popover-static-customer", popover: false %>
-<div class="u-stack u-gap-4">
-<p class="u-text-small u-text-muted">Try it:</p>
-<div class="u-row u-gap-4 u-text-small">
-<span class="u-text-data">#1042</span>
+<div class="flex flex-col gap-4">
+<p class="text-small text-muted">Try it:</p>
+<div class="flex flex-wrap items-center gap-4 text-small">
+<span class="u-data">#1042</span>
 <button type="button" class="u-link-btn" popovertarget="popover-live-customer">Ana Reyes</button>
 <span>Ring resize, size 6 to 7</span>
 </div>
@@ -29,10 +29,10 @@ without leaving the list.
 
 ## With a form
 
-<div class="example-frame u-row u-items-start u-gap-12">
+<div class="example-frame flex flex-wrap items-center gap-2 items-start gap-12">
 <%= render "examples/popover_due_date", id: "popover-static-due", popover: false %>
-<div class="u-stack u-gap-4">
-<p class="u-text-small u-text-muted">Try it:</p>
+<div class="flex flex-col gap-4">
+<p class="text-small text-muted">Try it:</p>
 <div class="u-actions">
 <button type="button" class="u-btn u-btn-outline" popovertarget="popover-live-due">Change due date</button>
 </div>
@@ -50,7 +50,7 @@ Add `data-u-hover` to the opener and the popover also opens when a mouse points 
 ```html
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="bulk-help" data-u-hover aria-label="What bulk intake does">…</button>
 <div class="u-popover" id="bulk-help" popover>
-  <p class="u-text-strong">Bulk intake</p>
+  <p class="font-medium">Bulk intake</p>
   <p>For entering several pieces in a row.</p>
 </div>
 ```
@@ -112,13 +112,13 @@ Dialog
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <dialog class="u-popover" open aria-label="Ana Reyes">
 <header><p>Ana Reyes</p></header>
-<div class="u-stack u-gap-2">
+<div class="flex flex-col gap-2">
 <button type="button" class="u-btn u-btn-ghost">Text Ana</button>
 <button type="button" class="u-btn u-btn-ghost">Call Ana</button>
 <button type="button" class="u-btn u-btn-ghost">Delete customer</button>
@@ -127,7 +127,7 @@ Dialog
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A popover full of buttons. A list of actions is a menu, which already groups them and marks the destructive one.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <%= render "examples/popover_customer", id: "popover-do-customer", popover: false %>

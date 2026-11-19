@@ -9,15 +9,15 @@
 
 .mailer-frame {
   overflow-x: auto;
-  border: 1px solid var(--u-color-border);
-  background: var(--u-color-bg-paper);
+  border: 1px solid var(--border-color-default);
+  background: var(--background-color-paper);
 }
 
 .mailer-iframe {
   display: block;
   width: 100%;
   border: 0;
-  background: var(--u-color-bg-paper);
+  background: var(--background-color-paper);
 }
 
 .mailer-preview-desktop .mailer-iframe { min-width: 640px; }
@@ -26,9 +26,9 @@
 
 .mailer-mock {
   display: grid;
-  gap: var(--u-space-4);
-  padding: var(--u-space-6);
-  background: var(--u-color-bg-surface);
+  gap: --spacing(4);
+  padding: --spacing(6);
+  background: var(--background-color-surface);
 }
 
 .mailer-mock > * { margin: 0; }
@@ -39,17 +39,17 @@
   display: grid;
   place-items: center;
   height: 96px;
-  border: 1px dashed var(--u-color-border-input);
-  color: var(--u-color-text-muted);
-  font-size: var(--u-font-size-14);
+  border: 1px dashed var(--border-color-input);
+  color: var(--text-color-muted);
+  font-size: var(--text-200);
 }
 
 .mailer-sign-in-code-inbox {
   display: grid;
-  gap: var(--u-space-1);
-  padding: var(--u-space-4);
-  background: var(--u-color-bg-surface);
-  font-size: var(--u-font-size-14);
+  gap: --spacing(1);
+  padding: --spacing(4);
+  background: var(--background-color-surface);
+  font-size: var(--text-200);
 }
 
 .mailer-sign-in-code-inbox p {
@@ -62,9 +62,9 @@
 .mailer-receipt-file {
   display: flex;
   justify-content: space-between;
-  gap: var(--u-space-4);
-  padding: var(--u-space-2) var(--u-space-4);
-  border: 1px solid var(--u-color-border);
+  gap: --spacing(4);
+  padding: --spacing(2) --spacing(4);
+  border: 1px solid var(--border-color-default);
 }
 
 .mailer-receipt-table :where(th, td):first-child { padding-left: 0; }

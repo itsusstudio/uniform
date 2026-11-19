@@ -1,22 +1,29 @@
 # Uniform
 
-The it's us studio design system as plain CSS, plus one small JavaScript module for the few components that need behaviour. No build step, no framework, no dependencies.
+The it's us studio design system: a tuned layer on Tailwind CSS v4, plus one small JavaScript module for the few components that need behaviour. Uniform sets the tokens and the components, and Tailwind's utilities handle layout and one-offs around them.
 
 ## Install
 
 ```ruby
 gem "studio-uniform", github: "itsusstudio/uniform", branch: "main", glob: "uniform/*.gemspec"
+gem "tailwindcss-rails"
 ```
 
-The engine adds `assets/` to the asset paths, so Propshaft serves every file under `uniform/`. In the layout, set the audience and link the stylesheets:
+`tailwindcss-rails` finds the gem's entry at `app/assets/tailwind/studio_uniform_engine/engine.css` and writes an import for it on every build. Import Tailwind, then Uniform, and link the build:
+
+```css
+/* app/assets/tailwind/application.css */
+@import "tailwindcss";
+@import "../builds/tailwind/studio_uniform_engine";
+```
 
 ```erb
 <html data-u-audience="business">
   <head>
-    <%= uniform_stylesheet_tags "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 ```
 
-`business` is for desktop-first tools people use at work, `consumer` for mobile-first products people use on their phones. There is no default. `uniform_stylesheet_tags` links each file in the order `assets/uniform/manifest.json` lists, so the browser fetches them all at once.
+`business` is for desktop-first tools people use at work, `consumer` for mobile-first products people use on their phones. Business sizes are the default, so set `consumer` when the product needs it. The engine also adds `assets/` to the asset paths, so Propshaft serves the fonts and icons the CSS points at, under `/uniform/`.
 
 Pin the script in `config/importmap.rb` and import it once from the application entry point:
 
@@ -26,24 +33,23 @@ pin "uniform", to: "uniform/uniform.js"
 
 The gem also ships the words its components use, as `uniform.*` keys in `config/locales/` for English, French, Dutch and Spanish. Rails loads them with the engine, so `t("uniform.close")` works straight away, and an app's own locale file can override any key.
 
-Outside Rails, link `assets/uniform/uniform.css` and load `assets/uniform/uniform.js` as a module.
-
 Everything works without the script. Each component starts as plain markup that does its job on its own, and the script only adds to it.
 
-Your own styles always win. Uniform sits in cascade layers (`uniform.tokens`, `uniform.base`, `uniform.layout`, `uniform.components`, `uniform.utilities`), and any CSS you write outside those layers, or in a layer declared after them, takes priority.
+Uniform uses Tailwind's own layers. Tokens are Tailwind theme variables, page defaults sit in `base`, components in `components`, and every Tailwind utility overrides a component. In component CSS, use the theme variables (`var(--text-color-muted)`) and `--spacing(n)` for space.
 
 ## What's inside
 
 | File | Contains |
 | --- | --- |
-| `uniform.css` | Entry file. Declares the layer order and imports the rest. |
-| `fonts.css` | The `@font-face` rules for the files in `fonts/`. Swap it to load fonts another way |
-| `tokens.css` | Every `--u-*` variable, light and dark |
-| `base.css` | Page defaults, wrapped in `:where()` so they're easy to override |
-| `layout.css` | `u-stack`, `u-row`, `u-grid`, `u-sidebar-layout`, `u-container` |
+| `tailwind.css` | Entry file for Tailwind. Imports the theme, the dark variant and `uniform.css`, and tells Tailwind to scan the gem's script and Ruby |
+| `theme.css` | Every token, as Tailwind theme variables: `--background-color-surface`, `--text-color-muted`, `--text-small`, `--spacing`, `--radius-surface` and the rest, light and dark, plus the consumer sizes and the page margin on small screens |
+| `variants.css` | The `dark:` variant, following the system setting and `data-u-theme` |
+| `uniform.css` | Imports the files below in order |
+| `fonts.css` | The `@font-face` rules for the files in `fonts/` |
+| `base.css` | Page defaults on top of Tailwind's preflight, wrapped in `:where()` so they're easy to override |
+| `layout.css` | `u-container` and `u-grid` |
 | `components/` | One file per component, all classes prefixed `u-`. The larger ones: `app-shell.css` (the app frame and sidebar), `auth-shell.css` (the sign-in and sign-up frame), `site-header.css` (a marketing site's top row), `data-grid.css` and `chart.css` |
 | `uniform.js` | Custom elements that add behaviour to markup that already works (see below) |
-| `utilities.css` | Type intent classes (`u-text-*`, `u-wordmark`), backgrounds (`u-bg-*`), `u-gap-*` |
 | `fonts/` | Inter, Apfel Grotezk, IBM Plex Mono and Instrument Serif |
 | `icons/` | The SVG icons, drawn with `mask` so they take the text colour |
 
@@ -71,7 +77,6 @@ The blocks are `heading`, `paragraph`, `rows`, `facts`, `table`, `button`, `code
 | --- | --- | --- |
 | `<u-combobox>` | the `role="combobox"` `u-input` and its listbox, inside a `u-field` | Filtering, keyboard and the floating list. Fires `combobox:action`. |
 | `<u-input-colour>` | the colour input, hex code `u-input`, caret and presets, inside a `u-field` | The hex code field, presets and their keyboard |
-| `<u-input-password>` | a password `u-input` and its show button | The show password button |
 | `<u-character-count>` | a `u-field` with `maxlength` | The live “47 of 500” count in its last `<small>` |
 | `<u-input-phone>` | the `u-field` holding a `type="tel"` `u-input`, with an optional `u-error` and hidden input | Groups the phone number as you type, like (416) 555-0142, and checks its length on blur and submit. `region` sets the home country (default `CA`). |
 | `<u-toggle>` | one `button.u-toggle[aria-pressed]` | Flips `aria-pressed`. Fires `toggle:change`. |
@@ -87,14 +92,14 @@ They live in the light DOM with no shadow DOM, draw only from markup already on 
 Nothing switches on its own. Apps sit on white, which is the default. A site (a marketing page, a blog) puts paper on the page itself:
 
 ```html
-<body class="u-bg-paper">
+<body class="bg-paper">
 ```
 
-Site-only type has its own classes: `u-text-hero`, `u-text-section-title`, `u-text-article-title` and `u-text-lead`. Never use them in an app.
+Site-only type has its own classes: `text-hero font-headline`, `text-section-title font-headline`, `text-article-title font-headline` and `text-lead`. Never use them in an app.
 
 ## Screen sizes
 
-Two breakpoints: phones below 640px and wide screens from 1024px. The page margin is 16px on phones, 24px up to 1023px and 48px from 1024px. The grid gutter is 16px on phones and 24px above. On phones every `u-span-*` child goes full width, and `u-sidebar-layout` stacks below 1024px.
+Two breakpoints: phones below 640px and wide screens from 1024px. The page margin is 16px on phones, 24px up to 1023px and 48px from 1024px. The grid gutter is 16px on phones and 24px above. A `u-grid` child takes all twelve columns until it sets `@grid:col-span-*`, which applies once the grid itself is 640px wide.
 
 ## Fonts
 
@@ -102,4 +107,4 @@ Inter, Apfel Grotezk and IBM Plex Mono ship in `fonts/` and load from the CSS, a
 
 ## Rules
 
-Read the full guidelines at the Uniform site before building a screen. In short: use components and layouts for spacing instead of writing your own, use only `--u-*` tokens for colour, type and space, and build patterns from what's here. A pattern that needs new CSS means a component or layout is missing.
+Read the full guidelines at the Uniform site before building a screen. In short: reach for a component first, then a Uniform theme value (`bg-surface`, `text-muted`, `gap-6`), then any Tailwind utility. When the same mix of utilities turns up three times, it belongs in Uniform as a component.

@@ -10,8 +10,8 @@ A wordmark is the product's name set in type and linked home. Every studio produ
 
 ## Example
 
-<div class="example-frame u-stack u-gap-6">
-<div class="u-row u-gap-12">
+<div class="example-frame flex flex-col gap-6">
+<div class="flex flex-wrap items-center gap-12">
 <a class="u-wordmark u-wordmark-lg u-wordmark-serif" href="#example">Workbench</a>
 <a class="u-wordmark u-wordmark-lg u-wordmark-sans" href="#example">workbench</a>
 </div>
@@ -19,9 +19,9 @@ A wordmark is the product's name set in type and linked home. Every studio produ
 
 ## Variants
 
-<div class="example-frame u-stack u-gap-2">
+<div class="example-frame flex flex-col gap-2">
 <% ["Workbench", "Belly", "Canvas", "Déjà Yum"].each do |name| -%>
-<div class="u-row u-gap-12"><span class="u-wordmark u-wordmark-lg u-wordmark-serif"><%= name %></span><span class="u-wordmark u-wordmark-lg u-wordmark-sans"><%= name %></span><span class="u-wordmark u-wordmark-lg u-wordmark-sans"><%= name.downcase %></span></div>
+<div class="flex flex-wrap items-center gap-12"><span class="u-wordmark u-wordmark-lg u-wordmark-serif"><%= name %></span><span class="u-wordmark u-wordmark-lg u-wordmark-sans"><%= name %></span><span class="u-wordmark u-wordmark-lg u-wordmark-sans"><%= name.downcase %></span></div>
 <% end -%>
 </div>
 
@@ -32,9 +32,9 @@ hand-finished. The sans is friendly and holds up best at small sizes.
 
 ## Sizes
 
-<div class="example-frame u-stack u-gap-4">
-<div class="u-row u-gap-12"><span class="u-wordmark u-wordmark-serif">Workbench</span><span class="u-wordmark u-wordmark-sans">workbench</span></div>
-<div class="u-row u-gap-12"><span class="u-wordmark u-wordmark-lg u-wordmark-serif">Workbench</span><span class="u-wordmark u-wordmark-lg u-wordmark-sans">workbench</span></div>
+<div class="example-frame flex flex-col gap-4">
+<div class="flex flex-wrap items-center gap-12"><span class="u-wordmark u-wordmark-serif">Workbench</span><span class="u-wordmark u-wordmark-sans">workbench</span></div>
+<div class="flex flex-wrap items-center gap-12"><span class="u-wordmark u-wordmark-lg u-wordmark-serif">Workbench</span><span class="u-wordmark u-wordmark-lg u-wordmark-sans">workbench</span></div>
 </div>
 
 20px in an app's sidebar, phone bar and sign-in screens. `u-wordmark-lg`, 24px, in a
@@ -43,8 +43,8 @@ both read at the same weight.
 
 ## Monogram
 
-<div class="example-frame u-stack u-gap-4">
-<div class="u-row u-gap-4">
+<div class="example-frame flex flex-col gap-4">
+<div class="flex flex-wrap items-center gap-4">
 <% [["Workbench", "W"], ["Belly", "B"], ["Canvas", "C"], ["Déjà Yum", "D"]].each do |name, letter| -%>
 <span class="wordmark-demo-tile u-wordmark-serif" title="<%= name %>"><%= letter %></span>
 <% end -%>

@@ -10,12 +10,6 @@
   without: The browser's own colour input picks a colour, and Chrome and Edge show the presets as suggestions.
   page: /components/input-colour/
 
-- name: <u-input-password>
-  wraps: A password `u-input` and its show `<button>`.
-  adds: The show password button.
-  without: The field still takes the password, hidden.
-  page: /components/input-password/
-
 - name: <u-character-count>
   wraps: A `u-field` with `maxlength`, ending in a `<small>` hint.
   adds: The live "47 of 500" count, in the field's last hint. `data-count` words it, with `{count}` and `{max}` for the numbers.

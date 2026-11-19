@@ -11,7 +11,7 @@ A badge says where something stands, or flags a fact, with a word beside a squar
 ## Example
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <%= render "examples/badge_cards" %>
 </div>
 </div>
@@ -20,15 +20,15 @@ States in a list get the square and word. A danger badge's word is red too, like
 
 ## Variants
 
-<div class="example-frame u-stack u-gap-4">
-<div class="u-row u-gap-6">
+<div class="example-frame flex flex-col gap-4">
+<div class="flex flex-wrap items-center gap-6">
 <span class="u-badge u-badge-info">On the bench</span>
 <span class="u-badge u-badge-warning">Waiting on parts</span>
 <span class="u-badge u-badge-danger">Overdue</span>
 <span class="u-badge u-badge-success">Paid</span>
 <span class="u-badge u-badge-neutral">Draft</span>
 </div>
-<div class="u-row">
+<div class="flex flex-wrap items-center gap-2">
 <span class="u-badge u-badge-info u-badge-strong">Beta</span>
 <span class="u-badge u-badge-warning u-badge-strong">Expires soon</span>
 <span class="u-badge u-badge-danger u-badge-strong">Card declined</span>
@@ -53,18 +53,18 @@ Give every badge `u-badge` and one colour class.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
-<div class="example-frame u-stack u-gap-2">
-<p class="u-text-small badge-demo-dont-text">Overdue</p>
-<p class="u-text-small"><span class="badge-demo-dont-pill">Paid</span></p>
+<div class="example-frame flex flex-col gap-2">
+<p class="text-small badge-demo-dont-text">Overdue</p>
+<p class="text-small"><span class="badge-demo-dont-pill">Paid</span></p>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Coloured words and tinted pills. Red text is hard to read, and a filled pill in every row shouts louder than the record it belongs to.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
-<div class="example-frame u-stack u-gap-2">
+<div class="example-frame flex flex-col gap-2">
 <span class="u-badge u-badge-danger">Overdue</span>
 <span class="u-badge u-badge-success">Paid</span>
 </div>

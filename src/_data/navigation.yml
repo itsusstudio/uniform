@@ -34,24 +34,14 @@
       url: /writing/
 - label: Layout
   items:
-    - title: Stack
-      url: /components/stack/
-    - title: Row
-      url: /components/row/
     - title: Actions
       url: /components/actions/
     - title: Form
       url: /components/form/
-    - title: Scroll row
-      url: /components/scroll-row/
     - title: Grid
       url: /components/grid/
-    - title: Sidebar layout
-      url: /components/sidebar-layout/
     - title: Container
       url: /components/container/
-    - title: Section
-      url: /components/section/
 - label: Page frame
   items:
     - title: App shell
@@ -82,8 +72,6 @@
       url: /components/badge/
     - title: Banner
       url: /components/banner/
-    - title: Breadcrumb
-      url: /components/breadcrumb/
     - title: Button
       url: /components/button/
     - title: Card
@@ -138,8 +126,6 @@
       url: /components/select/
     - title: Shimmer
       url: /components/shimmer/
-    - title: Spinner
-      url: /components/spinner/
     - title: Switch
       url: /components/switch/
     - title: Table
@@ -162,8 +148,6 @@
       url: /components/input-code/
     - title: "Input: colour"
       url: /components/input-colour/
-    - title: "Input: password"
-      url: /components/input-password/
     - title: "Input: phone number"
       url: /components/input-phone/
     - title: Time

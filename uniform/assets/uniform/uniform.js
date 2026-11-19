@@ -83,7 +83,7 @@ let announcedField = null
 const announce = (field, message) => {
   if (!announcer) {
     announcer = document.createElement("div")
-    announcer.className = "u-visually-hidden"
+    announcer.className = "sr-only"
     announcer.setAttribute("aria-live", "polite")
     document.body.append(announcer)
   }
@@ -231,23 +231,6 @@ define("u-combobox", class extends UniformElement {
       const option = event.target.closest('[role="option"]')
       if (option && option !== active && choices().includes(option)) setActive(option, false)
     })
-  }
-})
-
-define("u-input-password", class extends UniformElement {
-  setup(signal) {
-    const input = this.querySelector(":scope > .u-input")
-    const toggle = this.querySelector(":scope > button")
-    if (!input || !toggle) return
-    Object.assign(input, { autocapitalize: "none", spellcheck: false })
-    input.setAttribute("autocorrect", "off")
-    const show = (visible) => {
-      input.type = visible ? "text" : "password"
-      toggle.setAttribute("aria-pressed", String(visible))
-    }
-    toggle.addEventListener("click", () => show(input.type === "password"), { signal })
-    input.form?.addEventListener("submit", () => show(false), { signal })
-    toggle.hidden = false
   }
 })
 
@@ -878,7 +861,7 @@ define("u-input-colour", class extends UniformElement {
       const [a, b] = [luminance(hex), luminance(tokens.getPropertyValue(token).trim())]
       return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)
     }
-    const ink = (hex) => ["--u-color-bg-ink", "--u-color-text-on-ink"].sort((a, b) => contrast(hex, b) - contrast(hex, a))[0]
+    const ink = (hex) => ["--background-color-ink", "--text-color-on-ink"].sort((a, b) => contrast(hex, b) - contrast(hex, a))[0]
     const message = error?.textContent.trim() ?? ""
     const validate = (hex) => input.setCustomValidity(hex ? "" : message)
     const flag = (invalid) => {
@@ -1316,7 +1299,7 @@ define("u-chart", class extends UniformElement {
     tooltip.hidden = true
     tooltip.setAttribute("aria-hidden", "true")
     const lines = series.map((_, s) => {
-      const row = chartHtml("p", seriesCount > 1 ? `u-chart-key u-chart-key-line ${s === 0 ? "u-chart-current" : "u-chart-previous"}` : "u-row")
+      const row = chartHtml("p", seriesCount > 1 ? `u-chart-key u-chart-key-line ${s === 0 ? "u-chart-current" : "u-chart-previous"}` : "flex flex-wrap items-center gap-2")
       row.append(chartHtml("span", "u-chart-tooltip-value"), chartHtml("span", "u-chart-tooltip-label"))
       tooltip.append(row)
       return row
@@ -1923,7 +1906,7 @@ define("u-copy", class extends UniformElement {
     let status = this.querySelector('[role="status"]')
     if (!status) {
       status = document.createElement("span")
-      status.className = "u-visually-hidden"
+      status.className = "sr-only"
       status.setAttribute("role", "status")
       button.after(status)
     }
@@ -2082,7 +2065,8 @@ const placePopover = (popover, anchor) => {
   const below = viewHeight - box.bottom - gap
   const above = box.top - gap
   const top = below >= height || below >= above ? box.bottom + gap : box.top - gap - height
-  style.setProperty("left", `${Math.max(gap, Math.min(box.left, viewWidth - width - gap))}px`)
+  const left = popover.matches(".u-split-btn + .u-menu") ? box.right - width : box.left
+  style.setProperty("left", `${Math.max(gap, Math.min(left, viewWidth - width - gap))}px`)
   style.setProperty("top", `${Math.max(gap, Math.min(top, viewHeight - height - gap))}px`)
 }
 
@@ -2118,6 +2102,7 @@ if (!document[pageReady]) {
     const popover = event.target
     if (!popover.matches?.(anchoredPopovers)) return
     const open = event.newState === "open"
+    if (!open && popover.matches(".u-menu")) popover.querySelectorAll("details[open]").forEach((details) => { details.open = false })
     if (commandFallback && popover.id) {
       document.querySelectorAll(`button[commandfor="${CSS.escape(popover.id)}"][command="toggle-popover"]`).forEach((button) => button.setAttribute("aria-expanded", String(open)))
     }

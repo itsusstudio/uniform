@@ -10,11 +10,11 @@ Page tabs switch between views of the same record. Each tab is a link to its own
 
 ## Example
 
-<div class="example-frame u-stack u-gap-6">
+<div class="example-frame flex flex-col gap-6">
 <header class="u-page-header">
 <hgroup>
 <h1>Ana Reyes, ring resize</h1>
-<p>Job <span class="u-text-data">#1042</span>, due <span class="u-text-data">Nov 14</span></p>
+<p>Job <span class="u-data">#1042</span>, due <span class="u-data">Nov 14</span></p>
 </hgroup>
 </header>
 <nav class="u-page-tabs" aria-label="Job">
@@ -74,8 +74,8 @@ Mark the current tab with `aria-current="page"`.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <nav class="u-page-tabs" aria-label="Don’t example">
@@ -86,7 +86,7 @@ Mark the current tab with `aria-current="page"`.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Actions dressed up as tabs. A tab shows a view, it never does something. Use buttons.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <nav class="u-page-tabs" aria-label="Do example">

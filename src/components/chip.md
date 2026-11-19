@@ -10,8 +10,8 @@ A chip shows a filter or a tag that people press or remove. For a label people o
 
 ## Example
 
-<div class="u-row">
-<span class="u-text-small"><span class="u-text-data">3</span> of <span class="u-text-data">38</span> jobs</span>
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-small"><span class="u-data">3</span> of <span class="u-data">38</span> jobs</span>
 <span class="u-chip">Status: On the bench<a href="#example" aria-label="Remove filter: Status: On the bench"></a></span>
 <span class="u-chip">Due this week<a href="#example" aria-label="Remove filter: Due this week"></a></span>
 <a class="u-btn u-btn-ghost" href="#example">Clear all</a>
@@ -22,17 +22,17 @@ filter. See it in place on the [Data table](/patterns/data-table/) pattern.
 
 ## Kinds
 
-<div class="u-stack u-gap-6">
-<div class="u-row">
+<div class="flex flex-col gap-6">
+<div class="flex flex-wrap items-center gap-2">
 <span class="u-chip">Rush</span>
 <span class="u-chip">Engraving</span>
 <span class="u-chip">Customer's own stone</span>
 </div>
-<div class="u-row">
+<div class="flex flex-wrap items-center gap-2">
 <span class="u-chip">Rush<button type="button" aria-label="Remove tag: Rush"></button></span>
 <span class="u-chip">Engraving<button type="button" aria-label="Remove tag: Engraving"></button></span>
 </div>
-<div class="u-row">
+<div class="flex flex-wrap items-center gap-2">
 <a class="u-chip" href="#kinds">Rush</a>
 <a class="u-chip" href="#kinds">Engraving</a>
 </div>
@@ -82,19 +82,19 @@ Link
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
-<div class="example-frame u-row">
+<div class="example-frame flex flex-wrap items-center gap-2">
 <span class="u-chip">On the bench<a href="#do-and-dont" aria-label="Remove filter: On the bench"></a></span>
 <span class="u-chip">This week<a href="#do-and-dont" aria-label="Remove filter: This week"></a></span>
 <span class="u-chip">Ana Reyes<a href="#do-and-dont" aria-label="Remove filter: Ana Reyes"></a></span>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Values on their own. “This week” could be when the job came in or when it's due, so you have to open the filters to find out.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
-<div class="example-frame u-row">
+<div class="example-frame flex flex-wrap items-center gap-2">
 <span class="u-chip">Status: On the bench<a href="#do-and-dont" aria-label="Remove filter: Status: On the bench"></a></span>
 <span class="u-chip">Due: This week<a href="#do-and-dont" aria-label="Remove filter: Due: This week"></a></span>
 <span class="u-chip">Customer: Ana Reyes<a href="#do-and-dont" aria-label="Remove filter: Customer: Ana Reyes"></a></span>

@@ -23,7 +23,7 @@ four choices, or longer words, use a [select](/components/select/) or
 <div class="example-frame">
 <u-toggle-panels data-group="docs-example">
 <fieldset class="u-fieldset" hidden>
-<legend class="u-visually-hidden">Pay with</legend>
+<legend class="sr-only">Pay with</legend>
 <div class="u-toggle-group">
 <label><input type="radio" name="docs-example" value="card" checked> Card</label>
 <label><input type="radio" name="docs-example" value="cash"> Cash</label>
@@ -47,14 +47,14 @@ together, like the HTML and Rails code on these pages.
 
 ## States
 
-<div class="example-frame u-row u-gap-6">
+<div class="example-frame flex flex-wrap items-center gap-6">
 <div class="u-toggle-group">
 <label><input type="radio" name="toggle-states" checked> Today</label>
 <label><input type="radio" name="toggle-states"> This week</label>
 <label><input type="radio" name="toggle-states" disabled> All</label>
 </div>
 <fieldset class="u-fieldset" disabled>
-<legend class="u-visually-hidden">Due</legend>
+<legend class="sr-only">Due</legend>
 <div class="u-toggle-group">
 <label><input type="radio" name="toggle-states-off" checked> Today</label>
 <label><input type="radio" name="toggle-states-off"> This week</label>
@@ -69,7 +69,7 @@ Disable one choice, or the whole group with a disabled `<fieldset>`.
 
 ```html
 <fieldset class="u-fieldset">
-  <legend class="u-visually-hidden">Due</legend>
+  <legend class="sr-only">Due</legend>
   <div class="u-toggle-group">
     <label><input type="radio" name="due" value="today"> Today</label>
     <label><input type="radio" name="due" value="week" checked> This week</label>
@@ -80,7 +80,7 @@ Disable one choice, or the whole group with a disabled `<fieldset>`.
 
 ```erb
 <fieldset class="u-fieldset">
-  <legend class="u-visually-hidden"><%%= t(".due") %></legend>
+  <legend class="sr-only"><%%= t(".due") %></legend>
   <div class="u-toggle-group">
     <%% %w[today week all].each do |due| %>
       <label><%%= radio_button_tag :due, due, params.fetch(:due, "week") == due, id: nil %> <%%= t(".due_options.#{due}") %></label>
@@ -92,7 +92,7 @@ Disable one choice, or the whole group with a disabled `<fieldset>`.
 ```html
 <u-toggle-panels data-group="payment">
   <fieldset class="u-fieldset" hidden>
-    <legend class="u-visually-hidden">Pay with</legend>
+    <legend class="sr-only">Pay with</legend>
     <div class="u-toggle-group">
       <label><input type="radio" name="payment" value="card" checked> Card</label>
       <label><input type="radio" name="payment" value="cash"> Cash</label>
@@ -112,7 +112,7 @@ Disable one choice, or the whole group with a disabled `<fieldset>`.
 ```erb
 <u-toggle-panels data-group="payment">
   <fieldset class="u-fieldset" hidden>
-    <legend class="u-visually-hidden"><%%= t(".pay_with") %></legend>
+    <legend class="sr-only"><%%= t(".pay_with") %></legend>
     <div class="u-toggle-group">
       <%% %w[card cash].each do |method| %>
         <label><%%= radio_button_tag :payment, method, method == "card", id: nil %> <%%= t(".methods.#{method}") %></label>
@@ -128,7 +128,7 @@ Disable one choice, or the whole group with a disabled `<fieldset>`.
 </u-toggle-panels>
 ```
 
-Put the question in the `<legend>`, hidden with `u-visually-hidden` when the
+Put the question in the `<legend>`, hidden with `sr-only` when the
 title above already says it. To apply a choice the moment it's picked, listen
 for `change` or submit the form. Without JavaScript, every panel shows under
 its title.
@@ -139,17 +139,17 @@ its title.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
-<div class="example-frame u-row u-gap-2">
+<div class="example-frame flex flex-wrap items-center gap-2">
 <u-toggle><button type="button" class="u-toggle" aria-pressed="true">Today</button></u-toggle>
 <u-toggle><button type="button" class="u-toggle" aria-pressed="true">This week</button></u-toggle>
 <u-toggle><button type="button" class="u-toggle" aria-pressed="false">All</button></u-toggle>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Separate toggles for a choice where only one can be true. Two are pressed, and nobody knows which list they're seeing.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="u-toggle-group">

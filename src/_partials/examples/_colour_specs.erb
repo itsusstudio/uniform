@@ -1,7 +1,8 @@
 <div class="spec-list">
 <% rows.each do |row| %>
 <div class="spec-row">
-<div class="spec-meta"><% if row[:class] %><u-copy><button type="button" class="u-link-btn u-text-data" data-copy="<%= row[:class] %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= row[:class] %></button></u-copy><span class="u-text-data">var(<%= row[:token] %>)</span><% else %><u-copy><button type="button" class="u-link-btn u-text-data" data-copy="var(<%= row[:token] %>)" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= row[:token] %></button></u-copy><% end %><% light, dark = row[:hex].split(" / ") %><span>Light <span class="u-text-data"><%= light %></span></span><span>Dark <span class="u-text-data"><%= dark || light %></span></span></div>
+<% row_class = theme_class(row[:token]) -%>
+<div class="spec-meta"><% if row_class %><u-copy><button type="button" class="u-link-btn u-data" data-copy="<%= row_class %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= row_class %></button></u-copy><span class="u-data">var(<%= row[:token] %>)</span><% else %><u-copy><button type="button" class="u-link-btn u-data" data-copy="var(<%= row[:token] %>)" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= row[:token] %></button></u-copy><% end %><% light, dark = row[:hex].split(" / ") %><span>Light <span class="u-data"><%= light %></span></span><span>Dark <span class="u-data"><%= dark || light %></span></span></div>
 <div class="colour-row">
 <% case row[:sample] %>
 <% when :fill %><span class="colour-sample" style="background: var(<%= row[:sample_token] || row[:token] %>)"></span>
@@ -13,9 +14,9 @@
 <% when :text %><span class="colour-sample colour-sample-text" style="color: var(<%= row[:token] %>)"><%= row[:text] %></span>
 <% when :wash %><span class="colour-sample colour-sample-text"><mark style="background: var(<%= row[:token] %>)"><%= row[:text] %></mark></span>
 <% end %>
-<div class="u-stack u-gap-1">
-<p class="u-text-body"><%= row[:job] %></p>
-<% if row[:never] %><p class="u-text-small u-text-muted">Never: <%= row[:never] %></p><% end %>
+<div class="flex flex-col gap-1">
+<p class="text-body"><%= row[:job] %></p>
+<% if row[:never] %><p class="text-small text-muted">Never: <%= row[:never] %></p><% end %>
 </div>
 </div>
 </div>

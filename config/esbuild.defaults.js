@@ -21,8 +21,6 @@ import fsLib from "node:fs"
 const fs = fsLib.promises
 import { pathToFileURL, fileURLToPath } from "node:url"
 import postcss from "postcss"
-import postCssImport from "postcss-import"
-import readCache from "read-cache"
 
 // Detect if an NPM package is available
 const moduleAvailable = name => {
@@ -104,44 +102,27 @@ const importPostCssPlugin = (options, configuration) => ({
     build.onLoad({ filter: (configuration.filter || /\.css$/) }, async (args) => {
       if (args.path.endsWith(".lit.css")) return;
 
-      const additionalFilePaths = []
       const css = await fs.readFile(args.path, "utf8")
-
-      // Configure import plugin so PostCSS can properly resolve `@import`ed CSS files
-      const importPlugin = postCssImport({
-        filter: itemPath => !itemPath.startsWith("/"), // ensure it doesn't try to import source-relative paths
-        load: async filename => {
-          let contents = await readCache(filename, "utf-8")
-          const filedir = path.dirname(filename)
-          // We'll want to track any imports later when in watch mode:
-          additionalFilePaths.push(filename)
-
-          // We need to transform `url(...)` in imported CSS so the filepaths are properly
-          // relative to the entrypoint. Seems icky to have to hack this! C'est la vie...
-          contents = contents.replace(/url\(['"]?\.\/(.*?)['"]?\)/g, (_match, p1) => {
-            const relpath = path.relative(args.path, path.resolve(filedir, p1)).replace(/^\.\.\//, "")
-            return `url("${relpath}")`
-          })
-          return contents
-        }
-      })
 
       // Process the file through PostCSS
       let outputCSS = ""
+      let messages = []
       try {
-        const result = await postcss([importPlugin, ...options.plugins]).process(css, {
+        const result = await postcss(options.plugins).process(css, {
           map: true,
           ...options.options,
           from: args.path,
         })
         outputCSS = result.css
+        messages = result.messages
       } catch(err) {
         console.error(`\nerror: "${err.reason}" while processing CSS file:\n${err.file}:${err.line}:${err.column}\n`)
       }
       return {
         contents: outputCSS,
         loader: "css",
-        watchFiles: [args.path, ...additionalFilePaths],
+        watchFiles: [args.path, ...messages.filter(message => message.type === "dependency").map(message => message.file)],
+        watchDirs: messages.filter(message => message.type === "dir-dependency").map(message => message.dir),
       }
     })
   },

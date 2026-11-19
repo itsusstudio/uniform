@@ -13,7 +13,7 @@ that changes who's in charge. Lift it into an app as it is and change the words.
 ## Example
 
 <div class="example-frame">
-<div class="u-container u-container-narrow">
+<div class="u-container max-w-page-narrow">
 <%= render "examples/danger_zone" %>
 </div>
 </div>

@@ -14,9 +14,9 @@ element.
 <html data-u-audience="business">
 ```
 
-There is no default. Without the attribute, text and controls have no size, so
-a missing audience is obvious on the first page load, and `uniform.js` reports
-it in the console.
+Business sizes are the default, because Tailwind's theme needs a value for every
+token. Set the attribute anyway, so the choice is on purpose: `uniform.js`
+reports a missing audience in the console.
 
 ## The two audiences
 

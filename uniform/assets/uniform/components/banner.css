@@ -1,21 +1,19 @@
-@layer uniform.components {
+@layer components {
 .u-banner {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-1);
-  padding: var(--u-space-4) var(--u-space-6);
-  border-radius: var(--u-radius-surface);
+  gap: --spacing(1);
+  padding: --spacing(4) --spacing(6);
+  border-radius: var(--radius-surface);
   background: var(--u-banner-bg, transparent);
   color: var(--u-banner-text, inherit);
-  font-size: var(--u-font-size-small);
+  font-size: var(--text-small);
 }
-
-.u-banner > * { margin: 0; }
 
 .u-banner:has(> .u-icon:first-child) {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
-  column-gap: var(--u-space-2);
+  column-gap: --spacing(2);
   align-items: start;
 }
 
@@ -26,10 +24,10 @@
 
 .u-banner:has(> .u-icon:first-child) > :not(.u-icon) { grid-column: 2; }
 
-.u-banner > .u-actions { margin-top: var(--u-space-2); }
+.u-banner > .u-actions { margin-top: --spacing(2); }
 
 .u-banner-full {
-  padding: var(--u-space-2) var(--u-space-6);
+  padding: --spacing(2) --spacing(6);
   border-radius: 0;
   text-align: center;
   text-wrap: balance;
@@ -38,8 +36,8 @@
 .u-banner-full strong { font-weight: 500; }
 
 .u-banner-title {
-  font-size: var(--u-font-size-title);
-  line-height: var(--u-line-height-title);
+  font-size: var(--text-title);
+  line-height: var(--text-title--line-height);
   font-weight: 500;
 }
 
@@ -50,22 +48,22 @@
 .u-banner :focus-visible { outline-color: currentColor; }
 
 .u-banner-info {
-  --u-banner-bg: var(--u-color-info);
-  --u-banner-text: var(--u-color-text-on-info);
+  --u-banner-bg: var(--color-info);
+  --u-banner-text: var(--text-color-on-info);
 }
 
 .u-banner-warning {
-  --u-banner-bg: var(--u-color-warning);
-  --u-banner-text: var(--u-color-text-on-warning);
+  --u-banner-bg: var(--color-warning);
+  --u-banner-text: var(--text-color-on-warning);
 }
 
 .u-banner-danger {
-  --u-banner-bg: var(--u-color-danger);
-  --u-banner-text: var(--u-color-text-on-danger);
+  --u-banner-bg: var(--color-danger);
+  --u-banner-text: var(--text-color-on-danger);
 }
 
 .u-banner-success {
-  --u-banner-bg: var(--u-color-success);
-  --u-banner-text: var(--u-color-text-on-success);
+  --u-banner-bg: var(--color-success);
+  --u-banner-text: var(--text-color-on-success);
 }
 }

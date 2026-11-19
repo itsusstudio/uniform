@@ -10,8 +10,8 @@ A progress bar shows how far along a wait is, when its length is known. For a wa
 
 ## Example
 
-<div class="example-frame u-max-width-prose">
-<div class="u-stack u-gap-4">
+<div class="example-frame max-w-prose">
+<div class="flex flex-col gap-4">
 <div class="u-progress">
 <p id="progress-demo-label">Sending pickup texts</p>
 <progress id="progress-demo-bar" max="24" value="9" aria-labelledby="progress-demo-label">9 of 24</progress>
@@ -38,8 +38,8 @@ document.getElementById("progress-demo-start").addEventListener("click", () => {
 ## States
 
 <div class="u-grid">
-<div class="u-span-6 u-stack u-gap-2">
-<p class="u-text-small u-text-strong">Known wait</p>
+<div class="@grid:col-span-6 flex flex-col gap-2">
+<p class="text-small font-medium">Known wait</p>
 <div class="example-frame">
 <div class="u-progress">
 <p id="progress-state-label">Uploading photos for #1042</p>
@@ -48,8 +48,8 @@ document.getElementById("progress-demo-start").addEventListener("click", () => {
 </div>
 </div>
 </div>
-<div class="u-span-6 u-stack u-gap-2">
-<p class="u-text-small u-text-strong">Unknown wait</p>
+<div class="@grid:col-span-6 flex flex-col gap-2">
+<p class="text-small font-medium">Unknown wait</p>
 <%= render "examples/shimmer_list" %>
 </div>
 </div>
@@ -69,7 +69,7 @@ Unknown wait
   <p>9 of 24 sent</p>
 </div>
 
-<p class="u-text-small u-text-muted" role="status">Loading jobs…</p>
+<p class="text-small text-muted" role="status">Loading jobs…</p>
 ```
 
 The first `<p>` is the label and the last is the count. Both are optional.

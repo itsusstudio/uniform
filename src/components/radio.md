@@ -10,7 +10,7 @@ A radio picks exactly one option from a few, all in view. The whole label is the
 
 ## Example
 
-<div class="example-frame u-stack u-gap-6">
+<div class="example-frame flex flex-col gap-6">
 <fieldset class="u-fieldset">
 <legend>When it's ready, let Ana know by</legend>
 <label class="u-radio"><input type="radio" name="radio-notify" checked> Text<span class="u-radio-hint">To (416) 555-0199.</span></label>
@@ -27,7 +27,7 @@ A radio picks exactly one option from a few, all in view. The whole label is the
 
 ## States
 
-<div class="example-frame u-row u-gap-6">
+<div class="example-frame flex flex-wrap items-center gap-6">
 <label class="u-radio"><input type="radio" name="radio-state-a"> Not chosen</label>
 <label class="u-radio"><input type="radio" name="radio-state-b" checked> Chosen</label>
 <label class="u-radio"><input type="radio" name="radio-state-c" disabled> Disabled</label>
@@ -72,7 +72,7 @@ A plain `<fieldset>` frames its options in a hairline box with the legend set
 into the line, like a group on a printed form. Use `u-fieldset` instead when the
 group sits in a form's own column and needs no frame.
 
-<div class="u-grid"><div class="u-span-6">
+<div class="u-grid"><div class="@grid:col-span-6">
 <fieldset>
 <legend>Paid by</legend>
 <label class="u-radio"><input type="radio" name="framed_paid_by" value="card" checked> Card</label>
@@ -87,8 +87,8 @@ group sits in a form's own column and needs no frame.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <fieldset class="u-fieldset">
@@ -105,7 +105,7 @@ group sits in a form's own column and needs no frame.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Eight radios in a row. The form gets long and the one that's chosen is hard to find.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <fieldset class="u-fieldset">

@@ -33,13 +33,13 @@ Page margin
 ## Three widths
 
 Data pages
-: `u-container u-container-wide`, up to 1600px. Lists, tables and dashboards use the room on a big screen.
+: `u-container max-w-page-wide`, up to 1600px. Lists, tables and dashboards use the room on a big screen.
 
 Most pages
 : `u-container`, up to 1280px. Sites and pages that mix content.
 
 Settings, forms and reading
-: `u-container u-container-narrow`, a 768px column. A page you work down one setting at a time stays in one line of sight.
+: `u-container max-w-page-narrow`, a 768px column. A page you work down one setting at a time stays in one line of sight.
 
 ## When to use it
 

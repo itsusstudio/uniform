@@ -7,12 +7,12 @@
   counts = [14, 17, 12, 19, 21, 18, 16, 22, 20, 24, 19, 23]
   chart_json = ->(data) { raw(JSON.generate(data).gsub("</", "<\\/")) }
 -%>
-<section class="u-card<%= " u-span-#{span_value}" if span_value %>">
+<section class="u-card <%= grid_span(span_value) %>">
   <header>
     <h2>Jobs finished</h2>
     <form id="<%= uid.("weekly-period") %>" action="/reports" method="get">
       <fieldset class="u-fieldset">
-        <legend class="u-visually-hidden">Period</legend>
+        <legend class="sr-only">Period</legend>
         <div class="u-toggle-group">
           <label><input type="radio" name="weeks" value="12" checked> 12 weeks</label>
           <label><input type="radio" name="weeks" value="26"> 26 weeks</label>

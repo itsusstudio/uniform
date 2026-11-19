@@ -11,7 +11,7 @@
   <div class="u-card-content">
     <div class="u-stats">
 <% figures.each do |figure, label, path, caption, values| -%>
-      <div class="u-stack u-gap-2">
+      <div class="flex flex-col gap-2">
 <% if loading_value -%>
         <div class="u-stat" aria-hidden="true">
           <p><span class="u-shimmer"><%= figure %></span></p>

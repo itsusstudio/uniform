@@ -1,11 +1,10 @@
-@layer uniform.components {
+@layer components {
 u-input-colour > [type="color"] {
   display: block;
-  width: var(--u-size-control);
-  height: var(--u-size-control);
-  margin: 0;
+  width: var(--spacing-control);
+  height: var(--spacing-control);
   padding: 0;
-  border: 1px solid var(--u-color-border-input);
+  border: 1px solid var(--border-color-input);
   border-radius: 0;
   background: transparent;
   cursor: pointer;
@@ -28,34 +27,34 @@ u-input-colour > [type="color"]:disabled { cursor: not-allowed; }
 
 u-input-colour:has(> .u-input) > [type="color"] {
   position: absolute;
-  top: calc((var(--u-size-control) - 20px) / 2);
-  inset-inline-start: var(--u-space-2);
+  top: calc((var(--spacing-control) - 20px) / 2);
+  inset-inline-start: --spacing(2);
   width: 20px;
   height: 20px;
-  border-color: var(--u-color-border);
+  border-color: var(--border-color-default);
 }
 
 @media (pointer: coarse) {
   u-input-colour:has(> .u-input) > [type="color"] {
-    top: calc((var(--u-size-control) - 32px) / 2);
-    inset-inline-start: calc(var(--u-space-2) - 6px);
-    width: 32px;
-    height: 32px;
-    padding: 6px;
+    top: calc((var(--spacing-control) - var(--spacing-target)) / 2);
+    inset-inline-start: calc(--spacing(2) - (var(--spacing-target) - 20px) / 2);
+    width: var(--spacing-target);
+    height: var(--spacing-target);
+    padding: calc((var(--spacing-target) - 20px) / 2);
     border: 0;
   }
 
-  u-input-colour:has(> .u-input) > [type="color"]::-webkit-color-swatch { border: 1px solid var(--u-color-border); }
+  u-input-colour:has(> .u-input) > [type="color"]::-webkit-color-swatch { border: 1px solid var(--border-color-default); }
 
-  u-input-colour:has(> .u-input) > [type="color"]::-moz-color-swatch { border: 1px solid var(--u-color-border); }
+  u-input-colour:has(> .u-input) > [type="color"]::-moz-color-swatch { border: 1px solid var(--border-color-default); }
 }
 
 u-input-colour > .u-input {
-  padding-inline-start: calc(var(--u-space-2) + 20px + var(--u-space-2));
-  font-family: var(--u-font-mono);
+  padding-inline-start: calc(--spacing(2) + 20px + --spacing(2));
+  font-family: var(--font-mono);
 }
 
-u-input-colour:has(> button) > .u-input { padding-inline-end: calc(var(--u-size-target) + var(--u-space-2)); }
+u-input-colour:has(> button) > .u-input { padding-inline-end: calc(var(--spacing-target) + --spacing(2)); }
 
 u-input-colour > button {
   position: absolute;
@@ -63,25 +62,24 @@ u-input-colour > button {
   inset-inline-end: 2px;
   display: grid;
   place-content: center;
-  width: var(--u-size-target);
-  height: calc(var(--u-size-control) - 4px);
-  margin: 0;
+  width: var(--spacing-target);
+  height: calc(var(--spacing-control) - 4px);
   padding: 0;
   border: 0;
-  border-radius: var(--u-radius-pill);
+  border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
   cursor: pointer;
   outline-offset: 0;
 }
 
 @media (hover: hover) {
-  u-input-colour > button:hover { background: var(--u-color-divider); }
+  u-input-colour > button:hover { background: var(--border-color-divider); }
 }
 
 u-input-colour > button:disabled {
   background: transparent;
-  color: var(--u-color-border-input);
+  color: var(--border-color-input);
   cursor: not-allowed;
 }
 
@@ -90,32 +88,31 @@ u-input-colour > button::before {
   width: 16px;
   height: 16px;
   background: currentcolor;
-  mask: url("./../icons/chevron-down.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/chevron-down.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
 [data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child) u-input-colour:has(> .u-input) > [type="color"] {
-  top: calc(var(--u-space-6) + (var(--u-size-field) - var(--u-space-6) - 20px) / 2);
-  inset-inline-start: var(--u-space-4);
+  top: calc(--spacing(6) + (var(--spacing-field) - --spacing(6) - 20px) / 2);
+  inset-inline-start: --spacing(4);
 }
 
-[data-u-audience="consumer"] u-input-colour > .u-input { padding-inline-start: calc(var(--u-space-4) + 20px + var(--u-space-2)); }
+[data-u-audience="consumer"] u-input-colour > .u-input { padding-inline-start: calc(--spacing(4) + 20px + --spacing(2)); }
 
-[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child) u-input-colour > button { top: calc((var(--u-size-field) - var(--u-size-control) + 4px) / 2); }
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child) u-input-colour > button { top: calc((var(--spacing-field) - var(--spacing-control) + 4px) / 2); }
 
 u-input-colour > .u-menu > div {
   display: grid;
-  grid-template-columns: repeat(6, var(--u-size-target));
-  gap: var(--u-space-2);
-  padding: var(--u-space-2) var(--u-space-4);
+  grid-template-columns: repeat(6, var(--spacing-target));
+  gap: --spacing(2);
+  padding: --spacing(2) --spacing(4);
 }
 
 u-input-colour > .u-menu > div > button {
   display: grid;
   place-content: center;
-  width: var(--u-size-target);
-  height: var(--u-size-target);
-  margin: 0;
+  width: var(--spacing-target);
+  height: var(--spacing-target);
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -123,7 +120,7 @@ u-input-colour > .u-menu > div > button {
 }
 
 u-input-colour > .u-menu > div > button[aria-pressed="true"] {
-  outline: 2px solid var(--u-color-text-default);
+  outline: 2px solid var(--text-color-default);
   outline-offset: 2px;
 }
 
@@ -132,9 +129,9 @@ u-input-colour > .u-menu > div > button[aria-pressed="true"]::after {
   width: 16px;
   height: 16px;
   background: currentcolor;
-  mask: url("./../icons/check.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/check.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
-u-input-colour > .u-menu > div > button:focus-visible { outline: 2px solid var(--u-color-info); }
+u-input-colour > .u-menu > div > button:focus-visible { outline: 2px solid var(--color-info); }
 }

@@ -1,8 +1,9 @@
-@import "../../uniform/assets/uniform/uniform.css";
-@import "./site/shell.css" layer(site);
-@import "./site/examples.css" layer(site);
-@import "./site/figures.css" layer(site);
-@import "./site/specimens.css" layer(site);
-@import "./site/frames.css" layer(site);
-@import "./site/demos.css" layer(site);
-@import "./site/mailers.css" layer(site);
+@import "tailwindcss";
+@import "../../uniform/assets/uniform/tailwind.css";
+@import "./site/shell.css" layer(components.site);
+@import "./site/examples.css" layer(components.site);
+@import "./site/figures.css" layer(components.site);
+@import "./site/specimens.css" layer(components.site);
+@import "./site/frames.css" layer(components.site);
+@import "./site/demos.css" layer(components.site);
+@import "./site/mailers.css" layer(components.site);

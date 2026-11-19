@@ -1,55 +1,51 @@
-@layer uniform.components {
+@layer components {
 .u-nav {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-4);
+  gap: --spacing(4);
 }
 
 .u-nav > :is(div, details) { display: grid; }
-
-:is(.u-nav, u-sidebar) ul { list-style: none; margin: 0; padding: 0; }
 
 .u-nav ul { display: grid; }
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button), .u-nav > details > summary) {
   display: flex;
   align-items: center;
-  gap: var(--u-space-2);
-  min-height: var(--u-size-target);
-  padding-inline: var(--u-space-2);
-  border-radius: var(--u-radius-default);
-  font-size: var(--u-font-size-small);
-  color: var(--u-color-text-default);
+  gap: --spacing(2);
+  min-height: var(--spacing-target);
+  padding-inline: --spacing(2);
+  border-radius: var(--radius-item);
+  font-size: var(--text-small);
+  color: var(--text-color-default);
   text-decoration: none;
 }
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button), .u-nav > details > summary) > .u-icon { flex: none; }
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button), .u-nav > details > summary):hover {
-  background: color-mix(in srgb, var(--u-color-text-default) 3%, transparent);
-  color: var(--u-color-text-default);
+  background: color-mix(in srgb, var(--text-color-default) 3%, transparent);
+  color: var(--text-color-default);
 }
 
 .u-nav .u-nav-link-section {
   font-weight: 500;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
 }
 
 :is(.u-nav > a, .u-nav li > a, u-sidebar li > :is(a, button))[aria-current="page"] {
-  background: color-mix(in srgb, var(--u-color-text-default) 5%, transparent);
-  color: var(--u-color-text-default);
+  background: color-mix(in srgb, var(--text-color-default) 5%, transparent);
+  color: var(--text-color-default);
   font-weight: 500;
 }
-
-.u-sidebar-layout > .u-nav :is(.u-nav > a, li > a, details > summary) { font-size: var(--u-font-size-body); }
 
 .u-nav .u-nav-link-highlight,
 .u-nav .u-nav-link-highlight:hover,
 .u-nav .u-nav-link-highlight[aria-current="page"] {
-  --u-nav-text: var(--u-color-bg-surface);
-  --u-nav-label: var(--u-color-bg-surface);
-  background: var(--u-color-text-default);
-  color: var(--u-color-bg-surface);
+  --u-nav-text: var(--background-color-surface);
+  --u-nav-label: var(--background-color-surface);
+  background: var(--text-color-default);
+  color: var(--background-color-surface);
   font-weight: 500;
 }
 
@@ -58,7 +54,6 @@
 .u-nav .u-nav-link-highlight .u-meta { margin-inline-start: auto; }
 
 .u-nav > details > summary {
-  margin: 0;
   list-style: none;
   cursor: pointer;
 }
@@ -74,21 +69,21 @@
   background-image: linear-gradient(currentcolor, currentcolor), linear-gradient(currentcolor, currentcolor);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 10px var(--u-icon-stroke), var(--u-icon-stroke) 10px;
+  background-size: 10px var(--u-icon-stroke-width), var(--u-icon-stroke-width) 10px;
   forced-color-adjust: none;
 }
 
-.u-nav > details[open] > summary::after { background-size: 10px var(--u-icon-stroke), 0 0; }
+.u-nav > details[open] > summary::after { background-size: 10px var(--u-icon-stroke-width), 0 0; }
 
 .u-nav > details > ul {
-  --u-nav-guide: var(--u-space-2);
-  --u-nav-indent: calc(var(--u-space-4) + var(--u-space-2));
+  --u-nav-guide: --spacing(2);
+  --u-nav-indent: calc(--spacing(4) + --spacing(2));
   position: relative;
 }
 
 .u-nav > details:has(> summary > .u-icon) > ul {
-  --u-nav-guide: calc(var(--u-space-4) - 1px);
-  --u-nav-indent: calc(var(--u-space-4) * 2);
+  --u-nav-guide: calc(--spacing(4) - 1px);
+  --u-nav-indent: calc(--spacing(4) * 2);
 }
 
 .u-nav > details > ul::before {
@@ -108,10 +103,10 @@
 .u-nav > details > ul > li > a[aria-current="page"]::before {
   content: "";
   position: absolute;
-  inset-block: var(--u-space-2);
+  inset-block: --spacing(2);
   inset-inline-start: calc(var(--u-nav-guide) - 1px);
   width: 3px;
-  border-radius: var(--u-radius-pill);
+  border-radius: var(--radius-pill);
   background: currentcolor;
   opacity: 0.55;
 }

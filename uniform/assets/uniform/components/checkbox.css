@@ -1,12 +1,12 @@
-@layer uniform.components {
+@layer components {
 .u-checkbox {
   display: grid;
   grid-template-columns: 16px minmax(0, 1fr);
-  column-gap: var(--u-space-2);
+  column-gap: --spacing(2);
   align-items: center;
-  min-height: var(--u-size-target);
-  font-size: var(--u-font-size-small);
-  color: var(--u-color-text-default);
+  min-height: var(--spacing-target);
+  font-size: var(--text-small);
+  color: var(--text-color-default);
   cursor: pointer;
 }
 
@@ -17,9 +17,8 @@
   place-content: center;
   width: 16px;
   height: 16px;
-  margin: 0;
-  border: 1px solid var(--u-color-border-input);
-  background: var(--u-color-bg-surface);
+  border: 1px solid var(--border-color-input);
+  background: var(--background-color-surface);
   appearance: none;
   cursor: pointer;
 }
@@ -28,59 +27,59 @@
   content: "";
   width: 4px;
   height: 8px;
-  border: solid var(--u-color-bg-surface);
+  border: solid var(--background-color-surface);
   border-width: 0 2px 2px 0;
   transform: translateY(-1px) rotate(45deg);
   visibility: hidden;
 }
 
 .u-checkbox > input:is(:checked, :indeterminate) {
-  border-color: var(--u-color-text-default);
-  background: var(--u-color-text-default);
+  border-color: var(--text-color-default);
+  background: var(--text-color-default);
 }
 
 .u-checkbox > input:checked::before { visibility: visible; }
 
 .u-checkbox > input[aria-invalid="true"] {
-  outline: 2px solid var(--u-color-danger);
+  outline: 2px solid var(--color-danger);
   outline-offset: 2px;
 }
 
-.u-checkbox > input[aria-invalid="true"]:focus-visible { outline-color: var(--u-color-info); }
+.u-checkbox > input[aria-invalid="true"]:focus-visible { outline-color: var(--color-info); }
 
 .u-checkbox > input:indeterminate::before {
   width: 8px;
   height: 2px;
   border: 0;
-  background: var(--u-color-bg-surface);
+  background: var(--background-color-surface);
   transform: none;
   visibility: visible;
 }
 
 .u-checkbox-hint {
-  color: var(--u-color-text-muted);
-  line-height: var(--u-line-height-small);
+  color: var(--text-color-muted);
+  line-height: var(--text-small--line-height);
 }
 
 .u-checkbox:has(> input:disabled) {
-  color: var(--u-color-border-input);
+  color: var(--border-color-input);
   cursor: not-allowed;
 }
 
 .u-checkbox > input:disabled {
-  border-color: var(--u-color-border-input);
-  background: var(--u-color-divider);
+  border-color: var(--border-color-input);
+  background: var(--border-color-divider);
   cursor: not-allowed;
 }
 
 .u-checkbox > input:disabled:is(:checked, :indeterminate) {
-  border-color: var(--u-color-text-muted);
-  background: var(--u-color-text-muted);
+  border-color: var(--text-color-muted);
+  background: var(--text-color-muted);
 }
 
-.u-checkbox > input:disabled:checked::before { border-color: var(--u-color-bg-surface); }
+.u-checkbox > input:disabled:checked::before { border-color: var(--background-color-surface); }
 
-.u-checkbox > input:disabled:indeterminate::before { background: var(--u-color-bg-surface); }
+.u-checkbox > input:disabled:indeterminate::before { background: var(--background-color-surface); }
 
 @media (pointer: coarse) {
   .u-checkbox { position: relative; }

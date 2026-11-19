@@ -8,7 +8,7 @@ permalink: /components/settings/
 
 Settings lays out a settings page as rows, each a heading, one line saying what
 it does and its control. Use it for settings and preferences, inside
-`u-container u-container-narrow`.
+`u-container max-w-page-narrow`.
 
 ## Example
 
@@ -51,7 +51,7 @@ Control on the right
 : A switch, a select or a single button sits beside the text and applies straight away. A choice is one click with one clear result, so it saves as soon as it changes.
 
 Text with an Edit button
-: Text people type, like a name, an email address or an address, shows as plain text in `u-setting-edit` with a pencil button. The button opens a [dialog](/components/dialog/) with the field and a Save button. Typed text never saves on its own: a half-typed value could reach customers, and nothing tells people when it saved. A setting made of several fields, like an address, is one row and one dialog. When there's no value yet, say "Not set" in `u-text-muted`.
+: Text people type, like a name, an email address or an address, shows as plain text in `u-setting-edit` with a pencil button. The button opens a [dialog](/components/dialog/) with the field and a Save button. Typed text never saves on its own: a half-typed value could reach customers, and nothing tells people when it saved. A setting made of several fields, like an address, is one row and one dialog. When there's no value yet, say "Not set" in `text-muted`.
 
 Wide control underneath
 : A control too wide for the right, like a long select, goes under the text with `u-setting-stacked`, at form width.

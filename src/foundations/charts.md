@@ -57,16 +57,16 @@ The data is the only thing in ink.
 </div>
 
 Main series
-: Ink, `--u-color-chart-current`. This month, this week, the thing the figure talks about.
+: Ink, `--u-chart-color-current`. This month, this week, the thing the figure talks about.
 
 Comparison
-: Grey, `--u-color-chart-previous`. Last month, the same week last year, past weeks next to the current one.
+: Grey, `--u-chart-color-previous`. Last month, the same week last year, past weeks next to the current one.
 
 Fill
-: `--u-color-chart-fill` at `--u-chart-fill-opacity`: ink at 14% just under the main line, fading to nothing at the baseline (light ink at 12% in dark mode). Only under the main series and sparklines. A comparison line is drawn over it, never under.
+: `--u-chart-color-fill` at `--u-chart-opacity-fill`: ink at 14% just under the main line, fading to nothing at the baseline (light ink at 12% in dark mode). Only under the main series and sparklines. A comparison line is drawn over it, never under.
 
 Grid and track
-: `--u-color-chart-grid` for the lines across the plot, and `--u-color-chart-track` for the empty part of a meter. Both are the divider grey.
+: `--u-chart-color-grid` for the lines across the plot, and `--u-chart-color-track` for the empty part of a meter. Both are the divider grey.
 
 Signals
 : Vermilion, cobalt, yellow and pine only when they mean a job status: overdue, on the bench, waiting, ready. Never as series 3 or 4.
@@ -108,7 +108,7 @@ date in between, so the labels never crowd, even on a phone.
 ## Hover
 
 <div class="example-frame">
-<div class="u-row u-items-start u-gap-12">
+<div class="flex flex-wrap items-center gap-2 items-start gap-12">
 <%= render "examples/chart_tooltip" %>
 </div>
 </div>
@@ -132,7 +132,7 @@ a line chart is a dashed line in the input-border grey, the same as the guide
 on a bar chart.
 
 Hover follows the pointer straight away. The one fade is the bars dimming,
-over 100ms (`--u-motion-hover`), so moving across a bar chart reads as one
+over 100ms (`--u-duration-hover`), so moving across a bar chart reads as one
 steady sweep instead of a flicker. Tooltips only add detail. Everything they
 show is also in the stat, the legend or the chart's name.
 

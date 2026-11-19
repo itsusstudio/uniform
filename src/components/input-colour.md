@@ -12,17 +12,17 @@ never gives that colour a meaning.
 <%= render "example_heading" %>
 
 <div class="example-frame">
-<div class="u-max-width-form u-stack u-gap-6">
-<div class="u-stack u-gap-4">
+<div class="max-w-form flex flex-col gap-6">
+<div class="flex flex-col gap-4">
 <div class="u-field">
 <label for="cf-live-name">Label name</label>
 <input class="u-input" id="cf-live-name" type="text" value="Rush" autocomplete="off" placeholder=" ">
 </div>
 <%= render "examples/input_colour", id: "cf-live", value: "#e0a526" %>
 </div>
-<div class="u-stack u-gap-2">
-<p class="u-text-small u-text-strong">Preview</p>
-<div class="u-row u-gap-2 u-text-small"><span class="u-text-data">#1042</span> Ana Reyes, ring resize <span class="colour-field-demo-tag" id="cf-live-tag">Rush</span></div>
+<div class="flex flex-col gap-2">
+<p class="text-small font-medium">Preview</p>
+<div class="flex flex-wrap items-center gap-2 text-small"><span class="u-data">#1042</span> Ana Reyes, ring resize <span class="colour-field-demo-tag" id="cf-live-tag">Rush</span></div>
 </div>
 </div>
 </div>
@@ -37,11 +37,11 @@ own picker.
 
 ## States
 
-<div class="example-frame u-grid u-gap-6">
-<div class="u-span-6 colour-field-demo-open">
+<div class="example-frame u-grid gap-6">
+<div class="@grid:col-span-6 colour-field-demo-open">
 <%= render "examples/input_colour", id: "cf-open", value: "#3e5fc4", open_picker: true %>
 </div>
-<div class="u-span-6 u-stack u-gap-4">
+<div class="@grid:col-span-6 flex flex-col gap-4">
 <%= render "examples/input_colour", id: "cf-invalid", value: "#e0a526" %>
 <%= render "examples/input_colour", id: "cf-disabled", value: "#9c4a8f", disabled: true, hint_text: "Labels from your old system keep their colour." %>
 </div>
@@ -102,18 +102,18 @@ colour button. Both come from the gem's `uniform.input_colour` keys.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
-<div class="u-row u-gap-2 u-text-small"><span class="u-text-data">#1042</span> Ana Reyes, ring resize <span class="colour-field-demo-tag" style="background-color: #e0a526; color: var(--u-color-text-on-ink)">Rush</span></div>
+<div class="flex flex-wrap items-center gap-2 text-small"><span class="u-data">#1042</span> Ana Reyes, ring resize <span class="colour-field-demo-tag" style="background-color: #e0a526; color: var(--text-color-on-ink)">Rush</span></div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>The same light words on every label. Paper on amber is 2 to 1, too faint to read.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
-<div class="u-row u-gap-2 u-text-small"><span class="u-text-data">#1042</span> Ana Reyes, ring resize <span class="colour-field-demo-tag" style="background-color: #e0a526; color: var(--u-color-bg-ink)">Rush</span></div>
+<div class="flex flex-wrap items-center gap-2 text-small"><span class="u-data">#1042</span> Ana Reyes, ring resize <span class="colour-field-demo-tag" style="background-color: #e0a526; color: var(--background-color-ink)">Rush</span></div>
 </div>
 <figcaption class="example-caption example-caption-do"><span>Ink or paper, whichever has more contrast with the colour.</span></figcaption>
 </figure>

@@ -11,7 +11,7 @@ A list shows a few things of one kind, one per row. Use it when people act on ea
 ## Example
 
 <div class="u-grid">
-<div class="u-span-8">
+<div class="@grid:col-span-8">
 <%= render "examples/list_jobs" %>
 </div>
 </div>
@@ -35,7 +35,7 @@ the far right.
   <ul class="u-list">
     <%% jobs.each do |job| %>
       <li>
-        <span class="u-text-data">#<%%= job.number %></span>
+        <span class="u-data">#<%%= job.number %></span>
         <span><%%= t(".job", customer: job.customer.name, work: job.work) %></span>
         <%%= link_to t(".text_customer", name: job.customer.first_name), new_job_message_path(job), class: "u-btn u-btn-outline" %>
       </li>
@@ -71,7 +71,7 @@ For a short list people arrange themselves, like job statuses, split a card into
     <h3><svg class="u-icon u-icon-sm">…</svg>Waiting <span class="u-meta">5 jobs</span><button class="u-btn u-btn-ghost u-btn-icon" aria-label="Add a Waiting status">…</button></h3>
     <ul class="u-list">
       <li>
-        <div class="u-row">
+        <div class="flex flex-wrap items-center gap-2">
           <span class="u-list-handle" aria-hidden="true">…</span>
           <span class="u-swatch" style="--u-swatch: #e9c46a"></span>
           <input class="u-input-inline" value="Quote needed" aria-label="Status name">
@@ -90,7 +90,7 @@ For a short list people arrange themselves, like job statuses, split a card into
 ## A second line
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <section class="u-card">
 <ul class="u-list">
 <li><div><p>Ana Reyes</p><p class="u-list-item-detail">ana.reyes@gmail.com</p></div><span class="u-meta">3 jobs</span></li>
@@ -146,7 +146,7 @@ To fade a row in or out, give its `<li>` `u-enter` or `u-exit` from
 <ul class="u-list">
   <li class="u-enter">
     <div class="u-list-item">
-      <span class="u-text-data">#1051</span>
+      <span class="u-data">#1051</span>
       <span>Mia Chen, clasp replacement</span>
     </div>
   </li>
@@ -155,20 +155,20 @@ To fade a row in or out, give its `<li>` `u-enter` or `u-exit` from
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <section class="u-card">
 <ul class="u-list">
-<li><span>Ana Reyes</span><span class="u-text-data">Nov 14</span><span class="u-text-data">$85.00</span><span class="u-badge u-badge-info">On the bench</span></li>
-<li><span>Sam Okafor</span><span class="u-text-data">Nov 15</span><span class="u-text-data">$40.00</span><span class="u-badge u-badge-warning">Waiting</span></li>
+<li><span>Ana Reyes</span><span class="u-data">Nov 14</span><span class="u-data">$85.00</span><span class="u-badge u-badge-info">On the bench</span></li>
+<li><span>Sam Okafor</span><span class="u-data">Nov 15</span><span class="u-data">$40.00</span><span class="u-badge u-badge-warning">Waiting</span></li>
 </ul>
 </section>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Four facts per row with nothing to do. The columns don't line up and there are no headings, so it's a table pretending to be a list.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <section class="u-card">

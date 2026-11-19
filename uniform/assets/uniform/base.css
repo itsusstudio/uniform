@@ -1,7 +1,4 @@
-@layer uniform.base {
-:where(*, *::before, *::after) {
-  box-sizing: border-box;
-}
+@layer base {
 
 :where(html) {
   -webkit-text-size-adjust: 100%;
@@ -10,37 +7,36 @@
 }
 
 :where(body) {
-  margin: 0;
-  background: var(--u-color-bg-page);
-  color: var(--u-color-text-default);
-  font-family: var(--u-font-sans);
-  font-size: var(--u-font-size-body);
-  line-height: var(--u-line-height-body);
+  background: var(--background-color-page);
+  color: var(--text-color-default);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
   font-size-adjust: from-font;
   letter-spacing: -0.015em;
   -webkit-font-smoothing: antialiased;
 }
 
-:where(pre) { max-width: 100%; overflow-x: auto; }
+:where(h1, h2, h3, h4, h5, h6) { text-wrap: balance; }
 
-:where(img, video) { max-width: 100%; height: auto; }
+:where(pre) { max-width: 100%; overflow-x: auto; }
 
 /* border-input keeps the thumb at 3:1 or more on surface and paper, in both themes and on ink. */
 :where(body *) {
-  scrollbar-color: var(--u-color-border-input) transparent;
+  scrollbar-color: var(--border-color-input) transparent;
   scrollbar-width: thin;
 }
 
 @supports not (scrollbar-color: auto) {
   :where(body *)::-webkit-scrollbar {
-    width: var(--u-space-2);
-    height: var(--u-space-2);
+    width: --spacing(2);
+    height: --spacing(2);
   }
 
   :where(body *)::-webkit-scrollbar-thumb {
     border: 2px solid transparent;
-    border-radius: var(--u-radius-pill);
-    background-color: var(--u-color-border-input);
+    border-radius: var(--radius-pill);
+    background-color: var(--border-color-input);
     background-clip: padding-box;
   }
 
@@ -48,37 +44,38 @@
   :where(body *)::-webkit-scrollbar-corner { background: transparent; }
 }
 
-:where(figure) { margin: 0; }
+a { color: var(--text-color-link); text-decoration-line: underline; text-underline-offset: 3px; }
 
-:where(a) { color: var(--u-color-link); text-underline-offset: 3px; }
+button, input, textarea { letter-spacing: normal; }
+
+button:not(:disabled), [role="button"]:not(:disabled) { cursor: pointer; }
 
 :where(a:has(> .u-icon)) {
   display: inline-flex;
   align-items: center;
-  gap: var(--u-space-1);
+  gap: --spacing(1);
 }
 
-:where(mark) { background: var(--u-color-highlight); color: inherit; }
+:where(mark) { background: var(--background-color-highlight); color: inherit; }
 
 :where(fieldset:not(.u-fieldset)) {
   display: block;
   min-inline-size: 0;
-  margin: 0;
-  padding: var(--u-space-2) var(--u-space-4) var(--u-space-4);
-  border: 1px solid var(--u-color-border-input);
-  border-radius: var(--u-radius-default);
+  padding: --spacing(2) --spacing(4) --spacing(4);
+  border: 1px solid var(--border-color-input);
+  border-radius: var(--radius-item);
 }
 
-:where(fieldset:not(.u-fieldset) > :not(legend, [hidden], [type="hidden"]) ~ :not([hidden], [type="hidden"])) { margin-top: var(--u-space-2); }
+:where(fieldset:not(.u-fieldset) > :not(legend, [hidden], [type="hidden"]) ~ :not([hidden], [type="hidden"])) { margin-top: --spacing(2); }
 
 :where(fieldset:not(.u-fieldset) > legend) {
-  margin-inline-start: calc(-1 * var(--u-space-1));
-  padding-inline: var(--u-space-1);
+  margin-inline-start: calc(-1 * --spacing(1));
+  padding-inline: --spacing(1);
 }
 
-:where(:focus-visible) { outline: 2px solid var(--u-color-info); outline-offset: 2px; }
+:where(:focus-visible) { outline: 2px solid var(--color-info); outline-offset: 2px; }
 
-:where(u-combobox, u-input-code, u-input-password, u-character-count, u-input-phone, u-dropzone, u-input-colour, u-sidebar, u-chart, u-toast, u-data-grid, u-toggle-panels) { display: block; }
+:where(u-combobox, u-input-code, u-character-count, u-input-phone, u-dropzone, u-input-colour, u-sidebar, u-chart, u-toast, u-data-grid, u-toggle-panels) { display: block; }
 
 :where(u-toggle, u-time-zone) { display: contents; }
 

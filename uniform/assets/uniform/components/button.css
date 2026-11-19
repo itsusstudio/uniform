@@ -1,18 +1,18 @@
-@layer uniform.components {
+@layer components {
 .u-btn,
 .u-btn-close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--u-space-2);
-  min-height: var(--u-size-control);
-  padding: 0 var(--u-space-4);
+  gap: --spacing(2);
+  min-height: var(--spacing-control);
+  padding: 0 --spacing(4);
   border: 1px solid transparent;
-  border-radius: var(--u-radius-pill);
+  border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
   font: inherit;
-  font-size: var(--u-font-size-small);
+  font-size: var(--text-small);
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
@@ -20,43 +20,43 @@
 
 .u-btn-lg {
   min-height: 48px;
-  padding: 0 var(--u-space-6);
-  font-size: var(--u-font-size-body);
+  padding: 0 --spacing(6);
+  font-size: var(--text-body);
 }
 
 .u-btn-primary {
-  border-color: var(--u-color-text-default);
-  background: var(--u-color-text-default);
-  color: var(--u-color-bg-surface);
+  border-color: var(--text-color-default);
+  background: var(--text-color-default);
+  color: var(--background-color-surface);
 }
 
 .u-btn-outline {
-  border-color: var(--u-color-text-default);
+  border-color: var(--text-color-default);
   background: transparent;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
 }
 
-.u-btn-outline:not(:disabled, [aria-disabled="true"]):hover { background: var(--u-color-divider); }
+.u-btn-outline:not(:disabled, [aria-disabled="true"]):hover { background: var(--border-color-divider); }
 
 .u-btn-danger {
-  background: var(--u-color-danger);
-  border-color: var(--u-color-danger);
-  color: var(--u-color-text-on-danger);
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: var(--text-color-on-danger);
 }
 
 .u-btn-ghost,
 .u-btn-close {
   border-color: transparent;
   background: transparent;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
 }
 
 .u-btn-ghost:not(:disabled, [aria-disabled="true"]):hover,
-.u-btn-close:not(:disabled, [aria-disabled="true"]):hover { background: var(--u-color-divider); }
+.u-btn-close:not(:disabled, [aria-disabled="true"]):hover { background: var(--border-color-divider); }
 
 .u-btn-icon,
 .u-btn-close {
-  width: var(--u-size-control);
+  width: var(--spacing-control);
   padding: 0;
 }
 
@@ -70,12 +70,32 @@
   height: 20px;
 }
 
+.u-split-btn { display: inline-flex; }
+
+.u-split-btn > .u-btn:first-child {
+  border-inline-end-width: 0;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+.u-split-btn > .u-btn:last-child {
+  width: auto;
+  padding-inline: --spacing(2);
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+.u-split-btn > .u-btn-primary:last-child { border-inline-start-color: color-mix(in srgb, var(--background-color-surface) 35%, var(--text-color-default)); }
+
+.u-split-btn > .u-btn:last-child[aria-expanded="true"],
+.u-split-btn:has(+ .u-menu:popover-open) > .u-btn-outline:last-child { background: var(--border-color-divider); }
+
 .u-btn-close::before {
   content: "";
   width: 20px;
   height: 20px;
   background: currentcolor;
-  mask: url("./../icons/x.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/x.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 

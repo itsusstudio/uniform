@@ -11,7 +11,7 @@ A card groups the details and actions of one object on a page.
 ## Example
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <section class="u-card">
 <header>
 <h3>Customer</h3>
@@ -19,44 +19,44 @@ A card groups the details and actions of one object on a page.
 </header>
 <div class="u-card-content">
 <dl class="u-dl">
-<dt class="u-text-muted">Name</dt><dd>Ana Reyes</dd>
-<dt class="u-text-muted">Phone number</dt><dd class="u-text-data">(416) 555-0199</dd>
-<dt class="u-text-muted">Email address</dt><dd>ana@example.com</dd>
+<dt class="text-muted">Name</dt><dd>Ana Reyes</dd>
+<dt class="text-muted">Phone number</dt><dd class="u-data">(416) 555-0199</dd>
+<dt class="text-muted">Email address</dt><dd>ana@example.com</dd>
 </dl>
 </div>
 </section>
 </div>
-<div class="u-span-6 u-stack u-gap-2">
+<div class="@grid:col-span-6 flex flex-col gap-2">
 <section class="u-card">
 <header>
 <hgroup>
 <h3>Open jobs</h3>
 <p>Due this week</p>
 </hgroup>
-<a href="#example" class="u-text-small">View all</a>
+<a href="#example" class="text-small">View all</a>
 </header>
 <ul class="u-list">
-<li><span class="u-text-data">#1042</span><span>Ring resize</span><span class="u-meta">Nov 14</span></li>
-<li><span class="u-text-data">#1039</span><span>Chain repair</span><span class="u-meta">Nov 15</span></li>
-<li><span class="u-text-data">#1036</span><span>Watch battery</span><span class="u-meta">Nov 16</span></li>
+<li><span class="u-data">#1042</span><span>Ring resize</span><span class="u-meta">Nov 14</span></li>
+<li><span class="u-data">#1039</span><span>Chain repair</span><span class="u-meta">Nov 15</span></li>
+<li><span class="u-data">#1036</span><span>Watch battery</span><span class="u-meta">Nov 16</span></li>
 </ul>
 </section>
-<p class="u-text-small u-text-muted">With no <code class="u-text-data">u-card-content</code>, a <a href="/components/list/">list</a> runs edge to edge.</p>
+<p class="text-small text-muted">With no <code class="u-data">u-card-content</code>, a <a href="/components/list/">list</a> runs edge to edge.</p>
 </div>
 </div>
 
 <div class="u-grid card-example-pay">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <section class="u-card">
 <header>
 <h3>Take payment</h3>
-<span class="u-text-small u-text-muted">Job <span class="u-text-data">#1042</span></span>
+<span class="text-small text-muted">Job <span class="u-data">#1042</span></span>
 </header>
 <div class="u-card-content">
-<div class="u-stack u-gap-4">
+<div class="flex flex-col gap-4">
 <div class="u-field">
 <label for="pay-amount">Amount</label>
-<input id="pay-amount" class="u-input u-text-data" value="$85.00" placeholder=" ">
+<input id="pay-amount" class="u-input u-data" value="$85.00" placeholder=" ">
 </div>
 <div class="u-field">
 <label for="pay-method">Paid by</label>
@@ -74,8 +74,8 @@ A card groups the details and actions of one object on a page.
 </div>
 </section>
 </div>
-<div class="u-span-6 u-stack u-gap-4 anatomy-notes u-text-small">
-<p>A form inside a card is a <code class="u-text-data">&lt;header&gt;</code>, then the fields in <code class="u-text-data">u-card-content</code>, then a <code class="u-text-data">u-actions</code>. Each part brings its own padding.</p>
+<div class="@grid:col-span-6 flex flex-col gap-4 anatomy-notes text-small">
+<p>A form inside a card is a <code class="u-data">&lt;header&gt;</code>, then the fields in <code class="u-data">u-card-content</code>, then a <code class="u-data">u-actions</code>. Each part brings its own padding.</p>
 <p>The primary button comes last and says exactly what happens, amount included. Cancel sits to its left.</p>
 <p>Fields sit 16px apart, and each label sits 8px above its input.</p>
 </div>
@@ -101,7 +101,7 @@ A card groups the details and actions of one object on a page.
       <h3>Open jobs</h3>
       <p>Due this week</p>
     </hgroup>
-    <a class="u-text-small" href="/jobs">View all</a>
+    <a class="text-small" href="/jobs">View all</a>
   </header>
   <div class="u-table" tabindex="0" role="region" aria-label="Open jobs">
     <table>…</table>
@@ -124,18 +124,18 @@ Actions
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
-<section class="u-card"><header><h3>Job #1042</h3></header><div class="u-card-content"><section class="u-card"><header><h3>Customer</h3></header><div class="u-card-content"><p class="u-text-small">Ana Reyes</p></div></section><section class="u-card"><header><h3>Quote</h3></header><div class="u-card-content"><p class="u-text-small u-text-data">$85.00</p></div></section></div></section>
+<section class="u-card"><header><h3>Job #1042</h3></header><div class="u-card-content"><section class="u-card"><header><h3>Customer</h3></header><div class="u-card-content"><p class="text-small">Ana Reyes</p></div></section><section class="u-card"><header><h3>Quote</h3></header><div class="u-card-content"><p class="text-small u-data">$85.00</p></div></section></div></section>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Cards inside a card. Every box adds a line to read past, and nothing is grouped better for it.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
-<section class="u-card"><header><h3>Job #1042</h3></header><div class="u-card-content"><dl class="u-dl"><dt class="u-text-muted">Customer</dt><dd>Ana Reyes</dd><dt class="u-text-muted">Quote</dt><dd class="u-text-data">$85.00</dd></dl></div></section>
+<section class="u-card"><header><h3>Job #1042</h3></header><div class="u-card-content"><dl class="u-dl"><dt class="text-muted">Customer</dt><dd>Ana Reyes</dd><dt class="text-muted">Quote</dt><dd class="u-data">$85.00</dd></dl></div></section>
 </div>
 <figcaption class="example-caption example-caption-do"><span>One card, with space and a label column doing the grouping inside it.</span></figcaption>
 </figure>

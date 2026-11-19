@@ -11,7 +11,7 @@ A dropzone adds files to a form, picked or dropped. Each file gets a row, to wat
 ## Example
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/dropzone_photos", id: "dz-live" %>
 </div>
 </div>
@@ -42,16 +42,16 @@ document.getElementById("dz-live-field").addEventListener("dropzone:change", (ev
 ## States
 
 <div class="u-grid">
-<div class="u-span-6 u-stack u-gap-2">
-<p class="u-text-small u-text-strong">Files over the area</p>
+<div class="@grid:col-span-6 flex flex-col gap-2">
+<p class="text-small font-medium">Files over the area</p>
 <div class="example-frame">
 <div class="u-field">
 <%= render "examples/dropzone_area", id: "dz-over", label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true, over: true %>
 </div>
 </div>
 </div>
-<div class="u-span-6 u-stack u-gap-2">
-<p class="u-text-small u-text-strong">Uploading, done and too big</p>
+<div class="@grid:col-span-6 flex flex-col gap-2">
+<p class="text-small font-medium">Uploading, done and too big</p>
 <div class="example-frame">
 <div class="u-field">
 <%= render "examples/dropzone_area", id: "dz-rows", label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true %>
@@ -63,8 +63,8 @@ document.getElementById("dz-live-field").addEventListener("dropzone:change", (ev
 </div>
 </div>
 </div>
-<div class="u-span-6 u-stack u-gap-2">
-<p class="u-text-small u-text-strong">One file</p>
+<div class="@grid:col-span-6 flex flex-col gap-2">
+<p class="text-small font-medium">One file</p>
 <div class="example-frame">
 <div class="u-field">
 <%= render "examples/dropzone_area", id: "dz-receipt", label: "Receipt for the part", drop: "Drop the receipt here", choose: "choose a file", hint: "PDF, JPG or PNG, up to 10 MB.", accept: "application/pdf,image/jpeg,image/png" %>
@@ -74,9 +74,9 @@ document.getElementById("dz-live-field").addEventListener("dropzone:change", (ev
 </div>
 </div>
 </div>
-<div class="u-span-6 u-stack u-gap-2">
-<p class="u-text-small u-text-strong">Error and disabled</p>
-<div class="example-frame u-stack u-gap-6">
+<div class="@grid:col-span-6 flex flex-col gap-2">
+<p class="text-small font-medium">Error and disabled</p>
+<div class="example-frame flex flex-col gap-6">
 <div class="u-field">
 <%= render "examples/dropzone_area", id: "dz-error", label: "Photos of the piece", drop: "Drop photos here", choose: "choose files", hint: "JPG, PNG or HEIC, up to 10 MB each.", accept: "image/jpeg,image/png,image/heic,.heic", multiple: true, invalid: true, describedby: "dz-error-message" %>
 <p class="u-error" id="dz-error-message">Add at least one photo of the piece.</p>
@@ -182,7 +182,7 @@ On phones
 ## Direct uploads
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/dropzone_direct", id: "dz-direct" %>
 </div>
 </div>
@@ -278,8 +278,8 @@ Any file input with `data-upload-url` uploads the same way, so a button, an avat
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="u-field">
@@ -295,7 +295,7 @@ Any file input with `data-upload-url` uploads the same way, so a button, an avat
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Keeping the limits quiet until someone breaks one. They find out after choosing the file.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="u-field">

@@ -23,8 +23,8 @@ segment per step shows how far along someone is.
   </header>
   <main>
     <hgroup>
-      <h1 class="u-text-page-title" id="demo-goals">What do you want help with?</h1>
-      <p class="u-text-small">Your answers help us serve you best.</p>
+      <h1 class="text-page-title" id="demo-goals">What do you want help with?</h1>
+      <p class="text-small">Your answers help us serve you best.</p>
     </hgroup>
     <form class="u-form">
       <fieldset class="u-fieldset" aria-labelledby="demo-goals">
@@ -34,7 +34,7 @@ segment per step shows how far along someone is.
       </fieldset>
       <button type="button" class="u-btn u-btn-primary">Continue</button>
     </form>
-    <div class="u-row u-gap-6 u-text-small"><a href="#">Back</a><a href="#">Skip</a></div>
+    <div class="flex flex-wrap items-center gap-6 text-small"><a href="#">Back</a><a href="#">Skip</a></div>
   </main>
   <footer>
     <select class="u-input u-language-select" aria-label="Language"><option>English</option><option>Français</option></select>

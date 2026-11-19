@@ -1,6 +1,6 @@
 <%# locals: (state:, prefix:) -%>
 <%
-  m = ->(value) { %(<span class="u-text-data">#{value}</span>) }
+  m = ->(value) { %(<span class="u-data">#{value}</span>) }
   st = ->(tone, word) { %(Status changed to <span class="u-badge u-badge-#{tone}">#{word}</span>) }
   field_id = prefix.to_s.empty? ? "note" : "#{prefix}-note"
   days = {
@@ -61,8 +61,8 @@
   shown = days[state] || []
   older_count = state == :long ? days[:older].sum { |day| day[:events].size } : 0
 -%>
-<section class="u-stack u-gap-6">
-  <h2 class="u-text-heading">History</h2>
+<section class="flex flex-col gap-6">
+  <h2 class="text-heading">History</h2>
   <div>
     <form class="u-form" method="post" action="/jobs/<%= state == :long ? "1039" : "1042" %>/notes">
       <div class="u-field">
@@ -82,14 +82,14 @@
   </hgroup>
 <% else -%>
   <div>
-    <div class="u-stack u-gap-12">
+    <div class="flex flex-col gap-12">
 <% shown.each do |day| -%>
       <%= raw render("examples/timeline_day", day: day).strip.gsub("\n", "\n      ") %>
 <% end -%>
 <% if state == :long -%>
       <details>
         <summary>Show <%= older_count %> older events</summary>
-        <div class="u-stack u-gap-12">
+        <div class="flex flex-col gap-12">
 <% days[:older].each do |day| -%>
           <%= raw render("examples/timeline_day", day: day).strip.gsub("\n", "\n          ") %>
 <% end -%>

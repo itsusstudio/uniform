@@ -1,8 +1,7 @@
 <%
-  css = File.read(File.join(Studio::Uniform.assets_path, "uniform/tokens.css"))
-  declarations = ->(block) { block.to_s.scan(/(--u-[a-z0-9-]+)\s*:\s*([^;]+);/).to_h { |name, value| [name, value.strip.gsub(/\s+/, " ")] } }
-  light = declarations.(css[/^:root \{(.*?)^\}/m, 1])
-  dark = declarations.(css[/^:root\[data-u-theme="dark"\] \{(.*?)^\}/m, 1])
+  tokens = uniform_tokens
+  light = tokens[:theme].merge(tokens[:root])
+  dark = tokens[:dark]
   # Each light-dark(a, b) in a value resolves to a for the Light column and b for the Dark one.
   pick = ->(value, side) do
     out = +""
@@ -33,19 +32,21 @@
   end
   dark = light.select { |_, value| value.include?("light-dark(") }.transform_values { |value| pick.(value, 1) }.merge(dark)
   light = light.transform_values { |value| pick.(value, 0) }
-  business = declarations.(css[/^\[data-u-audience="business"\] \{(.*?)^\}/m, 1])
-  consumer = declarations.(css[/^\[data-u-audience="consumer"\] \{(.*?)^\}/m, 1])
+  business = tokens[:theme].merge(tokens[:root]).slice(*tokens[:consumer].keys)
+  consumer = tokens[:consumer]
+  sizes = ["--spacing-target", "--spacing-control", "--spacing-field", "--spacing-row"]
   token_groups = [
-    ["Colour", "/foundations/colour/", ->(n) { n.start_with?("--u-color-") && !n.start_with?("--u-color-chart-") }],
-    ["Font", "/foundations/typography/", ->(n) { n.start_with?("--u-font-") }],
-    ["Line height", "/foundations/typography/", ->(n) { n.start_with?("--u-line-height-") }],
-    ["Space", "/foundations/space-and-layout/", ->(n) { n.start_with?("--u-space-", "--u-grid-", "--u-page-") }],
-    ["Width", "/foundations/space-and-layout/", ->(n) { n.start_with?("--u-width-", "--u-max-width-") }],
-    ["Size", "/foundations/space-and-layout/", ->(n) { n.start_with?("--u-size-") }],
-    ["Radius", "/foundations/shape-and-depth/", ->(n) { n.start_with?("--u-radius-") }],
-    ["Shadow", "/foundations/shape-and-depth/", ->(n) { n.start_with?("--u-shadow-") }],
-    ["Motion", "/foundations/motion/", ->(n) { n.start_with?("--u-motion-") }],
-    ["Chart", "/foundations/charts/", ->(n) { n.start_with?("--u-color-chart-", "--u-chart-") }]
+    ["Colour", "/foundations/colour/", ->(n) { n.start_with?("--background-color-", "--text-color-", "--border-color-", "--color-") }],
+    ["Font", "/foundations/typography/", ->(n) { n.start_with?("--font-") }],
+    ["Type", "/foundations/typography/", ->(n) { n.start_with?("--text-", "--leading-") && !n.start_with?("--text-color-") }],
+    ["Space", "/foundations/space-and-layout/", ->(n) { n.start_with?("--spacing") && !sizes.include?(n) }],
+    ["Width", "/foundations/space-and-layout/", ->(n) { n.start_with?("--container-") }],
+    ["Size", "/foundations/space-and-layout/", ->(n) { sizes.include?(n) }],
+    ["Radius", "/foundations/shape-and-depth/", ->(n) { n.start_with?("--radius-") }],
+    ["Shadow", "/foundations/shape-and-depth/", ->(n) { n.start_with?("--shadow-") }],
+    ["Motion", "/foundations/motion/", ->(n) { n.start_with?("--u-duration-", "--ease-") }],
+    ["Chart", "/foundations/charts/", ->(n) { n.start_with?("--u-chart-") }],
+    ["Component", "/start/reference/", ->(n) { n.start_with?("--u-shimmer-", "--u-icon-") }]
   ]
   grouped = token_groups.map(&:last)
   token_groups << ["Other", "/start/reference/", ->(n) { grouped.none? { |test| test.(n) } }]
@@ -64,8 +65,8 @@
 <% names.each do |name| -%>
 <tr>
 <%= render "token_name", token: name %>
-<td><span class="u-row u-gap-2"><% if label == "Colour" || (label == "Chart" && name.start_with?("--u-color-")) %><span class="reference-swatch" style="background: <%= light[name] %>"></span><% elsif label == "Space" %><span class="reference-bar" style="width: <%= light[name] %>"></span><% end %><code class="u-text-data"><%= light[name] %></code></span></td>
-<td><% if dark[name] %><span class="u-row u-gap-2"><% if label == "Colour" || (label == "Chart" && name.start_with?("--u-color-")) %><span class="reference-swatch" style="background: <%= dark[name] %>"></span><% end %><code class="u-text-data"><%= dark[name] %></code></span><% end %></td>
+<td><span class="flex flex-wrap items-center gap-2"><% if label == "Colour" || name.include?("-color-") || name.end_with?("-color") %><span class="reference-swatch" style="background: <%= light[name] %>"></span><% elsif label == "Space" %><span class="reference-bar" style="width: <%= light[name] %>"></span><% end %><code class="u-data"><%= light[name] %></code></span></td>
+<td><% if dark[name] %><span class="flex flex-wrap items-center gap-2"><% if label == "Colour" || name.include?("-color-") || name.end_with?("-color") %><span class="reference-swatch" style="background: <%= dark[name] %>"></span><% end %><code class="u-data"><%= dark[name] %></code></span><% end %></td>
 </tr>
 <% end -%>
 </tbody>
@@ -83,8 +84,8 @@
 <% business.each_key do |name| -%>
 <tr>
 <%= render "token_name", token: name %>
-<td><code class="u-text-data"><%= business[name] %></code></td>
-<td><code class="u-text-data"><%= consumer[name] %></code></td>
+<td><code class="u-data"><%= business[name] %></code></td>
+<td><code class="u-data"><%= consumer[name] %></code></td>
 </tr>
 <% end -%>
 </tbody>

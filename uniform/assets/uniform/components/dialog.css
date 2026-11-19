@@ -1,21 +1,21 @@
-@layer uniform.components {
+@layer components {
 .u-dialog {
-  width: calc(100% - 2 * var(--u-space-4));
+  width: calc(100% - 2 * --spacing(4));
   max-width: 480px;
-  max-height: calc(100% - 2 * var(--u-space-6));
+  max-height: calc(100% - 2 * --spacing(6));
   margin: auto;
   padding: 0;
   overflow-y: auto;
-  border: 1px solid var(--u-color-border);
-  border-radius: var(--u-radius-surface);
-  background: var(--u-color-bg-surface);
-  color: var(--u-color-text-default);
-  box-shadow: var(--u-shadow-float);
+  border: 1px solid var(--border-color-default);
+  border-radius: var(--radius-surface);
+  background: var(--background-color-surface);
+  color: var(--text-color-default);
+  box-shadow: var(--shadow-float);
 }
 
 .u-dialog-wide { max-width: 720px; }
 
-.u-dialog::backdrop { background: var(--u-color-backdrop); }
+.u-dialog::backdrop { background: var(--background-color-backdrop); }
 
 .u-dialog:modal { overscroll-behavior: contain; }
 
@@ -25,25 +25,23 @@
   overscroll-behavior: contain;
 }
 
-.u-dialog > form { margin: 0; }
-
 .u-dialog > form.u-form { gap: 0; }
 
-.u-dialog .u-card-content { font-size: var(--u-font-size-small); }
+.u-dialog .u-card-content { font-size: var(--text-small); }
 
-@media (max-width: 639px) {
+@media (width < --theme(--breakpoint-sm)) {
   .u-dialog-sheet {
     width: 100%;
     max-width: none;
-    max-height: calc(100% - var(--u-space-12) - env(safe-area-inset-top));
+    max-height: calc(100% - --spacing(12) - env(safe-area-inset-top));
     margin: auto 0 0;
     padding-bottom: env(safe-area-inset-bottom);
     border-width: 1px 0 0;
-    border-radius: var(--u-radius-surface) var(--u-radius-surface) 0 0;
+    border-radius: var(--radius-surface) var(--radius-surface) 0 0;
   }
 
   :is(.u-dialog-sheet, .u-dialog-sheet > form) > .u-actions > .u-btn {
-    flex: 1 1 calc(50% - var(--u-space-1));
+    flex: 1 1 calc(50% - --spacing(1));
     min-width: max-content;
   }
 

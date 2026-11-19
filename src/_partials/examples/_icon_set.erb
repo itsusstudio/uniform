@@ -2,8 +2,8 @@
 <% [["x", "Close"], ["search", "Search"], ["menu", "Menu"], ["ellipsis", "More"], ["arrow-left", "Back"], ["chevron-left", "Previous"], ["chevron-right", "Next"], ["chevron-down", "Open"], ["chevron-up", "Collapse"], ["plus", "Add"], ["external-link", "Opens elsewhere"], ["arrow-down-up", "Sort"], ["pencil", "Edit"], ["trash-2", "Delete"]].each do |file, job| %>
 <div class="icon-cell">
 <%= render "icon", name: file, small: false %>
-<u-copy><button type="button" class="u-link-btn u-text-data" data-copy="<%= file %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= file %></button></u-copy>
-<span class="u-text-small u-text-muted"><%= job %></span>
+<u-copy><button type="button" class="u-link-btn u-data" data-copy="<%= file %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= file %></button></u-copy>
+<span class="text-small text-muted"><%= job %></span>
 </div>
 <% end %>
 </div>

@@ -42,7 +42,7 @@ Chart cards
 : One [chart](/components/chart/) per card: the line chart for revenue, the meter for jobs on time, the stacked bar for open jobs and the bar chart for jobs finished each week. Each card holds its title, figure, change, plot and footer.
 
 Layout
-: A [stack](/components/stack/) of the figure tile and a [grid](/components/grid/) with a 24px gap: revenue across eight columns beside a stack of the meter and the stacked bar, then the weekly bars across all twelve. On a phone the grid gives way to one card under another.
+: A `flex flex-col gap-6` column of the figure tile and a [grid](/components/grid/) with a 24px gap: revenue across eight columns beside a stack of the meter and the stacked bar, then the weekly bars across all twelve. On a phone the grid gives way to one card under another.
 
 ## Code
 

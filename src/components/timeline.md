@@ -38,8 +38,8 @@ continue the same list.
 Grouped by day, each day is a heading and its own list:
 
 ```html
-<section class="u-stack u-gap-2">
-  <h3 class="u-text-small u-text-strong"><u-relative-time format="day"><time datetime="2026-11-12T13:32:00-05:00">Today</time></u-relative-time></h3>
+<section class="flex flex-col gap-2">
+  <h3 class="text-small font-medium"><u-relative-time format="day"><time datetime="2026-11-12T13:32:00-05:00">Today</time></u-relative-time></h3>
   <ol class="u-timeline">…</ol>
 </section>
 ```
@@ -56,13 +56,13 @@ Older events, collapsed:
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <ol class="u-timeline">
   <li>
-    <div><p>Paid <span class="u-text-data">$85.00</span></p></div>
+    <div><p>Paid <span class="u-data">$85.00</span></p></div>
     <u-relative-time format="time"><time datetime="2026-11-12T16:08:00-05:00">3 hours ago</time></u-relative-time>
   </li>
   <li>
@@ -73,12 +73,12 @@ Older events, collapsed:
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Relative times and bare events. “6 hours ago” changes while you read it, and “Text sent” doesn't say which text or to whom.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <ol class="u-timeline">
   <li>
-    <div><p>Paid <span class="u-text-data">$85.00</span>, Visa ending <span class="u-text-data">4242</span></p></div>
+    <div><p>Paid <span class="u-data">$85.00</span>, Visa ending <span class="u-data">4242</span></p></div>
     <u-relative-time format="time"><time datetime="2026-11-12T16:08:00-05:00">4:08pm</time></u-relative-time>
   </li>
   <li>

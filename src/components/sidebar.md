@@ -13,7 +13,7 @@ places in the middle and the account at the bottom. Use it inside the
 ## Example
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <div class="frame-column">
 <%= render "examples/app_shell_nav", id: "sidebar-demo", popover: false %>
 </div>
@@ -54,7 +54,7 @@ can open it on a phone.
 
 ## Icon rail
 
-<div class="u-row u-items-start u-gap-6">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6">
 <div class="frame-column">
 <%= render "examples/app_shell_nav", id: "sidebar-rail", popover: false, collapsed: true %>
 </div>

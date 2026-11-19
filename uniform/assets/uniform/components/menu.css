@@ -1,41 +1,43 @@
-@layer uniform.components {
+@layer components {
 .u-menu {
   min-width: 192px;
   max-width: 320px;
-  padding: var(--u-space-1) 0;
-  border: 1px solid var(--u-color-border);
-  border-radius: var(--u-radius-surface);
+  padding: --spacing(1) 0;
+  border: 1px solid var(--border-color-default);
+  border-radius: var(--radius-surface);
   overflow: clip;
-  background: var(--u-color-bg-surface);
-  color: var(--u-color-text-default);
-  box-shadow: var(--u-shadow-float);
-  font-size: var(--u-font-size-small);
+  background: var(--background-color-surface);
+  color: var(--text-color-default);
+  box-shadow: var(--shadow-float);
+  font-size: var(--text-small);
 }
 
 .u-menu[popover] {
-  max-height: calc(100dvh - 2 * var(--u-space-2));
+  max-height: calc(100dvh - 2 * --spacing(2));
   overflow-y: auto;
 }
 
 @supports (position-area: block-end) {
   .u-menu[popover] {
     inset: auto;
-    margin: var(--u-space-2) 0 0;
+    margin: --spacing(2) 0 0;
     position-area: block-end span-inline-end;
     position-try-fallbacks: flip-block, flip-inline, flip-block flip-inline;
   }
+
+  .u-split-btn + .u-menu[popover] { position-area: block-end span-inline-start; }
 }
 
 .u-menu > hgroup {
   gap: 0;
-  margin-bottom: var(--u-space-1);
-  padding: var(--u-space-2) var(--u-space-4);
-  border-bottom: 1px solid var(--u-color-divider);
+  margin-bottom: --spacing(1);
+  padding: --spacing(2) --spacing(4);
+  border-bottom: 1px solid var(--border-color-divider);
 }
 
 .u-menu > hgroup > * {
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
 }
 
 .u-menu > hgroup > :is(h1, h2, h3, h4, h5, h6) {
@@ -44,21 +46,21 @@
   color: inherit;
 }
 
-.u-menu > form { margin: 0; }
-
 .u-menu > :is(a, button, label),
 .u-menu > form > button,
 .u-menu > details > summary,
+.u-menu > details > :is(a, button),
+.u-menu > details > form > button,
 .u-menu u-theme-preference > button {
   display: flex;
   align-items: center;
-  gap: var(--u-space-2);
+  gap: --spacing(2);
   width: 100%;
-  min-height: var(--u-size-target);
-  padding: 0 var(--u-space-4);
+  min-height: var(--spacing-target);
+  padding: 0 --spacing(4);
   border: 0;
   background: transparent;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
   font: inherit;
   text-align: left;
   text-decoration: none;
@@ -69,17 +71,21 @@
 .u-menu > :is(a, button, label):hover,
 .u-menu > form > button:hover,
 .u-menu > details > summary:hover,
-.u-menu u-theme-preference > button:hover { background: var(--u-color-divider); }
+.u-menu > details > :is(a, button):hover,
+.u-menu > details > form > button:hover,
+.u-menu u-theme-preference > button:hover { background: var(--border-color-divider); }
 
 .u-menu > :is(a, button, label):focus-visible,
 .u-menu > form > button:focus-visible,
 .u-menu > details > summary:focus-visible,
+.u-menu > details > :is(a, button):focus-visible,
+.u-menu > details > form > button:focus-visible,
 .u-menu u-theme-preference > button:focus-visible {
   outline-offset: -2px;
-  background: var(--u-color-divider);
+  background: var(--border-color-divider);
 }
 
-.u-menu .u-menu-item-danger { color: var(--u-color-danger); }
+.u-menu .u-menu-item-danger { color: var(--color-danger); }
 
 .u-menu > details > summary { list-style: none; }
 
@@ -94,17 +100,19 @@
   background-image: linear-gradient(currentcolor, currentcolor), linear-gradient(currentcolor, currentcolor);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 10px var(--u-icon-stroke), var(--u-icon-stroke) 10px;
+  background-size: 10px var(--u-icon-stroke-width), var(--u-icon-stroke-width) 10px;
   forced-color-adjust: none;
 }
 
-.u-menu > details[open] > summary::after { background-size: 10px var(--u-icon-stroke), 0 0; }
+.u-menu > details[open] > summary::after { background-size: 10px var(--u-icon-stroke-width), 0 0; }
 
 .u-menu u-theme-preference { display: grid; }
 
 .u-menu u-theme-preference > button > .u-icon { flex: none; }
 
 .u-menu > a[aria-current]::after,
+.u-menu > details > :is(a, button)[aria-pressed="true"]::after,
+.u-menu > details > form > button[aria-pressed="true"]::after,
 .u-menu u-theme-preference > button[aria-pressed="true"]::after {
   content: "";
   flex: none;
@@ -112,14 +120,18 @@
   height: 16px;
   margin-left: auto;
   background: currentcolor;
-  mask: url("./../icons/check.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/check.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
+.u-menu > details > :is(a, button, form > button) { padding-inline-start: --spacing(6); }
+
+.u-menu > :is(a, button) > .u-badge { margin-inline-start: auto; }
+
 .u-menu > hr {
   height: 1px;
-  margin: var(--u-space-1) 0;
+  margin: --spacing(1) 0;
   border: 0;
-  background: var(--u-color-divider);
+  background: var(--border-color-divider);
 }
 }

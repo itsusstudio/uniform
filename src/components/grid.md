@@ -6,39 +6,39 @@ section: Layout
 permalink: /components/grid/
 ---
 
-A grid lays things out on twelve columns, so everything starts on the same lines. Each child spans whole columns.
+A grid lays things out on twelve columns, so everything starts on the same lines. Each child spans whole columns, set with Tailwind's `col-span-*`.
 
 ## Example
 
 <div class="example-frame layout-demo">
-<div class="u-grid"><div class="u-span-4">u-span-4</div><div class="u-span-8">u-span-8</div></div>
+<div class="u-grid"><div class="@grid:col-span-4">@grid:col-span-4</div><div class="@grid:col-span-8">@grid:col-span-8</div></div>
 </div>
 
 ## Code
 
 ```html
 <div class="u-grid">
-  <div class="u-span-4">Filters</div>
-  <div class="u-span-8">Results</div>
+  <div class="@grid:col-span-4">Filters</div>
+  <div class="@grid:col-span-8">Results</div>
 </div>
 ```
 
 ## Details
 
 Columns
-: Twelve. A child with no `u-span-*` class takes all twelve.
+: Twelve. A child with no span takes all twelve. Give it `@grid:col-span-*` to take fewer once the grid is wide enough.
 
 Gutter
-: 24px, or 16px on phones. Change it with `u-gap-*`.
+: 24px, or 16px on phones. Change it with a `gap-*` class.
 
 Phones
-: When the grid is narrower than 640px, every child takes all twelve columns. This goes by the grid's own width, so a grid in a narrow panel stacks too.
+: The grid is a container, so `@grid:` goes by the grid's own width, not the screen's. Below 640px every child takes all twelve columns, and a grid in a narrow panel stacks too.
 
 First on a phone
-: Put the column people need first on a phone, like a record's contact details, first when the grid stacks with `u-first-when-stacked`. On wider screens it stays where it is in the row.
+: Put the column people need first on a phone, like a record's contact details, first when the grid stacks with `order-first @grid:order-none`. On wider screens it stays where it is in the row.
 
 Hidden when stacked
-: Hide a column that only decorates, like an illustration beside a welcome message, with `u-hidden-when-stacked`. Stacked, it would push the content below the fold.
+: Hide a column that only decorates, like an illustration beside a welcome message, with `hidden @grid:block`. Stacked, it would push the content below the fold.
 
 ## When to use it
 
@@ -46,4 +46,4 @@ Use it for
 : Page layouts, product tiles, image rows, and anything else that lines up with the rest of the page.
 
 Not for
-: A handful of buttons, which go in [Actions](/components/actions/), or chips, which go in a [Row](/components/row/).
+: A handful of buttons, which go in [Actions](/components/actions/), or chips, which sit in a `flex flex-wrap items-center gap-2` row.

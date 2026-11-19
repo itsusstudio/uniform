@@ -11,7 +11,7 @@ An accordion folds away content only some people need. Use it for secondary deta
 ## Example
 
 <div class="example-frame">
-<div class="u-max-width-prose">
+<div class="max-w-prose">
 <%= render "examples/accordion_job" %>
 </div>
 </div>
@@ -22,7 +22,7 @@ notes and the changes side by side.
 ## One open at a time
 
 <div class="example-frame">
-<div class="u-max-width-prose">
+<div class="max-w-prose">
 <%= render "examples/accordion_faq" %>
 </div>
 </div>
@@ -47,33 +47,33 @@ keep one open at a time.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="u-accordion">
 <details>
 <summary>Status and due date</summary>
-<p><span class="u-badge u-badge-info">On the bench</span>, due <span class="u-text-data">Nov 14</span></p>
+<p><span class="u-badge u-badge-info">On the bench</span>, due <span class="u-data">Nov 14</span></p>
 </details>
 <details>
 <summary>Quote</summary>
-<p class="u-text-data">$85.00</p>
+<p class="u-data">$85.00</p>
 </details>
 </div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>The status, due date and price folded away. Everyone who opens the job needs them, so they'd click every time.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
-<div class="example-frame u-stack u-gap-6">
+<div class="example-frame flex flex-col gap-6">
 <dl class="u-dl">
 <dt>Status</dt>
 <dd><span class="u-badge u-badge-info">On the bench</span></dd>
 <dt>Due</dt>
-<dd class="u-text-data">Nov 14</dd>
+<dd class="u-data">Nov 14</dd>
 <dt>Quote</dt>
-<dd class="u-text-data">$85.00</dd>
+<dd class="u-data">$85.00</dd>
 </dl>
 <div class="u-accordion">
 <details>
@@ -82,7 +82,7 @@ keep one open at a time.
 </details>
 <details>
 <summary>Changes</summary>
-<p>Moved to On the bench on <span class="u-text-data">Nov 12</span>.</p>
+<p>Moved to On the bench on <span class="u-data">Nov 12</span>.</p>
 </details>
 </div>
 </div>

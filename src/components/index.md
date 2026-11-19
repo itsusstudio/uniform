@@ -12,7 +12,7 @@ tune. Each one gets its own page with code you can copy, added one at a time.
 ## Components
 
 Layout
-: [Stack](/components/stack/), [Row](/components/row/), [Actions](/components/actions/), [Form](/components/form/), [Grid](/components/grid/), [Sidebar layout](/components/sidebar-layout/), [Container](/components/container/), [App shell](/components/app-shell/)
+: [Actions](/components/actions/), [Form](/components/form/), [Grid](/components/grid/), [Container](/components/container/), [App shell](/components/app-shell/)
 
 Actions
 : [Button](/components/button/), [Link](/components/link/)

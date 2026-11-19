@@ -11,7 +11,7 @@ A combobox finds one option in a long list as you type. Use it when a [select](/
 <%= render "example_heading" %>
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/combobox_customer", id: "cb-live" %>
 </div>
 </div>
@@ -23,7 +23,7 @@ whatever you type.
 ## Details in each option
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/combobox_customer_details", id: "cb-details" %>
 </div>
 </div>
@@ -37,8 +37,8 @@ only.
 
 ## States
 
-<div class="example-frame u-grid u-gap-6">
-<div class="u-span-4 combobox-demo-open">
+<div class="example-frame u-grid gap-6">
+<div class="@grid:col-span-4 combobox-demo-open">
 <div class="u-field">
 <label for="cb-matches">Customer</label>
 <u-combobox>
@@ -54,7 +54,7 @@ only.
 </u-combobox>
 </div>
 </div>
-<div class="u-span-4 combobox-demo-open">
+<div class="@grid:col-span-4 combobox-demo-open">
 <div class="u-field">
 <label for="cb-picked">Customer</label>
 <u-combobox>
@@ -70,7 +70,7 @@ only.
 </u-combobox>
 </div>
 </div>
-<div class="u-span-4 combobox-demo-open">
+<div class="@grid:col-span-4 combobox-demo-open">
 <div class="u-field">
 <label for="cb-none">Customer</label>
 <u-combobox>
@@ -85,7 +85,7 @@ only.
 </div>
 
 <div class="example-frame">
-<div class="u-max-width-form u-form">
+<div class="max-w-form u-form">
 <div class="u-field">
 <label for="cb-error">Customer</label>
 <u-combobox>
@@ -130,7 +130,7 @@ Disabled
 ## Without JavaScript
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/combobox_datalist" %>
 </div>
 </div>
@@ -222,8 +222,8 @@ use the [datalist](#without-javascript) version.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame combobox-demo-open">
 <div class="u-field">
@@ -240,7 +240,7 @@ use the [datalist](#without-javascript) version.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A combobox for three people. There’s nothing to search, and typing is slower than picking.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="u-field">

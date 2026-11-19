@@ -1,0 +1,13 @@
+<% css = File.read(File.join(Studio::Uniform.assets_path, "uniform/theme.css")) -%>
+<% prefixes = { "background-color" => ["bg-"], "text-color" => ["text-"], "border-color" => ["border-"], "color" => ["bg-", "text-", "border-"], "text" => ["text-"], "font" => ["font-"], "radius" => ["rounded-"], "shadow" => ["shadow-"], "ease" => ["ease-"], "container" => ["max-w-"] } -%>
+<% rows = css.scan(/^\s*--(#{prefixes.keys.sort_by { -it.length }.join("|")})-([a-z0-9-]+):\s*var\((--u-[a-z0-9-]+)\);/).reject { |_, name, _| name.include?("--") } -%>
+<div class="u-table">
+<table>
+<thead><tr><th scope="col">Tailwind class</th><th scope="col">Token</th></tr></thead>
+<tbody>
+<% rows.each do |namespace, name, token| -%>
+<tr><td><code><%= prefixes.fetch(namespace).map { |prefix| "#{prefix}#{name}" }.join("</code>, <code>").html_safe %></code></td><td><code><%= token %></code></td></tr>
+<% end -%>
+</tbody>
+</table>
+</div>

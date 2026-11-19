@@ -21,10 +21,6 @@ module Studio
       def manifest
         JSON.parse(assets_path.join("uniform/manifest.json").read)
       end
-
-      def stylesheets
-        manifest.fetch("stylesheets").map { |file| "uniform/#{file}" }
-      end
     end
   end
 end

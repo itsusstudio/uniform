@@ -1,4 +1,4 @@
-@layer uniform.components {
+@layer components {
 .u-tooltip {
   position: relative;
   display: inline-flex;
@@ -16,15 +16,15 @@
   display: none;
   width: max-content;
   max-width: 240px;
-  margin-bottom: var(--u-space-1);
-  padding: var(--u-space-1) var(--u-space-2);
-  background: var(--u-color-text-default);
-  color: var(--u-color-bg-surface);
-  box-shadow: var(--u-shadow-float);
-  font-family: var(--u-font-sans);
-  font-size: var(--u-font-size-caption);
+  margin-bottom: --spacing(1);
+  padding: --spacing(1) --spacing(2);
+  background: var(--text-color-default);
+  color: var(--background-color-surface);
+  box-shadow: var(--shadow-float);
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
   font-weight: 400;
-  line-height: var(--u-line-height-caption);
+  line-height: var(--text-caption--line-height);
   text-align: start;
   white-space: normal;
   translate: -50% 0;
@@ -34,7 +34,7 @@
 .u-tooltip > :last-child::after {
   content: "";
   position: absolute;
-  inset: calc(-1 * var(--u-space-1)) 0;
+  inset: calc(-1 * --spacing(1)) 0;
 }
 
 .u-tooltip:hover > :last-child,

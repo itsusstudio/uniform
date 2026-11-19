@@ -48,7 +48,7 @@ Give its heading only an `aria-label`, so it stays out of View.
 
 ## On a phone
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
 <div class="frame frame-phone frame-pad">
 <%= render "examples/data_grid", id: "phone-grid" %>
 </div>
@@ -62,7 +62,7 @@ it opens the record.
 
 ```html
 <u-data-grid id="jobs-grid">
-  <div class="u-stack u-gap-4">
+  <div class="flex flex-col gap-4">
     <search class="u-table-controls">
       <form action="/jobs" method="get">
         <div class="u-input-prefixed">
@@ -81,7 +81,7 @@ it opens the record.
         <table>
           <thead>
             <tr>
-              <th scope="col"><div class="u-row u-gap-4"><label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden">Select all jobs</span></label><span>Job</span></div></th>
+              <th scope="col"><div class="flex flex-wrap items-center gap-4"><label class="u-checkbox"><input type="checkbox"><span class="sr-only">Select all jobs</span></label><span>Job</span></div></th>
               <th scope="col" data-keep-narrow>Customer</th>
               <th scope="col" data-keep-narrow>Status</th>
               <th scope="col" aria-label="Actions"></th>
@@ -89,7 +89,7 @@ it opens the record.
           </thead>
           <tbody>
             <tr>
-              <th scope="row"><div class="u-row u-gap-4"><label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="1042" form="jobs-bulk"><span class="u-visually-hidden">Select job #1042</span></label><a class="u-text-data" href="/jobs/1042">#1042</a></div></th>
+              <th scope="row"><div class="flex flex-wrap items-center gap-4"><label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="1042" form="jobs-bulk"><span class="sr-only">Select job #1042</span></label><a class="u-data" href="/jobs/1042">#1042</a></div></th>
               <td><mark>Ana</mark> Reyes</td>
               <td>
                 <span class="u-badge u-badge-info">On the bench</span>
@@ -127,7 +127,7 @@ it opens the record.
 
 ```erb
 <u-data-grid id="jobs-grid" data-saved="<%%= t(".saved") %>" data-undo="<%%= t(".undo") %>" data-failed="<%%= t(".failed") %>" data-edit-hint="<%%= t(".edit_hint") %>">
-  <div class="u-stack u-gap-4">
+  <div class="flex flex-col gap-4">
     <search class="u-table-controls">
       <%%= form_with url: jobs_path, method: :get do |form| %>
         <div class="u-input-prefixed">
@@ -146,7 +146,7 @@ it opens the record.
         <table>
           <thead>
             <tr>
-              <th scope="col"><label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden"><%%= t(".select_all") %></span></label> <%%= t(".columns.job") %></th>
+              <th scope="col"><label class="u-checkbox"><input type="checkbox"><span class="sr-only"><%%= t(".select_all") %></span></label> <%%= t(".columns.job") %></th>
               <th scope="col" data-keep-narrow><%%= t(".columns.customer") %></th>
               <th scope="col" data-keep-narrow><%%= t(".columns.status") %></th>
               <th scope="col" aria-label="<%%= t(".columns.actions") %>"></th>
@@ -155,7 +155,7 @@ it opens the record.
           <tbody>
             <%% jobs.each do |job| %>
               <tr>
-                <th scope="row"><label class="u-checkbox"><%%= check_box_tag "job_ids[]", job.id, false, id: nil, form: "jobs-bulk" %><span class="u-visually-hidden"><%%= t(".select_job", number: job.number) %></span></label> <%%= link_to "##{job.number}", job, class: "u-text-data" %></th>
+                <th scope="row"><label class="u-checkbox"><%%= check_box_tag "job_ids[]", job.id, false, id: nil, form: "jobs-bulk" %><span class="sr-only"><%%= t(".select_job", number: job.number) %></span></label> <%%= link_to "##{job.number}", job, class: "u-data" %></th>
                 <td><%%= highlight(job.customer.name, params[:q]) %></td>
                 <td>
                   <%%= render "jobs/status", job: job %>

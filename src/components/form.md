@@ -11,7 +11,7 @@ permalink: /components/form/
 ## Example
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <form class="u-form" action="#example">
 <hgroup>
 <h3>New customer</h3>
@@ -42,7 +42,7 @@ page, like a code that ran out, isn't a failure: it goes under the page's
 heading as a `u-error` line.
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <form class="u-form" action="#example">
 <hgroup>
 <h3>New customer</h3>
@@ -154,4 +154,4 @@ unknown zone as "use the default".
 ## Rules
 
 Fields go in a form
-: Put every group of fields in a `u-form`, never a `u-stack` with a gap. Gaps picked by hand drift, and forms stop matching from one screen to the next.
+: Put every group of fields in a `u-form`, never a `flex flex-col` with a gap picked by hand. Gaps picked by hand drift, and forms stop matching from one screen to the next.

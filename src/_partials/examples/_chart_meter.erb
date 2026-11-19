@@ -1,9 +1,9 @@
 <% span_value = defined?(span) && span -%>
 <% loading_value = defined?(loading) && loading -%>
-<section class="u-card<%= " u-span-#{span_value}" if span_value %>">
+<section class="u-card <%= grid_span(span_value) %>">
   <header>
     <h2>Finished on time</h2>
-    <p class="u-text-small u-text-muted">This month</p>
+    <p class="text-small text-muted">This month</p>
   </header>
   <div class="u-card-content">
 <% if loading_value -%>

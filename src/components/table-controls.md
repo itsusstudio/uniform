@@ -94,8 +94,8 @@ The yellow wash only ever marks a search match or a change you just made.
 </tr>
 </thead>
 <tbody>
-<tr><td><span class="u-text-data">#1036</span> Priya Shah</td><td class="u-text-data">Nov 11</td><td class="u-table-num">$25.00</td></tr>
-<tr><td><span class="u-text-data">#1042</span> Ana Reyes</td><td class="u-text-data">Nov 14</td><td class="u-table-num">$85.00</td></tr>
+<tr><td><span class="u-data">#1036</span> Priya Shah</td><td class="u-data">Nov 11</td><td class="u-table-num">$25.00</td></tr>
+<tr><td><span class="u-data">#1042</span> Ana Reyes</td><td class="u-data">Nov 14</td><td class="u-table-num">$85.00</td></tr>
 </tbody>
 </table>
 </div>
@@ -122,7 +122,7 @@ in the same row. The search and chips stay put, so the table doesn't move.
 
 ## On a phone
 
-<div class="u-row u-items-start u-gap-6 frame-phones">
+<div class="flex flex-wrap items-center gap-2 items-start gap-6 frame-phones">
 <div class="frame frame-phone frame-pad">
 <%= render "examples/table_controls", presets_id: "controls-presets-phone", filter_id: "controls-filter-phone" %>
 </div>

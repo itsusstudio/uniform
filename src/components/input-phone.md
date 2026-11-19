@@ -11,7 +11,7 @@ A phone number field groups the digits as you type or paste. It's a [text field]
 <%= render "example_heading" %>
 
 <div class="example-frame">
-<div class="u-max-width-form u-stack u-gap-4">
+<div class="max-w-form flex flex-col gap-4">
 <%= render "examples/text_field_phone", id: "tf-phone-new" %>
 </div>
 </div>
@@ -45,7 +45,7 @@ can fill in a saved number.
 ## A saved number
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/text_field_phone", id: "tf-phone-saved", phone_value: "4165550142" %>
 </div>
 </div>
@@ -55,7 +55,7 @@ Send the number as it’s stored, and the field groups it when the page loads.
 ## Outside North America
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/text_field_phone", id: "tf-phone-world", phone_value: "+442079460958" %>
 </div>
 </div>
@@ -70,7 +70,7 @@ same blocks.
 ## Too short or too long
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/text_field_phone", id: "tf-phone-error", phone_value: "416 555 01", invalid: true %>
 </div>
 </div>

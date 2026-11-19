@@ -208,7 +208,7 @@
   body: No single framework face set for every word on the page, headlines included, and no tight negative letter spacing on every heading whatever its size. Uniform sets interface text in Inter, site headlines in Apfel Grotezk, codes in IBM Plex Mono and the wordmark in its own face, with spacing tuned per size in the type classes. See [Typography](/foundations/typography/).
   home: /start/rules/
   section: Don't look generated
-  check: Headlines on sites use Apfel Grotezk, not the interface face, and no letter spacing set by hand on headings. Type comes from the `u-text-*` classes.
+  check: Headlines on sites use Apfel Grotezk, not the interface face, and no letter spacing set by hand on headings. Type comes from the type role classes, like `text-page-title` and `text-small`.
 
 - id: card-soup
   name: Card soup
@@ -288,14 +288,14 @@
 - id: eight-sizes
   name: Eight sizes
   summary: 12, 14, 16, 20, 24, 32, 56 and 96px.
-  body: 12, 14, 16, 20, 24, 32, 56 and 96px. Apps use 12 to 32. Sites set paragraphs at 20px (`u-text-reading`), the intro line and feature headings at 24px, section headlines at 56px and one 96px hero per page.
+  body: 12, 14, 16, 20, 24, 32, 56 and 96px. Apps use 12 to 32. Sites set paragraphs at 20px (`text-reading`), the intro line and feature headings at 24px, section headlines at 56px and one 96px hero per page.
   default: "one scale for apps and sites, with 16px reading text everywhere."
   home: /foundations/typography/
 
 - id: one-line-height-per-size
   name: One line height per size
   summary: Each font size has its own line height token, and lines land on the 4px grid.
-  body: Each font size pairs with one line height, like `--u-line-height-14` with `--u-font-size-14`, so lines land on the 4px grid. Site reading text uses `--u-line-height-prose`. Components use the role tokens (`--u-font-size-body`, `-small` and `-caption`), never 16, 14 or 12.
+  body: Each font size pairs with one line height, like `--text-200--line-height` with `--text-200`, so lines land on the 4px grid. Site reading text uses `--leading-prose`. Components use the role tokens (`--text-body`, `-small` and `-caption`), never 16, 14 or 12.
   home: /foundations/typography/
   check: Every line-height in the CSS is a `--u-line-height-*` token, and components use the body, small and caption roles. The lint enforces both.
 
@@ -412,10 +412,10 @@
 
 - id: hit-area-is-not-spacing
   name: Hit area is not spacing
-  summary: Every control is at least as tall as `--u-size-target`, grown with padding inside it.
-  body: Every control is at least `--u-size-target` tall, and controls with a visible box, like buttons and fields, are `--u-size-control` tall. That's 32px and 36px for business, 40px and 44px for consumer. Padding inside the control makes up the height, never the space between controls.
+  summary: Every control is at least as tall as `--spacing-target`, grown with padding inside it.
+  body: Every control is at least `--spacing-target` tall, and controls with a visible box, like buttons and fields, are `--spacing-control` tall. That's 32px and 36px for business, 40px and 44px for consumer. Padding inside the control makes up the height, never the space between controls.
   home: /foundations/space-and-layout/
-  check: Every button, link row and input is at least `--u-size-target` tall.
+  check: Every button, link row and input is at least `--spacing-target` tall.
 
 - id: space-before-boxes
   name: Space before boxes
@@ -432,7 +432,7 @@
 - id: three-shapes
   name: Three shapes
   summary: Cards, dialogs, fields and floating panels have 8px corners, things you press are pills, and everything else is square.
-  body: Cards, dialogs, fields, popovers, menus and the option lists that drop from fields have 8px corners (`--u-radius-default`). Things you press, like buttons, chips and toggles, are pills (`--u-radius-pill`). Everything else is square, including tables, images and badges.
+  body: Cards, dialogs, fields, popovers, menus and the option lists that drop from fields have 12px corners (`--radius-surface`). Rows inside them, like nav items and list rows, have 4px corners (`--radius-item`). Things you press, like buttons, chips and toggles, are pills (`--radius-pill`). Everything else is square, including tables, images and badges.
   home: /foundations/shape-and-depth/
   default: zero border radius everywhere.
 
@@ -489,7 +489,7 @@
 - id: fixed-shapes
   name: Fixed shapes
   summary: 3:2, 4:5 or 1:1, spanning whole grid columns, with a "Fig." caption when needed.
-  body: Images are 3:2, 4:5 or 1:1, and span whole grid columns, like `u-span-5`. Caption an image only when it needs context, numbered "Fig. 1", in small muted text under it.
+  body: Images are 3:2, 4:5 or 1:1, and span whole grid columns, like `@grid:col-span-5`. Caption an image only when it needs context, numbered "Fig. 1", in small muted text under it.
   home: /foundations/imagery/
 
 - id: printed-matter-sits-on-paper
@@ -629,7 +629,7 @@
 - id: motion-follows-your-hand
   name: Motion follows your hand
   summary: Something moves only while you drag, swipe or pull it, and then settles. Nothing moves on its own.
-  body: What you drag, swipe or pull moves with your finger and settles with `--u-motion-ease` when you let go. A tap gets its answer instantly, and nothing moves on load or on scroll. See [Mostly still](#mostly-still).
+  body: What you drag, swipe or pull moves with your finger and settles with `--ease-standard` when you let go. A tap gets its answer instantly, and nothing moves on load or on scroll. See [Mostly still](#mostly-still).
   home: /foundations/motion/
   check: Nothing moves on load or on scroll, and nothing moves on a tap. Only what a finger drags, and what Mostly still allows.
 

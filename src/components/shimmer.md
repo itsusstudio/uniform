@@ -12,7 +12,7 @@ arrive in. Use it for any wait you can't count.
 ## Example
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <%= render "examples/shimmer_list" %>
 </div>
 </div>

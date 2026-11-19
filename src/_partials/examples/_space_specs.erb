@@ -1,15 +1,15 @@
 <div class="spec-list">
 <% rows.each do |row| %>
 <div class="spec-row">
-<div class="spec-meta"><u-copy><button type="button" class="u-link-btn u-text-data" data-copy="u-gap-<%= row[:px] / 4 %>" data-copied="Copied" data-copy-failed="Couldn’t copy">u-gap-<%= row[:px] / 4 %></button></u-copy><span><%= row[:px] / 4 %> × 4px = <%= row[:px] %>px</span></div>
+<div class="spec-meta"><u-copy><button type="button" class="u-link-btn u-data" data-copy="gap-<%= row[:px] / 4 %>" data-copied="Copied" data-copy-failed="Couldn’t copy">gap-<%= row[:px] / 4 %></button></u-copy><span><%= row[:px] / 4 %> × 4px = <%= row[:px] %>px</span></div>
 <div class="space-row">
-<span class="space-sample" style="width: var(<%= row[:token] %>)"></span>
-<div class="u-stack u-gap-2">
-<p class="u-text-body"><%= row[:job] %></p>
-<ul class="space-uses u-text-small">
+<span class="space-sample" style="width: calc(var(--spacing) * <%= row[:px] / 4 %>)"></span>
+<div class="flex flex-col gap-2">
+<p class="text-body"><%= row[:job] %></p>
+<ul class="list-disc pl-4 text-small">
 <% row[:uses].each do |use| %><li><%= raw markdownify(use).strip.delete_prefix("<p>").delete_suffix("</p>") %></li><% end %>
 </ul>
-<p class="u-text-small u-text-muted">In component CSS: <code class="u-text-data">var(<%= row[:token] %>)</code></p>
+<p class="text-small text-muted">In component CSS: <code class="u-data">--spacing(<%= row[:px] / 4 %>)</code></p>
 </div>
 </div>
 </div>

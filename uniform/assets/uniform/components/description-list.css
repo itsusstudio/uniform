@@ -1,23 +1,21 @@
-@layer uniform.components {
+@layer components {
 .u-dl {
   container: u-dl / inline-size;
   display: grid;
   grid-template-columns: fit-content(16rem) minmax(0, 1fr);
-  gap: var(--u-space-2) var(--u-space-6);
-  margin: 0;
-  color: var(--u-color-text-default);
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  gap: --spacing(2) --spacing(6);
+  color: var(--text-color-default);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
 }
 
 .u-dl > dt {
   grid-column: 1;
-  color: var(--u-color-text-muted);
+  color: var(--text-color-muted);
 }
 
 .u-dl > dd {
   grid-column: 2;
-  margin: 0;
   min-width: 0;
   overflow-wrap: anywhere;
 }
@@ -25,8 +23,8 @@
 @container u-dl (max-width: 17.4375rem) {
   .u-dl > dt, .u-dl > dd { grid-column: 1 / -1; }
 
-  .u-dl > dt { margin-bottom: calc(-1 * var(--u-space-2)); }
+  .u-dl > dt { margin-bottom: calc(-1 * --spacing(2)); }
 
-  .u-dl > dd + dt { margin-top: var(--u-space-2); }
+  .u-dl > dd + dt { margin-top: --spacing(2); }
 }
 }

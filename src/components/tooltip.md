@@ -10,16 +10,16 @@ A tooltip shows a short name on hover or focus. Use it for icon buttons and trun
 
 ## Example
 
-<div class="example-frame tooltip-demo-frame u-stack u-gap-6">
-<div class="u-row u-gap-2">
+<div class="example-frame tooltip-demo-frame flex flex-col gap-6">
+<div class="flex flex-wrap items-center gap-2">
 <%= render "examples/tooltip_icon", icon: "pencil", label: "Edit job", open: true %>
 <%= render "examples/tooltip_icon", icon: "trash-2", label: "Delete job", open: false %>
 <%= render "examples/tooltip_icon", icon: "search", label: "Search jobs", open: false %>
 <%= render "examples/tooltip_icon", icon: "ellipsis", label: "More actions", open: false %>
 </div>
 <div class="tooltip-demo-row">
-<span class="u-text-data">#1042</span>
-<span class="u-tooltip tooltip-demo-cell"><a href="#example" class="u-truncate">Ring resize, size 6 to 7, and re-tip two prongs on the centre stone</a><span aria-hidden="true">Ring resize, size 6 to 7, and re-tip two prongs on the centre stone</span></span>
+<span class="u-data">#1042</span>
+<span class="u-tooltip tooltip-demo-cell"><a href="#example" class="truncate">Ring resize, size 6 to 7, and re-tip two prongs on the centre stone</a><span aria-hidden="true">Ring resize, size 6 to 7, and re-tip two prongs on the centre stone</span></span>
 <span class="u-meta">Nov 14</span>
 </div>
 </div>
@@ -45,15 +45,15 @@ with it.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame tooltip-demo-frame">
 <span class="u-tooltip tooltip-demo-open"><button type="button" class="u-btn u-btn-outline">Text customer</button><span aria-hidden="true">Sends a pickup text. Each one uses 1 of your 500 texts this month.</span></span>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A tooltip on a button that already has a label, hiding the price where people can't count on seeing it.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame tooltip-demo-frame">
 <%= render "examples/tooltip_icon", icon: "trash-2", label: "Delete job", open: true %>

@@ -33,7 +33,7 @@ The current page fills its whole row and gets a short bar on the line.
 ## In an app
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <div class="example-frame example-sidebar">
 <nav class="u-nav" aria-label="Kensington Jewellery Repair">
 <div>
@@ -61,9 +61,9 @@ The current page fills its whole row and gets a short bar on the line.
 </nav>
 </div>
 </div>
-<div class="u-span-6 u-stack u-gap-4 u-text-small">
+<div class="@grid:col-span-6 flex flex-col gap-4 text-small">
 <p>Home, Jobs and Customers are links with icons. Settings and Reports are groups with icons, and the links inside them have none.</p>
-<p>Notifications is the current page, so Settings renders <code class="u-text-data">open</code>.</p>
+<p>Notifications is the current page, so Settings renders <code class="u-data">open</code>.</p>
 </div>
 </div>
 
@@ -88,7 +88,7 @@ The current page fills its whole row and gets a short bar on the line.
 ## On a docs site
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <div class="example-frame example-sidebar">
 <nav class="u-nav" aria-label="Uniform">
 <div>

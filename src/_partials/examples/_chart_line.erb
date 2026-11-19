@@ -9,12 +9,12 @@
   chart_json = ->(data) { raw(JSON.generate(data).gsub("</", "<\\/")) }
   money = ->(value) { whole, cents = ("%.2f" % value).split("."); "$#{whole.reverse.scan(/\d{1,3}/).join(",").reverse}.#{cents}" }
 -%>
-<section class="u-card<%= " u-span-#{span_value}" if span_value %>">
+<section class="u-card <%= grid_span(span_value) %>">
   <header>
     <h2>Revenue</h2>
     <form id="<%= uid.("revenue-period") %>" action="/reports" method="get">
       <fieldset class="u-fieldset">
-        <legend class="u-visually-hidden">Period</legend>
+        <legend class="sr-only">Period</legend>
         <div class="u-toggle-group">
           <label><input type="radio" name="period" value="month" checked> This month</label>
           <label><input type="radio" name="period" value="90-days"> Last 90 days</label>
@@ -32,7 +32,7 @@
 <% else -%>
     <div class="u-stat">
       <p><%= money.(november.last) %></p>
-      <p data-trend="up">So far this month, up 12% on <span class="u-text-data">Oct 12</span></p>
+      <p data-trend="up">So far this month, up 12% on <span class="u-data">Oct 12</span></p>
     </div>
 <%
   rows = (1..30).map do |day|

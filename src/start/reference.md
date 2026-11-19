@@ -12,17 +12,24 @@ the rare custom build.
 
 ## Tokens
 
-Every `--u-*` custom property, with its light value and its dark value where
-dark mode changes it. They're read from `uniform/tokens.css`, and the
+Every token, with its light value and its dark value where dark mode changes
+it. They're Tailwind theme variables read from `uniform/theme.css`, and the
 Foundations pages say when to use each one.
 
 <%= render "tokens_reference" %>
 
-## Utilities
+## Tailwind theme
 
-Reach for a component first, a layout class second, and a utility only when
-neither fits. Type, spacing, background and helper classes work on anything, inside a
-component or out.
+Uniform's tokens as Tailwind classes. Reach for a component first, then these,
+then any other Tailwind utility. Spacing uses Tailwind's numbers on a 4px unit,
+so `gap-6` is 24px, and `dark:` follows the system setting and `data-u-theme`.
+
+<%= render "theme_reference" %>
+
+## Type roles
+
+The type roles are Tailwind utilities, so they take variants like
+`md:text-page-title`.
 
 <%= render "utilities_reference" %>
 

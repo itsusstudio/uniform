@@ -137,32 +137,32 @@ Header
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="dialog-demo-stage dialog-demo-stage-small">
 <div class="u-dialog"><header><p>Are you sure?</p></header><div class="u-card-content"><p>This action can’t be undone.</p></div><div class="u-actions"><button type="button" class="u-btn u-btn-outline">No</button><button type="button" class="u-btn u-btn-primary">Yes</button></div></div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A vague question with Yes and No. People click Yes without reading, and nothing says what goes.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="dialog-demo-stage dialog-demo-stage-small">
-<div class="u-dialog"><header><p>Delete job <span class="u-text-data">#1042</span>?</p></header><div class="u-card-content"><p>Ana Reyes’s ring resize will be deleted. You can’t undo this.</p></div><div class="u-actions"><button type="button" class="u-btn u-btn-outline">Cancel</button><button type="button" class="u-btn u-btn-danger">Delete job</button></div></div>
+<div class="u-dialog"><header><p>Delete job <span class="u-data">#1042</span>?</p></header><div class="u-card-content"><p>Ana Reyes’s ring resize will be deleted. You can’t undo this.</p></div><div class="u-actions"><button type="button" class="u-btn u-btn-outline">Cancel</button><button type="button" class="u-btn u-btn-danger">Delete job</button></div></div>
 </div>
 <figcaption class="example-caption example-caption-do"><span>Name the thing, say what happens, and label the button with the action.</span></figcaption>
 </figure>
 </div>
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="dialog-demo-stage dialog-demo-stage-small">
-<div class="dialog-demo-stack"><div class="u-dialog"><header><p>Edit job</p></header><div class="u-card-content"><p class="u-text-muted">Customer, items, quote, due date, notes, photos…</p></div></div><div class="u-dialog"><div class="u-card-content"><p>Save changes to the quote first?</p></div></div></div>
+<div class="dialog-demo-stack"><div class="u-dialog"><header><p>Edit job</p></header><div class="u-card-content"><p class="text-muted">Customer, items, quote, due date, notes, photos…</p></div></div><div class="u-dialog"><div class="u-card-content"><p>Save changes to the quote first?</p></div></div></div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A whole page squeezed into a dialog, then a second dialog on top of it.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="dialog-demo-stage dialog-demo-stage-small">
 <div class="u-dialog"><header><p>Change due date</p></header><div class="u-card-content"><p>One field, one decision.</p></div><div class="u-actions"><button type="button" class="u-btn u-btn-outline">Cancel</button><button type="button" class="u-btn u-btn-primary">Save date</button></div></div>

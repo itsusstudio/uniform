@@ -52,14 +52,14 @@
           "HighlightText"
         ],
         "expandShorthand": true,
-        "message": "Use a Uniform token (var(--u-*)) for \"${property}\", not \"${value}\"."
+        "message": "Use a theme token (var(--color-*), --spacing(n) and the rest) for \"${property}\", not \"${value}\"."
       }
     ]
   },
   "overrides": [
     {
       "files": [
-        "uniform/assets/uniform/tokens.css",
+        "uniform/assets/uniform/theme.css",
         "uniform/assets/uniform/fonts.css"
       ],
       "rules": {
@@ -76,14 +76,14 @@
         "declaration-property-value-disallowed-list": [
           {
             "font-size": [
-              "/--u-font-size-1[246]\\b/"
+              "/--text-[123]00(?![\\w-])/"
             ],
             "line-height": [
-              "/--u-line-height-1[246]\\b/"
+              "/--text-[123]00--line-height/"
             ]
           },
           {
-            "message": "Use the role token (--u-font-size-body, -small, -caption) and its line height."
+            "message": "Use the role token (--text-body, --text-small, --text-caption) and its line height."
           }
         ]
       }

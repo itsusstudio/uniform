@@ -5,7 +5,7 @@
 <tbody>
 <% site.data.elements.each do |element| -%>
 <tr>
-<th scope="row" id="<%= element.name.delete("<>") %>"><a class="u-text-data reference-name" href="<%= element.page %>"><%= element.name %></a></th>
+<th scope="row" id="<%= element.name.delete("<>") %>"><a class="u-data reference-name" href="<%= element.page %>"><%= element.name %></a></th>
 <td><%= raw inline.(element.wraps) %></td>
 <td><%= raw inline.(element.adds) %></td>
 <td><%= raw inline.(element.without) %></td>

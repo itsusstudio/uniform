@@ -8,10 +8,10 @@
   ["disabled", '<button type="button" class="u-btn u-btn-primary" disabled>Save job</button>', "Disabled. Use sparingly, and say nearby why it can't be pressed yet."],
 ].each do |cls, html, job| %>
 <div class="spec-row">
-<div class="spec-meta"><u-copy><button type="button" class="u-link-btn u-text-data" data-copy="<%= cls %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= cls %></button></u-copy></div>
-<div class="u-row u-gap-6 button-row">
+<div class="spec-meta"><u-copy><button type="button" class="u-link-btn u-data" data-copy="<%= cls %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= cls %></button></u-copy></div>
+<div class="flex flex-wrap items-center gap-6 button-row">
 <span class="button-sample"><% if html %><%= raw html %><% else %><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="More actions"><%= render "icon", name: "ellipsis", small: false %></button><button type="button" class="u-btn u-btn-outline u-btn-icon" aria-label="Add"><%= render "icon", name: "plus", small: false %></button><% end %></span>
-<p class="u-text-body"><%= job %></p>
+<p class="text-body"><%= job %></p>
 </div>
 </div>
 <% end %>

@@ -14,7 +14,7 @@ the browser's own select, set as a small pill with a globe and a chevron. Add
 <%= render "example_heading" %>
 
 <div class="example-frame">
-<div class="u-row u-gap-6">
+<div class="flex flex-wrap items-center gap-6">
 <select class="u-input u-language-select" aria-label="Language">
 <option selected>English</option>
 <option>Français</option>

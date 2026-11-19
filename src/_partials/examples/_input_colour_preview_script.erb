@@ -12,7 +12,7 @@
     return (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05)
   }
   const paint = () => {
-    const ink = ["--u-color-bg-ink", "--u-color-text-on-ink"].sort((a, b) => contrast(swatch.value, b) - contrast(swatch.value, a))[0]
+    const ink = ["--background-color-ink", "--text-color-on-ink"].sort((a, b) => contrast(swatch.value, b) - contrast(swatch.value, a))[0]
     tag.style.backgroundColor = swatch.value
     tag.style.color = `var(${ink})`
     tag.textContent = name.value.trim() || "Label"

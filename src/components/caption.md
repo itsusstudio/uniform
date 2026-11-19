@@ -30,7 +30,7 @@ Start the caption with a `<strong>` to give it a title on its own line.
 ## Rules
 
 Always a figcaption
-: Write a caption as a `<figcaption>`, never a stack of `u-text-strong` and `u-text-small u-text-muted`.
+: Write a caption as a `<figcaption>`, never a stack of `font-medium` and `text-small text-muted`.
 
 The alt text describes, the caption explains
 : The image's `alt` says what's in it for people who can't see it. The caption adds what everyone needs to know, so the two never repeat each other.

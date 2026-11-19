@@ -1,6 +1,6 @@
-@layer uniform.components {
+@layer components {
 .u-avatar,
-.u-avatar-group { --u-avatar-size: var(--u-size-control); }
+.u-avatar-group { --u-avatar-size: var(--spacing-control); }
 
 :is(.u-avatar, .u-avatar-group > span) {
   display: inline-grid;
@@ -10,9 +10,9 @@
   width: var(--u-avatar-size);
   height: var(--u-avatar-size);
   border-radius: 50%;
-  background: var(--u-color-divider);
-  color: var(--u-color-text-default);
-  font-family: var(--u-font-sans);
+  background: var(--border-color-divider);
+  color: var(--text-color-default);
+  font-family: var(--font-sans);
   font-size: calc(var(--u-avatar-size) * 0.375);
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -30,7 +30,7 @@
 }
 
 :is(.u-avatar-sm, .u-avatar-group-sm > span) {
-  --u-avatar-size: calc(var(--u-size-target) - var(--u-space-2));
+  --u-avatar-size: calc(var(--spacing-target) - --spacing(2));
   font-size: calc(var(--u-avatar-size) * 0.42);
   letter-spacing: 0;
 }
@@ -41,9 +41,9 @@
   inset: auto 0 0 auto;
   width: 12px;
   height: 12px;
-  border: 2px solid var(--u-color-bg-surface);
+  border: 2px solid var(--background-color-surface);
   border-radius: 50%;
-  background: var(--u-color-success);
+  background: var(--color-success);
 }
 
 .u-avatar-sm.u-avatar-online::after {
@@ -57,7 +57,7 @@
   vertical-align: middle;
 }
 
-.u-avatar-group > span { outline: 2px solid var(--u-color-bg-surface); }
+.u-avatar-group > span { outline: 2px solid var(--background-color-surface); }
 
-.u-avatar-group > span + span { margin-inline-start: calc(-1 * var(--u-space-2)); }
+.u-avatar-group > span + span { margin-inline-start: calc(-1 * --spacing(2)); }
 }

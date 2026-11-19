@@ -1,4 +1,4 @@
-@layer uniform.components {
+@layer components {
 .u-enter,
 .u-exit { display: grid; }
 
@@ -8,9 +8,9 @@
   overflow: hidden;
 }
 
-.u-enter { animation: u-enter var(--u-motion-enter) var(--u-motion-ease) both; }
+.u-enter { animation: u-enter var(--u-duration-enter) var(--ease-standard) both; }
 
-.u-exit { animation: u-exit var(--u-motion-exit) var(--u-motion-ease) both; }
+.u-exit { animation: u-exit var(--u-duration-exit) var(--ease-standard) both; }
 
 @keyframes u-enter {
   from {

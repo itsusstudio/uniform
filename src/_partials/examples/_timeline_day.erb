@@ -1,6 +1,6 @@
 <%# locals: (day:) -%>
-<section class="u-stack u-gap-2">
-  <h3 class="u-text-small u-text-strong<% if day[:mono] %> u-text-data<% end %>"><u-relative-time format="day"><time datetime="<%= day[:events].first[:at] %>"><%= day[:label] %></time></u-relative-time></h3>
+<section class="flex flex-col gap-2">
+  <h3 class="text-small font-medium<% if day[:mono] %> u-data<% end %>"><u-relative-time format="day"><time datetime="<%= day[:events].first[:at] %>"><%= day[:label] %></time></u-relative-time></h3>
   <ol class="u-timeline">
 <% day[:events].each do |event| -%>
     <%= raw render("examples/timeline_event", event: event).strip.gsub("\n", "\n    ") %>

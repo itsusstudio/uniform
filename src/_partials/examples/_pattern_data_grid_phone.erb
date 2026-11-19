@@ -27,22 +27,22 @@
   short_date = ->(iso) { Date.parse(iso).strftime("%b %-d") }
   sheet = uid.("jobs-sheet")
 -%>
-<div class="u-stack u-gap-6">
+<div class="flex flex-col gap-6">
   <header class="u-page-header">
     <hgroup>
       <h1>Jobs</h1>
-      <p><span class="u-text-data">38</span> open, <span class="u-text-data">6</span> due this week</p>
+      <p><span class="u-data">38</span> open, <span class="u-data">6</span> due this week</p>
     </hgroup>
     <div class="u-actions">
       <a class="u-btn u-btn-primary" href="<%= href.("/jobs/new") %>"><%= raw icon.("plus") %>New job</a>
     </div>
   </header>
-  <div class="u-stack u-gap-4">
+  <div class="flex flex-col gap-4">
     <div data-grid-part="toolbar">
-      <div class="u-stack u-gap-2">
+      <div class="flex flex-col gap-2">
         <search>
           <form action="/jobs" method="get">
-            <label class="u-visually-hidden" for="<%= uid.("jobs-q") %>">Search jobs</label>
+            <label class="sr-only" for="<%= uid.("jobs-q") %>">Search jobs</label>
             <div class="u-input-prefixed">
               <input class="u-input" id="<%= uid.("jobs-q") %>" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" placeholder="Name, job number or phone">
             </div>
@@ -55,14 +55,14 @@
       </div>
     </div>
     <div data-grid-part="bulk" hidden>
-      <form class="u-row" action="/jobs/bulk" method="post" aria-label="Selected jobs">
+      <form class="flex flex-wrap items-center gap-2" action="/jobs/bulk" method="post" aria-label="Selected jobs">
         <span><output data-grid-count>0</output> selected</span>
         <button type="submit" class="u-btn u-btn-primary" name="bulk_action" value="ready">Mark ready</button>
         <button type="button" class="u-btn u-btn-ghost" data-select-done>Done</button>
       </form>
     </div>
     <div data-grid-part="chips">
-      <div class="u-row" role="group" aria-label="Filters">
+      <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filters">
 <% shown.each do |status| -%>
         <span class="u-chip">Status: <%= status %><button type="button" data-remove="status" value="<%= status %>" aria-label="Remove filter: Status: <%= status %>"></button></span>
 <% end -%>
@@ -85,10 +85,10 @@
             <tbody>
 <% jobs.each do |number, customer, status, due, quote| -%>
               <tr data-job="<%= number %>" data-customer="<%= customer %>" data-status="<%= status %>" data-due="<%= due %>" data-quote="<%= quote %>"<% unless shown.include?(status) %> hidden<% end %>>
-                <th scope="row"><label class="u-checkbox" hidden><input type="checkbox" name="job_ids[]" value="<%= number %>"><span class="u-visually-hidden">Select job #<%= number %></span></label><a class="u-text-data" href="<%= href.("/jobs/#{number}") %>">#<%= number %></a></th>
+                <th scope="row"><label class="u-checkbox" hidden><input type="checkbox" name="job_ids[]" value="<%= number %>"><span class="sr-only">Select job #<%= number %></span></label><a class="u-data" href="<%= href.("/jobs/#{number}") %>">#<%= number %></a></th>
                 <td><%= customer %></td>
                 <td><span class="u-badge u-badge-<%= variants[status] %>"><%= status %></span></td>
-                <td class="u-text-data"><%= short_date.(due) %></td>
+                <td class="u-data"><%= short_date.(due) %></td>
                 <td class="u-table-num">$<%= quote %></td>
               </tr>
 <% end -%>

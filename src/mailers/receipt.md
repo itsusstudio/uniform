@@ -49,26 +49,26 @@ so it prints as ink on white without a table splitting across two pages.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="mailer-mock">
 <p>Kensington Jewellery Repair</p>
-<p class="u-text-heading">Thanks for your order</p>
-<p class="u-text-small">Hi Ana, your receipt is attached.</p>
-<p class="mailer-receipt-file u-text-small"><span class="u-text-data">receipt-1042.pdf</span><span class="u-text-muted">48 KB</span></p>
+<p class="text-heading">Thanks for your order</p>
+<p class="text-small">Hi Ana, your receipt is attached.</p>
+<p class="mailer-receipt-file text-small"><span class="u-data">receipt-1042.pdf</span><span class="text-muted">48 KB</span></p>
 </div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>The amounts live only in a PDF. The inbox can't search it, the preview shows nothing, and on a phone it's one more thing to open.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="mailer-mock">
 <p>Kensington Jewellery Repair</p>
-<p class="u-text-heading">Receipt for job <span class="u-text-data">#1042</span></p>
-<p class="u-text-small">Hi Ana, you paid <span class="u-text-data">$96.05</span> on <span class="u-text-data">Nov 14, 2026</span>.</p>
+<p class="text-heading">Receipt for job <span class="u-data">#1042</span></p>
+<p class="text-small">Hi Ana, you paid <span class="u-data">$96.05</span> on <span class="u-data">Nov 14, 2026</span>.</p>
 <div class="u-table" tabindex="0" role="region" aria-label="Receipt">
 <table class="mailer-receipt-table">
 <thead><tr><th scope="col">Item</th><th scope="col" class="u-table-num">Amount</th></tr></thead>

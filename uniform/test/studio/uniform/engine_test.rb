@@ -55,14 +55,6 @@ module Studio
         assert_includes message.html_part.body.to_s, "482915</td>"
         assert_includes message.text_part.body.to_s, "Workbench\n\nYour code\n\n482915"
       end
-
-      def test_helper_links_every_stylesheet_in_manifest_order
-        view = ActionView::Base.empty
-        tags = view.uniform_stylesheet_tags
-
-        assert_equal Uniform.stylesheets.size, tags.scan("<link").size
-        assert_match %r{/assets/uniform/layers-\w+\.css}, tags
-      end
     end
   end
 end

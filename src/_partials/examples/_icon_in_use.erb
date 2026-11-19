@@ -1,22 +1,22 @@
 <div class="annotated">
-<div class="examples u-stack u-gap-12">
+<div class="examples flex flex-col gap-12">
 
 <figure class="example">
 <div class="example-frame example-tagged">
 <span class="example-tag">App</span>
-<div class="u-stack u-gap-12">
-<div class="u-row icon-bar">
+<div class="flex flex-col gap-12">
+<div class="flex flex-wrap items-center gap-2 icon-bar">
 <span class="icon-wrap" data-label="alone, with a label" data-label-corner="below"><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Menu"><%= render "icon", name: "menu", small: false %></button></span>
 <span class="u-input-prefixed icon-wrap" data-label="16px inside a field" data-label-corner="below"><input class="u-input" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search jobs" aria-label="Search jobs"></span>
 <span class="icon-wrap" data-label="16px beside a 14px word" data-label-corner="below"><span class="u-btn u-btn-primary"><%= render "icon", name: "plus", small: false %>New job</span></span>
 </div>
 <div class="u-card icon-wrap" data-label="row actions, each with a hidden label" data-label-corner="below">
 <ul class="u-list">
-<li><span class="u-text-data">#1042</span><span>Ana Reyes</span><span class="u-actions u-gap-1"><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit job #1042"><%= render "icon", name: "pencil", small: false %></button><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Delete job #1042"><%= render "icon", name: "trash-2", small: false %></button></span></li>
-<li><span class="u-text-data">#1039</span><span>Sam Okafor</span><span class="u-actions u-gap-1"><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit job #1039"><%= render "icon", name: "pencil", small: false %></button><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Delete job #1039"><%= render "icon", name: "trash-2", small: false %></button></span></li>
+<li><span class="u-data">#1042</span><span>Ana Reyes</span><span class="u-actions gap-1"><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit job #1042"><%= render "icon", name: "pencil", small: false %></button><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Delete job #1042"><%= render "icon", name: "trash-2", small: false %></button></span></li>
+<li><span class="u-data">#1039</span><span>Sam Okafor</span><span class="u-actions gap-1"><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit job #1039"><%= render "icon", name: "pencil", small: false %></button><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Delete job #1039"><%= render "icon", name: "trash-2", small: false %></button></span></li>
 </ul>
 </div>
-<p class="u-text-small"><a href="#in-use">Open the customer’s status page <%= render "icon", name: "external-link", small: true %></a></p>
+<p class="text-small"><a href="#in-use">Open the customer’s status page <%= render "icon", name: "external-link", small: true %></a></p>
 </div>
 </div>
 <figcaption class="example-caption"><span>App toolbar and list. Icons stand alone only for the universal set, each with a hidden label for screen readers. Everywhere else the word comes with it, or the word stands alone. Icons are 16px beside 14px words, like in buttons and fields, and 20px on their own. Always in the colour of the text.</span></figcaption>

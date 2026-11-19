@@ -1,4 +1,4 @@
-@layer uniform.components {
+@layer components {
 .u-table {
   position: relative;
   max-width: 100%;
@@ -10,34 +10,28 @@
 
 :is(.u-table, u-chart) > table {
   width: 100%;
-  margin: 0;
   border-collapse: collapse;
-  color: var(--u-color-text-default);
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  color: var(--text-color-default);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
 }
 
 :is(.u-table, u-chart) > table :where(th, td) {
-  padding: var(--u-space-2) var(--u-space-4);
+  padding: --spacing(2) --spacing(4);
   text-align: start;
   vertical-align: middle;
 }
 
-:is(.u-table, u-chart) > table tbody :where(th, td) { height: var(--u-size-row); }
-
-:is(.u-table, u-chart) > table :where(th, td) > .u-row {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-}
+:is(.u-table, u-chart) > table tbody :where(th, td) { height: var(--spacing-row); }
 
 :is(.u-table, u-chart) > table thead th {
-  border-bottom: 1px solid var(--u-color-text-default);
-  color: var(--u-color-text-muted);
+  border-bottom: 1px solid var(--text-color-default);
+  color: var(--text-color-muted);
   font-weight: 400;
   white-space: nowrap;
 }
 
-:is(.u-table, u-chart) > table tbody tr + tr > :where(th, td) { border-top: 1px solid var(--u-color-divider); }
+:is(.u-table, u-chart) > table tbody tr + tr > :where(th, td) { border-top: 1px solid var(--border-color-divider); }
 
 :is(.u-table, u-chart) > table tbody th { font-weight: 500; }
 
@@ -60,7 +54,7 @@
   inset: 0;
 }
 
-.u-table > table tbody tr:where(:has(> :first-child > a:not(.u-btn)):hover) > * { background: var(--u-color-divider); }
+.u-table > table tbody tr:where(:has(> :first-child > a:not(.u-btn)):hover) > * { background: var(--border-color-divider); }
 
 .u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) :is(a, button, input, label, select, summary):not(tr > :first-child > a) {
   position: relative;
@@ -68,19 +62,19 @@
 }
 
 :is(.u-table, u-chart) > table .u-table-num {
-  font-family: var(--u-font-mono);
+  font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   text-align: end;
   white-space: nowrap;
 }
 
-:is(.u-table, u-chart) > table thead .u-table-num { font-family: var(--u-font-sans); }
+:is(.u-table, u-chart) > table thead .u-table-num { font-family: var(--font-sans); }
 
-:is(.u-table, u-chart) > table .u-text-data { white-space: nowrap; }
+:is(.u-table, u-chart) > table .u-data { white-space: nowrap; }
 
 :is(.u-table, u-chart) > table .u-table-truncate {
   inline-size: 100%;
-  min-inline-size: var(--u-width-table-text);
+  min-inline-size: var(--container-table-text);
   max-inline-size: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -90,9 +84,9 @@
 .u-table-sort {
   display: inline-flex;
   align-items: center;
-  gap: var(--u-space-1);
-  min-height: var(--u-size-target);
-  margin-block: calc(-1 * var(--u-space-1));
+  gap: --spacing(1);
+  min-height: var(--spacing-target);
+  margin-block: calc(-1 * --spacing(1));
   padding: 0;
   border: 0;
   background: transparent;
@@ -103,7 +97,7 @@
 }
 
 .u-table-sort:hover,
-[aria-sort] > .u-table-sort { color: var(--u-color-text-default); }
+[aria-sort] > .u-table-sort { color: var(--text-color-default); }
 
 .u-table-sort::after {
   content: "";
@@ -111,17 +105,17 @@
   width: 16px;
   height: 16px;
   background: currentcolor;
-  mask: url("./../icons/arrow-down-up.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/arrow-down-up.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
-[aria-sort="ascending"] .u-table-sort::after { mask-image: url("./../icons/chevron-up.svg"); }
+[aria-sort="ascending"] .u-table-sort::after { mask-image: url("/uniform/icons/chevron-up.svg"); }
 
-[aria-sort="descending"] .u-table-sort::after { mask-image: url("./../icons/chevron-down.svg"); }
+[aria-sort="descending"] .u-table-sort::after { mask-image: url("/uniform/icons/chevron-down.svg"); }
 
 .u-table-num > .u-table-sort { flex-direction: row-reverse; }
 
-.u-card > .u-table > table :is(th, td):first-child { padding-inline-start: var(--u-space-6); }
+.u-card > .u-table > table :is(th, td):first-child { padding-inline-start: --spacing(6); }
 
 :is(.u-table, u-chart) > table :is(th, td):has(> .u-checkbox:only-child) {
   width: 16px;
@@ -133,13 +127,13 @@
   column-gap: 0;
 }
 
-.u-card > .u-table > table :is(th, td):last-child { padding-inline-end: var(--u-space-6); }
+.u-card > .u-table > table :is(th, td):last-child { padding-inline-end: --spacing(6); }
 
 .u-table-sticky {
   max-height: 80dvh;
   overflow: auto;
   /* The sticky header row: sort button, cell padding and the rule under it, so a focused row is never under it. */
-  scroll-padding-block-start: calc(var(--u-size-target) + var(--u-space-2) + 1px);
+  scroll-padding-block-start: calc(var(--spacing-target) + --spacing(2) + 1px);
 }
 
 .u-table-sticky > table {
@@ -151,7 +145,7 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  background: var(--u-color-bg-surface);
+  background: var(--background-color-surface);
 }
 
 .u-table-controls {
@@ -159,19 +153,15 @@
   width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--u-space-4);
+  gap: --spacing(4);
 }
-
-.u-table-controls[hidden],
-.u-table-controls > [hidden] { display: none; }
 
 .u-table-controls > form {
   display: flex;
   grid-area: 1 / 1;
   flex-wrap: wrap;
   align-items: flex-end;
-  gap: var(--u-space-2);
-  margin: 0;
+  gap: --spacing(2);
 }
 
 .u-table-controls > form > .u-field { flex: none; }
@@ -202,9 +192,15 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--u-space-2);
-  margin: 0;
+  gap: --spacing(2);
   padding: 0;
   list-style: none;
+}
+}
+
+@layer utilities {
+:is(.u-table, u-chart) > table :where(th, td) > .flex {
+  flex-wrap: nowrap;
+  white-space: nowrap;
 }
 }

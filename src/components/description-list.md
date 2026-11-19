@@ -11,20 +11,20 @@ A description list shows the details of one record, with muted labels beside the
 ## Example
 
 <div class="u-grid">
-<div class="u-span-6">
+<div class="@grid:col-span-6">
 <section class="u-card">
 <header>
-<h3>Job <span class="u-text-data">#1042</span></h3>
+<h3>Job <span class="u-data">#1042</span></h3>
 <button type="button" class="u-btn u-btn-ghost">Edit</button>
 </header>
 <div class="u-card-content">
 <dl class="u-dl">
 <dt>Customer</dt><dd>Ana Reyes</dd>
-<dt>Phone number</dt><dd class="u-text-data">(416) 555-0199</dd>
+<dt>Phone number</dt><dd class="u-data">(416) 555-0199</dd>
 <dt>Item</dt><dd>14k yellow gold band, size 6 to 7½</dd>
 <dt>Status</dt><dd><span class="u-badge u-badge-info">On the bench</span></dd>
-<dt>Due</dt><dd class="u-text-data">Nov 14</dd>
-<dt>Quote</dt><dd class="u-text-data">$85.00</dd>
+<dt>Due</dt><dd class="u-data">Nov 14</dd>
+<dt>Quote</dt><dd class="u-data">$85.00</dd>
 </dl>
 </div>
 </section>
@@ -40,7 +40,7 @@ Below 280px wide, each label sits on top of its value. A narrow card keeps them 
   <dt>Customer</dt>
   <dd>Ana Reyes</dd>
   <dt>Due</dt>
-  <dd class="u-text-data">Nov 14</dd>
+  <dd class="u-data">Nov 14</dd>
 </dl>
 ```
 
@@ -49,7 +49,7 @@ Below 280px wide, each label sits on top of its value. A narrow card keeps them 
   <dt><%%= t(".customer") %></dt>
   <dd><%%= job.customer.name %></dd>
   <dt><%%= t(".due") %></dt>
-  <dd class="u-text-data"><%%= l(job.due_on, format: :short) %></dd>
+  <dd class="u-data"><%%= l(job.due_on, format: :short) %></dd>
 </dl>
 ```
 
@@ -61,29 +61,29 @@ Below 280px wide, each label sits on top of its value. A narrow card keeps them 
 : The label. Short, in sentence case, with no colon.
 
 `<dd>`
-: The value. Add `u-text-data` for prices, dates, phone numbers and IDs.
+: The value. Add `u-data` for prices, dates, phone numbers and IDs.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
-<div class="u-stack u-gap-4 u-text-small">
-<p><span class="u-text-strong">Customer:</span> Ana Reyes</p>
-<p><span class="u-text-strong">Due:</span> Nov 14</p>
-<p><span class="u-text-strong">Quote:</span> $85.00</p>
+<div class="flex flex-col gap-4 text-small">
+<p><span class="font-medium">Customer:</span> Ana Reyes</p>
+<p><span class="font-medium">Due:</span> Nov 14</p>
+<p><span class="font-medium">Quote:</span> $85.00</p>
 </div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Labels run into their values, with heavy labels and colons. The values don't line up, so you have to read every line.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <dl class="u-dl">
 <dt>Customer</dt><dd>Ana Reyes</dd>
-<dt>Due</dt><dd class="u-text-data">Nov 14</dd>
-<dt>Quote</dt><dd class="u-text-data">$85.00</dd>
+<dt>Due</dt><dd class="u-data">Nov 14</dd>
+<dt>Quote</dt><dd class="u-data">$85.00</dd>
 </dl>
 </div>
 <figcaption class="example-caption example-caption-do"><span>Quiet labels in their own column, values lined up beside them.</span></figcaption>

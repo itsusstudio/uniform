@@ -11,7 +11,7 @@ A select picks one option from a list too long to show at once. It opens the pic
 <%= render "example_heading" %>
 
 <div class="example-frame">
-<div class="u-max-width-form u-form">
+<div class="max-w-form u-form">
 <div class="u-field">
 <label for="sel-type">Repair type</label>
 <select class="u-input" id="sel-type">
@@ -41,7 +41,7 @@ A select picks one option from a list too long to show at once. It opens the pic
 ## States
 
 <div class="example-frame">
-<div class="u-max-width-form u-form">
+<div class="max-w-form u-form">
 <div class="u-field">
 <label for="sel-error">Pickup location</label>
 <select class="u-input" id="sel-error" aria-invalid="true" aria-describedby="sel-error-message">
@@ -94,8 +94,8 @@ A `<select>` with `u-input` draws its own arrow. With a mouse in Chrome or Edge,
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="u-field">
@@ -108,7 +108,7 @@ A `<select>` with `u-input` draws its own arrow. With a mouse in Chrome or Edge,
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A select for two choices. Someone has to open it to see there's only one other option.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <fieldset class="u-fieldset">

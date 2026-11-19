@@ -10,7 +10,7 @@ A banner holds a message for everyone on the page, like an announcement or an ac
 
 ## Variants
 
-<div class="u-stack u-gap-4">
+<div class="flex flex-col gap-4">
 <%= render "examples/banner", variant: nil, title: "Texts now include your opening hours", body: "Customers see them on every pickup text. You can change them in Settings.", action: nil %>
 <%= render "examples/banner", variant: "warning", title: "Your card expires on Nov 30", body: "Update it before then so texts keep sending.", action: "Update card" %>
 <%= render "examples/banner", variant: "danger", title: "Texts aren’t sending", body: "Your phone number was rejected by the carrier. Nothing has been sent since 9:14am.", action: "Fix your number" %>
@@ -71,16 +71,16 @@ Add `u-banner-full` for news about the whole app. It runs edge to edge across th
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
-<div class="example-frame u-stack u-gap-2">
+<div class="example-frame flex flex-col gap-2">
 <%= render "examples/banner", variant: "success", title: "Job saved", body: "Ring resize for Ana Reyes.", action: nil %>
 <%= render "examples/banner", variant: "warning", title: "Card expires soon", body: "Update it before Nov 30.", action: nil %>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Stacking banners, and using one to confirm a quick action. The second one gets lost.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <%= render "examples/banner", variant: "warning", title: "Your card expires on Nov 30", body: "Update it before then so texts keep sending.", action: "Update card" %>

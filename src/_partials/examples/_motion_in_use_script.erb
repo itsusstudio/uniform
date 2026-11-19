@@ -10,8 +10,8 @@ document.addEventListener("click", (event) => {
     const [id, name] = motionNames[list.children.length % motionNames.length]
     const template = list.querySelector(".motion-item")
     const item = template.cloneNode(true)
-    item.querySelector(".u-text-data").textContent = id
-    item.querySelector(".u-text-data + span").textContent = name
+    item.querySelector(".u-data").textContent = id
+    item.querySelector(".u-data + span").textContent = name
     item.querySelector("[data-motion-remove]").setAttribute("aria-label", `Remove job ${id}`)
     item.classList.remove("u-exit")
     item.classList.add("u-enter")

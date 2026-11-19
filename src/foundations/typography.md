@@ -30,11 +30,11 @@ space rank what matters, instead of colour, boxes or bold. [Eight sizes](#eight-
 <%= render "examples/type_scale" %>
 
 Components name the three sizes they use most by their role:
-`--u-font-size-body`, `--u-font-size-small` and `--u-font-size-caption`, each
+`--text-body`, `--text-small` and `--text-caption`, each
 with a matching line height. Business apps set interface text in one size, 14,
 so body and small match and 12 is kept for badges and captions. They match
-`u-text-body`, `u-text-small` and `u-text-caption`. Titles of cards, banners,
-popovers and [heading groups](/components/heading-group/) use `--u-font-size-title`. Other headings use the
+`text-body`, `text-small` and `text-caption`. Titles of cards, banners,
+popovers and [heading groups](/components/heading-group/) use `--text-title`. Other headings use the
 sizes directly.
 
 Long reading text inside `u-prose` sits at 16 with a 1.6 line height, so
@@ -50,8 +50,8 @@ The product's name, standing alone and linked home, is a
 
 Every font, size and line height. Component CSS uses these through `var()`,
 never a raw number, and stylelint stops one getting in. Each size has a line
-height with the same number, so `--u-font-size-14` goes with
-`--u-line-height-14`.
+height with the same number, so `--text-200` goes with
+`--text-200--line-height`.
 
 <%= render "examples/type_tokens" %>
 

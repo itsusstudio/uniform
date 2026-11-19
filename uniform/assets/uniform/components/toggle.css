@@ -1,43 +1,42 @@
-@layer uniform.components {
+@layer components {
 .u-toggle {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--u-space-2);
-  min-height: var(--u-size-control);
-  padding: 0 var(--u-space-4);
-  border: 1px solid var(--u-color-text-default);
-  border-radius: var(--u-radius-pill);
+  gap: --spacing(2);
+  min-height: var(--spacing-control);
+  padding: 0 --spacing(4);
+  border: 1px solid var(--text-color-default);
+  border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
   font: inherit;
-  font-size: var(--u-font-size-small);
+  font-size: var(--text-small);
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
 }
 
 @media (hover: hover) {
-  .u-toggle:hover { background: var(--u-color-divider); }
+  .u-toggle:hover { background: var(--border-color-divider); }
 }
 
 .u-toggle:is([aria-pressed="true"], :has(> input:checked)) {
-  background: var(--u-color-text-default);
-  color: var(--u-color-bg-surface);
+  background: var(--text-color-default);
+  color: var(--background-color-surface);
 }
 
 .u-toggle > input {
   position: absolute;
   width: 1px;
   height: 1px;
-  margin: 0;
   opacity: 0;
   pointer-events: none;
 }
 
 .u-toggle:has(> input:focus-visible) {
-  outline: 2px solid var(--u-color-info);
+  outline: 2px solid var(--color-info);
   outline-offset: 2px;
 }
 
@@ -47,7 +46,7 @@
 }
 
 .u-toggle-icon {
-  width: var(--u-size-control);
+  width: var(--spacing-control);
   padding: 0;
 }
 
@@ -57,91 +56,90 @@
 }
 
 .u-toggle:is(:disabled, :has(> input:disabled)) {
-  border-color: var(--u-color-border-input);
+  border-color: var(--border-color-input);
   background: transparent;
-  color: var(--u-color-border-input);
+  color: var(--border-color-input);
   cursor: not-allowed;
 }
 
 .u-toggle:is([aria-pressed="true"]:disabled, :has(> input:checked:disabled)) {
-  background: var(--u-color-border-input);
-  color: var(--u-color-bg-surface);
+  background: var(--border-color-input);
+  color: var(--background-color-surface);
 }
 
 .u-toggle-group {
   display: inline-flex;
   max-width: 100%;
-  border: 1px solid var(--u-color-text-default);
-  border-radius: var(--u-radius-pill);
+  border: 1px solid var(--text-color-default);
+  border-radius: var(--radius-pill);
 }
 
 .u-toggle-group > label {
   position: relative;
   display: inline-flex;
   align-items: center;
-  min-height: calc(var(--u-size-control) - 2px);
-  padding: 0 var(--u-space-4);
-  color: var(--u-color-text-default);
-  font-size: var(--u-font-size-small);
+  min-height: calc(var(--spacing-control) - 2px);
+  padding: 0 --spacing(4);
+  color: var(--text-color-default);
+  font-size: var(--text-small);
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
 }
 
 @container (max-width: 29.9375rem) {
-  .u-toggle-group > label { padding-inline: var(--u-space-2); }
+  .u-toggle-group > label { padding-inline: --spacing(2); }
 }
 
-.u-toggle-group > label + label { border-inline-start: 1px solid var(--u-color-text-default); }
+.u-toggle-group > label + label { border-inline-start: 1px solid var(--text-color-default); }
 
 .u-toggle-group > label:first-child {
-  border-start-start-radius: var(--u-radius-pill);
-  border-end-start-radius: var(--u-radius-pill);
+  border-start-start-radius: var(--radius-pill);
+  border-end-start-radius: var(--radius-pill);
 }
 
 .u-toggle-group > label:last-child {
-  border-start-end-radius: var(--u-radius-pill);
-  border-end-end-radius: var(--u-radius-pill);
+  border-start-end-radius: var(--radius-pill);
+  border-end-end-radius: var(--radius-pill);
 }
 
 @media (hover: hover) {
-  .u-toggle-group > label:hover { background: var(--u-color-divider); }
+  .u-toggle-group > label:hover { background: var(--border-color-divider); }
 }
 
 .u-toggle-group > label > input {
   position: absolute;
   width: 1px;
   height: 1px;
-  margin: 0;
   opacity: 0;
   pointer-events: none;
 }
 
 .u-toggle-group > label:has(> input:checked) {
-  background: var(--u-color-text-default);
-  color: var(--u-color-bg-surface);
+  background: var(--text-color-default);
+  color: var(--background-color-surface);
 }
 
 .u-toggle-group > label:has(> input:focus-visible) {
   z-index: 1;
-  outline: 2px solid var(--u-color-info);
+  outline: 2px solid var(--color-info);
   outline-offset: 2px;
 }
 
 .u-toggle-group > label:has(> input:disabled) {
   background: transparent;
-  color: var(--u-color-border-input);
+  color: var(--border-color-input);
   cursor: not-allowed;
 }
 
 .u-toggle-group > label:has(> input:checked:disabled) {
-  background: var(--u-color-border-input);
-  color: var(--u-color-bg-surface);
+  background: var(--border-color-input);
+  color: var(--background-color-surface);
 }
 
-.u-toggle-group:not(:has(> label > input:enabled)) { border-color: var(--u-color-border-input); }
+.u-toggle-group:not(:has(> label > input:enabled)) { border-color: var(--border-color-input); }
 
-.u-toggle-group:not(:has(> label > input:enabled)) > label + label { border-color: var(--u-color-border-input); }
+.u-toggle-group:not(:has(> label > input:enabled)) > label + label { border-color: var(--border-color-input); }
 
 @media (forced-colors: active) {
   .u-toggle:is([aria-pressed="true"], :has(> input:checked)),

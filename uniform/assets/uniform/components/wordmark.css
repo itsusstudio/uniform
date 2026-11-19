@@ -1,0 +1,34 @@
+@layer components {
+.u-wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--spacing-target);
+  color: inherit;
+  font-size: var(--u-wordmark-font-size, var(--text-400));
+  line-height: var(--u-wordmark-line-height, var(--text-400--line-height));
+  text-decoration: none;
+}
+
+.u-wordmark-lg {
+  font-size: var(--text-500);
+  line-height: var(--text-500--line-height);
+}
+
+.u-wordmark-serif {
+  font-family: var(--font-wordmark-serif);
+  font-size: calc(var(--u-wordmark-font-size, var(--text-400)) * 1.2);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
+
+.u-wordmark-lg.u-wordmark-serif {
+  font-size: calc(var(--text-500) * 1.2);
+}
+
+.u-wordmark-sans {
+  font-family: var(--font-wordmark-sans);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+}

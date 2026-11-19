@@ -40,7 +40,7 @@ works. If people would look for it in Settings, it's a switch.
 
 ## States
 
-<div class="example-frame u-row u-gap-6">
+<div class="example-frame flex flex-wrap items-center gap-6">
 <u-toggle><button type="button" class="u-toggle" aria-pressed="false">Not pressed</button></u-toggle>
 <u-toggle><button type="button" class="u-toggle" aria-pressed="true">Pressed</button></u-toggle>
 <u-toggle><button type="button" class="u-toggle" aria-pressed="false" disabled>Disabled</button></u-toggle>
@@ -89,7 +89,7 @@ Listen for `toggle:change` to show only Dana's jobs or make the text bold.
 ## Without JavaScript
 
 <div class="example-frame">
-<form class="u-row u-gap-4" action="#without-javascript">
+<form class="flex flex-wrap items-center gap-4" action="#without-javascript">
 <label class="u-toggle"><input type="checkbox" name="mine" value="1"> Show only mine</label>
 <button type="submit" class="u-btn u-btn-outline">Apply</button>
 </form>

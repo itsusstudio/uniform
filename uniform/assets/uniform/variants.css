@@ -1,0 +1,11 @@
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-u-theme="light"]), :root:not([data-u-theme="light"]) *) {
+      @slot;
+    }
+  }
+
+  &:where([data-u-theme="dark"], [data-u-theme="dark"] *) {
+    @slot;
+  }
+}

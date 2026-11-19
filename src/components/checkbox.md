@@ -10,7 +10,7 @@ A checkbox turns one thing on or off, or picks several from a list. The whole la
 
 ## Example
 
-<div class="example-frame u-stack u-gap-6">
+<div class="example-frame flex flex-col gap-6">
 <label class="u-checkbox"><input type="checkbox" checked> Text the customer when the job is ready</label>
 <label class="u-checkbox"><input type="checkbox"> Keep me signed in<span class="u-checkbox-hint">On this device for 30 days.</span></label>
 <fieldset class="u-fieldset">
@@ -23,7 +23,7 @@ A checkbox turns one thing on or off, or picks several from a list. The whole la
 
 ## States
 
-<div class="example-frame u-row u-gap-6">
+<div class="example-frame flex flex-wrap items-center gap-6">
 <label class="u-checkbox"><input type="checkbox"> Off</label>
 <label class="u-checkbox"><input type="checkbox" checked> On</label>
 <label class="u-checkbox"><input type="checkbox" id="checkbox-mixed"> Some</label>
@@ -73,8 +73,8 @@ Put the input first, inside the label. A hint goes in `u-checkbox-hint`.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <fieldset class="u-fieldset"><legend>Paid by</legend>
@@ -84,7 +84,7 @@ Put the input first, inside the label. A hint goes in `u-checkbox-hint`.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>Checkboxes for a choice where only one answer can be true. That's a radio.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <label class="u-checkbox"><input type="checkbox" checked> Text the customer when the job is ready</label>

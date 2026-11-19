@@ -1,24 +1,21 @@
-@layer uniform.components {
+@layer components {
 :where(hgroup) {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-2);
-  margin: 0;
+  gap: --spacing(2);
 }
 
-:where(hgroup) > * { margin: 0; }
-
 :where(hgroup) > :where(h1, h2, h3, h4, h5, h6) {
-  font-size: var(--u-font-size-title);
+  font-size: var(--text-title);
   font-weight: 500;
-  line-height: var(--u-line-height-title);
+  line-height: var(--text-title--line-height);
   text-wrap: balance;
 }
 
 :where(hgroup) > :where(p) {
-  max-width: var(--u-max-width-prose);
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  max-width: var(--container-prose);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
   text-wrap: pretty;
 }
 }

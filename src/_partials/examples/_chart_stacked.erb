@@ -2,10 +2,10 @@
 <% loading_value = defined?(loading) && loading -%>
 <% statuses = [["danger", "Overdue", 2], ["info", "On the bench", 9], ["warning", "Waiting", 6], ["success", "Ready for pickup", 4]] -%>
 <% chart_json = ->(data) { raw(JSON.generate(data).gsub("</", "<\\/")) } -%>
-<section class="u-card<%= " u-span-#{span_value}" if span_value %>">
+<section class="u-card <%= grid_span(span_value) %>">
   <header>
     <h2>Open jobs by status</h2>
-    <a class="u-text-small" href="/jobs">All open jobs</a>
+    <a class="text-small" href="/jobs">All open jobs</a>
   </header>
   <div class="u-card-content">
 <% if loading_value -%>

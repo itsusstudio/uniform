@@ -15,7 +15,7 @@
   marked = ->(text) { query ? text.sub(/(#{Regexp.escape(query)})/i, "<mark>\\1</mark>") : text }
 -%>
 <u-data-grid id="<%= grid_id %>">
-  <div class="u-stack u-gap-4">
+  <div class="flex flex-col gap-4">
     <search class="u-table-controls">
       <form action="/jobs" method="get">
         <div class="u-input-prefixed">
@@ -44,8 +44,8 @@
           <thead>
             <tr>
               <th scope="col">
-                <div class="u-row u-gap-4">
-                  <label class="u-checkbox"><input type="checkbox"><span class="u-visually-hidden">Select all jobs</span></label>
+                <div class="flex flex-wrap items-center gap-4">
+                  <label class="u-checkbox"><input type="checkbox"><span class="sr-only">Select all jobs</span></label>
                   Job
                 </div>
               </th>
@@ -62,15 +62,15 @@
 <% jobs.each do |number, customer, work, status, due, jeweller, quote| -%>
             <tr>
               <th scope="row">
-                <div class="u-row u-gap-4">
-                  <label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="<%= number %>" form="<%= grid_id %>-bulk"<% if ticked.include?(number) %> checked<% end %>><span class="u-visually-hidden">Select job #<%= number %></span></label>
-                  <a class="u-text-data" href="/jobs/<%= number %>">#<%= number %></a>
+                <div class="flex flex-wrap items-center gap-4">
+                  <label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="<%= number %>" form="<%= grid_id %>-bulk"<% if ticked.include?(number) %> checked<% end %>><span class="sr-only">Select job #<%= number %></span></label>
+                  <a class="u-data" href="/jobs/<%= number %>">#<%= number %></a>
                 </div>
               </th>
               <td><%= raw marked.(customer) %></td>
               <td><%= work %></td>
               <td<% if number == "1042" %> class="u-data-grid-changed"<% end %>><span class="u-badge u-badge-<%= statuses[status] %>"><%= status %></span><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><select class="u-input" name="job[status]"><% statuses.each_key do |option| %><option<% if option == status %> selected<% end %>><%= option %></option><% end %></select></form></template></td>
-              <td class="u-text-data"><%= short_date.(due) %><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><input class="u-input u-text-data" type="date" name="job[due_on]" value="<%= due %>"></form></template></td>
+              <td class="u-data"><%= short_date.(due) %><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><input class="u-input u-data" type="date" name="job[due_on]" value="<%= due %>"></form></template></td>
               <td><%= jeweller %></td>
               <td class="u-table-num"><%= quote %></td>
               <td>

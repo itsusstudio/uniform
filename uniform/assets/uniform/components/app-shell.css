@@ -1,38 +1,38 @@
-@layer uniform.components {
+@layer components {
 :where(.u-app-shell, :not(.u-app-shell) > u-sidebar) {
-  --u-nav-bg: var(--u-color-bg-ink);
-  --u-nav-text: var(--u-color-text-on-ink);
-  --u-nav-link: var(--u-color-text-on-ink);
-  --u-nav-label: var(--u-color-text-muted-on-ink);
-  --u-nav-name: var(--u-color-info-on-ink);
-  --u-nav-line: var(--u-color-divider-on-ink);
-  --u-nav-edge: var(--u-color-text-muted-on-ink);
-  --u-nav-current-bg: var(--u-color-text-on-ink);
-  --u-nav-current-text: var(--u-color-bg-ink);
-  --u-nav-focus: var(--u-color-info-on-ink);
+  --u-nav-bg: var(--background-color-ink);
+  --u-nav-text: var(--text-color-on-ink);
+  --u-nav-link: var(--text-color-on-ink);
+  --u-nav-label: var(--text-color-muted-on-ink);
+  --u-nav-name: var(--color-info-on-ink);
+  --u-nav-line: var(--border-color-divider-on-ink);
+  --u-nav-edge: var(--text-color-muted-on-ink);
+  --u-nav-current-bg: var(--text-color-on-ink);
+  --u-nav-current-text: var(--background-color-ink);
+  --u-nav-focus: var(--color-info-on-ink);
   --u-nav-hover: color-mix(in srgb, var(--u-nav-text) 3%, transparent);
   --u-nav-current: color-mix(in srgb, var(--u-nav-text) 5%, transparent);
 }
 
 .u-app-shell-paper {
-  --u-nav-bg: var(--u-color-bg-paper);
-  --u-nav-text: var(--u-color-text-default);
-  --u-nav-link: var(--u-color-text-default);
-  --u-nav-label: var(--u-color-text-muted);
-  --u-nav-name: var(--u-color-link);
-  --u-nav-line: var(--u-color-divider);
-  --u-nav-edge: var(--u-color-text-default);
-  --u-nav-current-bg: var(--u-color-text-default);
-  --u-nav-current-text: var(--u-color-bg-surface);
-  --u-nav-focus: var(--u-color-info);
+  --u-nav-bg: var(--background-color-paper);
+  --u-nav-text: var(--text-color-default);
+  --u-nav-link: var(--text-color-default);
+  --u-nav-label: var(--text-color-muted);
+  --u-nav-name: var(--text-color-link);
+  --u-nav-line: var(--border-color-divider);
+  --u-nav-edge: var(--text-color-default);
+  --u-nav-current-bg: var(--text-color-default);
+  --u-nav-current-text: var(--background-color-surface);
+  --u-nav-focus: var(--color-info);
 }
 
 .u-app-shell {
   display: grid;
-  grid-template-columns: var(--u-width-sidebar) minmax(0, 1fr);
+  grid-template-columns: var(--container-sidebar) minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto;
   min-height: 100dvh;
-  background: var(--u-color-bg-page);
+  background: var(--background-color-page);
 }
 
 .u-app-shell > * { min-width: 0; }
@@ -49,20 +49,19 @@
   width: 24px;
   height: 24px;
   background: currentcolor;
-  mask: url("./../icons/menu.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/menu.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
 u-sidebar {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-6);
+  gap: --spacing(6);
   position: sticky;
   inset: 0 auto auto;
   width: auto;
   height: 100dvh;
-  margin: 0;
-  padding: var(--u-space-4) var(--u-space-2);
+  padding: --spacing(4) --spacing(2);
   overflow: visible;
   border: 0;
   background: var(--u-nav-bg);
@@ -94,11 +93,11 @@ u-sidebar > div:first-child {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--u-space-2);
+  gap: --spacing(2);
   color: var(--u-nav-name);
 }
 
-u-sidebar > div:first-child > .u-wordmark { padding-inline: var(--u-space-2); }
+u-sidebar > div:first-child > .u-wordmark { padding-inline: --spacing(2); }
 
 u-sidebar > div:first-child > button[aria-expanded] {
   display: inline-grid;
@@ -108,7 +107,7 @@ u-sidebar > div:first-child > button[aria-expanded] {
   height: 28px;
   padding: 0;
   border: 0;
-  border-radius: var(--u-radius-default);
+  border-radius: var(--radius-item);
   background: transparent;
   color: var(--u-nav-label);
   cursor: pointer;
@@ -119,7 +118,7 @@ u-sidebar > div:first-child > button[aria-expanded]::before {
   width: 16px;
   height: 16px;
   background: currentcolor;
-  mask: url("./../icons/panel-left.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/panel-left.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
@@ -133,18 +132,18 @@ u-sidebar > div:first-child > button[aria-expanded]:hover {
 u-sidebar > div:last-child:not(:first-child) {
   position: sticky;
   bottom: 0;
-  margin-inline: calc(-1 * var(--u-space-2));
-  padding: var(--u-space-2) var(--u-space-2) var(--u-space-1);
+  margin-inline: calc(-1 * --spacing(2));
+  padding: --spacing(2) --spacing(2) --spacing(1);
   background: var(--u-nav-bg);
 }
 
 u-sidebar > div:last-child > ul:has(~ button) {
-  margin: 0 calc(-1 * var(--u-space-2)) var(--u-space-2);
-  padding: 0 var(--u-space-2) var(--u-space-2);
+  margin: 0 calc(-1 * --spacing(2)) --spacing(2);
+  padding: 0 --spacing(2) --spacing(2);
   border-bottom: 1px solid var(--u-nav-line);
 }
 
-u-sidebar > div:last-child:not(:first-child) > :not(ul, button, [popover]) { padding-inline: var(--u-space-2); }
+u-sidebar > div:last-child:not(:first-child) > :not(ul, button, [popover]) { padding-inline: --spacing(2); }
 
 u-sidebar legend { color: var(--u-nav-label); }
 
@@ -182,16 +181,16 @@ u-sidebar .u-toggle-group > label:has(> input:checked) {
 u-sidebar > div:last-child > button {
   display: flex;
   align-items: center;
-  gap: var(--u-space-2);
+  gap: --spacing(2);
   width: 100%;
-  min-height: var(--u-size-target);
-  padding: var(--u-space-2);
+  min-height: var(--spacing-target);
+  padding: --spacing(2);
   border: 0;
-  border-radius: var(--u-radius-default);
+  border-radius: var(--radius-item);
   background: transparent;
   color: var(--u-nav-text);
   font: inherit;
-  font-size: var(--u-font-size-small);
+  font-size: var(--text-small);
   text-align: start;
   cursor: pointer;
 }
@@ -208,7 +207,7 @@ u-sidebar > div:last-child > button > span:first-child {
   border-radius: 50%;
   background: var(--u-nav-current-bg);
   color: var(--u-nav-current-text);
-  font-size: var(--u-font-size-caption);
+  font-size: var(--text-caption);
   font-weight: 500;
 }
 
@@ -226,22 +225,20 @@ u-sidebar > div:last-child > button > span:first-child + span > * {
 
 u-sidebar > div:last-child > button > span:first-child + span > small {
   color: var(--u-nav-label);
-  font-size: var(--u-font-size-caption);
-  line-height: var(--u-line-height-caption);
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
 }
 
-u-sidebar > div:last-child :is(button, li > button) + .u-menu[popover] { min-width: calc(var(--u-width-sidebar) - var(--u-space-4)); }
+u-sidebar > div:last-child :is(button, li > button) + .u-menu[popover] { min-width: calc(var(--container-sidebar) - --spacing(4)); }
 
-u-sidebar > div:last-child :is(button, li > button) + .u-menu[popover] > :is(a, button, form > button) { min-height: var(--u-size-control); }
-
-u-sidebar > div:last-child form { margin: 0; }
+u-sidebar > div:last-child :is(button, li > button) + .u-menu[popover] > :is(a, button, form > button) { min-height: var(--spacing-control); }
 
 u-sidebar li > button {
   width: 100%;
   border: 0;
   background: transparent;
   font: inherit;
-  font-size: var(--u-font-size-small);
+  font-size: var(--text-small);
   text-align: left;
   cursor: pointer;
 }
@@ -254,45 +251,45 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 @supports (position-area: top) {
   u-sidebar > div:last-child > button + .u-menu[popover],
   u-sidebar > div:last-child li > button + .u-menu[popover] {
-    margin: 0 0 var(--u-space-2);
+    margin: 0 0 --spacing(2);
     position-area: top span-right;
     position-try-fallbacks: flip-block;
   }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button + .u-menu[popover],
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child li > button + .u-menu[popover] {
-    margin: 0 0 0 var(--u-space-2);
+    margin: 0 0 0 --spacing(2);
     position-area: right span-top;
   }
 }
 
 .u-app-shell > main {
-  padding-block: var(--u-space-12) var(--u-space-24);
-  background: var(--u-color-bg-page);
+  padding-block: --spacing(12) --spacing(24);
+  background: var(--background-color-page);
 }
 
 .u-app-shell > main > .u-banner-full {
   position: sticky;
   top: 0;
   z-index: 1;
-  margin-block: calc(var(--u-space-12) * -1) var(--u-space-12);
+  margin-block: calc(--spacing(12) * -1) --spacing(12);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-u-theme="light"]) .u-app-shell:not(.u-app-shell-paper) > u-sidebar {
     border-inline-end: 1px solid var(--u-nav-line);
-    --u-nav-current-bg: color-mix(in srgb, var(--u-color-text-on-ink) 10%, var(--u-color-bg-ink));
-    --u-nav-current-text: var(--u-color-text-on-ink);
+    --u-nav-current-bg: color-mix(in srgb, var(--text-color-on-ink) 10%, var(--background-color-ink));
+    --u-nav-current-text: var(--text-color-on-ink);
   }
 }
 
 :root[data-u-theme="dark"] .u-app-shell:not(.u-app-shell-paper) > u-sidebar {
   border-inline-end: 1px solid var(--u-nav-line);
-  --u-nav-current-bg: color-mix(in srgb, var(--u-color-text-on-ink) 10%, var(--u-color-bg-ink));
-  --u-nav-current-text: var(--u-color-text-on-ink);
+  --u-nav-current-bg: color-mix(in srgb, var(--text-color-on-ink) 10%, var(--background-color-ink));
+  --u-nav-current-text: var(--text-color-on-ink);
 }
 
-@media (min-width: 64em) {
+@media (width >= --theme(--breakpoint-lg)) {
   .u-app-shell > u-sidebar {
     grid-column: 1;
     grid-row: 1 / -1;
@@ -307,10 +304,10 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     display: block;
     position: absolute;
     inset-block: 0;
-    inset-inline-end: calc(-1 * var(--u-space-2));
+    inset-inline-end: calc(-1 * --spacing(2));
     z-index: 1;
-    width: var(--u-space-4);
-    padding: 0 calc(var(--u-space-2) - 1px);
+    width: --spacing(4);
+    padding: 0 calc(--spacing(2) - 1px);
     border: 0;
     background: transparent;
     background-clip: content-box;
@@ -323,7 +320,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) {
     align-items: center;
-    padding-inline: var(--u-space-2);
+    padding-inline: --spacing(2);
   }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > .u-nav { overflow: visible; }
@@ -335,7 +332,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child > .u-wordmark {
     justify-content: flex-start;
-    width: var(--u-size-control);
+    width: var(--spacing-control);
     padding: 0;
     overflow: hidden;
     white-space: nowrap;
@@ -348,15 +345,15 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     place-items: center;
     width: 24px;
     height: 24px;
-    margin-inline: calc((var(--u-size-control) - 24px) / 2);
-    border-radius: var(--u-radius-default);
+    margin-inline: calc((var(--spacing-control) - 24px) / 2);
+    border-radius: var(--radius-item);
     background: var(--u-nav-name);
     color: var(--u-nav-bg);
-    font-size: var(--u-font-size-body);
+    font-size: var(--text-body);
     line-height: 1;
   }
 
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child > .u-wordmark-serif::before { font-size: calc(var(--u-font-size-body) * 1.25); }
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child > .u-wordmark-serif::before { font-size: calc(var(--text-body) * 1.25); }
 
   u-sidebar > div:first-child > button[aria-expanded="false"] {
     position: absolute;
@@ -371,11 +368,11 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child:not(:first-child) {
     align-self: stretch;
-    margin-inline: calc(-1 * var(--u-space-2));
-    padding-inline: var(--u-space-2);
+    margin-inline: calc(-1 * --spacing(2));
+    padding-inline: --spacing(2);
   }
 
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav { gap: var(--u-space-2); }
+  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav { gap: --spacing(2); }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-nav > details > ul { display: none; }
 
@@ -384,22 +381,22 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary) {
     position: relative;
     justify-content: center;
-    width: var(--u-size-control);
-    min-height: var(--u-size-control);
+    width: var(--spacing-control);
+    min-height: var(--spacing-control);
     padding-inline: 0;
-    border-radius: var(--u-radius-default);
+    border-radius: var(--radius-item);
   }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary) > span {
     position: absolute;
     top: 50%;
-    inset-inline-start: calc(100% + var(--u-space-2));
+    inset-inline-start: calc(100% + --spacing(2));
     z-index: 100;
-    padding: var(--u-space-1) var(--u-space-2);
+    padding: --spacing(1) --spacing(2);
     background: var(--u-nav-current-bg);
     color: var(--u-nav-current-text);
-    box-shadow: var(--u-shadow-float);
-    font-size: var(--u-font-size-caption);
+    box-shadow: var(--shadow-float);
+    font-size: var(--text-caption);
     white-space: nowrap;
     clip-path: inset(50%);
     translate: 0 -50%;
@@ -417,7 +414,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button > :not(:first-child) { display: none; }
 }
 
-@media (max-width: 63.9375em) {
+@media (width < --theme(--breakpoint-lg)) {
   .u-app-shell > * { grid-column: 1 / -1; }
 
   .u-app-shell > header {
@@ -427,14 +424,14 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     z-index: 1;
     align-items: center;
     justify-content: space-between;
-    gap: var(--u-space-4);
+    gap: --spacing(4);
     padding:
-      calc(var(--u-space-2) + env(safe-area-inset-top))
-      calc(var(--u-page-margin) - var(--u-space-2) + env(safe-area-inset-right))
-      var(--u-space-2)
-      calc(var(--u-page-margin) - var(--u-space-2) + env(safe-area-inset-left));
-    border-bottom: 1px solid var(--u-color-divider);
-    background: var(--u-color-bg-paper);
+      calc(--spacing(2) + env(safe-area-inset-top))
+      calc(var(--spacing-edge) - --spacing(2) + env(safe-area-inset-right))
+      --spacing(2)
+      calc(var(--spacing-edge) - --spacing(2) + env(safe-area-inset-left));
+    border-bottom: 1px solid var(--border-color-divider);
+    background: var(--background-color-paper);
   }
 
   .u-app-shell > u-sidebar {
@@ -442,15 +439,15 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     inset: 0 auto 0 0;
     width: min(85%, 20rem);
     height: auto;
-    padding-top: calc(var(--u-space-6) + env(safe-area-inset-top));
+    padding-top: calc(--spacing(6) + env(safe-area-inset-top));
     padding-inline:
-      calc(var(--u-page-margin) - var(--u-space-2) + env(safe-area-inset-left))
-      calc(var(--u-page-margin) - var(--u-space-2));
+      calc(var(--spacing-edge) - --spacing(2) + env(safe-area-inset-left))
+      calc(var(--spacing-edge) - --spacing(2));
     translate: -100% 0;
     transition:
-      translate var(--u-motion-exit) var(--u-motion-ease),
-      display var(--u-motion-exit),
-      overlay var(--u-motion-exit);
+      translate var(--u-duration-exit) var(--ease-standard),
+      display var(--u-duration-exit),
+      overlay var(--u-duration-exit);
     transition-behavior: allow-discrete;
   }
 
@@ -458,7 +455,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 
   .u-app-shell > u-sidebar:popover-open {
     translate: 0 0;
-    transition-duration: var(--u-motion-enter);
+    transition-duration: var(--u-duration-enter);
   }
 
   @starting-style {
@@ -466,18 +463,18 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   }
 
   .u-app-shell > u-sidebar::backdrop {
-    background: var(--u-color-backdrop);
+    background: var(--background-color-backdrop);
     opacity: 0;
     transition:
-      opacity var(--u-motion-exit) var(--u-motion-ease),
-      display var(--u-motion-exit),
-      overlay var(--u-motion-exit);
+      opacity var(--u-duration-exit) var(--ease-standard),
+      display var(--u-duration-exit),
+      overlay var(--u-duration-exit);
     transition-behavior: allow-discrete;
   }
 
   .u-app-shell > u-sidebar:popover-open::backdrop {
     opacity: 1;
-    transition-duration: var(--u-motion-enter);
+    transition-duration: var(--u-duration-enter);
   }
 
   @starting-style {
@@ -488,28 +485,27 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     .u-app-shell > u-sidebar:is(*, :popover-open) { translate: 0 0; }
   }
 
-  .u-app-shell > u-sidebar:not(:has(> div:last-child:not(:first-child))) { padding-bottom: calc(var(--u-space-6) + env(safe-area-inset-bottom)); }
+  .u-app-shell > u-sidebar:not(:has(> div:last-child:not(:first-child))) { padding-bottom: calc(--spacing(6) + env(safe-area-inset-bottom)); }
 
   .u-app-shell > u-sidebar > div:last-child:not(:first-child) {
     margin-inline:
-      calc(var(--u-space-2) - var(--u-page-margin) - env(safe-area-inset-left))
-      calc(var(--u-space-2) - var(--u-page-margin));
+      calc(--spacing(2) - var(--spacing-edge) - env(safe-area-inset-left))
+      calc(--spacing(2) - var(--spacing-edge));
     padding-inline:
-      calc(var(--u-page-margin) - var(--u-space-2) + env(safe-area-inset-left))
-      calc(var(--u-page-margin) - var(--u-space-2));
-    padding-bottom: calc(var(--u-space-6) + env(safe-area-inset-bottom));
+      calc(var(--spacing-edge) - --spacing(2) + env(safe-area-inset-left))
+      calc(var(--spacing-edge) - --spacing(2));
+    padding-bottom: calc(--spacing(6) + env(safe-area-inset-bottom));
   }
 
-
-  .u-app-shell > main { padding-block: var(--u-space-6) calc(var(--u-space-12) + env(safe-area-inset-bottom)); }
+  .u-app-shell > main { padding-block: --spacing(6) calc(--spacing(12) + env(safe-area-inset-bottom)); }
 
   .u-app-shell > main > .u-banner-full {
-    top: calc(var(--u-size-control) + var(--u-space-2) * 2 + 1px + env(safe-area-inset-top));
-    margin-block: calc(var(--u-space-6) * -1) var(--u-space-6);
+    top: calc(var(--spacing-control) + --spacing(2) * 2 + 1px + env(safe-area-inset-top));
+    margin-block: calc(--spacing(6) * -1) --spacing(6);
   }
 
   /* The page scrolls on the root, so each target keeps clear of the sticky bars instead. */
-  .u-app-shell > main * { scroll-margin-block-start: calc(var(--u-size-control) + var(--u-space-2) * 2 + 1px + env(safe-area-inset-top)); }
+  .u-app-shell > main * { scroll-margin-block-start: calc(var(--spacing-control) + --spacing(2) * 2 + 1px + env(safe-area-inset-top)); }
 }
 
 }

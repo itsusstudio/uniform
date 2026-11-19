@@ -12,7 +12,7 @@ email addresses and notes use the same box, with one small addition each.
 <%= render "example_heading" %>
 
 <div class="example-frame">
-<div class="u-max-width-form u-form">
+<div class="max-w-form u-form">
 <div class="u-field">
 <label for="tf-name">Customer name</label>
 <input class="u-input" id="tf-name" value="Ana Reyes" autocomplete="name" placeholder=" ">
@@ -26,7 +26,7 @@ email addresses and notes use the same box, with one small addition each.
 <label for="tf-quote">Quote</label>
 <div class="u-input-prefixed">
 <span>$</span>
-<input class="u-input u-text-data" id="tf-quote" inputmode="decimal" value="85.00" placeholder=" ">
+<input class="u-input u-data" id="tf-quote" inputmode="decimal" value="85.00" placeholder=" ">
 </div>
 </div>
 <div class="u-field">
@@ -36,9 +36,8 @@ email addresses and notes use the same box, with one small addition each.
 </div>
 </div>
 
-Passwords, phone numbers and one-time codes have their own pages:
-[Password](/components/input-password/), [Phone number](/components/input-phone/)
-and [Code input](/components/input-code/).
+Phone numbers and one-time codes have their own pages:
+[Phone number](/components/input-phone/) and [Code input](/components/input-code/).
 
 In a [consumer](/start/audience/) product, the label sits inside the box and
 moves to the top when you type or tab in. Give every text input `placeholder=" "`
@@ -53,7 +52,7 @@ Put fields in a [`u-form`](/components/form/).
 ## States
 
 <div class="example-frame">
-<div class="u-max-width-form u-form">
+<div class="max-w-form u-form">
 <div class="u-field">
 <label for="tf-empty">Customer email address</label>
 <input class="u-input" id="tf-empty" type="email" placeholder="name@example.com">
@@ -65,7 +64,7 @@ Put fields in a [`u-form`](/components/form/).
 </div>
 <div class="u-field">
 <label for="tf-disabled">Job number</label>
-<input class="u-input u-text-data" id="tf-disabled" value="#1042" disabled aria-describedby="tf-disabled-hint" placeholder=" ">
+<input class="u-input u-data" id="tf-disabled" value="#1042" disabled aria-describedby="tf-disabled-hint" placeholder=" ">
 <small id="tf-disabled-hint">Set when the job is created.</small>
 </div>
 </div>
@@ -83,13 +82,13 @@ Disabled
 ## Money
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/text_field_money" %>
 </div>
 </div>
 
 Wrap the input and a `<span>` holding the `$` in `u-input-prefixed`, and add
-`u-text-data` to the input so the amount is in mono.
+`u-data` to the input so the amount is in mono.
 
 ```html
 <%= raw render("examples/text_field_money").strip %>
@@ -100,7 +99,7 @@ Wrap the input and a `<span>` holding the `$` in `u-input-prefixed`, and add
   <%%= form.label :quote, t(".quote") %>
   <div class="u-input-prefixed">
     <span><%%= t("number.currency.format.unit") %></span>
-    <%%= form.text_field :quote, class: "u-input u-text-data", inputmode: "decimal", autocomplete: "off",
+    <%%= form.text_field :quote, class: "u-input u-data", inputmode: "decimal", autocomplete: "off",
       value: number_with_precision(form.object.quote, precision: 2),
       aria: { describedby: form.field_id(:quote, :hint) }, placeholder: " " %>
   </div>
@@ -116,7 +115,7 @@ server turn it into `85.00` or say what to fix.
 ## Search
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/text_field_search" %>
 </div>
 </div>
@@ -151,7 +150,7 @@ like the filter chips on a [data table](/patterns/data-table/).
 ## Email address
 
 <div class="example-frame">
-<div class="u-max-width-form u-form">
+<div class="max-w-form u-form">
 <%= render "examples/text_field_email" %>
 <div class="u-field">
 <label for="tf-email-error">Email address</label>
@@ -190,7 +189,7 @@ with `aria-invalid="true"` on the input and a `u-error` saying what to change.
 ## Text area
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/text_field_textarea" %>
 </div>
 </div>
@@ -238,7 +237,7 @@ and `{max}` where the numbers go.
   <label for="quote">Quote</label>
   <div class="u-input-prefixed">
     <span>$</span>
-    <input class="u-input u-text-data" id="quote" inputmode="decimal" placeholder=" ">
+    <input class="u-input u-data" id="quote" inputmode="decimal" placeholder=" ">
   </div>
 </div>
 
@@ -260,7 +259,7 @@ and `{max}` where the numbers go.
   <%%= form.label :quote, t(".quote") %>
   <div class="u-input-prefixed">
     <span><%%= t("number.currency.format.unit") %></span>
-    <%%= form.text_field :quote, class: "u-input u-text-data", inputmode: "decimal", placeholder: " " %>
+    <%%= form.text_field :quote, class: "u-input u-data", inputmode: "decimal", placeholder: " " %>
   </div>
 </div>
 
@@ -276,12 +275,12 @@ and `{max}` where the numbers go.
 
 <%= render "classes", classes_page: "/components/text-field/" %>
 
-Add `u-text-data` to an input that holds figures, codes or dates.
+Add `u-data` to an input that holds figures, codes or dates.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="u-field">
@@ -290,7 +289,7 @@ Add `u-text-data` to an input that holds figures, codes or dates.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A placeholder in place of a label. It disappears the moment someone types, and so does the question.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="u-field">
@@ -300,23 +299,23 @@ Add `u-text-data` to an input that holds figures, codes or dates.
 </div>
 <figcaption class="example-caption example-caption-do"><span>A label above the box that stays put while you type.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="u-field">
 <label for="tf-dont-due">Due date</label>
-<input class="u-input u-text-data" id="tf-dont-due" value="Nov 31" aria-invalid="true" aria-describedby="tf-dont-due-error" placeholder=" ">
+<input class="u-input u-data" id="tf-dont-due" value="Nov 31" aria-invalid="true" aria-describedby="tf-dont-due-error" placeholder=" ">
 <p class="u-error" id="tf-dont-due-error">Invalid input.</p>
 </div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>An error that only says something is wrong. The customer is waiting and you still don’t know what to type.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="u-field">
 <label for="tf-do-due">Due date</label>
-<input class="u-input u-text-data" id="tf-do-due" value="Nov 31" aria-invalid="true" aria-describedby="tf-do-due-error" placeholder=" ">
+<input class="u-input u-data" id="tf-do-due" value="Nov 31" aria-invalid="true" aria-describedby="tf-do-due-error" placeholder=" ">
 <p class="u-error" id="tf-do-due-error">November has 30 days. Pick a date up to Nov 30.</p>
 </div>
 </div>

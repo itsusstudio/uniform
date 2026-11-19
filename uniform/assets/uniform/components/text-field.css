@@ -1,43 +1,40 @@
-@layer uniform.components {
+@layer components {
 .u-field {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-2);
+  gap: --spacing(2);
   min-width: 0;
 }
 
-.u-field > * { margin: 0; }
-
 :is(.u-field > :is(label, p, span):first-child, .u-fieldset > legend) {
-  color: var(--u-color-text-default);
-  font-size: var(--u-font-size-small);
+  color: var(--text-color-default);
+  font-size: var(--text-small);
   font-weight: 500;
-  line-height: var(--u-line-height-small);
+  line-height: var(--text-small--line-height);
 }
 
 :is(.u-field > :is(label, p, span):first-child, .u-fieldset > legend) > span {
-  color: var(--u-color-text-muted);
+  color: var(--text-color-muted);
   font-weight: 400;
 }
 
 .u-input {
   display: block;
   width: 100%;
-  height: var(--u-size-control);
-  margin: 0;
-  padding: 0 var(--u-space-2);
-  border: 1px solid var(--u-color-border-input);
-  border-radius: var(--u-radius-surface);
-  background: var(--u-color-bg-surface);
-  color: var(--u-color-text-default);
+  height: var(--spacing-control);
+  padding: 0 --spacing(2);
+  border: 1px solid var(--border-color-input);
+  border-radius: var(--radius-surface);
+  background: var(--background-color-surface);
+  color: var(--text-color-default);
   font: inherit;
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
   appearance: none;
 }
 
-@media (pointer: coarse) and (max-width: 40em) {
-  .u-input { font-size: max(16px, var(--u-font-size-small)); }
+@media (pointer: coarse) and (width < --theme(--breakpoint-sm)) {
+  .u-input { font-size: max(16px, var(--text-small)); }
 }
 
 .u-input[type="tel"] { font-variant-numeric: tabular-nums; }
@@ -50,29 +47,29 @@
 .u-input::-webkit-date-and-time-value { text-align: start; }
 
 .u-input::placeholder {
-  color: var(--u-color-text-muted);
+  color: var(--text-color-muted);
   opacity: 1;
 }
 
 textarea.u-input {
   height: auto;
-  min-height: calc(var(--u-input-rows, 1) * 1lh + 2 * var(--u-space-2) + 2px);
-  max-height: calc(var(--u-size-control) * 8);
-  padding-block: var(--u-space-2);
+  min-height: calc(var(--u-input-rows, 1) * 1lh + 2 * --spacing(2) + 2px);
+  max-height: calc(var(--spacing-control) * 8);
+  padding-block: --spacing(2);
   resize: vertical;
   field-sizing: content;
 }
 
 .u-input[aria-invalid="true"] {
-  outline: 2px solid var(--u-color-danger);
+  outline: 2px solid var(--color-danger);
   outline-offset: 2px;
 }
 
-.u-input[aria-invalid="true"]:focus-visible { outline-color: var(--u-color-info); }
+.u-input[aria-invalid="true"]:focus-visible { outline-color: var(--color-info); }
 
 .u-input:disabled {
-  background: var(--u-color-divider);
-  color: var(--u-color-border-input);
+  background: var(--border-color-divider);
+  color: var(--border-color-input);
   -webkit-text-fill-color: currentcolor;
   opacity: 1;
   cursor: not-allowed;
@@ -80,7 +77,6 @@ textarea.u-input {
 
 .u-input-prefixed,
 u-combobox,
-u-input-password,
 u-input-code,
 u-input-colour {
   position: relative;
@@ -93,14 +89,14 @@ u-input-colour {
   inset-inline-start: 0;
   display: flex;
   align-items: center;
-  padding-inline-start: var(--u-space-2);
-  color: var(--u-color-text-muted);
-  font-family: var(--u-font-mono);
-  font-size: var(--u-font-size-small);
+  padding-inline-start: --spacing(2);
+  color: var(--text-color-muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
   pointer-events: none;
 }
 
-.u-input-prefixed > .u-input { padding-inline-start: var(--u-space-6); }
+.u-input-prefixed > .u-input { padding-inline-start: --spacing(6); }
 
 .u-input-prefixed:has(> [type="search"])::before,
 u-combobox::after {
@@ -114,29 +110,29 @@ u-combobox::after {
 
 .u-input-prefixed:has(> [type="search"])::before {
   top: 50%;
-  inset-inline-start: var(--u-space-2);
-  background: var(--u-color-text-muted);
-  mask: url("./../icons/search.svg") center / contain no-repeat;
+  inset-inline-start: --spacing(2);
+  background: var(--text-color-muted);
+  mask: url("/uniform/icons/search.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
-.u-input-prefixed > [type="search"] { padding-inline-start: calc(var(--u-space-2) + 16px + var(--u-space-2)); }
+.u-input-prefixed > [type="search"] { padding-inline-start: calc(--spacing(2) + 16px + --spacing(2)); }
 
 u-combobox::after {
-  top: calc(var(--u-size-control) / 2);
-  inset-inline-end: var(--u-space-2);
-  background: var(--u-color-text-default);
-  mask: url("./../icons/chevron-down.svg") center / contain no-repeat;
+  top: calc(var(--spacing-control) / 2);
+  inset-inline-end: --spacing(2);
+  background: var(--text-color-default);
+  mask: url("/uniform/icons/chevron-down.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
-u-combobox:has(> .u-input:disabled)::after { background: var(--u-color-border-input); }
+u-combobox:has(> .u-input:disabled)::after { background: var(--border-color-input); }
 
 :is(.u-field, .u-dropzone) > small {
   display: block;
-  color: var(--u-color-text-muted);
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  color: var(--text-color-muted);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
 }
 
 :is(.u-field, .u-fieldset):not(u-character-count *):has(> .u-error) > small { display: none; }
@@ -144,11 +140,11 @@ u-combobox:has(> .u-input:disabled)::after { background: var(--u-color-border-in
 .u-error {
   display: grid;
   grid-template-columns: 8px minmax(0, 1fr);
-  gap: var(--u-space-2);
+  gap: --spacing(2);
   align-items: baseline;
-  color: var(--u-color-danger);
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  color: var(--color-danger);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
 }
 
 .u-error::before {
@@ -156,7 +152,7 @@ u-combobox:has(> .u-input:disabled)::after { background: var(--u-color-border-in
   content: "" / "Error:";
   width: 8px;
   height: 8px;
-  background: var(--u-color-danger);
+  background: var(--color-danger);
 }
 
 .u-fieldset {
@@ -168,7 +164,7 @@ u-combobox:has(> .u-input:disabled)::after { background: var(--u-color-border-in
 }
 
 .u-fieldset > legend {
-  margin-bottom: var(--u-space-1);
+  margin-bottom: --spacing(1);
   padding: 0;
 }
 
@@ -181,52 +177,52 @@ u-character-count .u-field > small:last-of-type { font-variant-numeric: tabular-
 
 [data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) > :is(label, p, span):first-child {
   position: absolute;
-  top: var(--u-space-2);
-  inset-inline-start: calc(var(--u-space-4) + 1px);
+  top: --spacing(2);
+  inset-inline-start: calc(--spacing(4) + 1px);
   z-index: 1;
-  color: var(--u-color-text-muted);
-  font-size: var(--u-font-size-caption);
-  line-height: var(--u-line-height-caption);
+  color: var(--text-color-muted);
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
   pointer-events: none;
 }
 
-[data-u-audience="consumer"] .u-input { padding-inline: var(--u-space-4); }
+[data-u-audience="consumer"] .u-input { padding-inline: --spacing(4); }
 
 [data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) .u-input {
-  height: var(--u-size-field);
-  padding-top: var(--u-space-6);
+  height: var(--spacing-field);
+  padding-top: --spacing(6);
 }
 
 [data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) textarea.u-input {
   height: auto;
-  min-height: calc(var(--u-size-field) * 2);
-  padding-bottom: var(--u-space-2);
+  min-height: calc(var(--spacing-field) * 2);
+  padding-bottom: --spacing(2);
 }
 
-[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) .u-input-prefixed > span { padding-top: var(--u-space-6); }
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) .u-input-prefixed > span { padding-top: --spacing(6); }
 
-[data-u-audience="consumer"] .u-input-prefixed > span { padding-inline-start: var(--u-space-4); }
+[data-u-audience="consumer"] .u-input-prefixed > span { padding-inline-start: --spacing(4); }
 
-[data-u-audience="consumer"] .u-input-prefixed > .u-input { padding-inline-start: calc(var(--u-space-4) + var(--u-space-4)); }
+[data-u-audience="consumer"] .u-input-prefixed > .u-input { padding-inline-start: calc(--spacing(4) + --spacing(4)); }
 
-[data-u-audience="consumer"] .u-input-prefixed > [type="search"] { padding-inline-start: calc(var(--u-space-4) + 16px + var(--u-space-2)); }
+[data-u-audience="consumer"] .u-input-prefixed > [type="search"] { padding-inline-start: calc(--spacing(4) + 16px + --spacing(2)); }
 
-[data-u-audience="consumer"] .u-input-prefixed:has(> [type="search"])::before { inset-inline-start: var(--u-space-4); }
+[data-u-audience="consumer"] .u-input-prefixed:has(> [type="search"])::before { inset-inline-start: --spacing(4); }
 
-[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) .u-input-prefixed:has(> [type="search"])::before { top: calc(50% + var(--u-space-6) / 2); }
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) .u-input-prefixed:has(> [type="search"])::before { top: calc(50% + --spacing(6) / 2); }
 
-[data-u-audience="consumer"] u-combobox::after { inset-inline-end: var(--u-space-4); }
+[data-u-audience="consumer"] u-combobox::after { inset-inline-end: --spacing(4); }
 
-[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) u-combobox::after { top: calc(var(--u-size-field) / 2 + var(--u-space-2)); }
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) u-combobox::after { top: calc(var(--spacing-field) / 2 + --spacing(2)); }
 
-[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) > .u-error { margin-top: var(--u-space-1); }
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :not([role="group"], u-input-code)) > .u-error { margin-top: --spacing(1); }
 
 [data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + input.u-input[placeholder=" "]:placeholder-shown:not(:focus, :autofill)) > :is(label, p, span):first-child,
-[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + :is(u-input-password, u-combobox) > input.u-input[placeholder=" "]:placeholder-shown:not(:focus, :autofill)) > :is(label, p, span):first-child {
-  top: calc(var(--u-size-field) / 2);
+[data-u-audience="consumer"] .u-field:has(> :is(label, p, span):first-child + u-combobox > input.u-input[placeholder=" "]:placeholder-shown:not(:focus, :autofill)) > :is(label, p, span):first-child {
+  top: calc(var(--spacing-field) / 2);
   translate: 0 -50%;
-  font-size: var(--u-font-size-body);
-  line-height: var(--u-line-height-body);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
 }
 
 @media (forced-colors: active) {

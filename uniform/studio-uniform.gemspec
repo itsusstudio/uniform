@@ -19,4 +19,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activesupport", ">= 7.1"
+  spec.add_dependency "tailwindcss-ruby", ">= 4.3", "< 5"
 end

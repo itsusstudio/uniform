@@ -1,10 +1,10 @@
 <div class="annotated">
-<div class="examples u-stack u-gap-12">
+<div class="examples flex flex-col gap-12">
 
 <figure class="example">
 <div class="example-frame example-tagged">
 <span class="example-tag">App</span>
-<div class="u-stack u-gap-4 u-max-width-prose">
+<div class="flex flex-col gap-4 max-w-prose">
 <div class="u-actions">
 <button type="button" class="u-btn u-btn-primary" id="motion-add"><%= render "icon", name: "plus", small: false %>Add a job</button>
 <button type="button" class="u-btn u-btn-outline" id="motion-menu-toggle" aria-expanded="false">Menu</button>
@@ -16,7 +16,7 @@
 <div class="u-card" data-label="rows fade, space opens and closes" data-label-corner="below">
 <ul class="u-list" id="motion-list">
 <% [["#1042", "Ana Reyes"], ["#1039", "Sam Okafor"], ["#1036", "Lee Martin"]].each do |id, name| %>
-<li class="motion-item"><div class="u-list-item"><span class="u-text-data"><%= id %></span><span><%= name %></span><button type="button" class="u-btn-close" data-motion-remove aria-label="Remove job <%= id %>"></button></div></li>
+<li class="motion-item"><div class="flex items-center gap-4 min-h-row px-4 py-2"><span class="u-data"><%= id %></span><span><%= name %></span><button type="button" class="u-btn-close" data-motion-remove aria-label="Remove job <%= id %>"></button></div></li>
 <% end %>
 </ul>
 </div>
@@ -28,7 +28,7 @@
 <figure class="example">
 <div class="example-frame example-tagged">
 <span class="example-tag">App</span>
-<div class="u-stack u-gap-4 u-max-width-prose">
+<div class="flex flex-col gap-4 max-w-prose">
 <div class="u-progress">
 <p data-label="progress, the bar moves">Sending 24 texts</p>
 <progress id="motion-progress" max="24" value="0">0 of 24</progress>

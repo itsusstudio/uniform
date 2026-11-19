@@ -3,14 +3,14 @@
   <head>
     <%= render "head", metadata: site.metadata, title: data.title %>
   </head>
-  <body class="u-bg-paper" data-time-now="2026-11-12T16:00:00-05:00">
+  <body class="bg-paper" data-time-now="2026-11-12T16:00:00-05:00">
     <div class="u-app-shell u-app-shell-paper">
       <header data-u-audience="business">
         <a class="u-wordmark u-wordmark-lg u-wordmark-sans" href="<%= relative_url "/" %>">uniform</a>
         <button type="button" class="u-btn u-btn-ghost" popovertarget="site-nav">Menu</button>
       </header>
       <%= render "nav", navigation: site.data.navigation, metadata: site.metadata, current_url: resource.relative_url %>
-      <main class="u-bg-paper content">
+      <main class="bg-paper content">
         <div class="u-container">
           <%= yield %>
         </div>

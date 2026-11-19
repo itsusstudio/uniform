@@ -1,12 +1,9 @@
-@layer uniform.components {
+@layer components {
 .u-actions {
-  --u-gap: var(--u-space-2);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--u-gap);
+  gap: --spacing(2);
 }
-
-.u-actions > * { margin: 0; }
 
 }

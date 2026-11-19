@@ -6,11 +6,11 @@
   </header>
   <%= raw render("examples/app_shell_nav", id: "#{id}-nav", popover: true).strip.gsub("\n", "\n  ") %>
   <main>
-    <div class="u-container u-stack u-gap-12">
+    <div class="u-container flex flex-col gap-12">
       <header class="u-page-header">
         <hgroup>
           <h1>Jobs</h1>
-          <p><span class="u-text-data">38</span> open, <span class="u-text-data">6</span> due this week</p>
+          <p><span class="u-data">38</span> open, <span class="u-data">6</span> due this week</p>
         </hgroup>
         <div class="u-actions">
           <a class="u-btn u-btn-primary" href="/jobs/new"><%= raw render("icon", name: "plus", small: true).strip %>New job</a>
@@ -32,9 +32,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr><td><a class="u-text-data" href="/jobs/1036">#1036</a></td><td>Priya Shah</td><td><span class="u-badge u-badge-danger">Overdue</span></td><td class="u-text-data">Nov 11</td><td class="u-table-num">$25.00</td></tr>
-              <tr><td><a class="u-text-data" href="/jobs/1042">#1042</a></td><td>Ana Reyes</td><td><span class="u-badge u-badge-info">On the bench</span></td><td class="u-text-data">Nov 14</td><td class="u-table-num">$85.00</td></tr>
-              <tr><td><a class="u-text-data" href="/jobs/1039">#1039</a></td><td>Marcus Lee</td><td><span class="u-badge u-badge-warning">Waiting on parts</span></td><td class="u-text-data">Nov 15</td><td class="u-table-num">$40.00</td></tr>
+              <tr><td><a class="u-data" href="/jobs/1036">#1036</a></td><td>Priya Shah</td><td><span class="u-badge u-badge-danger">Overdue</span></td><td class="u-data">Nov 11</td><td class="u-table-num">$25.00</td></tr>
+              <tr><td><a class="u-data" href="/jobs/1042">#1042</a></td><td>Ana Reyes</td><td><span class="u-badge u-badge-info">On the bench</span></td><td class="u-data">Nov 14</td><td class="u-table-num">$85.00</td></tr>
+              <tr><td><a class="u-data" href="/jobs/1039">#1039</a></td><td>Marcus Lee</td><td><span class="u-badge u-badge-warning">Waiting on parts</span></td><td class="u-data">Nov 15</td><td class="u-table-num">$40.00</td></tr>
             </tbody>
           </table>
         </div>

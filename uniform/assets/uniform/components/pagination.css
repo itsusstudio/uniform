@@ -1,50 +1,50 @@
-@layer uniform.components {
+@layer components {
 .u-pagination {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--u-space-2);
+  gap: --spacing(2);
 }
 
 .u-pagination > :is(a, button) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: var(--u-size-control);
-  height: var(--u-size-control);
-  border: 1px solid var(--u-color-text-default);
-  border-radius: var(--u-radius-pill);
+  width: var(--spacing-control);
+  height: var(--spacing-control);
+  border: 1px solid var(--text-color-default);
+  border-radius: var(--radius-pill);
   background: transparent;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
   cursor: pointer;
 }
 
-.u-pagination > :is(a, button):hover { background: var(--u-color-divider); }
+.u-pagination > :is(a, button):hover { background: var(--border-color-divider); }
 
 .u-pagination > :is(a, button):is(:first-child, :last-child)::before {
   content: "";
   width: 20px;
   height: 20px;
   background: currentcolor;
-  mask: url("./../icons/chevron-left.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/chevron-left.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
-.u-pagination > :is(a, button):last-child::before { mask-image: url("./../icons/chevron-right.svg"); }
+.u-pagination > :is(a, button):last-child::before { mask-image: url("/uniform/icons/chevron-right.svg"); }
 
 .u-pagination > :is(a, button):is([aria-disabled="true"], :disabled) {
-  border-color: var(--u-color-border-input);
+  border-color: var(--border-color-input);
   background: transparent;
-  color: var(--u-color-border-input);
+  color: var(--border-color-input);
   cursor: not-allowed;
 }
 
 .u-pagination > span {
-  padding-inline: var(--u-space-2);
-  font-family: var(--u-font-mono);
-  font-size: var(--u-font-size-small);
+  padding-inline: --spacing(2);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
   font-variant-numeric: tabular-nums;
-  color: var(--u-color-text-default);
+  color: var(--text-color-default);
   white-space: nowrap;
 }
 

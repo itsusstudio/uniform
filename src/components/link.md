@@ -10,9 +10,9 @@ A link takes people to another page or place. Every `<a>` gets the link look fro
 
 ## Example
 
-<div class="example-frame u-stack u-gap-4">
-<p class="u-text-body">Ana's ring is ready. We sent her a text at 2:40pm. You can <a href="#example">see the message</a> or <a href="#example">change her phone number</a>.</p>
-<p class="u-text-small">Texts to the US need a registered number. <a href="#example" target="_blank" rel="noopener">How carriers register numbers (opens in a new tab) <%= render "icon", name: "external-link", small: true %></a></p>
+<div class="example-frame flex flex-col gap-4">
+<p class="text-body">Ana's ring is ready. We sent her a text at 2:40pm. You can <a href="#example">see the message</a> or <a href="#example">change her phone number</a>.</p>
+<p class="text-small">Texts to the US need a registered number. <a href="#example" target="_blank" rel="noopener">How carriers register numbers (opens in a new tab) <%= render "icon", name: "external-link", small: true %></a></p>
 </div>
 
 ## Leaving the app
@@ -24,19 +24,19 @@ screen readers.
 
 ## Link button
 
-<form class="u-text-small" action="#link-button">Didn’t get it? <button type="button" class="u-link-btn">Send a new code</button></form>
+<form class="text-small" action="#link-button">Didn’t get it? <button type="button" class="u-link-btn">Send a new code</button></form>
 
 An action inside a sentence, like sending a new code, is a `<button>` with
 `u-link-btn`. Put it in a form when it posts.
 
 ```html
-<form class="u-text-small" action="/sign-in/resend" method="post">
+<form class="text-small" action="/sign-in/resend" method="post">
   Didn’t get it? <button type="submit" class="u-link-btn">Send a new code</button>
 </form>
 ```
 
 ```erb
-<%%= form_with url: sign_in_resend_path, class: "u-text-small" do |form| %>
+<%%= form_with url: sign_in_resend_path, class: "text-small" do |form| %>
   <%%= t(".didnt_get_it") %> <%%= form.button t(".send_new_code"), class: "u-link-btn" %>
 <%% end %>
 ```
@@ -77,18 +77,18 @@ classes. A link that looks like a button uses `u-btn`.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
-<p class="u-text-small">Ana's ring is ready. To see the text we sent her, <a href="#do-and-dont">click here</a>.</p>
+<p class="text-small">Ana's ring is ready. To see the text we sent her, <a href="#do-and-dont">click here</a>.</p>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>“Click here” says nothing about where it goes. Read out in a list of links, it's meaningless.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
-<p class="u-text-small">Ana's ring is ready. You can <a href="#do-and-dont">see the text we sent her</a>.</p>
+<p class="text-small">Ana's ring is ready. You can <a href="#do-and-dont">see the text we sent her</a>.</p>
 </div>
 <figcaption class="example-caption example-caption-do"><span>The words that are linked say what you'll find there.</span></figcaption>
 </figure>

@@ -6,7 +6,7 @@
 <dt id="<%= rule.id %>"><%= rule.name %></dt>
 <dd><%= raw inline.(rule.body) %></dd>
 <% if rule["default"] -%>
-<dd class="u-text-muted">Default: <%= raw inline.(rule["default"]) %></dd>
+<dd class="text-muted">Default: <%= raw inline.(rule["default"]) %></dd>
 <% end -%>
 <% if rule.check -%>
 <dd>Check: <%= raw inline.(rule.check.sub(/\A[A-Z](?=[a-z ])/) { |letter| letter.downcase }) %></dd>

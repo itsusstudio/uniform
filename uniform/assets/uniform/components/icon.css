@@ -1,9 +1,10 @@
-@layer uniform.components {
+@layer components {
 .u-icon {
+  display: inline-block;
   flex: none;
   width: 20px;
   height: 20px;
-  stroke-width: var(--u-icon-stroke);
+  stroke-width: var(--u-icon-stroke-width);
   vertical-align: middle;
 }
 

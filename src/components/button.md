@@ -16,7 +16,7 @@ A button runs an action, like saving or sending. To go to another page, use a [l
 
 ## Large, sites only
 
-<div class="u-row">
+<div class="flex flex-wrap items-center gap-2">
 <span class="u-btn u-btn-primary u-btn-lg">Start free trial</span>
 <span class="u-btn u-btn-outline u-btn-lg">See pricing</span>
 </div>
@@ -64,8 +64,8 @@ the page too, so people can select it.
 The words change to `data-copied` for a moment, or to `data-copy-failed` when
 the browser blocks it. Set both from the gem's `uniform.copy.copied` and `uniform.copy.failed` keys. A status message beside the button tells screen readers.
 
-<div class="u-row">
-<span class="u-text-data">kensingtonrepair.ca/jobs/1042</span>
+<div class="flex flex-wrap items-center gap-2">
+<span class="u-data">kensingtonrepair.ca/jobs/1042</span>
 <u-copy><button type="button" class="u-btn u-btn-outline" data-copy="https://kensingtonrepair.ca/jobs/1042" data-copied="Copied" data-copy-failed="Couldn’t copy" hidden><span data-copy-label>Copy link</span></button></u-copy>
 </div>
 
@@ -89,8 +89,8 @@ For an icon-only copy button, put the copy icon in a `u-btn-icon` button with an
 `aria-label`. The icon turns into a check mark for a moment, or a cross when the
 browser blocks it.
 
-<div class="u-row">
-<span class="u-text-data">kensingtonrepair.ca/jobs/1042</span>
+<div class="flex flex-wrap items-center gap-2">
+<span class="u-data">kensingtonrepair.ca/jobs/1042</span>
 <u-copy><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Copy link" data-copy="https://kensingtonrepair.ca/jobs/1042" data-copied="Copied" data-copy-failed="Couldn’t copy" hidden><%= raw render("icon", name: "copy", small: true).strip %></button></u-copy>
 </div>
 

@@ -54,7 +54,7 @@ Change
 ## Rules
 
 One size for figures
-: Use `u-stat` for every figure, on a home page or a chart card. Never build one from `u-text-heading` and `u-text-data`.
+: Use `u-stat` for every figure, on a home page or a chart card. Never build one from `text-heading` and `u-data`.
 
 Arrows, not colours
 : A change stays muted, never green or red, because up isn't always good.

@@ -10,13 +10,13 @@ A menu holds the less common actions for one thing until someone asks for them. 
 
 ## Example
 
-<div class="example-frame u-row u-items-start u-gap-12">
+<div class="example-frame flex flex-wrap items-center items-start gap-12">
 <div class="menu-demo-anchor">
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Actions for job #1042"><%= render "icon", name: "ellipsis", small: false %></button>
 <%= render "examples/menu_job", id: nil, popover: false %>
 </div>
-<div class="u-stack u-gap-4">
-<p class="u-text-small u-text-muted">Try it:</p>
+<div class="flex flex-col gap-4">
+<p class="text-small text-muted">Try it:</p>
 <div class="u-actions">
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="menu-live-icon" aria-label="Actions for job #1042"><%= render "icon", name: "ellipsis", small: false %></button>
 <button type="button" class="u-btn u-btn-outline" popovertarget="menu-live-text">Actions <%= render "icon", name: "chevron-down", small: true %></button>
@@ -90,8 +90,8 @@ and keeps it on screen.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="u-menu menu-demo-long">
@@ -106,7 +106,7 @@ and keeps it on screen.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>One long list with no groups, Delete in the middle, and labels so short you can't tell what they act on.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <%= render "examples/menu_job", id: nil, popover: false %>

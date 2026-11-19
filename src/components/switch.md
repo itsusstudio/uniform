@@ -11,7 +11,7 @@ A switch turns a setting on or off the moment it's flipped. Inside a form with a
 ## Example
 
 <div class="example-frame">
-<div class="u-max-width-form">
+<div class="max-w-form">
 <%= render "examples/switch_settings" %>
 </div>
 </div>
@@ -33,7 +33,7 @@ checkbox. If the change is saved the moment you flip it, it's a switch.
 
 ## States
 
-<div class="example-frame u-row u-gap-6">
+<div class="example-frame flex flex-wrap items-center gap-6">
 <label class="u-switch"><input type="checkbox" switch role="switch"> Off</label>
 <label class="u-switch"><input type="checkbox" switch role="switch" checked> On</label>
 <label class="u-switch"><input type="checkbox" switch role="switch" disabled> Disabled</label>
@@ -80,8 +80,8 @@ its form a Save button.
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame u-form">
 <div class="u-field">
@@ -93,7 +93,7 @@ its form a Save button.
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A switch in a form with a Create button. Nothing happens until the form is sent, so the switch promises something it doesn't do.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame u-form">
 <div class="u-field">

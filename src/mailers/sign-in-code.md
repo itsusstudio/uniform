@@ -62,25 +62,25 @@ in the subject with
 
 ## Do and don't
 
-<div class="examples u-grid u-gap-6">
-<figure class="example u-span-6">
+<div class="examples u-grid gap-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="mailer-sign-in-code-inbox">
 <p>Workbench</p>
 <p>Your verification code</p>
-<p class="u-text-muted">Hello, please find your one-time code below. For your security…</p>
+<p class="text-muted">Hello, please find your one-time code below. For your security…</p>
 </div>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>The code is hidden in the body. Someone halfway through signing in has to open the email, find the code and switch back.</span></figcaption>
 </figure>
-<figure class="example u-span-6">
+<figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="mailer-sign-in-code-inbox">
 <p>Workbench</p>
-<p><span class="u-text-data">482915</span> is your Workbench sign-in code</p>
-<p class="u-text-muted">This code works for 10 minutes.</p>
+<p><span class="u-data">482915</span> is your Workbench sign-in code</p>
+<p class="text-muted">This code works for 10 minutes.</p>
 </div>
 </div>
 <figcaption class="example-caption example-caption-do"><span>The code leads the subject and the preview. They can read it from the inbox or the notification without opening anything.</span></figcaption>

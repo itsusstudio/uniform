@@ -1,49 +1,47 @@
-@layer uniform.components {
+@layer components {
 .u-stats {
   container: u-stats / inline-size;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--u-space-6);
+  gap: --spacing(6);
 }
 
 .u-stat {
   display: flex;
   flex-direction: column;
-  gap: var(--u-space-2);
+  gap: --spacing(2);
   min-width: 0;
 }
 
 .u-stats > .u-stat { flex: 1 1 124px; }
 
-.u-stat > * { margin: 0; }
-
 .u-stat > :first-child {
-  font-family: var(--u-font-mono);
-  font-size: clamp(var(--u-font-size-20), 4.8cqi, var(--u-font-size-32));
+  font-family: var(--font-mono);
+  font-size: clamp(var(--text-400), 4.8cqi, var(--text-600));
   font-weight: 400;
   font-variant-numeric: tabular-nums;
-  line-height: var(--u-line-height-32);
+  line-height: var(--text-600--line-height);
   white-space: nowrap;
 }
 
 .u-stat > :not(:first-child) {
-  font-size: var(--u-font-size-small);
-  line-height: var(--u-line-height-small);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
 }
 
-.u-stat > :not(:first-child, a) { color: var(--u-color-text-muted); }
+.u-stat > :not(:first-child, a) { color: var(--text-color-muted); }
 
 .u-stat > [data-trend]::before {
   content: "";
   display: inline-block;
   width: 16px;
   height: 16px;
-  margin-inline-end: var(--u-space-1);
+  margin-inline-end: --spacing(1);
   background: currentcolor;
   vertical-align: -3px;
-  mask: url("./../icons/arrow-up.svg") center / contain no-repeat;
+  mask: url("/uniform/icons/arrow-up.svg") center / contain no-repeat;
   forced-color-adjust: none;
 }
 
-.u-stat > [data-trend="down"]::before { mask-image: url("./../icons/arrow-down.svg"); }
+.u-stat > [data-trend="down"]::before { mask-image: url("/uniform/icons/arrow-down.svg"); }
 }

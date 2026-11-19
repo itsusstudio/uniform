@@ -8,11 +8,12 @@
 
 .u-stat {
   display: flex;
-  flex: 1 1 124px;
   flex-direction: column;
   gap: var(--u-space-2);
   min-width: 0;
 }
+
+.u-stats > .u-stat { flex: 1 1 124px; }
 
 .u-stat > * { margin: 0; }
 

@@ -76,6 +76,17 @@
 
 :is(.u-table, u-chart) > table thead .u-table-num { font-family: var(--u-font-sans); }
 
+:is(.u-table, u-chart) > table .u-text-data { white-space: nowrap; }
+
+:is(.u-table, u-chart) > table .u-table-truncate {
+  inline-size: 100%;
+  min-inline-size: var(--u-width-table-text);
+  max-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .u-table-sort {
   display: inline-flex;
   align-items: center;

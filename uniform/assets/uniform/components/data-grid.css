@@ -7,6 +7,7 @@ u-data-grid {
 u-data-grid .u-table {
   max-height: 70dvh;
   overflow: auto;
+  container: u-data-grid-scroll / scroll-state;
 }
 
 u-data-grid .u-table > table {
@@ -51,6 +52,19 @@ u-data-grid .u-table tr:has(> :first-child > .u-checkbox:only-child) > :nth-chil
 u-data-grid .u-table :is(th, td):nth-child(2) { background: var(--u-color-bg-surface); }
 
 u-data-grid .u-table thead tr:has(> :first-child > .u-checkbox:only-child) > :nth-child(2) { z-index: 3; }
+
+@container u-data-grid-scroll scroll-state(scrollable: left) {
+  u-data-grid .u-table tr > :first-child:not(:has(> .u-checkbox:only-child))::after,
+  u-data-grid .u-table tr:has(> :first-child > .u-checkbox:only-child) > :nth-child(2)::after {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 100%;
+    inline-size: var(--u-space-2);
+    background: var(--u-shadow-frozen-edge);
+    pointer-events: none;
+  }
+}
 
 u-data-grid .u-table thead .u-btn-icon {
   width: var(--u-size-target);

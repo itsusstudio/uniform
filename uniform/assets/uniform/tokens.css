@@ -40,6 +40,7 @@
   --u-max-width-page-narrow: 768px;
   --u-max-width-prose: 65ch;
   --u-max-width-form: 384px;
+  --u-width-table-text: 16rem;
   --u-width-sidebar: 264px;
   --u-width-scroll-item: 280px;
   --u-grid-gutter: 24px;
@@ -49,6 +50,7 @@
   --u-radius-default: 4px;
   --u-radius-surface: 12px;
   --u-radius-pill: 999px;
+  --u-shadow-frozen-edge: linear-gradient(to right, light-dark(color-mix(in srgb, #1a1a18 10%, transparent), color-mix(in srgb, #000000 50%, transparent)), transparent);
   --u-shadow-float:
     0 12px 32px light-dark(color-mix(in srgb, #1a1a18 12%, transparent), color-mix(in srgb, #000000 55%, transparent)),
     0 2px 6px light-dark(color-mix(in srgb, #1a1a18 8%, transparent), color-mix(in srgb, #000000 40%, transparent));

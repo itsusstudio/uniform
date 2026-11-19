@@ -35,7 +35,7 @@ The page header opens every app page with its title and main actions.
 
 ## On a phone
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="frame frame-phone frame-pad">
 <header class="u-page-header">
 <a href="#on-a-phone" aria-label="Back to Jobs">Jobs</a>

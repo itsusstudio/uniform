@@ -13,18 +13,6 @@
   page: /components/scroll-row/
   description: A row of cards that scrolls sideways and snaps to each card.
 
-- name: u-row-top
-  group: Layout
-  page: /components/row/
-  variant: true
-  description: Lines the children up along their top edge, for items of different heights.
-
-- name: u-row-spread
-  group: Layout
-  page: /components/row/
-  variant: true
-  description: Pushes the first and last children to opposite ends, like Back and Skip under a form.
-
 - name: u-grid
   group: Layout
   page: /components/grid/
@@ -69,7 +57,22 @@
 - name: u-gap-1, u-gap-2, u-gap-4, u-gap-6, u-gap-12, u-gap-24
   group: Spacing
   page: /start/reference/
-  description: Changes the gap of a stack, row or grid to 4, 8, 16, 24, 48 or 96px. The only way to change spacing by hand.
+  description: Changes the gap of a stack, row or grid to 4, 8, 16, 24, 48 or 96px.
+
+- name: u-pad-12
+  group: Spacing
+  page: /start/reference/
+  description: 48px of padding on every side, like a welcome panel's `u-card-content` that needs more room than a card.
+
+- name: u-items-start, u-items-center, u-justify-center, u-justify-between
+  group: Layout
+  page: /start/reference/
+  description: Lines up the children of a row or grid. `u-items-start` and `u-items-center` set them across the row, at the top or the middle. `u-justify-center` and `u-justify-between` set them along it, centred or pushed to the two ends.
+
+- name: u-border-0, u-radius-default
+  group: Backgrounds
+  page: /start/reference/
+  description: Drops a card's border for a panel of colour, or gives an image the 4px corner.
 
 - name: u-text-hero
   group: Type
@@ -467,11 +470,6 @@
   group: Layout
   page: /components/actions/
   description: A row of buttons, 8px apart, that wraps when it runs out of room.
-
-- name: u-actions-icons
-  group: Layout
-  page: /components/actions/
-  description: Added to `u-actions` for a toolbar of icon buttons, 4px apart.
 
 - name: u-form
   group: Layout

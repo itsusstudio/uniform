@@ -24,7 +24,7 @@ bottom, at 40% of the paper's width. On a tablet the paper stays plain.
 <%= render "screen", title: "Task shell on a wide screen", html: render("examples/task_shell_confirm", id: "task-shell-demo", tag: "div") %>
 </div>
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="frame frame-phone" style="height: 640px">
 <%= render "screen", title: "Task shell on a phone", html: render("examples/task_shell_confirm", id: "task-shell-phone", tag: "div") %>
 </div>

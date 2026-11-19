@@ -45,7 +45,7 @@ what to do next. The way out, sending a new code, sits right below.
 
 ### On a phone
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="frame frame-phone" style="height: 720px">
 <%= render "screen", title: "Sign in on a phone", html: render("examples/pattern_auth_sign_in", id: "auth-phone-in", tag: "div") %>
 </div>

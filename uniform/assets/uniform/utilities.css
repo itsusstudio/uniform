@@ -136,6 +136,20 @@
 .u-gap-12 { --u-gap: var(--u-space-12); }
 .u-gap-24 { --u-gap: var(--u-space-24); }
 
+.u-pad-12 { padding: var(--u-space-12); }
+
+.u-items-start { align-items: flex-start; }
+
+.u-items-center { align-items: center; }
+
+.u-justify-center { justify-content: center; }
+
+.u-justify-between { justify-content: space-between; }
+
+.u-border-0 { border: 0; }
+
+.u-radius-default { border-radius: var(--u-radius-default); }
+
 .u-visually-hidden {
   position: absolute;
   width: 1px;

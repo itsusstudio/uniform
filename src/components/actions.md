@@ -15,7 +15,7 @@ Actions is the row a group of buttons sits in. The buttons sit 8px apart and wra
 <button type="button" class="u-btn u-btn-primary">Save job</button>
 <button type="button" class="u-btn u-btn-outline">Print ticket</button>
 </div>
-<div class="u-actions u-actions-icons" role="group" aria-label="Job">
+<div class="u-actions u-gap-1" role="group" aria-label="Job">
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit job"><%= render "icon", name: "pencil", small: false %></button>
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Open the customer page"><%= render "icon", name: "external-link", small: false %></button>
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Delete job"><%= render "icon", name: "trash-2", small: false %></button>
@@ -38,7 +38,7 @@ End
 : Straight inside a [card](/components/card/), [dialog](/components/dialog/) or [popover](/components/popover/), the row lines up at the end. Put the primary button last, nearest the corner.
 
 Icon buttons
-: Add `u-actions-icons` for a toolbar of icon buttons. Give it `role="group"` and an `aria-label`.
+: Add `u-gap-1` for a toolbar of icon buttons, which sit 4px apart. Give it `role="group"` and an `aria-label`.
 
 ## Parts
 

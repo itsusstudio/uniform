@@ -11,7 +11,7 @@ A code input takes a one-time code, like the six digits that sign someone in. It
 <%= render "example_heading" %>
 
 <div class="example-frame">
-<div class="u-row u-row-top u-gap-12">
+<div class="u-row u-items-start u-gap-12">
 <%= render "examples/text_field_code", id: "tf-code" %>
 <%= render "examples/text_field_code", id: "tf-code-wrong", value: "482915", error: "That code doesn’t match. Check your latest email." %>
 </div>

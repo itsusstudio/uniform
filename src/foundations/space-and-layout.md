@@ -24,7 +24,7 @@ no block covers. The number is how many 4px units it holds, so `u-gap-6` is
 6 × 4 = 24px.
 
 <%= render "examples/space_specs", rows: [
-  { token: "--u-space-1", px: 4, job: "Inside one element: an icon to its label, the padding of a chip.", uses: ["An icon and its label inside a button", "Icon buttons in `u-actions-icons`", "Padding inside a chip"] },
+  { token: "--u-space-1", px: 4, job: "Inside one element: an icon to its label, the padding of a chip.", uses: ["An icon and its label inside a button", "Icon buttons in `u-actions u-gap-1`", "Padding inside a chip"] },
   { token: "--u-space-2", px: 8, job: "Parts of one item: a label to its input, a title to its meta.", uses: ["A label and its input in `u-field`", "A heading and its line in `<hgroup>`, a figure and its label in `u-stat`", "Buttons side by side in `u-actions`"] },
   { token: "--u-space-4", px: 16, job: "Items in a group or list, and padding inside small components.", uses: ["One field and the next in `u-form`", "Items in a list or menu", "Padding inside a small card or popover"] },
   { token: "--u-space-6", px: 24, job: "Between blocks, card padding and the grid gutter.", uses: ["Padding inside a card or panel", "The heading, fields and buttons of a `u-form`", "The grid gutter, and a site section title to its content"] },

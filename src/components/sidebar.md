@@ -54,7 +54,7 @@ can open it on a phone.
 
 ## Icon rail
 
-<div class="u-row u-row-top u-gap-6">
+<div class="u-row u-items-start u-gap-6">
 <div class="frame-column">
 <%= render "examples/app_shell_nav", id: "sidebar-rail", popover: false, collapsed: true %>
 </div>

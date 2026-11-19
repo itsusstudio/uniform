@@ -23,7 +23,7 @@ the keyboard never pushes it out of view.
 <%= render "screen", title: "Auth shell on a wide screen", html: render("examples/pattern_auth_sign_in", id: "auth-shell-demo", tag: "div") %>
 </div>
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="frame frame-phone" style="height: 640px">
 <%= render "screen", title: "Auth shell on a phone", html: render("examples/pattern_auth_sign_in", id: "auth-shell-phone", tag: "div") %>
 </div>

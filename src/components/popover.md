@@ -10,7 +10,7 @@ A popover shows a few details or one quick change without leaving the page. It's
 
 ## Example
 
-<div class="example-frame u-row u-row-top u-gap-12">
+<div class="example-frame u-row u-items-start u-gap-12">
 <%= render "examples/popover_customer", id: "popover-static-customer", popover: false %>
 <div class="u-stack u-gap-4">
 <p class="u-text-small u-text-muted">Try it:</p>
@@ -29,7 +29,7 @@ without leaving the list.
 
 ## With a form
 
-<div class="example-frame u-row u-row-top u-gap-12">
+<div class="example-frame u-row u-items-start u-gap-12">
 <%= render "examples/popover_due_date", id: "popover-static-due", popover: false %>
 <div class="u-stack u-gap-4">
 <p class="u-text-small u-text-muted">Try it:</p>

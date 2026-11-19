@@ -108,7 +108,7 @@ date in between, so the labels never crowd, even on a phone.
 ## Hover
 
 <div class="example-frame">
-<div class="u-row u-row-top u-gap-12">
+<div class="u-row u-items-start u-gap-12">
 <%= render "examples/chart_tooltip" %>
 </div>
 </div>

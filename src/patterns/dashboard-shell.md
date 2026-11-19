@@ -21,7 +21,7 @@ folds the nav down to its icons.
 
 ### On a phone
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="u-stack u-gap-2">
 <div class="frame frame-phone" style="height: 720px">
 <%= render "screen", title: "Dashboard shell on a phone, menu closed", html: render("examples/pattern_dashboard_shell_app", id: "shell-phone", live: false) %>

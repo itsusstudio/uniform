@@ -35,7 +35,7 @@ Escape or a tap outside closes it. See the
 
 ## Tab bar
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="frame frame-phone" style="height: 560px">
 <%= render "screen", title: "App shell with a tab bar on a phone", html: render("examples/app_shell", id: "app-shell-tabs", live: true, tabs: true) %>
 </div>

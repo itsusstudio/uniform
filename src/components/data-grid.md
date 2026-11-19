@@ -48,7 +48,7 @@ Give its heading only an `aria-label`, so it stays out of View.
 
 ## On a phone
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="frame frame-phone frame-pad">
 <%= render "examples/data_grid", id: "phone-grid" %>
 </div>

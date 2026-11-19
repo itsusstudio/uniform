@@ -37,7 +37,7 @@ An icon is an inline Lucide SVG with `u-icon`. When to use one is on [Iconograph
 <button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "arrow-down-up", small: true %>Sort</button>
 <button type="button" class="u-btn u-btn-outline"><%= render "icon", name: "upload", small: true %>Import</button>
 </div>
-<div class="u-actions u-actions-icons">
+<div class="u-actions u-gap-1">
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Edit job"><%= render "icon", name: "pencil", small: true %></button>
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Preview ticket"><%= render "icon", name: "eye", small: true %></button>
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Upload photos"><%= render "icon", name: "upload", small: true %></button>

@@ -10,7 +10,7 @@ A menu holds the less common actions for one thing until someone asks for them. 
 
 ## Example
 
-<div class="example-frame u-row u-row-top u-gap-12">
+<div class="example-frame u-row u-items-start u-gap-12">
 <div class="menu-demo-anchor">
 <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Actions for job #1042"><%= render "icon", name: "ellipsis", small: false %></button>
 <%= render "examples/menu_job", id: nil, popover: false %>

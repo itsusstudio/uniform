@@ -122,7 +122,7 @@ in the same row. The search and chips stay put, so the table doesn't move.
 
 ## On a phone
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="frame frame-phone frame-pad">
 <%= render "examples/table_controls", presets_id: "controls-presets-phone", filter_id: "controls-filter-phone" %>
 </div>

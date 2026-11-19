@@ -45,7 +45,7 @@ in the same list.
 
 ## On a phone
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="frame frame-phone">
 <%= render "screen", title: "Job page with its timeline on a phone", fit: true, html: render("examples/pattern_timeline_app", id: "tl-phone", live: false) %>
 </div>

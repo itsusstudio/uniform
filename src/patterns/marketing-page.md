@@ -24,7 +24,7 @@ the rest in a sentence, with the numbers that matter.
 
 ### On a phone
 
-<div class="u-row u-row-top u-gap-6 frame-phones">
+<div class="u-row u-items-start u-gap-6 frame-phones">
 <div class="u-stack u-gap-2">
 <div class="frame frame-paper frame-phone" style="height: 600px">
 <%= render "examples/pattern_marketing_page", id: "marketing-phone", live: true, banner: false %>

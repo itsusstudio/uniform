@@ -5,6 +5,8 @@
 <title><% if resource_title.empty? || resource_title == metadata.title %><%= metadata.title %><% else %><%= resource_title %> · <%= metadata.title %><% end %></title>
 <meta name="description" content="<%= metadata.description %>" />
 <meta name="color-scheme" content="light dark" />
+<link rel="icon" href="/favicon.ico" sizes="32x32" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <script>try { const theme = localStorage.getItem("u-theme-preference"); if (theme === "light" || theme === "dark") document.documentElement.dataset.uTheme = theme } catch (error) {}</script>
 <script>try { if (localStorage.getItem("uniform-audience") === "consumer") document.documentElement.dataset.uAudience = "consumer" } catch (error) {}</script>
 <link rel="stylesheet" href="<%= asset_path :css %>" />

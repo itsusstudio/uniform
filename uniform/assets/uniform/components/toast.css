@@ -37,7 +37,7 @@ u-toast > div {
   max-width: min(400px, 100%);
   min-height: var(--u-space-12);
   padding: var(--u-space-2) var(--u-space-2) var(--u-space-2) var(--u-space-4);
-  border-radius: var(--u-radius-default);
+  border-radius: var(--u-radius-surface);
   background: var(--u-color-text-default);
   color: var(--u-color-bg-surface);
   box-shadow: var(--u-shadow-float);

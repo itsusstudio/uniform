@@ -4,7 +4,7 @@
   flex-direction: column;
   overflow: clip;
   border: 1px solid var(--u-color-border);
-  border-radius: var(--u-radius-default);
+  border-radius: var(--u-radius-surface);
   background: var(--u-color-bg-surface);
   color: var(--u-color-text-default);
 }

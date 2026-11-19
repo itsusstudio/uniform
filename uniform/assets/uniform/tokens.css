@@ -47,6 +47,7 @@
   --u-section-space: 48px;
 
   --u-radius-default: 4px;
+  --u-radius-surface: 12px;
   --u-radius-pill: 999px;
   --u-shadow-float:
     0 12px 32px light-dark(color-mix(in srgb, #1a1a18 12%, transparent), color-mix(in srgb, #000000 55%, transparent)),

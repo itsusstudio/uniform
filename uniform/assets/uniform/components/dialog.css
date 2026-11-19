@@ -7,7 +7,7 @@
   padding: 0;
   overflow-y: auto;
   border: 1px solid var(--u-color-border);
-  border-radius: var(--u-radius-default);
+  border-radius: var(--u-radius-surface);
   background: var(--u-color-bg-surface);
   color: var(--u-color-text-default);
   box-shadow: var(--u-shadow-float);
@@ -39,7 +39,7 @@
     margin: auto 0 0;
     padding-bottom: env(safe-area-inset-bottom);
     border-width: 1px 0 0;
-    border-radius: var(--u-radius-default) var(--u-radius-default) 0 0;
+    border-radius: var(--u-radius-surface) var(--u-radius-surface) 0 0;
   }
 
   :is(.u-dialog-sheet, .u-dialog-sheet > form) > .u-actions > .u-btn {

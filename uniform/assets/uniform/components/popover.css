@@ -4,7 +4,7 @@
   max-width: calc(100vw - 2 * var(--u-space-4));
   padding: var(--u-space-4);
   border: 1px solid var(--u-color-border);
-  border-radius: var(--u-radius-default);
+  border-radius: var(--u-radius-surface);
   background: var(--u-color-bg-surface);
   color: var(--u-color-text-default);
   box-shadow: var(--u-shadow-float);

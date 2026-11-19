@@ -37,7 +37,7 @@ u-input-code > span {
   width: var(--u-size-control);
   height: calc(var(--u-size-control) + var(--u-space-2));
   border: 1px solid var(--u-color-border-input);
-  border-radius: var(--u-radius-default);
+  border-radius: var(--u-radius-surface);
   background: var(--u-color-bg-surface);
   color: var(--u-color-text-default);
   font-family: var(--u-font-mono);

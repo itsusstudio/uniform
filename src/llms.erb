@@ -31,7 +31,7 @@ layout: none
 
 > it's us studio's design system: a Tailwind v4 layer of theme tokens, components and one small script, with docs that explain every rule. The docs are written for people. This file routes agents to the pages that answer each task.
 
-Copy the `uniform/` folder into a project, link `uniform/uniform.css` and load `uniform/uniform.js`, as [Install](/start/install/) shows. The script adds behaviour to a few components, and every component still works without it. Classes start with `u-`, and every colour, size and space is a `--u-*` token.
+In a Rails app, add the `studio-uniform` gem, run `bin/rails uniform:install` to copy Uniform's Tailwind source into `app/assets/tailwind/uniform/`, import `./uniform/tailwind.css` after `tailwindcss`, link stylesheets with `stylesheet_link_tag :app` and load `uniform/uniform.js`, as [Install](/start/install/) shows. Run `uniform:install` again after each Uniform update; `bin/rails uniform:verify` fails in CI when the copy is stale. The script adds behaviour to a few components, and every component still works without it. Classes start with `u-`, tokens are Tailwind theme variables (`--background-color-surface`, `--text-color-muted`), and space uses `--spacing(n)`.
 
 ## Read first
 

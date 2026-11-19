@@ -9,18 +9,18 @@ gem "studio-uniform", github: "itsusstudio/uniform", branch: "main", glob: "unif
 gem "tailwindcss-rails"
 ```
 
-`tailwindcss-rails` finds the gem's entry at `app/assets/tailwind/studio_uniform_engine/engine.css` and writes an import for it on every build. Import Tailwind, then Uniform, and link the build:
+Copy Uniform's Tailwind source into the app with `bin/rails uniform:install`. It lands in `app/assets/tailwind/uniform/`, which the app commits, the way a `tailwindcss-rails` app keeps a downloaded daisyUI file. Run it again after each Uniform update; `bin/rails uniform:verify` fails when the copy is stale, so put it in CI. Import Tailwind, then Uniform, and link the app's stylesheets:
 
 ```css
 /* app/assets/tailwind/application.css */
 @import "tailwindcss";
-@import "../builds/tailwind/studio_uniform_engine";
+@import "./uniform/tailwind.css";
 ```
 
 ```erb
 <html data-u-audience="business">
   <head>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
 ```
 
 `business` is for desktop-first tools people use at work, `consumer` for mobile-first products people use on their phones. Business sizes are the default, so set `consumer` when the product needs it. The engine also adds `assets/` to the asset paths, so Propshaft serves the fonts and icons the CSS points at, under `/uniform/`.
@@ -41,7 +41,7 @@ Uniform uses Tailwind's own layers. Tokens are Tailwind theme variables, page de
 
 | File | Contains |
 | --- | --- |
-| `tailwind.css` | Entry file for Tailwind. Imports the theme, the dark variant and `uniform.css`, and tells Tailwind to scan the gem's script and Ruby |
+| `tailwind.css` | Entry file for Tailwind. Imports the theme, the dark variant and `uniform.css`, and always generates `sr-only` and the type-role utilities (`text-small`, `font-headline` and the rest), so studio gems' views can use them without Tailwind scanning the gem |
 | `theme.css` | Every token, as Tailwind theme variables: `--background-color-surface`, `--text-color-muted`, `--text-small`, `--spacing`, `--radius-surface` and the rest, light and dark, plus the consumer sizes and the page margin on small screens |
 | `variants.css` | The `dark:` variant, following the system setting and `data-u-theme` |
 | `uniform.css` | Imports the files below in order |

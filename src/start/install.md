@@ -35,21 +35,28 @@ gem "studio-uniform", github: "itsusstudio/uniform", branch: "main", glob: "unif
 gem "tailwindcss-rails"
 ```
 
-`tailwindcss-rails` finds the gem's Tailwind entry and, on every build, writes
-an import for it to `app/assets/builds/tailwind/studio_uniform_engine.css`.
-Import Tailwind, then Uniform:
+Copy Uniform's Tailwind source into the app, then import Tailwind and Uniform:
+
+```sh
+bin/rails uniform:install
+```
 
 ```css
 /* app/assets/tailwind/application.css */
 @import "tailwindcss";
-@import "../builds/tailwind/studio_uniform_engine";
+@import "./uniform/tailwind.css";
 ```
 
-Link the build, rebuild it while you work, and load the script:
+The copy lives in `app/assets/tailwind/uniform/` and is committed with the app,
+the same way `tailwindcss-rails` apps keep a downloaded daisyUI file. Run
+`bin/rails uniform:install` again after each Uniform update, and add
+`bin/rails uniform:verify` to CI so a stale copy fails the build.
+
+Link every stylesheet, rebuild while you work, and load the script:
 
 ```erb
 <%%# app/views/layouts/application.html.erb %>
-<%%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+<%%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
 ```
 
 ```text

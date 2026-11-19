@@ -1,6 +1,6 @@
 @import "./theme.css";
 @import "./variants.css";
 @import "./uniform.css";
-@source "./uniform.js";
-@source "../../lib";
-@source "../../app";
+@source inline("sr-only");
+@source inline("text-{hero,article-title,feature-title,page-title,title,section-title,heading,lead,body,reading,prose,small,caption}");
+@source inline("font-{sans,headline,mono,medium}");

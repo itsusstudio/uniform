@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
 
   spec.metadata["source_code_uri"] = spec.homepage
 
-  spec.files = Dir["lib/**/*.rb", "app/**/*", "assets/**/*", "config/**/*", "README.md"]
+  spec.files = Dir["lib/**/*.rb", "lib/**/*.rake", "app/**/*", "assets/**/*", "config/**/*", "README.md"]
   spec.require_paths = ["lib"]
 
   spec.add_dependency "activesupport", ">= 7.1"

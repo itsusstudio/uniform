@@ -79,6 +79,8 @@
 
 .u-card > .u-list :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: var(--u-space-6); }
 
+.u-checklist > * + * { border-top: 0; }
+
 .u-checklist > li::before {
   content: "";
   flex: none;

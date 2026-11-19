@@ -61,14 +61,15 @@
 :where(mark) { background: var(--u-color-highlight); color: inherit; }
 
 :where(fieldset:not(.u-fieldset)) {
-  display: grid;
-  gap: var(--u-space-2);
-  min-width: 0;
+  display: block;
+  min-inline-size: 0;
   margin: 0;
   padding: var(--u-space-2) var(--u-space-4) var(--u-space-4);
   border: 1px solid var(--u-color-border-input);
   border-radius: var(--u-radius-default);
 }
+
+:where(fieldset:not(.u-fieldset) > :not(legend, [hidden], [type="hidden"]) ~ :not([hidden], [type="hidden"])) { margin-top: var(--u-space-2); }
 
 :where(fieldset:not(.u-fieldset) > legend) {
   margin-inline-start: calc(-1 * var(--u-space-1));

@@ -70,8 +70,6 @@ u-input-code > .u-input[aria-invalid="true"] ~ span {
   outline-offset: 2px;
 }
 
-u-input-code > .u-input[aria-invalid="true"] ~ .u-input-code-slot-active { outline-color: var(--color-info); }
-
 u-input-code > .u-input:disabled ~ span {
   background: var(--border-color-divider);
   color: var(--border-color-input);

@@ -439,7 +439,7 @@
 - id: thin-lines
   name: Thin lines
   summary: 1px for lines and borders, 2px for the focus ring and its vermilion twin on a field with an error.
-  body: 1px for lines and borders, 2px for the focus ring and a field with an error, which gets the same ring in vermilion until it has focus. Lines only separate things. A rule between sections belongs on reading pages, prose and marketing, where it can be ink. App screens separate their sections with space and cards instead.
+  body: 1px for lines and borders, 2px for the focus ring and a field with an error, which gets the same ring in vermilion and keeps it while it has focus, so the error stays visible as people fix it. Lines only separate things. A rule between sections belongs on reading pages, prose and marketing, where it can be ink. App screens separate their sections with space and cards instead.
   home: /foundations/shape-and-depth/
   check: Rules between sections appear only on prose and marketing pages, never on an app screen.
 

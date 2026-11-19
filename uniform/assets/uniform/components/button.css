@@ -36,7 +36,7 @@
   color: var(--u-color-text-default);
 }
 
-.u-btn-outline:hover { background: var(--u-color-divider); }
+.u-btn-outline:not(:disabled, [aria-disabled="true"]):hover { background: var(--u-color-divider); }
 
 .u-btn-danger {
   background: var(--u-color-danger);
@@ -51,8 +51,8 @@
   color: var(--u-color-text-default);
 }
 
-.u-btn-ghost:hover,
-.u-btn-close:hover { background: var(--u-color-divider); }
+.u-btn-ghost:not(:disabled, [aria-disabled="true"]):hover,
+.u-btn-close:not(:disabled, [aria-disabled="true"]):hover { background: var(--u-color-divider); }
 
 .u-btn-icon,
 .u-btn-close {
@@ -81,9 +81,7 @@
 
 .u-btn:disabled,
 .u-btn[aria-disabled="true"] {
-  background: transparent;
-  border-color: var(--u-color-border-input);
-  color: var(--u-color-border-input);
+  opacity: 0.35;
   cursor: not-allowed;
 }
 }

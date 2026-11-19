@@ -125,7 +125,7 @@ Icon buttons
 : Always give an `aria-label` that names the action and its object, like "Delete job #1042".
 
 Disabled
-: A disabled button can't be focused or explained by a screen reader, so put the reason in text beside it.
+: A disabled button can't be focused or explained by a screen reader, so put the reason in text beside it. It keeps its own look, dimmed, so people can still see which action it is.
 
 ## Rules
 

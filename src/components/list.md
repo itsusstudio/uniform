@@ -140,7 +140,7 @@ When a row opens a page, make its title a link: `<p><a href="…">Ana Reyes</a><
 
 To fade a row in or out, give its `<li>` `u-enter` or `u-exit` from
 [Motion](/foundations/motion/), and put the row's content in a `<div>` with
-`u-list-item`. The divider goes with the row.
+`u-list-item`.
 
 ```html
 <ul class="u-list">

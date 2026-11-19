@@ -8,8 +8,6 @@
   list-style: none;
 }
 
-.u-list > * + * { border-top: 1px solid var(--u-color-divider); }
-
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) {
   display: flex;
   align-items: center;
@@ -79,7 +77,7 @@
 
 .u-card > .u-list :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: var(--u-space-6); }
 
-.u-checklist > * + * { border-top: 0; }
+.u-card > .u-list:last-child { padding-block-end: var(--u-space-4); }
 
 .u-checklist > li::before {
   content: "";

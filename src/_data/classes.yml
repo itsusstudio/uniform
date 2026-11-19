@@ -389,7 +389,7 @@
 - name: u-list
   group: Components
   page: /components/list/
-  description: A `<ul>` or `<ol>` with a divider between rows.
+  description: A `<ul>` or `<ol>` of rows, spaced without lines between them.
 
 - name: u-list-item
   group: Components

@@ -66,43 +66,47 @@ u-combobox mark {
   font-weight: 500;
 }
 
+u-combobox [role="option"] > span:first-child mark { font-weight: 650; }
+
 u-combobox [role="option"]:has(> span + span) {
   padding-block: var(--u-space-2);
-  line-height: var(--u-line-height-caption);
+  line-height: var(--u-line-height-small);
 }
 
-u-combobox [role="option"] > span:first-child {
+u-combobox [role="option"] > span:first-child { font-weight: 500; }
+
+u-combobox [role="option"]:has(> span + span) > span:first-child {
   display: block;
   line-height: var(--u-line-height-small);
 }
 
 u-combobox [role="option"] > span + span {
   color: var(--u-color-text-muted);
-  font-size: var(--u-font-size-caption);
+  font-size: var(--u-font-size-small);
   font-variant-numeric: tabular-nums;
-  line-height: var(--u-line-height-caption);
+  line-height: var(--u-line-height-small);
 }
 
 u-combobox [role="option"] > span + span + span { margin-inline-start: var(--u-space-4); }
 
-u-combobox > [role="listbox"]:has(> [data-action]) {
+u-combobox > [role="listbox"]:has(> [role="option"][data-action]) {
   max-height: calc(var(--u-size-target) * 8 + var(--u-space-1) * 2 + 3px);
   padding-bottom: 0;
   scroll-padding-block: var(--u-space-1) calc(var(--u-size-target) + var(--u-space-1) * 2 + 1px);
 }
 
-u-combobox [data-action] {
+u-combobox [role="option"][data-action] {
   position: sticky;
   bottom: 0;
   margin-top: var(--u-space-1);
-  padding-bottom: calc(var(--u-space-1) * 2);
-  border-top: 1px solid var(--u-color-divider);
+  padding-block: calc(var(--u-space-1) * 1.5);
+  border-top: 1px solid var(--u-color-text-default);
   background: var(--u-color-bg-surface);
 }
 
-u-combobox [data-action].u-combobox-option-active { background: var(--u-color-divider); }
+u-combobox [role="option"][data-action].u-combobox-option-active { background: var(--u-color-divider); }
 
-u-combobox [data-action]::before {
+u-combobox [role="option"][data-action]::before {
   content: "";
   display: inline-block;
   width: 16px;
@@ -117,7 +121,7 @@ u-combobox [data-action]::before {
 @media (max-width: 639px) {
   u-combobox > [role="listbox"] { max-height: calc(var(--u-size-target) * 5 + var(--u-space-1) * 2 + 2px); }
 
-  u-combobox > [role="listbox"]:has(> [data-action]) { max-height: calc(var(--u-size-target) * 5 + var(--u-space-1) * 2 + 3px); }
+  u-combobox > [role="listbox"]:has(> [role="option"][data-action]) { max-height: calc(var(--u-size-target) * 5 + var(--u-space-1) * 2 + 3px); }
 
   u-combobox > [role="listbox"][popover] { position-try-fallbacks: none; }
 }

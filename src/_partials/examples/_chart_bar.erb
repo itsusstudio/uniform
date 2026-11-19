@@ -5,6 +5,7 @@
   uid = ->(name) { [prefix_value, name].reject(&:empty?).join("-") }
   weeks = ["Aug 17", "Aug 24", "Aug 31", "Sep 7", "Sep 14", "Sep 21", "Sep 28", "Oct 5", "Oct 12", "Oct 19", "Oct 26", "Nov 2"]
   counts = [14, 17, 12, 19, 21, 18, 16, 22, 20, 24, 19, 23]
+  chart_json = ->(data) { raw(JSON.generate(data).gsub("</", "<\\/")) }
 -%>
 <section class="u-card<%= " u-span-#{span_value}" if span_value %>">
   <header>
@@ -25,22 +26,14 @@
       <p><span class="u-shimmer">23</span></p>
       <p><span class="u-shimmer">Last week, up 4</span></p>
     </div>
-    <u-chart type="bar" height="160" aria-busy="true" aria-label="Loading jobs finished"></u-chart>
+    <u-chart type="bar" height="160" aria-busy="true" data-label="Jobs finished each week"></u-chart>
 <% else -%>
     <div class="u-stat">
       <p>23</p>
       <p data-trend="up">Last week, up 4 on the week before</p>
     </div>
-    <u-chart type="bar" height="160">
-      <table>
-        <caption>Jobs finished each week</caption>
-        <thead><tr><th scope="col">Week of</th><th scope="col">Jobs</th></tr></thead>
-        <tbody>
-<% weeks.zip(counts).each do |week, count| -%>
-          <tr><th scope="row"><%= week %></th><td><%= count %></td></tr>
-<% end -%>
-        </tbody>
-      </table>
+    <u-chart type="bar" height="160" data-label="Jobs finished each week">
+      <script type="application/json"><%= chart_json.(rows: weeks.zip(counts).map { |week, count| {label: week, values: [count]} }) %></script>
     </u-chart>
 <% end -%>
     <p class="u-chart-footer"><span>Updated just now</span><a href="/reports/jobs">Full report</a></p>

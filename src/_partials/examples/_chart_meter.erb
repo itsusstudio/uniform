@@ -11,20 +11,14 @@
       <p><span class="u-shimmer">31 of 40</span></p>
       <p><span class="u-shimmer">Jobs by their due date</span></p>
     </div>
-    <u-chart type="meter" aria-busy="true" aria-label="Loading jobs finished on time"></u-chart>
+    <u-chart type="meter" aria-busy="true" data-label="Jobs finished on time this month"></u-chart>
 <% else -%>
     <div class="u-stat">
       <p>31 of 40</p>
       <p data-trend="up">Jobs by their due date, up from 26 of 38 in October</p>
     </div>
-    <u-chart type="meter">
-      <table>
-        <caption>Jobs finished on time this month</caption>
-        <tbody>
-          <tr><th scope="row">On time</th><td>31</td></tr>
-          <tr><th scope="row">Due</th><td>40</td></tr>
-        </tbody>
-      </table>
+    <u-chart type="meter" data-label="Jobs finished on time this month">
+      <script type="application/json">{"rows": [{"label": "On time", "values": [31]}, {"label": "Due", "values": [40]}]}</script>
     </u-chart>
 <% end -%>
   </div>

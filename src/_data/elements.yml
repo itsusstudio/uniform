@@ -53,9 +53,9 @@
   page: /components/sidebar/
 
 - name: <u-chart>
-  wraps: A `<table>` of data, with `type` for the kind of chart.
-  adds: Draws the chart, with hover, a shimmer while it loads, and the empty and error lines. A bar or line chart is one Tab stop whose arrow keys step through the tooltips. A line chart with two value columns gets a legend.
-  without: The table shows as a plain table of the same numbers.
+  wraps: A `<script type="application/json">` of rows, with `type` for the kind of chart.
+  adds: Draws the chart, with hover, a shimmer while it loads, and the empty and error lines. A bar or line chart is one Tab stop whose arrow keys step through the tooltips. A line chart with two series gets a legend.
+  without: The shimmer the server rendered stays in place.
   page: /components/chart/
 
 - name: <u-relative-time>

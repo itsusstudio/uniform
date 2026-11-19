@@ -1,12 +1,8 @@
-<u-chart type="line" prefix="$" height="120">
-  <table>
-    <caption>Revenue so far, by week</caption>
-    <thead><tr><th scope="col">Week</th><th scope="col">November</th><th scope="col">October</th></tr></thead>
-    <tbody>
-      <tr><th scope="row">Week 1</th><td>$1,487.50</td><td data-label="Oct week 1">$1,605.50</td></tr>
-      <tr><th scope="row">Week 2</th><td>$3,855.00</td><td data-label="Oct week 2">$3,821.40</td></tr>
-      <tr><th scope="row">Week 3</th><td></td><td data-label="Oct week 3">$6,445.90</td></tr>
-      <tr><th scope="row">Week 4</th><td></td><td data-label="Oct week 4">$9,226.40</td></tr>
-    </tbody>
-  </table>
+<u-chart type="line" prefix="$" height="120" data-label="Revenue so far, by week">
+  <script type="application/json">{"series": ["November", "October"], "rows": [
+    {"label": "Week 1", "values": [{"value": 1487.5, "text": "$1,487.50"}, {"value": 1605.5, "text": "$1,605.50", "label": "Oct week 1"}]},
+    {"label": "Week 2", "values": [{"value": 3855, "text": "$3,855.00"}, {"value": 3821.4, "text": "$3,821.40", "label": "Oct week 2"}]},
+    {"label": "Week 3", "values": [null, {"value": 6445.9, "text": "$6,445.90", "label": "Oct week 3"}]},
+    {"label": "Week 4", "values": [null, {"value": 9226.4, "text": "$9,226.40", "label": "Oct week 4"}]}
+  ]}</script>
 </u-chart>

@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Chart
-summary: "A chart drawn from a plain table of data."
+summary: "A chart drawn from the JSON inside it."
 section: Components
 permalink: /components/chart/
 ---
 
-`<u-chart>` draws a chart from the `<table>` inside it. Pick the type with one
+`<u-chart>` draws a chart from the JSON inside it. Pick the type with one
 attribute, and the element handles the drawing, hover, loading and empty states.
 
 ## Example
@@ -18,34 +18,23 @@ attribute, and the element handles the drawing, hover, loading and empty states.
 ## Code
 
 ```html
-<u-chart type="bar" height="160">
-  <table>
-    <caption>Jobs finished each week</caption>
-    <thead><tr><th scope="col">Week of</th><th scope="col">Jobs</th></tr></thead>
-    <tbody>
-      <tr><th scope="row">Oct 26</th><td>19</td></tr>
-      <tr><th scope="row">Nov 2</th><td>23</td></tr>
-    </tbody>
-  </table>
+<u-chart type="bar" height="160" data-label="Jobs finished each week">
+  <script type="application/json">
+    {"rows": [{"label": "Oct 26", "values": [19]}, {"label": "Nov 2", "values": [23]}]}
+  </script>
 </u-chart>
 ```
 
 ```erb
-<u-chart type="bar" height="160">
-  <table>
-    <caption><%%= t(".caption") %></caption>
-    <thead><tr><th scope="col"><%%= t(".week_of") %></th><th scope="col"><%%= t(".jobs") %></th></tr></thead>
-    <tbody>
-      <%% jobs_per_week.each do |week, count| %>
-        <tr><th scope="row"><%%= l(week, format: :short) %></th><td><%%= count %></td></tr>
-      <%% end %>
-    </tbody>
-  </table>
-</u-chart>
+<%%= uniform_chart :bar,
+      label: t(".caption"),
+      height: 160,
+      rows: jobs_per_week.map { |week, count| {label: l(week, format: :short), value: count} } %>
 ```
 
-The first column labels each row, like a week or a day, and the next holds the
-values. Put the chart in a [card](/components/card/) with its title and a
+Each row has a `label`, like a week or a day, and its `values`. In Rails,
+`uniform_chart` writes the JSON and a shimmer that shows until the chart is
+drawn. Put the chart in a [card](/components/card/) with its title and a
 [stat](/components/stat/), and load [`uniform.js`](/start/install/).
 
 ## Types
@@ -65,16 +54,21 @@ values. Put the chart in a [card](/components/card/) with its title and a
 [Sparkline](/components/chart-spark/)
 : A small trend line under a figure.
 
-## Why a table, not JSON
+## Data
 
-Works with no script
-: If JavaScript fails or hasn't loaded, people see a readable table of the same numbers instead of a blank card.
+`rows`
+: One object per bar, point or part, in order. Each has a `label` and `values`, one per series. A missing value is `null`.
 
-One copy of the data
-: Screen readers read the table. Once the chart is drawn, the table stays in the page for them, hidden from sight.
+A value
+: A number, or an object when the server formats it: `{"value": 4280, "text": "$4,280.00", "label": "Oct 12"}`. The chart shows `text` in its tooltip, and `label` names a comparison value's own date.
 
-Formatted by the server
-: Rails writes dates and money in the reader's language, and the chart shows those words in its tooltip. JSON would need its own formatting and escaping.
+`tone` on a row
+: The status colour of a stacked bar segment: `danger`, `info`, `warning`, `success` or `neutral`.
+
+`series`
+: The names of a line chart's lines, for its legend, like `["November", "October"]`.
+
+Without the script, the chart stays as its shimmer.
 
 ## Attributes
 
@@ -93,27 +87,21 @@ Formatted by the server
 `current`
 : Set to `none` to draw every bar grey. Otherwise the last bar is ink.
 
-`data-value` on a cell
-: The number to draw, when the cell's text can't be read as one, like `4 280,00 $`.
-
-`data-label` on a cell
-: The tooltip label for that value, like `Oct 12` in a comparison row for Nov 12.
-
-`data-tone` on a row
-: The status colour of a stacked bar segment: `danger`, `info`, `warning`, `success` or `neutral`.
+`data-label`
+: What the chart shows, like “Jobs finished each week”. It names the chart for screen readers.
 
 ## Loading and empty
 
 <%= render "examples/chart_states" %>
 
 Empty
-: A table with no rows shows the line in `data-empty`, in the plot's height.
+: Rows with no values show the line in `data-empty`, in the plot's height.
 
 Loading
-: With `aria-busy="true"` and no table, the chart shows shimmer bars until a table arrives, for example by Turbo Stream.
+: With `aria-busy="true"` and no JSON, the chart shows shimmer bars until its data arrives, for example by Turbo Stream.
 
 From a URL
-: With `src`, the chart fetches that page and draws its first table, with shimmer bars while it loads. If the fetch fails, it shows the line in `data-error`.
+: With `src`, the chart fetches its JSON from that URL, with shimmer bars while it loads. If the fetch fails, it shows the line in `data-error`.
 
 ```html
 <u-chart type="bar" src="/reports/jobs/weekly" data-error="This chart didn't load. Reload the page to try again."></u-chart>
@@ -133,11 +121,11 @@ From a URL
 
 ## Accessibility
 
-The table is the data
-: Give the table a `<caption>`, header cells and `scope`. Screen readers read the table and skip the drawing.
+Name every chart
+: `data-label` says what it shows. A stacked bar, meter and sparkline read their values after it, like “Open jobs by status: Overdue 2, On the bench 9”. Put the figure that matters in a [stat](/components/stat/), where everyone reads it.
 
 Keyboard
-: A bar or line chart is one Tab stop, named by the table's caption. The left and right arrow keys step through the columns with the same tooltip as hover, Home and End jump to the ends, and Escape hides it.
+: A bar or line chart is one Tab stop, named by `data-label`. The left and right arrow keys step through the columns with the same tooltip as hover, Home and End jump to the ends, and Escape hides it.
 
 Never colour alone
 : Two series get a legend in words, stacked segments keep their status names, and the stat says up or down.
@@ -147,7 +135,7 @@ Never colour alone
 One idea per card
 : A card holds one chart about one thing. Two measures with different scales get two cards.
 
-Write the table, never the drawing
-: Never draw chart SVG by hand or pass the data as JSON.
+Write the data, never the drawing
+: Never draw chart SVG by hand. Pass the rows and let `<u-chart>` draw them.
 
 More chart rules are on the [Charts foundation](/foundations/charts/#rules).

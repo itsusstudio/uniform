@@ -1,6 +1,7 @@
 <% span_value = defined?(span) && span -%>
 <% loading_value = defined?(loading) && loading -%>
 <% statuses = [["danger", "Overdue", 2], ["info", "On the bench", 9], ["warning", "Waiting", 6], ["success", "Ready for pickup", 4]] -%>
+<% chart_json = ->(data) { raw(JSON.generate(data).gsub("</", "<\\/")) } -%>
 <section class="u-card<%= " u-span-#{span_value}" if span_value %>">
   <header>
     <h2>Open jobs by status</h2>
@@ -12,22 +13,14 @@
       <p><span class="u-shimmer">12</span></p>
       <p><span class="u-shimmer">Open now, down 2</span></p>
     </div>
-    <u-chart type="stacked" aria-busy="true" aria-label="Loading open jobs by status"></u-chart>
+    <u-chart type="stacked" aria-busy="true" data-label="Open jobs by status"></u-chart>
 <% else -%>
     <div class="u-stat">
       <p><%= statuses.sum { |_, _, count| count } %></p>
       <p data-trend="down">Open now, down 2 on last Thursday</p>
     </div>
-    <u-chart type="stacked">
-      <table>
-        <caption>Open jobs by status</caption>
-        <thead><tr><th scope="col">Status</th><th scope="col">Jobs</th></tr></thead>
-        <tbody>
-<% statuses.each do |tone, label, count| -%>
-          <tr data-tone="<%= tone %>"><th scope="row"><%= label %></th><td><%= count %></td></tr>
-<% end -%>
-        </tbody>
-      </table>
+    <u-chart type="stacked" data-label="Open jobs by status">
+      <script type="application/json"><%= chart_json.(rows: statuses.map { |tone, label, count| {label: label, values: [count], tone: tone} }) %></script>
     </u-chart>
 <% end -%>
   </div>

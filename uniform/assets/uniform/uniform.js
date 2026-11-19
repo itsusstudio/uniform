@@ -1039,13 +1039,20 @@ const chartTip = (tooltip, x, min, max) => {
   tooltip.style.left = `${left}px`
 }
 
-const chartNumber = (cell) => {
-  if (!cell) return null
-  const raw = cell.dataset.value ?? cell.textContent
-  if (!raw.trim()) return null
-  const value = parseFloat(raw.replace(/[^\d.-]/g, ""))
-  return Number.isFinite(value) ? value : null
+const chartNumber = (point) => (Number.isFinite(point?.value) ? point.value : null)
+
+const chartPoint = (raw) => {
+  if (raw == null) return null
+  const point = typeof raw === "object" ? raw : { value: raw }
+  const value = typeof point.value === "string" ? parseFloat(point.value) : point.value
+  return { value: Number.isFinite(value) ? value : null, text: point.text, label: point.label }
 }
+
+const chartRows = (data) => (Array.isArray(data?.rows) ? data.rows : []).map((row) => ({
+  label: String(row.label ?? ""),
+  cells: (Array.isArray(row.values) ? row.values : [row.value]).map(chartPoint),
+  tone: row.tone || "neutral"
+}))
 
 const chartNice = (max) => {
   if (max <= 0) return 1
@@ -1105,10 +1112,35 @@ define("u-chart", class extends UniformElement {
   setup(signal) {
     signal.addEventListener("abort", () => this.clear())
     const src = this.getAttribute("src")
-    const table = this.querySelector(":scope > table")
-    if (src && !table) this.load(src, signal)
-    else if (!table && this.getAttribute("aria-busy") === "true") this.shimmer()
+    this.data = this.inlineData()
+    if (src && !this.data) this.load(src, signal)
+    else if (!this.data && this.getAttribute("aria-busy") === "true") this.shimmer()
     else this.render(signal)
+  }
+
+  inlineData() {
+    const script = this.querySelector(':scope > script[type="application/json"]')
+    if (!script) return null
+    try {
+      return JSON.parse(script.textContent)
+    } catch (error) {
+      console.error("u-chart: the JSON inside the chart doesn't parse.", error)
+      return null
+    }
+  }
+
+  text(point, top) {
+    return point?.text ?? this.format(point?.value ?? 0, top)
+  }
+
+  name() {
+    return this.dataset.label || ""
+  }
+
+  describe(words) {
+    const name = this.name()
+    this.setAttribute("role", "img")
+    this.setAttribute("aria-label", [name, words].filter(Boolean).join(": "))
   }
 
   shimmer() {
@@ -1153,11 +1185,14 @@ define("u-chart", class extends UniformElement {
     }
     shimmer.setAttribute("aria-hidden", "true")
     this.mark(shimmer)
+    this.describe("")
   }
 
   clear() {
     this.querySelectorAll(":scope > [data-chart]").forEach((node) => node.remove())
     delete this.dataset.drawn
+    this.removeAttribute("role")
+    this.removeAttribute("aria-label")
   }
 
   mark(node) {
@@ -1170,13 +1205,10 @@ define("u-chart", class extends UniformElement {
     this.setAttribute("aria-busy", "true")
     this.shimmer()
     try {
-      const response = await fetch(src, { headers: { Accept: "text/html" }, signal })
+      const response = await fetch(src, { headers: { Accept: "application/json" }, signal })
       if (!response.ok) throw new Error(response.statusText)
-      const page = new DOMParser().parseFromString(trustedHTML(await response.text()), "text/html")
-      const table = page.querySelector("table")
-      if (!table) throw new Error("No table")
+      this.data = await response.json()
       this.clear()
-      this.append(document.importNode(table, true))
       this.removeAttribute("aria-busy")
       this.render(signal)
     } catch (error) {
@@ -1189,14 +1221,9 @@ define("u-chart", class extends UniformElement {
 
   render(signal) {
     this.clear()
-    const table = this.querySelector(":scope > table")
-    if (!table) return
-    const rows = [...(table.tBodies[0]?.rows || [])].map((row) => ({
-      label: row.cells[0]?.textContent.trim() || "",
-      cells: [...row.cells].slice(1),
-      tone: row.dataset.tone || "neutral"
-    }))
-    const names = [...(table.tHead?.rows[0]?.cells || [])].slice(1).map((cell) => cell.textContent.trim())
+    if (!this.data) return
+    const rows = chartRows(this.data)
+    const names = Array.isArray(this.data.series) ? this.data.series.map(String) : []
     const type = this.getAttribute("type") || "bar"
     const hasData = rows.some((row) => row.cells.some((cell) => chartNumber(cell)))
     if (!hasData) {
@@ -1326,8 +1353,8 @@ define("u-chart", class extends UniformElement {
         tip.hidden = empty
         if (empty) return
         shown = true
-        tip.children[0].textContent = cell.textContent.trim()
-        tip.children[1].textContent = cell.dataset.label || row.label
+        tip.children[0].textContent = this.text(cell, top)
+        tip.children[1].textContent = cell.label || row.label
       })
       tooltip.hidden = !shown
       if (!shown) return
@@ -1348,12 +1375,10 @@ define("u-chart", class extends UniformElement {
       if (event.pointerType !== "touch") hide()
     }, { signal })
 
-    // The table stays what screen readers read. This lets keyboard users step through the same tooltips.
-    const table = this.querySelector(":scope > table")
+    // One Tab stop, named by data-label; the arrow keys read each column through the same tooltip as hover.
     plot.tabIndex = 0
     plot.setAttribute("role", "img")
-    const name = table?.caption?.textContent.trim() || table?.getAttribute("aria-label") || this.dataset.label
-    if (name) plot.setAttribute("aria-label", name)
+    if (this.name()) plot.setAttribute("aria-label", this.name())
     plot.addEventListener("focus", () => show(active ?? (current === -1 ? rows.length - 1 : current)), { signal })
     plot.addEventListener("blur", hide, { signal })
     plot.addEventListener("keydown", (event) => {
@@ -1380,11 +1405,12 @@ define("u-chart", class extends UniformElement {
       segment.style.setProperty("--u-chart-share", value)
       bar.append(segment)
       const item = chartHtml("li")
-      item.append(chartHtml("span", `u-badge u-badge-${row.tone}`, row.label), chartHtml("span", "u-meta", row.cells[0]?.textContent.trim()))
+      item.append(chartHtml("span", `u-badge u-badge-${row.tone}`, row.label), chartHtml("span", "u-meta", this.text(row.cells[0])))
       legend.append(item)
     })
     wrap.append(bar, legend)
     this.mark(wrap)
+    this.describe(rows.map((row) => `${row.label} ${this.text(row.cells[0])}`).join(", "))
   }
 
   meter(rows) {
@@ -1394,6 +1420,7 @@ define("u-chart", class extends UniformElement {
     meter.max = chartNumber(rows[1]?.cells[0]) || Number(this.getAttribute("max")) || 100
     meter.value = chartNumber(rows[0].cells[0]) || 0
     this.mark(meter)
+    this.describe(`${this.text(rows[0].cells[0])} / ${rows[1] ? this.text(rows[1].cells[0]) : this.format(meter.max)}`)
   }
 
   spark(rows) {
@@ -1411,6 +1438,8 @@ define("u-chart", class extends UniformElement {
     const curve = chartCurve(points)
     svg.append(defs, chartSvg("path", { class: "u-chart-area", fill: `url(#${id})`, d: `${curve} L96 24 L0 24 Z` }), chartSvg("path", { class: "u-chart-line u-chart-current", d: curve }))
     this.mark(svg)
+    const last = rows.findLast((row) => chartNumber(row.cells[0]) != null)
+    this.describe(last ? `${last.label} ${this.text(last.cells[0])}` : "")
   }
 })
 

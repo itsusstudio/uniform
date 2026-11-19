@@ -5,12 +5,8 @@
     <p class="u-text-small u-text-muted">Last 12 weeks</p>
   </header>
   <div class="u-card-content">
-    <u-chart type="bar" height="160" data-empty="Finished jobs show here each week, starting with your first.">
-      <table>
-        <caption>Jobs finished each week</caption>
-        <thead><tr><th scope="col">Week of</th><th scope="col">Jobs</th></tr></thead>
-        <tbody></tbody>
-      </table>
+    <u-chart type="bar" height="160" data-label="Jobs finished each week" data-empty="Finished jobs show here each week, starting with your first.">
+      <script type="application/json">{"rows": []}</script>
     </u-chart>
   </div>
 </section>
@@ -20,7 +16,7 @@
     <p class="u-text-small u-text-muted">Last 12 weeks</p>
   </header>
   <div class="u-card-content">
-    <u-chart type="bar" height="160" aria-busy="true" aria-label="Loading jobs finished"></u-chart>
+    <u-chart type="bar" height="160" aria-busy="true" data-label="Jobs finished each week"></u-chart>
   </div>
 </section>
 </div>

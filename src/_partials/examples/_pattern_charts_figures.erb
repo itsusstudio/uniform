@@ -17,21 +17,14 @@
           <p><span class="u-shimmer"><%= figure %></span></p>
           <p><span class="u-shimmer"><%= label %></span></p>
         </div>
-        <u-chart type="spark" aria-busy="true" aria-label="Loading <%= caption.downcase %>"></u-chart>
+        <u-chart type="spark" aria-busy="true" data-label="<%= caption %>"></u-chart>
 <% else -%>
         <div class="u-stat">
           <p><%= figure %></p>
           <a href="<%= path %>"><%= label %></a>
         </div>
-        <u-chart type="spark">
-          <table class="u-visually-hidden">
-            <caption><%= caption %></caption>
-            <tbody>
-<% weeks.zip(values).each do |week, value| -%>
-              <tr><th scope="row"><%= week %></th><td><%= value %></td></tr>
-<% end -%>
-            </tbody>
-          </table>
+        <u-chart type="spark" data-label="<%= caption %>">
+          <script type="application/json"><%= raw(JSON.generate(rows: weeks.zip(values).map { |week, value| {label: week, values: [value]} }).gsub("</", "<\\/")) %></script>
         </u-chart>
 <% end -%>
       </div>

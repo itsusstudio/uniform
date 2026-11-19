@@ -151,7 +151,7 @@ Wrap the component's markup in it:
 : The [app shell](/components/app-shell/)'s sidebar column itself.
 
 `<u-chart>`
-: Around a `<table>` of data. Draws it as a chart.
+: Around a JSON script of rows. Draws it as a chart.
 
 `<u-data-grid>`
 : Around a [data grid](/components/data-grid/)'s table and its bars. Adds selecting rows, editing in place and columns.

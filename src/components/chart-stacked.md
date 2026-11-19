@@ -30,7 +30,7 @@ this shape while the data loads.
 <%= raw render("examples/chart_stacked").strip %>
 ```
 
-Use one row per part, with `data-tone` for its [badge](/components/badge/) colour.
+Use one row per part, with a `tone` for its [badge](/components/badge/) colour.
 
 ## Rules
 

@@ -26,8 +26,7 @@ this shape while the data loads.
 <%= raw render("examples/pattern_charts_figures").strip %>
 ```
 
-Use one value column. Make the table `u-visually-hidden`, since the stat
-already shows the number.
+Use one value per row. The stat above already shows the number.
 
 ## Rules
 

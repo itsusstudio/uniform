@@ -1,15 +1,4 @@
 @layer uniform.components {
-/* A table grows to fit its rows whatever its height, so an absolute one still lengthens the page. */
-u-chart[data-drawn] > table {
-  position: fixed;
-  inset: 0 auto auto 0;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 .u-chart-stacked {
   display: flex;
   flex-direction: column;

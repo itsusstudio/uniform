@@ -134,7 +134,7 @@ on a bar chart.
 Hover follows the pointer straight away. The one fade is the bars dimming,
 over 100ms (`--u-motion-hover`), so moving across a bar chart reads as one
 steady sweep instead of a flicker. Tooltips only add detail. Everything they
-show is also in the chart's hidden table.
+show is also in the stat, the legend or the chart's name.
 
 ## Legend
 
@@ -143,7 +143,7 @@ show is also in the chart's hidden table.
 </div>
 
 Only when there are two series or more, in a row above the plot, in sentence
-case. The chart draws it from the table's header cells, with a short line key
+case. The chart draws it from the `series` names, with a short line key
 for each line. A status chart uses
 [badge](/components/badge/) for its legend, with the count beside each word,
 so the legend doubles as the numbers.
@@ -172,8 +172,7 @@ Changes
 Keep the card, its title and the plot's height, so nothing jumps when data
 arrives. With no data yet, say in one muted line what will show up there. While
 it loads, grey bars fill the same space with a slow shimmer passing over them,
-and the card has `aria-busy="true"` and a hidden “Loading” line for screen
-readers. The shimmer stops when someone has asked for reduced motion.
+and the chart has `aria-busy="true"`. The shimmer stops when someone has asked for reduced motion.
 Leave out the figure until there's a real one: a row of zeros only says twice
 that nothing has happened.
 
@@ -182,8 +181,8 @@ that nothing has happened.
 Name the picture
 : A static SVG chart has `role="img"` and an `aria-label` that says what it shows and the values that matter: the lowest, the highest and the latest.
 
-Keep every value in text
-: Put the full data in a table with `u-visually-hidden` after the chart, so a screen reader can go row by row.
+Keep the answer in text
+: The figure people need is in the stat beside the chart. A bar or line chart steps through every value by keyboard, and the other types read theirs aloud.
 
 Never colour alone
 : Series have a legend in words, statuses have their names, and changes say up or down.
@@ -193,10 +192,10 @@ Contrast
 
 ## Drawing them
 
-Every chart is a `<table>` of data inside [`<u-chart>`](/components/chart/),
-which draws it as SVG and HTML. The fill under a line is a `linearGradient`
-with two stops, `u-chart-fade-top` and `u-chart-fade-bottom`, which read the
-fill tokens. Without the script, the table shows on its own.
+Every chart is JSON inside [`<u-chart>`](/components/chart/), which draws it
+as SVG and HTML. The fill under a line is a `linearGradient` with two stops,
+`u-chart-fade-top` and `u-chart-fade-bottom`, which read the fill tokens.
+Without the script, the chart stays as its shimmer.
 
 ## Rules
 

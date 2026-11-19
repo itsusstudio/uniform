@@ -23,9 +23,9 @@ Leave a cell empty and the line stops there, so this month ends at today.
 <%= render "examples/chart_line", span: 8, compare: true, prefix: "line-compare" %>
 </div>
 
-A second value column draws a grey line under the ink one, with a legend named
-from the two header cells. Add a `data-label` to each comparison cell so its
-tooltip names its own date.
+A second value in each row draws a grey line under the ink one, with a legend
+named from `series`. Give each comparison value a `label` so its tooltip names
+its own date.
 
 ## Loading
 

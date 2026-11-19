@@ -697,7 +697,7 @@
 - name: <u-chart>
   group: Charts
   page: /components/chart/
-  description: "Wraps a `<table>` and draws it as a chart, picked with `type`: `bar`, `line`, `stacked`, `meter` or `spark`."
+  description: "Draws the JSON inside it as a chart, picked with `type`: `bar`, `line`, `stacked`, `meter` or `spark`."
 
 - name: u-chart-legend
   group: Charts

@@ -32,7 +32,7 @@ the keyboard never pushes it out of view.
 ## Code
 
 ```html
-<%= raw render("examples/pattern_auth_sign_in", id: "sign-in", tag: "main").strip %>
+<%= inline_partial("examples/pattern_auth_sign_in", id: "sign-in", tag: "main") %>
 ```
 
 A `u-auth-shell` holds three parts, in order:

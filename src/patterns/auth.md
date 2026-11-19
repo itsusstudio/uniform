@@ -78,11 +78,11 @@ Links
 ## Code
 
 ```html
-<%= raw render("examples/pattern_auth_sign_in", id: "sign-in", tag: "main").strip %>
+<%= inline_partial("examples/pattern_auth_sign_in", id: "sign-in", tag: "main") %>
 
-<%= raw render("examples/pattern_auth_code", id: "code", tag: "main", error: true).strip %>
+<%= inline_partial("examples/pattern_auth_code", id: "code", tag: "main", error: true) %>
 
-<%= raw render("examples/pattern_auth_sign_up", id: "sign-up", tag: "main").strip %>
+<%= inline_partial("examples/pattern_auth_sign_up", id: "sign-up", tag: "main") %>
 ```
 
 The page's `<body>` stays white. On the code screen, leave out `aria-invalid`

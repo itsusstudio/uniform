@@ -24,7 +24,7 @@ the far right.
 ## Code
 
 ```html
-<%= raw render("examples/list_jobs").strip %>
+<%= inline_partial("examples/list_jobs") %>
 ```
 
 ```erb

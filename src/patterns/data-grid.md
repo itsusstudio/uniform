@@ -86,13 +86,13 @@ Sort and filter sheet
 The desktop grid, with three status filters set:
 
 ```html
-<%= raw render("examples/pattern_data_grid_desktop", prefix: "", code: true).strip %>
+<%= inline_partial("examples/pattern_data_grid_desktop", prefix: "", code: true) %>
 ```
 
 The phone layout, with the sheet closed:
 
 ```html
-<%= raw render("examples/pattern_data_grid_phone", prefix: "", code: true, sheet_open: false).strip %>
+<%= inline_partial("examples/pattern_data_grid_phone", prefix: "", code: true, sheet_open: false) %>
 ```
 
 ### What needs JavaScript

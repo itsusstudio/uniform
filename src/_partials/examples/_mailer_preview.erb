@@ -10,6 +10,6 @@
     title: title, preheader: preheader, sender: sender, address: address.split(", ", 3), wordmark_style: "serif", labels: labels,
     unsubscribe_url: (given.include?(:unsubscribe_url) ? unsubscribe_url : nil),
     sent_with: (on_behalf ? "Workbench" : nil), sent_with_url: "https://useworkbench.co",
-    fonts: Studio::Uniform::Mail::FONTS.to_h { |_, _, file| [file, asset_path("uniform/assets/uniform/fonts/#{file}")] })
+    fonts: Studio::Uniform::Mail::FONTS.to_h { |_, _, file| [file, asset_path("uniform/assets/uniform/fonts/#{file}")] }).to_s.html_safe
 -%>
-<%= raw email %>
+<%= email %>

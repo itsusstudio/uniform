@@ -32,7 +32,7 @@ continue the same list.
 ## Code
 
 ```html
-<%= raw render("examples/timeline_basic").strip %>
+<%= inline_partial("examples/timeline_basic") %>
 ```
 
 Grouped by day, each day is a heading and its own list:
@@ -47,7 +47,7 @@ Grouped by day, each day is a heading and its own list:
 Older events, collapsed:
 
 ```html
-<%= raw render("examples/timeline_older").strip %>
+<%= inline_partial("examples/timeline_older") %>
 ```
 
 ## Parts

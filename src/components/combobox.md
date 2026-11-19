@@ -136,7 +136,7 @@ Disabled
 </div>
 
 ```html
-<%= raw render("examples/combobox_datalist").strip %>
+<%= inline_partial("examples/combobox_datalist") %>
 ```
 
 ```erb

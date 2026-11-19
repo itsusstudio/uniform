@@ -9,18 +9,18 @@
   <nav class="u-nav" aria-label="Workbench">
     <div>
       <ul>
-        <li><a href="/"<% if here == "home" %> aria-current="page"<% end %>><%= raw render("icon", name: "house", small: true).strip %><span>Home</span></a></li>
-        <li><a href="/jobs"<% if here == "jobs" %> aria-current="page"<% end %>><%= raw render("icon", name: "wrench", small: true).strip %><span>Jobs</span></a></li>
-        <li><a href="/customers"<% if here == "customers" %> aria-current="page"<% end %>><%= raw render("icon", name: "users", small: true).strip %><span>Customers</span></a></li>
+        <li><a href="/"<% if here == "home" %> aria-current="page"<% end %>><%= inline_partial("icon", name: "house", small: true) %><span>Home</span></a></li>
+        <li><a href="/jobs"<% if here == "jobs" %> aria-current="page"<% end %>><%= inline_partial("icon", name: "wrench", small: true) %><span>Jobs</span></a></li>
+        <li><a href="/customers"<% if here == "customers" %> aria-current="page"<% end %>><%= inline_partial("icon", name: "users", small: true) %><span>Customers</span></a></li>
       </ul>
     </div>
     <div>
       <ul>
-        <li><a href="/payments"<% if here == "payments" %> aria-current="page"<% end %>><%= raw render("icon", name: "credit-card", small: true).strip %><span>Payments</span></a></li>
+        <li><a href="/payments"<% if here == "payments" %> aria-current="page"<% end %>><%= inline_partial("icon", name: "credit-card", small: true) %><span>Payments</span></a></li>
       </ul>
     </div>
     <details<% if here == "reports" %> open<% end %>>
-      <summary><%= raw render("icon", name: "chart-column", small: true).strip %><span>Reports</span></summary>
+      <summary><%= inline_partial("icon", name: "chart-column", small: true) %><span>Reports</span></summary>
       <ul>
         <li><a href="/reports/turnaround"<% if here == "reports" %> aria-current="page"<% end %>>Turnaround</a></li>
         <li><a href="/reports/revenue">Revenue</a></li>
@@ -29,9 +29,9 @@
   </nav>
   <div>
     <ul>
-      <li><a href="/guides"><%= raw render("icon", name: "file", small: true).strip %><span>Guides</span></a></li>
+      <li><a href="/guides"><%= inline_partial("icon", name: "file", small: true) %><span>Guides</span></a></li>
       <li>
-        <button type="button" popovertarget="<%= id %>-help"><%= raw render("icon", name: "circle-help", small: true).strip %><span>Help</span></button>
+        <button type="button" popovertarget="<%= id %>-help"><%= inline_partial("icon", name: "circle-help", small: true) %><span>Help</span></button>
         <div class="u-menu" id="<%= id %>-help" popover>
           <a href="/help">Help centre</a>
           <a href="/changelog">What’s new</a>
@@ -47,9 +47,9 @@
       <details>
         <summary>Appearance</summary>
         <u-theme-preference>
-          <button type="button" value="system"><%= raw render("icon", name: "monitor", small: true).strip %>Use system setting</button>
-          <button type="button" value="light"><%= raw render("icon", name: "sun", small: true).strip %>Light</button>
-          <button type="button" value="dark"><%= raw render("icon", name: "moon", small: true).strip %>Dark</button>
+          <button type="button" value="system"><%= inline_partial("icon", name: "monitor", small: true) %>Use system setting</button>
+          <button type="button" value="light"><%= inline_partial("icon", name: "sun", small: true) %>Light</button>
+          <button type="button" value="dark"><%= inline_partial("icon", name: "moon", small: true) %>Dark</button>
         </u-theme-preference>
       </details>
       <hr>

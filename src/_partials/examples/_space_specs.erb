@@ -7,7 +7,7 @@
 <div class="flex flex-col gap-2">
 <p class="text-body"><%= row[:job] %></p>
 <ul class="list-disc pl-4 text-small">
-<% row[:uses].each do |use| %><li><%= raw markdownify(use).strip.delete_prefix("<p>").delete_suffix("</p>") %></li><% end %>
+<% row[:uses].each do |use| %><li><%= inline_markdown(use) %></li><% end %>
 </ul>
 <p class="text-small text-muted">In component CSS: <code class="u-data">--spacing(<%= row[:px] / 4 %>)</code></p>
 </div>

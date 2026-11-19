@@ -23,7 +23,7 @@ Delete shop opens the confirm. Try it.
 ## Code
 
 ```html
-<%= raw render("examples/danger_zone").strip %>
+<%= inline_partial("examples/danger_zone") %>
 ```
 
 ## How it's built

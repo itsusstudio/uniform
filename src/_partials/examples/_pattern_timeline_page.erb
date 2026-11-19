@@ -26,6 +26,6 @@
         </dl>
       </div>
     </section>
-    <%= raw render("examples/pattern_timeline_card", state: :full, prefix: prefix).strip.gsub("\n", "\n    ") %>
+    <%= inline_partial("examples/pattern_timeline_card", state: :full, prefix: prefix, indent: 4) %>
   </div>
 </div>

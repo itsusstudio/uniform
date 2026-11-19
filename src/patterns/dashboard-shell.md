@@ -62,7 +62,7 @@ Page content
 ## Code
 
 ```html
-<%= raw render("examples/pattern_dashboard_shell_app", id: "app", live: true).strip %>
+<%= inline_partial("examples/pattern_dashboard_shell_app", id: "app", live: true) %>
 ```
 
 ## Do and don't

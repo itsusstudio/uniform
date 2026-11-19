@@ -4,8 +4,8 @@
     <a class="u-wordmark u-wordmark-serif" href="/" data-monogram="W">Workbench</a>
     <button type="button" class="u-btn u-btn-ghost"<% if live %> popovertarget="<%= id %>-nav"<% end %>>Menu</button>
   </header>
-  <%= raw render("examples/app_shell_nav", id: "#{id}-nav", popover: true, current: "jobs").strip.gsub("\n", "\n  ") %>
+  <%= inline_partial("examples/app_shell_nav", id: "#{id}-nav", popover: true, current: "jobs", indent: 2) %>
   <main>
-    <%= raw render("examples/pattern_timeline_page", prefix: id).strip.gsub("\n", "\n    ") %>
+    <%= inline_partial("examples/pattern_timeline_page", prefix: id, indent: 4) %>
   </main>
 </div>

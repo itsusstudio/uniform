@@ -39,7 +39,7 @@ this shape while the data loads.
 ## Code
 
 ```html
-<%= raw render("examples/chart_line", compare: true).strip %>
+<%= inline_partial("examples/chart_line", compare: true) %>
 ```
 
 Set `prefix="$"` for money, so the axis reads `$5k`.

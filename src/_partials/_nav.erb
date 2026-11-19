@@ -25,12 +25,12 @@
   <div class="site-nav-footer">
     <ul>
       <li>
-        <button type="button" popovertarget="site-appearance"><%= raw render("icon", name: "monitor", small: true).strip %><span>Appearance</span></button>
+        <button type="button" popovertarget="site-appearance"><%= inline_partial("icon", name: "monitor", small: true) %><span>Appearance</span></button>
         <div class="u-menu" id="site-appearance" popover>
           <u-theme-preference>
-            <button type="button" value="system"><%= raw render("icon", name: "monitor", small: true).strip %>Use system setting</button>
-            <button type="button" value="light"><%= raw render("icon", name: "sun", small: true).strip %>Light</button>
-            <button type="button" value="dark"><%= raw render("icon", name: "moon", small: true).strip %>Dark</button>
+            <button type="button" value="system"><%= inline_partial("icon", name: "monitor", small: true) %>Use system setting</button>
+            <button type="button" value="light"><%= inline_partial("icon", name: "sun", small: true) %>Light</button>
+            <button type="button" value="dark"><%= inline_partial("icon", name: "moon", small: true) %>Dark</button>
           </u-theme-preference>
         </div>
       </li>

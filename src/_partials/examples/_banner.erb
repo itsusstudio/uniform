@@ -1,5 +1,5 @@
 <%# locals: (variant:, title:, body:, action:) -%>
-<div class="u-banner u-banner-<%= variant || "info" %>" role="status">
+<div class="<%= variant_class("u-banner", variant || "info") %>" role="status">
 <p class="u-banner-title"><%= title %></p>
 <p><%= body %></p>
 <% if action %><div class="u-actions"><a class="u-btn u-btn-primary" href="#code"><%= action %></a></div><% end %>

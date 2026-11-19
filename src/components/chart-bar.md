@@ -30,7 +30,7 @@ this shape while the data loads.
 ## Code
 
 ```html
-<%= raw render("examples/chart_bar").strip %>
+<%= inline_partial("examples/chart_bar") %>
 ```
 
 Use one value column, with the oldest period first. Add `current="none"` when

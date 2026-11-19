@@ -85,19 +85,19 @@ Empty state
 The job page, inside the app shell's `<main>`. See [Dashboard shell](/patterns/dashboard-shell/) for the frame around it.
 
 ```html
-<%= raw render("examples/pattern_timeline_page", prefix: "").strip %>
+<%= inline_partial("examples/pattern_timeline_page", prefix: "") %>
 ```
 
 A brand-new job:
 
 ```html
-<%= raw render("examples/pattern_timeline_card", state: :empty, prefix: "").strip %>
+<%= inline_partial("examples/pattern_timeline_card", state: :empty, prefix: "") %>
 ```
 
 A long history, with older events collapsed:
 
 ```html
-<%= raw render("examples/pattern_timeline_card", state: :long, prefix: "").strip %>
+<%= inline_partial("examples/pattern_timeline_card", state: :long, prefix: "") %>
 ```
 
 ## Do and don't

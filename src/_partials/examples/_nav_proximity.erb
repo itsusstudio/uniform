@@ -3,9 +3,9 @@
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame nav-dont">
 <nav class="u-nav" aria-label="Example, before">
-<div><p>Work</p><ul><li><a><%= render "icon", name: "wrench", small: true %><span>Jobs</span></a></li><li><a>Quotes</a></li></ul></div>
-<div><p>People</p><ul><li><a><%= render "icon", name: "users", small: true %><span>Customers</span></a></li><li><a>Staff</a></li></ul></div>
-<div><p>Settings</p><ul><li><a>Settings</a></li></ul></div>
+<div><p>Work</p><ul><li><a href="#example"><%= render "icon", name: "wrench", small: true %><span>Jobs</span></a></li><li><a href="#example">Quotes</a></li></ul></div>
+<div><p>People</p><ul><li><a href="#example"><%= render "icon", name: "users", small: true %><span>Customers</span></a></li><li><a href="#example">Staff</a></li></ul></div>
+<div><p>Settings</p><ul><li><a href="#example">Settings</a></li></ul></div>
 </nav>
 </div>
 <figcaption class="example-caption example-caption-dont">Some links have icons and some don't, so the labels never line up. Grey headings name groups that can't fold, and Settings fills a group on its own.</figcaption>
@@ -14,9 +14,9 @@
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame nav-do">
 <nav class="u-nav" aria-label="Example, after">
-<div><ul><li><a><%= render "icon", name: "wrench", small: true %><span>Jobs</span></a></li><li><a><%= render "icon", name: "file", small: true %><span>Quotes</span></a></li></ul></div>
-<div><ul><li><a><%= render "icon", name: "users", small: true %><span>Customers</span></a></li></ul></div>
-<details open><summary><%= render "icon", name: "settings", small: true %><span>Settings</span></summary><ul><li><a>General</a></li><li><a>Team</a></li></ul></details>
+<div><ul><li><a href="#example"><%= render "icon", name: "wrench", small: true %><span>Jobs</span></a></li><li><a href="#example"><%= render "icon", name: "file", small: true %><span>Quotes</span></a></li></ul></div>
+<div><ul><li><a href="#example"><%= render "icon", name: "users", small: true %><span>Customers</span></a></li></ul></div>
+<details open><summary><%= render "icon", name: "settings", small: true %><span>Settings</span></summary><ul><li><a href="#example">General</a></li><li><a href="#example">Team</a></li></ul></details>
 </nav>
 </div>
 <figcaption class="example-caption example-caption-do">Every top-level link has an icon, space separates the groups, and Settings folds because it has pages under it.</figcaption>

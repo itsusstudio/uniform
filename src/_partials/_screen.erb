@@ -18,4 +18,4 @@
     </html>
   HTML
 -%>
-<iframe class="screen" title="<%= h title %>" loading="lazy"<% if fit_height %> onload="this.style.height = this.contentDocument.documentElement.scrollHeight + 'px'"<% end %> srcdoc="<%= raw h(document) %>"></iframe>
+<iframe class="screen" title="<%= h title %>" loading="lazy"<% if fit_height %> onload="this.style.height = this.contentDocument.documentElement.scrollHeight + 'px'"<% end %> srcdoc="<%= document %>"></iframe>

@@ -25,6 +25,9 @@ step "Gem: tests"
 step "CSS: stylelint"
 npm run --silent lint:css
 
+step "ERB: herb lint"
+mise exec -- herb-lint --simple .
+
 step "Security: npm audit"
 npm audit
 

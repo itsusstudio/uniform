@@ -146,26 +146,26 @@ Empty state
 The whole page, with nothing filtered or selected:
 
 ```html
-<%= raw render("examples/pattern_data_table_screen", state: :list, prefix: "", code: true).strip %>
+<%= inline_partial("examples/pattern_data_table_screen", state: :list, prefix: "", code: true) %>
 ```
 
 With two filters set. The chips appear, and pagination gives way to a count
 because the results fit on one page:
 
 ```html
-<%= raw render("examples/pattern_data_table_screen", state: :filtered, prefix: "", code: true).strip %>
+<%= inline_partial("examples/pattern_data_table_screen", state: :filtered, prefix: "", code: true) %>
 ```
 
 With filters set and nothing matching:
 
 ```html
-<%= raw render("examples/pattern_data_table_screen", state: :no_results, prefix: "", code: true).strip %>
+<%= inline_partial("examples/pattern_data_table_screen", state: :no_results, prefix: "", code: true) %>
 ```
 
 The first time, with no jobs at all:
 
 ```html
-<%= raw render("examples/pattern_data_table_screen", state: :empty, prefix: "", code: true).strip %>
+<%= inline_partial("examples/pattern_data_table_screen", state: :empty, prefix: "", code: true) %>
 ```
 
 A long page, with the heading row that stays put:

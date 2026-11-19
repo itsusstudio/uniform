@@ -53,7 +53,7 @@ The view. One file makes both the HTML and the plain-text part: in Rails,
 The filled plain-text email, with the layout around it:
 
 ```text
-<%= raw render("examples/mailer_preview", slug: "sign-in-code", title: "482915 is your Workbench sign-in code", preheader: "This code works for 10 minutes.", sender: "Workbench", reason: "You’re getting this because someone asked to sign in to Workbench with this email address.", address: "it's us studio, 216-4035 rue Saint-Ambroise, Montréal QC H4C 2E1", plain_text: true).strip %>
+<%= inline_partial("examples/mailer_preview", slug: "sign-in-code", title: "482915 is your Workbench sign-in code", preheader: "This code works for 10 minutes.", sender: "Workbench", reason: "You’re getting this because someone asked to sign in to Workbench with this email address.", address: "it's us studio, 216-4035 rue Saint-Ambroise, Montréal QC H4C 2E1", plain_text: true) %>
 ```
 
 In Rails, swap `482915` for `<%%= @code %>` in both files, and put the code

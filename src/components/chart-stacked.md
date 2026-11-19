@@ -27,7 +27,7 @@ this shape while the data loads.
 ## Code
 
 ```html
-<%= raw render("examples/chart_stacked").strip %>
+<%= inline_partial("examples/chart_stacked") %>
 ```
 
 Use one row per part, with a `tone` for its [badge](/components/badge/) colour.

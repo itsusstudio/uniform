@@ -1,9 +1,10 @@
 <div class="spec-list">
 <% rows.each do |row| %>
+<% sample_html = row[:sample].to_s.html_safe %>
 <div class="spec-row">
 <div class="spec-meta"><% if row[:copy] %><u-copy><button type="button" class="u-link-btn u-data" data-copy="<%= row[:copy] %>" data-copied="Copied" data-copy-failed="Couldn’t copy"><%= row[:copy] %></button></u-copy><% else %><span class="u-data shape-meta-name"><%= row[:name] %></span><% end %><% if row[:detail] %><span><%= row[:detail] %></span><% end %></div>
 <div class="colour-row shape-row">
-<span class="shape-sample"><%= raw row[:sample] %></span>
+<span class="shape-sample"><%= sample_html %></span>
 <div class="flex flex-col gap-1">
 <p class="text-body"><%= row[:job] %></p>
 <% if row[:never] %><p class="text-small text-muted">Never: <%= row[:never] %></p><% end %>

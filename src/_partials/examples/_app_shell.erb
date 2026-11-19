@@ -4,7 +4,7 @@
     <a class="u-wordmark u-wordmark-serif" href="/" data-monogram="W">Workbench</a>
     <button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Menu"<% if live %> popovertarget="<%= id %>-nav"<% end %>></button>
   </header>
-  <%= raw render("examples/app_shell_nav", id: "#{id}-nav", popover: true).strip.gsub("\n", "\n  ") %>
+  <%= inline_partial("examples/app_shell_nav", id: "#{id}-nav", popover: true, indent: 2) %>
   <main>
     <div class="u-container">
       <header class="u-page-header">
@@ -13,7 +13,7 @@
           <p><span class="u-data">38</span> open, <span class="u-data">6</span> due this week</p>
         </hgroup>
         <div class="u-actions">
-          <a class="u-btn u-btn-primary" href="/jobs/new"><%= raw render("icon", name: "plus", small: true).strip %>New job</a>
+          <a class="u-btn u-btn-primary" href="/jobs/new"><%= inline_partial("icon", name: "plus", small: true) %>New job</a>
         </div>
       </header>
     </div>

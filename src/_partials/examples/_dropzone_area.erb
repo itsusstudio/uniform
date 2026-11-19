@@ -5,8 +5,8 @@
 <% invalid_value = defined?(invalid) && invalid -%>
 <% extra = (defined?(describedby) && describedby) || nil -%>
 <label id="<%= id %>-label" for="<%= id %>"><%= label %></label>
-<label class="u-dropzone<%= " u-dropzone-over" if over_value %>">
-<input id="<%= id %>" type="file" name="<%= id %><%= "[]" if many %>" accept="<%= accept %>" data-max-size="10485760" aria-labelledby="<%= id %>-label" aria-describedby="<%= [ "#{id}-hint", extra ].compact.join(" ") %>"<% if invalid_value %> aria-invalid="true"<% end %><%= " multiple" if many %><%= " disabled" if off %>>
+<label class="u-dropzone<% if over_value %> u-dropzone-over<% end %>">
+<input id="<%= id %>" type="file" name="<%= id %><% if many %>[]<% end %>" accept="<%= accept %>" data-max-size="10485760" aria-labelledby="<%= id %>-label" aria-describedby="<%= [ "#{id}-hint", extra ].compact.join(" ") %>"<% if invalid_value %> aria-invalid="true"<% end %><% if many %> multiple<% end %><% if off %> disabled<% end %>>
 <span><%= drop %> or <span class="u-dropzone-link"><%= choose %></span></span>
 <small id="<%= id %>-hint"><%= hint %></small>
 </label>

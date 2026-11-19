@@ -1,6 +1,6 @@
 <%# locals: (prefix:, code:, sheet_open:) -%>
 <%
-  icon = ->(name, small = true) { code ? %(<svg class="u-icon#{" u-icon-sm" if small}" aria-hidden="true">…</svg>) : render("icon", name: name, small: small) }
+  icon = ->(name, small = true) { code ? %(<svg class="u-icon#{" u-icon-sm" if small}" aria-hidden="true">…</svg>).html_safe : inline_partial("icon", name: name, small: small) }
   href = ->(path) { code ? path : "#example" }
   uid = ->(name) { [prefix, name].reject(&:empty?).join("-") }
   jobs = [
@@ -34,7 +34,7 @@
       <p><span class="u-data">38</span> open, <span class="u-data">6</span> due this week</p>
     </hgroup>
     <div class="u-actions">
-      <a class="u-btn u-btn-primary" href="<%= href.("/jobs/new") %>"><%= raw icon.("plus") %>New job</a>
+      <a class="u-btn u-btn-primary" href="<%= href.("/jobs/new") %>"><%= icon.("plus") %>New job</a>
     </div>
   </header>
   <div class="flex flex-col gap-4">
@@ -44,12 +44,12 @@
           <form action="/jobs" method="get">
             <label class="sr-only" for="<%= uid.("jobs-q") %>">Search jobs</label>
             <div class="u-input-prefixed">
-              <input class="u-input" id="<%= uid.("jobs-q") %>" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" placeholder="Name, job number or phone">
+              <input autocomplete="off" class="u-input" id="<%= uid.("jobs-q") %>" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" placeholder="Name, job number or phone">
             </div>
           </form>
         </search>
         <div class="u-actions">
-          <button type="button" class="u-btn u-btn-outline" commandfor="<%= sheet %>" command="show-modal"><%= raw icon.("sliders-horizontal") %>Sort and filter</button>
+          <button type="button" class="u-btn u-btn-outline" commandfor="<%= sheet %>" command="show-modal"><%= icon.("sliders-horizontal") %>Sort and filter</button>
           <button type="button" class="u-btn u-btn-ghost" data-select-start>Select</button>
         </div>
       </div>
@@ -87,7 +87,7 @@
               <tr data-job="<%= number %>" data-customer="<%= customer %>" data-status="<%= status %>" data-due="<%= due %>" data-quote="<%= quote %>"<% unless shown.include?(status) %> hidden<% end %>>
                 <th scope="row"><label class="u-checkbox" hidden><input type="checkbox" name="job_ids[]" value="<%= number %>"><span class="sr-only">Select job #<%= number %></span></label><a class="u-data" href="<%= href.("/jobs/#{number}") %>">#<%= number %></a></th>
                 <td><%= customer %></td>
-                <td><span class="u-badge u-badge-<%= variants[status] %>"><%= status %></span></td>
+                <td><span class="<%= variant_class("u-badge", variants[status]) %>"><%= status %></span></td>
                 <td class="u-data"><%= short_date.(due) %></td>
                 <td class="u-table-num">$<%= quote %></td>
               </tr>
@@ -98,7 +98,7 @@
       </section>
     </u-data-grid>
     <nav class="u-pagination" aria-label="Pages">
-      <a aria-disabled="true" aria-label="Previous page"></a>
+      <a href="#example" aria-disabled="true" aria-label="Previous page"></a>
       <span data-grid-range>1–9 of 9</span>
       <a href="<%= href.("/jobs?page=2") %>" rel="next" aria-label="Next page" aria-disabled="true" data-grid-next></a>
     </nav>

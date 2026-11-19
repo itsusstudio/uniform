@@ -24,7 +24,7 @@ line, and `u-avatar u-shimmer` stands in for an avatar.
 ## Code
 
 ```html
-<%= raw render("examples/shimmer_list").strip %>
+<%= inline_partial("examples/shimmer_list") %>
 ```
 
 Swap the whole container for the real content when it arrives. Charts have

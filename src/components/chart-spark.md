@@ -23,7 +23,7 @@ this shape while the data loads.
 ## Code
 
 ```html
-<%= raw render("examples/pattern_charts_figures").strip %>
+<%= inline_partial("examples/pattern_charts_figures") %>
 ```
 
 Use one value per row. The stat above already shows the number.

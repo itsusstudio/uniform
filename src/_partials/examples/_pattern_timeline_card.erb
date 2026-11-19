@@ -84,14 +84,14 @@
   <div>
     <div class="flex flex-col gap-12">
 <% shown.each do |day| -%>
-      <%= raw render("examples/timeline_day", day: day).strip.gsub("\n", "\n      ") %>
+      <%= inline_partial("examples/timeline_day", day: day, indent: 6) %>
 <% end -%>
 <% if state == :long -%>
       <details>
         <summary>Show <%= older_count %> older events</summary>
         <div class="flex flex-col gap-12">
 <% days[:older].each do |day| -%>
-          <%= raw render("examples/timeline_day", day: day).strip.gsub("\n", "\n          ") %>
+          <%= inline_partial("examples/timeline_day", day: day, indent: 10) %>
 <% end -%>
         </div>
       </details>

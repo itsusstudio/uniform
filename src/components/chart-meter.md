@@ -27,7 +27,7 @@ this shape while the data loads.
 ## Code
 
 ```html
-<%= raw render("examples/chart_meter").strip %>
+<%= inline_partial("examples/chart_meter") %>
 ```
 
 Use two rows, the value first and then the total.

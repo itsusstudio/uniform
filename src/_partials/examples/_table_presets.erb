@@ -3,7 +3,7 @@
   picked = (defined?(current) && current) || "Due this month"
   anchor = (defined?(suffix) && suffix) || ""
   as_code = defined?(code) && code
-  chevron = as_code ? %(<svg class="u-icon u-icon-sm" aria-hidden="true">…</svg>) : render("icon", name: "chevron-down", small: true).strip
+  chevron = as_code ? %(<svg class="u-icon u-icon-sm" aria-hidden="true">…</svg>).html_safe : inline_partial("icon", name: "chevron-down", small: true)
   presets = [
     ["All jobs", "?sort=due&amp;dir=asc"],
     ["Overdue", "?status=overdue&amp;sort=due&amp;dir=asc"],
@@ -11,7 +11,7 @@
     ["Ready for pickup", "?status=ready&amp;sort=due&amp;dir=asc"]
   ]
 -%>
-<button type="button" class="u-btn u-btn-outline" popovertarget="<%= menu_id %>"><%= picked %><%= raw chevron %></button>
+<button type="button" class="u-btn u-btn-outline" popovertarget="<%= menu_id %>"><%= picked %><%= chevron %></button>
 <div class="u-menu" id="<%= menu_id %>" popover>
 <% presets.each do |name, query| -%>
   <a href="<%= query %><%= anchor %>"<% if name == picked %> aria-current="page"<% end %>><%= name %></a>

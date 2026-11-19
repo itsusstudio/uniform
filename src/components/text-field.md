@@ -91,7 +91,7 @@ Wrap the input and a `<span>` holding the `$` in `u-input-prefixed`, and add
 `u-data` to the input so the amount is in mono.
 
 ```html
-<%= raw render("examples/text_field_money").strip %>
+<%= inline_partial("examples/text_field_money") %>
 ```
 
 ```erb
@@ -126,7 +126,7 @@ the pageâ€™s search, and add `role="search"` to the form for browsers that donâ€
 know `<search>`.
 
 ```html
-<%= raw render("examples/text_field_search", code: true).strip %>
+<%= inline_partial("examples/text_field_search", code: true) %>
 ```
 
 ```erb
@@ -165,7 +165,7 @@ up a keyboard with an @ on phones, and `autocomplete="email"` lets the browser
 fill it in.
 
 ```html
-<%= raw render("examples/text_field_email").strip %>
+<%= inline_partial("examples/text_field_email") %>
 ```
 
 ```erb
@@ -202,7 +202,7 @@ its content. Set `--u-input-rows` to start a textarea taller, for example 4 for
 notes: `style="--u-input-rows: 4"`.
 
 ```html
-<%= raw render("examples/text_field_textarea").strip %>
+<%= inline_partial("examples/text_field_textarea") %>
 ```
 
 ```erb

@@ -28,7 +28,7 @@ under the bar, and Escape or a tap outside closes them. The
 ## Code
 
 ```html
-<%= raw render("examples/site_header", id: "site", live: true, banner: true).strip %>
+<%= inline_partial("examples/site_header", id: "site", live: true, banner: true) %>
 ```
 
 ## Parts

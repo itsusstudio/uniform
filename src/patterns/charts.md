@@ -49,7 +49,7 @@ Layout
 The whole page, inside the app shell's `<main>`. Each card is a [chart](/components/chart/) drawn by `<u-chart>` from a table.
 
 ```html
-<%= raw render("examples/pattern_charts_page", phone: false).strip %>
+<%= inline_partial("examples/pattern_charts_page", phone: false) %>
 ```
 
 

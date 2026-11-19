@@ -8,20 +8,20 @@
     </hgroup>
   </header>
   <div class="flex flex-col gap-6">
-    <%= raw render("examples/pattern_charts_figures", prefix: scope).strip.gsub("\n", "\n    ") %>
+    <%= inline_partial("examples/pattern_charts_figures", prefix: scope, indent: 4) %>
 <% if phone -%>
-    <%= raw render("examples/chart_line", prefix: scope).strip.gsub("\n", "\n    ") %>
-    <%= raw render("examples/chart_meter").strip.gsub("\n", "\n    ") %>
-    <%= raw render("examples/chart_bar", prefix: scope).strip.gsub("\n", "\n    ") %>
-    <%= raw render("examples/chart_stacked").strip.gsub("\n", "\n    ") %>
+    <%= inline_partial("examples/chart_line", prefix: scope, indent: 4) %>
+    <%= inline_partial("examples/chart_meter", indent: 4) %>
+    <%= inline_partial("examples/chart_bar", prefix: scope, indent: 4) %>
+    <%= inline_partial("examples/chart_stacked", indent: 4) %>
 <% else -%>
     <div class="u-grid gap-6">
-      <%= raw render("examples/chart_line", span: 8, prefix: scope).strip.gsub("\n", "\n      ") %>
+      <%= inline_partial("examples/chart_line", span: 8, prefix: scope, indent: 6) %>
       <div class="@grid:col-span-4 flex flex-col gap-6">
-        <%= raw render("examples/chart_meter").strip.gsub("\n", "\n        ") %>
-        <%= raw render("examples/chart_stacked").strip.gsub("\n", "\n        ") %>
+        <%= inline_partial("examples/chart_meter", indent: 8) %>
+        <%= inline_partial("examples/chart_stacked", indent: 8) %>
       </div>
-      <%= raw render("examples/chart_bar", span: 12, prefix: scope).strip.gsub("\n", "\n      ") %>
+      <%= inline_partial("examples/chart_bar", span: 12, prefix: scope, indent: 6) %>
     </div>
 <% end -%>
   </div>

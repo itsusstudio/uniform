@@ -33,7 +33,7 @@ bottom, at 40% of the paper's width. On a tablet the paper stays plain.
 ## Code
 
 ```html
-<%= raw render("examples/task_shell_confirm", id: "confirm", tag: "main").strip %>
+<%= inline_partial("examples/task_shell_confirm", id: "confirm", tag: "main") %>
 ```
 
 A `u-task-shell` holds two parts, in order:

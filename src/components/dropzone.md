@@ -198,7 +198,7 @@ document.getElementById("dz-direct-form").addEventListener("submit", (event) => 
 Set `data-upload-url` on the file input and each file goes to storage the moment it's picked, with its own upload bar. The form sends the ids storage hands back, never the files, so saving is instant. Nothing changes on the record until the form is saved: removing a saved photo marks it, with Undo, and Discard puts everything back. Here the uploads are pretend.
 
 ```html
-<%= raw render("examples/dropzone_direct", id: "job-photos").strip %>
+<%= inline_partial("examples/dropzone_direct", id: "job-photos") %>
 ```
 
 ```erb

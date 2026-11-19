@@ -57,4 +57,4 @@ Add more people as needed, with varied, real-sounding names.
 
 1. `npm run lint:css`, and `cd uniform && bundle exec rake test` after touching the gem.
 2. `curl -s -o /dev/null -w '%{http_code}' localhost:4000/<path>/` returns 200.
-3. `bin/ci` runs everything a push to main runs: gem tests, stylelint, npm audit and a production docs build, which compiles Uniform through Tailwind. Apps take Uniform from main, so a push to main is a release. Lefthook runs it on pre-push to main and stylelint on pre-commit; `lefthook install` once per checkout.
+3. `bin/ci` runs everything a push to main runs: gem tests, stylelint, herb lint, npm audit and a production docs build, which compiles Uniform through Tailwind. Apps take Uniform from main, so a push to main is a release. Lefthook runs it on pre-push to main, and stylelint and herb lint on pre-commit; `lefthook install` once per checkout.

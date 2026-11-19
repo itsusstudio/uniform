@@ -69,7 +69,7 @@ a glance.
 <%= render "examples/type_site_page" %>
 
 ```html
-<%= raw render("examples/type_site_page").strip %>
+<%= inline_partial("examples/type_site_page") %>
 ```
 
 ## In use

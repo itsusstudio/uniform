@@ -36,7 +36,7 @@ Escape or a tap outside closes it. See the
 ## Code
 
 ```html
-<%= raw render("examples/app_shell", id: "app", live: true).strip %>
+<%= inline_partial("examples/app_shell", id: "app", live: true) %>
 ```
 
 Give the nav an `id` and the `popover` attribute, and point the Menu button at

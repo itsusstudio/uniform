@@ -11,7 +11,7 @@
 <div class="u-card-content">
 <svg class="chart-donut" viewBox="0 0 42 42" role="img" aria-label="Open jobs by status">
 <% shares.each do |token, share| -%>
-<circle cx="21" cy="21" r="15.9" fill="none" stroke-width="6" pathLength="100" style="stroke: var(<%= token %>)" stroke-dasharray="<%= share %> <%= (100 - share).round(2) %>" stroke-dashoffset="<%= (25 - offset).round(2) %>"/>
+<circle cx="21" cy="21" r="15.9" fill="none" stroke-width="6" pathLength="100" style="stroke: var(<%= token %>)" stroke-dasharray="<%= share %> <%= (100 - share).round(2) %>" stroke-dashoffset="<%= (25 - offset).round(2) %>" />
 <% offset += share -%>
 <% end -%>
 </svg>

@@ -31,7 +31,7 @@
         <tr>
           <td><a class="u-data" href="#long-lists">#<%= number %></a></td>
           <td><%= customer %></td>
-          <td><span class="u-badge u-badge-<%= variant %>"><%= status %></span></td>
+          <td><span class="<%= variant_class("u-badge", variant) %>"><%= status %></span></td>
           <td class="u-data"><%= due %></td>
           <td class="u-table-num"><%= quote %></td>
         </tr>

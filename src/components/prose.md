@@ -17,7 +17,7 @@ Wrap long-form writing in `u-prose`, like articles and help pages. Everything in
 ## Code
 
 ```html
-<%= raw render("examples/prose_sample").strip %>
+<%= inline_partial("examples/prose_sample") %>
 ```
 
 ## What it styles

@@ -1,6 +1,6 @@
 <%# locals: (state:, prefix:, code:) -%>
 <%
-  icon = ->(name, small = true) { code ? %(<svg class="u-icon#{" u-icon-sm" if small}" aria-hidden="true">…</svg>) : render("icon", name: name, small: small) }
+  icon = ->(name, small = true) { code ? %(<svg class="u-icon#{" u-icon-sm" if small}" aria-hidden="true">…</svg>).html_safe : inline_partial("icon", name: name, small: small) }
   href = ->(path) { (code ? path : "#example").html_safe }
   uid = ->(name) { [prefix, name].reject(&:empty?).join("-") }
   all_jobs = [
@@ -23,9 +23,8 @@
   end
   sort = { "sort" => "due", "dir" => "asc" }
   url = ->(params) { "/jobs" + (params.empty? ? "" : "?" + params.map { |key, value| "#{key}=#{ERB::Util.url_encode(value)}" }.join("&")) }
-  this_week = ["Nov 12", "Nov 13", "Nov 14", "Nov 15"]
   jobs = state == :filtered ? all_jobs.select { |job| job[1].downcase.include?(filters["q"]) } : all_jobs.first(7)
-  mark = ->(text) { filters["q"] ? ERB::Util.h(text).sub(/(#{Regexp.escape(filters["q"])})/i, '<mark>\1</mark>') : ERB::Util.h(text) }
+  mark = ->(text) { (filters["q"] ? ERB::Util.h(text).sub(/(#{Regexp.escape(filters["q"])})/i, '<mark>\1</mark>') : ERB::Util.h(text)).html_safe }
   chips = filters.map do |key, value|
     words = case key
       when "q" then "Search: “#{value}”"
@@ -35,7 +34,6 @@
     [words, url.(filters.except(key).merge(sort))]
   end
   checked = state == :selected ? %w[1042 1039 1044] : []
-  total = 38
   shown = state == :no_results ? 0 : jobs.size
   columns = [["Job", nil], ["Customer", "customer"], ["Work", nil], ["Status", nil], ["Due", "due"], ["Quote", "quote"]]
 -%>
@@ -46,7 +44,7 @@
     </hgroup>
 <% unless state == :empty -%>
     <div class="u-actions">
-      <a class="u-btn u-btn-primary" href="<%= href.("/jobs/new") %>"><%= raw icon.("plus") %>New job</a>
+      <a class="u-btn u-btn-primary" href="<%= href.("/jobs/new") %>"><%= icon.("plus") %>New job</a>
     </div>
 <% end -%>
   </header>
@@ -58,7 +56,7 @@
         <p>When you take in a repair, it shows up here with its status, due date and quote.</p>
       </hgroup>
       <div class="u-actions">
-        <a class="u-btn u-btn-primary" href="<%= href.("/jobs/new") %>"><%= raw icon.("plus") %>New job</a>
+        <a class="u-btn u-btn-primary" href="<%= href.("/jobs/new") %>"><%= icon.("plus") %>New job</a>
       </div>
     </div>
   </section>
@@ -68,9 +66,9 @@
       <search class="u-table-controls">
         <form action="/jobs" method="get">
           <div class="u-input-prefixed">
-            <input class="u-input" id="<%= uid.("jobs-q") %>" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" aria-label="Search jobs" placeholder="Name, job number or phone"<% if filters["q"] %> value="<%= filters["q"] %>"<% end %>>
+            <input autocomplete="off" class="u-input" id="<%= uid.("jobs-q") %>" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" aria-label="Search jobs" placeholder="Name, job number or phone"<% if filters["q"] %> value="<%= filters["q"] %>"<% end %>>
           </div>
-          <%= raw render("examples/table_filter", id: uid.("jobs-filter"), selected: filters, clear: href.(url.(filters.slice("q").merge(sort))), code: code).strip.gsub("\n", "\n          ") %>
+          <%= inline_partial("examples/table_filter", id: uid.("jobs-filter"), selected: filters, clear: href.(url.(filters.slice("q").merge(sort))), code: code, indent: 10) %>
           <input type="hidden" name="sort" value="<%= sort["sort"] %>">
           <input type="hidden" name="dir" value="<%= sort["dir"] %>">
         </form>
@@ -111,13 +109,12 @@
               <tr>
                 <th scope="col"><div class="flex flex-wrap items-center gap-4"><label class="u-checkbox"><input type="checkbox"><span class="sr-only">Select all jobs on this page</span></label><span>Job</span></div></th>
 <% columns.drop(1).each do |words, key| -%>
-<% num = key == "quote" ? %( class="u-table-num") : "" -%>
 <% if key.nil? -%>
                 <th scope="col"><%= words %></th>
 <% elsif key == sort["sort"] -%>
-                <th scope="col"<%= raw num %> aria-sort="ascending"><a class="u-table-sort" href="<%= href.(url.(filters.merge("sort" => key, "dir" => "desc"))) %>"><%= words %></a></th>
+                <th scope="col"<% if key == "quote" %> class="u-table-num"<% end %> aria-sort="ascending"><a class="u-table-sort" href="<%= href.(url.(filters.merge("sort" => key, "dir" => "desc"))) %>"><%= words %></a></th>
 <% else -%>
-                <th scope="col"<%= raw num %>><a class="u-table-sort" href="<%= href.(url.(filters.merge("sort" => key, "dir" => "asc"))) %>"><%= words %></a></th>
+                <th scope="col"<% if key == "quote" %> class="u-table-num"<% end %>><a class="u-table-sort" href="<%= href.(url.(filters.merge("sort" => key, "dir" => "asc"))) %>"><%= words %></a></th>
 <% end -%>
 <% end -%>
                 <th scope="col"><span class="sr-only">Actions</span></th>
@@ -128,13 +125,13 @@
 <% menu = uid.("job-#{number}-actions") -%>
               <tr>
                 <th scope="row"><div class="flex flex-wrap items-center gap-4"><label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="<%= number %>" form="<%= uid.("jobs-bulk") %>"<% if checked.include?(number) %> checked<% end %>><span class="sr-only">Select job #<%= number %></span></label><a class="u-data" href="<%= href.("/jobs/#{number}") %>">#<%= number %></a></div></th>
-                <td><%= raw mark.(customer) %></td>
+                <td><%= mark.(customer) %></td>
                 <td><%= work %></td>
-                <td><span class="u-badge u-badge-<%= variant %>"><%= status %></span></td>
+                <td><span class="<%= variant_class("u-badge", variant) %>"><%= status %></span></td>
                 <td class="u-data"><%= due %></td>
                 <td class="u-table-num"><%= quote %></td>
                 <td>
-                  <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="<%= menu %>" aria-label="Actions for job #<%= number %>"><%= raw icon.("ellipsis", false) %></button>
+                  <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="<%= menu %>" aria-label="Actions for job #<%= number %>"><%= icon.("ellipsis", false) %></button>
                   <div class="u-menu" id="<%= menu %>" popover>
                     <a href="<%= href.("/jobs/#{number}/edit") %>">Edit job</a>
                     <button type="button" popovertarget="<%= menu %>" popovertargetaction="hide">Change due date</button>
@@ -155,7 +152,7 @@
     </u-data-grid>
 <% if state == :list || state == :selected -%>
     <nav class="u-pagination" aria-label="Pages">
-      <a aria-disabled="true" aria-label="Previous page"></a>
+      <a href="#example" aria-disabled="true" aria-label="Previous page"></a>
       <span>1–25 of 38</span>
       <a href="<%= href.(url.(sort.merge("page" => "2"))) %>" rel="next" aria-label="Next page"></a>
     </nav>

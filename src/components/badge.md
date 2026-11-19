@@ -44,7 +44,7 @@ Give every badge `u-badge` and one colour class.
 ## Code
 
 ```html
-<%= raw render("examples/badge_cards").strip %>
+<%= inline_partial("examples/badge_cards") %>
 ```
 
 ## Parts

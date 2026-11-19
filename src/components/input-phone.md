@@ -22,7 +22,7 @@ only the digits and groups them again. The digits keep
 an even width, so numbers line up.
 
 ```html
-<%= raw render("examples/text_field_phone", id: "phone").strip %>
+<%= inline_partial("examples/text_field_phone", id: "phone") %>
 ```
 
 ```erb

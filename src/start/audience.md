@@ -49,7 +49,7 @@ changes.
 <%= render "examples/audience_form" %>
 
 ```html
-<%= raw render("examples/audience_form").strip %>
+<%= inline_partial("examples/audience_form") %>
 ```
 
 ## Rules

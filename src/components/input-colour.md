@@ -28,7 +28,7 @@ never gives that colour a meaning.
 </div>
 
 <script>
-<%= raw render("examples/input_colour_preview_script").strip %>
+<%= inline_partial("examples/input_colour_preview_script") %>
 </script>
 
 Press the caret or the down arrow to see the presets. Type a code like
@@ -68,7 +68,7 @@ Disabled
 ## Code
 
 ```html
-<%= raw render("examples/input_colour", id: "label-colour", value: "#e0a526").strip %>
+<%= inline_partial("examples/input_colour", id: "label-colour", value: "#e0a526") %>
 ```
 
 ```erb

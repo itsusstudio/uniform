@@ -1,4 +1,3 @@
-<% inline = ->(s) { markdownify(s.to_s).strip.delete_prefix("<p>").delete_suffix("</p>") } -%>
 <div class="u-table" tabindex="0" role="region" aria-label="Elements">
 <table class="reference-tokens">
 <thead><tr><th scope="col">Element</th><th scope="col">Wraps</th><th scope="col">Adds</th><th scope="col">Without it</th></tr></thead>
@@ -6,9 +5,9 @@
 <% site.data.elements.each do |element| -%>
 <tr>
 <th scope="row" id="<%= element.name.delete("<>") %>"><a class="u-data reference-name" href="<%= element.page %>"><%= element.name %></a></th>
-<td><%= raw inline.(element.wraps) %></td>
-<td><%= raw inline.(element.adds) %></td>
-<td><%= raw inline.(element.without) %></td>
+<td><%= inline_markdown(element.wraps) %></td>
+<td><%= inline_markdown(element.adds) %></td>
+<td><%= inline_markdown(element.without) %></td>
 </tr>
 <% end -%>
 </tbody>

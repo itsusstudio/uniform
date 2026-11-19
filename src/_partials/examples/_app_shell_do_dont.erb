@@ -3,8 +3,8 @@
 <header>
 <span class="u-wordmark u-wordmark-serif">Workbench</span>
 <div class="u-actions">
-<button type="button" class="u-btn u-btn-primary"><%= raw render("icon", name: "plus", small: true).strip %>New job</button>
-<button type="button" class="u-btn u-btn-ghost"><%= raw render("icon", name: "menu", small: true).strip %>Menu</button>
+<button type="button" class="u-btn u-btn-primary"><%= inline_partial("icon", name: "plus", small: true) %>New job</button>
+<button type="button" class="u-btn u-btn-ghost"><%= inline_partial("icon", name: "menu", small: true) %>Menu</button>
 </div>
 </header>
 <main>
@@ -33,7 +33,7 @@
 <p><span class="u-data">38</span> open, <span class="u-data">6</span> due this week</p>
 </hgroup>
 <div class="u-actions">
-<button type="button" class="u-btn u-btn-primary"><%= raw render("icon", name: "plus", small: true).strip %>New job</button>
+<button type="button" class="u-btn u-btn-primary"><%= inline_partial("icon", name: "plus", small: true) %>New job</button>
 </div>
 </header>
 </div>

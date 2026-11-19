@@ -17,7 +17,7 @@ An avatar shows a face, or initials, beside a person's name. Use it wherever a n
 <div class="u-card-content">
 <ol class="u-timeline">
 <li>
-<span class="u-avatar u-avatar-sm" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
+<span class="u-avatar u-avatar-sm" aria-hidden="true"><%= inline_partial("examples/avatar_portrait", tone: "a") %></span>
 <div>
 <strong>Luis Ortega</strong>
 <p>Sized up to a 7. Polishing tomorrow morning.</p>
@@ -40,11 +40,11 @@ An avatar shows a face, or initials, beside a person's name. Use it wherever a n
 
 <div class="example-frame flex flex-wrap items-center gap-6">
 <div class="flex flex-col gap-2">
-<span class="u-avatar u-avatar-sm"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
+<span class="u-avatar u-avatar-sm"><%= inline_partial("examples/avatar_portrait", tone: "a") %></span>
 <p class="text-caption text-muted"><code>u-avatar-sm</code></p>
 </div>
 <div class="flex flex-col gap-2">
-<span class="u-avatar"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
+<span class="u-avatar"><%= inline_partial("examples/avatar_portrait", tone: "a") %></span>
 <p class="text-caption text-muted">Default</p>
 </div>
 </div>
@@ -78,11 +78,11 @@ letters of its name, like KJ for Kensington Jewellery Repair.
 </header>
 <ul class="u-list">
 <li>
-<span class="u-avatar u-avatar-online" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
+<span class="u-avatar u-avatar-online" aria-hidden="true"><%= inline_partial("examples/avatar_portrait", tone: "a") %></span>
 <div><p>Luis Ortega</p><p class="u-list-item-detail">Online</p></div>
 </li>
 <li>
-<span class="u-avatar" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "b").strip %></span>
+<span class="u-avatar" aria-hidden="true"><%= inline_partial("examples/avatar_portrait", tone: "b") %></span>
 <div><p>Mei Tanaka</p><p class="u-list-item-detail">Away since 2pm</p></div>
 </li>
 </ul>
@@ -98,13 +98,13 @@ say it in words too, like "Online" beside the name.
 <div class="example-frame flex flex-wrap items-center gap-12">
 <div class="u-avatar-group" role="img" aria-label="Dana Whitfield, Luis Ortega, Mei Tanaka and 3 more">
 <span>DW</span>
-<span><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
-<span><%= raw render("examples/avatar_portrait", tone: "b").strip %></span>
+<span><%= inline_partial("examples/avatar_portrait", tone: "a") %></span>
+<span><%= inline_partial("examples/avatar_portrait", tone: "b") %></span>
 <span>+3</span>
 </div>
 <div class="u-avatar-group u-avatar-group-sm" role="img" aria-label="Luis Ortega, Mei Tanaka and Dana Whitfield">
-<span><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
-<span><%= raw render("examples/avatar_portrait", tone: "b").strip %></span>
+<span><%= inline_partial("examples/avatar_portrait", tone: "a") %></span>
+<span><%= inline_partial("examples/avatar_portrait", tone: "b") %></span>
 <span>DW</span>
 </div>
 </div>
@@ -171,8 +171,8 @@ avatar.
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame">
 <div class="flex flex-wrap items-center gap-2">
-<span class="u-avatar u-avatar-online" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
-<span class="u-avatar" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "b").strip %></span>
+<span class="u-avatar u-avatar-online" aria-hidden="true"><%= inline_partial("examples/avatar_portrait", tone: "a") %></span>
+<span class="u-avatar" aria-hidden="true"><%= inline_partial("examples/avatar_portrait", tone: "b") %></span>
 <span class="u-avatar" aria-hidden="true">DW</span>
 </div>
 </div>
@@ -182,7 +182,7 @@ avatar.
 <p class="example-verdict example-verdict-do">Do</p>
 <div class="example-frame">
 <div class="flex flex-wrap items-center gap-2">
-<span class="u-avatar u-avatar-sm" aria-hidden="true"><%= raw render("examples/avatar_portrait", tone: "a").strip %></span>
+<span class="u-avatar u-avatar-sm" aria-hidden="true"><%= inline_partial("examples/avatar_portrait", tone: "a") %></span>
 <span class="text-small">Luis Ortega</span>
 </div>
 </div>

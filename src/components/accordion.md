@@ -34,7 +34,7 @@ several stay open, which is fine.
 ## Code
 
 ```html
-<%= raw render("examples/accordion_faq").strip %>
+<%= inline_partial("examples/accordion_faq") %>
 ```
 
 Each row is a `<details>`, with its heading in a `<summary>` and its content

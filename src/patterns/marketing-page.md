@@ -56,7 +56,7 @@ Hero
 ## Code
 
 ```html
-<%= raw render("examples/pattern_marketing_page", id: "site", live: true, banner: true).strip %>
+<%= inline_partial("examples/pattern_marketing_page", id: "site", live: true, banner: true) %>
 ```
 
 ## Do and don't

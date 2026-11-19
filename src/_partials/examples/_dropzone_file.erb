@@ -12,10 +12,10 @@
 <% end -%>
 <div>
 <p><%= name %></p>
-<p><span class="u-meta"><%= size %></span><span data-dropzone-done<%= " hidden" unless state == "done" %>>Uploaded</span></p>
-<progress max="100" value="<%= value_value %>" aria-label="Uploading<%= named %>"<%= " hidden" unless state == "uploading" %>></progress>
-<p class="u-error" data-dropzone-error="size"<%= " hidden" unless state == "size" %>>Too big. <%= thing %> can be up to 10 MB.</p>
-<p class="u-error" data-dropzone-error="type"<%= " hidden" unless state == "type" %>>That type won’t open here. <%= types %></p>
+<p><span class="u-meta"><%= size %></span><span<% unless state == "done" %> hidden<% end %> data-dropzone-done>Uploaded</span></p>
+<progress max="100" value="<%= value_value %>" aria-label="Uploading<%= named %>" <% unless state == "uploading" %> hidden<% end %>></progress>
+<p<% unless state == "size" %> hidden<% end %> class="u-error" data-dropzone-error="size">Too big. <%= thing %> can be up to 10 MB.</p>
+<p<% unless state == "type" %> hidden<% end %> class="u-error" data-dropzone-error="type">That type won’t open here. <%= types %></p>
 </div>
 <button type="button" class="u-btn-close" data-dropzone-remove aria-label="Remove<%= named %>"></button>
 </li>

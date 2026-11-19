@@ -1,5 +1,3 @@
-<% inline = ->(s) { markdownify(s.to_s).strip.delete_prefix("<p>").delete_suffix("</p>") } -%>
-<% names = ->(s) { s.split(/(, | to )/).map { |part| part.match?(/\A(, | to )\z/) ? part : "<code>#{ERB::Util.h(part)}</code>" }.join } -%>
 <%
   sample = lambda do |entry|
     name = entry.name
@@ -9,7 +7,7 @@
     when "text-hero", "text-section-title" then %(<p class="#{name} font-headline">One price</p>)
     when "text-article-title" then %(<p class="#{name} font-headline">Ring resize, size 6 to 7</p>)
     else %(<p class="#{name}">Ring resize, size 6 to 7</p>)
-    end
+    end.html_safe
   end
 -%>
 <% site.data.classes.select { |entry| entry.page == "/start/reference/" }.group_by(&:group).each do |group, entries| -%>
@@ -17,10 +15,10 @@
 
 <dl>
 <% entries.each do |entry| -%>
-<dt id="<%= entry.name.split(/, | to /).first.delete("<>") %>"><%= raw names.(entry.name) %></dt>
+<dt id="<%= entry.name.split(/, | to /).first.delete("<>") %>"><%= code_names(entry.name) %></dt>
 <dd>
-<p><%= raw inline.(entry.description) %><% if entry["scope"] == "sites" %> <span class="u-badge u-badge-info u-badge-strong">Sites only</span><% end %></p>
-<div class="reference-example flex flex-col gap-2"><%= raw sample.(entry) %></div>
+<p><%= inline_markdown(entry.description) %><% if entry["scope"] == "sites" %> <span class="u-badge u-badge-info u-badge-strong">Sites only</span><% end %></p>
+<div class="reference-example flex flex-col gap-2"><%= sample.(entry) %></div>
 </dd>
 <% end -%>
 </dl>

@@ -11,9 +11,9 @@
     </hgroup>
     <form class="flex flex-col gap-6" action="/sign-in/code" method="post">
 <% if error -%>
-      <%= raw render("examples/text_field_code", id: "#{id}-code", value: "482915", error: "That code doesn’t match. Check your latest email.").strip.gsub("\n", "\n        ") %>
+      <%= inline_partial("examples/text_field_code", id: "#{id}-code", value: "482915", error: "That code doesn’t match. Check your latest email.", indent: 8) %>
 <% else -%>
-      <%= raw render("examples/text_field_code", id: "#{id}-code").strip.gsub("\n", "\n        ") %>
+      <%= inline_partial("examples/text_field_code", id: "#{id}-code", indent: 8) %>
 <% end -%>
       <button type="submit" class="u-btn u-btn-primary">Sign in</button>
     </form>

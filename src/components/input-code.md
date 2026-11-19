@@ -22,7 +22,7 @@ input underneath, so paste and backspace work as usual. Add `submit` to send
 the form on the last digit.
 
 ```html
-<%= raw render("examples/text_field_code", id: "code").strip %>
+<%= inline_partial("examples/text_field_code", id: "code") %>
 ```
 
 ```erb

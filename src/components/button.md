@@ -91,7 +91,7 @@ browser blocks it.
 
 <div class="flex flex-wrap items-center gap-2">
 <span class="u-data">kensingtonrepair.ca/jobs/1042</span>
-<u-copy><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Copy link" data-copy="https://kensingtonrepair.ca/jobs/1042" data-copied="Copied" data-copy-failed="Couldn’t copy" hidden><%= raw render("icon", name: "copy", small: true).strip %></button></u-copy>
+<u-copy><button type="button" class="u-btn u-btn-ghost u-btn-icon" aria-label="Copy link" data-copy="https://kensingtonrepair.ca/jobs/1042" data-copied="Copied" data-copy-failed="Couldn’t copy" hidden><%= inline_partial("icon", name: "copy", small: true) %></button></u-copy>
 </div>
 
 ```erb

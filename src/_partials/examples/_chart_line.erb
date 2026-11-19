@@ -46,7 +46,7 @@
       <script type="application/json"><%= chart_json.(series: series, rows: rows) %></script>
     </u-chart>
 <% end -%>
-    <label class="u-checkbox"><input type="checkbox" name="compare" value="previous" form="<%= uid.("revenue-period") %>"<%= " checked" if compare_value %>> Compare to previous period</label>
+    <label class="u-checkbox"><input type="checkbox" name="compare" value="previous" form="<%= uid.("revenue-period") %>"<% if compare_value %> checked<% end %>> Compare to previous period</label>
     <p class="u-chart-footer"><span>Updated just now</span><a href="/reports/revenue">Full report</a></p>
   </div>
 </section>

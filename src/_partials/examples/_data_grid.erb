@@ -12,18 +12,18 @@
   ]
   short_date = ->(iso) { Date.parse(iso).strftime("%b %-d") }
   jobs = jobs.select { |job| job[1].downcase.include?(query) } if query
-  marked = ->(text) { query ? text.sub(/(#{Regexp.escape(query)})/i, "<mark>\\1</mark>") : text }
+  marked = ->(text) { (query ? ERB::Util.h(text).sub(/(#{Regexp.escape(query)})/i, "<mark>\\1</mark>") : ERB::Util.h(text)).html_safe }
 -%>
 <u-data-grid id="<%= grid_id %>">
   <div class="flex flex-col gap-4">
     <search class="u-table-controls">
       <form action="/jobs" method="get">
         <div class="u-input-prefixed">
-          <input class="u-input" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" aria-label="Search jobs" placeholder="Name, job number or phone"<% if query %> value="<%= query %>"<% end %>>
+          <input autocomplete="off" class="u-input" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" aria-label="Search jobs" placeholder="Name, job number or phone"<% if query %> value="<%= query %>"<% end %>>
         </div>
-        <%= raw render("examples/table_presets", id: "#{grid_id}-presets").strip.gsub("\n", "\n        ") %>
-        <%= raw render("examples/table_filter", id: "#{grid_id}-filter", selected: { "due" => "month" }, clear: "?sort=due&amp;dir=asc").strip.gsub("\n", "\n        ") %>
-        <button type="button" class="u-btn u-btn-outline" popovertarget="<%= grid_id %>-columns"><%= raw render("icon", name: "sliders-horizontal", small: true).strip %>View</button>
+        <%= inline_partial("examples/table_presets", id: "#{grid_id}-presets", indent: 8) %>
+        <%= inline_partial("examples/table_filter", id: "#{grid_id}-filter", selected: { "due" => "month" }, clear: "?sort=due&amp;dir=asc", indent: 8) %>
+        <button type="button" class="u-btn u-btn-outline" popovertarget="<%= grid_id %>-columns"><%= inline_partial("icon", name: "sliders-horizontal", small: true) %>View</button>
       </form>
       <form id="<%= grid_id %>-bulk" action="/jobs/bulk" method="post" aria-label="Selected jobs">
         <span><output><%= ticked.size %></output> selected</span>
@@ -67,14 +67,14 @@
                   <a class="u-data" href="/jobs/<%= number %>">#<%= number %></a>
                 </div>
               </th>
-              <td><%= raw marked.(customer) %></td>
+              <td><%= marked.(customer) %></td>
               <td><%= work %></td>
-              <td<% if number == "1042" %> class="u-data-grid-changed"<% end %>><span class="u-badge u-badge-<%= statuses[status] %>"><%= status %></span><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><select class="u-input" name="job[status]"><% statuses.each_key do |option| %><option<% if option == status %> selected<% end %>><%= option %></option><% end %></select></form></template></td>
-              <td class="u-data"><%= short_date.(due) %><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><input class="u-input u-data" type="date" name="job[due_on]" value="<%= due %>"></form></template></td>
+              <td<% if number == "1042" %> class="u-data-grid-changed"<% end %>><span class="<%= variant_class("u-badge", statuses[status]) %>"><%= status %></span><template><form action="/jobs/<%= number %>" method="post"><input type="hidden" name="_method" value="patch"><select class="u-input" name="job[status]"><% statuses.each_key do |option| %><option<% if option == status %> selected<% end %>><%= option %></option><% end %></select></form></template></td>
+              <td class="u-data"><%= short_date.(due) %><template><form action="/jobs/<%= number %>" method="post"><input autocomplete="off" type="hidden" name="_method" value="patch"><input autocomplete="off" class="u-input u-data" type="date" name="job[due_on]" value="<%= due %>"></form></template></td>
               <td><%= jeweller %></td>
               <td class="u-table-num"><%= quote %></td>
               <td>
-                <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="<%= grid_id %>-job-<%= number %>" aria-label="Actions for job #<%= number %>"><%= raw render("icon", name: "ellipsis", small: true).strip %></button>
+                <button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="<%= grid_id %>-job-<%= number %>" aria-label="Actions for job #<%= number %>"><%= inline_partial("icon", name: "ellipsis", small: true) %></button>
                 <div class="u-menu" id="<%= grid_id %>-job-<%= number %>" popover>
                   <hgroup><h2>Job #<%= number %></h2></hgroup>
                   <a href="/jobs/<%= number %>/edit">Edit job</a>
@@ -99,7 +99,7 @@
     <p class="u-meta"><%= jobs.size %> jobs</p>
 <% else -%>
     <nav class="u-pagination" aria-label="Pages">
-      <a aria-disabled="true" aria-label="Previous page"></a>
+      <a href="#example" aria-disabled="true" aria-label="Previous page"></a>
       <span>1–5 of 12</span>
       <a href="?due=month&amp;sort=due&amp;dir=asc&amp;page=2" rel="next" aria-label="Next page"></a>
     </nav>

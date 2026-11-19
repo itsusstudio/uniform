@@ -28,7 +28,7 @@ arrow. Try them.
 ## Code
 
 ```html
-<%= raw render("examples/app_shell_nav", id: "nav", popover: false).strip %>
+<%= inline_partial("examples/app_shell_nav", id: "nav", popover: false) %>
 ```
 
 A `<u-sidebar>` holds three parts, in order:

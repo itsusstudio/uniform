@@ -6,7 +6,7 @@
 <thead><tr><th scope="col">Tailwind class</th><th scope="col">Token</th></tr></thead>
 <tbody>
 <% rows.each do |namespace, name, token| -%>
-<tr><td><code><%= prefixes.fetch(namespace).map { |prefix| "#{prefix}#{name}" }.join("</code>, <code>").html_safe %></code></td><td><code><%= token %></code></td></tr>
+<tr><td><% prefixes.fetch(namespace).each_with_index do |prefix, index| %><% if index.positive? %>, <% end %><code><%= prefix %><%= name %></code><% end %></td><td><code><%= token %></code></td></tr>
 <% end -%>
 </tbody>
 </table>

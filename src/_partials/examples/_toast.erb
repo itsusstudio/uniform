@@ -1,7 +1,8 @@
 <% tone_value = defined?(tone) && tone -%>
 <% still_value = defined?(still) && still -%>
-<div<%= raw %( class="u-toast-#{tone_value}") if tone_value %><%= raw %( data-timeout="0") if still_value %>>
-<p><%= raw message %></p>
+<% message_html = message.to_s.html_safe -%>
+<div<% if tone_value == "danger" %> class="u-toast-danger"<% end %><% if still_value %> data-timeout="0"<% end %>>
+<p><%= message_html %></p>
 <% if action %><button type="button"><%= action %></button><% end %>
 <button type="button" class="u-btn-close" aria-label="Dismiss"></button>
 </div>

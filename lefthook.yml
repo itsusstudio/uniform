@@ -1,0 +1,13 @@
+pre-push:
+  follow: true
+  commands:
+    ci:
+      files: echo .lefthook/pre-push/ci.rb
+      use_stdin: true
+      run: .lefthook/pre-push/ci.rb
+
+pre-commit:
+  commands:
+    stylelint:
+      glob: "*.css"
+      run: npx stylelint {staged_files}

@@ -107,6 +107,8 @@ const importPostCssPlugin = (options, configuration) => ({
       // Process the file through PostCSS
       let outputCSS = ""
       let messages = []
+      const errors = []
+      const failedFiles = []
       try {
         const result = await postcss(options.plugins).process(css, {
           map: true,
@@ -116,12 +118,14 @@ const importPostCssPlugin = (options, configuration) => ({
         outputCSS = result.css
         messages = result.messages
       } catch(err) {
-        console.error(`\nerror: "${err.reason}" while processing CSS file:\n${err.file}:${err.line}:${err.column}\n`)
+        errors.push({ text: `${err.reason || err.message} (${err.file || args.path}:${err.line ?? "?"}:${err.column ?? "?"})` })
+        if (err.file) failedFiles.push(err.file)
       }
       return {
+        errors,
         contents: outputCSS,
         loader: "css",
-        watchFiles: [args.path, ...messages.filter(message => message.type === "dependency").map(message => message.file)],
+        watchFiles: [args.path, ...failedFiles, ...messages.filter(message => message.type === "dependency").map(message => message.file)],
         watchDirs: messages.filter(message => message.type === "dir-dependency").map(message => message.dir),
       }
     })

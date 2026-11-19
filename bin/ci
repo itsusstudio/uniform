@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# Summary: Check Uniform before it reaches main, where every app picks it up
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+export BRIDGETOWN_ENV=production
+
+red="\033[1;31m"
+green="\033[1;32m"
+reset_colour="\033[0m"
+
+step() {
+  current_step_name="$1"
+  echo "🔍 $1"
+}
+
+report_failed_step() {
+  printf "\n${red}❌ %s failed${reset_colour}\n" "$current_step_name" >&2
+}
+trap report_failed_step ERR
+
+step "Gem: tests"
+(cd uniform && bundle exec rake test)
+
+step "CSS: stylelint"
+npm run --silent lint:css
+
+step "Security: npm audit"
+npm audit
+
+step "Clean: bin/bridgetown clean"
+bin/bridgetown clean
+
+# The docs stylesheet imports uniform/assets/uniform/tailwind.css, so this
+# compiles Uniform through Tailwind the same way an app's build does.
+step "Frontend: npm run esbuild"
+npm run esbuild
+
+step "Build: bin/bridgetown build"
+bin/bridgetown build
+
+printf "\n%b✅ CI passed%b\n" "$green" "$reset_colour"

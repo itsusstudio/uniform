@@ -41,6 +41,12 @@ Put an empty [menu](/components/menu/) in the grid and a View button that opens
 it. The grid fills it with every column but the first, and remembers the choice
 when the grid has an `id`.
 
+## Scrolling
+
+When the columns don't fit, the grid scrolls sideways inside its card and the
+first column stays put. It never scrolls up and down on its own: the page does,
+so there's only ever one vertical scrollbar. Don't give the grid a height.
+
 ## Row actions
 
 End each row with a ghost icon button that opens a [menu](/components/menu/).

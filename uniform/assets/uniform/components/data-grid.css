@@ -5,8 +5,7 @@ u-data-grid {
 }
 
 u-data-grid .u-table {
-  max-height: 70dvh;
-  overflow: auto;
+  overflow-x: auto;
   container: u-data-grid-scroll / scroll-state;
 }
 
@@ -19,12 +18,7 @@ u-data-grid .u-table > table {
 
 u-data-grid .u-table :is(th, td) { white-space: nowrap; }
 
-u-data-grid .u-table thead th {
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  background: var(--background-color-surface);
-}
+u-data-grid .u-table thead th { background: var(--background-color-surface); }
 
 u-data-grid .u-table :is(th, td):first-child {
   position: sticky;
@@ -158,10 +152,7 @@ u-data-grid .u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) :is(a,
 }
 
 @container u-data-grid (max-width: 37.4375rem) {
-  u-data-grid:has(thead [data-keep-narrow]) .u-table {
-    max-height: none;
-    overflow: visible;
-  }
+  u-data-grid:has(thead [data-keep-narrow]) .u-table { overflow: visible; }
 
   u-data-grid:has(thead [data-keep-narrow]) .u-table > table,
   u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody { display: block; width: auto; min-width: 0; }

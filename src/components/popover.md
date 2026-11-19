@@ -43,6 +43,18 @@ without leaving the list.
 
 The date field has `autofocus`, so you can type the date as soon as it opens.
 
+## Opening on hover
+
+Add `data-u-hover` to the opener and the popover also opens when a mouse points at it, then closes a moment after the pointer leaves both. Clicking pins it open. On a touch screen it opens on tap, as usual. Use it for an info button beside a setting, where a tooltip would be too small to read and would never open on a tablet.
+
+```html
+<button type="button" class="u-btn u-btn-ghost u-btn-icon" popovertarget="bulk-help" data-u-hover aria-label="What bulk intake does">…</button>
+<div class="u-popover" id="bulk-help" popover>
+  <p class="u-text-strong">Bulk intake</p>
+  <p>For entering several pieces in a row.</p>
+</div>
+```
+
 ## Code
 
 ```html

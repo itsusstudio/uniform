@@ -2149,6 +2149,46 @@ if (!document[pageReady]) {
     items[next].focus()
   })
 
+  // A popover opener marked data-u-hover also opens on hover where a pointer can
+  // hover. Leaving both for a moment closes it; a click pins it open.
+  const canHover = matchMedia("(hover: hover)")
+  let hoverClose = null
+  const hoverTarget = (opener) => document.getElementById(opener?.getAttribute("popovertarget") ?? "")
+  document.addEventListener("pointerover", (event) => {
+    if (!canHover.matches || event.pointerType === "touch") return
+    const opener = event.target.closest?.("[popovertarget][data-u-hover]")
+    const popover = opener ? hoverTarget(opener) : event.target.closest?.("[popover][data-u-hover-open]")
+    if (!popover) return
+    clearTimeout(hoverClose)
+    if (!opener || popover.matches(":popover-open")) return
+    try { popover.showPopover({ source: opener }) } catch { popover.showPopover() }
+    popover.dataset.uHoverOpen = ""
+  })
+  document.addEventListener("pointerout", (event) => {
+    const from = event.target.closest?.("[popovertarget][data-u-hover]")
+    const popover = from ? hoverTarget(from) : event.target.closest?.("[popover][data-u-hover-open]")
+    if (!popover?.hasAttribute("data-u-hover-open")) return
+    const to = event.relatedTarget
+    const opener = document.querySelector(`[popovertarget="${popover.id}"][data-u-hover]`)
+    if (to && (popover.contains(to) || opener?.contains(to))) return
+    hoverClose = setTimeout(() => {
+      if (!popover.hasAttribute("data-u-hover-open")) return
+      popover.hidePopover()
+      delete popover.dataset.uHoverOpen
+    }, 100)
+  })
+  document.addEventListener("click", (event) => {
+    const opener = event.target.closest?.("[popovertarget][data-u-hover]")
+    const popover = hoverTarget(opener)
+    if (!popover?.hasAttribute("data-u-hover-open")) return
+    event.preventDefault()
+    clearTimeout(hoverClose)
+    delete popover.dataset.uHoverOpen
+  })
+  document.addEventListener("toggle", (event) => {
+    if (event.newState === "closed") delete event.target.dataset?.uHoverOpen
+  }, true)
+
   // Escape hides a tooltip without moving the pointer or focus (WCAG 1.4.13). It stays hidden until both leave it.
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape" || event.defaultPrevented) return

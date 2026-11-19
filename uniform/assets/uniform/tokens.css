@@ -92,7 +92,6 @@
   --u-color-chart-fill: var(--u-color-chart-current);
   --u-chart-fill-opacity: 0.14;
   --u-chart-dim-opacity: 0.35;
-  --u-chart-lane: 56px;
   --u-color-chart-grid: var(--u-color-divider);
   --u-color-chart-track: var(--u-color-divider);
   --u-color-shimmer: light-dark(color-mix(in srgb, #ffffff 80%, transparent), color-mix(in srgb, #ffffff 8%, transparent));

@@ -239,14 +239,11 @@ u-chart > .u-chart-legend { margin-block-end: var(--u-space-4); }
   font-family: var(--u-font-mono);
 }
 
-u-chart:defined > .u-chart-plot:has(> .u-chart-tooltip) { padding-top: var(--u-chart-lane); }
-
 .u-chart-plot .u-chart-tooltip {
   position: absolute;
-  top: calc(var(--u-chart-lane) - var(--u-space-2));
+  top: 0;
   left: 0;
   z-index: 10;
-  translate: 0 -100%;
   pointer-events: none;
 }
 
@@ -273,7 +270,7 @@ u-chart:defined > .u-chart-plot:has(> .u-chart-tooltip) { padding-top: var(--u-c
 }
 
 .u-chart-empty-plot {
-  min-height: calc(var(--u-chart-lane) + var(--u-chart-height, 200px) + var(--u-space-2) + var(--u-font-size-caption) * var(--u-line-height-caption));
+  min-height: calc(var(--u-chart-height, 200px) + var(--u-space-2) + var(--u-font-size-caption) * var(--u-line-height-caption));
 }
 
 .u-chart-loading {

@@ -5,7 +5,6 @@
 "--u-color-chart-fill": "The colour of the fade under the current line. It follows the current series, so it flips with dark mode."
 "--u-chart-fill-opacity": "How strong the fade under a line starts, at the top. It fades to nothing at the baseline. Lighter in dark mode."
 "--u-chart-dim-opacity": "How faint the other bars go while you hover one, so the bar you're on stands out."
-"--u-chart-lane": "The strip above a chart you can hover, where its tooltip sits so it never covers the bars or the line."
 "--u-motion-hover": "How long a hover change takes to fade in, like the other bars dimming on a bar chart. Short enough to feel instant without flashing."
 "--u-color-chart-grid": "The faint horizontal gridlines behind a chart."
 "--u-color-chart-track": "The empty part of a meter, behind the filled bar."

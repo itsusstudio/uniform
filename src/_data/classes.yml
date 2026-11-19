@@ -28,6 +28,11 @@
   page: /components/grid/
   description: On a grid child, moves it to the top when the grid stacks on a phone, like a client's contact details beside their jobs.
 
+- name: u-hidden-when-stacked
+  group: Layout
+  page: /components/grid/
+  description: On a grid child, hides it when the grid stacks, like an illustration beside a welcome message.
+
 - name: u-sidebar-layout
   group: Layout
   page: /components/sidebar-layout/
@@ -64,10 +69,10 @@
   page: /start/reference/
   description: 48px of padding on every side, like a welcome panel's `u-card-content` that needs more room than a card.
 
-- name: u-items-start, u-items-center, u-justify-center, u-justify-between
+- name: u-items-start, u-items-center, u-justify-center, u-justify-between, u-justify-end
   group: Layout
   page: /start/reference/
-  description: Lines up the children of a row or grid. `u-items-start` and `u-items-center` set them across the row, at the top or the middle. `u-justify-center` and `u-justify-between` set them along it, centred or pushed to the two ends.
+  description: Lines up the children of a row or grid. `u-items-start` and `u-items-center` set them across the row, at the top or the middle. `u-justify-center`, `u-justify-between` and `u-justify-end` set them along it: centred, pushed to the two ends, or gathered at the end.
 
 - name: u-border-0, u-radius-default
   group: Backgrounds

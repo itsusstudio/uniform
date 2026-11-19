@@ -37,6 +37,9 @@ Phones
 First on a phone
 : Put the column people need first on a phone, like a record's contact details, first when the grid stacks with `u-first-when-stacked`. On wider screens it stays where it is in the row.
 
+Hidden when stacked
+: Hide a column that only decorates, like an illustration beside a welcome message, with `u-hidden-when-stacked`. Stacked, it would push the content below the fold.
+
 ## When to use it
 
 Use it for

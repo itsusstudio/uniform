@@ -37,7 +37,7 @@ Top edge
 : Add `u-items-start` to line up items of different heights along the top, like two open menus side by side.
 
 Spread
-: Add `u-justify-between` to push the first and last items to opposite ends, like Back and Skip under a form.
+: Add `u-justify-between` to push the first and last items to opposite ends, like Back and Skip under a form. Add `u-justify-end` to gather them at the end, like Cancel and Save under a panel inside a form.
 
 ## When to use it
 

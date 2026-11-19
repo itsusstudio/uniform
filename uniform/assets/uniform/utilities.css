@@ -146,6 +146,8 @@
 
 .u-justify-between { justify-content: space-between; }
 
+.u-justify-end { justify-content: flex-end; }
+
 .u-border-0 { border: 0; }
 
 .u-radius-default { border-radius: var(--u-radius-default); }

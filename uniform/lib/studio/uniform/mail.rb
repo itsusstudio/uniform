@@ -9,11 +9,11 @@ module Studio
       LINE = "#ebeae6"
       LINK = "#2449b0"
       PAPER = "#f5f4ef"
-      SANS = "font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;"
-      HEADLINE = "font-family: 'Apfel Grotezk', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;"
+      SANS = "font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"
+      HEADLINE = "font-family: 'Apfel Grotezk', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"
       WORDMARKS = {
         "serif" => "font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 28px; font-style: italic; font-weight: 400; letter-spacing: -0.005em;",
-        "sans" => "font-family: 'Apfel Grotezk', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 24px; line-height: 28px; font-weight: 500; letter-spacing: -0.03em;"
+        "sans" => "font-family: 'Apfel Grotezk', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 24px; line-height: 28px; font-weight: 500; letter-spacing: -0.03em;"
       }.freeze
       MONO = "font-family: 'IBM Plex Mono', Menlo, Consolas, monospace;"
       FONTS = [

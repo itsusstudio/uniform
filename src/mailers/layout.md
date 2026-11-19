@@ -31,8 +31,9 @@ Inter for text, Instrument Serif or Apfel Grotezk for the product's wordmark,
 Apfel Grotezk for the heading and a shop's name, IBM Plex
 Mono for codes and amounts, the same as the app. Apple Mail and iOS load them;
 Gmail and Outlook fall back to the system's own interface font: San Francisco
-on Apple devices, Segoe UI on Windows and Roboto on Android, then Helvetica and
-Arial. Those sit closest to Inter. In Rails, the layout loads them when
+on Apple devices and Segoe UI on Windows, then Helvetica and Arial. Roboto is
+left out on purpose: Gmail loads it for its own interface, so listing it would
+set every email in Roboto there instead of Helvetica or Arial. In Rails, the layout loads them when
 `config.action_mailer.asset_host` is set, since an email can only fetch a font
 from a full URL.
 

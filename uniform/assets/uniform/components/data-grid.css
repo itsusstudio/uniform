@@ -146,9 +146,7 @@ u-data-grid .u-table td.u-data-grid-changed { background: var(--background-color
 
 u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)) { cursor: pointer; }
 
-u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)):hover > * { background: var(--border-color-divider); }
-
-u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)):hover > .u-table-actions { background: none; }
+u-data-grid .u-table > table tbody tr:has(> :first-child a:not(.u-btn)):hover > * { background: var(--background-color-paper); }
 
 u-data-grid .u-table > table tbody tr > :first-child > a:not(.u-btn)::after { content: none; }
 
@@ -182,7 +180,7 @@ u-data-grid .u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) :is(a,
 
   u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody > tr + tr { border-top: 1px solid var(--border-color-divider); }
 
-  u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody > tr:hover { background: var(--border-color-divider); }
+  u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody > tr:hover { background: var(--background-color-paper); }
 
   u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody > tr > * {
     position: static;

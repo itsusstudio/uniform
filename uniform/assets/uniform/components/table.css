@@ -54,7 +54,7 @@
   inset: 0;
 }
 
-.u-table > table tbody tr:where(:has(> :first-child > a:not(.u-btn)):hover) > * { background: var(--border-color-divider); }
+.u-table > table tbody tr:where(:has(> :first-child > a:not(.u-btn)):hover) > * { background: var(--background-color-paper); }
 
 .u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) :is(a, button, input, label, select, summary):not(tr > :first-child > a) {
   position: relative;
@@ -69,8 +69,6 @@
   text-align: end;
   cursor: default;
 }
-
-.u-table > table tbody tr:hover > .u-table-actions { background: none; }
 
 :is(.u-table, u-chart) > table .u-table-num {
   font-family: var(--font-mono);

@@ -509,7 +509,7 @@
 - name: u-table-actions
   group: Components
   page: /components/table/
-  description: The last cell of a row, holding that row's icon buttons and menu. Clicking anywhere in it never opens the row's record, and row hover leaves it unshaded.
+  description: The last cell of a row, holding that row's icon buttons and menu. Clicking anywhere in it never opens the row's record. Row hover shades it with the rest of the row.
 
 - name: u-table-truncate
   group: Components

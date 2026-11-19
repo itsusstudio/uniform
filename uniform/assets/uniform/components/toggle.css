@@ -68,6 +68,7 @@
 }
 
 .u-toggle-group {
+  isolation: isolate;
   display: inline-flex;
   max-width: 100%;
   border: 1px solid var(--text-color-default);

@@ -1,4 +1,6 @@
 @layer components {
+u-chart { isolation: isolate; }
+
 .u-chart-stacked {
   display: flex;
   flex-direction: column;
@@ -20,6 +22,7 @@
 .u-chart-neutral { --u-chart-color: var(--border-color-input); }
 
 .u-chart-plot {
+  isolation: isolate;
   --u-chart-height: 200px;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);

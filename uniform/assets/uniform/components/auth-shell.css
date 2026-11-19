@@ -1,5 +1,6 @@
 @layer components {
 .u-auth-shell {
+  isolation: isolate;
   --u-auth-poster: light-dark(var(--background-color-ink), var(--background-color-paper));
 
   display: grid;

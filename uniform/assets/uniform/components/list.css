@@ -1,5 +1,6 @@
 @layer components {
 .u-list {
+  isolation: isolate;
   padding: 0;
   color: var(--text-color-default);
   font-size: var(--text-body);

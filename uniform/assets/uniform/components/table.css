@@ -1,6 +1,7 @@
 @layer components {
 .u-table {
   position: relative;
+  isolation: isolate;
   max-width: 100%;
   overflow-x: auto;
 }

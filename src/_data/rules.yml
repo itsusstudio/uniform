@@ -35,6 +35,14 @@
   home: /start/rules/
   section: Building
 
+- id: contain-stacking
+  name: Contain stacking
+  summary: Floating UI opens in the top layer, and a component that needs z-index isolates it.
+  body: Menus, dialogs, popovers and messages open with `popover` or `<dialog>`, so they sit above everything without a z-index. A component that layers its own parts, like a table's frozen column or a row's buttons above its link, sets `isolation: isolate` on its root so its z-index never reaches the page. Only the app shell's sticky header and banner set a z-index that counts across the page.
+  home: /start/rules/
+  section: Building
+  check: Every component root whose parts set a z-index also sets `isolation: isolate`. No z-index outside a component except the app shell's header and banner.
+
 - id: behaviour-lives-in-custom-elements
   name: Behaviour lives in custom elements
   summary: Any JavaScript a component needs is a custom element in `uniform.js` around markup that already works.

@@ -9,13 +9,15 @@ module Studio
       LINE = "#ebeae6"
       LINK = "#2449b0"
       PAPER = "#f5f4ef"
-      SANS = "font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"
-      HEADLINE = "font-family: 'Apfel Grotezk', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;"
+      # Gmail and most Outlooks never load web fonts, so every stack falls back to a Swiss grotesk.
+      GROTESK = "'Helvetica Neue', Helvetica, Arial, sans-serif"
+      SANS = "font-family: Inter, #{GROTESK};"
+      HEADLINE = "font-family: 'Apfel Grotezk', Inter, #{GROTESK};"
       WORDMARKS = {
         "serif" => "font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; line-height: 28px; font-style: italic; font-weight: 400; letter-spacing: -0.005em;",
-        "sans" => "font-family: 'Apfel Grotezk', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 24px; line-height: 28px; font-weight: 500; letter-spacing: -0.03em;"
+        "sans" => "#{HEADLINE} font-size: 24px; line-height: 28px; font-weight: 500; letter-spacing: -0.03em;"
       }.freeze
-      MONO = "font-family: 'IBM Plex Mono', Menlo, Consolas, monospace;"
+      MONO = "font-family: 'IBM Plex Mono', 'SF Mono', Menlo, Consolas, 'Roboto Mono', monospace;"
       FONTS = [
         ["Inter", 400, "Inter-Regular.woff2"],
         ["Inter", 500, "Inter-Medium.woff2"],
@@ -24,6 +26,8 @@ module Studio
         ["IBM Plex Mono", 400, "IBMPlexMono-Regular.woff2"]
       ]
       TEXT = "#{SANS} font-size: 16px; line-height: 24px;"
+      # An italic Georgia reads as a different brand, so where Instrument Serif can't load the wordmark goes upright.
+      WORDMARK_WITHOUT_WEB_FONTS = "font-family: #{GROTESK} !important; font-style: normal !important; font-weight: 700 !important; letter-spacing: -0.02em !important;"
       TONES = {success: "#277a4d", warning: "#f3c22c", info: "#2f5bd3", danger: "#c03a26", neutral: "#8c8981"}
 
       Fallback = Struct.new(:text, :url)
@@ -57,6 +61,7 @@ module Studio
             policies = !sent_with && %(<td class="u-mail-col" valign="top" align="right" style="padding: 24px 0 0 24px; #{small} text-align: right; white-space: nowrap;"><a href="#{h(Uniform::TERMS_URL)}" style="#{link}">#{h(labels.fetch(:terms))}</a> — <a href="#{h(Uniform::PRIVACY_URL)}" style="#{link}">#{h(labels.fetch(:privacy))}</a></td>)
             # Only the product's own name is a wordmark; a shop sending through it is set in the headline face.
             masthead = sent_with ? "#{HEADLINE} font-size: 18px; line-height: 24px; font-weight: 500;" : WORDMARKS.fetch(wordmark_style.to_s)
+            wordmark_class = (!sent_with && wordmark_style.to_s == "serif") ? " u-mail-wordmark" : ""
             faces = FONTS.filter_map { |family, weight, file, style = "normal"|
               url = fonts[file] and %(@font-face { font-family: "#{family}"; src: url("#{h(url)}") format("woff2"); font-weight: #{weight}; font-style: #{style}; }\n  )
             }.join
@@ -74,7 +79,11 @@ module Studio
               <title>#{h(title)}</title>
               <!--[if mso]>
               <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+              <style>.u-mail-wordmark { #{WORDMARK_WITHOUT_WEB_FONTS} }</style>
               <![endif]-->
+              <style>
+                u + .body .u-mail-wordmark, u + #body .u-mail-wordmark { #{WORDMARK_WITHOUT_WEB_FONTS} }
+              </style>
               <style>
                 #{faces}:root { color-scheme: light; supported-color-schemes: light; }
                 body { margin: 0; padding: 0; width: 100%; }
@@ -88,7 +97,7 @@ module Studio
                 }
               </style>
               </head>
-              <body id="body" style="margin: 0; padding: 0; width: 100%; background-color: #ffffff;">
+              <body id="body" class="body" style="margin: 0; padding: 0; width: 100%; background-color: #ffffff;">
               <div style="display: none; max-height: 0; max-width: 0; overflow: hidden; opacity: 0; mso-hide: all; font-size: 1px; line-height: 1px; color: #ffffff;">#{h(preheader)}#{"&#8199;&#65279;&#847;" * 8}</div>
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="width: 100%; background-color: #ffffff;">
                 <tr>
@@ -96,7 +105,7 @@ module Studio
                     <!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
                     <table role="presentation" class="u-mail-card" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#ffffff" style="width: 100%; max-width: 600px; background-color: #ffffff;">
                       <tr>
-                        <td class="u-mail-pad" style="padding: 24px 48px 0; #{masthead} color: #{INK};">#{h(sender)}</td>
+                        <td class="u-mail-pad#{wordmark_class}" style="padding: 24px 48px 0; #{masthead} color: #{INK};">#{h(sender)}</td>
                       </tr>
                       <tr>
                         <td class="u-mail-pad" style="padding: 48px 48px 48px; #{TEXT} color: #{INK};">

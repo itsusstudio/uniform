@@ -55,14 +55,14 @@ module Studio
       def test_uniform_people_shows_three_avatars_two_short_names_and_the_rest_as_a_count
         html = view.uniform_people(["John Manager", "Sarah Owner", "Virgen Paucek", "Dexter Little"], empty: "Unassigned")
 
-        assert_equal 3, html.scan(/<span data-person="[1-8]">[A-Z]{2}<\/span>/).size
+        assert_equal 3, html.scan(/<span data-person-color="[1-8]">[A-Z]{2}<\/span>/).size
         assert_includes html, '<span aria-hidden="true">John M, Sarah O +2</span>'
         assert_includes html, '<span class="sr-only">John Manager, Sarah Owner, Virgen Paucek, and Dexter Little</span>'
       end
 
-      def test_uniform_person_gives_a_name_the_same_colour_every_time
-        assert_equal view.uniform_person("John Manager"), view.uniform_person("John Manager")
-        assert_includes 1..8, view.uniform_person("Zoë Ågren")
+      def test_uniform_person_color_gives_a_name_the_same_colour_every_time
+        assert_equal view.uniform_person_color("John Manager"), view.uniform_person_color("John Manager")
+        assert_includes 1..8, view.uniform_person_color("Zoë Ågren")
       end
 
       def test_uniform_people_says_the_empty_label_when_nobody_is_picked

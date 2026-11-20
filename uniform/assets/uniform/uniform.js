@@ -2409,8 +2409,8 @@ if (!document[hotkeysReady]) {
 // The checkboxes stay real form fields, so the form posts the same with or without this script.
 let multiSelects = 0
 const initialsOf = (name) => name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0].toUpperCase()).join("")
-// Matches uniform_person in the gem, so a person keeps their colour on server-drawn and script-drawn avatars.
-const personOf = (name) => ([...name].reduce((hash, char) => Math.imul(hash ^ char.codePointAt(0), 16777619) >>> 0, 2166136261) % 8) + 1
+// Matches uniform_person_color in the gem, so a person keeps their colour on server-drawn and script-drawn avatars.
+const personColorOf = (name) => ([...name].reduce((hash, char) => Math.imul(hash ^ char.codePointAt(0), 16777619) >>> 0, 2166136261) % 8) + 1
 const shortName = (name) => {
   const [first, ...rest] = name.split(/\s+/).filter(Boolean)
   return rest.length ? `${first} ${rest[0][0]}` : first
@@ -2473,7 +2473,7 @@ define("u-multi-select", class extends UniformElement {
       avatar.className = "u-avatar u-avatar-sm"
       avatar.setAttribute("aria-hidden", "true")
       avatar.textContent = initialsOf(nameOf(box))
-      avatar.dataset.person = personOf(nameOf(box))
+      avatar.dataset.personColor = personColorOf(nameOf(box))
       box.after(avatar)
     })
 
@@ -2494,7 +2494,7 @@ define("u-multi-select", class extends UniformElement {
         group.setAttribute("aria-hidden", "true")
         names.slice(0, 3).forEach((name) => {
           const avatar = Object.assign(document.createElement("span"), { textContent: initialsOf(name) })
-          avatar.dataset.person = personOf(name)
+          avatar.dataset.personColor = personColorOf(name)
           group.append(avatar)
         })
         const short = Object.assign(document.createElement("span"), {
@@ -2561,9 +2561,9 @@ define("u-row-hint", class extends UniformElement {
         const box = each.getBoundingClientRect()
         return x >= box.left && x <= box.right
       })
-      const onFirst = cell === row.cells[0] && !target.closest("label, input")
-      if (cell && !onFirst && cell.querySelector("a, button, input, select, textarea, label")) return this.hide()
-      this.toggleAttribute("data-on-first", onFirst)
+      const overRecordLink = cell === row.cells[0] && !target.closest("label, input")
+      if (cell && !overRecordLink && cell.querySelector("a, button, input, select, textarea, label")) return this.hide()
+      this.toggleAttribute("data-over-record-link", overRecordLink)
       this.style.setProperty("--u-row-hint-x", `${x}px`)
       this.style.setProperty("--u-row-hint-y", `${y}px`)
       if (!this.matches(":popover-open")) this.showPopover()

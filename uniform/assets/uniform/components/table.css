@@ -89,7 +89,7 @@ u-row-hint:popover-open {
   translate: -50% calc(-100% - --spacing(3));
 }
 
-u-row-hint[data-on-first] { background: var(--text-color-link); }
+u-row-hint[data-over-record-link] { background: var(--text-color-link); }
 
 u-row-hint > [data-u-hint] {
   display: inline-flex;
@@ -97,8 +97,8 @@ u-row-hint > [data-u-hint] {
   gap: --spacing(1.5);
 }
 
-u-row-hint:not([data-on-first]) > [data-u-hint="first"],
-u-row-hint[data-on-first] > [data-u-hint="row"] { display: none; }
+u-row-hint:not([data-over-record-link]) > [data-u-hint="first"],
+u-row-hint[data-over-record-link] > [data-u-hint="row"] { display: none; }
 
 :is(.u-table, u-chart) > table .u-table-num {
   font-family: var(--font-mono);

@@ -33,8 +33,8 @@ module Studio
       end
 
       # The person colour (1 to 8) for a name, the same in uniform.js, so a person keeps their colour everywhere.
-      #   <span class="u-avatar" data-person="<%= uniform_person(user.full_name) %>">JM</span>
-      def uniform_person(name)
+      #   <span class="u-avatar" data-person-color="<%= uniform_person_color(user.full_name) %>">JM</span>
+      def uniform_person_color(name)
         hash = name.codepoints.reduce(2166136261) { |sum, point| ((sum ^ point) * 16777619) & 0xffffffff }
         (hash % 8) + 1
       end
@@ -43,8 +43,8 @@ module Studio
       def uniform_people(names, empty:)
         return tag.span(empty, class: "u-people u-people-empty") if names.empty?
 
-        avatars = tag.span(safe_join(names.first(3).map { |name| tag.span(people_initials(name), data: {person: uniform_person(name)}) }),
-          class: "u-avatar-group", aria: {hidden: true})
+        faces = names.first(3).map { |name| tag.span(people_initials(name), data: {person_color: uniform_person_color(name)}) }
+        avatars = tag.span(safe_join(faces), class: "u-avatar-group", aria: {hidden: true})
         shown = names.first(2).map { |name| people_short_name(name) }.join(", ")
         shown += " +#{names.size - 2}" if names.size > 2
         tag.span(class: "u-people") do

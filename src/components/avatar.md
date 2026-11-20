@@ -122,11 +122,11 @@ muted. A [multi-select](/components/multi-select/) draws the same thing for
 the people picked.
 
 Each person gets one of eight colours, picked from their name with
-`uniform_person`, so they look the same on every page and in every list.
-Give an initials avatar `data-person` to use it.
+`uniform_person_color`, so they look the same on every page and in every list.
+Give an initials avatar `data-person-color` to use it.
 
 ```erb
-<span class="u-avatar u-avatar-sm" data-person="<%%= uniform_person(user.full_name) %>"
+<span class="u-avatar u-avatar-sm" data-person-color="<%%= uniform_person_color(user.full_name) %>"
   role="img" aria-label="<%%= user.full_name %>"><%%= user.initials %></span>
 ```
 

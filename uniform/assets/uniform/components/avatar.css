@@ -21,16 +21,16 @@
   user-select: none;
 }
 
-:is(.u-avatar, .u-avatar-group > span)[data-person] { color: var(--text-color-on-person); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color] { color: var(--text-color-on-person); }
 
-:is(.u-avatar, .u-avatar-group > span)[data-person="1"] { background: var(--color-person-1); }
-:is(.u-avatar, .u-avatar-group > span)[data-person="2"] { background: var(--color-person-2); }
-:is(.u-avatar, .u-avatar-group > span)[data-person="3"] { background: var(--color-person-3); }
-:is(.u-avatar, .u-avatar-group > span)[data-person="4"] { background: var(--color-person-4); }
-:is(.u-avatar, .u-avatar-group > span)[data-person="5"] { background: var(--color-person-5); }
-:is(.u-avatar, .u-avatar-group > span)[data-person="6"] { background: var(--color-person-6); }
-:is(.u-avatar, .u-avatar-group > span)[data-person="7"] { background: var(--color-person-7); }
-:is(.u-avatar, .u-avatar-group > span)[data-person="8"] { background: var(--color-person-8); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color="1"] { background: var(--color-person-1); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color="2"] { background: var(--color-person-2); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color="3"] { background: var(--color-person-3); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color="4"] { background: var(--color-person-4); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color="5"] { background: var(--color-person-5); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color="6"] { background: var(--color-person-6); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color="7"] { background: var(--color-person-7); }
+:is(.u-avatar, .u-avatar-group > span)[data-person-color="8"] { background: var(--color-person-8); }
 
 :is(.u-avatar, .u-avatar-group > span) > img {
   display: block;

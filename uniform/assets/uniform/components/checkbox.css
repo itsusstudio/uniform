@@ -18,6 +18,7 @@
   width: 16px;
   height: 16px;
   border: 1px solid var(--border-color-input);
+  border-radius: var(--radius-item);
   background: var(--background-color-surface);
   appearance: none;
   cursor: pointer;

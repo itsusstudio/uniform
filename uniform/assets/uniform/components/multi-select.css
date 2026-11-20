@@ -68,8 +68,6 @@ u-multi-select { display: block; }
 
 .u-multi-select-me:disabled:hover { background: transparent; }
 
-.u-multi-select-list .u-checkbox > input { border-radius: var(--radius-item); }
-
 .u-multi-select-me {
   margin-bottom: --spacing(1);
   border-bottom: 1px solid var(--border-color-divider);

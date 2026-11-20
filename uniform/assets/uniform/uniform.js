@@ -2364,11 +2364,29 @@ const runHotkey = (element) => {
   element.click()
 }
 
+// The icon set's arrows, matching uniform_kbd, since text arrows are too faint at keycap size.
+const keyIcons = {
+  ArrowUp: '<path d="m5 12 7-7 7 7"/><path d="M12 19V5"/>',
+  ArrowDown: '<path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>',
+  ArrowLeft: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  ArrowRight: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+}
+
+const keycap = (part) => {
+  const kbd = Object.assign(document.createElement("kbd"), { className: "u-kbd" })
+  if (keyIcons[part]) {
+    kbd.innerHTML = `<svg class="u-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${keyIcons[part]}</svg>`
+  } else {
+    kbd.textContent = keyLabel(part)
+  }
+  return kbd
+}
+
 const kbdFor = (parts) => {
   const group = document.createElement("kbd")
   group.className = "u-kbd-group"
   group.dataset.uKeys = parts.join("+")
-  group.append(...parts.map((part) => Object.assign(document.createElement("kbd"), { className: "u-kbd", textContent: keyLabel(part) })))
+  group.append(...parts.map(keycap))
   return group
 }
 
@@ -2589,6 +2607,245 @@ define("u-row-hint", class extends UniformElement {
 
   hide() {
     if (this.matches(":popover-open")) this.hidePopover()
+  }
+})
+
+// A search field that opens a panel of results the server renders as HTML, grouped, with filters and a level of actions.
+// Each result is a real link, button or form button, so picking one does exactly what clicking it would.
+let searchOptions = 0
+define("u-search", class extends UniformElement {
+  setup(signal) {
+    const trigger = this.querySelector(":scope > button")
+    const panel = this.querySelector(":scope > dialog")
+    const input = panel?.querySelector("input")
+    const results = panel?.querySelector("[role='listbox']")
+    if (!trigger || !panel || !input || !results || !this.dataset.src) return
+    const crumb = panel.querySelector(".u-search-crumb")
+    const chips = panel.querySelector(".u-search-chips")
+    const storeKey = `uniform.search.recent.${this.dataset.recentKey || location.host}`
+    let kind = "all"
+    let levels = []
+    let active = 0
+    let request
+    let timer
+    const actionsCache = new Map()
+
+    const recent = () => { try { return JSON.parse(localStorage.getItem(storeKey)) || [] } catch { return [] } }
+    const remember = (id) => {
+      if (!id) return
+      try { localStorage.setItem(storeKey, JSON.stringify([id, ...recent().filter((each) => each !== id)].slice(0, 8))) } catch {}
+    }
+    const options = () => [...results.querySelectorAll("[role='option']")].filter((option) => !option.closest("[hidden]"))
+
+    const highlight = (index) => {
+      const list = options()
+      results.querySelectorAll("[aria-selected='true']").forEach((option) => option.setAttribute("aria-selected", "false"))
+      if (!list.length) return input.removeAttribute("aria-activedescendant")
+      active = (index + list.length) % list.length
+      const option = list[active]
+      option.id ||= `u-search-option-${++searchOptions}`
+      option.setAttribute("aria-selected", "true")
+      input.setAttribute("aria-activedescendant", option.id)
+      option.scrollIntoView({ block: "nearest" })
+      if (option.dataset.uSearchActions) loadActions(option.dataset.uSearchActions)
+    }
+
+    // A record's actions come from the server only when it's highlighted, so a list of results stays small.
+    const loadActions = (url) => {
+      if (!actionsCache.has(url)) {
+        actionsCache.set(url, fetch(new URL(url, location.href), { headers: { Accept: "text/html" } })
+          .then((response) => response.ok ? response.text() : Promise.reject(response))
+          .catch(() => { actionsCache.delete(url); return null }))
+      }
+      return actionsCache.get(url)
+    }
+
+    const openActions = async (option) => {
+      const html = await loadActions(option.dataset.uSearchActions)
+      if (!html || !panel.open) return
+      const template = document.createElement("template")
+      template.innerHTML = html
+      template.dataset.crumb = option.dataset.uSearchCrumb || ""
+      enter(template, option)
+    }
+
+    const drawChips = () => {
+      const meta = results.querySelector("[data-u-search-counts]")
+      const counts = JSON.parse(meta?.dataset.uSearchCounts || "{}")
+      const kinds = JSON.parse(meta?.dataset.uSearchKinds || "{}")
+      chips.hidden = !!levels.length || !input.value.trim() || !Object.keys(counts).length
+      if (chips.hidden) return
+      chips.replaceChildren(...["all", ...Object.keys(kinds).filter((key) => key !== "all")].map((key) => {
+        const chip = Object.assign(document.createElement("button"), { type: "button", className: "u-search-chip" })
+        chip.dataset.kind = key
+        chip.setAttribute("aria-pressed", String(key === kind))
+        chip.append(kinds[key], Object.assign(document.createElement("span"), { className: "u-data", textContent: counts[key] ?? 0 }))
+        return chip
+      }))
+    }
+
+    const load = async () => {
+      request?.abort()
+      request = new AbortController()
+      const url = new URL(this.dataset.src, location.href)
+      url.searchParams.set("q", input.value.trim())
+      if (kind !== "all") url.searchParams.set("kind", kind)
+      recent().forEach((id) => url.searchParams.append("recent[]", id))
+      panel.setAttribute("aria-busy", "true")
+      try {
+        const response = await fetch(url, { headers: { Accept: "text/html" }, signal: request.signal })
+        if (!response.ok) return
+        results.innerHTML = await response.text()
+        drawChips()
+        highlight(0)
+      } catch (error) {
+        if (error.name !== "AbortError") throw error
+      } finally {
+        panel.removeAttribute("aria-busy")
+      }
+    }
+
+    const filterLevel = () => {
+      const words = input.value.trim().toLowerCase().split(/\s+/).filter(Boolean)
+      options().concat([...results.querySelectorAll("[role='option'][hidden]")]).forEach((option) => {
+        option.hidden = !words.every((word) => option.textContent.toLowerCase().includes(word))
+      })
+      highlight(0)
+    }
+
+    const enter = (template, from) => {
+      if (!template) return
+      levels.push({ html: results.innerHTML, value: input.value, active, crumb: crumb.textContent, recent: from.dataset.uSearchRecent ?? levels.at(-1)?.recent })
+      results.replaceChildren(template.content.cloneNode(true))
+      crumb.textContent = [crumb.hidden ? "" : crumb.textContent, template.dataset.crumb].filter(Boolean).join(" · ")
+      crumb.hidden = false
+      input.value = ""
+      chips.hidden = true
+      const list = options()
+      const current = list.findIndex((option) => option.hasAttribute("data-u-search-current"))
+      highlight(current === -1 ? 0 : Math.min(current + 1, list.length - 1))
+    }
+
+    const back = () => {
+      const level = levels.pop()
+      if (!level) return
+      results.innerHTML = level.html
+      input.value = level.value
+      crumb.textContent = level.crumb
+      crumb.hidden = !levels.length
+      drawChips()
+      highlight(level.active)
+    }
+
+    // Shimmer rows hold the panel at its usual height until the first results arrive, so it doesn't open short and jump.
+    const placeholder = () => {
+      const block = (width) => Object.assign(document.createElement("span"), { className: "u-shimmer", style: `width: ${width}` })
+      const fragment = document.createDocumentFragment()
+      for (const [rows, label] of [[4, "6rem"], [2, "4rem"], [3, "3.5rem"]]) {
+        const group = document.createElement("div")
+        group.className = "u-search-placeholder"
+        group.setAttribute("aria-hidden", "true")
+        const heading = Object.assign(document.createElement("div"), { className: "u-search-group-label" })
+        heading.append(block(label))
+        group.append(heading)
+        for (let row = 0; row < rows; row++) {
+          const line = Object.assign(document.createElement("div"), { className: "u-search-option" })
+          line.append(block("2.5rem"), block(`${[45, 60, 38, 52][row % 4]}%`))
+          group.append(line)
+        }
+        fragment.append(group)
+      }
+      return fragment
+    }
+
+    const close = () => { if (panel.open) panel.close() }
+
+    const pick = (option, event) => {
+      if (!option || option.disabled) return
+      if (option.dataset.uSearchLevel) {
+        event?.preventDefault()
+        return enter(document.getElementById(option.dataset.uSearchLevel), option)
+      }
+      remember(option.dataset.uSearchRecent ?? levels.at(-1)?.recent)
+      this.dispatchEvent(new CustomEvent("search:pick", { bubbles: true, detail: { kind, level: levels.length, query: !!input.value.trim() } }))
+      close()
+      if (!event) option.click()
+    }
+
+    const open = () => {
+      levels = []
+      kind = "all"
+      crumb.hidden = true
+      crumb.textContent = ""
+      if (!results.querySelector("[role='option'], .u-search-empty")) results.replaceChildren(placeholder())
+      if (!panel.open) panel.showModal()
+      input.focus()
+      input.select()
+      load()
+    }
+
+    trigger.addEventListener("click", open, { signal })
+    // Another button can open this search by pointing at its id, like a search icon in a phone header.
+    if (this.id) {
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(`[data-u-search-opener="${this.id}"]`)) return
+        event.preventDefault()
+        open()
+      }, { signal })
+    }
+    panel.addEventListener("close", () => { levels = []; request?.abort(); actionsCache.clear() }, { signal })
+
+    input.addEventListener("input", () => {
+      if (levels.length) return filterLevel()
+      clearTimeout(timer)
+      timer = setTimeout(load, 120)
+    }, { signal })
+
+    input.addEventListener("keydown", (event) => {
+      const option = options()[active]
+      const atEnd = input.selectionStart === input.value.length
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault()
+        highlight(active + (event.key === "ArrowDown" ? 1 : -1))
+      } else if (event.key === "Enter") {
+        event.preventDefault()
+        pick(option)
+      } else if ((event.key === "ArrowRight" && atEnd) || (event.key === "Tab" && !event.shiftKey)) {
+        const actions = option?.dataset.uSearchActions
+        if (actions || event.key === "Tab") event.preventDefault()
+        if (actions) openActions(option)
+      } else if (event.key === "Tab" && event.shiftKey && !chips.hidden) {
+        event.preventDefault()
+        const keys = [...chips.children].map((chip) => chip.dataset.kind)
+        kind = keys[(keys.indexOf(kind) + 1) % keys.length]
+        load()
+      } else if (levels.length && ((event.key === "ArrowLeft" && input.selectionStart === 0) || (event.key === "Backspace" && !input.value) || event.key === "Escape")) {
+        event.preventDefault()
+        back()
+      } else if (event.key.toLowerCase() === "k" && (event.metaKey || event.ctrlKey)) {
+        event.preventDefault()
+        close()
+      }
+    }, { signal })
+
+    results.addEventListener("pointermove", (event) => {
+      const option = event.target.closest("[role='option']")
+      const index = options().indexOf(option)
+      if (index !== -1 && index !== active) highlight(index)
+    }, { signal })
+
+    results.addEventListener("click", (event) => {
+      const option = event.target.closest("[role='option']")
+      if (option) pick(option, event)
+    }, { signal })
+
+    chips.addEventListener("click", (event) => {
+      const chip = event.target.closest(".u-search-chip")
+      if (!chip) return
+      kind = chip.dataset.kind
+      input.focus()
+      load()
+    }, { signal })
   }
 })
 

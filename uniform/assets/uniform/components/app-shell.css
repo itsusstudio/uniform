@@ -53,6 +53,11 @@
   forced-color-adjust: none;
 }
 
+/* A search button sits beside the menu button, on the right. */
+.u-app-shell > header > button[data-u-search-opener] { margin-inline-start: auto; }
+
+.u-app-shell > header > button[data-u-search-opener]::before { mask-image: url("/uniform/icons/search.svg"); }
+
 u-sidebar {
   display: flex;
   flex-direction: column;

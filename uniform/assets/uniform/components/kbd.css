@@ -20,6 +20,12 @@
   user-select: none;
 }
 
+.u-kbd > .u-icon {
+  width: 12px;
+  height: 12px;
+  stroke-width: 1.5px;
+}
+
 .u-kbd-group {
   display: inline-flex;
   align-items: center;

@@ -26,10 +26,16 @@ module Studio
         "Escape" => "Esc", "ArrowUp" => "↑", "ArrowDown" => "↓", "ArrowLeft" => "←", "ArrowRight" => "→"
       }.freeze
 
+      # Text arrows are too faint at keycap size, so arrow keys show the icon set's own arrows.
+      KEY_ICONS = {"ArrowUp" => "arrow-up", "ArrowDown" => "arrow-down", "ArrowLeft" => "arrow-left", "ArrowRight" => "arrow-right"}.freeze
+
       #   <%= uniform_kbd "Mod+Enter" %>
       def uniform_kbd(keys)
-        labels = keys.split("+").map(&:strip).map { |part| KEY_LABELS.fetch(part) { (part.length == 1) ? part.upcase : part } }
-        tag.kbd(safe_join(labels.map { |label| tag.kbd(label, class: "u-kbd") }), class: "u-kbd-group", data: {u_keys: keys}, aria: {hidden: true})
+        caps = keys.split("+").map(&:strip).map do |part|
+          label = KEY_ICONS[part] ? uniform_icon(KEY_ICONS[part]) : KEY_LABELS.fetch(part) { (part.length == 1) ? part.upcase : part }
+          tag.kbd(label, class: "u-kbd")
+        end
+        tag.kbd(safe_join(caps), class: "u-kbd-group", data: {u_keys: keys}, aria: {hidden: true})
       end
 
       # The person colour (1 to 8) for a name, the same in uniform.js, so a person keeps their colour everywhere.

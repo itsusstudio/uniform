@@ -126,6 +126,8 @@
       url: /components/prose/
     - title: Radio
       url: /components/radio/
+    - title: Search
+      url: /components/search/
     - title: Select
       url: /components/select/
     - title: Shimmer

@@ -1,0 +1,297 @@
+@layer components {
+u-search { display: block; }
+
+/* Sits in a sidebar like a nav link, so it lines up with the links below it. */
+.u-search-trigger {
+  display: flex;
+  align-items: center;
+  gap: --spacing(2);
+  width: 100%;
+  min-height: var(--spacing-target);
+  padding-inline: --spacing(2);
+  border: 0;
+  border-radius: var(--radius-item);
+  background: transparent;
+  color: var(--text-color-default);
+  font: inherit;
+  font-size: var(--text-small);
+  text-align: start;
+  cursor: pointer;
+}
+
+.u-search-trigger:hover { background: color-mix(in srgb, var(--text-color-default) 3%, transparent); }
+
+.u-search-trigger::before {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentcolor;
+  mask: url("/uniform/icons/search.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-search-trigger > span:first-child {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-search-trigger {
+  justify-content: center;
+  width: var(--spacing-control);
+  padding: 0;
+}
+
+u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-search-trigger::before { margin: 0; }
+
+u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-search-trigger > * { display: none; }
+
+.u-search-panel {
+  position: fixed;
+  inset: 12vh 0 auto;
+  width: min(640px, calc(100vw - 32px));
+  max-height: calc(100dvh - 12vh - 16px);
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid var(--border-color-default);
+  border-radius: var(--radius-surface);
+  background: var(--background-color-surface);
+  color: var(--text-color-default);
+  box-shadow: var(--shadow-float);
+  overflow: hidden;
+}
+
+.u-search-panel[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.u-search-panel::backdrop { background: color-mix(in srgb, var(--background-color-backdrop) 50%, transparent); }
+
+/* The search line is the panel's headline; a job's chip sits under it while you pick its actions. */
+.u-search-field {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  gap: --spacing(2);
+  padding: --spacing(5) --spacing(6) --spacing(3);
+}
+
+.u-search-field > input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--text-color-default);
+  font: inherit;
+  font-size: var(--text-page-title);
+  line-height: var(--text-page-title--line-height);
+}
+
+.u-search-field > input::placeholder { color: var(--text-color-muted); }
+
+.u-search-crumb {
+  padding: --spacing(1) --spacing(2);
+  background: var(--color-info);
+  color: var(--text-color-on-info);
+  font-size: var(--text-small);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.u-search-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: --spacing(1.5);
+  padding: 0 --spacing(6) --spacing(2);
+}
+
+.u-search-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: --spacing(1.5);
+  min-height: 28px;
+  padding: 0 --spacing(2.5);
+  border: 1px solid var(--border-color-default);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-color-default);
+  font: inherit;
+  font-size: var(--text-small);
+  cursor: pointer;
+}
+
+.u-search-chip > .u-data { color: var(--text-color-muted); }
+
+.u-search-chip[aria-pressed="true"] {
+  border-color: var(--background-color-ink);
+  background: var(--background-color-ink);
+  color: var(--text-color-on-ink);
+}
+
+.u-search-chip[aria-pressed="true"] > .u-data { color: var(--text-color-muted-on-ink); }
+
+.u-search-results {
+  flex: 1;
+  min-height: 0;
+  padding: 0 0 --spacing(4);
+  overflow-y: auto;
+}
+
+.u-search-panel[aria-busy="true"] .u-search-results:not(:has(.u-search-placeholder)) { opacity: 0.6; }
+
+.u-search-placeholder + .u-search-placeholder {
+  margin-top: --spacing(2);
+  border-top: 1px solid var(--border-color-divider);
+}
+
+.u-search-placeholder .u-search-option { cursor: default; }
+
+.u-search-placeholder .u-shimmer { flex: none; }
+
+.u-search-results [role="group"] + [role="group"] {
+  margin-top: --spacing(2);
+  border-top: 1px solid var(--border-color-divider);
+}
+
+.u-search-group-label {
+  padding: --spacing(4) --spacing(6) --spacing(1);
+  color: var(--text-color-muted);
+  font-size: var(--text-small);
+}
+
+/* One quiet line per result; only the highlighted one opens up to show its detail and keys. */
+.u-search-option {
+  --u-search-number: 64px;
+  display: flex;
+  align-items: center;
+  gap: --spacing(3);
+  width: 100%;
+  /* Tall enough for the keycaps a highlighted row shows, so moving through rows doesn't nudge them. */
+  min-height: calc(--spacing(3) + 22px);
+  padding: --spacing(1.5) --spacing(6);
+  border: 0;
+  background: transparent;
+  color: var(--text-color-default);
+  font: inherit;
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.u-search-option[aria-selected="true"] { background: var(--background-color-paper); }
+
+.u-search-option:disabled { cursor: default; }
+
+.u-search-text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.u-search-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.u-search-title > .u-data {
+  display: inline-block;
+  min-width: var(--u-search-number);
+  color: var(--text-color-muted);
+}
+
+.u-search-option[aria-selected="true"] .u-search-title > .u-data { color: var(--text-color-default); }
+
+.u-search-glyph {
+  display: inline-flex;
+  min-width: var(--u-search-number);
+  color: var(--text-color-muted);
+  vertical-align: -3px;
+}
+
+.u-search-option[aria-selected="true"] .u-search-glyph { color: var(--text-color-default); }
+
+.u-search-meta {
+  display: none;
+  overflow: hidden;
+  color: var(--text-color-muted);
+  font-size: var(--text-small);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.u-search-option[aria-selected="true"] .u-search-meta { display: block; }
+
+.u-search-option:has(.u-search-title > :is(.u-data, .u-search-glyph)) .u-search-meta { padding-inline-start: var(--u-search-number); }
+
+.u-search-option mark {
+  background: var(--background-color-highlight);
+  color: inherit;
+}
+
+.u-search-note {
+  margin-inline-start: --spacing(2);
+  color: var(--text-color-muted);
+}
+
+.u-search-end {
+  display: inline-flex;
+  flex: none;
+  align-self: center;
+  align-items: center;
+  gap: --spacing(4);
+  color: var(--text-color-muted);
+  font-size: var(--text-small);
+}
+
+.u-search-option:not([aria-selected="true"]) .u-search-end > :not(.u-icon) { display: none; }
+
+.u-search-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: --spacing(1.5);
+}
+
+.u-search-see-all {
+  padding-block: --spacing(1);
+  color: var(--text-color-link);
+  font-size: var(--text-small);
+}
+
+.u-search-empty {
+  margin: 0;
+  padding: --spacing(4) --spacing(6) --spacing(2);
+  color: var(--text-color-muted);
+}
+
+.u-search-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: --spacing(2) --spacing(5);
+  padding: --spacing(3) --spacing(6);
+  border-top: 1px solid var(--border-color-divider);
+  color: var(--text-color-muted);
+  font-size: var(--text-small);
+}
+
+.u-search-keys > span {
+  display: inline-flex;
+  align-items: center;
+  gap: --spacing(1.5);
+}
+
+@media (pointer: coarse) {
+  .u-search-keys { display: none; }
+
+  .u-search-trigger .u-kbd-group,
+  .u-search-trigger .u-kbd,
+  .u-search-end .u-kbd,
+  .u-search-end .u-kbd-group { display: none; }
+}
+}

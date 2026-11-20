@@ -367,6 +367,16 @@
   page: /components/dialog/
   description: On a `u-dialog`, makes it a full-height side sheet against the right edge, 448px wide and full width on a phone, for editing a record from a list.
 
+- name: u-search-trigger
+  group: Components
+  page: /components/search/
+  description: The search field in a sidebar that opens a `u-search` panel. Styled like a nav link, with its shortcut on the right.
+
+- name: u-search-panel
+  group: Components
+  page: /components/search/
+  description: The `<dialog>` a `u-search` opens, centred near the top of the window, with the search line set large.
+
 - name: u-dialog-narrow
   group: Components
   page: /components/dialog/

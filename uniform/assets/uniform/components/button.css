@@ -25,8 +25,8 @@
 }
 
 .u-btn-primary {
-  border-color: var(--text-color-default);
-  background: var(--text-color-default);
+  border-color: var(--background-color-primary);
+  background: var(--background-color-primary);
   color: var(--background-color-surface);
 }
 
@@ -95,7 +95,7 @@
   border-end-start-radius: 0;
 }
 
-.u-split-btn > .u-btn-primary:last-child { border-inline-start-color: color-mix(in srgb, var(--background-color-surface) 35%, var(--text-color-default)); }
+.u-split-btn > .u-btn-primary:last-child { border-inline-start-color: color-mix(in srgb, var(--background-color-surface) 35%, var(--background-color-primary)); }
 
 .u-split-btn > .u-btn:last-child[aria-expanded="true"],
 .u-split-btn:has(+ .u-menu:popover-open) > .u-btn-outline:last-child { background: var(--border-color-divider); }

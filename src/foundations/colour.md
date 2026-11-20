@@ -22,6 +22,7 @@ so you'll mostly reach for a class on a one-off.
   { token: "--background-color-paper", hex: "#f5f4ef / #262625", sample: :fill, job: "Off-white paper. The page behind marketing sites and blogs, set with bg-paper, and behind halftones everywhere." },
   { token: "--text-color-default", hex: "#1a1a18 / #e2e1dd", sample: :fill, job: "Ink. Text, headings, primary buttons and the rule under a table header." },
   { token: "--background-color-ink", hex: "#1a1a18 / #20201f", sample: :fill, job: "A solid ink panel: the app sidebar and the brand half of the sign-in screen. Matches the cards in dark mode." },
+  { token: "--background-color-primary", hex: "#1a1a18 / #b8b5ad", sample: :fill, job: "The fill of a primary button. Ink in light mode, a soft warm grey in dark mode so the main action stands out without glare.", never: "panels, cards or anything that isn't the main action" },
 ] %>
 
 ## Greys

@@ -104,6 +104,7 @@
   --background-color-surface: light-dark(#ffffff, #20201f);
   --background-color-paper: light-dark(#f5f4ef, #262625);
   --background-color-ink: #1a1a18;
+  --background-color-primary: light-dark(#1a1a18, #b8b5ad);
   --background-color-highlight: light-dark(#fbeeb0, #735a00);
   --background-color-backdrop: light-dark(color-mix(in srgb, #1a1a18 28%, transparent), color-mix(in srgb, #000000 60%, transparent));
 

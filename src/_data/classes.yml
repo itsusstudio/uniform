@@ -406,6 +406,11 @@
   page: /components/form/
   description: On a `<form>` holding a heading group, the fields and a `u-actions` row, in that order.
 
+- name: u-field-row
+  group: Layout
+  page: /components/form/
+  description: Two or three short `u-field`s side by side, stacking when each would have less than 224px.
+
 - name: <figcaption>
   group: Components
   page: /components/caption/

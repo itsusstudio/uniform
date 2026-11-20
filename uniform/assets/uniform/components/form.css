@@ -8,4 +8,11 @@
 .u-form > :is(.u-field, .u-fieldset, :has(> .u-field)) + :is(.u-field, .u-fieldset, :has(> .u-field)) {
   margin-top: calc(--spacing(4) - --spacing(6));
 }
+
+.u-field-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  align-items: start;
+  gap: --spacing(4);
+}
 }

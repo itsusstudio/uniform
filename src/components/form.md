@@ -131,6 +131,43 @@ for a code that isn't six digits.
 <%%= form.code_field :code, label: t(".code"), error: @field_error, submit: true, autofocus: true %>
 ```
 
+## Fields side by side
+
+Put two or three short fields in a `u-field-row` when each would otherwise
+fill a whole line with a few characters, like a status and a reference
+number. They sit side by side while each has at least 224px, and stack on a
+narrower screen. Keep a field that needs room, like a toggle group or a
+description, on its own line.
+
+<div class="example-frame">
+<div class="max-w-form">
+<form class="u-form" action="#example">
+<div class="u-field-row">
+<div class="u-field">
+<label for="form-row-status">Status</label>
+<select class="u-input" id="form-row-status"><option>Draft</option><option>In progress</option></select>
+</div>
+<div class="u-field">
+<label for="form-row-reference">Client reference</label>
+<input class="u-input" id="form-row-reference" autocomplete="off" placeholder=" ">
+<small>Their bag tag or order number.</small>
+</div>
+</div>
+<div class="u-field">
+<label for="form-row-description">Description</label>
+<textarea class="u-input" id="form-row-description" rows="3"></textarea>
+</div>
+</form>
+</div>
+</div>
+
+```html
+<div class="u-field-row">
+  <div class="u-field">…</div>
+  <div class="u-field">…</div>
+</div>
+```
+
 ## Time zone
 
 Wrap a hidden input in `<u-time-zone>` to send the browser's time zone with

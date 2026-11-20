@@ -54,6 +54,16 @@
 .u-btn-ghost:not(:disabled, [aria-disabled="true"]):hover,
 .u-btn-close:not(:disabled, [aria-disabled="true"]):hover { background: var(--border-color-divider); }
 
+.u-btn-ghost-danger {
+  border-color: transparent;
+  background: transparent;
+  color: var(--color-danger);
+}
+
+.u-btn-ghost-danger:not(:disabled, [aria-disabled="true"]):hover {
+  background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+}
+
 .u-btn-icon,
 .u-btn-close {
   width: var(--spacing-control);

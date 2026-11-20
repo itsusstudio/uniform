@@ -13,7 +13,7 @@
   line-height: var(--text-small--line-height);
 }
 
-:is(.u-field > :is(label, p, span):first-child, .u-fieldset > legend) > span {
+:is(.u-field > :is(label, p, span):first-child, .u-fieldset > legend) > span:not(.u-badge) {
   color: var(--text-color-muted);
   font-weight: 400;
 }

@@ -1,0 +1,99 @@
+@layer components {
+u-multi-select { display: block; }
+
+.u-multi-select-trigger {
+  display: flex;
+  align-items: center;
+  gap: --spacing(2);
+  width: 100%;
+  text-align: start;
+  cursor: pointer;
+}
+
+.u-multi-select-trigger::after {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: auto;
+  background: var(--text-color-default);
+  mask: url("/uniform/icons/chevron-down.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
+.u-multi-select-trigger > .u-people { overflow: hidden; }
+
+.u-multi-select-list {
+  width: auto;
+  max-height: 20rem;
+  padding: --spacing(1) 0;
+  overflow-y: auto;
+}
+
+.u-multi-select-list > fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.u-multi-select-list > fieldset > legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.u-multi-select-list label,
+.u-multi-select-me {
+  display: flex;
+  align-items: center;
+  gap: --spacing(2.5);
+  width: 100%;
+  min-height: var(--spacing-target);
+  padding: --spacing(1) --spacing(3);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-color-default);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.u-multi-select-list label:is(:hover, :has(:focus-visible)),
+.u-multi-select-me:is(:hover, :focus-visible) {
+  outline: none;
+  background: var(--border-color-divider);
+}
+
+.u-multi-select-me:disabled {
+  color: var(--text-color-muted);
+  cursor: default;
+}
+
+.u-multi-select-me:disabled:hover { background: transparent; }
+
+.u-multi-select-list .u-checkbox > input { border-radius: var(--radius-item); }
+
+.u-multi-select-me {
+  margin-bottom: --spacing(1);
+  border-bottom: 1px solid var(--border-color-divider);
+  color: var(--text-color-link);
+  font-weight: 500;
+}
+
+.u-multi-select-search {
+  height: var(--spacing-target);
+  margin: calc(-1 * --spacing(1)) 0 --spacing(1);
+  padding-inline: --spacing(3);
+  border: 0;
+  border-bottom: 1px solid var(--border-color-divider);
+  border-radius: 0;
+  background: transparent;
+}
+
+.u-multi-select-search:focus-visible {
+  outline: none;
+  box-shadow: inset 0 -2px 0 var(--color-info);
+}
+
+.u-multi-select-none {
+  padding: --spacing(2) --spacing(3);
+  color: var(--text-color-muted);
+}
+}

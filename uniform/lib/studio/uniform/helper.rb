@@ -32,6 +32,34 @@ module Studio
         tag.kbd(safe_join(labels.map { |label| tag.kbd(label, class: "u-kbd") }), class: "u-kbd-group", data: {u_keys: keys}, aria: {hidden: true})
       end
 
+      # The person colour (1 to 8) for a name, the same in uniform.js, so a person keeps their colour everywhere.
+      #   <span class="u-avatar" data-person="<%= uniform_person(user.full_name) %>">JM</span>
+      def uniform_person(name)
+        hash = name.codepoints.reduce(2166136261) { |sum, point| ((sum ^ point) * 16777619) & 0xffffffff }
+        (hash % 8) + 1
+      end
+
+      #   <%= uniform_people job.assignees.map(&:full_name), empty: t(".unassigned") %>
+      def uniform_people(names, empty:)
+        return tag.span(empty, class: "u-people u-people-empty") if names.empty?
+
+        avatars = tag.span(safe_join(names.first(3).map { |name| tag.span(people_initials(name), data: {person: uniform_person(name)}) }),
+          class: "u-avatar-group", aria: {hidden: true})
+        shown = names.first(2).map { |name| people_short_name(name) }.join(", ")
+        shown += " +#{names.size - 2}" if names.size > 2
+        tag.span(class: "u-people") do
+          safe_join([avatars, tag.span(shown, aria: {hidden: true}), tag.span(names.to_sentence, class: "sr-only")])
+        end
+      end
+
+      #   <%= uniform_row_hint row: {label: t(".quick_edit"), number: "#916", keys: "e"},
+      #         first: {label: t(".open_job"), number: "#916", keys: "o"} %>
+      def uniform_row_hint(row:, first: nil)
+        labels = [row_hint_label(row, "row")]
+        labels << row_hint_label(first, "first") if first
+        content_tag("u-row-hint", safe_join(labels), popover: "manual", aria: {hidden: true})
+      end
+
       #   <%= uniform_chart :bar, label: t(".caption"), height: 160, rows: jobs_per_week.map { |week, count| {label: l(week, format: :short), value: count} } %>
       def uniform_chart(type = :bar, label:, rows:, series: nil, empty: nil, error: nil, **attributes)
         data = {rows: rows.map { |row| uniform_chart_row(row) }, series: series}.compact
@@ -45,6 +73,21 @@ module Studio
       end
 
       private
+
+      def people_initials(name)
+        name.split.first(2).map { |part| part[0].upcase }.join
+      end
+
+      def people_short_name(name)
+        first, *rest = name.split
+        rest.empty? ? first : "#{first} #{rest.first[0]}"
+      end
+
+      def row_hint_label(label, part)
+        number = (tag.span(label[:number], class: "u-data") if label[:number])
+        keys = (uniform_kbd(label[:keys]) if label[:keys])
+        tag.span(safe_join([label[:label], number, keys].compact, " "), data: {u_hint: part})
+      end
 
       CHART_SHIMMER_BARS = [45, 60, 40, 70, 55, 80, 65, 50, 75, 60, 85, 70].freeze
       CHART_SHIMMER_LEGEND = ["96px", "120px", "80px", "136px"].freeze

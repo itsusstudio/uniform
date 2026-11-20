@@ -68,6 +68,8 @@ Separate two keys for the same action with a comma, like `/,s`.
   field.
 - When two elements share a key, the one in the focused form wins, then the
   one on screen.
+- A shortcut with `data-u-hotkey-row` runs only on the row under the pointer or
+  holding focus, so every row can share one key, like `E` to quick edit.
 - While a modal dialog is open, only its own shortcuts run.
 - Escape belongs to an open menu, popover or dialog first.
 - A key on its own, like in a field or the shortcut list, looks like a

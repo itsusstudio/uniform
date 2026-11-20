@@ -127,6 +127,18 @@
   --color-info-on-ink: #5b7fe6;
   --color-warning: #f3c22c;
   --color-success: light-dark(#277a4d, #4aa874);
+
+  /* One colour per person, picked from their name, so the same person always looks the same.
+     None of them is a signal colour (info, link, success, danger, warning), so an avatar never reads as a state. */
+  --color-person-1: light-dark(#7b4fb3, #b598e0);
+  --color-person-2: light-dark(#a63d7a, #e08ab8);
+  --color-person-3: light-dark(#8a5a2b, #c99a68);
+  --color-person-4: light-dark(#6b6f1f, #b5b86a);
+  --color-person-5: light-dark(#4a5d6e, #93a8ba);
+  --color-person-6: light-dark(#8a6510, #d6b25a);
+  --color-person-7: light-dark(#6e5a8a, #b8a6cc);
+  --color-person-8: light-dark(#6f6448, #c2b494);
+  --text-color-on-person: light-dark(#ffffff, #131311);
 }
 
 @layer base {

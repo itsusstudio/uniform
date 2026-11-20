@@ -60,7 +60,7 @@
   opacity: 1;
 }
 
-.u-tooltip > :last-child .u-kbd {
+:is(.u-tooltip > :last-child, u-row-hint) .u-kbd {
   background: color-mix(in srgb, var(--background-color-surface) 20%, transparent);
   color: inherit;
 }

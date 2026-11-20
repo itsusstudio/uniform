@@ -17,6 +17,89 @@
 
 .u-dialog-narrow { max-width: 384px; }
 
+.u-dialog-side {
+  width: 100%;
+  max-width: 448px;
+  height: 100%;
+  max-height: none;
+  margin: 0 0 0 auto;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  border-width: 0 0 0 1px;
+  border-radius: 0;
+}
+
+.u-dialog-side {
+  opacity: 0;
+  transition-property: opacity, translate;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+
+  @media (prefers-reduced-motion: no-preference) { translate: 100% 0; }
+}
+
+.u-dialog-side::backdrop {
+  opacity: 0;
+  transition-property: opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+:is(.u-dialog-side[open]):where(:not([data-closing])) {
+  opacity: 1;
+  translate: 0 0;
+
+  @starting-style {
+    opacity: 0;
+
+    @media (prefers-reduced-motion: no-preference) { translate: 100% 0; }
+  }
+
+  &::backdrop {
+    opacity: 1;
+
+    @starting-style { opacity: 0; }
+  }
+}
+
+/* A sheet's form fills its height, so the actions stay at the bottom however long the form is. */
+.u-dialog-side > turbo-frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+:is(.u-dialog-side > form, .u-dialog-side > turbo-frame > form) {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+:is(.u-dialog-side > form, .u-dialog-side > turbo-frame > form) > .u-card-content { flex: 1; }
+
+:is(.u-dialog-side > form, .u-dialog-side > turbo-frame > form) > .u-actions {
+  position: sticky;
+  bottom: 0;
+  padding-top: --spacing(4);
+  background: var(--background-color-surface);
+}
+
+/* A sheet can open before its content arrives; the content fades in rather than popping. */
+.u-dialog-side > * {
+  transition-property: opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+}
+
+.u-dialog-side[aria-busy="true"] > * { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .u-dialog-side,
+  .u-dialog-side > *,
+  .u-dialog-side::backdrop { transition-duration: 0.1s; }
+}
+
 .u-dialog::backdrop { background: var(--background-color-backdrop); }
 
 .u-dialog:modal { overscroll-behavior: contain; }
@@ -27,7 +110,7 @@
   overscroll-behavior: contain;
 }
 
-.u-dialog > form.u-form { gap: 0; }
+:is(.u-dialog > form, .u-dialog > turbo-frame > form).u-form { gap: 0; }
 
 .u-dialog .u-card-content { font-size: var(--text-small); }
 

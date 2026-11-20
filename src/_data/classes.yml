@@ -131,6 +131,11 @@
   page: /components/avatar/
   description: Up to three avatars and a "+N" avatar, each a plain `<span>`, overlapping.
 
+- name: u-people
+  group: Components
+  page: /components/avatar/
+  description: Who's on something, written by `uniform_people`, as an avatar group, two short names and a count, with every full name for screen readers. `u-people-empty` mutes the empty label.
+
 - name: u-avatar-group-sm
   group: Components
   page: /components/avatar/
@@ -209,6 +214,12 @@
   page: /components/button/
   variant: true
   description: Vermilion with white text, for an action that deletes something.
+
+- name: u-btn-ghost-danger
+  group: Components
+  page: /components/button/
+  variant: true
+  description: Vermilion text with no edge or fill, for a quiet action that throws work away next to a primary button, like Discard changes.
 
 - name: u-btn-close
   group: Components
@@ -350,6 +361,11 @@
   group: Components
   page: /components/dialog/
   description: On a `u-dialog`, widens it to 720px for a signature pad, a photo grid or a preview.
+
+- name: u-dialog-side
+  group: Components
+  page: /components/dialog/
+  description: On a `u-dialog`, makes it a full-height side sheet against the right edge, 448px wide and full width on a phone, for editing a record from a list.
 
 - name: u-dialog-narrow
   group: Components

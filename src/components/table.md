@@ -28,6 +28,34 @@ place and columns are on [Table: Data grid](/components/data-grid/).
 
 <%= render "examples/data_grid_demo_script" %>
 
+## Row shortcuts
+
+A row can have a key that acts on whichever row is under the pointer, like `E`
+to edit. Give the link that does it `data-u-hotkey` and `data-u-hotkey-row`, so
+the key works only on the hovered or focused row and never on one picked at
+random. The link can be visually hidden, since the hint shows the key.
+
+`uniform_row_hint` writes a `<u-row-hint>` that floats just above the pointer
+while it's over the row, saying what a click or key does there. Its `first:`
+label replaces the `row:` one over the first cell, which opens the row's page,
+and turns link blue. Over a cell with its own control, like a status picker,
+the hint gets out of the way. It's a closed popover until `uniform.js` opens it,
+so a page without the script never shows a key that does nothing, and touch
+screens never show it.
+
+In a `u-data-grid`, mark a link `data-u-row-link` to open it, instead of the
+row's page, when someone clicks or taps the row. The first cell still opens the
+page, and so does a Cmd or Ctrl click.
+
+```erb
+<td class="u-table-actions">
+  <%%= link_to t(".quick_edit", number: job.number), edit_job_path(job),
+        class: "sr-only", data: {turbo_frame: "global_modal", u_hotkey: "e", u_hotkey_row: true, u_row_link: true} %>
+  <%%= uniform_row_hint row: {label: t(".quick_edit"), number: "##{job.number}", keys: "e"},
+        first: {label: t(".open_job"), number: "##{job.number}", keys: "o"} %>
+</td>
+```
+
 ## Code
 
 ```html

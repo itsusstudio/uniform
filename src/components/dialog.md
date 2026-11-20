@@ -74,6 +74,10 @@ Add `u-dialog-wide` when the content needs room: a signature pad, a photo grid,
 or a preview someone has to read. It widens the dialog to 720px and leaves
 phones as they are.
 
+Add `u-dialog-side` for a side sheet: a full-height dialog against the right
+edge, for editing a record without leaving the list behind it. It's 448px wide,
+the whole width on a phone, and slides in unless someone prefers less motion.
+
 Add `u-dialog-narrow` for a short list of pairs, like the keyboard shortcuts,
 so each label stays close to its value. It narrows the dialog to 384px.
 

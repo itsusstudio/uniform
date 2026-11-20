@@ -71,6 +71,35 @@
   cursor: default;
 }
 
+u-row-hint:popover-open {
+  position: fixed;
+  inset: auto;
+  top: var(--u-row-hint-y, 0);
+  left: var(--u-row-hint-x, 0);
+  display: inline-flex;
+  margin: 0;
+  padding: --spacing(1) --spacing(2);
+  border: 0;
+  background: var(--text-color-default);
+  color: var(--background-color-surface);
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
+  white-space: nowrap;
+  pointer-events: none;
+  translate: -50% calc(-100% - --spacing(3));
+}
+
+u-row-hint[data-on-first] { background: var(--text-color-link); }
+
+u-row-hint > [data-u-hint] {
+  display: inline-flex;
+  align-items: center;
+  gap: --spacing(1.5);
+}
+
+u-row-hint:not([data-on-first]) > [data-u-hint="first"],
+u-row-hint[data-on-first] > [data-u-hint="row"] { display: none; }
+
 :is(.u-table, u-chart) > table .u-table-num {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;

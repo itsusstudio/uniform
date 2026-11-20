@@ -94,6 +94,18 @@
   without: The list stays empty. The shortcuts themselves need JavaScript too, so there's nothing to list.
   page: /components/kbd/#shortcut-list
 
+- name: <u-multi-select>
+  wraps: A fieldset of checkboxes, each in a label with the option's name.
+  adds: Folds them into one field that names what's picked, with the same checkboxes in a popover, picked ones first, an "Assign to me" shortcut and a search field for long lists.
+  without: The fieldset stays a plain list of checkboxes that still posts.
+  page: /components/multi-select/
+
+- name: <u-row-hint>
+  wraps: A `data-u-hint="row"` label and an optional `data-u-hint="first"` label, written by `uniform_row_hint`, inside a table row.
+  adds: Opens in the top layer just above the pointer while it's over the row, swaps to the first-cell label over the first cell, and hides over cells with their own controls.
+  without: Stays a closed popover, so it never shows.
+  page: /components/table/#row-shortcuts
+
 - name: <u-time-zone>
   wraps: A hidden `<input>` in a form.
   adds: Fills the input with the browser's time zone, like America/Toronto, when it's empty.

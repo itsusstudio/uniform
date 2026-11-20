@@ -113,6 +113,27 @@ Use a group for several people on one thing, like everyone who has worked on a
 job. Show three at most, then a `<span>` with the count of the rest, like +3.
 Add `u-avatar-group-sm` to make them all small.
 
+## People
+
+`uniform_people` shows who's on something, like a job's assignees: up to
+three avatars, then two short names and a count, like "John M, Sarah O +1".
+Screen readers hear every full name. With no one, it shows the `empty:` label
+muted. A [multi-select](/components/multi-select/) draws the same thing for
+the people picked.
+
+Each person gets one of eight colours, picked from their name with
+`uniform_person`, so they look the same on every page and in every list.
+Give an initials avatar `data-person` to use it.
+
+```erb
+<span class="u-avatar u-avatar-sm" data-person="<%%= uniform_person(user.full_name) %>"
+  role="img" aria-label="<%%= user.full_name %>"><%%= user.initials %></span>
+```
+
+```erb
+<%%= uniform_people job.assignees.map(&:full_name), empty: t(".unassigned") %>
+```
+
 ## Code
 
 ```html

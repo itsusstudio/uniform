@@ -1716,7 +1716,7 @@ define("u-data-grid", class extends UniformElement {
       const link = cell.parentElement.cells[0]?.querySelector("a:not(.u-btn)")
       if (!link || getSelection()?.toString()) return
       if (event.metaKey || event.ctrlKey) window.open(link.href, "_blank", "noopener")
-      else link.click()
+      else ((cell !== cell.parentElement.cells[0] && cell.parentElement.querySelector("a[data-u-row-link]")) || link).click()
     })
   }
 
@@ -2221,6 +2221,20 @@ if (!document[pageReady]) {
     if (dialog.dispatchEvent(new Event("cancel", { cancelable: true }))) dialog.close(value)
   }
 
+  // A side sheet slides out while it's still open, then closes. Chrome drops the slide when it transitions a dialog that has already closed.
+  document.addEventListener("cancel", async (event) => {
+    const dialog = event.target
+    if (!dialog.matches?.(".u-dialog-side") || !event.cancelable) return
+    event.preventDefault()
+    if (dialog.hasAttribute("data-closing")) return
+    dialog.setAttribute("data-closing", "")
+    getComputedStyle(dialog).opacity
+    const animations = dialog.getAnimations({ subtree: true })
+    await Promise.race([Promise.allSettled(animations.map((animation) => animation.finished)), new Promise((done) => setTimeout(done, 400))])
+    dialog.removeAttribute("data-closing")
+    dialog.close()
+  }, true)
+
   if (!("closedBy" in HTMLDialogElement.prototype)) {
     document.addEventListener("click", (event) => {
       const dialog = event.target
@@ -2318,6 +2332,12 @@ const hotkeyAvailable = (element) => !element.disabled && element.getAttribute("
 
 const typingIn = (target) => target.closest?.('textarea, select, [contenteditable]:not([contenteditable="false"]), input:not([type="checkbox"], [type="radio"], [type="button"], [type="submit"], [type="reset"])')
 
+// A row's shortcut acts on the row under the pointer, or the row holding focus, and never on a row picked at random.
+const rowActive = (element) => {
+  const row = element.closest("tr, li, [role='row']")
+  return !!row && (row.matches(":hover") || row.contains(document.activeElement))
+}
+
 const hotkeyTarget = (event) => {
   const typing = typingIn(event.target)
   const scope = document.querySelector("dialog:modal") || document
@@ -2325,6 +2345,7 @@ const hotkeyTarget = (event) => {
   const candidates = [...scope.querySelectorAll("[data-u-hotkey]")]
   if (scope !== document && scope.matches("[data-u-hotkey]")) candidates.push(scope)
   const matches = candidates.filter((element) => hotkeyAvailable(element)
+    && (!element.hasAttribute("data-u-hotkey-row") || rowActive(element))
     && hotkeysOf(element).some((parts) => hotkeyMatches(parts, event)
       && (usesModifier(parts) || (!typing && !characterKeysOff()))))
   return matches.find((element) => form && (form.contains(element) || element.form === form))
@@ -2367,6 +2388,7 @@ const hotkeysReady = Symbol.for("uniform.hotkeys")
 if (!document[hotkeysReady]) {
   document[hotkeysReady] = true
 
+
   document.addEventListener("keydown", (event) => {
     if (event.defaultPrevented || event.repeat || event.isComposing) return
     if (event.key === "Escape" && document.querySelector(':popover-open:not([popover="manual"]), dialog:modal')) return
@@ -2382,6 +2404,193 @@ if (!document[hotkeysReady]) {
   }
   if (document.readyState !== "loading") markHotkeys()
 }
+
+// Folds a fieldset of checkboxes into one button that says who's picked, with the same checkboxes in a popover.
+// The checkboxes stay real form fields, so the form posts the same with or without this script.
+let multiSelects = 0
+const initialsOf = (name) => name.split(/\s+/).filter(Boolean).slice(0, 2).map((part) => part[0].toUpperCase()).join("")
+// Matches uniform_person in the gem, so a person keeps their colour on server-drawn and script-drawn avatars.
+const personOf = (name) => ([...name].reduce((hash, char) => Math.imul(hash ^ char.codePointAt(0), 16777619) >>> 0, 2166136261) % 8) + 1
+const shortName = (name) => {
+  const [first, ...rest] = name.split(/\s+/).filter(Boolean)
+  return rest.length ? `${first} ${rest[0][0]}` : first
+}
+
+define("u-multi-select", class extends UniformElement {
+  setup(signal) {
+    const fieldset = this.querySelector(":scope > fieldset")
+    if (!fieldset) return
+    const id = this.id || `u-multi-select-${++multiSelects}`
+    const boxes = () => [...fieldset.querySelectorAll('input[type="checkbox"]')]
+    // Read each name once, before the avatar's initials join the label's text.
+    boxes().forEach((box) => { box.dataset.name ??= box.closest("label")?.textContent.trim() ?? "" })
+    const nameOf = (box) => box.dataset.name
+    const legend = fieldset.querySelector("legend")
+    if (legend) legend.id ||= `${id}-legend`
+
+    const trigger = document.createElement("button")
+    trigger.type = "button"
+    trigger.className = "u-input u-multi-select-trigger"
+    trigger.setAttribute("popovertarget", `${id}-list`)
+    const summary = document.createElement("span")
+    summary.id = `${id}-summary`
+    trigger.setAttribute("aria-labelledby", [legend?.id, summary.id].filter(Boolean).join(" "))
+
+    const list = document.createElement("div")
+    list.className = "u-popover u-multi-select-list"
+    list.id = `${id}-list`
+    list.setAttribute("popover", "")
+    if (legend) list.setAttribute("aria-labelledby", legend.id)
+
+    const searchFrom = Number(this.dataset.searchFrom || 8)
+    const search = boxes().length >= searchFrom ? document.createElement("input") : null
+    if (search) {
+      search.type = "search"
+      search.className = "u-input u-multi-select-search"
+      search.placeholder = this.dataset.searchLabel || ""
+      search.setAttribute("aria-label", this.dataset.searchLabel || "")
+      list.append(search)
+    }
+
+    const meBox = this.dataset.me && boxes().find((box) => box.value === this.dataset.me)
+    const me = meBox ? document.createElement("button") : null
+    if (me) {
+      me.type = "button"
+      me.className = "u-multi-select-me"
+      me.textContent = this.dataset.meLabel || ""
+      list.append(me)
+    }
+
+    const none = document.createElement("p")
+    none.className = "u-multi-select-none"
+    none.textContent = this.dataset.noMatch || ""
+    none.hidden = true
+
+    boxes().forEach((box) => {
+      const label = box.closest("label")
+      if (!label || label.querySelector(".u-avatar")) return
+      const avatar = document.createElement("span")
+      avatar.className = "u-avatar u-avatar-sm"
+      avatar.setAttribute("aria-hidden", "true")
+      avatar.textContent = initialsOf(nameOf(box))
+      avatar.dataset.person = personOf(nameOf(box))
+      box.after(avatar)
+    })
+
+    fieldset.before(trigger)
+    list.append(fieldset, none)
+    trigger.after(list)
+    trigger.append(summary)
+
+    const draw = () => {
+      // Draws what uniform_people draws on the server, so a picked list reads the same everywhere.
+      const names = boxes().filter((box) => box.checked).map(nameOf)
+      summary.replaceChildren()
+      summary.className = names.length ? "u-people" : "u-people u-people-empty"
+      if (!names.length) {
+        summary.textContent = this.dataset.placeholder || ""
+      } else {
+        const group = Object.assign(document.createElement("span"), { className: "u-avatar-group" })
+        group.setAttribute("aria-hidden", "true")
+        names.slice(0, 3).forEach((name) => {
+          const avatar = Object.assign(document.createElement("span"), { textContent: initialsOf(name) })
+          avatar.dataset.person = personOf(name)
+          group.append(avatar)
+        })
+        const short = Object.assign(document.createElement("span"), {
+          textContent: names.slice(0, 2).map(shortName).join(", ") + (names.length > 2 ? ` +${names.length - 2}` : "")
+        })
+        short.setAttribute("aria-hidden", "true")
+        const full = Object.assign(document.createElement("span"), {
+          className: "sr-only",
+          textContent: new Intl.ListFormat(langOf(this), { type: "conjunction" }).format(names)
+        })
+        summary.append(group, short, full)
+      }
+      // Greys out rather than leaving, so the list never jumps when someone picks themselves.
+      if (me) me.disabled = meBox.checked
+    }
+
+    const visible = () => [me, ...boxes()].filter((item) => item && !item.hidden && !item.disabled && !item.closest("label")?.hidden)
+    const filter = () => {
+      const query = search.value.trim().toLowerCase()
+      boxes().forEach((box) => { box.closest("label").hidden = !!query && !nameOf(box).toLowerCase().includes(query) })
+      if (me) me.hidden = !!query
+      none.hidden = boxes().some((box) => !box.closest("label").hidden)
+    }
+
+    fieldset.addEventListener("change", draw, { signal })
+    me?.addEventListener("click", () => { meBox.click(); (search || boxes()[0])?.focus() }, { signal })
+    search?.addEventListener("input", filter, { signal })
+    // Picked people move to the top each time the list opens, never while someone is picking.
+    list.addEventListener("beforetoggle", (event) => {
+      if (event.newState !== "open") return
+      list.style.minWidth = `${trigger.offsetWidth}px`
+      const labels = boxes().map((box) => box.closest("label"))
+      labels.filter((label) => label.control.checked).concat(labels.filter((label) => !label.control.checked)).forEach((label) => fieldset.append(label))
+      if (search) { search.value = ""; filter() }
+    }, { signal })
+    list.addEventListener("toggle", (event) => { if (event.newState === "open") (search || visible()[0])?.focus() }, { signal })
+    list.addEventListener("keydown", (event) => {
+      const items = visible()
+      const at = items.indexOf(document.activeElement)
+      if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+        event.preventDefault()
+        const next = event.key === "ArrowDown" ? Math.min(at + 1, items.length - 1) : Math.max(at - 1, 0)
+        items[at === -1 ? 0 : next]?.focus()
+      } else if (event.key === "Enter" && event.target === search) {
+        event.preventDefault()
+        boxes().find((box) => !box.closest("label").hidden)?.click()
+      }
+    }, { signal })
+    draw()
+  }
+})
+
+// Floats over its row in the top layer, just above the pointer, saying what a click or key does there.
+// A cell with its own control, like a status picker, keeps it out of the way; the row's key still works.
+define("u-row-hint", class extends UniformElement {
+  setup(signal) {
+    const row = this.closest("tr")
+    if (!row || !this.hasAttribute("popover")) return
+    let frame = 0
+    const show = (x, y, target) => {
+      if (document.querySelector("dialog:modal")) return this.hide()
+      // By position, since a plain table's first-cell link stretches over the whole row.
+      const cell = [...row.cells].find((each) => {
+        const box = each.getBoundingClientRect()
+        return x >= box.left && x <= box.right
+      })
+      const onFirst = cell === row.cells[0] && !target.closest("label, input")
+      if (cell && !onFirst && cell.querySelector("a, button, input, select, textarea, label")) return this.hide()
+      this.toggleAttribute("data-on-first", onFirst)
+      this.style.setProperty("--u-row-hint-x", `${x}px`)
+      this.style.setProperty("--u-row-hint-y", `${y}px`)
+      if (!this.matches(":popover-open")) this.showPopover()
+    }
+    row.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse") return
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(() => show(event.clientX, event.clientY, event.target))
+    }, { signal })
+    row.addEventListener("pointerleave", () => {
+      cancelAnimationFrame(frame)
+      this.hide()
+    }, { signal })
+    row.addEventListener("focusin", (event) => {
+      if (!event.target.matches(":focus-visible")) return
+      const box = event.target.closest("td, th").getBoundingClientRect()
+      show(box.left + box.width / 2, box.top, event.target)
+    }, { signal })
+    row.addEventListener("focusout", (event) => { if (!row.contains(event.relatedTarget)) this.hide() }, { signal })
+    document.addEventListener("hotkey:run", () => this.hide(), { signal })
+    signal.addEventListener("abort", () => cancelAnimationFrame(frame))
+  }
+
+  hide() {
+    if (this.matches(":popover-open")) this.hidePopover()
+  }
+})
 
 // Lists the shortcuts the page has right now, each element's label next to its keys, whenever its dialog opens.
 define("u-hotkey-list", class extends UniformElement {

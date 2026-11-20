@@ -115,6 +115,7 @@
 .u-menu u-theme-preference > button > .u-icon { flex: none; }
 
 .u-menu > a[aria-current]::after,
+.u-menu > button[aria-pressed="true"]::after,
 .u-menu > details > :is(a, button)[aria-pressed="true"]::after,
 .u-menu > details > form > button[aria-pressed="true"]::after,
 .u-menu u-theme-preference > button[aria-pressed="true"]::after {

@@ -153,4 +153,4 @@ One primary per part of the page
 : Each form, card or dialog has at most one primary button. Everything next to it is outline or ghost.
 
 Always add a variant
-: Write `u-btn` with `u-btn-primary`, `u-btn-outline`, `u-btn-ghost` or `u-btn-danger`. On its own, `u-btn` has no fill and no border.
+: Write `u-btn` with `u-btn-primary`, `u-btn-outline`, `u-btn-ghost`, `u-btn-danger` or `u-btn-ghost-danger`. On its own, `u-btn` has no fill and no border.

@@ -108,6 +108,8 @@
       url: /components/language-select/
     - title: Link
       url: /components/link/
+    - title: Multi-select
+      url: /components/multi-select/
     - title: List
       url: /components/list/
     - title: Menu

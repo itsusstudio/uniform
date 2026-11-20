@@ -40,6 +40,35 @@ module Studio
           '<kbd class="u-kbd">Ctrl</kbd><kbd class="u-kbd">Enter</kbd></kbd>', html
       end
 
+      def test_uniform_row_hint_writes_a_closed_popover_with_a_label_for_the_row_and_the_first_cell
+        html = view.uniform_row_hint(row: {label: "Quick edit", number: "#916", keys: "e"}, first: {label: "Open job", keys: "o"})
+
+        assert_includes html, '<u-row-hint popover="manual" aria-hidden="true">'
+        assert_includes html, '<span data-u-hint="row">Quick edit <span class="u-data">#916</span> <kbd class="u-kbd-group" data-u-keys="e"'
+        assert_includes html, '<span data-u-hint="first">Open job <kbd class="u-kbd-group" data-u-keys="o"'
+      end
+
+      def test_uniform_row_hint_leaves_out_the_first_cell_label_when_there_is_none
+        refute_includes view.uniform_row_hint(row: {label: "Edit"}), 'data-u-hint="first"'
+      end
+
+      def test_uniform_people_shows_three_avatars_two_short_names_and_the_rest_as_a_count
+        html = view.uniform_people(["John Manager", "Sarah Owner", "Virgen Paucek", "Dexter Little"], empty: "Unassigned")
+
+        assert_equal 3, html.scan(/<span data-person="[1-8]">[A-Z]{2}<\/span>/).size
+        assert_includes html, '<span aria-hidden="true">John M, Sarah O +2</span>'
+        assert_includes html, '<span class="sr-only">John Manager, Sarah Owner, Virgen Paucek, and Dexter Little</span>'
+      end
+
+      def test_uniform_person_gives_a_name_the_same_colour_every_time
+        assert_equal view.uniform_person("John Manager"), view.uniform_person("John Manager")
+        assert_includes 1..8, view.uniform_person("Zoë Ågren")
+      end
+
+      def test_uniform_people_says_the_empty_label_when_nobody_is_picked
+        assert_equal '<span class="u-people u-people-empty">Unassigned</span>', view.uniform_people([], empty: "Unassigned")
+      end
+
       def test_uniform_kbd_capitalizes_a_letter
         assert_includes view.uniform_kbd("e"), '<kbd class="u-kbd">E</kbd>'
       end

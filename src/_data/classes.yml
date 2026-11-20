@@ -261,6 +261,11 @@
   page: /components/checkbox/
   description: Resets a `<fieldset>` for a group of checkboxes or radios. Its `<legend>` is styled like a field's label.
 
+- name: u-fieldset-row
+  group: Components
+  page: /components/radio/
+  description: Lays a `u-fieldset`'s radios or checkboxes side by side, wrapping when they run out of room. For two to four short choices.
+
 - name: u-badge
   group: Components
   page: /components/badge/

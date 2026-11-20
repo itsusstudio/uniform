@@ -5,9 +5,11 @@
   gap: --spacing(6);
 }
 
-.u-form > :is(.u-field, .u-fieldset, :has(> .u-field)) + :is(.u-field, .u-fieldset, :has(> .u-field)) {
+.u-form > :is(.u-field, .u-fieldset, .u-accordion, :has(> .u-field)) + :is(.u-field, .u-fieldset, .u-accordion, :has(> .u-field)) {
   margin-top: calc(--spacing(4) - --spacing(6));
 }
+
+.u-form > .u-accordion > details > summary { padding-block: 0; }
 
 .u-field-row {
   display: grid;

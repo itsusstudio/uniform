@@ -81,6 +81,31 @@ group sits in a form's own column and needs no frame.
 </fieldset>
 </div></div>
 
+## In a row
+
+Two to four short choices can sit side by side. Add `u-fieldset-row` to the
+`u-fieldset`, and the options wrap to the next line when they run out of room.
+The fieldset stays a plain block, so the row works in every browser Uniform
+supports.
+
+<div class="u-grid"><div class="@grid:col-span-6">
+<fieldset class="u-fieldset u-fieldset-row">
+<legend>Preferred language</legend>
+<label class="u-radio"><input type="radio" name="row_language" value="en" checked> English</label>
+<label class="u-radio"><input type="radio" name="row_language" value="fr_formal"> French, vous</label>
+<label class="u-radio"><input type="radio" name="row_language" value="fr_casual"> French, tu</label>
+</fieldset>
+</div></div>
+
+```erb
+<fieldset class="u-fieldset u-fieldset-row">
+  <legend><%%= t(".preferred_language") %></legend>
+  <%% Customer::LANGUAGE_CHOICES.each_key do |choice| %>
+    <label class="u-radio"><%%= form.radio_button :language_choice, choice %> <%%= t(".languages.#{choice}") %></label>
+  <%% end %>
+</fieldset>
+```
+
 ## Classes
 
 <%= render "classes", classes_page: "/components/radio/" %>

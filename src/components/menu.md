@@ -121,7 +121,7 @@ Button
 : Give the menu's button a visible label or an `aria-label` that names the thing, like "Actions for job #1042". `popovertarget` tells screen readers it opens something and whether it's open.
 
 Arrow keys
-: When every item is a button or a link, `uniform.js` makes the menu a `role="menu"` as it opens. Focus goes to the first item, the arrow keys move between items and wrap, Home and End jump to the ends, and Tab leaves and closes it. A heading in the menu becomes its name. Without the script the items are ordinary buttons and links, reached with Tab. Never write `role="menu"` in the markup.
+: When every item is a button or a link, `uniform.js` makes the menu a `role="menu"` as it opens. Focus goes to the first item, or, when an item has `aria-current`, to the next one in its group, so moving a job to its next status is Enter. The arrow keys move between items and wrap, Home and End jump to the ends, and Tab leaves and closes it. A heading in the menu becomes its name. Without the script the items are ordinary buttons and links, reached with Tab. Never write `role="menu"` in the markup.
 
 Closing
 : Escape and clicking outside close the menu, and focus goes back to its button.

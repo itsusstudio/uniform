@@ -39,6 +39,9 @@ open so you can see it without a mouse.
 Put the wrapper around the control, so a tooltip on truncated text isn't cut off
 with it.
 
+Add `data-open` to show a tooltip without a hover, like a "Copied" message that
+should stay up for a moment.
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/tooltip/" %>
@@ -49,7 +52,7 @@ with it.
 <figure class="example @grid:col-span-6">
 <p class="example-verdict example-verdict-dont">Don’t</p>
 <div class="example-frame tooltip-demo-frame">
-<span class="u-tooltip tooltip-demo-open"><button type="button" class="u-btn u-btn-outline">Text customer</button><span aria-hidden="true">Sends a pickup text. Each one uses 1 of your 500 texts this month.</span></span>
+<span class="u-tooltip" data-open><button type="button" class="u-btn u-btn-outline">Text customer</button><span aria-hidden="true">Sends a pickup text. Each one uses 1 of your 500 texts this month.</span></span>
 </div>
 <figcaption class="example-caption example-caption-dont"><span>A tooltip on a button that already has a label, hiding the price where people can't count on seeing it.</span></figcaption>
 </figure>
@@ -89,3 +92,6 @@ Only where there's no label
 
 Nothing important
 : Prices, warnings and instructions go on the page, where everyone sees them.
+
+Never `title`
+: Use `u-tooltip`, not the `title` attribute. A tooltip shows at once and on keyboard focus, while `title` waits about a second and never shows on focus.

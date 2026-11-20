@@ -28,6 +28,14 @@
   section: Building
   check: Every `u-btn`, `u-banner` and `u-badge` has a variant class, like `u-btn-primary` or `u-banner-info`.
 
+- id: tooltip-not-title
+  name: Tooltip, not title
+  summary: Show hidden text with `u-tooltip`, never the `title` attribute.
+  body: Show the full text of something cut short, or the name of an icon button, with `u-tooltip`. It appears at once on hover and on keyboard focus, where `title` waits about a second and never shows on focus. Inside a box that scrolls, like a table, check the tooltip isn't cut off at the edge.
+  home: /components/tooltip/
+  section: Building
+  check: No element has a `title` attribute. Text cut short and icon buttons use `u-tooltip`.
+
 - id: use-what-the-browser-already-does
   name: Use what the browser already does
   summary: Native elements and validation before JavaScript.

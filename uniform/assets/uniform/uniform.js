@@ -1899,7 +1899,7 @@ define("u-copy", class extends UniformElement {
   setup(signal) {
     const button = this.querySelector("[data-copy]")
     if (!button || !navigator.clipboard) return
-    const label = button.querySelector("[data-copy-label]") || button
+    const label = this.querySelector("[data-copy-label]") || button
     const icon = label === button && !button.textContent.trim() ? button.querySelector("svg") : null
     const original = icon ? icon.innerHTML : label.textContent
     // A button's children aren't announced reliably, so the message goes in a status beside it.
@@ -1924,12 +1924,14 @@ define("u-copy", class extends UniformElement {
       clearTimeout(timer)
       if (icon) icon.innerHTML = message === button.dataset.copied ? COPY_ICON_DONE : COPY_ICON_FAILED
       else label.textContent = message
+      this.toggleAttribute("data-copied", true)
       status.textContent = ""
       // VoiceOver skips a message that repeats the last one, and the no-break space isn't read.
       requestAnimationFrame(() => { status.textContent = message === lastCopyMessage ? `${message}\u00A0` : message; lastCopyMessage = status.textContent })
       timer = setTimeout(() => {
         if (icon) icon.innerHTML = original
         else label.textContent = original
+        this.removeAttribute("data-copied")
         status.textContent = ""
       }, 1500)
     }, { signal })
@@ -2006,6 +2008,19 @@ const pageReady = Symbol.for("uniform.page")
 
 const menuItems = (menu) => [...menu.querySelectorAll(":scope > :is(a[href], button), :scope > form > button")]
   .filter((item) => !item.disabled && item.getAttribute("aria-disabled") !== "true")
+
+// Opening on the item after the current one makes "move to the next step" two key presses.
+const firstMenuItem = (menu) => {
+  const items = menuItems(menu)
+  const current = menu.querySelector(':scope > [aria-current]:not([aria-current="false"]), :scope > form > [aria-current]:not([aria-current="false"])')
+  let node = current?.closest(".u-menu > *")?.nextElementSibling
+  while (node && !node.matches("hr")) {
+    const item = items.find((candidate) => candidate === node || candidate.parentElement === node)
+    if (item) return item
+    node = node.nextElementSibling
+  }
+  return items[0]
+}
 
 // Arrow keys only where every item is a command or a link. Checkboxes, radios and pickers keep Tab.
 const asMenu = (menu, invoker) => {
@@ -2120,7 +2135,7 @@ if (!document[pageReady]) {
         addEventListener("scroll", place, { signal: follow.signal, capture: true, passive: true })
       }
     }
-    if (open && popover.matches(".u-menu") && asMenu(popover, invokerOf(popover, event))) menuItems(popover)[0]?.focus({ preventScroll: true })
+    if (open && popover.matches(".u-menu") && asMenu(popover, invokerOf(popover, event))) firstMenuItem(popover)?.focus({ preventScroll: true })
   }, true)
 
   document.addEventListener("keydown", (event) => {

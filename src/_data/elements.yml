@@ -71,7 +71,7 @@
   page: /components/data-grid/
 
 - name: <u-copy>
-  wraps: A button with `data-copy` (the text to copy) and `hidden`, optionally with a `data-copy-label` span for the words.
+  wraps: A button with `data-copy` (the text to copy) and `hidden`, optionally with a `data-copy-label` span for the words, inside the button or in a tooltip beside it.
   adds: Shows the button, copies the text on click, and reads `data-copied` for a moment, or `data-copy-failed`. A status message beside the button tells screen readers.
   without: The button stays hidden. Show the text itself so people can select it.
   page: /components/button/

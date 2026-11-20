@@ -29,6 +29,10 @@
 
 :is(.u-card, .u-dialog, .u-dialog > form) > header > .u-btn-close { margin: calc(-1 * --spacing(1)) calc(-1 * --spacing(2)) calc(-1 * --spacing(1)) 0; }
 
+:is(.u-card, .u-dialog, .u-dialog > form) > :is(header, .u-actions) > .u-btn-ghost:not(.u-btn-icon):last-child {
+  margin-inline-end: calc(-1 * --spacing(4));
+}
+
 :is(.u-card, .u-dialog, .u-dialog > form) > .u-actions { justify-content: flex-end; }
 
 .u-card-content {

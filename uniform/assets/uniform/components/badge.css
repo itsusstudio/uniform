@@ -63,5 +63,12 @@ p > .u-badge { margin-inline-start: --spacing(1); }
 
 .u-badge-strong::before { display: none; }
 
+.u-badge-strong:has(> .u-icon) { gap: --spacing(1); }
+
+.u-badge-strong > .u-icon {
+  width: 12px;
+  height: 12px;
+}
+
 .u-badge-neutral.u-badge-strong { background: var(--border-color-divider); }
 }

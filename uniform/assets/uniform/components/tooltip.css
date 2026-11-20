@@ -37,6 +37,7 @@
   inset: calc(-1 * --spacing(1)) 0;
 }
 
+.u-tooltip:is([data-open], [data-copied]) > :last-child,
 .u-tooltip:hover > :last-child,
 .u-tooltip:has(:focus-visible) > :last-child { display: block; }
 

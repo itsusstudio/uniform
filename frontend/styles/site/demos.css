@@ -45,8 +45,6 @@
 
 .tooltip-demo-frame { padding-top: --spacing(12); }
 
-.tooltip-demo-open > :last-child { display: block; }
-
 .tooltip-demo-cell { max-width: 240px; }
 
 .tooltip-demo-row {

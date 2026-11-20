@@ -85,6 +85,20 @@ the browser blocks it. Set both from the gem's `uniform.copy.copied` and `unifor
 </u-copy>
 ```
 
+To copy a value by clicking the value itself, like an email address, make the
+value a `u-link-btn` and give `<u-copy>` the `u-tooltip` class. Put
+`data-copy-label` on the tooltip: it shows the value on hover, says
+`data-copied` for a moment after a click, and stays open while it does. The
+value never changes, so nothing on the page moves.
+
+```erb
+<u-copy class="u-tooltip">
+  <%%= tag.button customer.email_address, type: "button", class: "u-link-btn truncate",
+        data: { copy: customer.email_address, copied: t("uniform.copy.copied"), copy_failed: t("uniform.copy.failed") } %>
+  <span aria-hidden="true" data-copy-label><%%= customer.email_address %></span>
+</u-copy>
+```
+
 For an icon-only copy button, put the copy icon in a `u-btn-icon` button with an
 `aria-label`. The icon turns into a check mark for a moment, or a cross when the
 browser blocks it.

@@ -1675,7 +1675,7 @@ define("u-data-grid", class extends UniformElement {
     const labels = headers.map((th) => th.textContent.trim() || th.getAttribute("aria-label") || "")
     ;[...tbody.rows].forEach((row) => [...row.cells].forEach((cell, i) => {
       cell.toggleAttribute("data-keep-narrow", kept[i])
-      if (kept[i] && i > 0 && labels[i]) cell.dataset.label = labels[i]
+      if (kept[i] && i > 0 && labels[i] && cell.colSpan === 1) cell.dataset.label = labels[i]
     }))
   }
 
@@ -1724,11 +1724,26 @@ define("u-data-grid", class extends UniformElement {
     this.querySelectorAll(".u-menu > [data-column-toggle]").forEach((node) => node.remove())
     const menu = [...this.querySelectorAll(".u-menu")].find((item) => !item.querySelector("input, a, button"))
     if (!menu || headers.length < 2) return
-    const hidden = new Set(stored().hidden ?? headers.flatMap((th, i) => th.hidden ? [i] : []))
+    if (menu.id) this.querySelectorAll(`[popovertarget="${CSS.escape(menu.id)}"]`).forEach((button) => button.toggleAttribute("data-columns-button", true))
+    const defaults = headers.flatMap((th, i) => th.hidden ? [i] : [])
+    const hidden = new Set(stored().hidden ?? defaults)
     const show = (index, visible) => [...table.rows].forEach((row) => { if (row.cells[index]) row.cells[index].hidden = !visible })
+    const toggles = []
+    const divider = document.createElement("hr")
+    const reset = document.createElement("button")
+    divider.dataset.columnToggle = ""
+    reset.type = "button"
+    reset.dataset.columnToggle = ""
+    reset.textContent = this.dataset.columnsReset || "Reset to default"
+    const sync = () => {
+      const changed = hidden.size !== defaults.length || defaults.some((index) => !hidden.has(index))
+      divider.hidden = reset.hidden = !changed
+    }
     headers.slice(1).forEach((th, offset) => {
       const index = offset + 1
       if (!th.textContent.trim()) return
+      const locked = th.hasAttribute("data-column-locked")
+      if (locked) hidden.delete(index)
       const label = document.createElement("label")
       const box = document.createElement("input")
       const text = document.createElement("span")
@@ -1736,17 +1751,32 @@ define("u-data-grid", class extends UniformElement {
       label.dataset.columnToggle = ""
       box.type = "checkbox"
       box.checked = !hidden.has(index)
+      box.disabled = locked
       text.textContent = th.textContent.trim()
       label.append(box, text)
       menu.append(label)
       show(index, box.checked)
+      toggles.push([index, box])
       on(box, "change", () => {
         show(index, box.checked)
         if (box.checked) hidden.delete(index)
         else hidden.add(index)
         store({ hidden: [...hidden] })
+        sync()
       })
     })
+    menu.append(divider, reset)
+    on(reset, "click", () => {
+      hidden.clear()
+      defaults.forEach((index) => hidden.add(index))
+      toggles.forEach(([index, box]) => {
+        box.checked = !hidden.has(index)
+        show(index, box.checked)
+      })
+      store({ hidden: undefined })
+      sync()
+    })
+    sync()
   }
 
   editing(on, signal, tbody, headers, words) {

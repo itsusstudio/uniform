@@ -23,9 +23,9 @@ u-multi-select { display: block; }
 
 .u-multi-select-trigger > .u-people { overflow: hidden; }
 
-.u-multi-select-list {
+.u-multi-select-list[popover] {
   width: auto;
-  max-height: 20rem;
+  max-height: min(20rem, calc(100dvh - 2 * --spacing(2)));
   padding: --spacing(1) 0;
   overflow-y: auto;
 }
@@ -78,13 +78,16 @@ u-multi-select { display: block; }
 }
 
 .u-multi-select-search {
-  height: var(--spacing-target);
+  position: sticky;
+  top: calc(-1 * --spacing(1));
+  z-index: 1;
+  height: auto;
   margin: calc(-1 * --spacing(1)) 0 --spacing(1);
-  padding-inline: --spacing(3);
+  padding: --spacing(3);
   border: 0;
   border-bottom: 1px solid var(--border-color-divider);
   border-radius: 0;
-  background: transparent;
+  background: var(--background-color-surface);
 }
 
 .u-multi-select-search:focus-visible {

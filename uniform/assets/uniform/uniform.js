@@ -2538,6 +2538,7 @@ define("u-multi-select", class extends UniformElement {
     }
 
     fieldset.addEventListener("change", draw, { signal })
+    fieldset.form?.addEventListener("reset", () => requestAnimationFrame(draw), { signal })
     me?.addEventListener("click", () => { meBox.click(); (search || boxes()[0])?.focus() }, { signal })
     search?.addEventListener("input", filter, { signal })
     // Picked people move to the top each time the list opens, never while someone is picking.

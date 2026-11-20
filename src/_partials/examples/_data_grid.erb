@@ -23,7 +23,7 @@
         </div>
         <%= inline_partial("examples/table_presets", id: "#{grid_id}-presets", indent: 8) %>
         <%= inline_partial("examples/table_filter", id: "#{grid_id}-filter", selected: { "due" => "month" }, clear: "?sort=due&amp;dir=asc", indent: 8) %>
-        <button type="button" class="u-btn u-btn-outline" popovertarget="<%= grid_id %>-columns"><%= inline_partial("icon", name: "sliders-horizontal", small: true) %>View</button>
+        <button type="button" class="u-btn u-btn-outline u-btn-icon" popovertarget="<%= grid_id %>-columns" aria-label="Columns"><%= inline_partial("icon", name: "columns-3", small: true) %></button>
       </form>
       <form id="<%= grid_id %>-bulk" action="/jobs/bulk" method="post" aria-label="Selected jobs">
         <span><output><%= ticked.size %></output> selected</span>
@@ -49,7 +49,7 @@
                   Job
                 </div>
               </th>
-              <th scope="col" data-keep-narrow>Customer</th>
+              <th scope="col" data-keep-narrow data-column-locked>Customer</th>
               <th scope="col">Work</th>
               <th scope="col" data-keep-narrow>Status</th>
               <th scope="col" aria-sort="ascending" data-keep-narrow><a class="u-table-sort" href="?due=month&amp;sort=due&amp;dir=desc">Due</a></th>

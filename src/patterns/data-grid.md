@@ -24,7 +24,7 @@ changes where you read it.
 The header row and the job number stay put while the rest scrolls, so you never
 lose which job or column you're reading. Sort from a column's name, and filter
 Status or Due from the funnel beside it. Each filter shows up as a chip above
-the grid, with “Clear all” at the end. “View” hides the columns you don't need. Click a status or a due
+the grid, with “Clear all” at the end. The Columns button hides the columns you don't need. Click a status or a due
 date to change it: Enter saves, Escape puts it back, and the cell you changed
 keeps the yellow wash so you can see what you did. Tick rows and the bulk bar
 takes the place of the filters, so the table doesn't move.
@@ -61,10 +61,10 @@ press “Done”.
 : The title, a muted count line and the one primary button, “New job”.
 
 [Table controls](/components/table-controls/)
-: Its form holds a [text field](/components/text-field/) with the search icon and, last, an outline [button](/components/button/) “View” that opens a [menu](/components/menu/) of checkboxes. Under it, a `<ul>` of [chips](/components/chip/), one per filter, each with a remove button, then a ghost “Clear all” button. The chips hide when nothing is filtered.
+: Its form holds a [text field](/components/text-field/) with the search icon and, last, an outline icon [button](/components/button/), Columns, that opens a [menu](/components/menu/) of checkboxes. Under it, a `<ul>` of [chips](/components/chip/), one per filter, each with a remove button, then a ghost “Clear all” button. The chips hide when nothing is filtered.
 
 Bulk bar
-: A second `<form>` inside the controls, which takes the place of the filters and View while rows are ticked: an `<output>` for the count, two actions and a reset button, “Clear selection”.
+: A second `<form>` inside the controls, which takes the place of the filters and Columns while rows are ticked: an `<output>` for the count, two actions and a reset button, “Clear selection”.
 
 Grid
 : A [data grid](/components/data-grid/): `<u-data-grid>` around the whole screen, with a [table](/components/table/) in a [card](/components/card/), in `u-table`. The first cell of each row is a `<th scope="row">` holding the [checkbox](/components/checkbox/) and the job link, and it's the column that stays put. Sortable headers use `u-table-sort`. A filterable header has a ghost icon button that opens a [menu](/components/menu/) whose items are `u-checkbox` or `u-radio` labels.

@@ -161,4 +161,4 @@ No shadow
 : A card rests on the page, so it has no shadow.
 
 Empty states live in the card
-: When a card has nothing to show yet, an `<hgroup>` saying what will appear there and a `u-actions` with one action take the place of its content. There is no empty state component, no picture and no centred text.
+: When a card has nothing to show yet, an `<hgroup>` saying what will appear there and a `u-actions` with one action take the place of its content. There is no empty state component, no picture and no centred text. A table with no search results is the exception: it keeps its header and says so in a row, as the [data table](/patterns/data-table/#no-results) shows.

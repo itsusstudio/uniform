@@ -45,7 +45,7 @@
           <input autocomplete="off" class="u-input" id="<%= uid.("jobs-q") %>" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" placeholder="Name, job number or phone">
         </div>
         <%= inline_partial("examples/table_presets", id: uid.("jobs-presets"), current: "Custom view", code: code, indent: 8) %>
-        <button type="button" class="u-btn u-btn-outline" popovertarget="<%= uid.("jobs-columns") %>"><%= icon.("sliders-horizontal") %>View</button>
+        <button type="button" class="u-btn u-btn-outline u-btn-icon" popovertarget="<%= uid.("jobs-columns") %>" aria-label="Columns"><%= icon.("columns-3") %></button>
       </form>
       <form id="<%= uid.("jobs-bulk") %>" action="/jobs/bulk" method="post" aria-label="Selected jobs">
         <span><output>0</output> selected</span>

@@ -37,9 +37,14 @@ value back.
 
 ## Columns
 
-Put an empty [menu](/components/menu/) in the grid and a View button that opens
-it. The grid fills it with every column but the first, and remembers the choice
-when the grid has an `id`.
+Put an empty [menu](/components/menu/) in the grid and an icon button, Columns,
+with the `columns-3` icon, that opens it. The grid fills it with every column but
+the first, and remembers the choice when the grid has an `id`.
+
+Mark the column that names each row, like the customer, with
+`data-column-locked`. It shows in the menu, ticked and disabled, so it can't be
+hidden. Once someone hides a column, the menu ends with “Reset to default”,
+which brings back the columns the page started with.
 
 ## Scrolling
 
@@ -50,7 +55,7 @@ so there's only ever one vertical scrollbar. Don't give the grid a height.
 ## Row actions
 
 End each row with a ghost icon button that opens a [menu](/components/menu/).
-Give its heading only an `aria-label`, so it stays out of View.
+Give its heading only an `aria-label`, so it stays out of Columns.
 
 ## On a phone
 
@@ -74,7 +79,7 @@ it opens the record.
         <div class="u-input-prefixed">
           <input class="u-input" type="search" autocorrect="off" autocapitalize="off" spellcheck="false" name="q" aria-label="Search jobs">
         </div>
-        <button type="button" class="u-btn u-btn-outline" popovertarget="jobs-columns"><svg class="u-icon u-icon-sm" aria-hidden="true">…</svg>View</button>
+        <button type="button" class="u-btn u-btn-outline u-btn-icon" popovertarget="jobs-columns" aria-label="Columns"><svg class="u-icon u-icon-sm" aria-hidden="true">…</svg></button>
       </form>
       <form id="jobs-bulk" action="/jobs/bulk" method="post" aria-label="Selected jobs">
         <span><output>0</output> selected</span>
@@ -139,7 +144,7 @@ it opens the record.
         <div class="u-input-prefixed">
           <%%= form.search_field :q, value: params[:q], class: "u-input", aria: { label: t(".search") } %>
         </div>
-        <button type="button" class="u-btn u-btn-outline" popovertarget="jobs-columns"><svg class="u-icon u-icon-sm" aria-hidden="true">…</svg><%%= t(".view") %></button>
+        <button type="button" class="u-btn u-btn-outline u-btn-icon" popovertarget="jobs-columns" aria-label="<%%= t(".columns") %>"><svg class="u-icon u-icon-sm" aria-hidden="true">…</svg></button>
       <%% end %>
       <%%= form_with url: bulk_jobs_path, id: "jobs-bulk", aria: { label: t(".selected_jobs") } do |form| %>
         <span><%%= t(".selected_html", count: tag.output(0)) %></span>
@@ -199,7 +204,7 @@ new content, like `render partial: "jobs/status", locals: { job: @job }`.
 
 | On `<u-data-grid>` | Does |
 |---|---|
-| `data-saved`, `data-undo`, `data-failed`, `data-edit-hint` | The words it shows, English by default |
+| `data-saved`, `data-undo`, `data-failed`, `data-edit-hint`, `data-columns-reset` | The words it shows, English by default |
 | `data-grid:select` | Fires with the selected count |
 | `data-grid:change` | Fires before each save. `preventDefault()` to save it yourself, and set `event.detail.html` |
 

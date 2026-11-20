@@ -20,7 +20,7 @@ every choice and nothing needs a script.
 ## Parts
 
 The form
-: Search first, then the preset menu and a Filter button. The search grows to fill the row. A View button, last, sits at the right end.
+: Search first, then the preset menu and a Filter button. The search grows to fill the row. The Columns icon button, last, sits at the right end.
 
 The filter panel
 : A [popover](/components/popover/) inside the form, opened by Filter. It holds one field per filter, a ghost Clear link and an Apply button, so the fields send with the search.
@@ -128,7 +128,7 @@ in the same row. The search and chips stay put, so the table doesn't move.
 </div>
 </div>
 
-On a phone the search takes the full width, and the preset, Filter and View
+On a phone the search takes the full width, and the preset, Filter and Columns
 wrap under it.
 
 ## Code

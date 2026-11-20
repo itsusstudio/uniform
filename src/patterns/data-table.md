@@ -73,10 +73,11 @@ when nothing is ticked.
 <%= render "examples/pattern_data_table_screen", state: :no_results, prefix: "dt-none", code: false %>
 </div>
 
-When nothing matches, the chips still show what was set, and the table gives
-way to an empty state that names the search and offers an outline “Clear
-filters” button. It never offers to make a new job, because that's not what the
-person was trying to do.
+When nothing matches, the chips still show what was set and the table keeps its
+header, so the page holds its shape. One row takes the place of the results,
+starting at the second column: a large heading that names the search, with the
+searched text in mono, a muted hint, and a “Clear filters” text link. It never
+offers to make a new job, because that's not what the person was trying to do.
 
 ### Nothing yet
 
@@ -135,7 +136,7 @@ Row actions
 : Previous, next and the range, under the card. The range is the count. Its links keep the sort and filters. When everything fits on one page, a `u-meta` line like “3 jobs” takes its place.
 
 Empty state
-: Takes the table's place when there's nothing to show: “No jobs yet” with “New job”, or no results with “Clear filters”.
+: When there's nothing yet, a card takes the table's place with “No jobs yet” and “New job”. When nothing matches, the table stays and one row holds the message and a “Clear filters” link.
 
 ## Classes
 
@@ -227,8 +228,8 @@ Search first
 The view lives in the URL
 : Sort, search, filters and page are all in the query string, and every heading, chip and page link carries the rest. A view can be bookmarked, shared and reached with the back button, with no script.
 
-Two empty states, two buttons
-: No records yet gets the primary “New job”. No results gets an outline “Clear filters” and names what was searched.
+Two empty states, two actions
+: No records yet gets the primary “New job”. No results keeps the table, names what was searched in a large headline, and offers a “Clear filters” text link. Nothing is centred and there's no picture.
 
 Scroll, don't stack
 : On a phone the table scrolls sideways in its card. Keep the job number first so every row stays easy to tell apart.

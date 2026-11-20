@@ -89,25 +89,16 @@
         </ul>
 <% end -%>
       </search>
-<% if state == :no_results -%>
-      <section class="u-card" aria-labelledby="<%= uid.("jobs-none") %>">
-        <div class="u-card-content">
-          <hgroup>
-            <h2 id="<%= uid.("jobs-none") %>">No overdue jobs match “Tremblay”</h2>
-            <p>Check the spelling, try a job number, or clear the filters to see every job.</p>
-          </hgroup>
-          <div class="u-actions">
-            <a class="u-btn u-btn-outline" href="<%= href.(url.(sort)) %>">Clear filters</a>
-          </div>
-        </div>
-      </section>
-<% else -%>
       <section class="u-card" aria-label="Jobs">
         <div class="u-table" tabindex="0" role="region" aria-label="Jobs">
           <table>
             <thead>
               <tr>
+<% if state == :no_results -%>
+                <th scope="col">Job</th>
+<% else -%>
                 <th scope="col"><div class="flex flex-wrap items-center gap-4"><label class="u-checkbox"><input type="checkbox"><span class="sr-only">Select all jobs on this page</span></label><span>Job</span></div></th>
+<% end -%>
 <% columns.drop(1).each do |words, key| -%>
 <% if key.nil? -%>
                 <th scope="col"><%= words %></th>
@@ -121,7 +112,21 @@
               </tr>
             </thead>
             <tbody>
-<% jobs.each do |number, customer, work, variant, status, due, quote| -%>
+<% if state == :no_results -%>
+              <tr>
+                <td></td>
+                <td colspan="<%= columns.size %>" class="pt-16 pb-24 align-top whitespace-normal">
+                  <div class="flex max-w-xl flex-col items-start gap-8">
+                    <hgroup class="flex flex-col gap-3">
+                      <h2 class="text-article-title font-headline">No overdue jobs match <span class="font-mono">“Tremblay”</span></h2>
+                      <p class="text-body text-muted">Check the spelling, try a job number, or clear the filters to see every job.</p>
+                    </hgroup>
+                    <a class="text-body text-link underline underline-offset-4" href="<%= href.(url.(sort)) %>">Clear filters</a>
+                  </div>
+                </td>
+              </tr>
+<% end -%>
+<% (state == :no_results ? [] : jobs).each do |number, customer, work, variant, status, due, quote| -%>
 <% menu = uid.("job-#{number}-actions") -%>
               <tr>
                 <th scope="row"><div class="flex flex-wrap items-center gap-4"><label class="u-checkbox"><input type="checkbox" name="job_ids[]" value="<%= number %>" form="<%= uid.("jobs-bulk") %>"<% if checked.include?(number) %> checked<% end %>><span class="sr-only">Select job #<%= number %></span></label><a class="u-data" href="<%= href.("/jobs/#{number}") %>">#<%= number %></a></div></th>
@@ -148,7 +153,6 @@
           </table>
         </div>
       </section>
-<% end -%>
     </u-data-grid>
 <% if state == :list || state == :selected -%>
     <nav class="u-pagination" aria-label="Pages">

@@ -351,6 +351,11 @@
   page: /components/dialog/
   description: On a `u-dialog`, widens it to 720px for a signature pad, a photo grid or a preview.
 
+- name: u-dialog-narrow
+  group: Components
+  page: /components/dialog/
+  description: On a `u-dialog`, narrows it to 384px for a short list of pairs, like keyboard shortcuts.
+
 - name: <u-dropzone>
   group: Components
   page: /components/dropzone/
@@ -405,6 +410,16 @@
   group: Layout
   page: /components/form/
   description: On a `<form>` holding a heading group, the fields and a `u-actions` row, in that order.
+
+- name: u-kbd
+  group: Components
+  page: /components/kbd/
+  description: One key, on a `<kbd>`. Write it with `uniform_kbd`, never by hand, so ⌘ shows on a Mac.
+
+- name: u-kbd-group
+  group: Components
+  page: /components/kbd/
+  description: The keys of one shortcut, on a `<kbd>` around the `u-kbd`s. A keycap on its own, and a flat tint inside a button or menu item.
 
 - name: u-field-row
   group: Layout

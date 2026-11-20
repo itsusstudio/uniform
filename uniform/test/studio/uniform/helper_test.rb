@@ -33,6 +33,17 @@ module Studio
         assert_equal "</script><b>", JSON.parse(html[%r{<script type="application/json">(.*)</script>}m, 1])["rows"][0]["label"]
       end
 
+      def test_uniform_kbd_shows_each_key_and_keeps_the_hotkey_for_the_mac_swap
+        html = view.uniform_kbd("Mod+Enter")
+
+        assert_equal '<kbd class="u-kbd-group" data-u-keys="Mod+Enter" aria-hidden="true">' \
+          '<kbd class="u-kbd">Ctrl</kbd><kbd class="u-kbd">Enter</kbd></kbd>', html
+      end
+
+      def test_uniform_kbd_capitalizes_a_letter
+        assert_includes view.uniform_kbd("e"), '<kbd class="u-kbd">E</kbd>'
+      end
+
       private
 
       def view

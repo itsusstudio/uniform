@@ -15,6 +15,8 @@
 
 .u-dialog-wide { max-width: 720px; }
 
+.u-dialog-narrow { max-width: 384px; }
+
 .u-dialog::backdrop { background: var(--background-color-backdrop); }
 
 .u-dialog:modal { overscroll-behavior: contain; }

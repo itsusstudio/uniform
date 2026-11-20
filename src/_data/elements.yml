@@ -88,6 +88,12 @@
   without: Hidden, and the page follows the device's light or dark setting.
   page: /components/sidebar/
 
+- name: <u-hotkey-list>
+  wraps: Empty `<dl>`s, each in a `<section>` with a heading, and a hidden `<p>` for a page with none, inside the `<dialog>` that lists the shortcuts.
+  adds: Each time the dialog opens, fills the list with every shortcut on the page, its element's label next to its keys.
+  without: The list stays empty. The shortcuts themselves need JavaScript too, so there's nothing to list.
+  page: /components/kbd/#shortcut-list
+
 - name: <u-time-zone>
   wraps: A hidden `<input>` in a form.
   adds: Fills the input with the browser's time zone, like America/Toronto, when it's empty.

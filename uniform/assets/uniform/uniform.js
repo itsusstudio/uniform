@@ -2271,4 +2271,156 @@ if (!document[pageReady]) {
   })
 }
 
+// Keyboard shortcuts: data-u-hotkey goes on the button, link, field or dialog that already does the action.
+const isMac = /Mac|iPhone|iPad/.test(navigator.userAgentData?.platform || navigator.platform || "")
+const modifierKeys = ["Control", "Meta", "Alt"]
+const keyLabels = {
+  Control: "Ctrl", Meta: "⌘", Alt: isMac ? "⌥" : "Alt", Shift: isMac ? "⇧" : "Shift",
+  Escape: "Esc", ArrowUp: "↑", ArrowDown: "↓", ArrowLeft: "←", ArrowRight: "→"
+}
+
+const hotkeysOf = (element) => element.dataset.uHotkey.split(",").map((hotkey) =>
+  hotkey.split("+").map((part) => part.trim()).filter(Boolean).map((part) => part === "Mod" ? (isMac ? "Meta" : "Control") : part))
+
+const keyLabel = (part) => keyLabels[part] ?? (part.length === 1 ? part.toUpperCase() : part)
+
+const usesModifier = (parts) => parts.some((part) => modifierKeys.includes(part))
+
+const hotkeyMatches = (parts, event) => {
+  const key = parts.at(-1)
+  const held = (name) => parts.slice(0, -1).includes(name)
+  if (event.ctrlKey !== held("Control") || event.metaKey !== held("Meta") || event.altKey !== held("Alt")) return false
+  if (/^[a-z]$/i.test(key)) return event.key.toLowerCase() === key.toLowerCase() && event.shiftKey === held("Shift")
+  // A character like ? already needs Shift on most layouts, so Shift doesn't count against it.
+  if (key.length === 1) return event.key === key
+  return event.key === key && event.shiftKey === held("Shift")
+}
+
+const characterKeysOff = () => document.body?.dataset.uCharacterKeys === "off"
+
+const hotkeyAvailable = (element) => !element.disabled && element.getAttribute("aria-disabled") !== "true"
+  && !element.closest("[hidden], [inert], fieldset:disabled")
+
+const typingIn = (target) => target.closest?.('textarea, select, [contenteditable]:not([contenteditable="false"]), input:not([type="checkbox"], [type="radio"], [type="button"], [type="submit"], [type="reset"])')
+
+const hotkeyTarget = (event) => {
+  const typing = typingIn(event.target)
+  const scope = document.querySelector("dialog:modal") || document
+  const form = event.target.closest?.("form")
+  const candidates = [...scope.querySelectorAll("[data-u-hotkey]")]
+  if (scope !== document && scope.matches("[data-u-hotkey]")) candidates.push(scope)
+  const matches = candidates.filter((element) => hotkeyAvailable(element)
+    && hotkeysOf(element).some((parts) => hotkeyMatches(parts, event)
+      && (usesModifier(parts) || (!typing && !characterKeysOff()))))
+  return matches.find((element) => form && (form.contains(element) || element.form === form))
+    || matches.find((element) => element.checkVisibility?.() ?? true)
+    || matches[0]
+}
+
+const runHotkey = (element) => {
+  if (element instanceof HTMLDialogElement) return element.open ? element.close() : element.showModal()
+  if (element.hasAttribute("popover")) return element.togglePopover()
+  if (typingIn(element)) {
+    element.focus()
+    element.select?.()
+    return
+  }
+  element.click()
+}
+
+const kbdFor = (parts) => {
+  const group = document.createElement("kbd")
+  group.className = "u-kbd-group"
+  group.dataset.uKeys = parts.join("+")
+  group.append(...parts.map((part) => Object.assign(document.createElement("kbd"), { className: "u-kbd", textContent: keyLabel(part) })))
+  return group
+}
+
+const markHotkeys = () => {
+  document.querySelectorAll("[data-u-hotkey]:not([aria-keyshortcuts])").forEach((element) => {
+    element.setAttribute("aria-keyshortcuts", hotkeysOf(element).map((parts) => parts.join("+")).join(" "))
+  })
+  if (!isMac) return
+  document.querySelectorAll("kbd[data-u-keys*='Mod']").forEach((kbd) => {
+    const keys = kbdFor(kbd.dataset.uKeys.split("+").map((part) => part === "Mod" ? "Meta" : part))
+    if (kbd.hasAttribute("aria-hidden")) keys.setAttribute("aria-hidden", "true")
+    kbd.replaceWith(keys)
+  })
+}
+
+const hotkeysReady = Symbol.for("uniform.hotkeys")
+if (!document[hotkeysReady]) {
+  document[hotkeysReady] = true
+
+  document.addEventListener("keydown", (event) => {
+    if (event.defaultPrevented || event.repeat || event.isComposing) return
+    if (event.key === "Escape" && document.querySelector(':popover-open:not([popover="manual"]), dialog:modal')) return
+    const element = hotkeyTarget(event)
+    if (!element) return
+    event.preventDefault()
+    element.dispatchEvent(new CustomEvent("hotkey:run", { bubbles: true, detail: { keys: element.dataset.uHotkey } }))
+    runHotkey(element)
+  })
+
+  for (const name of ["DOMContentLoaded", "turbo:load", "turbo:render", "turbo:frame-load", "turbo:morph"]) {
+    addEventListener(name, markHotkeys)
+  }
+  if (document.readyState !== "loading") markHotkeys()
+}
+
+// Lists the shortcuts the page has right now, each element's label next to its keys, whenever its dialog opens.
+define("u-hotkey-list", class extends UniformElement {
+  setup(signal) {
+    const dialog = this.closest("dialog")
+    if (!dialog) return
+    const observer = new MutationObserver(() => { if (dialog.open) this.render(dialog) })
+    observer.observe(dialog, { attributes: true, attributeFilter: ["open"] })
+    signal.addEventListener("abort", () => observer.disconnect())
+  }
+
+  render(dialog) {
+    const sections = [...this.querySelectorAll(":scope > section")]
+    const groups = sections.length ? sections : [this]
+    const fallback = groups.find((group) => !group.dataset.group) || groups[0]
+    const rows = new Map(groups.map((group) => [group, []]))
+    const seen = new Set()
+    document.querySelectorAll("[data-u-hotkey]").forEach((element) => {
+      if ((element !== dialog && dialog.contains(element)) || !hotkeyAvailable(element)) return
+      const parts = hotkeysOf(element)[0]
+      const keys = parts.join("+")
+      if (seen.has(keys) || (!usesModifier(parts) && characterKeysOff())) return
+      const label = this.labelOf(element)
+      if (!label) return
+      seen.add(keys)
+      const term = Object.assign(document.createElement("dt"), { textContent: label })
+      const keysCell = document.createElement("dd")
+      keysCell.append(kbdFor(parts))
+      const group = groups.find((candidate) => candidate.dataset.group
+        && candidate.dataset.group === element.dataset.uHotkeyGroup) || fallback
+      rows.get(group).push(term, keysCell)
+    })
+    let total = 0
+    rows.forEach((groupRows, group) => {
+      const list = group.querySelector("dl")
+      if (!list) return
+      list.replaceChildren(...groupRows)
+      ;(group === this ? list : group).hidden = groupRows.length === 0
+      total += groupRows.length
+    })
+    const empty = this.querySelector(":scope > p")
+    if (empty) empty.hidden = total > 0
+  }
+
+  labelOf(element) {
+    if (element.dataset.uHotkeyLabel) return element.dataset.uHotkeyLabel
+    if (element.getAttribute("aria-label")) return element.getAttribute("aria-label")
+    const labelledBy = element.getAttribute("aria-labelledby")
+    if (labelledBy) return document.getElementById(labelledBy)?.textContent.trim()
+    if (element.labels?.length) return element.labels[0].textContent.trim()
+    const copy = element.cloneNode(true)
+    copy.querySelectorAll("kbd, svg, [aria-hidden='true']").forEach((part) => part.remove())
+    return copy.textContent.replace(/\s+/g, " ").trim()
+  }
+})
+
 if (!document.querySelector("[data-u-audience]")) console.error("Uniform: set data-u-audience=\"business\" or data-u-audience=\"consumer\" on <html>.")

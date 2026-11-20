@@ -20,6 +20,18 @@ module Studio
         form_with(**options, builder: FormBuilder, class: ["u-form", options[:class]].compact.join(" "), &)
       end
 
+      # Labels for a browser without JavaScript; uniform.js swaps Mod for ⌘ on a Mac.
+      KEY_LABELS = {
+        "Mod" => "Ctrl", "Control" => "Ctrl", "Meta" => "⌘", "Alt" => "Alt", "Shift" => "Shift",
+        "Escape" => "Esc", "ArrowUp" => "↑", "ArrowDown" => "↓", "ArrowLeft" => "←", "ArrowRight" => "→"
+      }.freeze
+
+      #   <%= uniform_kbd "Mod+Enter" %>
+      def uniform_kbd(keys)
+        labels = keys.split("+").map(&:strip).map { |part| KEY_LABELS.fetch(part) { (part.length == 1) ? part.upcase : part } }
+        tag.kbd(safe_join(labels.map { |label| tag.kbd(label, class: "u-kbd") }), class: "u-kbd-group", data: {u_keys: keys}, aria: {hidden: true})
+      end
+
       #   <%= uniform_chart :bar, label: t(".caption"), height: 160, rows: jobs_per_week.map { |week, count| {label: l(week, format: :short), value: count} } %>
       def uniform_chart(type = :bar, label:, rows:, series: nil, empty: nil, error: nil, **attributes)
         data = {rows: rows.map { |row| uniform_chart_row(row) }, series: series}.compact

@@ -102,6 +102,8 @@
       url: /components/dropzone/
     - title: Icon
       url: /components/icon/
+    - title: Keyboard shortcuts
+      url: /components/kbd/
     - title: Language select
       url: /components/language-select/
     - title: Link

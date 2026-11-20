@@ -10,6 +10,8 @@
   color: var(--text-color-default);
   box-shadow: var(--shadow-float);
   font-size: var(--text-small);
+  text-align: start;
+  white-space: normal;
 }
 
 .u-menu[popover] {

@@ -24,6 +24,7 @@ u-data-grid .u-table :is(th, td):first-child {
   position: sticky;
   left: 0;
   z-index: 1;
+  width: 1%;
   border-right: 1px solid var(--border-color-divider);
   background: var(--background-color-surface);
 }
@@ -176,6 +177,7 @@ u-data-grid .u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) :is(a,
   u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody > tr > * {
     position: static;
     display: none;
+    height: auto;
     padding: 0;
     border: 0;
     background: none;
@@ -197,7 +199,16 @@ u-data-grid .u-table > table tbody tr:has(> :first-child > a:not(.u-btn)) :is(a,
     margin-left: auto;
   }
 
+  u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody > tr::after {
+    content: "";
+    flex-basis: 100%;
+    order: -1;
+    margin-top: calc(-1 * --spacing(1));
+  }
+
   u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody .u-checkbox { display: none; }
+
+  u-data-grid:has(thead [data-keep-narrow]) [data-columns-button] { display: none; }
 
   u-data-grid:has(thead [data-keep-narrow]) .u-table > table > tbody > tr > [data-label]::before {
     content: attr(data-label) ": ";

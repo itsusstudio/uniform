@@ -7,7 +7,7 @@ permalink: /components/shimmer/
 ---
 
 A shimmer stands in for content that is still loading, in the shape it will
-arrive in. Use it for any wait you can't count.
+arrive in. Use it for content that loads after the page.
 
 ## Example
 

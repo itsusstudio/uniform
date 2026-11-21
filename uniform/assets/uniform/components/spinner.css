@@ -1,0 +1,62 @@
+@layer components {
+.u-spinner,
+.u-btn[aria-busy="true"]::before,
+form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"])::before {
+  flex: none;
+  box-sizing: border-box;
+  width: 16px;
+  height: 16px;
+  border: 2px solid color-mix(in srgb, currentcolor 25%, transparent);
+  border-top-color: currentcolor;
+  border-radius: var(--radius-pill);
+  animation: u-spinner 1s linear infinite;
+}
+
+.u-spinner {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.u-spinner-lg {
+  width: 24px;
+  height: 24px;
+}
+
+.u-spinner-xl {
+  width: 40px;
+  height: 40px;
+  border-width: 3px;
+}
+
+.u-btn[aria-busy="true"],
+form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"]) {
+  opacity: 1;
+  cursor: progress;
+}
+
+.u-btn[aria-busy="true"]::before,
+form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"])::before { content: ""; }
+
+.u-btn[aria-busy="true"] > :is(.u-icon, svg),
+form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"]) > :is(.u-icon, svg) { display: none; }
+
+@keyframes u-spinner {
+  to { rotate: 1turn; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-spinner,
+  .u-btn[aria-busy="true"]::before,
+  form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"])::before { animation: none; }
+}
+
+@media (forced-colors: active) {
+  .u-spinner,
+  .u-btn[aria-busy="true"]::before,
+  form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"])::before {
+    forced-color-adjust: none;
+    border-color: GrayText;
+    border-top-color: CanvasText;
+  }
+}
+}

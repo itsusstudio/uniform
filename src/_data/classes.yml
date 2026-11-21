@@ -532,6 +532,21 @@
   page: /components/shimmer/
   description: A `<span>` that stands in for loading text, as a grey bar with a light band sweeping across. A typical value inside, like `Nov 14`, sets its width and stays hidden. Empty, it fills the line.
 
+- name: u-spinner
+  group: Components
+  page: /components/spinner/
+  description: An empty `<span aria-hidden="true">`, a 16px ring with an arc that turns in the text colour.
+
+- name: u-spinner-lg
+  group: Components
+  page: /components/spinner/
+  description: The 24px size, for a panel.
+
+- name: u-spinner-xl
+  group: Components
+  page: /components/spinner/
+  description: The 40px size with a thicker ring, for something that fills a large area while it loads, like a camera view.
+
 - name: u-timeline
   group: Components
   page: /components/timeline/

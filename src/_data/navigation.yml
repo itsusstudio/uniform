@@ -132,6 +132,8 @@
       url: /components/select/
     - title: Shimmer
       url: /components/shimmer/
+    - title: Spinner
+      url: /components/spinner/
     - title: Switch
       url: /components/switch/
     - title: Table

@@ -80,6 +80,11 @@
   height: 20px;
 }
 
+.u-btn-icon > svg.u-icon-sm {
+  width: 16px;
+  height: 16px;
+}
+
 .u-split-btn { display: inline-flex; }
 
 .u-split-btn > .u-btn:first-child {

@@ -2449,10 +2449,11 @@ const hotkeyTarget = (event) => {
   const form = event.target.closest?.("form")
   const candidates = [...scope.querySelectorAll("[data-u-hotkey]")]
   if (scope !== document && scope.matches("[data-u-hotkey]")) candidates.push(scope)
+  const inForm = (element) => form && (form.contains(element) || element.form === form)
   const matches = candidates.filter((element) => hotkeyAvailable(element)
     && (!element.hasAttribute("data-u-hotkey-row") || rowActive(element))
     && hotkeysOf(element).some((parts) => hotkeyMatches(parts, event)
-      && (usesModifier(parts) || (!typing && !characterKeysOff()))))
+      && (usesModifier(parts) || (!typing && !characterKeysOff()) || (parts.at(-1) === "Escape" && inForm(element)))))
   return matches.find((element) => form && (form.contains(element) || element.form === form))
     || matches.find((element) => element.checkVisibility?.() ?? true)
     || matches[0]

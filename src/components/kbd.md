@@ -65,7 +65,8 @@ Separate two keys for the same action with a comma, like `/,s`.
 
 - Letters and characters, like `e` or `?`, don't fire while someone is typing
   in a field. Keys with Ctrl, ⌘ or Alt do, so `Mod+Enter` saves from inside a
-  field.
+  field. Escape does too, but only for a shortcut in the same form, so a
+  form's Cancel with `data-u-hotkey="Escape"` works from its own field.
 - When two elements share a key, the one in the focused form wins, then the
   one on screen.
 - A shortcut with `data-u-hotkey-row` runs only on the row under the pointer or

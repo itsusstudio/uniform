@@ -40,4 +40,62 @@
     outline-offset: -1px;
   }
 }
+
+/* View tabs on a list card's top edge: underlined, with an optional count, sharing the header row with a select-all box. */
+/* Matches the card header rule's specificity and comes later, so the tabs fill the header and each underline sits on the divider. */
+.u-card > header:has(> .u-card-tabs > a) {
+  align-items: stretch;
+  justify-content: flex-start;
+  padding-block: 0;
+  border-bottom: 1px solid var(--border-color-divider);
+}
+
+.u-card > header > :has(> [data-u-select-all]) { align-self: center; }
+
+.u-card-tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: --spacing(6);
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.u-card-tabs::-webkit-scrollbar { display: none; }
+
+.u-card-tabs > a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: --spacing(1.5);
+  min-height: var(--spacing-target);
+  position: relative;
+  padding-block: --spacing(3);
+  color: var(--text-color-muted);
+  font-size: var(--text-small);
+  font-weight: 400;
+  line-height: var(--text-small--line-height);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.u-card-tabs > a:hover { color: var(--text-color-default); }
+
+.u-card-tabs > a[aria-current="page"] { color: var(--text-color-default); }
+
+/* A border on a pseudo-element, so forced-colours mode keeps the underline and the tab's size never changes. */
+.u-card-tabs > a[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  border-bottom: 2px solid currentcolor;
+}
+
+.u-card-tabs > a > .u-data {
+  color: var(--text-color-muted);
+  font-size: var(--text-caption);
+  font-weight: 400;
+}
+
+.u-card-tabs > a > .u-data[data-tone="danger"] { color: var(--color-danger); }
 }

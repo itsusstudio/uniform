@@ -208,6 +208,10 @@ new content, like `render partial: "jobs/status", locals: { job: @job }`.
 | `data-grid:select` | Fires with the selected count |
 | `data-grid:change` | Fires before each save. `preventDefault()` to save it yourself, and set `event.detail.html` |
 
+## Selecting rows in a list
+
+`<u-data-grid>` also handles selection for a `u-list` of rows. Put a checkbox in each row and a select-all box with `data-u-select-all`, and the grid counts the picks, shows the bulk bar and hides the filters while anything is picked, the same as for a table. Shift-click picks every row between the last one clicked and this one, in a table or a list.
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/data-grid/" %>

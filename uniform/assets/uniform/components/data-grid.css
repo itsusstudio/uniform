@@ -121,9 +121,9 @@ u-data-grid .u-data-grid-value:focus-visible::after { outline: 2px solid var(--c
 
 .u-data-grid-editor > form > * { flex: 1; }
 
-u-data-grid:not(:has(tbody input[type="checkbox"]:checked)) form:has(output) { display: none; }
+u-data-grid:not(:has(:is(tbody, .u-list) input[type="checkbox"]:checked)) form:has(output) { display: none; }
 
-u-data-grid:has(tbody input[type="checkbox"]:checked) .u-table-controls > form:first-child > :not(:has(input[type="search"]), input[type="search"], label) { visibility: hidden; }
+u-data-grid:has(:is(tbody, .u-list) input[type="checkbox"]:checked) .u-table-controls > form:first-child { visibility: hidden; }
 
 u-data-grid tbody tr:has(input[type="checkbox"]:checked) > * { background: var(--border-color-divider); }
 

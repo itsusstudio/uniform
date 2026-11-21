@@ -60,6 +60,8 @@
       url: /components/page-header/
     - title: Page tabs
       url: /components/page-tabs/
+    - title: Index page
+      url: /components/index-page/
     - title: Navigation
       url: /components/navigation/
 - label: Components
@@ -100,6 +102,8 @@
       url: /components/dialog/
     - title: Dropzone
       url: /components/dropzone/
+    - title: Filter
+      url: /components/filter/
     - title: Icon
       url: /components/icon/
     - title: Keyboard shortcuts

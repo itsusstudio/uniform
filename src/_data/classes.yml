@@ -823,3 +823,49 @@
   group: Components
   page: /components/settings/
   description: A read-only value with a Copy button, like a studio ID, on a soft tint.
+
+- name: u-index
+  group: Page frame
+  page: /components/index-page/
+  description: On the element that holds a list page. From tablet width it fills the window, and only the list's body scrolls.
+
+- name: u-index-split
+  group: Page frame
+  page: /components/index-page/
+  description: Puts the list and its pane side by side from desktop width.
+
+- name: u-index-grow
+  group: Page frame
+  page: /components/index-page/
+  description: On a card or column that takes the rest of the page's height.
+
+- name: u-index-scroll
+  group: Page frame
+  page: /components/index-page/
+  description: On the part inside a growing card that scrolls, like a list or a form's fields.
+
+- name: u-index-pane
+  group: Page frame
+  page: /components/index-page/
+  description: On the selected record's pane. Beside the list on desktop, a modal sheet that slides in below that.
+
+- name: u-index-backdrop
+  group: Page frame
+  page: /components/index-page/
+  description: On a link back to the list without the pane, behind the sheet, so a tap outside closes it.
+
+- name: u-card-tabs
+  group: Page frame
+  page: /components/page-tabs/
+  description: Underlined view tabs, with optional counts, on a list card's top edge.
+
+- name: u-list-divided
+  group: Components
+  page: /components/list/
+  description: Draws a line between a list's rows.
+
+- name: u-table-filters
+  group: Components
+  page: /components/filter/
+  description: Holds a list's filter pills in one row, which scrolls sideways on a narrow screen.
+

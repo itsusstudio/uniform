@@ -83,6 +83,10 @@ For a short list people arrange themselves, like job statuses, split a card into
 </section>
 ```
 
+## Selected and divided rows
+
+Add `u-list-divided` for a line between rows, for lists people scan quickly like jobs or clients. Mark the row that's open in a pane with `aria-current="true"`, and it's shaded. A checkbox at the start of a row keeps its size. On a phone, rows in a card use a 16px gutter instead of 24px.
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/list/" %>

@@ -1626,9 +1626,13 @@ define("u-toast", class extends UniformElement {
 
 define("u-data-grid", class extends UniformElement {
   setup(signal) {
-    const table = this.querySelector("table")
-    if (!table?.tBodies[0]) return
     const on = (target, type, listener) => target.addEventListener(type, listener, { signal })
+    const list = this.querySelector(".u-list")
+    const table = this.querySelector("table")
+    if (!table?.tBodies[0]) {
+      if (list) this.selection(on, list, "[data-u-select-all]")
+      return
+    }
     const tbody = table.tBodies[0]
     const headers = table.tHead ? [...table.tHead.rows[0].cells] : []
     const key = this.id && `u-data-grid:${this.id}`
@@ -1637,7 +1641,7 @@ define("u-data-grid", class extends UniformElement {
     const words = (name, fallback) => this.dataset[name] || fallback
     this.semantics(table)
     this.keepNarrow(tbody, headers)
-    this.selection(on, tbody)
+    this.selection(on, tbody, "thead input[type=checkbox]")
     this.rowLinks(on, tbody)
     this.columns(on, table, headers, stored, store)
     this.editing(on, signal, tbody, headers, words)
@@ -1683,9 +1687,21 @@ define("u-data-grid", class extends UniformElement {
     return this.clientWidth < 600 && !!this.querySelector("thead [data-keep-narrow]")
   }
 
-  selection(on, tbody) {
-    const all = this.querySelector("thead input[type=checkbox]")
-    const rows = () => [...tbody.querySelectorAll("input[type=checkbox]")].filter((box) => !box.closest("tr").hidden)
+  selection(on, tbody, allSelector) {
+    const all = this.querySelector(allSelector)
+    const rows = () => [...tbody.querySelectorAll("input[type=checkbox]")].filter((box) => !box.closest("tr, li").hidden)
+    let anchor = null
+    // Shift-click ticks every row between the last row clicked and this one.
+    on(tbody, "click", (event) => {
+      const box = event.target.closest("input[type=checkbox]")
+      if (!box) return
+      const boxes = rows()
+      if (event.shiftKey && anchor && boxes.includes(anchor)) {
+        const [from, to] = [boxes.indexOf(anchor), boxes.indexOf(box)].sort((a, b) => a - b)
+        boxes.slice(from, to + 1).forEach((other) => { other.checked = box.checked })
+      }
+      anchor = box
+    })
     const counts = this.querySelectorAll("form output")
     const update = () => {
       const boxes = rows()

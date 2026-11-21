@@ -65,6 +65,27 @@ second line.
 
 Mark the current tab with `aria-current="page"`.
 
+## On a list card
+
+`u-card-tabs` puts views of a list on the top edge of the list's card, underlined, with an optional count. A view is a saved set of filters, so picking one also fills the filter pills. The current view is marked with an underline, not colour alone, and its width never changes. A count marked `data-tone="danger"` is red, for views that mean something is late.
+
+```html
+<section class="u-card">
+  <header>
+    <label class="u-checkbox"><input type="checkbox" data-u-select-all><span class="sr-only">Select all</span></label>
+
+    <nav class="u-card-tabs" aria-label="Views">
+      <a href="/jobs" aria-current="page">All</a>
+      <a href="/jobs?view=mine">Mine <span class="u-data">38</span></a>
+      <a href="/jobs?view=overdue">Overdue <span class="u-data" data-tone="danger">6</span></a>
+    </nav>
+  </header>
+  …
+</section>
+```
+
+The tabs share the header row with a select-all box. They are links to filtered views of the same page, so they're navigation, not an ARIA tab list. On a narrow card the row scrolls sideways.
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/page-tabs/" %>

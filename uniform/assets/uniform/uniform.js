@@ -1540,7 +1540,7 @@ define("u-toast", class extends UniformElement {
       if (hadFocus && before?.isConnected) before.focus()
     }
     const watch = (toast) => {
-      const wait = Number(toast.dataset.timeout ?? (toast.classList.contains("u-toast-danger") ? 0 : toast.querySelector(":scope > button:not(.u-btn-close)") ? 10000 : 5000))
+      const wait = Number(toast.dataset.timeout ?? (toast.classList.contains("u-toast-danger") ? 0 : toast.querySelector(":scope > :is(button:not(.u-btn-close), a)") ? 10000 : 3000))
       let timer = null
       let left = wait
       let started = 0

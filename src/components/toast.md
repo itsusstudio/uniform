@@ -44,7 +44,7 @@ document.querySelectorAll("[data-toast-message]").forEach((button) => button.add
 </script>
 
 Press a button to see the toast at the bottom of the page. A plain toast goes
-after 5 seconds, and one with Undo after 10. A ring around the close button runs
+after 3 seconds, and one with an action, like Undo or a link, after 10. A ring around the close button runs
 down until it goes, and stops while you point at it or tab into it. Set
 `data-timeout` in milliseconds to change the time. Swipe a toast down to
 dismiss it.

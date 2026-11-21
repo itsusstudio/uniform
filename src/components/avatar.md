@@ -118,16 +118,24 @@ Add `u-avatar-group-sm` to make them all small.
 `uniform_people` shows who's on something, like a job's assignees: up to
 three avatars, then two short names and a count, like "John M, Sarah O +1".
 Screen readers hear every full name. With no one, it shows the `empty:` label
-muted. A [multi-select](/components/multi-select/) draws the same thing for
-the people picked.
+muted, beside a dashed empty avatar where a face would be, so "nobody" reads at
+a glance down a column of faces. A [multi-select](/components/multi-select/)
+draws the same thing for the people picked.
 
 Each person gets one of eight colours, picked from their name with
 `uniform_person_color`, so they look the same on every page and in every list.
-Give an initials avatar `data-person-color` to use it.
+`uniform_avatar` draws an initials avatar in that colour. Pass `size: :sm` for
+the small size, and `class:` for anything the layout adds.
 
 ```erb
-<span class="u-avatar u-avatar-sm" data-person-color="<%%= uniform_person_color(user.full_name) %>"
-  role="img" aria-label="<%%= user.full_name %>"><%%= user.initials %></span>
+<%%= uniform_avatar user.full_name, size: :sm %>
+```
+
+Where a choice means "nobody", like Unassigned in a people filter, give it the
+same empty avatar with `u-avatar-empty`.
+
+```html
+<span class="u-avatar u-avatar-sm u-avatar-empty" aria-hidden="true"></span>
 ```
 
 ```erb

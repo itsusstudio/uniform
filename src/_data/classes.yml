@@ -121,6 +121,11 @@
   page: /components/avatar/
   description: The small size, 24px for business and 32px for consumer.
 
+- name: u-avatar-empty
+  group: Components
+  page: /components/avatar/
+  description: A dashed circle with a person outline, for a choice that means nobody, like Unassigned.
+
 - name: u-avatar-online
   group: Components
   page: /components/avatar/
@@ -134,7 +139,7 @@
 - name: u-people
   group: Components
   page: /components/avatar/
-  description: Who's on something, written by `uniform_people`, as an avatar group, two short names and a count, with every full name for screen readers. `u-people-empty` mutes the empty label.
+  description: Who's on something, written by `uniform_people`, as an avatar group, two short names and a count, with every full name for screen readers. `u-people-empty` mutes the empty label and puts an empty avatar before it.
 
 - name: u-avatar-group-sm
   group: Components

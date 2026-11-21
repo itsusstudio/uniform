@@ -65,6 +65,17 @@ module Studio
         assert_includes 1..8, view.uniform_person_color("Zoë Ågren")
       end
 
+      def test_uniform_avatar_shows_initials_in_the_person_colour
+        color = view.uniform_person_color("John Manager")
+
+        assert_equal %(<span class="u-avatar u-avatar-sm" data-person-color="#{color}" aria-hidden="true">JM</span>),
+          view.uniform_avatar("John Manager", size: :sm)
+      end
+
+      def test_uniform_avatar_adds_classes_after_its_own
+        assert_includes view.uniform_avatar("Sarah Owner", class: "self-center"), 'class="u-avatar self-center"'
+      end
+
       def test_uniform_people_says_the_empty_label_when_nobody_is_picked
         assert_equal '<span class="u-people u-people-empty">Unassigned</span>', view.uniform_people([], empty: "Unassigned")
       end

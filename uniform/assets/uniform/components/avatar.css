@@ -87,5 +87,44 @@
   text-overflow: ellipsis;
 }
 
-.u-people-empty { color: var(--text-color-muted); }
+.u-people-empty {
+  --u-avatar-size: 22px;
+
+  position: relative;
+  color: var(--text-color-muted);
+}
+
+/* An empty avatar where a face would be, so "nobody" reads at a glance down a column of faces. */
+.u-avatar-empty,
+.u-people-empty::before {
+  box-sizing: border-box;
+  border: 1px dashed currentcolor;
+  background: transparent;
+  color: var(--text-color-muted);
+}
+
+.u-people-empty::before {
+  content: "";
+  flex: none;
+  width: var(--u-avatar-size);
+  height: var(--u-avatar-size);
+  border-radius: 50%;
+}
+
+:is(.u-avatar-empty, .u-people-empty)::after {
+  --u-avatar-empty-icon: calc(var(--u-avatar-size) * 0.55);
+
+  content: "";
+  position: absolute;
+  width: var(--u-avatar-empty-icon);
+  height: var(--u-avatar-empty-icon);
+  background: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.u-people-empty::after {
+  inset-inline-start: calc((var(--u-avatar-size) - var(--u-avatar-empty-icon)) / 2);
+  top: 50%;
+  translate: 0 -50%;
+}
 }

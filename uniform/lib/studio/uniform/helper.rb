@@ -45,6 +45,13 @@ module Studio
         (hash % 8) + 1
       end
 
+      #   <%= uniform_avatar user.full_name, size: :sm %>
+      def uniform_avatar(name, size: nil, **attributes)
+        classes = ["u-avatar", ("u-avatar-#{size}" if size), attributes.delete(:class)].compact
+        tag.span(people_initials(name.to_s), class: classes, data: {person_color: uniform_person_color(name.to_s)},
+          aria: {hidden: true}, **attributes)
+      end
+
       #   <%= uniform_people job.assignees.map(&:full_name), empty: t(".unassigned") %>
       def uniform_people(names, empty:)
         return tag.span(empty, class: "u-people u-people-empty") if names.empty?

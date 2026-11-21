@@ -60,6 +60,12 @@
 
 .u-list > li:where(:has(> div > p:first-child > a:not(.u-btn)):hover) { background: color-mix(in srgb, var(--text-color-default) 4%, transparent); }
 
+/* The row's own hover shade hides a ghost button's fill, so a control in a row is outlined instead. */
+.u-list > li .u-btn-ghost:not(:disabled, [aria-disabled="true"]):is(:hover, :focus-visible) {
+  border-color: var(--border-color-input);
+  background: var(--background-color-paper);
+}
+
 .u-list > li > div > p:first-child > a:not(.u-btn):focus-visible { text-decoration: underline; }
 
 .u-list > li:has(> div > p:first-child > a:not(.u-btn)) :is(a, button, input, label, select, summary):not(li > div > p:first-child > a) {

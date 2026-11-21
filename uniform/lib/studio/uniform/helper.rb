@@ -38,6 +38,12 @@ module Studio
         tag.kbd(safe_join(caps), class: "u-kbd-group", data: {u_keys: keys}, aria: {hidden: true})
       end
 
+      #   <%= uniform_tooltip "Edit" do %><%= link_to … %><% end %>
+      def uniform_tooltip(label, **attributes, &)
+        classes = ["u-tooltip", attributes.delete(:class)].compact
+        tag.span(class: classes, **attributes) { capture(&) + tag.span(label, aria: {hidden: true}) }
+      end
+
       # The person colour (1 to 8) for a name, the same in uniform.js, so a person keeps their colour everywhere.
       #   <span class="u-avatar" data-person-color="<%= uniform_person_color(user.full_name) %>">JM</span>
       def uniform_person_color(name)

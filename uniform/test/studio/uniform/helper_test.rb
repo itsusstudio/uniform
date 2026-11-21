@@ -60,6 +60,12 @@ module Studio
         assert_includes html, '<span class="sr-only">John Manager, Sarah Owner, Virgen Paucek, and Dexter Little</span>'
       end
 
+      def test_uniform_tooltip_wraps_the_control_and_adds_a_hidden_label
+        html = view.uniform_tooltip("Edit photos", class: "flex") { view.tag.a("Photos", href: "#") }
+
+        assert_equal '<span class="u-tooltip flex"><a href="#">Photos</a><span aria-hidden="true">Edit photos</span></span>', html
+      end
+
       def test_uniform_person_color_gives_a_name_the_same_colour_every_time
         assert_equal view.uniform_person_color("John Manager"), view.uniform_person_color("John Manager")
         assert_includes 1..8, view.uniform_person_color("Zoë Ågren")

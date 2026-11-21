@@ -39,6 +39,16 @@ open so you can see it without a mouse.
 Put the wrapper around the control, so a tooltip on truncated text isn't cut off
 with it.
 
+In a Rails app, `uniform_tooltip` writes the wrapper and the hidden label:
+
+```erb
+<%= uniform_tooltip "Edit photos" do %>
+  <%= link_to edit_photos_path, class: "u-btn u-btn-ghost u-btn-icon", aria: {label: "Edit photos"} do %>
+    <%= uniform_icon "square-pen" %>
+  <% end %>
+<% end %>
+```
+
 Add `data-open` to show a tooltip without a hover, like a "Copied" message that
 should stay up for a moment.
 

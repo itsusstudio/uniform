@@ -100,6 +100,12 @@
   without: The fieldset stays a plain list of checkboxes that still posts.
   page: /components/multi-select/
 
+- name: <u-filter>
+  wraps: A pill button and a popover of checkboxes, grouped with `data-u-filter-group`, inside a list's search form.
+  adds: Submits the form once when the menu closes, picks a whole group from its box, adds Only to each option, and narrows a long list with a search field.
+  without: The checkboxes still post with the form's own submit.
+  page: /components/filter/
+
 - name: <u-search>
   wraps: A trigger button and a `<dialog>` with a search field, a chips row, a listbox and a key hint footer.
   adds: Opens the panel from the trigger, ⌘K or any `data-u-search-opener` button, fetches results from `data-src` as you type, and moves through them, their filter chips and their actions from the keyboard.

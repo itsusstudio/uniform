@@ -30,6 +30,8 @@ u-multi-select { display: block; }
   overflow-y: auto;
 }
 
+.u-multi-select-list > * + * { margin-top: 0; }
+
 .u-multi-select-list > fieldset {
   margin: 0;
   padding: 0;
@@ -96,5 +98,21 @@ u-multi-select { display: block; }
 .u-multi-select-none {
   padding: --spacing(2) --spacing(3);
   color: var(--text-color-muted);
+}
+
+/* Fingers need bigger rows than a pointer: full-size text, a 48px row and a larger box. */
+@media (pointer: coarse) {
+  .u-multi-select-list label,
+  .u-multi-select-me {
+    min-height: 48px;
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  .u-multi-select-list .u-checkbox > input,
+  .u-multi-select-list label > input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+  }
 }
 }

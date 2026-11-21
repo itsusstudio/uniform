@@ -205,7 +205,7 @@ u-row-hint[data-over-record-link] > [data-u-hint="row"] { display: none; }
 
 .u-table-controls > form > .u-field { flex: none; }
 
-.u-table-controls > form > :is(input[type="search"], :has(input[type="search"])) {
+.u-table-controls > form > :is(input[type="search"], :has(> input[type="search"])) {
   flex: 1 1 10rem;
   max-width: 32rem;
 }
@@ -213,10 +213,30 @@ u-row-hint[data-over-record-link] > [data-u-hint="row"] { display: none; }
 .u-table-controls > form > select.u-input { width: auto; }
 
 @container u-table-controls (max-width: 29.9375rem) {
-  .u-table-controls > form > :is(input[type="search"], :has(input[type="search"])) {
+  .u-table-controls > form > :is(input[type="search"], :has(> input[type="search"])) {
     flex: 1 0 100%;
     max-width: none;
   }
+}
+
+.u-table-filters {
+  display: flex;
+  flex: none;
+  gap: --spacing(2);
+  min-width: 0;
+}
+
+.u-table-filters > * { flex: none; }
+
+/* On a narrow screen the filter pills keep one row and scroll sideways instead of wrapping. */
+@container u-table-controls (max-width: 29.9375rem) {
+  .u-table-filters {
+    flex: 1 0 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .u-table-filters::-webkit-scrollbar { display: none; }
 }
 
 .u-table-controls > form > button[popovertarget]:last-child { margin-inline-start: auto; }

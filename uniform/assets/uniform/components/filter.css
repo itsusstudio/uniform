@@ -1,0 +1,58 @@
+@layer components {
+/* A filter pill that opens a menu of choices. Once something is picked, a joined × clears it. */
+u-filter {
+  display: inline-flex;
+  align-items: center;
+}
+
+u-filter > .u-btn:first-child { gap: --spacing(1.5); }
+
+u-filter > .u-btn:first-child > .u-meta { font-weight: 400; }
+
+u-filter:has(> a) > .u-btn {
+  background: var(--background-color-paper);
+}
+
+u-filter:has(> a) > .u-btn:first-child {
+  border-inline-end: 0;
+  border-start-end-radius: 0;
+  border-end-end-radius: 0;
+}
+
+u-filter > a.u-btn {
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+}
+
+u-filter .u-multi-select-list[popover] { width: 18rem; }
+
+u-filter [data-u-filter-group] > label:first-child {
+  color: var(--text-color-muted);
+  font-size: var(--text-small);
+  font-weight: 500;
+}
+
+u-filter [data-u-filter-option] > span:first-of-type {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: --spacing(2);
+  min-width: 0;
+}
+
+u-filter [data-u-filter-only] {
+  display: none;
+  padding: 0 --spacing(1.5);
+  border: 0;
+  border-radius: var(--radius-item);
+  background: none;
+  color: var(--text-color-link);
+  font: inherit;
+  font-size: var(--text-small);
+  cursor: pointer;
+}
+
+u-filter [data-u-filter-option]:is(:hover, :focus-within) [data-u-filter-only] { display: block; }
+
+u-filter [data-u-filter-option]:is(:hover, :focus-within) > .u-meta { display: none; }
+}

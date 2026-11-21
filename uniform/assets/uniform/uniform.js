@@ -2523,6 +2523,61 @@ const shortName = (name) => {
   return rest.length ? `${first} ${rest[0][0]}` : first
 }
 
+// A filter pill's menu: picks submit the form once when the menu closes, Only picks one,
+// a group's box picks the whole group, and search narrows a long list.
+define("u-filter", class extends UniformElement {
+  setup(signal) {
+    const menu = this.querySelector("[popover]")
+    if (!menu) return
+    const on = (target, type, listener) => target.addEventListener(type, listener, { signal })
+    const boxes = (scope = menu) => [...scope.querySelectorAll("[data-u-filter-option] input[type=checkbox]")]
+    let changed = false
+    const syncGroups = () => menu.querySelectorAll("[data-u-filter-group]").forEach((group) => {
+      const all = group.querySelector("input[data-u-filter-all]")
+      if (!all) return
+      const picked = boxes(group).filter((box) => box.checked).length
+      all.checked = picked > 0 && picked === boxes(group).length
+      all.indeterminate = picked > 0 && picked < boxes(group).length
+    })
+    const pick = (value) => {
+      boxes().forEach((box) => { box.checked = box.value === value })
+      changed = true
+      menu.hidePopover()
+    }
+    on(menu, "change", (event) => {
+      if (event.target.matches("input[data-u-filter-all]")) {
+        const group = event.target.closest("[data-u-filter-group]")
+        boxes(group).forEach((box) => { box.checked = event.target.checked })
+      }
+      changed = true
+      syncGroups()
+    })
+    on(menu, "click", (event) => {
+      const only = event.target.closest("[data-u-filter-only]")
+      if (!only) return
+      event.preventDefault()
+      pick(only.dataset.uFilterOnly || only.closest("[data-u-filter-option]").querySelector("input").value)
+    })
+    on(menu, "toggle", (event) => {
+      if (event.newState !== "closed" || !changed) return
+      changed = false
+      this.closest("form")?.requestSubmit()
+    })
+    const search = menu.querySelector("input[type=search]")
+    const none = menu.querySelector("[data-u-filter-none]")
+    if (search) on(search, "input", () => {
+      const query = search.value.trim().toLowerCase()
+      let shown = 0
+      menu.querySelectorAll("[data-u-filter-option]").forEach((option) => {
+        option.hidden = query !== "" && !option.textContent.toLowerCase().includes(query)
+        if (!option.hidden) shown += 1
+      })
+      if (none) none.hidden = shown > 0
+    })
+    syncGroups()
+  }
+})
+
 define("u-multi-select", class extends UniformElement {
   setup(signal) {
     const fieldset = this.querySelector(":scope > fieldset")

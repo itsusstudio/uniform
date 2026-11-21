@@ -1003,17 +1003,17 @@ define("u-sidebar", class extends UniformElement {
       button.setAttribute("aria-expanded", String(expanded))
       // The server renders aria-expanded from this cookie, so the column doesn't flash open on the next page.
       if (this.dataset.remember) document.cookie = `${this.dataset.remember}=${expanded ? "open" : "collapsed"}; path=/; max-age=31536000; samesite=lax`
+      const moves = this.getAnimations().filter((animation) => animation.transitionProperty === "width")
+      if (moves.length === 0) return
+      this.toggleAttribute("data-u-moving", true)
+      Promise.allSettled(moves.map((animation) => animation.finished)).then(() => this.removeAttribute("data-u-moving"))
     }, { signal })
-    let edge = this.querySelector(":scope > div:first-child + button")
-    if (!edge) {
-      edge = document.createElement("button")
-      edge.type = "button"
-      edge.tabIndex = -1
-      edge.setAttribute("aria-hidden", "true")
-      button.parentElement.after(edge)
-    }
-    edge.title = button.getAttribute("aria-label") ?? ""
-    edge.addEventListener("click", () => button.click(), { signal })
+    this.addEventListener("click", (event) => {
+      if (button.getAttribute("aria-expanded") !== "false" || this.matches(":popover-open")) return
+      const control = event.target.closest("a, button, summary, input, label, select, textarea, [popover]")
+      if (control && control !== this) return
+      button.click()
+    }, { signal })
   }
 })
 

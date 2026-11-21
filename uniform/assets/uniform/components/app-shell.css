@@ -39,8 +39,6 @@
 
 .u-app-shell > main { anchor-name: --u-app-main; }
 
-.u-app-shell:has(> u-sidebar > div:first-child > button[aria-expanded="false"]) { grid-template-columns: auto minmax(0, 1fr); }
-
 .u-app-shell > header { display: none; }
 
 .u-app-shell > header > button::before {
@@ -89,8 +87,6 @@ u-sidebar > .u-nav {
   min-height: 0;
   overflow-y: auto;
 }
-
-u-sidebar > div:first-child + button { display: none; }
 
 u-sidebar:has(> div:last-child:not(:first-child)) { padding-bottom: 0; }
 
@@ -312,9 +308,23 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
 }
 
 @media (width >= --theme(--breakpoint-lg)) {
+  .u-app-shell { grid-template-columns: auto minmax(0, 1fr); }
+
   .u-app-shell > u-sidebar {
     grid-column: 1;
     grid-row: 1 / -1;
+    width: var(--container-sidebar);
+    transition: width var(--u-duration-enter) var(--ease-standard);
+  }
+
+  .u-app-shell > u-sidebar:has(> div:first-child > button[aria-expanded="false"]) { width: calc(var(--spacing-control) + --spacing(4)); }
+
+  /* uniform.js sets data-u-moving while the width animates, so labels stay inside the column instead of spilling over main. */
+  u-sidebar[data-u-moving],
+  u-sidebar[data-u-moving] > .u-nav { overflow: clip; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .u-app-shell > u-sidebar { transition: none; }
   }
 
   .u-app-shell > main {
@@ -322,27 +332,11 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     grid-row: 1 / -1;
   }
 
-  u-sidebar > div:first-child + button {
-    display: block;
-    position: absolute;
-    inset-block: 0;
-    inset-inline-end: calc(-1 * --spacing(2));
-    z-index: 1;
-    width: --spacing(4);
-    padding: 0 calc(--spacing(2) - 1px);
-    border: 0;
-    background: transparent;
-    background-clip: content-box;
-    cursor: w-resize;
-  }
-
-  u-sidebar > div:first-child + button:hover { background-color: var(--u-nav-edge); }
-
-  u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:first-child + button { cursor: e-resize; }
-
+  /* Icons hold their place while the column folds, so the rail lines up from the start instead of centring. */
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) {
-    align-items: center;
+    align-items: flex-start;
     padding-inline: --spacing(2);
+    cursor: pointer;
   }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > .u-nav { overflow: visible; }
@@ -384,9 +378,9 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
     opacity: 0;
   }
 
-  u-sidebar > div:first-child:is(:hover, :has(> button:focus-visible)) > button[aria-expanded="false"] { opacity: 1; }
+  u-sidebar:is(:hover, :has(> div:first-child > button:focus-visible)) > div:first-child > button[aria-expanded="false"] { opacity: 1; }
 
-  u-sidebar > div:first-child:is(:hover, :has(> button:focus-visible)):has(> button[aria-expanded="false"]) > .u-wordmark { visibility: hidden; }
+  u-sidebar:is(:hover, :has(> div:first-child > button:focus-visible)) > div:first-child:has(> button[aria-expanded="false"]) > .u-wordmark { visibility: hidden; }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child:not(:first-child) {
     align-self: stretch;
@@ -429,8 +423,8 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) :is(.u-nav > a, li > :is(a, button), .u-nav > details > summary):is(:hover, :focus-visible) > span { clip-path: none; }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button {
-    justify-content: center;
-    padding: 0;
+    width: var(--spacing-control);
+    padding: 0 calc((var(--spacing-control) - 28px) / 2);
   }
 
   u-sidebar:has(> div:first-child > button[aria-expanded="false"]) > div:last-child > button > :not(:first-child) { display: none; }

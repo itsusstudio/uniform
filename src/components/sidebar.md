@@ -21,9 +21,7 @@ places in the middle and the account at the bottom. Use it inside the
 </div>
 
 Jobs is the current page, so it gets a soft grey background and medium weight. Reports folds, with its
-pages on a guide line. The account at the bottom opens a menu upward, with Appearance and Log out. The button beside the app name folds the column to its icons, and
-so does a click anywhere along its right edge, where the cursor turns into an
-arrow. Try them.
+pages on a guide line. The account at the bottom opens a menu upward, with Appearance and Log out. The button beside the app name folds the column to its icons. Try it.
 
 ## Code
 
@@ -61,8 +59,11 @@ can open it on a phone.
 </div>
 
 With `aria-expanded="false"` on the collapse button, the column folds to its
-icons. Each link shows its name when you point at it or tab to it, and the same
-button or the edge opens the column again. The rail shows on screens 1024px and
+icons. Each link shows its name when you point at it or tab to it. Pointing
+anywhere on the rail swaps the app's monogram for the collapse button, and a
+click on any empty part of the rail opens the column again, as does the button.
+The column slides between its widths while the icons stay in
+place, unless the person asks for reduced motion. The rail shows on screens 1024px and
 wider. Narrower, the sidebar slides in from the left behind the app shell's Menu
 button, three quarters wide, over a backdrop. Tapping the backdrop, pressing
 Escape or the button beside the app name closes it.
@@ -100,8 +101,8 @@ to put it on paper. Paper is quieter; ink sets the column apart.
 Collapse button
 : `aria-label="Sidebar"` names it, and `<u-sidebar>` flips its `aria-expanded` when it folds the column.
 
-Edge
-: `uniform.js` adds the edge as a `<button>` after the head, with the collapse button's label as its title. It's for the pointer only: it stays out of the tab order and away from screen readers, since the collapse button does the same job.
+Rail click
+: A click on the rail's empty space is for the pointer only. Keyboard and screen reader users open the column with the collapse button, which does the same job.
 
 Names stay in the links
 : In the rail, each link's name is still inside it, so screen readers say it.

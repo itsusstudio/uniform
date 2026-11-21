@@ -130,7 +130,8 @@
 @media (width >= 64rem) {
   .u-index-split { grid-template-columns: minmax(0, 1fr) 26rem; }
 
-  .u-index-backdrop { display: none; }
+  /* Beside the list the pane stays put, so its close link only answers Escape. */
+  .u-index-backdrop, .u-index-pane .u-btn-close[data-u-index-close] { display: none; }
 }
 
 @media (width >= 96rem) {

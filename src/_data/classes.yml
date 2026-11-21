@@ -190,6 +190,11 @@
   page: /components/button/
   description: The button shape, with no fill or border of its own. Always add one variant.
 
+- name: u-btn-sm
+  group: Components
+  page: /components/button/
+  description: The small button, one step below the standard height, for an action inside a box like a note composer. Add it alongside a variant.
+
 - name: u-btn-lg
   group: Components
   page: /components/button/

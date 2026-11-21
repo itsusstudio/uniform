@@ -24,6 +24,12 @@
   font-size: var(--text-body);
 }
 
+.u-btn-sm {
+  gap: --spacing(1.5);
+  min-height: calc(var(--spacing-control) - 4px);
+  padding: 0 --spacing(3);
+}
+
 .u-btn-primary {
   border-color: var(--background-color-primary);
   background: var(--background-color-primary);

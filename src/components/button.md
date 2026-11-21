@@ -24,6 +24,15 @@ A button runs an action, like saving or sending. To go to another page, use a [l
 Use `u-btn-lg` for a marketing site's main call to action, next to a hero or
 section headline. Never use it in an app.
 
+## Small
+
+<div class="flex flex-wrap items-center gap-2">
+<span class="u-btn u-btn-outline u-btn-sm">Post</span>
+<span class="u-btn u-btn-primary u-btn-sm">Post</span>
+</div>
+
+Use `u-btn-sm` for an action that sits inside another control, like the Post button at the bottom of a note box, where a full-size button would crowd the text. It is 4px shorter than the standard button and keeps the same text size, so it stays easy to tap. Everywhere else, use the standard size.
+
 ## Code
 
 ```html

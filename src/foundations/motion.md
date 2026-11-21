@@ -22,7 +22,7 @@ A list gaining or losing an item
 : The item fades and the space around it opens or closes. Wrap the item in `u-enter` when it arrives and `u-exit` when it leaves, then remove it when the animation ends.
 
 Surfaces that open over or beside the page
-: A dialog fades in while it grows from 97% of its size, and rises from the bottom on a phone. A side sheet and the index pane slide in from the right. The sidebar slides between its full width and its icons, and a sidebar group slides open. Uniform's CSS does all of it.
+: A dialog and the search panel fade in while they grow from 97% of their size, and a dialog rises from the bottom on a phone. A side sheet and the index pane slide in from the right. The sidebar slides between its full width and its icons, and a sidebar group slides open. Uniform's CSS does all of it.
 
 <%= render "examples/shape_specs", rows: [
   { copy: "var(--u-duration-enter)", detail: "200ms", sample: '<span class="shape-box"></span>', job: "How long an item takes to arrive." },

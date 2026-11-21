@@ -2960,7 +2960,11 @@ define("u-search", class extends UniformElement {
       levels = []
       request?.abort()
       actionsCache.clear()
-      if (panel.parentElement !== this) this.append(panel)
+      if (panel.parentElement === this) return
+      // Moving the panel ends its closing animation, so it goes home once that finishes.
+      Promise.allSettled(panel.getAnimations().map((animation) => animation.finished)).then(() => {
+        if (!panel.open && panel.parentElement !== this) this.append(panel)
+      })
     }, { signal })
 
     input.addEventListener("input", () => {

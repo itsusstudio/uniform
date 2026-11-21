@@ -71,6 +71,47 @@ u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-search-trigg
 
 .u-search-panel::backdrop { background: color-mix(in srgb, var(--background-color-backdrop) 50%, transparent); }
 
+/* Opens and closes like a dialog: fast in and settling, out quicker. */
+.u-search-panel {
+  opacity: 0;
+  scale: 0.97;
+  transition:
+    opacity var(--u-duration-exit) var(--ease-standard),
+    scale var(--u-duration-exit) var(--ease-standard),
+    display var(--u-duration-exit) allow-discrete,
+    overlay var(--u-duration-exit) allow-discrete;
+}
+
+.u-search-panel[open] {
+  opacity: 1;
+  scale: 1;
+  transition-duration: var(--u-duration-enter);
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.97;
+  }
+}
+
+.u-search-panel::backdrop {
+  opacity: 0;
+  transition:
+    opacity var(--u-duration-exit) var(--ease-standard),
+    display var(--u-duration-exit) allow-discrete,
+    overlay var(--u-duration-exit) allow-discrete;
+}
+
+.u-search-panel[open]::backdrop {
+  opacity: 1;
+  transition-duration: var(--u-duration-enter);
+
+  @starting-style { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-search-panel:is(*, [open]) { scale: 1; }
+}
+
 /* The search line is the panel's headline; a job's chip sits under it while you pick its actions. */
 .u-search-field {
   display: flex;

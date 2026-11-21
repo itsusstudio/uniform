@@ -327,12 +327,12 @@ u-sidebar:has(> div:first-child > button[aria-expanded="false"]) .u-search-trigg
   gap: --spacing(1.5);
 }
 
+/* Hints name keyboard shortcuts, so a touch screen drops them and the row keeps its room. */
 @media (pointer: coarse) {
-  .u-search-keys { display: none; }
+  .u-search-keys,
+  .u-search-hint { display: none; }
 
   .u-search-trigger .u-kbd-group,
-  .u-search-trigger .u-kbd,
-  .u-search-end .u-kbd,
-  .u-search-end .u-kbd-group { display: none; }
+  .u-search-trigger .u-kbd { display: none; }
 }
 }

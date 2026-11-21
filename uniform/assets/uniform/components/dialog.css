@@ -29,11 +29,54 @@
   border-radius: 0;
 }
 
+/* Dialogs open fast and settle (ease-out), and close quicker than they open. The closed state carries the exit timing. */
+.u-dialog:not(.u-dialog-side) {
+  opacity: 0;
+  scale: 0.97;
+  transition:
+    opacity var(--u-duration-exit) var(--ease-standard),
+    scale var(--u-duration-exit) var(--ease-standard),
+    translate var(--u-duration-exit) var(--ease-standard),
+    display var(--u-duration-exit) allow-discrete,
+    overlay var(--u-duration-exit) allow-discrete;
+}
+
+.u-dialog:not(.u-dialog-side)[open] {
+  opacity: 1;
+  scale: 1;
+  translate: 0 0;
+  transition-duration: var(--u-duration-enter);
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.97;
+  }
+}
+
+.u-dialog:not(.u-dialog-side)::backdrop {
+  opacity: 0;
+  transition:
+    opacity var(--u-duration-exit) var(--ease-standard),
+    display var(--u-duration-exit) allow-discrete,
+    overlay var(--u-duration-exit) allow-discrete;
+}
+
+.u-dialog:not(.u-dialog-side)[open]::backdrop {
+  opacity: 1;
+  transition-duration: var(--u-duration-enter);
+
+  @starting-style { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .u-dialog:not(.u-dialog-side):is(*, [open]) { scale: 1; translate: 0 0; }
+}
+
 .u-dialog-side {
   opacity: 0;
   transition-property: opacity, translate;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  transition-duration: var(--u-duration-exit);
+  transition-timing-function: var(--ease-standard);
 
   @media (prefers-reduced-motion: no-preference) { translate: 100% 0; }
 }
@@ -41,13 +84,14 @@
 .u-dialog-side::backdrop {
   opacity: 0;
   transition-property: opacity;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  transition-duration: var(--u-duration-exit);
+  transition-timing-function: var(--ease-standard);
 }
 
 :is(.u-dialog-side[open]):where(:not([data-closing])) {
   opacity: 1;
   translate: 0 0;
+  transition-duration: var(--u-duration-enter);
 
   @starting-style {
     opacity: 0;
@@ -57,6 +101,7 @@
 
   &::backdrop {
     opacity: 1;
+    transition-duration: var(--u-duration-enter);
 
     @starting-style { opacity: 0; }
   }
@@ -88,8 +133,8 @@
 /* A sheet can open before its content arrives; the content fades in rather than popping. */
 .u-dialog-side > * {
   transition-property: opacity;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  transition-duration: var(--u-duration-enter);
+  transition-timing-function: var(--ease-standard);
 }
 
 .u-dialog-side[aria-busy="true"] > * { opacity: 0; }
@@ -123,6 +168,16 @@
     padding-bottom: env(safe-area-inset-bottom);
     border-width: 1px 0 0;
     border-radius: var(--radius-surface) var(--radius-surface) 0 0;
+  }
+
+  /* On a phone the sheet rises from the bottom edge instead of growing in the middle. */
+  .u-dialog-sheet:not(.u-dialog-side) {
+    scale: 1;
+    translate: 0 100%;
+  }
+
+  .u-dialog-sheet:not(.u-dialog-side)[open] {
+    @starting-style { scale: 1; translate: 0 100%; }
   }
 
   :is(.u-dialog-sheet, .u-dialog-sheet > form) > .u-actions > .u-btn {

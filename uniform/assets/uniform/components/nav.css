@@ -75,6 +75,30 @@
 
 .u-nav > details[open] > summary::after { background-size: 10px var(--u-icon-stroke-width), 0 0; }
 
+/* A group's pages slide open where the browser can animate details; elsewhere they snap. */
+@supports selector(::details-content) {
+  .u-nav > details {
+    interpolate-size: allow-keywords;
+  }
+
+  .u-nav > details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size var(--u-duration-exit) var(--ease-standard),
+      content-visibility var(--u-duration-exit) allow-discrete;
+  }
+
+  .u-nav > details[open]::details-content {
+    block-size: auto;
+    transition-duration: var(--u-duration-enter);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .u-nav > details::details-content { transition: none; }
+  }
+}
+
 .u-nav > details > ul {
   --u-nav-guide: --spacing(2);
   --u-nav-indent: calc(--spacing(4) + --spacing(2));

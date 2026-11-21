@@ -558,8 +558,8 @@
 
 - id: mostly-still
   name: Mostly still
-  summary: Only progress bars, spinners, shimmer and list changes move.
-  body: Menus, dialogs and messages appear instantly. Only progress bars, spinners, the shimmer on content still loading, and lists gaining or losing an item move, and they hold still when someone has asked for reduced motion.
+  summary: Only progress, list changes and surfaces that open over or beside the page move.
+  body: Menus, popovers, tabs, hover and page changes are instant, because people use them all day. Only progress bars, spinners, the shimmer on content still loading, lists gaining or losing an item, and the larger surfaces people open less often move. Those are dialogs, side sheets, the index pane, the sidebar folding and its groups opening. They open fast and settle with `--ease-standard`, close quicker than they open, and hold still when someone has asked for reduced motion.
   home: /foundations/motion/
 
 - id: motion-when-a-list-changes
@@ -645,7 +645,7 @@
 - id: motion-follows-your-hand
   name: Motion follows your hand
   summary: Something moves only while you drag, swipe or pull it, and then settles. Nothing moves on its own.
-  body: What you drag, swipe or pull moves with your finger and settles with `--ease-standard` when you let go. A tap gets its answer instantly, and nothing moves on load or on scroll. See [Mostly still](#mostly-still).
+  body: What you drag, swipe or pull moves with your finger and settles with `--ease-standard` when you let go. A tap gets its answer instantly, apart from what Mostly still allows, and nothing moves on load or on scroll. See [Mostly still](#mostly-still).
   home: /foundations/motion/
   check: Nothing moves on load or on scroll, and nothing moves on a tap. Only what a finger drags, and what Mostly still allows.
 

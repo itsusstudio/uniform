@@ -11,6 +11,8 @@
 
 .u-form > .u-accordion > details > summary { padding-block: 0; }
 
+.u-form > .u-accordion > details[open] > summary { margin-bottom: --spacing(4); }
+
 .u-field-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));

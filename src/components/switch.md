@@ -70,6 +70,19 @@ Disabled
 Put the input first inside the label, then the words, then an optional
 `u-switch-hint`.
 
+An action that belongs to the setting, like sending a sign-in link once a
+portal is on, goes after the label as a link with `u-switch-action`. Never put
+it inside the label, because a click there would flip the switch.
+
+```html
+<label class="u-switch">
+  <input type="checkbox" switch role="switch" name="portal" checked>
+  Client portal
+  <span class="u-switch-hint">Ana can sign in with their email address to check on their jobs.</span>
+</label>
+<a class="u-switch-action" href="/customers/12/portal_link/new">Send sign-in link</a>
+```
+
 Your app does the saving: listen for `change` on the input and save the setting,
 or submit its form. Without JavaScript, the switch works as a checkbox, so give
 its form a Save button.

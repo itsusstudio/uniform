@@ -547,6 +547,11 @@
   page: /components/switch/
   description: A muted line under the words.
 
+- name: u-switch-action
+  group: Components
+  page: /components/switch/
+  description: On a link after the `<label>`, for an action that belongs to the setting. It lines up under the words, in small text.
+
 - name: u-table
   group: Components
   page: /components/table/

@@ -42,6 +42,11 @@
   line-height: var(--text-small--line-height);
 }
 
+.u-switch-action {
+  margin-inline-start: calc(36px + --spacing(2));
+  font-size: var(--text-small);
+}
+
 .u-switch:has(> input:disabled) {
   color: var(--border-color-input);
   cursor: not-allowed;

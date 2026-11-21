@@ -22,26 +22,29 @@
 :where(pre) { max-width: 100%; overflow-x: auto; }
 
 /* border-input keeps the thumb at 3:1 or more on surface and paper, in both themes and on ink. */
-:where(body *) {
+:where(html, body *) {
   scrollbar-color: var(--border-color-input) transparent;
   scrollbar-width: thin;
 }
 
 @supports not (scrollbar-color: auto) {
-  :where(body *)::-webkit-scrollbar {
+  /* Thin width would otherwise switch off the ::-webkit-scrollbar styling below in browsers without scrollbar-color. */
+  :where(html, body *) { scrollbar-width: auto; }
+
+  :where(html, body *)::-webkit-scrollbar {
     width: --spacing(2);
     height: --spacing(2);
   }
 
-  :where(body *)::-webkit-scrollbar-thumb {
+  :where(html, body *)::-webkit-scrollbar-thumb {
     border: 2px solid transparent;
     border-radius: var(--radius-pill);
     background-color: var(--border-color-input);
     background-clip: padding-box;
   }
 
-  :where(body *)::-webkit-scrollbar-track,
-  :where(body *)::-webkit-scrollbar-corner { background: transparent; }
+  :where(html, body *)::-webkit-scrollbar-track,
+  :where(html, body *)::-webkit-scrollbar-corner { background: transparent; }
 }
 
 a { color: var(--text-color-link); text-decoration-line: underline; text-underline-offset: 3px; }

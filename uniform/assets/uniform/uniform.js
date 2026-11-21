@@ -2939,6 +2939,8 @@ define("u-search", class extends UniformElement {
       crumb.hidden = true
       crumb.textContent = ""
       if (!results.querySelector("[role='option'], .u-search-empty")) results.replaceChildren(placeholder())
+      // A hidden home (like a phone's closed sidebar) would render the dialog at zero size, so it opens from the body.
+      if (!this.checkVisibility()) document.body.append(panel)
       if (!panel.open) panel.showModal()
       input.focus()
       input.select()
@@ -2954,7 +2956,12 @@ define("u-search", class extends UniformElement {
         open()
       }, { signal })
     }
-    panel.addEventListener("close", () => { levels = []; request?.abort(); actionsCache.clear() }, { signal })
+    panel.addEventListener("close", () => {
+      levels = []
+      request?.abort()
+      actionsCache.clear()
+      if (panel.parentElement !== this) this.append(panel)
+    }, { signal })
 
     input.addEventListener("input", () => {
       if (levels.length) return filterLevel()

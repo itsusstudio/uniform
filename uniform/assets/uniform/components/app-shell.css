@@ -273,11 +273,28 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   background: var(--background-color-page);
 }
 
+/* From tablet width the shell is pinned to the window and only main scrolls, so there is no page scrollbar to reserve a gutter for and nothing shifts when a dialog opens. Phones keep page scroll for iOS Safari's address bar and tap-to-top. */
+@media (width >= 48rem) {
+  :root:has(> body > .u-app-shell) { scrollbar-gutter: auto; }
+
+  .u-app-shell { height: 100dvh; }
+
+  .u-app-shell > main {
+    min-height: 0;
+    overflow-y: auto;
+  }
+}
+
 .u-app-shell > main > .u-banner-full {
   position: sticky;
   top: 0;
   z-index: 1;
   margin-block: calc(--spacing(12) * -1) --spacing(12);
+}
+
+/* Where main scrolls, a sticky child stops inside main's padding, so the banner pulls up by that padding. */
+@media (width >= 48rem) {
+  .u-app-shell > main > .u-banner-full { top: calc(--spacing(12) * -1); }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -513,4 +530,10 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   .u-app-shell > main * { scroll-margin-block-start: calc(var(--spacing-control) + --spacing(2) * 2 + 1px + env(safe-area-inset-top)); }
 }
 
+/* Tablets: the top bar sits outside main, and main scrolls on its own, so the banner and scroll targets need no offset for it. */
+@media (width >= 48rem) and (width < --theme(--breakpoint-lg)) {
+  .u-app-shell > main > .u-banner-full { top: calc(--spacing(6) * -1); }
+
+  .u-app-shell > main * { scroll-margin-block-start: 0; }
+}
 }

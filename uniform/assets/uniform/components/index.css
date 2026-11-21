@@ -1,0 +1,132 @@
+@layer components {
+/* An index page: a header, controls, then a body that grows. From tablet width the page fills the window and only the body scrolls. */
+.u-index {
+  display: flex;
+  flex-direction: column;
+  gap: --spacing(6);
+}
+
+.u-index-split {
+  display: grid;
+  gap: --spacing(6);
+}
+
+.u-index-split > * {
+  display: flex;
+  flex-direction: column;
+  gap: --spacing(4);
+}
+
+@media (width >= 48rem) {
+  .u-app-shell > main:has(.u-index) {
+    display: flex;
+    flex-direction: column;
+    overflow: clip;
+    padding-block-end: --spacing(6);
+  }
+
+  .u-app-shell > main:has(.u-index) > .u-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  :is(.u-index, .u-index-split, .u-index-split > *, .u-index-grow) {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .u-index-grow {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .u-index-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+  }
+}
+
+/* Below desktop the pane slides over the list from the right, like a side sheet, instead of stacking above it. */
+@media (width < 64rem) {
+  .u-index-pane {
+    position: fixed;
+    inset: 0 0 0 auto;
+    z-index: 20;
+    width: 100%;
+    max-width: 448px;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    border-left: 1px solid var(--border-color-default);
+    background: var(--background-color-surface);
+  }
+
+  /* A link to the list without the pane, under the sheet, so a click outside closes it instead of picking a row. */
+  .u-index-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 19;
+    background: color-mix(in srgb, var(--background-color-ink) 40%, transparent);
+  }
+
+  .u-index-pane > .u-card {
+    flex: none;
+    min-height: 100%;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .u-index-pane:empty, .u-index-pane[hidden] { display: none; }
+
+  /* Slides in on arrival; data-closing (set by uniform.js before a close link is followed) slides it out. */
+  .u-index-pane {
+    translate: 0 0;
+    transition: translate 0.25s cubic-bezier(0.2, 0, 0, 1);
+  }
+
+  .u-index-backdrop {
+    opacity: 1;
+    transition: opacity 0.25s ease;
+  }
+
+  @starting-style {
+    .u-index-pane { translate: 100% 0; }
+    .u-index-backdrop { opacity: 0; }
+  }
+
+  .u-index-pane[data-closing] { translate: 100% 0; }
+  .u-index-backdrop[data-closing] { opacity: 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .u-index-pane, .u-index-backdrop { transition: none; }
+  }
+
+  /* The sheet scrolls on its own and keeps scrolling from reaching the page; the backdrop swallows scroll gestures over it. */
+  .u-index-pane {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .u-index-backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Tablets: the card fills the sheet and scrolls its fields inside, keeping Save in view. */
+@media (width >= 48rem) and (width < 64rem) {
+  .u-index-pane > .u-card { height: 100%; }
+}
+
+@media (width >= 64rem) {
+  .u-index-split { grid-template-columns: minmax(0, 1fr) 26rem; }
+
+  .u-index-backdrop { display: none; }
+}
+
+@media (width >= 96rem) {
+  .u-index-split { grid-template-columns: minmax(0, 1fr) 30rem; }
+}
+}

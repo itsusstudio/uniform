@@ -2331,6 +2331,64 @@ if (!document[pageReady]) {
   })
 }
 
+// An index pane shown as a sheet slides out before its close link is followed, so closing
+// animates like opening. Docked panes, and people who prefer less motion, close at once.
+document.addEventListener("click", (event) => {
+  const link = event.target.closest?.("a[data-u-index-close]")
+  if (!link || "uIndexClosing" in link.dataset || event.defaultPrevented) return
+  const pane = document.querySelector(".u-index-pane")
+  if (!pane || getComputedStyle(pane).position !== "fixed" || matchMedia("(prefers-reduced-motion: reduce)").matches) return
+  event.preventDefault()
+  link.dataset.uIndexClosing = ""
+  const closing = [...document.querySelectorAll(".u-index-pane, .u-index-backdrop")]
+  closing.forEach((element) => element.toggleAttribute("data-closing", true))
+  requestAnimationFrame(async () => {
+    const animations = closing.flatMap((element) => element.getAnimations())
+    await Promise.race([Promise.allSettled(animations.map((animation) => animation.finished)), new Promise((resolve) => setTimeout(resolve, 500))])
+    link.click()
+  })
+}, true)
+
+// Below desktop width the pane is a modal sheet: it's announced as a dialog, the page behind it
+// is inert, and focus moves into it. On wider screens it's an ordinary sidebar again.
+const indexSheetQuery = matchMedia("(width < 64rem)")
+const syncIndexPane = () => {
+  document.querySelectorAll("[data-u-index-inert]").forEach((element) => {
+    element.inert = false
+    element.removeAttribute("data-u-index-inert")
+  })
+  const pane = document.querySelector(".u-index-pane")
+  if (!pane) return
+  if (!indexSheetQuery.matches || !pane.firstElementChild) {
+    pane.removeAttribute("role")
+    pane.removeAttribute("aria-modal")
+    return
+  }
+  pane.setAttribute("role", "dialog")
+  pane.setAttribute("aria-modal", "true")
+  const heading = pane.querySelector("h1, h2, h3")
+  if (heading && !pane.hasAttribute("aria-label")) {
+    heading.id ||= "u-index-pane-title"
+    pane.setAttribute("aria-labelledby", heading.id)
+  }
+  for (let node = pane; node && node !== document.body; node = node.parentElement) {
+    for (const sibling of node.parentElement?.children ?? []) {
+      if (sibling === node || sibling.inert || sibling.matches(".u-index-backdrop, script, template, style")) continue
+      sibling.inert = true
+      sibling.dataset.uIndexInert = ""
+    }
+  }
+  // A frame swap settles focus after its render events, so focus moves in on the next frame.
+  requestAnimationFrame(() => {
+    if (!pane.isConnected || pane.contains(document.activeElement)) return
+    const target = pane.querySelector("[data-u-index-close]") || pane.querySelector("button, a[href], input:not([type='hidden'])")
+    target?.focus({ preventScroll: true })
+  })
+}
+for (const name of ["DOMContentLoaded", "turbo:load", "turbo:render", "turbo:frame-load", "turbo:frame-render"]) addEventListener(name, syncIndexPane)
+indexSheetQuery.addEventListener("change", syncIndexPane)
+if (document.readyState !== "loading") syncIndexPane()
+
 // Keyboard shortcuts: data-u-hotkey goes on the button, link, field or dialog that already does the action.
 const isMac = /Mac|iPhone|iPad/.test(navigator.userAgentData?.platform || navigator.platform || "")
 const modifierKeys = ["Control", "Meta", "Alt"]

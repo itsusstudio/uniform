@@ -38,7 +38,7 @@ Put the filters inside the list's search form, wrapped in a `<div class="u-table
 
 - Picks submit the form once, when the menu closes, so ticking several choices costs one page load.
 - `data-u-filter-all` on a group's first box picks or clears the whole group, and shows a partial state when only some are picked.
-- Hovering an option shows Only (`data-u-filter-only`), which picks just that option and applies it at once. A `data-u-filter-only="<value>"` button at the top, like "Only my jobs", does the same for a fixed value.
+- Hovering an option shows Only (`data-u-filter-only`), which unticks the rest and leaves just that option picked. The menu stays open, and closing it applies the pick like any other. A `data-u-filter-only="<value>"` button at the top, like "Only my jobs", does the same for a fixed value.
 - With 8 or more options, add a search field (`type="search"`) as the menu's first child. Typing narrows the options, and `data-u-filter-none` shows when nothing matches.
 - On touch screens the rows grow to 48px with full-size text.
 

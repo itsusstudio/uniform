@@ -2540,7 +2540,7 @@ const shortName = (name) => {
   return rest.length ? `${first} ${rest[0][0]}` : first
 }
 
-// A filter pill's menu: picks submit the form once when the menu closes, Only picks one,
+// A filter pill's menu: picks submit the form once when the menu closes, Only narrows the picks to one,
 // a group's box picks the whole group, and search narrows a long list.
 define("u-filter", class extends UniformElement {
   setup(signal) {
@@ -2559,7 +2559,7 @@ define("u-filter", class extends UniformElement {
     const pick = (value) => {
       boxes().forEach((box) => { box.checked = box.value === value })
       changed = true
-      menu.hidePopover()
+      syncGroups()
     }
     on(menu, "change", (event) => {
       if (event.target.matches("input[data-u-filter-all]")) {

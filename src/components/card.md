@@ -20,7 +20,7 @@ A card groups the details and actions of one object on a page.
 <div class="u-card-content">
 <dl class="u-dl">
 <dt class="text-muted">Name</dt><dd>Ana Reyes</dd>
-<dt class="text-muted">Phone number</dt><dd class="u-data">(416) 555-0199</dd>
+<dt class="text-muted">Phone number</dt><dd>(416) 555-0199</dd>
 <dt class="text-muted">Email address</dt><dd>ana@example.com</dd>
 </dl>
 </div>

@@ -169,8 +169,8 @@ To fade a row in or out, give its `<li>` `u-enter` or `u-exit` from
 <div class="example-frame">
 <section class="u-card">
 <ul class="u-list">
-<li><span>Ana Reyes</span><span class="u-data">Nov 14</span><span class="u-data">$85.00</span><span class="u-badge u-badge-info">On the bench</span></li>
-<li><span>Sam Okafor</span><span class="u-data">Nov 15</span><span class="u-data">$40.00</span><span class="u-badge u-badge-warning">Waiting</span></li>
+<li><span>Ana Reyes</span><span>Nov 14</span><span class="u-data">$85.00</span><span class="u-badge u-badge-info">On the bench</span></li>
+<li><span>Sam Okafor</span><span>Nov 15</span><span class="u-data">$40.00</span><span class="u-badge u-badge-warning">Waiting</span></li>
 </ul>
 </section>
 </div>

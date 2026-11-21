@@ -17,10 +17,10 @@ Apfel Grotezk Mittel
 : Headlines on marketing sites and blogs, at 32px and larger. Never inside an app.
 
 Inter
-: All other text, in apps and on sites. Regular weight for reading, medium for headings and labels, and never bold.
+: All other text, in apps and on sites, dates, times and phone numbers included. Regular weight for reading, medium for headings and labels, and never bold.
 
 IBM Plex Mono
-: Prices, dates, order numbers and codes.
+: Prices, order numbers and codes: things people compare or copy digit by digit.
 
 ## Hierarchy
 

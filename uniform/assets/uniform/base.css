@@ -19,6 +19,8 @@
 
 :where(h1, h2, h3, h4, h5, h6) { text-wrap: balance; }
 
+:where(time) { font-variant-numeric: tabular-nums; }
+
 :where(pre) { max-width: 100%; overflow-x: auto; }
 
 /* border-input keeps the thumb at 3:1 or more on surface and paper, in both themes and on ink. */

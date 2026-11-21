@@ -11,10 +11,10 @@ A time shows a moment in the reader's time zone and language. The server writes 
 ## Example
 
 <div class="flex flex-col gap-2 text-small">
-<p>Quote sent <u-relative-time format="time"><time class="u-data" datetime="2026-11-12T14:14:00-05:00">2:14pm</time></u-relative-time></p>
-<p>Due <u-relative-time format="date"><time class="u-data" datetime="2026-11-14T17:00:00-05:00">Nov 14</time></u-relative-time></p>
+<p>Quote sent <u-relative-time format="time"><time datetime="2026-11-12T14:14:00-05:00">2:14pm</time></u-relative-time></p>
+<p>Due <u-relative-time format="date"><time datetime="2026-11-14T17:00:00-05:00">Nov 14</time></u-relative-time></p>
 <p><u-relative-time format="day"><time datetime="2026-11-11T09:00:00-05:00">Nov 11</time></u-relative-time></p>
-<p>Updated <u-relative-time format="relative"><time class="u-data" datetime="2026-11-12T14:10:00-05:00">2:10pm</time></u-relative-time></p>
+<p>Updated <u-relative-time format="relative"><time datetime="2026-11-12T14:10:00-05:00">2:10pm</time></u-relative-time></p>
 </div>
 
 ## Formats
@@ -41,7 +41,7 @@ the reader's zone, or the one in `data-time-zone`.
 ## Time zone
 
 <div class="flex flex-col gap-2 text-small" data-time-zone="America/Vancouver">
-<p>Ready for pickup <u-relative-time zone="America/Toronto"><time class="u-data" datetime="2026-11-14T14:00:00-05:00">Nov 14, 2pm</time></u-relative-time></p>
+<p>Ready for pickup <u-relative-time zone="America/Toronto"><time datetime="2026-11-14T14:00:00-05:00">Nov 14, 2pm</time></u-relative-time></p>
 </div>
 
 Hover any time to see the full date with its zone. Set `zone` to the shop's
@@ -53,13 +53,13 @@ zone at all. This example shows a reader in Vancouver.
 
 ```html
 <u-relative-time format="time">
-  <time class="u-data" datetime="2026-11-12T14:14:00-05:00">2:14pm</time>
+  <time datetime="2026-11-12T14:14:00-05:00">2:14pm</time>
 </u-relative-time>
 ```
 
 ```erb
 <u-relative-time format="time">
-  <%%= time_tag message.sent_at, l(message.sent_at, format: :time), class: "u-data" %>
+  <%%= time_tag message.sent_at, l(message.sent_at, format: :time) %>
 </u-relative-time>
 ```
 

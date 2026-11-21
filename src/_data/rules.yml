@@ -336,8 +336,8 @@
 
 - id: mono-only-for-data
   name: Mono only for data
-  summary: Prices, dates, order numbers and codes are in IBM Plex Mono, so digits line up.
-  body: Prices, dates, order numbers and codes are in IBM Plex Mono, so digits line up. Never labels, headings or buttons.
+  summary: Prices, order numbers and codes are in IBM Plex Mono, so digits line up. Dates and phone numbers are not.
+  body: Prices, order numbers and codes are in IBM Plex Mono, so digits line up and are easy to check. Dates, times and phone numbers stay in Inter, because people read them as a whole; their digits still line up in tables. Never labels, headings or buttons.
   home: /foundations/typography/
   default: the same face as the rest of the text.
 

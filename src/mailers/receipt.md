@@ -68,7 +68,7 @@ so it prints as ink on white without a table splitting across two pages.
 <div class="mailer-mock">
 <p>Kensington Jewellery Repair</p>
 <p class="text-heading">Receipt for job <span class="u-data">#1042</span></p>
-<p class="text-small">Hi Ana, you paid <span class="u-data">$96.05</span> on <span class="u-data">Nov 14, 2026</span>.</p>
+<p class="text-small">Hi Ana, you paid <span class="u-data">$96.05</span> on <span>Nov 14, 2026</span>.</p>
 <div class="u-table" tabindex="0" role="region" aria-label="Receipt">
 <table class="mailer-receipt-table">
 <thead><tr><th scope="col">Item</th><th scope="col" class="u-table-num">Amount</th></tr></thead>

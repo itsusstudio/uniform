@@ -20,10 +20,10 @@ A description list shows the details of one record, with muted labels beside the
 <div class="u-card-content">
 <dl class="u-dl">
 <dt>Customer</dt><dd>Ana Reyes</dd>
-<dt>Phone number</dt><dd class="u-data">(416) 555-0199</dd>
+<dt>Phone number</dt><dd>(416) 555-0199</dd>
 <dt>Item</dt><dd>14k yellow gold band, size 6 to 7½</dd>
 <dt>Status</dt><dd><span class="u-badge u-badge-info">On the bench</span></dd>
-<dt>Due</dt><dd class="u-data">Nov 14</dd>
+<dt>Due</dt><dd>Nov 14</dd>
 <dt>Quote</dt><dd class="u-data">$85.00</dd>
 </dl>
 </div>
@@ -40,7 +40,7 @@ Below 280px wide, each label sits on top of its value. A narrow card keeps them 
   <dt>Customer</dt>
   <dd>Ana Reyes</dd>
   <dt>Due</dt>
-  <dd class="u-data">Nov 14</dd>
+  <dd>Nov 14</dd>
 </dl>
 ```
 
@@ -82,7 +82,7 @@ Below 280px wide, each label sits on top of its value. A narrow card keeps them 
 <div class="example-frame">
 <dl class="u-dl">
 <dt>Customer</dt><dd>Ana Reyes</dd>
-<dt>Due</dt><dd class="u-data">Nov 14</dd>
+<dt>Due</dt><dd>Nov 14</dd>
 <dt>Quote</dt><dd class="u-data">$85.00</dd>
 </dl>
 </div>

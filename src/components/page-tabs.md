@@ -14,7 +14,7 @@ Page tabs switch between views of the same record. Each tab is a link to its own
 <header class="u-page-header">
 <hgroup>
 <h1>Ana Reyes, ring resize</h1>
-<p>Job <span class="u-data">#1042</span>, due <span class="u-data">Nov 14</span></p>
+<p>Job <span class="u-data">#1042</span>, due <span>Nov 14</span></p>
 </hgroup>
 </header>
 <nav class="u-page-tabs" aria-label="Job">

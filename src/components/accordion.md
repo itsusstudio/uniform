@@ -54,7 +54,7 @@ keep one open at a time.
 <div class="u-accordion">
 <details>
 <summary>Status and due date</summary>
-<p><span class="u-badge u-badge-info">On the bench</span>, due <span class="u-data">Nov 14</span></p>
+<p><span class="u-badge u-badge-info">On the bench</span>, due <span>Nov 14</span></p>
 </details>
 <details>
 <summary>Quote</summary>
@@ -71,7 +71,7 @@ keep one open at a time.
 <dt>Status</dt>
 <dd><span class="u-badge u-badge-info">On the bench</span></dd>
 <dt>Due</dt>
-<dd class="u-data">Nov 14</dd>
+<dd>Nov 14</dd>
 <dt>Quote</dt>
 <dd class="u-data">$85.00</dd>
 </dl>
@@ -82,7 +82,7 @@ keep one open at a time.
 </details>
 <details>
 <summary>Changes</summary>
-<p>Moved to On the bench on <span class="u-data">Nov 12</span>.</p>
+<p>Moved to On the bench on <span>Nov 12</span>.</p>
 </details>
 </div>
 </div>

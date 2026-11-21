@@ -15,7 +15,7 @@ The page header opens every app page with its title and main actions.
 <a href="#example" aria-label="Back to Jobs">Jobs</a>
 <hgroup>
 <h1>Ana Reyes, ring resize</h1>
-<p>Job <span class="u-data">#1042</span>, due <span class="u-data">Nov 14</span></p>
+<p>Job <span class="u-data">#1042</span>, due <span>Nov 14</span></p>
 </hgroup>
 <div class="u-actions">
 <button type="button" class="u-btn u-btn-outline">Text Ana</button>
@@ -41,7 +41,7 @@ The page header opens every app page with its title and main actions.
 <a href="#on-a-phone" aria-label="Back to Jobs">Jobs</a>
 <hgroup>
 <h1>Ana Reyes, ring resize</h1>
-<p>Job <span class="u-data">#1042</span>, due <span class="u-data">Nov 14</span></p>
+<p>Job <span class="u-data">#1042</span>, due <span>Nov 14</span></p>
 </hgroup>
 <div class="u-actions">
 <button type="button" class="u-btn u-btn-outline">Text Ana</button>
@@ -61,7 +61,7 @@ on the left.
   <a href="/jobs" aria-label="Back to Jobs">Jobs</a>
   <hgroup>
     <h1>Ana Reyes, ring resize</h1>
-    <p>Job <span class="u-data">#1042</span>, due <span class="u-data">Nov 14</span></p>
+    <p>Job <span class="u-data">#1042</span>, due <span>Nov 14</span></p>
   </hgroup>
   <div class="u-actions">
     <button type="button" class="u-btn u-btn-outline">Text Ana</button>

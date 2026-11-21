@@ -89,7 +89,7 @@ page, and so does a Cmd or Ctrl click.
         <tr>
           <td><a class="u-data" href="/jobs/1042">#1042</a></td>
           <td><span class="u-badge u-badge-info">On the bench</span></td>
-          <td class="u-data">Nov 14</td>
+          <td>Nov 14</td>
           <td class="u-table-num">$85.00</td>
         </tr>
       </tbody>

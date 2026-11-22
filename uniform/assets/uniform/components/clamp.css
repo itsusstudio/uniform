@@ -1,0 +1,17 @@
+@layer components {
+u-clamp { display: block; }
+
+u-clamp:defined > :first-child {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--u-clamp-lines, 4);
+}
+
+u-clamp[data-open] > :first-child {
+  display: block;
+  overflow: visible;
+}
+
+u-clamp > button { font-size: var(--text-small); }
+}

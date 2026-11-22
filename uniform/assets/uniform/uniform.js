@@ -1989,6 +1989,28 @@ const storedChoice = (group) => {
   try { return localStorage.getItem(`u-toggle-panels:${group}`) } catch { return null }
 }
 
+define("u-clamp", class extends UniformElement {
+  setup(signal) {
+    const text = this.firstElementChild
+    const button = this.querySelector(":scope > button")
+    if (!text || !button) return
+    const more = button.textContent.trim()
+    const measure = () => {
+      if (!this.hasAttribute("data-open")) button.hidden = text.scrollHeight <= text.clientHeight + 1
+    }
+    const observer = new ResizeObserver(measure)
+    observer.observe(text)
+    signal.addEventListener("abort", () => observer.disconnect())
+    requestAnimationFrame(measure)
+    button.setAttribute("aria-expanded", "false")
+    button.addEventListener("click", () => {
+      const open = this.toggleAttribute("data-open")
+      button.textContent = open ? button.dataset.less : more
+      button.setAttribute("aria-expanded", String(open))
+    }, { signal })
+  }
+})
+
 define("u-toggle-panels", class extends UniformElement {
   setup(signal) {
     const fieldset = this.querySelector(":scope > .u-fieldset")

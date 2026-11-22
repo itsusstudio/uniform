@@ -432,6 +432,11 @@
   page: /components/dropzone/
   description: On `<u-dropzone>`, shows photos as square tiles in a grid with the drop area as the last tile.
 
+- name: <u-clamp>
+  group: Components
+  page: /components/clamp/
+  description: Wraps long text and its Show more button. The text shows four lines until the button opens it, and the button stays hidden when the text fits.
+
 - name: <hgroup>
   group: Components
   page: /components/heading-group/

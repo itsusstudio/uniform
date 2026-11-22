@@ -75,4 +75,12 @@ p > .u-badge { margin-inline-start: --spacing(1); }
   background: var(--border-color-divider);
   box-shadow: inset 0 0 0 1px var(--border-color-default);
 }
+
+.u-badge-lg.u-badge-strong {
+  min-height: var(--spacing-control);
+  gap: --spacing(1);
+  padding: 0 --spacing(3);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+}
 }

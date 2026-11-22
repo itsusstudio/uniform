@@ -322,6 +322,11 @@
   page: /components/badge/
   description: Fills the badge with its colour, for one fact that needs attention, like "Card declined". Never in a list of records.
 
+- name: u-badge-lg
+  group: Components
+  page: /components/badge/
+  description: A strong badge at the height of a button, for the one that heads a page, like a job's status button. Add it alongside `u-badge-strong`.
+
 - name: u-chip
   group: Components
   page: /components/chip/

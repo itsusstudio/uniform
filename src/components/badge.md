@@ -39,6 +39,10 @@ States in a list get the square and word. A danger badge's word is red too, like
 <span class="u-badge u-badge-info u-badge-strong"><%= render "icon", name: "eye", small: true %>Clients see this</span>
 <span class="u-badge u-badge-neutral u-badge-strong"><%= render "icon", name: "lock", small: true %>Only your team</span>
 </div>
+<div class="flex flex-wrap items-center gap-2">
+<span class="u-badge u-badge-info u-badge-strong u-badge-lg">At the bench</span>
+<span class="u-btn u-btn-outline">Edit</span>
+</div>
 </div>
 
 <%= render "classes", classes_page: "/components/badge/", classes_variants: true %>
@@ -47,6 +51,9 @@ Give every badge `u-badge` and one colour class.
 
 A strong badge can start with a small icon, like a lock on a card only your
 team sees. The badge sizes the icon to its text.
+
+Add `u-badge-lg` to a strong badge that heads a page, like the status button at
+the top of a job. It takes the height of the buttons beside it.
 
 ## Code
 

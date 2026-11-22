@@ -272,6 +272,16 @@ Uniform never talks to a server. `uploads.upload` gets each file with `{ url, pr
 
 Any file input with `data-upload-url` uploads the same way, so a button, an avatar or a cover photo needs no dropzone. A single-file input keeps only the newest file. While files upload, the form has `data-upload-state` (`uploading`, `uploaded`, `failed` or `idle`) and `--u-upload-progress` from 0 to 1 for your own bar. The input fires `upload:start`, `upload:progress`, `upload:finish` and `upload:remove`, each with `{ upload }`: its `file`, the `prepared` file, `state`, `progress`, `id`, `error` and `timings` in milliseconds. To save as soon as a file is up, call `form.requestSubmit()` on `upload:finish`.
 
+## Media grid
+
+Add `u-dropzone-media` to `<u-dropzone>` to show photos as square tiles in a grid, with the drop area as the last tile. Each row's first child is its photo, and its close button shows on hover. Use it where the photos themselves matter, like a job's photos, and the plain list where names and sizes do.
+
+```html
+<u-dropzone class="u-dropzone-media">
+  <div class="u-field">…</div>
+</u-dropzone>
+```
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/dropzone/" %>

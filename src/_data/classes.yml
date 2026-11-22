@@ -427,6 +427,11 @@
   page: /components/dropzone/
   description: The ink edge and paper fill while files are dragged over. `<u-dropzone>` sets it.
 
+- name: u-dropzone-media
+  group: Components
+  page: /components/dropzone/
+  description: On `<u-dropzone>`, shows photos as square tiles in a grid with the drop area as the last tile.
+
 - name: <hgroup>
   group: Components
   page: /components/heading-group/

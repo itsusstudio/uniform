@@ -140,4 +140,138 @@
 .u-dropzone ~ .u-list > li[data-dropzone-marked-row] > div > p:first-child { text-decoration: line-through; }
 
 .u-dropzone ~ .u-list > li > [data-dropzone-retry] { margin-inline-start: auto; }
+
+u-dropzone.u-dropzone-media > .u-field {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: --spacing(2);
+}
+
+u-dropzone.u-dropzone-media > .u-field > p { grid-column: 1 / -1; }
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list { display: contents; }
+
+u-dropzone.u-dropzone-media .u-dropzone {
+  order: 1;
+  align-items: center;
+  justify-content: center;
+  gap: --spacing(1);
+  aspect-ratio: 1;
+  padding: --spacing(2);
+  border: 0;
+  border-radius: var(--radius-item);
+  background: var(--border-color-divider);
+  color: var(--text-color-muted);
+  text-align: center;
+}
+
+u-dropzone.u-dropzone-media .u-dropzone::before {
+  margin: 0;
+  mask-image: url("/uniform/icons/plus.svg");
+}
+
+u-dropzone.u-dropzone-media .u-dropzone:hover,
+u-dropzone.u-dropzone-media .u-dropzone.u-dropzone-over {
+  background: var(--border-color-default);
+  box-shadow: none;
+}
+
+u-dropzone.u-dropzone-media .u-dropzone > small {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li {
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-item);
+  background: var(--border-color-divider);
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > :first-child {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  object-fit: cover;
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > div {
+  position: absolute;
+  inset: auto 0 0;
+  padding: --spacing(1.5);
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > div > p:first-child,
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li [data-dropzone-marked],
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li .u-meta {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li progress { width: 100%; }
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li .u-error {
+  padding: --spacing(1) --spacing(1.5);
+  border-radius: var(--radius-item);
+  background: var(--background-color-surface);
+  font-size: var(--text-caption);
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li [data-dropzone-done] {
+  padding: 0 --spacing(1.5);
+  border-radius: var(--radius-item);
+  background: var(--background-color-surface);
+  font-size: var(--text-caption);
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > .u-btn-close {
+  position: absolute;
+  top: --spacing(1);
+  right: --spacing(1);
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  min-height: 28px;
+  border-radius: var(--radius-pill);
+  background: var(--background-color-ink);
+  box-shadow: var(--shadow-float);
+  opacity: 0;
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > .u-btn-close::before { background: var(--text-color-on-ink); }
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li:is(:hover, :focus-within) > .u-btn-close { opacity: 1; }
+
+@media (pointer: coarse) {
+  u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > .u-btn-close { opacity: 1; }
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > :is([data-dropzone-undo], [data-dropzone-retry]) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  padding: --spacing(1) --spacing(3);
+  border-radius: var(--radius-pill);
+  background: var(--background-color-surface);
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li[data-dropzone-marked-row] > :first-child { opacity: 0.35; }
+
+u-dropzone.u-dropzone-media > .u-field:not(:has(.u-list > li)) .u-dropzone {
+  grid-column: 1 / -1;
+  aspect-ratio: auto;
+  min-height: 160px;
+}
 }

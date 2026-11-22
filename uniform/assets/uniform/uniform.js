@@ -2011,6 +2011,14 @@ define("u-clamp", class extends UniformElement {
   }
 })
 
+document.addEventListener("click", (event) => {
+  const button = event.target.closest?.(".u-timeline [data-u-show-earlier]")
+  if (!button) return
+  const timeline = button.closest(".u-timeline")
+  timeline.querySelectorAll(":scope > li[data-u-earlier]").forEach((item) => { item.hidden = false })
+  button.closest("li").remove()
+})
+
 define("u-toggle-panels", class extends UniformElement {
   setup(signal) {
     const fieldset = this.querySelector(":scope > .u-fieldset")

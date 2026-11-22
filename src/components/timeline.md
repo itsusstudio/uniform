@@ -21,7 +21,7 @@ its `<strong>` is the author.
 
 Give a note's `<div>` the `u-timeline-card` class to set the person's words on a soft card, apart from the changes around it. A `<li class="u-timeline-day">` holding a heading starts a new day on the same line: it has no dot, so one line runs from the top of the list through every day. Put a note box as the first `<li>`, after the writer's avatar, and the line starts from it.
 
-To keep a long list short, fold back-to-back changes into one `<details class="u-timeline-fold">` inside the event's `<div>`: the summary says what changed, and a `<ul>` lists each change with its time. Hide older rows with `hidden` and put a `<li class="u-timeline-more u-timeline-gap">` holding a button where they start: the line loops beside it, marking the updates folded away. Day headings keep a straight line.
+To keep a long list short, fold back-to-back changes into one `<details class="u-timeline-fold">` inside the event's `<div>`: the summary says what changed, and a `<ul>` lists each change with its time. Hide older rows with `hidden` and `data-u-earlier`, and put a `<li class="u-timeline-more u-timeline-gap">` holding a button with `data-u-show-earlier` where they start: the line loops beside it, marking the updates folded away, and the button shows them and goes away. Day headings keep a straight line.
 
 ## Older events
 

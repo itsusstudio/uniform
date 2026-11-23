@@ -38,3 +38,4 @@
 "--text-700": "Site headlines. Grows with its container, from 36px to 56px."
 "--text-800": "The one hero headline on a site. Grows with its container, from 44px to 96px."
 "--spacing": "The 4px unit every spacing class counts in, so gap-6 is 24px. In component CSS, write --spacing(6)."
+"--background-color-canvas": "The neutral grey behind a document shown as a page: an agreement preview, a signing screen. The page itself is surface white with the float shadow, so it reads as paper on a desk."

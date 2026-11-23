@@ -642,6 +642,11 @@
   page: /components/table/
   description: Added to `u-table` on a long table. The table scrolls inside its card and the heading row stays in view. See [Data table](/patterns/data-table/).
 
+- name: u-breadcrumbs
+  group: Page frame
+  page: /components/breadcrumbs/
+  description: The trail from a section to the current page, on a `<nav>` with an `aria-label`. An `<ol>` holds one `<li>` per step, each a link except the last, which is a `<span aria-current="page">`. In a `u-page-header` it takes the back link's place above the title.
+
 - name: u-page-tabs
   group: Page frame
   page: /components/page-tabs/

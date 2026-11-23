@@ -32,6 +32,7 @@
 @import "./components/meta.css";
 @import "./components/stat.css";
 @import "./components/page-header.css";
+@import "./components/breadcrumbs.css";
 @import "./components/page-tabs.css";
 @import "./components/toggle-panels.css";
 @import "./components/pagination.css";

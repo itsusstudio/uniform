@@ -7,7 +7,7 @@
   gap: --spacing(4) --spacing(6);
 }
 
-.u-page-header:has(> a)::before {
+.u-page-header:has(> a, > .u-breadcrumbs)::before {
   content: "";
   flex-basis: 100%;
   order: -1;
@@ -23,6 +23,11 @@
   font-size: var(--text-small);
   color: var(--text-color-muted);
   text-decoration: none;
+}
+
+.u-page-header > .u-breadcrumbs {
+  order: -2;
+  margin-bottom: calc(-1 * --spacing(4));
 }
 
 .u-page-header > a:hover {

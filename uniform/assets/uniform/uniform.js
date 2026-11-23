@@ -2759,19 +2759,21 @@ define("u-multi-select", class extends UniformElement {
 
 // Floats over its row in the top layer, just above the pointer, saying what a click or key does there.
 // A cell with its own control, like a status picker, keeps it out of the way; the row's key still works.
+// In a list row (li), a button, field or label under the pointer does the same.
 define("u-row-hint", class extends UniformElement {
   setup(signal) {
-    const row = this.closest("tr")
+    const row = this.closest("tr, li")
     if (!row || !this.hasAttribute("popover")) return
     let frame = 0
+    const listControl = (target) => row.localName === "li" && target.closest("button, input, select, textarea, label")
     const show = (x, y, target) => {
-      if (document.querySelector("dialog:modal")) return this.hide()
+      if (document.querySelector("dialog:modal") || listControl(target)) return this.hide()
       // By position, since a plain table's first-cell link stretches over the whole row.
-      const cell = [...row.cells].find((each) => {
+      const cell = row.cells && [...row.cells].find((each) => {
         const box = each.getBoundingClientRect()
         return x >= box.left && x <= box.right
       })
-      const overRecordLink = cell === row.cells[0] && !target.closest("label, input")
+      const overRecordLink = !!cell && cell === row.cells[0] && !target.closest("label, input")
       if (cell && !overRecordLink && cell.querySelector("a, button, input, select, textarea, label")) return this.hide()
       this.toggleAttribute("data-over-record-link", overRecordLink)
       this.style.setProperty("--u-row-hint-x", `${x}px`)
@@ -2789,7 +2791,7 @@ define("u-row-hint", class extends UniformElement {
     }, { signal })
     row.addEventListener("focusin", (event) => {
       if (!event.target.matches(":focus-visible")) return
-      const box = event.target.closest("td, th").getBoundingClientRect()
+      const box = (event.target.closest("td, th") || event.target).getBoundingClientRect()
       show(box.left + box.width / 2, box.top, event.target)
     }, { signal })
     row.addEventListener("focusout", (event) => { if (!row.contains(event.relatedTarget)) this.hide() }, { signal })

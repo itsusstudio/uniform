@@ -47,6 +47,23 @@
 
 .u-banner :focus-visible { outline-color: currentColor; }
 
+.u-banner-inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: --spacing(3);
+  padding-block: --spacing(2);
+}
+
+.u-banner-inline > p { flex: 1 1 16rem; min-width: 0; }
+
+.u-banner-inline > .u-actions { margin-top: 0; }
+
+.u-banner-neutral {
+  --u-banner-bg: var(--background-color-paper);
+  --u-banner-text: var(--text-color-default);
+}
+
 .u-banner-info {
   --u-banner-bg: var(--color-info);
   --u-banner-text: var(--text-color-on-info);

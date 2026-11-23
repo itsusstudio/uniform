@@ -161,6 +161,16 @@
   page: /components/banner/
   description: Added to `u-banner` for a square-cornered strip across the top of the page area.
 
+- name: u-banner-inline
+  group: Components
+  page: /components/banner/
+  description: Added to `u-banner` for a short notice on one row, its text beside a `u-actions` group, wrapping on a narrow screen.
+
+- name: u-banner-neutral
+  group: Components
+  page: /components/banner/
+  description: A quiet paper colour for a notice that needs no urgency, like unpublished edits.
+
 - name: u-banner-info
   group: Components
   page: /components/banner/
@@ -943,3 +953,8 @@
   group: Components
   page: /components/dialog/
   description: A bottom sheet at every width, up to 52rem wide, for a task that belongs to the page behind it, like signing the document being read.
+
+- name: u-overline
+  group: Components
+  page: /components/caption/
+  description: A small uppercase label above a group, like the name of a set of chips.

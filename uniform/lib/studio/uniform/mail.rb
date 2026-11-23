@@ -58,7 +58,7 @@ module Studio
               sent_with && %(<p style="margin: 16px 0 0;">#{h(labels.fetch(:powered_by)).sub("%{name}", %(<a href="#{h(sent_with_url)}" style="#{link}">#{h(sent_with)}</a>))}</p>)
             ].select { |line| line.is_a?(String) }.join("\n                ")
             small = "#{SANS} font-size: 14px; line-height: 20px; color: #{MUTED};"
-            policies = !sent_with && %(<td class="u-mail-col" valign="top" align="right" style="padding: 24px 0 0 24px; #{small} text-align: right; white-space: nowrap;"><a href="#{h(Uniform::TERMS_URL)}" style="#{link}">#{h(labels.fetch(:terms))}</a> — <a href="#{h(Uniform::PRIVACY_URL)}" style="#{link}">#{h(labels.fetch(:privacy))}</a></td>)
+            policies = sent_with ? "" : %(<td class="u-mail-col" valign="top" align="right" style="padding: 24px 0 0 24px; #{small} text-align: right; white-space: nowrap;"><a href="#{h(Uniform::TERMS_URL)}" style="#{link}">#{h(labels.fetch(:terms))}</a> — <a href="#{h(Uniform::PRIVACY_URL)}" style="#{link}">#{h(labels.fetch(:privacy))}</a></td>)
             # Only the product's own name is a wordmark; a shop sending through it is set in the headline face.
             masthead = sent_with ? "#{HEADLINE} font-size: 18px; line-height: 24px; font-weight: 500;" : WORDMARKS.fetch(wordmark_style.to_s)
             wordmark_class = (!sent_with && wordmark_style.to_s == "serif") ? " u-mail-wordmark" : ""

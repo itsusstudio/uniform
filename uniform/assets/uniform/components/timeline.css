@@ -155,4 +155,32 @@ details:not(.u-accordion > details):has(.u-timeline) > summary {
 details:not(.u-accordion > details):has(.u-timeline) > summary::-webkit-details-marker { display: none; }
 
 details[open]:not(.u-accordion > details):has(.u-timeline) > summary { display: none; }
+
+.u-timeline > li:has(> .u-timeline-icon)::after { content: none; }
+
+.u-timeline-icon {
+  position: relative;
+  display: flex;
+  grid-column: 1;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  width: 20px;
+  height: 20px;
+  margin-block-start: calc((var(--u-timeline-line) - 20px) / 2);
+  background: var(--background-color-surface);
+  color: var(--text-color-muted);
+}
+
+.u-timeline-icon:is(.u-badge-info, .u-badge-warning, .u-badge-success, .u-badge-danger) {
+  color: var(--u-badge-color);
+}
+
+.u-timeline-time {
+  color: var(--text-color-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.u-timeline-time::before { content: "· " / ""; }
 }

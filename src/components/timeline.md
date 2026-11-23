@@ -23,6 +23,8 @@ Give a note's `<div>` the `u-timeline-card` class to set the person's words on a
 
 To keep a long list short, fold back-to-back changes into one `<details class="u-timeline-fold">` inside the event's `<div>`: the summary says what changed, and a `<ul>` lists each change with its time. Hide older rows with `hidden` and `data-u-earlier`, and put a `<li class="u-timeline-more u-timeline-gap">` holding a button with `data-u-show-earlier` where they start: the line loops beside it, marking the updates folded away, and the button shows them and goes away. To fold several stretches apart, give each its own name: rows with `data-u-earlier="2"` open only from the button with `data-u-show-earlier="2"`. Day headings keep a straight line.
 
+To tell events apart at a glance, put a `<span class="u-timeline-icon">` holding a small icon first in the `<li>`, in place of the square marker. Icons stay muted; add a `u-badge-*` class only for events that matter, like a status change or a signature. For short rows, put a `<span class="u-timeline-time">` holding the `<time>` at the end of the sentence instead of the right-hand time column.
+
 ## Older events
 
 <div class="example-frame">

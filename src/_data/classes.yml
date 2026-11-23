@@ -582,6 +582,16 @@
   page: /components/timeline/
   description: An `<ol>` of events, newest first, with a grey square and a line drawn for each.
 
+- name: u-timeline-icon
+  group: Components
+  page: /components/timeline/
+  description: An event's icon on the line, in place of the square marker, as the first child of its `<li>`. Muted by default; add a `u-badge-*` tone class for events that matter, like a status change or a signature.
+
+- name: u-timeline-time
+  group: Components
+  page: /components/timeline/
+  description: The time placed right after an event's sentence, inside its `<p>`, with a dot before it. Use it instead of the right-hand time column when rows are short.
+
 - name: u-switch
   group: Components
   page: /components/switch/

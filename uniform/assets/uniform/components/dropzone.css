@@ -197,6 +197,8 @@ u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li {
   overflow: hidden;
   border: 0;
   border-radius: var(--radius-item);
+  outline: 1px solid var(--border-color-default);
+  outline-offset: -1px;
   background: var(--border-color-divider);
 }
 

@@ -274,7 +274,7 @@ Any file input with `data-upload-url` uploads the same way, so a button, an avat
 
 ## Media grid
 
-Add `u-dropzone-media` to `<u-dropzone>` to show photos as square tiles in a grid, with the drop area as the last tile. Each row's first child is its photo, and its close button shows on hover. Use it where the photos themselves matter, like a job's photos, and the plain list where names and sizes do.
+Add `u-dropzone-media` to `<u-dropzone>` to show photos as square tiles in a grid, with the drop area as the last tile. Each row's first child is its photo, edged with a thin outline so light photos hold their shape, and its close button shows on hover. Use it where the photos themselves matter, like a job's photos, and the plain list where names and sizes do.
 
 ```html
 <u-dropzone class="u-dropzone-media">

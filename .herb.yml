@@ -34,6 +34,7 @@ files:
 
 linter:
   enabled: true
+  failLevel: hint
   rules:
     html-no-unescaped-entities:
       enabled: false
@@ -98,10 +99,6 @@ linter:
       enabled: true
     html-no-style-elements:
       enabled: true
-  # # Exit with error code when diagnostics of this severity or higher are present
-  # # Valid values: error (default), warning, info, hint
-  # failLevel: warning
-
   # # Additional patterns beyond the defaults for linting
   # include:
   #   - '**/*.xml.erb'

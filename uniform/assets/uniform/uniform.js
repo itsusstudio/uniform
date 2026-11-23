@@ -691,7 +691,12 @@ define("u-dropzone", class extends UniformElement {
   // Files upload as they're picked. Saved files are rows marked
   // data-dropzone-saved; removing one marks it, and data-remove-name on the
   // element names the hidden field that carries its id.
+  // With data-autosave, nothing waits for a form: once every upload has
+  // settled it fires dropzone:uploaded with the new ids, and removing a saved
+  // row fires dropzone:remove with its id for the page to delete.
+  // Once it holds data-max-files it gets data-full and its input turns off.
   setupDirect({ signal, on, input, list, render, dropRow, show, take }) {
+    const autosave = this.hasAttribute("data-autosave")
     const rows = this.uploadRows ??= new Map()
     const marked = this.marked ??= new Map()
     const maxFiles = Number(input.dataset.maxFiles) || Infinity
@@ -703,7 +708,23 @@ define("u-dropzone", class extends UniformElement {
       changes: () => marked.size + live().length,
       busy: () => live().some(({ upload }) => upload.state === "preparing" || upload.state === "uploading")
     }
-    const dirty = () => this.dispatchEvent(new CustomEvent("dropzone:dirty", { bubbles: true, detail: { changes: this.changes, busy: this.busy } }))
+    const dirty = () => {
+      const full = input.multiple && count() >= maxFiles
+      if (full !== this.hasAttribute("data-full")) {
+        this.toggleAttribute("data-full", full)
+        input.disabled = full
+      }
+      const entries = live().map(({ upload }) => upload)
+      this.dataset.uploadState = this.busy ? "uploading"
+        : [...rows.values()].some(({ upload }) => upload?.state === "failed") ? "failed"
+        : entries.some((upload) => upload.state === "uploaded") ? "uploaded" : "idle"
+      this.dispatchEvent(new CustomEvent("dropzone:dirty", { bubbles: true, detail: { changes: this.changes, busy: this.busy } }))
+    }
+    const settle = () => {
+      if (!autosave || this.busy) return
+      const ids = live().map(({ upload }) => upload.state === "uploaded" && upload.id).filter(Boolean)
+      if (ids.length) this.dispatchEvent(new CustomEvent("dropzone:uploaded", { bubbles: true, detail: { ids } }))
+    }
     const paint = (row, upload) => {
       const bar = row.querySelector("progress")
       const working = upload.state === "preparing" || upload.state === "uploading"
@@ -768,6 +789,7 @@ define("u-dropzone", class extends UniformElement {
         const row = rowOf(upload)
         if (row) paint(row, upload)
         if (type !== "progress") dirty()
+        if (type === "finish") settle()
       })
     }
     on(input, "upload:remove", ({ detail: { upload } }) => {
@@ -782,6 +804,9 @@ define("u-dropzone", class extends UniformElement {
       const button = event.target.closest("[data-dropzone-remove], [data-dropzone-undo], [data-dropzone-retry]")
       const row = button?.closest("li")
       if (!row) return
+      if (row.hasAttribute("data-dropzone-saved") && autosave) {
+        return this.dispatchEvent(new CustomEvent("dropzone:remove", { bubbles: true, detail: { id: row.dataset.dropzoneSaved, row } }))
+      }
       if (row.hasAttribute("data-dropzone-saved")) return mark(row, !button.hasAttribute("data-dropzone-undo"))
       const entry = rows.get(row)
       if (!entry) return

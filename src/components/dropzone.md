@@ -282,6 +282,25 @@ Add `u-dropzone-media` to `<u-dropzone>` to show photos as square tiles in a gri
 </u-dropzone>
 ```
 
+Add `u-dropzone-hero` to show the first photo large, across two columns and two rows, fitted whole instead of cropped. A row's first child can be a button around the photo, to open it larger.
+
+## Saving as you go
+
+Add `data-autosave` to `<u-dropzone>` where photos save on their own instead of with a form, like a record's page. Nothing waits for a submit:
+
+- Once every upload has settled, it fires `dropzone:uploaded` with `{ ids }`, the signed ids of the new files. Save them, then replace the dropzone with the saved rows.
+- Removing a saved row fires `dropzone:remove` with `{ id, row }` instead of marking it. Confirm, delete it on the server, then replace the dropzone. In the media grid its button shows a trash icon, since the photo goes for good.
+- The element carries `data-upload-state` (`uploading`, `uploaded`, `failed` or `idle`) from its own uploads, so it works inside another form or none.
+- When saving fails, set `data-unsaved` on `<u-dropzone>`: rows that uploaded but aren't saved show their `[data-dropzone-unsaved]` part ("Not saved") instead of `[data-dropzone-done]`, and the photo dims. Take it off when the retry succeeds.
+
+Once the dropzone holds `data-max-files` files it gets `data-full` and its input turns off, so the drop area can't invite a pick that would fail. Put the full state's words in the drop area as `[data-dropzone-when-full]` ("10 of 10") and mark the usual words `[data-dropzone-when-open]`; a `[data-dropzone-when-full]` note under the grid says what to do instead.
+
+```html
+<u-dropzone class="u-dropzone-media u-dropzone-hero" data-autosave>
+  <div class="u-field">…</div>
+</u-dropzone>
+```
+
 ## Parts
 
 <%= render "classes", classes_page: "/components/dropzone/" %>

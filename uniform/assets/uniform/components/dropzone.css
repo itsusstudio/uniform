@@ -147,7 +147,10 @@ u-dropzone.u-dropzone-media > .u-field {
   gap: --spacing(2);
 }
 
-u-dropzone.u-dropzone-media > .u-field > p { grid-column: 1 / -1; }
+u-dropzone.u-dropzone-media > .u-field > p {
+  order: 2;
+  grid-column: 1 / -1;
+}
 
 u-dropzone.u-dropzone-media .u-dropzone ~ .u-list { display: contents; }
 
@@ -268,6 +271,57 @@ u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > :is([data-dropzone-undo
 }
 
 u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li[data-dropzone-marked-row] > :first-child { opacity: 0.35; }
+
+u-dropzone.u-dropzone-media[data-autosave] .u-dropzone ~ .u-list > li[data-dropzone-saved] > .u-btn-close::before {
+  mask-image: url("/uniform/icons/trash-2.svg");
+  width: 16px;
+  height: 16px;
+}
+
+u-dropzone.u-dropzone-media.u-dropzone-hero .u-dropzone ~ .u-list > li:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+u-dropzone.u-dropzone-media.u-dropzone-hero .u-dropzone ~ .u-list > li:first-child > :first-child { object-fit: contain; }
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > button:first-child {
+  display: block;
+  padding: 0;
+  background: transparent;
+  cursor: zoom-in;
+}
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li > button:first-child > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+u-dropzone.u-dropzone-media.u-dropzone-hero .u-dropzone ~ .u-list > li:first-child > button:first-child > img { object-fit: contain; }
+
+u-dropzone[data-full] [data-dropzone-when-open],
+u-dropzone:not([data-full]) [data-dropzone-when-full] { display: none; }
+
+u-dropzone.u-dropzone-media[data-full] .u-dropzone::before { display: none; }
+
+.u-dropzone ~ .u-list > li [data-dropzone-unsaved] { display: none; }
+
+u-dropzone[data-unsaved] .u-dropzone ~ .u-list > li:not([data-dropzone-saved]) [data-dropzone-unsaved] {
+  display: inline-flex;
+  color: var(--color-danger);
+}
+
+u-dropzone[data-unsaved] .u-dropzone ~ .u-list > li:not([data-dropzone-saved]) [data-dropzone-done] { display: none; }
+
+u-dropzone.u-dropzone-media[data-unsaved] .u-dropzone ~ .u-list > li:not([data-dropzone-saved]) > :first-child { opacity: 0.55; }
+
+u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li [data-dropzone-unsaved] {
+  padding: 0 --spacing(1.5);
+  border-radius: var(--radius-item);
+  background: var(--background-color-surface);
+  font-size: var(--text-caption);
+}
 
 u-dropzone.u-dropzone-media > .u-field:not(:has(.u-list > li)) .u-dropzone {
   grid-column: 1 / -1;

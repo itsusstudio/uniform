@@ -40,8 +40,13 @@
 }
 
 .u-dl-fit > div > dt {
-  flex: 0 0 7rem;
+  flex: 0 0 auto;
+  min-width: 7rem;
+  max-width: 100%;
+  overflow: hidden;
   color: var(--text-color-muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .u-dl-fit > div > dd {

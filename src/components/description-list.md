@@ -65,7 +65,7 @@ Below 280px wide, each label sits on top of its value. A narrow card keeps them 
 
 A list sets its labels beside their values, and stacks them once it's narrower than 280px. Add `u-dl-stacked` to stack them at every width, for a side card whose values carry their own button, like "Texts on · Send", so the value gets the full row.
 
-Add `u-dl-fit` instead to let each row decide for itself. Wrap each `<dt>` and `<dd>` pair in a `<div>`: a value that fits on one line beside its label stays there, and one that would wrap drops below its label and gets the full width. Labels are 7rem wide, so short values line up in a column.
+Add `u-dl-fit` instead to let each row decide for itself. Wrap each `<dt>` and `<dd>` pair in a `<div>`: a value that fits on one line beside its label stays there, and one that would wrap drops below its label and gets the full width. Labels are at least 7rem wide, so short values line up in a column, and a longer label stays on one line and pushes its value along.
 
 ## Do and don't
 

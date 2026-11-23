@@ -16,6 +16,9 @@
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
+  transition:
+    background-color var(--u-duration-hover) var(--ease-standard),
+    border-color var(--u-duration-hover) var(--ease-standard);
 }
 
 .u-btn-lg {
@@ -36,6 +39,11 @@
   color: var(--background-color-surface);
 }
 
+.u-btn-primary:not(:disabled, [aria-disabled="true"]):hover {
+  border-color: color-mix(in oklab, var(--background-color-primary) 85%, var(--background-color-surface));
+  background: color-mix(in oklab, var(--background-color-primary) 85%, var(--background-color-surface));
+}
+
 .u-btn-outline {
   border-color: var(--text-color-default);
   background: transparent;
@@ -48,6 +56,11 @@
   background: var(--color-danger);
   border-color: var(--color-danger);
   color: var(--text-color-on-danger);
+}
+
+.u-btn-danger:not(:disabled, [aria-disabled="true"]):hover {
+  border-color: color-mix(in oklab, var(--color-danger) 88%, var(--background-color-surface));
+  background: color-mix(in oklab, var(--color-danger) 88%, var(--background-color-surface));
 }
 
 .u-btn-ghost,

@@ -2040,7 +2040,9 @@ document.addEventListener("click", (event) => {
   const button = event.target.closest?.(".u-timeline [data-u-show-earlier]")
   if (!button) return
   const timeline = button.closest(".u-timeline")
-  timeline.querySelectorAll(":scope > li[data-u-earlier]").forEach((item) => { item.hidden = false })
+  const run = button.dataset.uShowEarlier
+  const earlier = run ? `:scope > li[data-u-earlier="${CSS.escape(run)}"]` : ":scope > li[data-u-earlier]"
+  timeline.querySelectorAll(earlier).forEach((item) => { item.hidden = false })
   button.closest("li").remove()
 })
 

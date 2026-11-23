@@ -27,6 +27,16 @@
   color: var(--background-color-surface);
 }
 
+.u-toggle:has(> input[type="checkbox"]:checked)::before {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin-inline-start: calc(--spacing(1) * -1);
+  background: currentcolor;
+  mask: url("/uniform/icons/check.svg") center / contain no-repeat;
+}
+
 .u-toggle > input {
   position: absolute;
   width: 1px;

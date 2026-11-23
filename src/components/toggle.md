@@ -53,6 +53,9 @@ Not pressed
 Pressed
 : Ink fill, light text.
 
+Picked, with a checkbox inside
+: Ink fill and a check mark, so a row of chips that takes several picks reads differently from one that takes a single pick.
+
 Disabled
 : Grey, and a pressed one keeps a grey fill.
 

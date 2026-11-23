@@ -94,11 +94,7 @@
           <table>
             <thead>
               <tr>
-<% if state == :no_results -%>
-                <th scope="col">Job</th>
-<% else -%>
-                <th scope="col"><div class="flex flex-wrap items-center gap-4"><label class="u-checkbox"><input type="checkbox"><span class="sr-only">Select all jobs on this page</span></label><span>Job</span></div></th>
-<% end -%>
+                <th scope="col"><% if state == :no_results %>Job<% else %><div class="flex flex-wrap items-center gap-4"><label class="u-checkbox"><input type="checkbox"><span class="sr-only">Select all jobs on this page</span></label><span>Job</span></div><% end %></th>
 <% columns.drop(1).each do |words, key| -%>
 <% if key.nil? -%>
                 <th scope="col"><%= words %></th>

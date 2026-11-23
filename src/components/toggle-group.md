@@ -65,6 +65,18 @@ together, like the HTML and Rails code on these pages.
 
 Disable one choice, or the whole group with a disabled `<fieldset>`.
 
+## Small
+
+<div class="example-frame flex flex-wrap items-center justify-between gap-3">
+<h3 class="m-0">Activity</h3>
+<div class="u-toggle-group u-toggle-group-sm" role="group" aria-label="Show">
+<label><input type="radio" name="toggle-small" checked> All activity</label>
+<label><input type="radio" name="toggle-small"> Notes only</label>
+</div>
+</div>
+
+Add `u-toggle-group-sm` for a view switch that sits beside a section heading. It's one step smaller, the same height as a `u-btn-sm` button.
+
 ## Code
 
 ```html

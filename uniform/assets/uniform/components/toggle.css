@@ -102,6 +102,11 @@
   .u-toggle-group > label { padding-inline: --spacing(2); }
 }
 
+.u-toggle-group-sm > label {
+  min-height: calc(var(--spacing-control) - 6px);
+  padding-inline: --spacing(3);
+}
+
 .u-toggle-group > label + label { border-inline-start: 1px solid var(--text-color-default); }
 
 .u-toggle-group > label:first-child {

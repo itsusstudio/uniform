@@ -708,6 +708,11 @@
   page: /components/toggle-group/
   description: Joined pills for one choice out of two to four, each a `<label>` around a native radio. Wrap the group in a `u-fieldset` with a `<legend>`.
 
+- name: u-toggle-group-sm
+  group: Components
+  page: /components/toggle-group/
+  description: The small toggle group, one step below the standard height like `u-btn-sm`, for a view switch beside a section heading. Add it alongside `u-toggle-group`.
+
 - name: u-tooltip
   group: Components
   page: /components/tooltip/

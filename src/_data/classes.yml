@@ -432,6 +432,11 @@
   page: /components/dropzone/
   description: On `<u-dropzone>`, shows photos as square tiles in a grid with the drop area as the last tile.
 
+- name: u-dropzone-compact
+  group: Components
+  page: /components/dropzone/
+  description: With `u-dropzone-media`, five equal tiles per row, for a narrow column like a side pane.
+
 - name: <u-clamp>
   group: Components
   page: /components/clamp/

@@ -284,6 +284,8 @@ Add `u-dropzone-media` to `<u-dropzone>` to show photos as square tiles in a gri
 
 Add `u-dropzone-hero` to show the first photo large, across two columns and two rows, fitted whole instead of cropped. A row's first child can be a button around the photo, to open it larger.
 
+Add `u-dropzone-compact` to fit the grid into a narrow column, like a side pane: five equal tiles per row, however wide the column is. Leave out `u-dropzone-hero` there, since a large first photo crowds a narrow column.
+
 ## Saving as you go
 
 Add `data-autosave` to `<u-dropzone>` where photos save on their own instead of with a form, like a record's page. Nothing waits for a submit:

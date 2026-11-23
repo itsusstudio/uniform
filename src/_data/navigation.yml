@@ -118,6 +118,8 @@
       url: /components/list/
     - title: Menu
       url: /components/menu/
+    - title: Option list
+      url: /components/option-list/
     - title: Pagination
       url: /components/pagination/
     - title: Settings

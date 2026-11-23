@@ -159,6 +159,25 @@
 
 .u-dialog .u-card-content { font-size: var(--text-small); }
 
+.u-dialog-bottom {
+  width: 100%;
+  max-width: 52rem;
+  max-height: calc(100% - --spacing(12) - env(safe-area-inset-top));
+  margin: auto auto 0;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-bottom-width: 0;
+  border-radius: var(--radius-surface) var(--radius-surface) 0 0;
+}
+
+.u-dialog-bottom:not(.u-dialog-side) {
+  scale: 1;
+  translate: 0 100%;
+}
+
+.u-dialog-bottom:not(.u-dialog-side)[open] {
+  @starting-style { scale: 1; translate: 0 100%; }
+}
+
 @media (width < --theme(--breakpoint-sm)) {
   .u-dialog-sheet {
     width: 100%;

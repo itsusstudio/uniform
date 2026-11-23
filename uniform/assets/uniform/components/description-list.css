@@ -20,6 +20,37 @@
   overflow-wrap: anywhere;
 }
 
+.u-dl-stacked > :is(dt, dd) { grid-column: 1 / -1; }
+
+.u-dl-stacked > dt { margin-bottom: calc(-1 * --spacing(2)); }
+
+.u-dl-stacked > dd + dt { margin-top: --spacing(2); }
+
+.u-dl-fit {
+  display: flex;
+  flex-direction: column;
+  gap: --spacing(3);
+}
+
+.u-dl-fit > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: --spacing(1) --spacing(6);
+}
+
+.u-dl-fit > div > dt {
+  flex: 0 0 7rem;
+  color: var(--text-color-muted);
+}
+
+.u-dl-fit > div > dd {
+  flex: 1 0 max-content;
+  max-width: 100%;
+  min-width: 0;
+  margin: 0;
+}
+
 @container u-dl (max-width: 17.4375rem) {
   .u-dl > dt, .u-dl > dd { grid-column: 1 / -1; }
 

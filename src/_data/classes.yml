@@ -904,3 +904,22 @@
   page: /components/filter/
   description: Holds a list's filter pills in one row, which scrolls sideways on a narrow screen.
 
+- name: u-option-list
+  group: Components
+  page: /components/option-list/
+  description: A few ways to do one thing, each a large row that acts when picked; aria-disabled marks one that's off.
+
+- name: u-dl-stacked
+  group: Components
+  page: /components/description-list/
+  description: Puts every label above its value, for a narrow card whose values carry their own action.
+
+- name: u-dl-fit
+  group: Components
+  page: /components/description-list/
+  description: Each label and value pair in its own div decides alone; the value sits beside its label when it fits on one line, and drops below it when it doesn't.
+
+- name: u-dialog-bottom
+  group: Components
+  page: /components/dialog/
+  description: A bottom sheet at every width, up to 52rem wide, for a task that belongs to the page behind it, like signing the document being read.

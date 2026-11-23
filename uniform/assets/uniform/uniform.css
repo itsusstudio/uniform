@@ -57,6 +57,7 @@
 @import "./components/data-grid.css";
 @import "./components/index.css";
 @import "./components/timeline.css";
+@import "./components/diff.css";
 @import "./components/clamp.css";
 @import "./components/wordmark.css";
 @import "./components/data.css";

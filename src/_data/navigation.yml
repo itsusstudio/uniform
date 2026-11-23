@@ -100,6 +100,8 @@
       url: /components/description-list/
     - title: Dialog
       url: /components/dialog/
+    - title: Diff
+      url: /components/diff/
     - title: Dropzone
       url: /components/dropzone/
     - title: Filter

@@ -592,6 +592,11 @@
   page: /components/timeline/
   description: The time placed right after an event's sentence, inside its `<p>`, with a dot before it. Use it instead of the right-hand time column when rows are short.
 
+- name: u-diff
+  group: Components
+  page: /components/diff/
+  description: Wraps text that shows what changed between two versions. Removed words go in `<del>`, added words in `<ins>`.
+
 - name: u-switch
   group: Components
   page: /components/switch/

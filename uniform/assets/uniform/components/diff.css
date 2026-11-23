@@ -1,0 +1,11 @@
+@layer components {
+.u-diff del {
+  color: var(--color-danger);
+  text-decoration: line-through;
+}
+
+.u-diff ins {
+  background: color-mix(in oklab, var(--color-success) 18%, transparent);
+  text-decoration: none;
+}
+}

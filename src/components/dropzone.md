@@ -284,6 +284,10 @@ Add `u-dropzone-media` to `<u-dropzone>` to show photos as square tiles in a gri
 
 Add `u-dropzone-hero` to show the first photo large, across two columns and two rows, fitted whole instead of cropped. A row's first child can be a button around the photo, to open it larger.
 
+Empty, a media grid's add tile widens into a drop target across the row. Add
+`u-dropzone-quiet` where photos are optional, like a record's page, to keep it
+one tile.
+
 Add `u-dropzone-compact` to fit the grid into a narrow column, like a side pane: five equal tiles per row, however wide the column is. Leave out `u-dropzone-hero` there, since a large first photo crowds a narrow column.
 
 ## Saving as you go

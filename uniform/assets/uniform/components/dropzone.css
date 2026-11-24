@@ -327,7 +327,7 @@ u-dropzone.u-dropzone-media .u-dropzone ~ .u-list > li [data-dropzone-unsaved] {
   font-size: var(--text-caption);
 }
 
-u-dropzone.u-dropzone-media > .u-field:not(:has(.u-list > li)) .u-dropzone {
+u-dropzone.u-dropzone-media:not(.u-dropzone-quiet) > .u-field:not(:has(.u-list > li)) .u-dropzone {
   grid-column: 1 / -1;
   aspect-ratio: auto;
   min-height: 160px;

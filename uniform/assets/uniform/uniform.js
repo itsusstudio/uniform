@@ -2422,6 +2422,21 @@ document.addEventListener("click", (event) => {
   })
 }, true)
 
+// Beside the list, a pane that wasn't there before slides in. A frame swap re-renders the pane
+// on every record change, so only a pane appearing where there was none gets the entrance.
+let indexPaneWasOpen = false
+const rememberIndexPane = () => { indexPaneWasOpen = !!document.querySelector(".u-index-pane")?.firstElementChild }
+const enterIndexPane = () => {
+  const pane = document.querySelector(".u-index-pane")
+  const opened = !!pane?.firstElementChild && !indexPaneWasOpen
+  indexPaneWasOpen = !!pane?.firstElementChild
+  if (!opened || indexSheetQuery.matches) return
+  pane.toggleAttribute("data-u-index-entering", true)
+  pane.addEventListener("animationend", () => pane.removeAttribute("data-u-index-entering"), { once: true })
+}
+for (const name of ["turbo:before-render", "turbo:before-frame-render"]) addEventListener(name, rememberIndexPane)
+for (const name of ["turbo:render", "turbo:frame-render"]) addEventListener(name, enterIndexPane)
+
 // Below desktop width the pane is a modal sheet: it's announced as a dialog, the page behind it
 // is inert, and focus moves into it. On wider screens it's an ordinary sidebar again.
 const indexSheetQuery = matchMedia("(width < 64rem)")

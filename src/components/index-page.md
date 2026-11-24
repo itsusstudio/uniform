@@ -41,12 +41,14 @@ From tablet width (`48rem`) the page fills the window. Only the list's body scro
 ```
 
 Leave out `u-index-split`, the pane and the backdrop for a page with no pane.
+With `u-index-split` but no record open, leave the pane out too, and the list
+takes the full width.
 
 ## The pane
 
-From desktop width (`64rem`) the pane sits beside the list. Below that it slides in from the right as a sheet over the list, with a dimmed backdrop behind it. As a sheet it behaves like a modal dialog: `uniform.js` gives it `role="dialog"` and `aria-modal`, names it from its first heading, and makes the rest of the page inert. The sheet scrolls on its own, and scrolling over it or the backdrop never moves the page.
+From desktop width (`64rem`) the pane sits beside the list, and slides in when it opens. Moving to another record replaces it in place, without sliding again. Below that it slides in from the right as a sheet over the list, with a dimmed backdrop behind it. As a sheet it behaves like a modal dialog: `uniform.js` gives it `role="dialog"` and `aria-modal`, names it from its first heading, and makes the rest of the page inert. The sheet scrolls on its own, and scrolling over it or the backdrop never moves the page.
 
-Render the pane with the list, in the same response, so it never arrives empty. Mark its close links, and the backdrop, with `data-u-index-close`. In the sheet they slide it out before the link is followed. Give the pane's close link `autofocus`, so focus lands in the pane after the list is replaced. Beside the list the close button is hidden, since picking another row replaces the job, and Escape still clears it. People who ask for reduced motion get no slide.
+Render the pane with the list, in the same response, so it never arrives empty. Mark its close links, and the backdrop, with `data-u-index-close`. In the sheet they slide it out before the link is followed. Give the pane's close link `autofocus`, so focus lands in the pane after the list is replaced. Escape clears it too. People who ask for reduced motion get no slide.
 
 ## Parts
 

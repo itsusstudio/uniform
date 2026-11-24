@@ -48,6 +48,9 @@ Keep the form to three fields at most. It uses `method="dialog"`, so its buttons
 close the dialog with no script. Give Cancel and the close button
 `formnovalidate` so they close it even when a field is empty.
 
+On a short screen, only the `u-card-content` scrolls. The title and the buttons
+stay in view, so Save never scrolls away.
+
 ## Sheet
 
 <div class="dialog-demo-stage dialog-demo-sheet">

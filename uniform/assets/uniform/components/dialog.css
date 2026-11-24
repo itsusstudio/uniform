@@ -1,16 +1,41 @@
 @layer components {
+/* overflow-x: hidden stops a password manager's icon, placed just past a field's edge, from adding a sideways scrollbar. */
 .u-dialog {
   width: calc(100% - 2 * --spacing(4));
   max-width: 480px;
   max-height: calc(100% - 2 * --spacing(6));
   margin: auto;
   padding: 0;
+  overflow-x: hidden;
   overflow-y: auto;
   border: 1px solid var(--border-color-default);
   border-radius: var(--radius-surface);
   background: var(--background-color-surface);
   color: var(--text-color-default);
   box-shadow: var(--shadow-float);
+}
+
+/* With a u-card-content, only it scrolls: the title and the buttons stay in view however long the fields run. */
+.u-dialog[open]:has(> .u-card-content, > form > .u-card-content, > turbo-frame > form > .u-card-content) {
+  display: flex;
+  flex-direction: column;
+  overflow-y: hidden;
+}
+
+.u-dialog[open] > :is(form, turbo-frame):has(.u-card-content),
+.u-dialog[open] > turbo-frame > form:has(> .u-card-content) {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+}
+
+:is(.u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > :is(header, .u-actions) { flex: none; }
+
+:is(.u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > .u-card-content {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .u-dialog-wide { max-width: 720px; }

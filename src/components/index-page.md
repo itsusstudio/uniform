@@ -41,6 +41,9 @@ From tablet width (`48rem`) the page fills the window. Only the list's body scro
 ```
 
 Leave out `u-index-split`, the pane and the backdrop for a page with no pane.
+Use `u-index-fit` in place of `u-index-grow` when the card should end at its
+last row instead of filling the page, like a list with a fixed page size. It
+still shrinks and scrolls inside when the rows are taller than the screen.
 With `u-index-split` but no record open, leave the pane out too, and the list
 takes the full width.
 

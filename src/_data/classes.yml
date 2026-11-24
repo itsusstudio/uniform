@@ -904,6 +904,11 @@
   page: /components/index-page/
   description: On a card or column that takes the rest of the page's height.
 
+- name: u-index-fit
+  group: Page frame
+  page: /components/index-page/
+  description: On a card or column that ends at its content, and shrinks and scrolls inside only when the content is taller than the screen.
+
 - name: u-index-scroll
   group: Page frame
   page: /components/index-page/

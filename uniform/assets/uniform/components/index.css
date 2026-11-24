@@ -42,6 +42,14 @@
     flex-direction: column;
   }
 
+  /* Sized to its content, it shrinks and scrolls inside only when the content is taller than the screen. */
+  .u-index-fit {
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+    min-height: 0;
+  }
+
   .u-index-scroll {
     flex: 1;
     min-height: 0;

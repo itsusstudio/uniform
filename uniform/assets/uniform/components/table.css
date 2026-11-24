@@ -26,7 +26,7 @@
 :is(.u-table, u-chart) > table tbody :where(th, td) { height: var(--spacing-row); font-variant-numeric: tabular-nums; }
 
 :is(.u-table, u-chart) > table thead th {
-  border-bottom: 1px solid var(--text-color-default);
+  border-bottom: 1px solid var(--border-color-default);
   color: var(--text-color-muted);
   font-weight: 400;
   white-space: nowrap;

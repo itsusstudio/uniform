@@ -7,7 +7,10 @@ u-filter {
 
 u-filter > .u-btn:first-child { gap: --spacing(1.5); }
 
-u-filter > .u-btn:first-child > .u-meta { font-weight: 400; }
+u-filter > .u-btn:first-child > .u-meta {
+  font-family: var(--font-sans);
+  font-weight: 400;
+}
 
 u-filter:has(> a) > .u-btn {
   background: var(--background-color-paper);

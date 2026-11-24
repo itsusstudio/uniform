@@ -38,9 +38,34 @@ u-multi-select { display: block; }
   border: 0;
 }
 
+/* A divider groups the options below it; while a search narrows the list the groups no longer hold, so it hides. */
+.u-multi-select-list hr {
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--border-color-divider);
+}
+
+.u-multi-select-list:has(.u-multi-select-search:not(:placeholder-shown)) hr { display: none; }
+
+.u-multi-select-list > a { text-decoration: none; }
+
+/* A closing link stays in view at the bottom of a long list, the way the search stays at the top. */
+.u-multi-select-list > a:last-child {
+  position: sticky;
+  bottom: calc(-1 * --spacing(1));
+  z-index: 1;
+  margin-bottom: calc(-1 * --spacing(1));
+  border-top: 1px solid var(--border-color-divider);
+  background: var(--background-color-surface);
+}
+
+.u-multi-select-list > hr:has(+ a:last-child) { display: none; }
+
 .u-multi-select-list > fieldset > legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 .u-multi-select-list label,
+.u-multi-select-list > a,
 .u-multi-select-me {
   display: flex;
   align-items: center;
@@ -58,6 +83,7 @@ u-multi-select { display: block; }
 }
 
 .u-multi-select-list label:is(:hover, :has(:focus-visible)),
+.u-multi-select-list > a:is(:hover, :focus-visible),
 .u-multi-select-me:is(:hover, :focus-visible) {
   outline: none;
   background: var(--border-color-divider);
@@ -90,6 +116,23 @@ u-multi-select { display: block; }
   background: var(--background-color-surface);
 }
 
+/* Wrapped in u-input-prefixed for its search icon, the wrapper carries the sticky place at the top of the list. */
+.u-multi-select-list > .u-input-prefixed:has(> .u-multi-select-search) {
+  position: sticky;
+  top: calc(-1 * --spacing(1));
+  z-index: 1;
+  margin: calc(-1 * --spacing(1)) 0 --spacing(1);
+}
+
+.u-multi-select-list > .u-input-prefixed > .u-multi-select-search {
+  position: static;
+  width: 100%;
+  margin: 0;
+  padding-inline-start: calc(--spacing(3) + 16px + --spacing(2));
+}
+
+.u-multi-select-list > .u-input-prefixed:has(> .u-multi-select-search)::before { inset-inline-start: --spacing(3); }
+
 .u-multi-select-search:focus-visible {
   outline: none;
   box-shadow: inset 0 -2px 0 var(--color-info);
@@ -100,11 +143,12 @@ u-multi-select { display: block; }
   color: var(--text-color-muted);
 }
 
-/* Fingers need bigger rows than a pointer: full-size text, a 48px row and a larger box. */
+/* Fingers need bigger rows than a pointer: full-size text, a 40px row and a larger box. */
 @media (pointer: coarse) {
   .u-multi-select-list label,
+  .u-multi-select-list > a,
   .u-multi-select-me {
-    min-height: 48px;
+    min-height: 40px;
     font-size: var(--text-body);
     line-height: var(--text-body--line-height);
   }

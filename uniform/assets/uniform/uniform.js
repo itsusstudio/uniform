@@ -2700,7 +2700,10 @@ define("u-multi-select", class extends UniformElement {
       search.className = "u-input u-multi-select-search"
       search.placeholder = this.dataset.searchLabel || ""
       search.setAttribute("aria-label", this.dataset.searchLabel || "")
-      list.append(search)
+      const searchField = document.createElement("span")
+      searchField.className = "u-input-prefixed"
+      searchField.append(search)
+      list.append(searchField)
     }
 
     const meBox = this.dataset.me && boxes().find((box) => box.value === this.dataset.me)

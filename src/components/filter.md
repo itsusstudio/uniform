@@ -39,8 +39,10 @@ Put the filters inside the list's search form, wrapped in a `<div class="u-table
 - Picks submit the form once, when the menu closes, so ticking several choices costs one page load.
 - `data-u-filter-all` on a group's first box picks or clears the whole group, and shows a partial state when only some are picked.
 - Hovering an option shows Only (`data-u-filter-only`), which unticks the rest and leaves just that option picked. The menu stays open, and closing it applies the pick like any other. A `data-u-filter-only="<value>"` button at the top, like "Only my jobs", does the same for a fixed value.
-- With 8 or more options, add a search field (`type="search"`) as the menu's first child. Typing narrows the options, and `data-u-filter-none` shows when nothing matches.
-- On touch screens the rows grow to 48px with full-size text.
+- With 8 or more options, add a search field (`type="search"`) as the menu's first child. `uniform.js` gives it a search icon. Typing narrows the options, and `data-u-filter-none` shows when nothing matches.
+- An `<hr>` between options groups them without a heading, like statuses by stage. It hides while a search narrows the list.
+- A link as the menu's last child, like "Customize statuses", reads as a row and stays pinned to the bottom of a long list, the way the search stays at the top.
+- On touch screens the rows grow to 40px with full-size text.
 
 ## Rules
 

@@ -52,7 +52,9 @@ The page header opens every app page with its title and main actions.
 </div>
 
 On a phone the back link stays above the title, and the actions wrap under it
-on the left.
+on the left. When the only action is one button with an icon, like New job, the
+button shrinks to its icon and stays beside the title. Its text stays for screen
+readers.
 
 ## Code
 

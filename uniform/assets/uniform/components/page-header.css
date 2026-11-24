@@ -63,4 +63,25 @@
   font-size: var(--text-body);
   line-height: var(--text-body--line-height);
 }
+
+/* On a phone a lone primary action shrinks to its icon so it fits beside the title; its text stays for screen readers. */
+@media (width < 40rem) {
+  .u-page-header:has(> .u-actions > .u-btn:only-child > .u-icon) > hgroup { flex-basis: 0; }
+
+  .u-page-header > .u-actions > .u-btn:only-child:has(> .u-icon) {
+    width: var(--spacing-target);
+    padding-inline: 0;
+  }
+
+  .u-page-header > .u-actions > .u-btn:only-child:has(> .u-icon) > span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .u-page-header > .u-actions > .u-btn:only-child:has(> .u-icon) > .u-kbd-group { display: none; }
+}
 }

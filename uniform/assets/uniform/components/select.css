@@ -118,6 +118,13 @@ select.u-input:disabled {
       color: var(--border-color-input);
       cursor: not-allowed;
     }
+
+    select.u-input hr {
+      height: 1px;
+      margin: --spacing(1) 0;
+      border: 0;
+      background: var(--border-color-divider);
+    }
   }
 }
 }

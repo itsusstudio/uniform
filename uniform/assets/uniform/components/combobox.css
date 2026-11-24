@@ -66,6 +66,9 @@ u-combobox mark {
 u-combobox [role="option"] > span:first-child mark { font-weight: 650; }
 
 u-combobox [role="option"]:has(> span + span) {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: --spacing(4);
   padding-block: --spacing(2);
   line-height: var(--text-small--line-height);
 }
@@ -73,18 +76,22 @@ u-combobox [role="option"]:has(> span + span) {
 u-combobox [role="option"] > span:first-child { font-weight: 500; }
 
 u-combobox [role="option"]:has(> span + span) > span:first-child {
-  display: block;
+  flex-basis: 100%;
   line-height: var(--text-small--line-height);
 }
 
 u-combobox [role="option"] > span + span {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--text-color-muted);
   font-size: var(--text-small);
   font-variant-numeric: tabular-nums;
   line-height: var(--text-small--line-height);
 }
 
-u-combobox [role="option"] > span + span + span { margin-inline-start: --spacing(4); }
 
 u-combobox > [role="listbox"]:has(> [role="option"][data-action]) {
   max-height: calc(var(--spacing-target) * 8 + --spacing(1) * 2 + 3px);

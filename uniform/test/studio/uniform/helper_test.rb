@@ -44,8 +44,15 @@ module Studio
         html = view.uniform_row_hint(row: {label: "Quick edit", number: "#916", keys: "e"}, first: {label: "Open job", keys: "o"})
 
         assert_includes html, '<u-row-hint popover="manual" aria-hidden="true">'
-        assert_includes html, '<span data-u-hint="row">Quick edit <span class="u-data">#916</span> <kbd class="u-kbd-group" data-u-keys="e"'
-        assert_includes html, '<span data-u-hint="first">Open job <kbd class="u-kbd-group" data-u-keys="o"'
+        assert_includes html, '<span data-u-hint="row"><span data-u-hint-action="true">Quick edit <span class="u-data">#916</span> <kbd class="u-kbd-group" data-u-keys="e"'
+        assert_includes html, '<span data-u-hint="first"><span data-u-hint-action="true">Open job <kbd class="u-kbd-group" data-u-keys="o"'
+      end
+
+      def test_uniform_row_hint_names_each_action_when_given_a_list
+        html = view.uniform_row_hint(row: [{label: "Open job", keys: "o"}, {label: "Quick edit", keys: "e"}])
+
+        assert_equal 2, html.scan("data-u-hint-action").size
+        assert_includes html, '<span data-u-hint-action="true">Quick edit <kbd class="u-kbd-group" data-u-keys="e"'
       end
 
       def test_uniform_row_hint_leaves_out_the_first_cell_label_when_there_is_none

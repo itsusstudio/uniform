@@ -97,6 +97,17 @@ u-row-hint > [data-u-hint] {
   gap: --spacing(1.5);
 }
 
+u-row-hint [data-u-hint-action] {
+  display: inline-flex;
+  align-items: center;
+  gap: --spacing(1.5);
+}
+
+u-row-hint [data-u-hint-action] + [data-u-hint-action]::before {
+  content: "·";
+  opacity: 0.6;
+}
+
 u-row-hint:not([data-over-record-link]) > [data-u-hint="first"],
 u-row-hint[data-over-record-link] > [data-u-hint="row"] { display: none; }
 

@@ -73,6 +73,7 @@ module Studio
 
       #   <%= uniform_row_hint row: {label: t(".quick_edit"), number: "#916", keys: "e"},
       #         first: {label: t(".open_job"), number: "#916", keys: "o"} %>
+      #   <%= uniform_row_hint row: [{label: t(".open_job"), number: "#916", keys: "o"}, {label: t(".quick_edit"), keys: "e"}] %>
       def uniform_row_hint(row:, first: nil)
         labels = [row_hint_label(row, "row")]
         labels << row_hint_label(first, "first") if first
@@ -102,10 +103,14 @@ module Studio
         rest.empty? ? first : "#{first} #{rest.first[0]}"
       end
 
-      def row_hint_label(label, part)
-        number = (tag.span(label[:number], class: "u-data") if label[:number])
-        keys = (uniform_kbd(label[:keys]) if label[:keys])
-        tag.span(safe_join([label[:label], number, keys].compact, " "), data: {u_hint: part})
+      def row_hint_label(actions, part)
+        tag.span(safe_join(Array.wrap(actions).map { |action| row_hint_action(action) }), data: {u_hint: part})
+      end
+
+      def row_hint_action(action)
+        number = (tag.span(action[:number], class: "u-data") if action[:number])
+        keys = (uniform_kbd(action[:keys]) if action[:keys])
+        tag.span(safe_join([action[:label], number, keys].compact, " "), data: {u_hint_action: true})
       end
 
       CHART_SHIMMER_BARS = [45, 60, 40, 70, 55, 80, 65, 50, 75, 60, 85, 70].freeze

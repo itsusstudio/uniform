@@ -38,10 +38,11 @@ random. The link can be visually hidden, since the hint shows the key.
 `uniform_row_hint` writes a `<u-row-hint>` that floats just above the pointer
 while it's over the row, saying what a click or key does there. Its `first:`
 label replaces the `row:` one over the first cell, which opens the row's page,
-and turns link blue. Over a cell with its own control, like a status picker,
-the hint gets out of the way. It's a closed popover until `uniform.js` opens it,
-so a page without the script never shows a key that does nothing, and touch
-screens never show it.
+and turns link blue. Either one can take a list of actions, like opening the
+row's page and a quick edit, and the hint names each with its key. Over a cell
+with its own control, like a status picker, the hint gets out of the way. It's
+a closed popover until `uniform.js` opens it, so a page without the script
+never shows a key that does nothing, and touch screens never show it.
 
 In a `u-data-grid`, mark a link `data-u-row-link` to open it, instead of the
 row's page, when someone clicks or taps the row. The first cell still opens the

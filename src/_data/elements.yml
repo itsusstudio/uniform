@@ -113,7 +113,7 @@
   page: /components/search/
 
 - name: <u-row-hint>
-  wraps: A `data-u-hint="row"` label and an optional `data-u-hint="first"` label, written by `uniform_row_hint`, inside a table row.
+  wraps: A `data-u-hint="row"` label and an optional `data-u-hint="first"` label, each naming one or more actions, written by `uniform_row_hint`, inside a table row.
   adds: Opens in the top layer just above the pointer while it's over the row, swaps to the first-cell label over the first cell, and hides over cells with their own controls.
   without: Stays a closed popover, so it never shows.
   page: /components/table/#row-shortcuts

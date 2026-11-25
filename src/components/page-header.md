@@ -56,6 +56,14 @@ on the left. When the only action is one button with an icon, like New job, the
 button shrinks to its icon and stays beside the title. Its text stays for screen
 readers.
 
+## Sticky
+
+Add `u-page-header-sticky` to keep the header in view while a long page
+scrolls, so its title and actions stay in reach. From tablet width up it sticks
+to the top of the window on the page colour, and a hairline appears under it
+once it's stuck. On a phone it scrolls away, because the app's top bar already
+sticks there.
+
 ## Code
 
 ```html

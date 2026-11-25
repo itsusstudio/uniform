@@ -16,6 +16,7 @@
   max-width: var(--container-prose);
   font-size: var(--text-small);
   line-height: var(--text-small--line-height);
+  color: var(--text-color-muted);
   text-wrap: pretty;
 }
 }

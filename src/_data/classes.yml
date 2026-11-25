@@ -332,6 +332,11 @@
   page: /components/badge/
   description: Fills the badge with its colour, for one fact that needs attention, like "Card declined". Never in a list of records.
 
+- name: u-badge-sm
+  group: Components
+  page: /components/badge/
+  description: A smaller badge in caption text, for a label tucked beside other small text, like a template's language or a failed delivery on a timeline event. Works quiet or strong.
+
 - name: u-badge-lg
   group: Components
   page: /components/badge/
@@ -536,6 +541,11 @@
   group: Page frame
   page: /components/page-header/
   description: The top of an app page, on a `<header>`, with an optional back link, an `<hgroup>` title and a `u-actions` row on the right.
+
+- name: u-page-header-sticky
+  group: Page frame
+  page: /components/page-header/
+  description: Keeps the page header at the top of the window while the page scrolls, from tablet width up, with a hairline under it once it's stuck. For pages people scroll while they need the header's actions, like settings.
 
 - name: u-pagination
   group: Components
@@ -928,6 +938,11 @@
   group: Page frame
   page: /components/page-tabs/
   description: Underlined view tabs, with optional counts, on a list card's top edge.
+
+- name: u-list-columns
+  group: Components
+  page: /components/list/
+  description: From tablet width up, puts each row's name and detail line side by side in aligned columns, so a long list of people reads one line per person. Phones keep them stacked.
 
 - name: u-list-divided
   group: Components

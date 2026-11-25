@@ -82,6 +82,23 @@
 .u-list-item-detail {
   font-size: var(--text-small);
   line-height: var(--text-small--line-height);
+  color: var(--text-color-muted);
+}
+
+@media (width >= 48rem) {
+  .u-list-columns > li > div:not([popover]) {
+    display: grid;
+    flex: 1 1 auto;
+    grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+    align-items: baseline;
+    column-gap: --spacing(4);
+  }
+
+  .u-list-columns > li > div:not([popover]) > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .u-card > .u-list :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: --spacing(6); }

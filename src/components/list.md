@@ -135,6 +135,24 @@ entry.
 </li>
 ```
 
+## Columns
+
+For a long list of people or accounts, add `u-list-columns`. From tablet width
+up, the name and its detail line sit side by side in aligned columns, so each
+row is one line and the eye can skip the column it doesn't need. Phones keep
+them stacked.
+
+```html
+<ul class="u-list u-list-divided u-list-columns">
+  <li>
+    <div>
+      <p>Ana Reyes</p>
+      <p class="u-list-item-detail">ana.reyes@gmail.com</p>
+    </div>
+  </li>
+</ul>
+```
+
 ## The first line
 
 A row's first line is its name, in medium weight, and the lines after it are its

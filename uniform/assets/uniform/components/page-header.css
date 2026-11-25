@@ -64,6 +64,37 @@
   line-height: var(--text-body--line-height);
 }
 
+@media (width >= 48rem) {
+  .u-page-header-sticky {
+    --u-page-header-pull: --spacing(6);
+    position: sticky;
+    top: calc(var(--u-page-header-pull) * -1);
+    z-index: 1;
+    margin-block: calc(var(--u-page-header-pull) * -1) calc(--spacing(4) * -1);
+    padding-block: var(--u-page-header-pull) --spacing(4);
+    background: var(--background-color-page);
+    container: u-page-header / scroll-state;
+  }
+
+  .u-page-header-sticky::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    height: 1px;
+  }
+
+  @container u-page-header scroll-state(stuck: block-start) {
+    .u-page-header-sticky::after { background: var(--border-color-divider); }
+  }
+
+  .u-app-shell > main:has(.u-page-header-sticky) { scroll-padding-top: --spacing(32); }
+}
+
+@media (width >= --theme(--breakpoint-lg)) {
+  .u-page-header-sticky { --u-page-header-pull: --spacing(12); }
+}
+
 /* On a phone a lone primary action shrinks to its icon so it fits beside the title; its text stays for screen readers. */
 @media (width < 40rem) {
   .u-page-header:has(> .u-actions > .u-btn:only-child > .u-icon) > hgroup { flex-basis: 0; }

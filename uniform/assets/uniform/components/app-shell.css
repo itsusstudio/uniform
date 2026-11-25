@@ -269,7 +269,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   background: var(--background-color-page);
 }
 
-/* From tablet width the shell is pinned to the window and only main scrolls, so there is no page scrollbar to reserve a gutter for and nothing shifts when a dialog opens. Phones keep page scroll for iOS Safari's address bar and tap-to-top. */
+/* From tablet width the shell is pinned to the window and only main scrolls, so nothing shifts when a dialog opens. Main reserves its own gutter so a long page and a short one centre the same. Phones keep page scroll for iOS Safari's address bar and tap-to-top. */
 @media (width >= 48rem) {
   :root:has(> body > .u-app-shell) { scrollbar-gutter: auto; }
 
@@ -278,6 +278,7 @@ u-sidebar li > button:has(+ .u-menu:popover-open) {
   .u-app-shell > main {
     min-height: 0;
     overflow-y: auto;
+    scrollbar-gutter: stable;
   }
 }
 

@@ -119,7 +119,7 @@
   --text-color-on-warning: light-dark(#1a1a18, #131311);
   --text-color-on-success: light-dark(#ffffff, #131311);
 
-  --border-color-default: light-dark(#d4d2cb, #3a3a37);
+  --border-color-default: light-dark(#c9c6bd, #45443f);
   --border-color-input: light-dark(#8c8981, #7a7873);
   --border-color-divider: light-dark(#ebeae6, #2a2a28);
   --border-color-divider-on-ink: #3a3935;

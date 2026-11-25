@@ -12,8 +12,8 @@ Navigation lists the places in an app and marks the one you're on. In an app it 
 
 Navigation is built from links and groups, with or without icons. Apps use icons
 on every top-level entry; docs and other reading sites use none. Never mix the
-two in one nav. Space separates groups, so a group only gets a name when it can
-fold.
+two in one nav. Space separates top-level groups, so a group only gets a name
+when it can fold. Inside a long group, like Settings, name its sections.
 
 Link with an icon
 : `<li><a>` holding a `u-icon u-icon-sm` and a `<span>` label. The top level of an app.
@@ -136,6 +136,28 @@ The current page fills its whole row and gets a short bar on the line.
 A group folds with the same plus and minus as the [accordion](/components/accordion/).
 Render the group holding the current page with `open`, so its link is never
 hidden.
+
+## Sections inside a group
+
+When a group holds more than about six pages, split it into short named
+sections, like You, Business, Jobs and Clients under Settings. Each section is a
+`<p>` holding its name, then a `<ul>` labelled by it. The name sits muted in
+caption text, lined up with the links.
+
+```html
+<details open>
+  <summary><svg class="u-icon u-icon-sm">…</svg><span>Settings</span></summary>
+  <p id="settings-business">Business</p>
+  <ul aria-labelledby="settings-business">
+    <li><a href="/settings/general">General</a></li>
+    <li><a href="/settings/team" aria-current="page">Team</a></li>
+  </ul>
+  <p id="settings-clients">Clients</p>
+  <ul aria-labelledby="settings-clients">
+    <li><a href="/settings/portal">Client portal</a></li>
+  </ul>
+</details>
+```
 
 ## A highlighted link
 

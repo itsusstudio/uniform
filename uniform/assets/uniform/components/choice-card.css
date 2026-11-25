@@ -1,0 +1,62 @@
+@layer components {
+.u-choice-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: --spacing(2);
+}
+
+.u-choice-cards > label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: --spacing(2);
+  padding: --spacing(3);
+  border: 1px solid var(--border-color-input);
+  border-radius: var(--radius-surface);
+  background: var(--background-color-surface);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+  cursor: pointer;
+}
+
+.u-choice-cards > label > .u-checkbox {
+  position: absolute;
+  inset-block-start: --spacing(3);
+  inset-inline-end: --spacing(3);
+  min-height: 0;
+}
+
+.u-choice-cards > label > :last-child {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding-inline-end: --spacing(6);
+}
+
+.u-choice-cards > label > :last-child > :first-child { font-weight: 500; }
+
+.u-choice-cards > label > :last-child > :last-child:not(:first-child) {
+  overflow: hidden;
+  color: var(--text-color-muted);
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.u-choice-cards > label:has(input:checked) {
+  border-color: var(--background-color-ink);
+  box-shadow: 0 0 0 1px var(--background-color-ink);
+}
+
+.u-choice-cards > label:has(input:focus-visible) {
+  outline: 2px solid var(--color-info);
+  outline-offset: 2px;
+}
+
+.u-choice-cards > label:has(input:disabled) {
+  background: var(--background-color-page);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+}

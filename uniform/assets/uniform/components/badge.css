@@ -51,6 +51,11 @@ p > .u-badge { margin-inline-start: --spacing(1); }
   --u-badge-text: var(--text-color-on-ink);
 }
 
+.u-badge-automation {
+  --u-badge-color: var(--color-automation);
+  --u-badge-text: var(--text-color-on-automation);
+}
+
 .u-badge-strong {
   min-height: 20px;
   padding: 0 --spacing(2);

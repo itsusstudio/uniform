@@ -44,6 +44,11 @@
 @import "./components/site-header.css";
 @import "./components/badge.css";
 @import "./components/chip.css";
+@import "./components/message.css";
+@import "./components/panel.css";
+@import "./components/composer.css";
+@import "./components/choice-card.css";
+@import "./components/email-preview.css";
 @import "./components/combobox.css";
 @import "./components/accordion.css";
 @import "./components/avatar.css";

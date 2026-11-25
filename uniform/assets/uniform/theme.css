@@ -141,6 +141,9 @@
   --color-person-7: light-dark(#6e5a8a, #b8a6cc);
   --color-person-8: light-dark(#6f6448, #c2b494);
   --text-color-on-person: light-dark(#ffffff, #131311);
+
+  --color-automation: light-dark(#6d43b0, #b598e0);
+  --text-color-on-automation: light-dark(#ffffff, #131311);
 }
 
 @layer base {

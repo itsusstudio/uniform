@@ -1,0 +1,27 @@
+@layer components {
+.u-composer {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-surface);
+  background: var(--background-color-paper);
+}
+
+.u-composer .u-input {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  outline: none;
+}
+
+.u-composer textarea {
+  min-height: calc(4lh + --spacing(4));
+  resize: none;
+}
+
+.u-composer > :last-child {
+  display: flex;
+  align-items: center;
+  gap: --spacing(1.5);
+  padding: 0 --spacing(2) --spacing(2);
+}
+}

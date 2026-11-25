@@ -132,6 +132,8 @@
   }
 }
 
+.u-dialog-side:has(> turbo-frame > .u-dialog-wide) { max-width: 600px; }
+
 /* A sheet's form fills its height, so the actions stay at the bottom however long the form is. */
 .u-dialog-side > turbo-frame {
   display: flex;

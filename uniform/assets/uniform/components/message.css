@@ -1,0 +1,35 @@
+@layer components {
+.u-message {
+  max-width: 78%;
+  padding: --spacing(2.5) --spacing(4);
+  border-radius: calc(var(--radius-surface) * 1.5);
+  border-end-end-radius: var(--radius-item);
+  background: var(--background-color-ink);
+  color: var(--text-color-on-ink);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  white-space: pre-line;
+}
+
+.u-message-received {
+  border-end-end-radius: calc(var(--radius-surface) * 1.5);
+  border-end-start-radius: var(--radius-item);
+  background: var(--background-color-paper);
+  color: var(--text-color-default);
+}
+
+.u-message-meta {
+  display: flex;
+  align-items: center;
+  gap: --spacing(1);
+  padding-inline: --spacing(1);
+  color: var(--text-color-muted);
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
+}
+
+.u-message-meta > .u-icon {
+  width: 14px;
+  height: 14px;
+}
+}

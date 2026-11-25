@@ -1,0 +1,11 @@
+@layer components {
+.u-panel {
+  display: flex;
+  flex-direction: column;
+  gap: --spacing(3);
+  padding: --spacing(4);
+  border: 1px solid var(--border-color-input);
+  border-radius: calc(var(--radius-surface) * 1.5);
+  background: var(--background-color-surface);
+}
+}

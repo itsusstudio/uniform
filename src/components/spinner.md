@@ -54,6 +54,9 @@ document.getElementById("spinner-demo-save").addEventListener("click", (event) =
 In a button
 : The spinner takes the place of the button's icon, or sits before its label. Keep the label, or change it to say what's happening, like "Deleting…", when the wait is long or hard to undo.
 
+In a menu item
+: Set `aria-busy="true"` on a menu's link or button while the work it started runs in place, like printing. The spinner sits at the end of the item, after any badge, and the menu stays open.
+
 In a panel
 : When one part of a page loads after the rest, put a 24px spinner at the top left of that space, with a muted line beside it.
 

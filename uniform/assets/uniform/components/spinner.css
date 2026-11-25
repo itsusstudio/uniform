@@ -1,6 +1,7 @@
 @layer components {
 .u-spinner,
 .u-btn[aria-busy="true"]::before,
+.u-menu > :is(a, button)[aria-busy="true"]::after,
 form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"])::before {
   flex: none;
   box-sizing: border-box;
@@ -37,6 +38,15 @@ form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"
 .u-btn[aria-busy="true"]::before,
 form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"])::before { content: ""; }
 
+.u-menu > :is(a, button)[aria-busy="true"] { cursor: progress; }
+
+.u-menu > :is(a, button)[aria-busy="true"]::after {
+  content: "";
+  margin-inline-start: auto;
+}
+
+.u-menu > :is(a, button)[aria-busy="true"]:has(> .u-badge)::after { margin-inline-start: 0; }
+
 .u-btn[aria-busy="true"] > :is(.u-icon, svg),
 form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"]) > :is(.u-icon, svg) { display: none; }
 
@@ -47,12 +57,14 @@ form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"
 @media (prefers-reduced-motion: reduce) {
   .u-spinner,
   .u-btn[aria-busy="true"]::before,
+  .u-menu > :is(a, button)[aria-busy="true"]::after,
   form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"])::before { animation: none; }
 }
 
 @media (forced-colors: active) {
   .u-spinner,
   .u-btn[aria-busy="true"]::before,
+  .u-menu > :is(a, button)[aria-busy="true"]::after,
   form[aria-busy="true"] .u-btn[type="submit"]:is(:disabled, [aria-disabled="true"])::before {
     forced-color-adjust: none;
     border-color: GrayText;

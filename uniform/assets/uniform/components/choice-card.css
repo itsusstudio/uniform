@@ -19,7 +19,7 @@
   cursor: pointer;
 }
 
-.u-choice-cards > label > .u-checkbox {
+.u-choice-cards > label > :is(.u-checkbox, .u-radio) {
   position: absolute;
   inset-block-start: --spacing(3);
   inset-inline-end: --spacing(3);

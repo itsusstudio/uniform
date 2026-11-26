@@ -6,7 +6,7 @@ section: Components
 permalink: /components/meta/
 ---
 
-Meta is a small fact beside the thing it describes, like a date or a count. It's muted mono, so figures line up in a column.
+Meta is a small fact beside the thing it describes, like a date or a count. It's small and muted, with even-width digits so figures line up in a column. For codes and order numbers that need mono, use `u-data`.
 
 ## Example
 
@@ -43,7 +43,7 @@ the reader sees their own time zone.
 ## Rules
 
 Meta is a fact, not a sentence
-: Use it for dates, times, counts, sizes and codes. A muted sentence under a heading is a [heading group](/components/heading-group/), and a hint under a field is a `<small>` in its `u-field`.
+: Use it for dates, times, counts and sizes. Codes and order numbers take `u-data`. A muted sentence under a heading is a [heading group](/components/heading-group/), and a hint under a field is a `<small>` in its `u-field`.
 
 Never build one by hand
-: Always use `u-meta`, never `text-muted`, `text-small` and `u-data`. Copies built by hand drift in size or lose the mono, and the columns stop lining up.
+: Always use `u-meta`, never `text-muted`, `text-small` and `u-data`. Copies built by hand drift in size or colour, and the columns stop lining up.

@@ -1,10 +1,8 @@
 @layer components {
 .u-meta {
   color: var(--text-color-muted);
-  font-family: var(--font-mono);
   font-size: var(--text-small);
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0;
   line-height: var(--text-small--line-height);
   white-space: nowrap;
 }

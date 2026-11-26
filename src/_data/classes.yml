@@ -475,7 +475,7 @@
 - name: u-meta
   group: Components
   page: /components/meta/
-  description: A date, time, count or code in 14px muted mono. It never wraps.
+  description: A date, time or count in small muted text with even-width digits. It never wraps.
 
 - name: u-actions
   group: Layout

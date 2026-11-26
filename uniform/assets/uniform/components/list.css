@@ -22,7 +22,7 @@
 
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(.u-icon, .u-btn, .u-badge) { flex: none; }
 
-:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(.u-meta, .u-btn, .u-btn-close, .u-actions, .u-badge, button):not(:is(.u-meta, .u-btn, .u-btn-close, .u-actions, .u-badge, button) ~ *) { margin-inline-start: auto; }
+:is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > :is(.u-meta, .u-btn, .u-btn-close, .u-actions, .u-badge, button:not(.u-list-handle)):not(:is(.u-meta, .u-btn, .u-btn-close, .u-actions, .u-badge, button:not(.u-list-handle)) ~ *) { margin-inline-start: auto; }
 
 :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) > div { min-width: 0; }
 
@@ -101,13 +101,13 @@
   }
 }
 
-.u-card > .u-list :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: --spacing(6); }
+.u-card > :is(.u-list, .u-list-group > .u-list) :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: --spacing(6); }
 
 .u-card > .u-list:last-child { padding-block-end: --spacing(4); }
 
 /* Phones get a tighter gutter, like native lists. */
 @media (width < 40rem) {
-  .u-card > .u-list :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: --spacing(4); }
+  .u-card > :is(.u-list, .u-list-group > .u-list) :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: --spacing(4); }
 }
 
 .u-checklist > li::before {
@@ -131,6 +131,7 @@
 
 .u-list-group > h3 {
   display: flex;
+  color: var(--text-color-muted);
   align-items: center;
   gap: --spacing(2);
   min-height: var(--spacing-row);

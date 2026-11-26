@@ -152,13 +152,31 @@
 
 .u-list-handle {
   display: inline-grid;
+  flex: none;
   place-items: center;
+  min-width: 24px;
+  min-height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-item);
+  background: none;
   color: var(--text-color-muted);
   cursor: grab;
   opacity: 0;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
+.u-list-handle:not(:disabled) { cursor: grab; }
+
+.u-list-handle:is(:hover, :focus-visible) { background: var(--background-color-highlight); color: var(--text-color-default); }
+
+.u-list-handle[aria-pressed="true"] { background: var(--background-color-ink); color: var(--text-color-on-ink); opacity: 1; }
+
 .u-list > li:is(:hover, :focus-within) .u-list-handle { opacity: 1; }
+
+:is(.u-card, .u-dialog) .u-list-handle { opacity: 1; }
 
 @media (hover: none) {
   .u-list-handle { opacity: 1; }
@@ -192,4 +210,54 @@
   outline: none;
   background: var(--background-color-surface);
 }
+}
+
+.u-sortable-placeholder {
+  border-color: transparent;
+  border-radius: var(--radius-surface);
+  background: var(--background-color-paper);
+  box-shadow: none;
+}
+
+.u-sortable-placeholder > * { visibility: hidden; }
+
+.u-sortable-lifted {
+  border-radius: var(--radius-surface);
+  box-shadow: var(--shadow-float);
+  scale: 1.02;
+}
+
+.u-sortable-lifted:not(.sortable-fallback) { position: relative; z-index: 1; }
+
+.u-sortable .u-list-handle:focus-visible { outline: none; }
+
+.u-sortable > :has(.u-list-handle:focus-visible) {
+  outline: 2px solid var(--color-info);
+  outline-offset: 2px;
+  border-radius: var(--radius-surface);
+}
+
+:root[data-sortable-dragging],
+:root[data-sortable-dragging] * { cursor: grabbing; }
+
+.u-hover-tools > li { transition: background-color var(--u-duration-exit) var(--ease-standard); }
+
+.u-hover-tools > li:hover { background: var(--background-color-paper); }
+
+.u-hover-tools > :not(:hover, :focus-within) :is(.u-list-handle, .u-hover-tool) { opacity: 0; }
+
+@media (hover: none) {
+  .u-hover-tools > :not(:focus-within) :is(.u-list-handle, .u-hover-tool) { opacity: 0.6; }
+}
+
+.u-list-handle-gutter {
+  position: absolute;
+  top: calc(var(--u-card-padding, --spacing(6)) - --spacing(1));
+  inset-inline-start: calc(-1 * --spacing(6));
+}
+
+:is(.u-sortable-chosen, .u-sortable-lifted):not(.u-sortable-placeholder) > .u-card,
+:is(.u-sortable-chosen, .u-sortable-lifted):not(.u-sortable-placeholder, :has(> .u-card)) {
+  outline: 2px solid var(--background-color-ink);
+  outline-offset: -1px;
 }

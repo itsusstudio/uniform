@@ -16,23 +16,23 @@
 }
 
 /* With a u-card-content, only it scrolls: the title and the buttons stay in view however long the fields run. */
-.u-dialog[open]:has(> .u-card-content, > form > .u-card-content, > turbo-frame > form > .u-card-content) {
+.u-dialog[open]:has(> .u-card-content, > form > .u-card-content, > turbo-frame > :is(form, div) > .u-card-content) {
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
 }
 
 .u-dialog[open] > :is(form, turbo-frame):has(.u-card-content),
-.u-dialog[open] > turbo-frame > form:has(> .u-card-content) {
+.u-dialog[open] > turbo-frame > :is(form, div):has(> .u-card-content) {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   min-height: 0;
 }
 
-:is(.u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > :is(header, .u-actions) { flex: none; }
+:is(.u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > :is(header, .u-actions) { flex: none; }
 
-:is(.u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > .u-card-content {
+:is(.u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > .u-card-content {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
@@ -68,8 +68,8 @@
 
 .u-dialog:not(.u-dialog-side)[open] {
   opacity: 1;
-  scale: 1;
-  translate: 0 0;
+  scale: none;
+  translate: none;
   transition-duration: var(--u-duration-enter);
 
   @starting-style {
@@ -94,7 +94,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .u-dialog:not(.u-dialog-side):is(*, [open]) { scale: 1; translate: 0 0; }
+  .u-dialog:not(.u-dialog-side):is(*, [open]) { scale: none; translate: none; }
 }
 
 .u-dialog-side {

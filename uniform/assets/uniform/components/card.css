@@ -9,40 +9,42 @@
   color: var(--text-color-default);
 }
 
-/* A dialog filled from the server keeps its form inside a turbo-frame. */
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > :is(header, .u-card-content, .u-actions) { padding: --spacing(6); }
+.u-card-compact { --u-card-padding: --spacing(4); }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > header + :is(.u-card-content, .u-actions),
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > .u-card-content + .u-actions { padding-top: 0; }
+/* A dialog filled from the server keeps its form, or a div for a step with no form, inside a turbo-frame. */
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > :is(header, .u-card-content, .u-actions) { padding: var(--u-card-padding, --spacing(6)); }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > header {
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > header + :is(.u-card-content, .u-actions),
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > .u-card-content + .u-actions { padding-top: 0; }
+
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: --spacing(4);
 }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > header > :first-child:not(hgroup) {
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > header > :first-child:not(hgroup) {
   font-size: var(--text-title);
   font-weight: 500;
   line-height: var(--text-title--line-height);
 }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > header > :first-child:not(hgroup) { text-box: trim-both cap alphabetic; }
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > header > :first-child:not(hgroup) { text-box: trim-both cap alphabetic; }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > header > hgroup > :first-child { text-box: trim-start cap alphabetic; }
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > header > hgroup > :first-child { text-box: trim-start cap alphabetic; }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > header > hgroup > :last-child { text-box: trim-end cap alphabetic; }
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > header > hgroup > :last-child { text-box: trim-end cap alphabetic; }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > header > hgroup > :only-child { text-box: trim-both cap alphabetic; }
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > header > hgroup > :only-child { text-box: trim-both cap alphabetic; }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > header > :is(.u-btn-close, .u-btn-ghost.u-btn-icon:last-child) { margin: calc(-1 * --spacing(1)) calc(-1 * --spacing(2)) calc(-1 * --spacing(1)) 0; }
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > header > :is(.u-btn-close, .u-btn-ghost.u-btn-icon:last-child) { margin: calc(-1 * --spacing(1)) calc(-1 * --spacing(2)) calc(-1 * --spacing(1)) 0; }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > :is(header, .u-actions) > .u-btn-ghost:not(.u-btn-icon):last-child {
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > :is(header, .u-actions) > .u-btn-ghost:not(.u-btn-icon):last-child {
   margin-inline-end: calc(-1 * --spacing(4));
 }
 
-:is(.u-card, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > form) > .u-actions { justify-content: flex-end; }
+:is(.u-card, .u-card > form, .u-dialog, .u-dialog > form, .u-dialog > turbo-frame > :is(form, div)) > .u-actions { justify-content: flex-end; }
 
 .u-card-content {
   display: flex;

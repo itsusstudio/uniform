@@ -56,6 +56,8 @@
       url: /components/sidebar/
     - title: Site header
       url: /components/site-header/
+    - title: Masthead
+      url: /components/masthead/
     - title: Breadcrumbs
       url: /components/breadcrumbs/
     - title: Page header

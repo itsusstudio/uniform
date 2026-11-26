@@ -652,6 +652,11 @@
   page: /components/table/
   description: A cell for free text, like a description. It takes the width left over by the other columns, never less than a short readable line, and cuts its text to one line with an ellipsis. Long text never widens the table on a wide screen; on a narrow screen the table scrolls sideways.
 
+- name: u-table-flush
+  group: Components
+  page: /components/table/
+  description: Add to `u-table` for a table that sits on the page, not in a card. The first and last columns lose their outer padding so the text lines up with the page edge, and the header rule turns ink.
+
 - name: u-table-sort
   group: Components
   page: /components/table/
@@ -833,6 +838,11 @@
   group: Page frame
   page: /components/site-header/
   description: The top row of a marketing site, on a `<header>`. Its `u-container` holds a `u-wordmark`, a `<nav>` with `popover`, the primary trial button and a ghost Menu `<button>` whose `popovertarget` is the nav's `id`. The nav's first `<ul>` holds the page links, and a second `<ul>` on the right holds Sign in and the language link.
+
+- name: u-masthead
+  group: Page frame
+  page: /components/masthead/
+  description: "The top of a client-facing page with no sidebar, on a `<header>`. Its `u-container` lays a 12-column grid: the business name in `u-wordmark` across six columns, then a `<nav>` and a `<ul>` of three columns each, holding one link or line per `<li>`. A `<li>` with plain text, like the client's name, hides on a phone."
 
 - name: Announcement
   group: Page frame

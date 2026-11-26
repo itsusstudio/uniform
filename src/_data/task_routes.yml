@@ -44,6 +44,7 @@
     - /patterns/dashboard-shell/
     - /components/sidebar/
     - /components/navigation/
+    - /components/masthead/
 
 - title: Build a marketing site page
   pages:

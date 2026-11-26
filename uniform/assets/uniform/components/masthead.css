@@ -1,0 +1,66 @@
+@layer components {
+.u-masthead {
+  --u-wordmark-font-size: var(--text-400);
+  --u-wordmark-line-height: var(--text-400--line-height);
+  container: u-masthead / inline-size;
+}
+
+.u-masthead > .u-container {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: --spacing(6);
+  row-gap: --spacing(3);
+  align-items: start;
+  padding-block: --spacing(6) --spacing(2);
+}
+
+.u-masthead > .u-container > .u-wordmark {
+  grid-column: span 6;
+  justify-self: start;
+  color: var(--text-color-default);
+  text-decoration: none;
+}
+
+.u-masthead ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+}
+
+.u-masthead > .u-container > :is(nav, ul) { grid-column: span 3; }
+
+.u-masthead li > a,
+.u-masthead li > form > button {
+  display: inline-block;
+  padding-block: --spacing(0.5);
+  border: 0;
+  background: transparent;
+  color: var(--text-color-default);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.u-masthead li > a:hover,
+.u-masthead li > form > button:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.u-masthead li > a[aria-current="page"] { font-weight: 500; }
+
+.u-masthead li > form > button { color: var(--text-color-muted); }
+
+.u-masthead li:not(:has(a, form)) { padding-block: --spacing(0.5); }
+
+@container u-masthead (max-width: 39.9375rem) {
+  .u-masthead > .u-container { grid-template-columns: 1fr auto; }
+
+  .u-masthead > .u-container > .u-wordmark { grid-column: auto; grid-row: span 2; }
+
+  .u-masthead > .u-container > :is(nav, ul) { grid-column: 2; }
+
+  .u-masthead li:not(:has(a, form)) { display: none; }
+}
+}

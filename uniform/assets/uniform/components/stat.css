@@ -44,4 +44,33 @@
 }
 
 .u-stat > [data-trend="down"]::before { mask-image: url("/uniform/icons/arrow-down.svg"); }
+
+.u-stat:has(> a) {
+  position: relative;
+  padding-top: --spacing(3);
+  border-top: 1px solid var(--border-color-divider);
+}
+
+.u-stat > a {
+  color: var(--text-color-muted);
+  text-decoration: none;
+}
+
+.u-stat > a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.u-stat > a:hover { color: var(--text-color-default); }
+
+.u-stat:has(> a[aria-current="page"]) {
+  padding-top: calc(--spacing(3) - 1px);
+  border-top: 2px solid var(--text-color-default);
+}
+
+.u-stat > a[aria-current="page"] {
+  color: var(--text-color-default);
+  font-weight: 500;
+}
 }

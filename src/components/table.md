@@ -214,5 +214,8 @@ No fills
 In a card, edge to edge
 : Put a table straight inside its card, under the header, with no `u-card-content`. Its lines then run edge to edge.
 
+On the page, flush
+: A table that sits on the page instead of in a card takes `u-table-flush`, so its first and last columns line up with the text above it.
+
 Short first column
 : Keep the first column short, so rows stay easy to tell apart when the table scrolls sideways.

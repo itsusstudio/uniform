@@ -44,6 +44,9 @@ A stat shows one figure that matters on its own. Several sit in a `u-stats` row 
 Label
 : The line after the figure says what it counts. Make it an `<a>` to link to the list behind the number, or a `<p>` for muted text.
 
+Views
+: When every label in a row is a link to a filtered list, the row works as tabs over that list. Each stat gets a rule on top and the whole stat is the link's target. Put `aria-current="page"` on the link to the view on show, and its rule turns ink.
+
 Change
 : Give the line `data-trend="up"` or `data-trend="down"` to say how the figure moved. It gets an up or down arrow. Use it only when the figure changed.
 

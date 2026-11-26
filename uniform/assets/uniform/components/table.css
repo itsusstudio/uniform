@@ -266,6 +266,12 @@ u-row-hint[data-over-record-link] > [data-u-hint="row"] { display: none; }
   padding: 0;
   list-style: none;
 }
+
+.u-table-flush > table :is(th, td):first-child { padding-inline-start: 0; }
+
+.u-table-flush > table :is(th, td):last-child { padding-inline-end: 0; }
+
+.u-table-flush > table thead th { border-bottom-color: var(--text-color-default); }
 }
 
 @layer utilities {

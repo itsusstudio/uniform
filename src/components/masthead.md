@@ -67,6 +67,9 @@ Sign out
 
 ## Rules
 
+Pair it with the colophon
+: Close the page with the [colophon](/components/colophon/), which sits on the same grid.
+
 For clients, not teams
 : Use the masthead where a sidebar would be too much: a few pages, read more than worked in. Apps for a team use the [app shell](/components/app-shell/).
 

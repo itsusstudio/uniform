@@ -52,4 +52,6 @@
   gap: --spacing(6);
 }
 
+.u-card-list > .u-card-content + .u-card-content { border-top: 1px solid var(--border-color-divider); }
+
 }

@@ -112,6 +112,9 @@ A card groups the details and actions of one object on a page.
 Header
 : A `<header>` straight inside the card. Its first child is the title, a real heading. When the title has a line under it, use an [`<hgroup>`](/components/heading-group/). A link or button after the title sits on the right.
 
+List of records
+: Add `u-card-list` to a card that holds a list of records, like the items on a job, with one `u-card-content` per record. A rule separates each record from the one before it.
+
 Content
 : Put text, fields or a description list in `u-card-content`. Put a [table](/components/table/) or [list](/components/list/) straight in the card instead, so it runs edge to edge.
 

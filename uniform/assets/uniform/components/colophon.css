@@ -1,0 +1,44 @@
+@layer components {
+.u-colophon { container: u-colophon / inline-size; }
+
+.u-colophon > .u-container {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: --spacing(6);
+  row-gap: --spacing(4);
+  align-items: start;
+  padding-block: --spacing(16) --spacing(10);
+  font-size: var(--text-small);
+  line-height: var(--text-small--line-height);
+}
+
+.u-colophon > .u-container > * {
+  display: flex;
+  flex-direction: column;
+  gap: --spacing(1);
+  grid-column: span 3;
+  padding: 0;
+  margin: 0;
+  font-style: normal;
+  list-style: none;
+}
+
+.u-colophon > .u-container > :first-child { grid-column: span 6; }
+
+.u-colophon > .u-container > :first-child > :first-child { font-weight: 500; }
+
+.u-colophon > .u-container > :first-child > :not(:first-child),
+.u-colophon > .u-container > :first-child > :not(:first-child) a { color: var(--text-color-muted); }
+
+.u-colophon a {
+  color: var(--text-color-default);
+  text-decoration: none;
+}
+
+.u-colophon a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+@container u-colophon (max-width: 39.9375rem) {
+  .u-colophon > .u-container > *,
+  .u-colophon > .u-container > :first-child { grid-column: 1 / -1; }
+}
+}

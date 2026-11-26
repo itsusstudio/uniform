@@ -108,6 +108,7 @@
   --background-color-primary: light-dark(#1a1a18, #b8b5ad);
   --background-color-highlight: light-dark(#fbeeb0, #735a00);
   --background-color-backdrop: light-dark(color-mix(in srgb, #1a1a18 28%, transparent), color-mix(in srgb, #000000 60%, transparent));
+  --background-color-photo-scrim: color-mix(in srgb, #1a1a18 55%, transparent);
 
   --text-color-default: light-dark(#1a1a18, #e2e1dd);
   --text-color-muted: light-dark(#6b6964, #9d9c97);

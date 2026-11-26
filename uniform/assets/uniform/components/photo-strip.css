@@ -1,0 +1,27 @@
+@layer components {
+.u-photo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: --spacing(2);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.u-photo-strip > li { width: --spacing(16); height: --spacing(16); }
+
+.u-photo-strip > li:nth-child(n + 7) { display: none; }
+
+.u-photo-strip > li > button[data-more]::before {
+  content: attr(data-more);
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  border-radius: inherit;
+  background: var(--background-color-photo-scrim);
+  color: var(--text-color-on-ink);
+  font-weight: 500;
+}
+}

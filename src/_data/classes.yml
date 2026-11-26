@@ -844,6 +844,21 @@
   page: /components/masthead/
   description: "The top of a client-facing page with no sidebar, on a `<header>`. Its `u-container` lays a 12-column grid: the business name in `u-wordmark` across six columns, then a `<nav>` and a `<ul>` of three columns each, holding one link or line per `<li>`. A `<li>` with plain text, like the client's name, hides on a phone."
 
+- name: u-colophon
+  group: Page frame
+  page: /components/colophon/
+  description: "The foot of a client-facing page, on a `<footer>`, mirroring the masthead's grid. Its `u-container` holds a `<div>` with the business name and a muted line across six columns, then an `<address>` and a `<ul>` of contact links across three each. Links stay in the text colour."
+
+- name: u-card-list
+  group: Components
+  page: /components/card/
+  description: Add to `u-card` when it holds a list of records, one `u-card-content` each. A rule separates each record from the one before it.
+
+- name: u-photo-strip
+  group: Components
+  page: /components/photo-strip/
+  description: "A `<ul>` of 64px photo buttons for one record. It shows six; give the sixth button `data-more=\"+4\"` to dim it under the count of photos left. The rest stay in the page, hidden, so a photo viewer still steps through all of them."
+
 - name: Announcement
   group: Page frame
   page: /components/site-header/

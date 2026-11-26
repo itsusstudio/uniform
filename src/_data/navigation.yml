@@ -58,6 +58,8 @@
       url: /components/site-header/
     - title: Masthead
       url: /components/masthead/
+    - title: Colophon
+      url: /components/colophon/
     - title: Breadcrumbs
       url: /components/breadcrumbs/
     - title: Page header
@@ -108,6 +110,8 @@
       url: /components/diff/
     - title: Dropzone
       url: /components/dropzone/
+    - title: Photo strip
+      url: /components/photo-strip/
     - title: Filter
       url: /components/filter/
     - title: Icon

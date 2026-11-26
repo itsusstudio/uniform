@@ -110,6 +110,31 @@
   .u-card > :is(.u-list, .u-list-group > .u-list) :is(.u-list > li:not(:has(> .u-list-item)), .u-list-item) { padding-inline: --spacing(4); }
 }
 
+.u-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: --spacing(2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.u-feature-list > li {
+  display: flex;
+  align-items: center;
+  gap: --spacing(2);
+}
+
+.u-feature-list > li::before {
+  content: "";
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: var(--color-success);
+  mask: url("/uniform/icons/check.svg") center / contain no-repeat;
+  forced-color-adjust: none;
+}
+
 .u-checklist > li::before {
   content: "";
   flex: none;

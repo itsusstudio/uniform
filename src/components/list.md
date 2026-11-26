@@ -61,6 +61,18 @@ Add `u-checklist` for a short list of steps to finish, like setting up a product
 </section>
 ```
 
+## Feature list
+
+Use `u-feature-list` for a short list of what a plan includes. Each line gets a green check from CSS, and the lines sit close together because they're one block of reading, not rows to act on.
+
+```html
+<h3>Every plan includes</h3>
+<ul class="u-feature-list">
+  <li>Unlimited jobs, team members and photos</li>
+  <li>Client emails and texts</li>
+</ul>
+```
+
 ## Groups you can edit
 
 For a short list people arrange themselves, like job statuses, split a card into `u-list-group` sections. Each one has an `h3` (an icon, the name, a `u-meta` count and an action at the end) and a `u-list`. Rows can carry a `u-list-handle` to drag, a `u-swatch` for a colour, and a `u-input-inline` to rename in place.

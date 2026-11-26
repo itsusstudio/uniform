@@ -844,6 +844,10 @@
   page: /components/toggle-group/
   description: Wraps a `u-fieldset` holding a toggle group and one `<section>` per choice, and shows the section whose `data-value` matches the checked radio.
 
+- name: u-feature-list
+  group: Components
+  page: /components/list/
+  description: A short list of what a plan or product includes, each line with a green check. Tighter than u-list, with no rows.
 - name: u-list-group
   group: Components
   page: /components/list/

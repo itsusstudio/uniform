@@ -54,7 +54,7 @@
 
 textarea.u-input {
   height: auto;
-  min-height: calc(var(--u-input-rows, 1) * 1lh + 2 * --spacing(2) + 2px);
+  min-height: calc(var(--u-input-rows, 3) * 1lh + 2 * --spacing(2) + 2px);
   max-height: calc(var(--spacing-control) * 8);
   padding: --spacing(2) --spacing(3);
   resize: vertical;

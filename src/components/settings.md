@@ -56,6 +56,9 @@ Text with an Edit button
 Wide control underneath
 : A control too wide for the right, like a long select, goes under the text with `u-setting-stacked`, at form width.
 
+Theme
+: For light and dark, put a `<select class="u-input">` with the options `system`, `light` and `dark` inside a `<u-theme-preference>` on the right. `uniform.js` selects the current theme, applies a new choice at once and remembers it in this browser, the same as the sidebar's theme buttons. Give each option its icon (monitor, sun, moon) before its label.
+
 Groups
 : An `<h2>` names each group and an `<hr>` separates groups. Space alone separates the rows inside one.
 

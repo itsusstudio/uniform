@@ -2090,19 +2090,24 @@ try { applyTheme(localStorage.getItem("u-theme-preference")) } catch {}
 define("u-theme-preference", class extends UniformElement {
   setup(signal) {
     const buttons = [...this.querySelectorAll(":scope > button[value]")]
-    if (!buttons.length) return
+    const select = this.querySelector(":scope > select")
+    if (!buttons.length && !select) return
     const mark = () => {
       const current = document.documentElement.dataset.uTheme || "system"
       buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.value === current)))
+      if (select) select.value = current
+    }
+    const choose = (value) => {
+      applyTheme(value)
+      try { localStorage.setItem("u-theme-preference", value) } catch {}
+      document.dispatchEvent(new CustomEvent("theme-preference:change", { detail: { value, source: this } }))
     }
     mark()
     this.addEventListener("click", (event) => {
       const button = event.target.closest("button[value]")
-      if (!buttons.includes(button)) return
-      applyTheme(button.value)
-      try { localStorage.setItem("u-theme-preference", button.value) } catch {}
-      document.dispatchEvent(new CustomEvent("theme-preference:change", { detail: { value: button.value, source: this } }))
+      if (buttons.includes(button)) choose(button.value)
     }, { signal })
+    select?.addEventListener("change", () => choose(select.value), { signal })
     document.addEventListener("theme-preference:change", mark, { signal })
   }
 })

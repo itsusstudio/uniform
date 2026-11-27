@@ -58,7 +58,7 @@
   inset: 0;
 }
 
-.u-list > li:where(:has(> div > p:first-child > a:not(.u-btn)):hover) { background: color-mix(in srgb, var(--text-color-default) 4%, transparent); }
+:root:not([data-sortable-dragging]) .u-list > li:where(:has(> div > p:first-child > a:not(.u-btn)):hover) { background: color-mix(in srgb, var(--text-color-default) 4%, transparent); }
 
 /* The row's own hover shade hides a ghost button's fill, so a control in a row is outlined instead. */
 .u-list > li .u-btn-ghost:not(:disabled, [aria-disabled="true"]):is(:hover, :focus-visible) {
@@ -236,7 +236,6 @@
   outline: none;
   background: var(--background-color-surface);
 }
-}
 
 .u-sortable-placeholder {
   border-color: transparent;
@@ -266,11 +265,19 @@
 :root[data-sortable-dragging],
 :root[data-sortable-dragging] * { cursor: grabbing; }
 
+:root[data-sortable-dragging] .u-sortable { isolation: auto; }
+
+.u-list > li.sortable-fallback {
+  background: var(--background-color-surface);
+  scale: none;
+}
+
 .u-hover-tools > li { transition: background-color var(--u-duration-exit) var(--ease-standard); }
 
-.u-hover-tools > li:hover { background: var(--background-color-paper); }
+:root:not([data-sortable-dragging]) .u-hover-tools > li:hover { background: var(--background-color-paper); }
 
-.u-hover-tools > :not(:hover, :focus-within) :is(.u-list-handle, .u-hover-tool) { opacity: 0; }
+.u-hover-tools > :not(:hover, :focus-within) :is(.u-list-handle, .u-hover-tool),
+:root[data-sortable-dragging] .u-hover-tools :is(.u-list-handle, .u-hover-tool) { opacity: 0; }
 
 @media (hover: none) {
   .u-hover-tools > :not(:focus-within) :is(.u-list-handle, .u-hover-tool) { opacity: 0.6; }
@@ -286,4 +293,5 @@
 :is(.u-sortable-chosen, .u-sortable-lifted):not(.u-sortable-placeholder, :has(> .u-card)) {
   outline: 2px solid var(--background-color-ink);
   outline-offset: -1px;
+}
 }

@@ -38,7 +38,10 @@
 .u-colophon a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 @container u-colophon (max-width: 39.9375rem) {
-  .u-colophon > .u-container > *,
+  .u-colophon > .u-container { padding-block: --spacing(8) --spacing(6); }
+
+  .u-colophon > .u-container > * { grid-column: span 6; }
+
   .u-colophon > .u-container > :first-child { grid-column: 1 / -1; }
 }
 }

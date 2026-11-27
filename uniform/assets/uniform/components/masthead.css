@@ -33,6 +33,11 @@
 
 .u-masthead > .u-container > :is(nav, ul) { grid-column: span 3; }
 
+.u-masthead > .u-container > form {
+  grid-column: -4 / -1;
+  justify-self: end;
+}
+
 .u-masthead li > a,
 .u-masthead li > form > button {
   display: inline-block;
@@ -59,7 +64,7 @@
 
   .u-masthead > .u-container > .u-wordmark { grid-column: auto; grid-row: span 2; }
 
-  .u-masthead > .u-container > :is(nav, ul) { grid-column: 2; }
+  .u-masthead > .u-container > :is(nav, ul, form) { grid-column: 2; }
 
   .u-masthead li:not(:has(a, form)) { display: none; }
 }

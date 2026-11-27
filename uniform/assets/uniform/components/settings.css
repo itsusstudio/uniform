@@ -23,7 +23,7 @@
 
 .u-setting {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: minmax(50%, 1fr) minmax(0, auto);
   align-items: center;
   gap: --spacing(2) --spacing(6);
   padding-block: --spacing(4);

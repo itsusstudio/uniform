@@ -43,6 +43,9 @@ The masthead opens every page of an app that a business's clients use, such as a
 Columns
 : The business name spans six of twelve columns, and the `<nav>` and the `<ul>` span three each, so the links line up with any 12-column layout below.
 
+Language
+: On a page for someone who isn't signed in, put a `<form>` holding the [language select](/components/language-select/) in place of the two lists. It sits at the top right.
+
 Width
 : Give the `u-container` the widest width any page of the app uses, and keep it on every page. Narrow pages centre their own content under it.
 
